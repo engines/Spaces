@@ -12,8 +12,7 @@ module Software
 
     attr_accessor :title,
       :label,
-      :memory_required,
-      :memory_recommended
+      :memory_usage
 
   end
 end

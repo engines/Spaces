@@ -12,7 +12,12 @@ module Software
 
     attr_accessor :version_number,
       :url,
-      :extraction_command
+      :extraction_command,
+      :memory_usage
+
+    def memory_usage
+      instance_variable_get(:@memory_usage) || software.memory_usage
+    end
 
   end
 end
