@@ -1,7 +1,7 @@
-require_relative '../engines/model'
+require_relative '../framework/model'
 
 module Blueprint
-  class Catalogue < Engines::Model
+  class Catalogue < ::Framework::Model
     # A collection of blueprints for the purpose of grouping, locating, accessing and maintaining
 
   end

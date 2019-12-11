@@ -1,8 +1,8 @@
-require_relative '../engines/product'
+require_relative '../framework/product'
 require_relative 'tensor'
 
 module Image
-  class Image < Engines::Product
+  class Image < ::Framework::Product
     # A frozen memory snaphot suitable for quick loading and execution
 
   end

@@ -1,6 +1,6 @@
 require_relative 'model'
 
-module Engines
+module Framework
   class Tensor < Model
     # A sufficient set of values that guarantee a tranformation into a corresponding model object
 

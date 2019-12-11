@@ -1,7 +1,7 @@
-require_relative '../engines/model'
+require_relative '../framework/model'
 
 module Software
-  class Framework < Engines::Model
+  class Framework < ::Framework::Model
 
     attr_accessor :label,
       :port_override

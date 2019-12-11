@@ -1,8 +1,8 @@
-require_relative '../engines/model'
+require_relative '../framework/model'
 require_relative '../executable/executable'
 
 module Environment
-  class Executable < Engines::Model
+  class Executable < ::Framework::Model
     # The understanding of an executable inside an environment
 
     relation_accessor :executable

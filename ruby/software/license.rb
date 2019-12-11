@@ -1,7 +1,7 @@
-require_relative '../engines/model'
+require_relative '../framework/model'
 
 module Software
-  class License < Engines::Model
+  class License < ::Framework::Model
 
     attr_accessor :label
 

@@ -1,10 +1,13 @@
 require 'yaml'
 require 'yajl/json_gem'
 
-module Engines
+module Framework
   class Model
 
     class << self
+      def identifier
+        name.split('::').join
+      end
 
       def from_yaml(yaml)
         YAML::load(yaml)
@@ -18,6 +21,10 @@ module Engines
         alias_method to, from
         alias_method "#{to}=", "#{from}="
       end
+    end
+
+    def identifier
+      self.class.identifier
     end
 
     def to_memo

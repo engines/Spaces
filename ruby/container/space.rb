@@ -1,7 +1,7 @@
-require_relative '../engines/model'
+require_relative '../framework/space'
 
 module Container
-  class Space < Engines::Model
+  class Space < ::Framework::Space
     # The dimensions in which running live containers exist
 
   end

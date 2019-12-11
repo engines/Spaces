@@ -1,8 +1,8 @@
-require_relative '../engines/model'
+require_relative '../framework/model'
 require_relative 'tensor'
 
 module Software
-  class Installation < Engines::Product
+  class Installation < ::Framework::Product
     # A copy of a software version
 
   end

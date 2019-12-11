@@ -1,7 +1,8 @@
-require_relative '../engines/model'
+require_relative '../framework/space'
+require_relative '../blueprint/blueprint'
 
 module Blueprint
-  class Space < Engines::Model
+  class Space < ::Framework::Space
     # The dimensions in which blueprints exist
 
   end
