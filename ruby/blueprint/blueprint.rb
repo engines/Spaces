@@ -10,7 +10,8 @@ module Blueprint
   class Blueprint < ::Framework::Model
     # A plan for making software executable and usable, potentially many times over
 
-    relation_accessor :software_version,
+    relation_accessor :descriptor,
+      :software_version,
       :executable_tensor,
       :container_tensor,
       :software_tensor,
