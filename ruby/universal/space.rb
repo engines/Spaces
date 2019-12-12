@@ -1,9 +1,9 @@
-require_relative '../framework/model'
+require_relative '../framework/space'
 require_relative '../blueprint/space'
 require_relative '../persistence/space'
 
 module Universal
-  class Space < ::Framework::Model
+  class Space < ::Framework::Space
     # The aggregation of all spaces
 
     class << self
@@ -16,5 +16,8 @@ module Universal
       end
     end
 
+    def path
+      "/opt/engines/#{identifier}"
+    end
   end
 end
