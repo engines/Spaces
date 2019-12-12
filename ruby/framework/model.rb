@@ -1,5 +1,6 @@
 require 'yaml'
 require 'yajl/json_gem'
+require_relative '../framework/error'
 
 module Framework
   class Model
