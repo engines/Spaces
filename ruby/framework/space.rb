@@ -6,7 +6,6 @@ module Framework
     class << self
       def universal
         require_relative '../universal/space'
-        
         @@universal ||= Universal::Space.new
       end
     end

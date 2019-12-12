@@ -1,6 +1,7 @@
 require_relative '../framework/space'
 require_relative 'git/space'
 require_relative 'uri/space'
+#require_relative '../universal/descriptor'
 
 module Persistence
   class Space < ::Framework::Space
@@ -14,10 +15,30 @@ module Persistence
       def uri
         @@uri ||= Persistence::Uri::Space.new
       end
+
+      def maps
+        @@maps ||= {
+          git: git,
+          json: uri
+        }
+      end
     end
 
-    def_delegator self, :git
-    def_delegator self, :uri    
+    def git
+      self.class.git
+    end
+
+    def uri
+      self.class.uri
+    end
+
+    def maps
+      self.class.maps
+    end
+
+    def import(descriptor)
+      maps[:"#{descriptor.extension}"].send(:import, descriptor)
+    end
 
   end
 end

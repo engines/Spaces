@@ -7,13 +7,23 @@ module Universal
       :identifier,
       :space
 
+    def import
+      space&.universal.persistence.import(self)
+    end
+
     def identifier
-      value ? value.split('/').last.split('.').first : super
+      value&.split('/').last.split('.').first
     end
 
     def url
-      "#{space.path}/#{identifier}"
+      "#{space&.path}/#{identifier}"
+    end
+
+    def extension
+      value&.split('.')&.last
     end
 
   end
 end
+
+# /opt/engines/FrameworkModel/FrameworkModel/miniminal
