@@ -15,8 +15,8 @@ module Universal
       value&.split('/').last.split('.').first
     end
 
-    def url
-      "#{space&.path}/#{identifier}"
+    def basename
+      File.basename(value)
     end
 
     def extension
@@ -25,5 +25,3 @@ module Universal
 
   end
 end
-
-# /opt/engines/FrameworkModel/FrameworkModel/miniminal

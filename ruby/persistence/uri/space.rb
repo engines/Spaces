@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'resolv'
 require_relative '../space'
 
 module Persistence
@@ -8,16 +9,16 @@ module Persistence
 
       def import(descriptor)
         d = if nullify_ssl?
-          open(descriptor.url, { ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE })
+          open(descriptor.value, { ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE })
         else
-          open(url)
+          open(descriptor.value)
         end
 
-        IO.copy_stream(d, descriptor.value)
-      rescue Resolv::ResolvError => e
-        ::Framework::Error.new(e)
-      rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
-        ::Framework::Error.new(e)
+        IO.copy_stream(d, "#{path}/#{descriptor.basename}")
+      # rescue Resolv::ResolvError => e
+      #   ::Framework::Error.new(e)
+      # rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
+      #   ::Framework::Error.new(e)
       ensure
         d.close unless d.nil?
       end
