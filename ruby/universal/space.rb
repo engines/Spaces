@@ -16,6 +16,14 @@ module Universal
       end
     end
 
+    def blueprint
+      self.class.blueprint
+    end
+
+    def persistence
+      self.class.persistence
+    end
+
     def path
       "/opt/engines/#{identifier}"
     end
