@@ -23,6 +23,10 @@ module Persistence
         }
       end
     end
+    
+    def encloses?(descriptor)
+      route(:encloses?, descriptor)
+    end
 
     def by(descriptor)
       route(:by, descriptor)

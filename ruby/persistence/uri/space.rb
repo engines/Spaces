@@ -7,14 +7,18 @@ module Persistence
     class Space < ::Framework::Space
       # The dimensions in which resources exist
 
+      def encloses?(descriptor)
+        File.exist?(file_name_for(descriptor))
+      end
+
       def by(descriptor)
-        f = File.open(basename_for(descriptor), 'r')
+        f = File.open(file_name_for(descriptor), 'r')
         c = f.read
         f.close
         c
       end
 
-      def basename_for(descriptor)
+      def file_name_for(descriptor)
         "#{path}/#{descriptor.basename}"
       end
 

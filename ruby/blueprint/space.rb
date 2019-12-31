@@ -5,15 +5,20 @@ module Blueprint
   class Space < ::Framework::Space
     # The dimensions in which blueprints exist
 
-    def by(descriptor)
-      universal.persistence.by(descriptor)
+    def encloses?(blueprint)
+      persistence.encloses(blueprint.descriptor)
     end
 
-    def encloses?(blueprint)
+    def by(descriptor)
+      persistence.by(descriptor)
     end
 
     def import(descriptor)
-      universal.persistence.import(descriptor)
+      persistence.import(descriptor)
+    end
+
+    def persistence
+      universal.persistence
     end
   end
 end

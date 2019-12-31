@@ -6,7 +6,11 @@ module Persistence
     class Space < ::Persistence::Uri::Space
       # The dimensions in which Git repos exist
 
-      def basename_for(descriptor)
+      def encloses?(descriptor)
+        Dir.exist?("#{path}/#{descriptor.identifier}")
+      end
+
+      def file_name_for(descriptor)
         Dir["#{path}/#{descriptor.identifier}/*.json"].first
       end
 
