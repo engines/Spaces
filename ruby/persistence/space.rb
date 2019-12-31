@@ -24,6 +24,18 @@ module Persistence
       end
     end
 
+    def by(descriptor)
+      route(:by, descriptor)
+    end
+
+    def import(descriptor)
+      route(:import, descriptor)
+    end
+
+    def route(method, descriptor)
+      maps[:"#{descriptor.extension}"].send(method, descriptor)
+    end
+
     def git
       self.class.git
     end
@@ -34,10 +46,6 @@ module Persistence
 
     def maps
       self.class.maps
-    end
-
-    def import(descriptor)
-      maps[:"#{descriptor.extension}"].send(:import, descriptor)
     end
 
   end

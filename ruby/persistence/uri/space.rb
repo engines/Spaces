@@ -7,6 +7,17 @@ module Persistence
     class Space < ::Framework::Space
       # The dimensions in which resources exist
 
+      def by(descriptor)
+        f = File.open(basename_for(descriptor), 'r')
+        c = f.read
+        f.close
+        c
+      end
+
+      def basename_for(descriptor)
+        "#{path}/#{descriptor.basename}"
+      end
+
       def import(descriptor)
         d = if nullify_ssl?
           open(descriptor.value, { ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE })

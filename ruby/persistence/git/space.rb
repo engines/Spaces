@@ -1,10 +1,14 @@
 require 'git'
-require_relative '../space'
+require_relative '../uri/space'
 
 module Persistence
   module Git
-    class Space < ::Framework::Space
+    class Space < ::Persistence::Uri::Space
       # The dimensions in which Git repos exist
+
+      def basename_for(descriptor)
+        Dir["#{path}/#{descriptor.identifier}/*.json"].first
+      end
 
       def import(descriptor)
         ::Git.clone(descriptor.value, descriptor.identifier, path: path)

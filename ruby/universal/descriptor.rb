@@ -4,15 +4,10 @@ module Universal
   class Descriptor < ::Framework::Model
 
     attr_accessor :value,
-      :identifier,
-      :space
-
-    def import
-      space&.universal.persistence.import(self)
-    end
+      :identifier
 
     def identifier
-      value&.split('/').last.split('.').first
+      @identifier ||= value&.split('/').last.split('.').first
     end
 
     def basename
