@@ -10,7 +10,7 @@ module Blueprint
     end
 
     def by(descriptor)
-      persistence.by(descriptor)
+      parse_json(persistence.by(descriptor))
     end
 
     def import(descriptor)

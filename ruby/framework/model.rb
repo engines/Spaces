@@ -14,6 +14,10 @@ module Framework
         YAML::load(yaml)
       end
 
+      def json_parser
+        @@json_parser ||= Yajl::Parser.new(symbolize_keys: true)
+      end
+
       def relation_accessor(*args)
         attr_accessor(*args)
       end
@@ -41,6 +45,14 @@ module Framework
       []
     end
 
+    def parse_json(json)
+      json_parser.parse(json)
+    end
+
+    def json_parser
+      self.class.json_parser
+    end
+
     private
 
     def to_h(variables)
@@ -59,6 +71,5 @@ module Framework
           end
       end
     end
-
   end
 end
