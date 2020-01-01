@@ -13,9 +13,11 @@ module Persistence
 
       def by(descriptor)
         f = File.open(file_name_for(descriptor), 'r')
-        c = f.read
-        f.close
-        c
+        begin
+          f.read
+        ensure
+          f.close
+        end
       end
 
       def file_name_for(descriptor)
