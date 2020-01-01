@@ -1,5 +1,6 @@
 require 'yaml'
-require 'yajl/json_gem'
+require 'json'
+require 'ostruct'
 require_relative '../framework/error'
 
 module Framework
@@ -12,10 +13,6 @@ module Framework
 
       def from_yaml(yaml)
         YAML::load(yaml)
-      end
-
-      def json_parser
-        @@json_parser ||= Yajl::Parser.new(symbolize_keys: true)
       end
 
       def relation_accessor(*args)
@@ -45,12 +42,8 @@ module Framework
       []
     end
 
-    def parse_json(json)
-      json_parser.parse(json)
-    end
-
-    def json_parser
-      self.class.json_parser
+    def open_struct_from_json(json)
+      JSON.parse(json, object_class: OpenStruct)
     end
 
     private
