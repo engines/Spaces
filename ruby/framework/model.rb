@@ -27,6 +27,18 @@ module Framework
 
     attr_accessor :struct
 
+    def initialize(struct = nil)
+      self.struct = struct
+    end
+
+    def method_missing(m, *args, &block)
+      if struct&.methods(false).include?(m)
+        struct.send(m, *args, &block)
+      else
+        super
+      end
+    end
+
     def identifier
       self.class.identifier
     end

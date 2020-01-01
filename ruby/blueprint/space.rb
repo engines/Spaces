@@ -10,11 +10,17 @@ module Blueprint
     end
 
     def by(descriptor)
-      open_struct_from_json(persistence.by(descriptor))
+      model_class.new(open_struct_from_json(persistence.by(descriptor))).tap do |m|
+        m.descriptor = descriptor
+      end
     end
 
     def import(descriptor)
       persistence.import(descriptor)
+    end
+
+    def model_class
+      Blueprint
     end
 
     def persistence
