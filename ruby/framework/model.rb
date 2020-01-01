@@ -32,7 +32,7 @@ module Framework
     end
 
     def method_missing(m, *args, &block)
-      if struct&.methods(false).include?(m)
+      if struct&.methods(false)&.include?(m)
         struct.send(m, *args, &block)
       else
         super
