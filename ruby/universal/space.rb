@@ -1,4 +1,5 @@
 require_relative '../framework/space'
+require_relative '../container/space'
 require_relative '../blueprint/space'
 require_relative '../persistence/space'
 
@@ -7,6 +8,10 @@ module Universal
     # The aggregation of all spaces
 
     class << self
+      def container
+        @@container ||= Container::Space.new
+      end
+
       def blueprint
         @@blueprint ||= Blueprint::Space.new
       end
@@ -14,6 +19,10 @@ module Universal
       def persistence
         @@persistence ||= Persistence::Space.new
       end
+    end
+
+    def container
+      self.class.container
     end
 
     def blueprint

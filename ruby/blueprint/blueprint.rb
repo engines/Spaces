@@ -1,3 +1,5 @@
+require 'duplicate'
+
 require_relative '../framework/model'
 require_relative '../software/version'
 require_relative '../executable/tensor'
@@ -16,6 +18,10 @@ module Blueprint
       :image_tensor,
       :dependencies,
       :pages
+
+    def container_tensor
+      @container_tensor ||= Container::Tensor.new(duplicate(struct))
+    end
 
   end
 end
