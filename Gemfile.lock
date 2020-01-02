@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    duplicate (1.1.1)
     git (1.5.0)
     yajl-ruby (1.4.1)
 
@@ -8,8 +9,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  duplicate
   git
   yajl-ruby
 
 BUNDLED WITH
-   2.1.0.pre.2
+   2.1.2
