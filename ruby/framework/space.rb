@@ -14,6 +14,10 @@ module Framework
       self.class.universal
     end
 
+    def ensure_space
+      FileUtils.mkdir_p(path)
+    end
+
     def path
       "#{universal.path}/#{identifier}"
     end

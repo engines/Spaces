@@ -21,6 +21,7 @@ module Persistence
       end
 
       def file_name_for(descriptor)
+        ensure_space
         "#{path}/#{descriptor.basename}"
       end
 

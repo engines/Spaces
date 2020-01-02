@@ -11,6 +11,7 @@ module Persistence
       end
 
       def file_name_for(descriptor)
+        ensure_space
         Dir["#{path}/#{descriptor.identifier}/*.json"].first
       end
 
