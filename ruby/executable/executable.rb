@@ -1,7 +1,7 @@
 require_relative '../framework/product'
 require_relative 'tensor'
 require_relative '../container/executable'
-require_relative '../environment/executable'
+require_relative '../environment/environment'
 require_relative '../network/executable'
 
 module Executable
