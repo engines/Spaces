@@ -16,7 +16,13 @@ module Persistence
       end
 
       def import(descriptor)
-        ::Git.clone(descriptor.value, descriptor.identifier, path: path)
+        clear_for(descriptor)
+        g = ::Git.clone(descriptor.value, descriptor.identifier, path: path)
+        g.checkout(descriptor.branch) if descriptor.branch
+      end
+
+      def clear_for(descriptor)
+        FileUtils.rm_rf("#{path}/#{descriptor.identifier}")
       end
 
     end

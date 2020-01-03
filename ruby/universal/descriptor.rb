@@ -4,7 +4,8 @@ module Universal
   class Descriptor < ::Framework::Model
 
     attr_accessor :value,
-      :identifier
+      :identifier,
+      :branch
 
     def identifier
       @identifier ||= value&.split('/').last.split('.').first
