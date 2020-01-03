@@ -1,8 +1,8 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 require_relative 'version'
 
 module Software
-  class VersionDescriptor < ::Framework::Model
+  class VersionDescriptor < ::Spaces::Model
     # AKA SoftwareListing?
     # Human-readable data minimally sufficient to identity & distinguish software product
 

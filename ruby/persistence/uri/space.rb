@@ -4,7 +4,7 @@ require_relative '../space'
 
 module Persistence
   module Uri
-    class Space < ::Framework::Space
+    class Space < ::Spaces::Space
       # The dimensions in which resources exist
 
       def encloses?(descriptor)
@@ -34,9 +34,9 @@ module Persistence
 
         IO.copy_stream(d, "#{path}/#{descriptor.basename}")
       # rescue Resolv::ResolvError => e
-      #   ::Framework::Error.new(e)
+      #   ::Spaces::Error.new(e)
       # rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError
-      #   ::Framework::Error.new(e)
+      #   ::Spaces::Error.new(e)
       ensure
         d.close unless d.nil?
       end

@@ -1,4 +1,4 @@
-module Framework
+module Spaces
   class Error < StandardError
 
     def initialize(error)

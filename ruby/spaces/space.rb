@@ -1,6 +1,6 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 
-module Framework
+module Spaces
   class Space < Model
 
     class << self

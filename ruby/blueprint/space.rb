@@ -2,7 +2,7 @@ require_relative '../blueprint/blueprint'
 require_relative '../universal/space'
 
 module Blueprint
-  class Space < ::Framework::Space
+  class Space < ::Spaces::Space
     # The dimensions in which blueprints exist
 
     def new_for(descriptor)

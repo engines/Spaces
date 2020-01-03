@@ -1,10 +1,10 @@
-require_relative '../framework/space'
+require_relative '../spaces/space'
 require_relative '../container/space'
 require_relative '../blueprint/space'
 require_relative '../persistence/space'
 
 module Universal
-  class Space < ::Framework::Space
+  class Space < ::Spaces::Space
     # The aggregation of all spaces
 
     class << self

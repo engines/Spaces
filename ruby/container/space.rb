@@ -1,7 +1,7 @@
-require_relative '../framework/space'
+require_relative '../spaces/space'
 
 module Container
-  class Space < ::Framework::Space
+  class Space < ::Spaces::Space
     # The dimensions in which running live containers exist
 
     def save_tensor(model)

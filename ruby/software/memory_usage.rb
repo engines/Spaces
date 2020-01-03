@@ -1,7 +1,7 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 
 module Software
-  class MemoryUsage < ::Framework::Model
+  class MemoryUsage < ::Spaces::Model
 
     attr_accessor :required,
       :recommended

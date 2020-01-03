@@ -1,10 +1,10 @@
-require_relative '../framework/space'
+require_relative '../spaces/space'
 require_relative 'git/space'
 require_relative 'uri/space'
 #require_relative '../universal/descriptor'
 
 module Persistence
-  class Space < ::Framework::Space
+  class Space < ::Spaces::Space
     # The dimensions in which long-lived recordings of software objects can be made and maintained.
 
     class << self

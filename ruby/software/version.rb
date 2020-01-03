@@ -1,9 +1,9 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 require_relative 'software'
 require_relative 'version_descriptor'
 
 module Software
-  class Version < ::Framework::Model
+  class Version < ::Spaces::Model
     # AKA Software Product Version
     # A software version to the level of minor version, patch and pre-release
 

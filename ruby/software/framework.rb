@@ -1,7 +1,7 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 
 module Software
-  class Framework < ::Framework::Model
+  class Framework < ::Spaces::Model
 
     attr_accessor :label,
       :port_override

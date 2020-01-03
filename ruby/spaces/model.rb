@@ -1,9 +1,9 @@
 require 'yaml'
 require 'json'
 require 'ostruct'
-require_relative '../framework/error'
+require_relative '../spaces/error'
 
-module Framework
+module Spaces
   class Model
 
     class << self

@@ -1,7 +1,7 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 
 module Blueprint
-  class Catalogue < ::Framework::Model
+  class Catalogue < ::Spaces::Model
     # A collection of blueprints for the purpose of grouping, locating, accessing and maintaining
 
   end

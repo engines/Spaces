@@ -1,7 +1,7 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 
 module Software
-  class License < ::Framework::Model
+  class License < ::Spaces::Model
 
     attr_accessor :label
 

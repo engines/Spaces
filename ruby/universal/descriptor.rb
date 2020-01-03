@@ -1,7 +1,7 @@
-require_relative '../framework/model'
+require_relative '../spaces/model'
 
 module Universal
-  class Descriptor < ::Framework::Model
+  class Descriptor < ::Spaces::Model
 
     attr_accessor :value,
       :identifier,
