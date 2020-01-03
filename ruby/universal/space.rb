@@ -1,5 +1,6 @@
 require_relative '../spaces/space'
 require_relative '../container/space'
+require_relative '../framework/space'
 require_relative '../blueprint/space'
 require_relative '../persistence/space'
 
@@ -10,6 +11,10 @@ module Universal
     class << self
       def container
         @@container ||= Container::Space.new
+      end
+
+      def framework
+        @@framework ||= Framework::Space.new
       end
 
       def blueprint
