@@ -19,7 +19,8 @@ module Container
       [
         framework.first_layer(descriptor),
         framework.setup_layers,
-        memory_layer
+        memory_layer,
+        environment.locale_layers
       ]
     end
 
@@ -31,6 +32,10 @@ module Container
       @framework ||= universe.frameworks.by(tensor.struct.version.software.framework).tap do |m|
         m.struct = duplicate(tensor.struct.version.software.framework)
       end
+    end
+
+    def environment
+      @environment ||= universe.environments.by('')
     end
 
     def file_path
