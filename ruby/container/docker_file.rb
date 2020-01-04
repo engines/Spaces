@@ -18,8 +18,13 @@ module Container
     def layers
       [
         framework.first_layer(descriptor),
-        framework.setup_layers
+        framework.setup_layers,
+        memory_layer
       ]
+    end
+
+    def memory_layer
+      "ENV Memory '#{tensor.struct.version.software.memory_usage.recommended}'"
     end
 
     def framework
