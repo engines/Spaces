@@ -20,7 +20,8 @@ module Container
         framework.first_layer(descriptor),
         framework.setup_layers,
         memory_layer,
-        environment.locale_layers
+        environment.locale_layers,
+        domain.layers(tensor.struct.version.software)
       ]
     end
 
@@ -36,6 +37,10 @@ module Container
 
     def environment
       @environment ||= universe.environments.by('')
+    end
+
+    def domain
+      @domain ||= universe.domains.by('')
     end
 
     def file_path

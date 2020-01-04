@@ -2,6 +2,7 @@ require_relative '../spaces/space'
 require_relative '../container/space'
 require_relative '../framework/space'
 require_relative '../environment/space'
+require_relative '../domain/space'
 require_relative '../blueprint/space'
 require_relative '../persistence/space'
 
@@ -20,6 +21,10 @@ module Universal
 
       def environments
         @@environments ||= Environment::Space.new
+      end
+
+      def domains
+        @@domains ||= Domain::Space.new
       end
 
       def blueprints
@@ -41,6 +46,10 @@ module Universal
 
     def environments
       self.class.environments
+    end
+
+    def domains
+      self.class.domains
     end
 
     def blueprints
