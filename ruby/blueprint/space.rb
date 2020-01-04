@@ -44,7 +44,7 @@ module Blueprint
     end
 
     def persistence
-      universal.persistence
+      universe.persistence
     end
   end
 end

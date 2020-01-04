@@ -4,14 +4,14 @@ module Spaces
   class Space < Model
 
     class << self
-      def universal
+      def universe
         require_relative '../universal/space'
-        @@universal ||= Universal::Space.new
+        @@universe ||= Universal::Space.new
       end
     end
 
-    def universal
-      self.class.universal
+    def universe
+      self.class.universe
     end
 
     def ensure_space
@@ -19,7 +19,7 @@ module Spaces
     end
 
     def path
-      "#{universal.path}/#{identifier}"
+      "#{universe.path}/#{identifier}"
     end
 
   end

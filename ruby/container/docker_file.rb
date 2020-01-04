@@ -28,7 +28,7 @@ module Container
     end
 
     def framework
-      @framework ||= framework_space.by(tensor.struct.version.software.framework).tap do |m|
+      @framework ||= universe.frameworks.by(tensor.struct.version.software.framework).tap do |m|
         m.struct = duplicate(tensor.struct.version.software.framework)
       end
     end
@@ -45,8 +45,8 @@ module Container
       tensor.struct.version.descriptor.name
     end
 
-    def framework_space
-      Universal::Space.framework
+    def universe
+      @universal_space ||= Universal::Space.new
     end
 
   end
