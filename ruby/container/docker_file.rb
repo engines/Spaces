@@ -11,13 +11,33 @@ module Container
       self.tensor = tensor
     end
 
-    def instructions
+    def contents
+      layers.flatten.compact.join("\n\n")
+    end
+
+    def layers
+      [
+        framework.first_layer(descriptor),
+        framework.setup_layers
+      ]
     end
 
     def framework
       @framework ||= framework_space.by(tensor.struct.version.software.framework).tap do |m|
         m.struct = duplicate(tensor.struct.version.software.framework)
       end
+    end
+
+    def file_path
+      "#{name}/DockerFile"
+    end
+
+    def subspace_path
+      name
+    end
+
+    def name
+      tensor.struct.version.descriptor.name
     end
 
     def framework_space
