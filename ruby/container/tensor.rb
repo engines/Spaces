@@ -1,13 +1,28 @@
-require_relative '../engines/tensor'
-require_relative '../blueprint/blueprint'
+require_relative '../spaces/tensor'
 require_relative 'container'
+require_relative 'docker_file'
 
 module Container
-  class Tensor < Engines::Tensor
+  class Tensor < ::Spaces::Tensor
     # A sufficient set of values that guarantee a tranformation into a realiably predictable container
 
-    relation_accessor :blueprint,
-      :container
+    relation_accessor :docker_file
+
+    def docker_file
+      @docker_file ||= DockerFile.new(self)
+    end
+
+    def file_path
+      "#{name}/#{self.class.identifier}"
+    end
+
+    def subspace_path
+      name
+    end
+
+    def name
+      struct.version.descriptor.name
+    end
 
   end
 end

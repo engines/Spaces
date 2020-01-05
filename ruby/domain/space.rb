@@ -1,24 +1,20 @@
-require_relative '../environment/environment'
+require_relative '../domain/domain'
 require_relative '../spaces/space'
 
-module Environment
+module Domain
   class Space < ::Spaces::Space
     # The dimensions in which a running version of a software product can exist as a single entity
 
     def by(descriptor)
       model_class.new.tap do |m|
         m.struct = OpenStruct.new.tap do |s|
-          s.locale = OpenStruct.new.tap do |s|
-            s.language = 'en_AU:en'
-            s.lang = 'en_AU.UTF8'
-            s.lc_all = 'en_AU.UTF8'
-          end
+          s.name = 'current.engines.org'
         end
       end
     end
 
     def model_class
-      Environment
+      Domain
     end
 
   end
