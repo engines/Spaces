@@ -25,5 +25,40 @@ module Framework
       )
     end
 
+    def stack_layers
+      %Q(
+        ENV FRAMEWORK '#{identifier}'
+        ENV RUNTIME '#{identifier}'
+        ENV PORT '8000'
+      )
+    end
+
+    def mid_layers
+      %Q(
+        USER 0
+        RUN   /build_scripts/configure_apache.sh
+        RUN \
+          bash /home/setup.sh
+        RUN \
+          /build_scripts/set_data_permissions.sh&& \
+          /build_scripts/_finalise_environment.sh
+      )
+    end
+
+    def startup_layer
+      "ADD home/start.sh #{start_script_path}"
+    end
+
+    def start_layers
+      %Q(
+        USER $ContUser
+        CMD ["#{start_script_path}"]
+      )
+    end
+
+    def start_script_path
+      '/home/engines/scripts/startup/start.sh'
+    end
+
   end
 end
