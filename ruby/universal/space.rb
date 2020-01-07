@@ -4,7 +4,7 @@ require_relative '../framework/space'
 require_relative '../environment/space'
 require_relative '../domain/space'
 require_relative '../blueprint/space'
-require_relative '../persistence/space'
+require_relative '../outer/space'
 
 module Universal
   class Space < ::Spaces::Space
@@ -31,8 +31,8 @@ module Universal
         @@blueprints ||= Blueprint::Space.new
       end
 
-      def persistence
-        @@persistence ||= Persistence::Space.new
+      def outer
+        @@outer ||= Outer::Space.new
       end
     end
 
@@ -56,8 +56,8 @@ module Universal
       self.class.blueprints
     end
 
-    def persistence
-      self.class.persistence
+    def outer
+      self.class.outer
     end
 
     def path

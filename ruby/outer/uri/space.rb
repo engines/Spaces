@@ -2,7 +2,7 @@ require 'open-uri'
 require 'resolv'
 require_relative '../space'
 
-module Persistence
+module Outer
   module Uri
     class Space < ::Spaces::Space
       # The dimensions in which resources exist
