@@ -1,9 +1,9 @@
 require 'git'
 require_relative '../uri/space'
 
-module Persistence
+module Outer
   module Git
-    class Space < ::Persistence::Uri::Space
+    class Space < ::Outer::Uri::Space
       # The dimensions in which Git repos exist
 
       def encloses?(descriptor)

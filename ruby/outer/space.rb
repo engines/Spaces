@@ -3,17 +3,17 @@ require_relative 'git/space'
 require_relative 'uri/space'
 #require_relative '../universal/descriptor'
 
-module Persistence
+module Outer
   class Space < ::Spaces::Space
     # The dimensions in which long-lived recordings of software objects can be made and maintained.
 
     class << self
       def git
-        @@git ||= Persistence::Git::Space.new
+        @@git ||= Outer::Git::Space.new
       end
 
       def uri
-        @@uri ||= Persistence::Uri::Space.new
+        @@uri ||= Outer::Uri::Space.new
       end
 
       def maps

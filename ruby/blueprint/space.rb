@@ -6,7 +6,7 @@ module Blueprint
     # The dimensions in which blueprints exist
 
     def new_for(descriptor)
-      model_class.new(open_struct_from_json(persistence.by(descriptor))).tap do |m|
+      model_class.new(open_struct_from_json(outer.by(descriptor))).tap do |m|
         m.struct.descriptor = descriptor
       end
     end
@@ -35,7 +35,7 @@ module Blueprint
     end
 
     def import(descriptor)
-      persistence.import(descriptor)
+      outer.import(descriptor)
       new_for(descriptor).tap { |m| save(m) }
     end
 
@@ -43,8 +43,8 @@ module Blueprint
       Blueprint
     end
 
-    def persistence
-      universe.persistence
+    def outer
+      universe.outer
     end
   end
 end
