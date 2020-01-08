@@ -96,10 +96,6 @@ module Container
       "#{name}/DockerFile"
     end
 
-    def subspace_path
-      name
-    end
-
     def name
       tensor.struct.version.descriptor.name
     end
