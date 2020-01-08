@@ -36,4 +36,4 @@ mv /tmp/apache2.conf /etc/apache2/apache2.conf
 		 cp /home/engines/configs/apache2/site.conf /etc/apache2/sites-enabled/000-default.conf
 	fi
 	
-/build_scripts/install_htaccess.sh
+/scripts/install_htaccess.sh

@@ -54,16 +54,16 @@ module Container
     def archive_layer
       %Q(
         RUN \
-          /build_scripts/set_cont_user.sh && \
+          /scripts/set_cont_user.sh && \
           echo "#App Archives" && \
-          /build_scripts/package_installer.sh  'git'  '#{tensor.struct.version.url}'  '#{tensor.struct.version.descriptor.name}' 'false'  '/home/app'  '#{tensor.struct.version.descriptor.name}/hello'  '' && \
+          /scripts/package_installer.sh  'git'  '#{tensor.struct.version.url}'  '#{tensor.struct.version.descriptor.name}' 'false'  '/home/app'  '#{tensor.struct.version.descriptor.name}/hello'  '' && \
       )
     end
 
     def chown_layer
       %Q(
         RUN \
-          /build_scripts/chown_app_dir.sh
+          /scripts/chown_app_dir.sh
       )
     end
 

@@ -17,7 +17,7 @@ module Framework
         ENV ContUser www-data
         ENV CONTFSVolHome /home/fs/
 
-        ADD build_scripts /build_scripts
+        ADD scripts /scripts
         ADD home home
         ADD engines home/engines
 
@@ -36,12 +36,12 @@ module Framework
     def mid_layers
       %Q(
         USER 0
-        RUN   /build_scripts/configure_apache.sh
+        RUN   /scripts/configure_apache.sh
         RUN \
           bash /home/setup.sh
         RUN \
-          /build_scripts/set_data_permissions.sh&& \
-          /build_scripts/_finalise_environment.sh
+          /scripts/set_data_permissions.sh&& \
+          /scripts/_finalise_environment.sh
       )
     end
 
