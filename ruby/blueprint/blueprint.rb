@@ -13,5 +13,13 @@ module Blueprint
       @container_tensor ||= Container::Tensor.new(duplicate(struct))
     end
 
+    def name
+      struct.version.descriptor.name
+    end
+
+    def file_path
+      "#{name}/#{self.class.unqualified_identifier}"
+    end
+
   end
 end

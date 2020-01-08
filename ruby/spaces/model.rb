@@ -11,6 +11,10 @@ module Spaces
         name.split('::').join
       end
 
+      def unqualified_identifier
+        name.split('::').last
+      end
+
       def from_yaml(yaml)
         YAML::load(yaml)
       end
@@ -41,6 +45,18 @@ module Spaces
 
     def identifier
       self.class.identifier
+    end
+
+    def file_path
+      "#{name}/#{self.class.identifier}"
+    end
+
+    def subspace_path
+      name
+    end
+
+    def name
+      identifier
     end
 
     def to_yaml

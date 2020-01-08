@@ -12,14 +12,6 @@ module Container
       @docker_file ||= DockerFile.new(self)
     end
 
-    def file_path
-      "#{name}/#{self.class.identifier}"
-    end
-
-    def subspace_path
-      name
-    end
-
     def name
       struct.version.descriptor.name
     end

@@ -20,23 +20,22 @@ module Blueprint
       end
     end
 
-    def save(model)
-      f = File.open(file_name_for(model.descriptor), 'w')
-      begin
-        f.write(model.to_yaml)
-      ensure
-        f.close
-      end
+    def import(descriptor)
+      outer.import(descriptor)
+      new_for(descriptor).tap { |m| save_yaml(m) }
     end
 
     def file_name_for(descriptor)
-      ensure_space
-      "#{path}/#{descriptor.identifier}.yaml"
+      ensure_subspace_for(descriptor)
+      "#{subspace_path_for(descriptor)}/#{model_class.unqualified_identifier}.yaml"
     end
 
-    def import(descriptor)
-      outer.import(descriptor)
-      new_for(descriptor).tap { |m| save(m) }
+    def ensure_subspace_for(descriptor)
+      FileUtils.mkdir_p(subspace_path_for(descriptor))
+    end
+
+    def subspace_path_for(descriptor)
+      "#{path}/#{descriptor.identifier}"
     end
 
     def model_class
