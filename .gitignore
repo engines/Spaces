@@ -51,3 +51,4 @@ build-iPhoneSimulator/
 .DS_Store
 .irb_history
 x.rb
+ruby/x_*.rb
