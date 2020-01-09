@@ -19,8 +19,8 @@ module Framework
         ENV ContUser ruby
         ENV RAILS_ENV production
 
-        ENV SECRET_KEY_BASE	_Engines_System(random(128))
-        ENV RAILS_MASTER_KEY _Engines_System(random(32))
+        ENV SECRET_KEY_BASE	#{SecureRandom.hex(128)}
+        ENV RAILS_MASTER_KEY #{SecureRandom.hex(32)}
         ENV PATH /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
         ADD scripts /scripts
