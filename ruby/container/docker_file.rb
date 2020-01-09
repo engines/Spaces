@@ -21,7 +21,7 @@ module Container
         framework.setup_layers,
         memory_layer,
         environment.locale_layers,
-        domain.layers(tensor.struct.version.software),
+        domain.layers(tensor.struct.software),
         framework.stack_layers,
         user_layers,
         root_layer,
@@ -36,7 +36,7 @@ module Container
     end
 
     def memory_layer
-      "ENV Memory '#{tensor.struct.version.software.memory_usage.recommended}'"
+      "ENV Memory '#{tensor.struct.software.memory_usage.recommended}'"
     end
 
     def user_layers
@@ -56,7 +56,7 @@ module Container
         RUN \
           /scripts/set_cont_user.sh && \
           echo "#App Archives" && \
-          /scripts/package_installer.sh  'git'  '#{tensor.struct.version.url}'  '#{tensor.struct.version.descriptor.name}' 'false'  '/home/app'  '#{tensor.struct.version.descriptor.name}/hello'  '' && \
+          /scripts/package_installer.sh  'git'  '#{tensor.struct.descriptor.value}'  '#{tensor.struct.descriptor.identifier}' 'false'  '/home/app'  '#{tensor.struct.descriptor.identifier}/hello'  '' && \
       )
     end
 
@@ -79,8 +79,8 @@ module Container
     end
 
     def framework
-      @framework ||= universe.frameworks.by(tensor.struct.version.software.framework).tap do |m|
-        m.struct = duplicate(tensor.struct.version.software.framework)
+      @framework ||= universe.frameworks.by(tensor.struct.software.framework).tap do |m|
+        m.struct = duplicate(tensor.struct.software.framework)
       end
     end
 
@@ -93,11 +93,15 @@ module Container
     end
 
     def file_path
-      "#{name}/DockerFile"
+      "#{identifier}/DockerFile"
     end
 
-    def name
-      tensor.struct.version.descriptor.name
+    def identifier
+      tensor.struct.software.title
+    end
+
+    def descriptor
+     tensor.descriptor
     end
 
     def universe
