@@ -1,6 +1,7 @@
 require 'duplicate'
 
 require_relative '../spaces/model'
+require_relative '../spaces/descriptor'
 require_relative '../container/tensor'
 
 module Blueprint

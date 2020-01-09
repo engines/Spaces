@@ -1,7 +1,8 @@
 require 'yaml'
 require 'json'
 require 'ostruct'
-require_relative '../spaces/error'
+require_relative 'descriptor'
+require_relative 'error'
 
 module Spaces
   class Model
@@ -65,6 +66,10 @@ module Spaces
 
     def open_struct_from_json(json)
       JSON.parse(json, object_class: OpenStruct)
+    end
+
+    def descriptor_class
+      Descriptor
     end
   end
 end

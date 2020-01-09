@@ -1,7 +1,6 @@
 require_relative '../spaces/space'
 require_relative 'git/space'
 require_relative 'uri/space'
-#require_relative '../universal/descriptor'
 
 module Outer
   class Space < ::Spaces::Space

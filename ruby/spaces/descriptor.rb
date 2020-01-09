@@ -1,11 +1,19 @@
-require_relative '../spaces/model'
+require_relative 'model'
 
-module Universal
+module Spaces
   class Descriptor < ::Spaces::Model
 
     attr_accessor :value,
       :identifier,
       :branch
+
+    def initialize(struct = nil)
+      if struct
+        self.value = struct.value
+        self.identifier = struct.identifier
+        self.branch = struct.branch
+      end
+    end
 
     def identifier
       @identifier ||= value&.split('/').last.split('.').first
