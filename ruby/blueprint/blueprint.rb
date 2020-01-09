@@ -14,8 +14,10 @@ module Blueprint
       @container_tensor ||= container_tensor_class.new(duplicate(struct))
     end
 
-    def name
-      struct.version.descriptor.name
+    def dependency_descriptors
+      struct.dependencies&.map { |d|
+        descriptor_class.new(d.descriptor)
+      } || []
     end
 
     def file_path

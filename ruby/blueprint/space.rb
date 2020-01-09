@@ -12,7 +12,7 @@ module Blueprint
     end
 
     def by(descriptor)
-      f = File.open(file_name_for(descriptor), 'r')
+      f = File.open("#{file_name_for(descriptor)}.yaml", 'r')
       begin
         model_class.new(model_class.from_yaml(f.read))
       ensure
@@ -22,16 +22,31 @@ module Blueprint
 
     def import(descriptor)
       outer.import(descriptor)
-      new_for(descriptor).tap { |m| save_yaml(m) }
+      new_for(descriptor).tap do |m|
+        save_yaml(m)
+        import_dependencies_for(m)
+      end
+    end
+
+    def import_dependencies_for(model)
+      unimported_dependencies(model).each { |d| import(d) }
+    end
+
+    def unimported_dependencies(model)
+      model.dependency_descriptors.reject { |d| imported?(d) }
     end
 
     def file_name_for(descriptor)
       ensure_subspace_for(descriptor)
-      "#{subspace_path_for(descriptor)}/#{model_class.unqualified_identifier}.yaml"
+      "#{subspace_path_for(descriptor)}/#{model_class.unqualified_identifier}"
     end
 
     def ensure_subspace_for(descriptor)
       FileUtils.mkdir_p(subspace_path_for(descriptor))
+    end
+
+    def imported?(descriptor)
+      Dir.exist?(subspace_path_for(descriptor))
     end
 
     def subspace_path_for(descriptor)
