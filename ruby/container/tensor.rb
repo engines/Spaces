@@ -12,9 +12,5 @@ module Container
       @docker_file ||= DockerFile.new(self)
     end
 
-    def name
-      struct.version.descriptor.name
-    end
-
   end
 end

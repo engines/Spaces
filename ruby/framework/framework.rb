@@ -18,5 +18,8 @@ module Framework
     '/home/spaces/scripts/startup/start.sh'
   end
 
+    def identifier
+      self.class.identifier
+    end
   end
 end
