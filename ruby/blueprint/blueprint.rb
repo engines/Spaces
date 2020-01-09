@@ -11,7 +11,7 @@ module Blueprint
     relation_accessor :container_tensor
 
     def container_tensor
-      @container_tensor ||= Container::Tensor.new(duplicate(struct))
+      @container_tensor ||= container_tensor_class.new(duplicate(struct))
     end
 
     def name
@@ -22,5 +22,8 @@ module Blueprint
       "#{name}/#{self.class.unqualified_identifier}"
     end
 
+    def container_tensor_class
+      Container::Tensor
+    end
   end
 end
