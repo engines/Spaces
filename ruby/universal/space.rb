@@ -61,7 +61,7 @@ module Universal
     end
 
     def path
-      "/opt/engines/#{identifier}"
+      "/opt/#{identifier}"
     end
   end
 end

@@ -9,7 +9,7 @@ module Framework
     end
 
     def first_layer(descriptor)
-      "FROM engines/ngpassenger:#{descriptor.branch}"
+      "FROM spaces/ngpassenger:#{descriptor.branch}"
     end
 
     def setup_layers
@@ -25,7 +25,7 @@ module Framework
 
         ADD scripts /scripts
         ADD home home
-        ADD engines home/engines
+        ADD spaces home/spaces
 
         RUN apt-get update &&\
         	chown $ContUser /opt &&\

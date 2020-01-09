@@ -15,7 +15,7 @@ module Framework
   end
 
   def start_script_path
-    '/home/engines/scripts/startup/start.sh'
+    '/home/spaces/scripts/startup/start.sh'
   end
 
   end

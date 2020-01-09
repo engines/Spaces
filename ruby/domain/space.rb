@@ -1,4 +1,4 @@
-require_relative '../domain/domain'
+require_relative 'domain'
 require_relative '../spaces/space'
 
 module Domain
@@ -8,7 +8,7 @@ module Domain
     def by(descriptor)
       model_class.new.tap do |m|
         m.struct = OpenStruct.new.tap do |s|
-          s.name = 'current.engines.org'
+          s.name = 'current.spaces.org'
         end
       end
     end

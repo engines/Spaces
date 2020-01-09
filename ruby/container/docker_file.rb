@@ -75,7 +75,7 @@ module Container
     end
 
     def clearing_layer
-      'RUN /home/engines/scripts/build/post_build_clean.sh'
+      'RUN /home/spaces/scripts/build/post_build_clean.sh'
     end
 
     def framework
