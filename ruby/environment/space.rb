@@ -1,4 +1,4 @@
-require_relative '../environment/environment'
+require_relative 'environment'
 require_relative '../spaces/space'
 
 module Environment

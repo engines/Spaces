@@ -1,7 +1,8 @@
 require 'yaml'
 require 'json'
 require 'ostruct'
-require_relative '../spaces/error'
+require_relative 'descriptor'
+require_relative 'error'
 
 module Spaces
   class Model
@@ -30,32 +31,25 @@ module Spaces
     end
 
     attr_accessor :struct
+    relation_accessor :descriptor
 
     def initialize(struct = nil)
       self.struct = struct
     end
 
-    def method_missing(m, *args, &block)
-      if struct&.methods(false)&.include?(m)
-        struct.send(m, *args, &block)
-      else
-        super
-      end
+    def descriptor
+      @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
     def identifier
-      self.class.identifier
+      descriptor.identifier
     end
 
     def file_path
-      "#{name}/#{self.class.identifier}"
+      "#{subspace_path}/#{self.class.identifier}"
     end
 
     def subspace_path
-      name
-    end
-
-    def name
       identifier
     end
 
@@ -65,6 +59,18 @@ module Spaces
 
     def open_struct_from_json(json)
       JSON.parse(json, object_class: OpenStruct)
+    end
+
+    def descriptor_class
+      Descriptor
+    end
+
+    def method_missing(m, *args, &block)
+      if struct&.methods(false)&.include?(m)
+        struct.send(m, *args, &block)
+      else
+        super
+      end
     end
   end
 end

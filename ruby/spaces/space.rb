@@ -1,4 +1,4 @@
-require_relative '../spaces/model'
+require_relative 'model'
 
 module Spaces
   class Space < Model
@@ -43,6 +43,10 @@ module Spaces
 
     def path
       "#{universe.path}/#{identifier}"
+    end
+
+    def identifier
+      self.class.identifier
     end
 
     def ensure_space

@@ -6,5 +6,9 @@ module Spaces
 
     relation_accessor :tensor
 
+    def identifier
+      struct.software.title
+    end
+
   end
 end

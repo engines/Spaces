@@ -9,7 +9,7 @@ module Framework
     end
 
     def first_layer(descriptor)
-      "FROM engines/ngpassenger:#{descriptor.branch}"
+      "FROM spaces/ngpassenger:#{descriptor.branch}"
     end
 
     def setup_layers
@@ -19,13 +19,13 @@ module Framework
         ENV ContUser ruby
         ENV RAILS_ENV production
 
-        ENV SECRET_KEY_BASE	_Engines_System(random(128))
-        ENV RAILS_MASTER_KEY _Engines_System(random(32))
+        ENV SECRET_KEY_BASE	#{SecureRandom.hex(128)}
+        ENV RAILS_MASTER_KEY #{SecureRandom.hex(32)}
         ENV PATH /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
         ADD scripts /scripts
         ADD home home
-        ADD engines home/engines
+        ADD spaces home/spaces
 
         RUN apt-get update &&\
         	chown $ContUser /opt &&\

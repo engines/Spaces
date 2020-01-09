@@ -16,6 +16,7 @@ module Outer
       end
 
       def import(descriptor)
+        ensure_space
         clear_for(descriptor)
         g = ::Git.clone(descriptor.value, descriptor.identifier, path: path)
         g.checkout(descriptor.branch) if descriptor.branch

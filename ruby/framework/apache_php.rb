@@ -9,7 +9,7 @@ module Framework
     end
 
     def first_layer(descriptor)
-      "FROM engines/php:#{descriptor.branch}"
+      "FROM spaces/php:#{descriptor.branch}"
     end
 
     def setup_layers
@@ -19,7 +19,7 @@ module Framework
 
         ADD scripts /scripts
         ADD home home
-        ADD engines home/engines
+        ADD spaces home/spaces
 
         RUN apt-get update -y
       )
