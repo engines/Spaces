@@ -1,0 +1,26 @@
+ _Engines_Builder(engine_name) Now installed at _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)/
+
+_Engines_Builder(engine_name)
+_Engines_Builder(domain_name)
+_Engines_Builder(hostname)
+_Engines_Builder(http_protocol)
+_Engines_Builder(repository)
+_Engines_Builder(web_port)
+_Engines_Builder(build_name)
+_Engines_Builder(runtime)
+_Engines_Builder(set_environments) 
+_Engines_Builder(environments)
+ 
+_Engines_Blueprint(software,license_name)
+_Engines_Blueprint(software,rake_tasks)
+_Engines_Blueprint(software,softwareservices)
+
+
+
+
+
+Database host _Engines_Environment(dbhost)
+Database Name _Engines_Environment(dbname)
+Database User _Engines_Environment(dbuser)
+Database Password _Engines_Environment(dbpasswd)
+

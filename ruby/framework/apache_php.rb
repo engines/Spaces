@@ -8,33 +8,22 @@ module Framework
       end
     end
 
-    def first_layer(descriptor)
-      "FROM spaces/php:#{descriptor.branch}"
+    def initial
+      'FROM spaces/php:current'
     end
 
-    def setup_layers
+    def variables
+      [
+        super,
+        %Q(
+          ENV ContUser www-data
+        )
+      ]
+    end
+
+    def scripts
       %Q(
-        ENV ContUser www-data
-        ENV CONTFSVolHome /home/fs/
-
-        ADD scripts /scripts
-        ADD home home
-        ADD spaces home/spaces
-
         RUN apt-get update -y
-      )
-    end
-
-    def stack_layers
-      %Q(
-        ENV FRAMEWORK '#{identifier}'
-        ENV RUNTIME '#{identifier}'
-        ENV PORT '8000'
-      )
-    end
-
-    def mid_layers
-      %Q(
         USER 0
         RUN   /scripts/configure_apache.sh
         RUN \

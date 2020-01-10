@@ -1,12 +1,15 @@
 require_relative '../spaces/model'
+require_relative '../container/docker_file_layering'
 
 module Environment
   class Environment < ::Spaces::Model
+    include Container::DockerFileLayering
     # The understanding of an executable inside an environment
 
+    attr_reader *precedence
     attr_accessor :locale
 
-    def locale_layers
+    def variables
       %Q(
         ENV LANGUAGE '#{locale.language}'
         ENV LANG '#{locale.lang}'
