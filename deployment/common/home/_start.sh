@@ -1,17 +1,17 @@
 #!/bin/sh
 
-PID_FILE=/home/engines/run/engines.pid	
+PID_FILE=/home/spaces/run/spaces.pid	
 
 export PID_FILE
 
-if test -f /home/engines/functions/trap.sh 
+if test -f /home/spaces/functions/trap.sh 
  then
- . /home/engines/functions/trap.sh
+ . /home/spaces/functions/trap.sh
  else
 . /home/trap.sh
 fi
 
-. /home/engines/functions/start_functions.sh
+. /home/spaces/functions/start_functions.sh
 
 volume_setup
 dynamic_persistence
@@ -30,7 +30,7 @@ pre_running
 custom_start
 
 
-touch home/engines/run/flags/started_once
+touch home/spaces/run/flags/started_once
 
 if ! test -z $exit_start
  then
@@ -38,7 +38,7 @@ if ! test -z $exit_start
 fi   
 
 #for non apache framework (or use custom start)
-if test -f /home/engines/scripts/start/startwebapp.sh 
+if test -f /home/spaces/scripts/start/startwebapp.sh 
  then
    launch_app
 elif test -f /usr/sbin/apache2ctl
@@ -49,9 +49,9 @@ elif test -f /usr/sbin/apache2ctl
 elif test -d /etc/nginx
  then
    start_nginx	
-elif test -f /home/engines/scripts/blocking.sh 
+elif test -f /home/spaces/scripts/blocking.sh 
   then
-	 /home/engines/scripts/blocking.sh  &
+	 /home/spaces/scripts/blocking.sh  &
 	 echo -n " $!" >>  $PID_FILE		   
 else
  echo "Nothing to run!"

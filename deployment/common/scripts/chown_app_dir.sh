@@ -13,11 +13,11 @@ chown -R $ContUser /home/app /home/fs /home/fs/local
 
  set_permissions()
 {
-user=`cat /home/engines/etc/user/name`
+user=`cat /home/spaces/etc/user/name`
 
-if test -f /home/engines/etc/user/files_post_install
+if test -f /home/spaces/etc/user/files_post_install
  then
-  for file in `cat /home/engines/etc/user/files_post_install`
+  for file in `cat /home/spaces/etc/user/files_post_install`
    do
     if ! test -f $file
     then
@@ -26,9 +26,9 @@ if test -f /home/engines/etc/user/files_post_install
     chown $user $file
    done
 fi
-if test -f /home/engines/etc/user/dirs_post_install
+if test -f /home/spaces/etc/user/dirs_post_install
  then
-  for dir in  `cat /home/engines/etc/user/dirs_post_install`
+  for dir in  `cat /home/spaces/etc/user/dirs_post_install`
    do
     mkdir -p $dir
     chown -R $user $dir
@@ -36,11 +36,11 @@ if test -f /home/engines/etc/user/dirs_post_install
 fi
 
 
-group=`cat /home/engines/etc/group/name`
+group=`cat /home/spaces/etc/group/name`
 
-if test -f /home/engines/etc/group/files_post_install
+if test -f /home/spaces/etc/group/files_post_install
  then
-  for file in  `cat /home/engines/etc/group/files_post_install`
+  for file in  `cat /home/spaces/etc/group/files_post_install`
    do
     if ! test -f $file
     then
@@ -50,9 +50,9 @@ if test -f /home/engines/etc/group/files_post_install
     chown $group $file
    done
 fi
-if test -f /home/engines/etc/group/dirs_post_install
+if test -f /home/spaces/etc/group/dirs_post_install
  then
-  for dir in  `cat /home/engines/etc/group/dirs_post_install`
+  for dir in  `cat /home/spaces/etc/group/dirs_post_install`
    do
    mkdir -p $dir
     chown -R $group $dir
