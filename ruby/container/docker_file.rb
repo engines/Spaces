@@ -1,58 +1,64 @@
 require_relative 'tensor'
+require_relative 'docker_file_layering'
 
 module Container
   class DockerFile < ::Spaces::Product
+    include DockerFileLayering
+
     # A mechanism by which software can be made executable.
+
+    class << self
+      def collaborator_precedence
+        @collaborator_precedence ||= [:framework, :dependencies, :itself, :environment, :domain]
+      end
+    end
+
+    attr_reader *precedence
 
     relation_accessor :tensor,
       :framework
 
-    def initialize(tensor)
-      self.tensor = tensor
+    def collaborator_precedence
+      self.class.collaborator_precedence
     end
 
     def contents
-      layers.flatten.compact.join("\n\n")
+      layers.flatten.compact.join("\n")
     end
 
     def layers
-      [
-        framework.first_layer(descriptor),
-        framework.setup_layers,
-        memory_layer,
-        environment.locale_layers,
-        domain.layers(tensor.struct.software),
-        framework.stack_layers,
-        user_layers,
-        root_layer,
-        archive_layer,
-        chown_layer,
-        framework.mid_layers,
-        work_layers,
-        framework.startup_layer,
-        clearing_layer,
-        framework.start_layers
-      ]
+      precedence.map do |p|
+        collaborator_precedence.map do |c|
+          self.send(c)&.send(p)
+        end
+      end
     end
 
-    def memory_layer
-      "ENV Memory '#{tensor.struct.software.memory_usage.recommended}'"
-    end
-
-    def user_layers
+    def variables
       %Q(
+        ENV Memory '#{tensor.struct.software.memory_usage.recommended}'
+
         ENV cont_uid '100124'
         ENV data_gid '1111'
         ENV data_uid '1111'
       )
     end
 
-    def root_layer
-      'USER 0'
+    def volumes
+      'VOLUME /var/log/'
+    end
+
+    def work_directories
+      'WORKDIR /home/app'
+    end
+
+    def scripts
+      [archive_layer, chown_layer]
     end
 
     def archive_layer
       %Q(
+        USER 0
         RUN \
           /scripts/set_cont_user.sh && \
           echo "#App Archives" && \
@@ -67,15 +73,11 @@ module Container
       )
     end
 
-    def work_layers
-      %Q(
-        WORKDIR /home/app
-        VOLUME /var/log/
-      )
+    def final
+      'RUN /home/spaces/scripts/build/post_build_clean.sh'
     end
 
-    def clearing_layer
-      'RUN /home/spaces/scripts/build/post_build_clean.sh'
+    def dependencies
     end
 
     def framework
@@ -89,7 +91,8 @@ module Container
     end
 
     def domain
-      @domain ||= universe.domains.by('')
+      #@domain ||= universe.domains.by('')
+      @domain ||= universe.domains.model_class.new(tensor.struct.software)
     end
 
     def file_path
@@ -104,8 +107,8 @@ module Container
      tensor.descriptor
     end
 
-    def universe
-      @universal_space ||= Universal::Space.new
+    def initialize(tensor)
+      self.tensor = tensor
     end
 
   end

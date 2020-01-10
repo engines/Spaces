@@ -65,6 +65,10 @@ module Spaces
       Descriptor
     end
 
+    def universe
+      @universal_space ||= Universal::Space.new
+    end
+
     def method_missing(m, *args, &block)
       if struct&.methods(false)&.include?(m)
         struct.send(m, *args, &block)

@@ -1,13 +1,17 @@
 require_relative '../spaces/model'
+require_relative '../container/docker_file_layering'
 
 module Framework
   class Framework < ::Spaces::Model
+    include Container::DockerFileLayering
 
-    def startup_layer
+    attr_reader *precedence
+
+    def adds
       "ADD home/start.sh #{start_script_path}"
     end
 
-    def start_layers
+    def final
       %Q(
         USER $ContUser
         CMD ["#{start_script_path}"]

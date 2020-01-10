@@ -1,13 +1,17 @@
 require_relative '../spaces/model'
+require_relative '../container/docker_file_layering'
 
 module Domain
   class Domain < ::Spaces::Model
+    include Container::DockerFileLayering
 
-    def layers(software)
+    attr_reader *precedence
+
+    def variables
       %Q(
-        ENV Hostname '#{software.title}'
-        ENV Domainname '#{struct.name}'
-        ENV fqdn '#{software.title}.#{struct.name}'
+        ENV Hostname '#{struct.title}'
+        ENV Domainname 'current.spaces.org'
+        ENV fqdn '#{struct.title}.current.spaces.org'
       )
     end
 
