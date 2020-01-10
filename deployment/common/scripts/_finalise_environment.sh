@@ -21,10 +21,10 @@ echo "	id $ContUser | grep $data_gid '"
      chown -R $ContUser ~$ContUser/.ssh
  
  	
-	if test -f /build_scripts/finalise_environment.sh
+	if test -f /scripts/finalise_environment.sh
 		then
 			echo "running finalise_environment.sh"
-			/build_scripts/finalise_environment.sh
+			/scripts/finalise_environment.sh
 	fi
 	
 	if ! test -z "$VOLDIR"
