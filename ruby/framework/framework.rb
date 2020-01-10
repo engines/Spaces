@@ -7,8 +7,22 @@ module Framework
 
     attr_reader *precedence
 
+    def variables
+      %Q(
+        ENV CONTFSVolHome /home/fs/
+        ENV FRAMEWORK '#{identifier}'
+        ENV RUNTIME '#{identifier}'
+        ENV PORT '8000'
+      )
+    end
+
     def adds
-      "ADD home/start.sh #{start_script_path}"
+      %Q(
+        ADD scripts /scripts
+        ADD home home
+        ADD spaces home/spaces
+        ADD home/start.sh #{start_script_path}
+      )
     end
 
     def final

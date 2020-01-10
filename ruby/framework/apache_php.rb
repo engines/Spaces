@@ -13,25 +13,10 @@ module Framework
     end
 
     def variables
-      %Q(
-        ENV ContUser www-data
-        ENV CONTFSVolHome /home/fs/
-        ENV ContUser www-data
-        ENV CONTFSVolHome /home/fs/
-
-        ENV FRAMEWORK '#{identifier}'
-        ENV RUNTIME '#{identifier}'
-        ENV PORT '8000'
-      )
-    end
-
-    def adds
       [
         super,
         %Q(
-          ADD scripts /scripts
-          ADD home home
-          ADD spaces home/spaces
+          ENV ContUser www-data
         )
       ]
     end

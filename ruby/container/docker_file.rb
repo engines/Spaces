@@ -9,7 +9,12 @@ module Container
 
     class << self
       def collaborator_precedence
-        @collaborator_precedence ||= [:framework, :dependencies, :itself, :environment, :domain]
+        @collaborator_precedence ||= {
+          final:
+            [:dependencies, :itself, :environment, :domain, :framework],
+          default:
+            [:framework, :dependencies, :itself, :environment, :domain]
+        }
       end
     end
 
@@ -28,7 +33,7 @@ module Container
 
     def layers
       precedence.map do |p|
-        collaborator_precedence.map do |c|
+        (collaborator_precedence[p] || collaborator_precedence[:default]).map do |c|
           self.send(c)&.send(p)
         end
       end
@@ -92,7 +97,7 @@ module Container
 
     def domain
       #@domain ||= universe.domains.by('')
-      @domain ||= universe.domains.model_class.new(tensor.struct.software)
+      @domain ||= universe.domains.model_class.new(tensor.struct.descriptor)
     end
 
     def file_path
