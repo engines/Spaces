@@ -11,6 +11,7 @@ module Spaces
     end
 
     def save(model)
+      save_dependency_content_for(model) if model.respond_to?(:dependencies)
       f = File.open("#{file_name_for(model)}", 'w')
       begin
         f.write(model.contents)
@@ -19,13 +20,34 @@ module Spaces
       end
     end
 
+    def save_dependency_content_for(model)
+      unsaved_dependency_content(model).each { |m| save(m) }
+    end
+
+    def unsaved_dependency_content(model)
+      model.dependencies.reject { |m| encloses?(file_name_for(model)) }
+    end
+
     def save_yaml(model)
+      save_dependency_yaml_for(model) if model.respond_to?(:dependencies)
       f = File.open("#{file_name_for(model)}.yaml", 'w')
       begin
         f.write(model.to_yaml)
       ensure
         f.close
       end
+    end
+
+    def save_dependency_yaml_for(model)
+      unsaved_dependency_yaml(model).each { |m| save_yaml(m) }
+    end
+
+    def unsaved_dependency_yaml(model)
+      model.dependencies.reject { |m| encloses?("#{file_name_for(model)}.yaml") }
+    end
+
+    def encloses?(file_name)
+      Dir.exist?(file_name)
     end
 
     def file_name_for(model)
