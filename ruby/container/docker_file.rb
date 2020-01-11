@@ -11,9 +11,9 @@ module Container
       def collaborator_precedence
         @collaborator_precedence ||= {
           final:
-            [:dependencies, :itself, :environment, :domain, :framework],
+            [:itself, :environment, :domain, :framework],
           default:
-            [:framework, :dependencies, :itself, :environment, :domain]
+            [:framework, :itself, :environment, :domain]
         }
       end
     end
@@ -21,7 +21,14 @@ module Container
     attr_reader *precedence
 
     relation_accessor :tensor,
+      :dependencies,
       :framework
+
+    def dependencies
+      @dependencies ||= tensor.dependencies&.map do |d|
+        d.docker_file
+      end.compact || []
+    end
 
     def collaborator_precedence
       self.class.collaborator_precedence
@@ -82,12 +89,12 @@ module Container
       'RUN /home/spaces/scripts/build/post_build_clean.sh'
     end
 
-    def dependencies
-    end
-
     def framework
-      @framework ||= universe.frameworks.by(tensor.struct.software.framework).tap do |m|
-        m.struct = duplicate(tensor.struct.software.framework)
+      if (f = tensor.struct.software.framework)
+        @framework ||=
+          universe.frameworks.by(f).tap do |m|
+            m.struct = duplicate(f)
+          end
       end
     end
 
