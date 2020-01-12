@@ -38,10 +38,10 @@ module Container
     end
 
     def resolution_for(h)
-      overrides(struct.dependents&.variables).merge(h)
+      overrides_for(struct.dependents&.variables).merge(h)
     end
 
-    def overrides(struct = OpenStruct.new)
+    def overrides_for(struct = OpenStruct.new)
       h = struct.to_h
       h.keys.inject({}) do |m, k|
         m[k] =

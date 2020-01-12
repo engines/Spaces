@@ -15,7 +15,7 @@ module Container
     end
 
     def resolution
-      @resolution ||= needed_tensor.resolution_for(tensor.overrides(struct.variables))
+      @resolution ||= needed_tensor.resolution_for(tensor.overrides_for(struct.variables))
     end
 
     def needed_tensor
