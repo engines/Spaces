@@ -19,7 +19,7 @@ module Container
     end
 
     def needed_tensor
-      universe.blueprints.by(descriptor)&.container_tensor
+      universe.blueprints.by(descriptor)&.tensor
     end
 
     def initialize(struct, tensor)

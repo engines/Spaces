@@ -20,7 +20,7 @@ module Container
 
     def dependencies
       @dependencies ||= dependency_descriptors.map do |d|
-        universe.blueprints.by(d)&.container_tensor
+        universe.blueprints.by(d)&.tensor
       end.compact
     end
 
