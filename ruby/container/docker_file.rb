@@ -5,15 +5,13 @@ module Container
   class DockerFile < ::Spaces::Product
     include DockerFileLayering
 
-    # A mechanism by which software can be made executable.
-
     class << self
       def collaborator_precedence
         @collaborator_precedence ||= {
           final:
-            [:itself, :environment, :domain, :framework],
+            [:needs, :docker_file, :environment, :domain, :framework],
           default:
-            [:framework, :itself, :environment, :domain]
+            [:framework, :needs, :docker_file, :environment, :domain]
         }
       end
     end
@@ -21,8 +19,7 @@ module Container
     attr_reader *precedence
 
     relation_accessor :tensor,
-      :dependencies,
-      :framework
+      :dependencies
 
     def dependencies
       @dependencies ||= tensor.dependencies&.map do |d|
@@ -40,10 +37,12 @@ module Container
 
     def layers
       precedence.map do |p|
-        (collaborator_precedence[p] || collaborator_precedence[:default]).map do |c|
-          self.send(c)&.send(p)
-        end
+        best_collaborator_precedence_for(p).map { |c| tensor.send(c) }.flatten.compact.map { |r| r.send(p) }
       end
+    end
+
+    def best_collaborator_precedence_for(precedence)
+      (collaborator_precedence[precedence] || collaborator_precedence[:default])
     end
 
     def variables
@@ -87,24 +86,6 @@ module Container
 
     def final
       'RUN /home/spaces/scripts/build/post_build_clean.sh'
-    end
-
-    def framework
-      if (f = tensor.struct.software.framework)
-        @framework ||=
-          universe.frameworks.by(f).tap do |m|
-            m.struct = duplicate(f)
-          end
-      end
-    end
-
-    def environment
-      @environment ||= universe.environments.by('')
-    end
-
-    def domain
-      #@domain ||= universe.domains.by('')
-      @domain ||= universe.domains.model_class.new(tensor.struct.descriptor)
     end
 
     def file_path
