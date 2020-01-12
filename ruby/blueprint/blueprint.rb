@@ -8,10 +8,10 @@ module Blueprint
   class Blueprint < ::Spaces::Model
     # A plan for making software executable and usable, potentially many times over
 
-    relation_accessor :container_tensor
+    relation_accessor :tensor
 
-    def container_tensor
-      @container_tensor ||= container_tensor_class.new(duplicate(struct))
+    def tensor
+      @tensor ||= tensor_class.new(duplicate(struct))
     end
 
     def dependency_descriptors
@@ -24,7 +24,7 @@ module Blueprint
       "#{name}/#{self.class.unqualified_identifier}"
     end
 
-    def container_tensor_class
+    def tensor_class
       Container::Tensor
     end
   end
