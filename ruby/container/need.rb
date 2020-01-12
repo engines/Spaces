@@ -19,7 +19,7 @@ module Container
     end
 
     def needed_tensor
-      universe.blueprints.by(descriptor)&.tensor
+      tensor.dependencies.detect { |d| d.struct.descriptor.value == struct.descriptor.value }
     end
 
     def initialize(struct, tensor)
