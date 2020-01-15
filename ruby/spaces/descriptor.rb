@@ -5,13 +5,15 @@ module Spaces
 
     attr_accessor :value,
       :identifier,
-      :branch
+      :branch,
+      :extraction
 
     def initialize(struct = nil)
       if struct
         self.value = struct.value
         self.identifier = struct.identifier
         self.branch = struct.branch
+        self.extraction = struct.extraction
       end
     end
 
