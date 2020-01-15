@@ -5,7 +5,18 @@ module Framework
   class Framework < ::Spaces::Model
     include Container::DockerFileLayering
 
+    class << self
+      def step_precedence
+        @@framework_step_precedence ||= [:tasks]
+      end
+    end
+
     attr_reader *precedence
+    attr_reader *step_precedence
+
+    def step_precedence
+      self.class.step_precedence
+    end
 
     def variables
       %Q(

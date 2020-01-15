@@ -1,5 +1,6 @@
 require_relative 'tensor'
 require_relative 'docker_file_layering'
+require_relative 'package'
 
 module Container
   class DockerFile < ::Spaces::Product
@@ -7,16 +8,21 @@ module Container
 
     class << self
       def collaborator_precedence
-        @collaborator_precedence ||= {
+        @@collaborator_precedence ||= {
           final:
             [:needs, :docker_file, :environment, :domain, :framework],
           default:
             [:framework, :needs, :docker_file, :environment, :domain]
         }
       end
+
+      def step_precedence
+        @@docker_file_step_precedence ||= [:preparations, :packages, :permissions, :templates, :source_protection, :replacements, :seeds, :tasks, :data_persistence, :installs, :source_persistence]
+      end
     end
 
     attr_reader *precedence
+    attr_reader *step_precedence
 
     relation_accessor :tensor,
       :dependencies
@@ -29,6 +35,14 @@ module Container
 
     def collaborator_precedence
       self.class.collaborator_precedence
+    end
+
+    def step_precedence
+      self.class.step_precedence
+    end
+
+    def step_precedence
+      @step_precedence ||= [:preparations, :packages, :permissions, :templates, :source_protection, :replacements, :seeds, :tasks, :data_persistence, :installs, :source_persistence]
     end
 
     def contents
@@ -56,36 +70,128 @@ module Container
     end
 
     def volumes
-      'VOLUME /var/log/'
+      %Q(
+        VOLUME /var/log/
+        VOLUME /home/fs/
+        VOLUME /home/fs_src/
+      )
     end
 
-    def work_directories
-      'WORKDIR /home/app'
+    def adds
+      %Q(
+        ADD scripts /scripts
+        ADD home home
+        ADD spaces home/spaces
+        ADD home/start.sh #{start_script_path}
+        USER 0
+        RUN \
+          mkdir -p /home/fs/local/
+      )
     end
 
-    def scripts
-      [archive_layer, chown_layer]
+    def preparations
+      [copy_sudo_list, repositories]
     end
 
-    def archive_layer
+    def copy_sudo_list
+      "COPY sudo_list /etc/sudoers.d/container"
+    end
+
+    def repositories
       %Q(
         USER 0
         RUN \
           /scripts/set_cont_user.sh && \
-          echo "#App Archives" && \
-          /scripts/package_installer.sh  'git'  '#{tensor.struct.descriptor.value}'  '#{tensor.struct.descriptor.identifier}' 'false'  '/home/app'  '#{tensor.struct.descriptor.identifier}/hello'  '' && \
+          ln -s /usr/local/ /home/local && \
+          chown -R $ContUser /usr/local/ && \
+          add-apt-repository  -y ppa:opencpn/opencpn && \
+          apt-get -y update && \
       )
     end
 
-    def chown_layer
+    def packages
+      [
+        %Q(
+          apt-get install -y mysql-client make && \
+        ), # TODO: how do we generalise this? with a dependency!
+
+        package_class.new(tensor.descriptor).installation
+      ]
+    end
+
+    def permissions
+      %Q(
+        /scripts/recursive_write_permissions.sh test_package_dest/test_write_rec_dir && \
+        /scripts/write_permissions.sh test_package_dest/test_write_file test_package_dest/test_write_dir test_package_dest/test_write_rec_dir && \
+      )
+    end
+
+    def templates
+       '/scripts/install_templates.sh'
+    end
+
+    def source_protection
+      %Q(
+        USER 0
+        RUN \
+        /scripts/chown_app_dir.sh
+      )
+    end
+
+    def replacements
+      tensor.struct.adaptations&.replacements&.map do |r|
+        %Q(
+          RUN cat #{r.source} | sed #{r.string} > #{tmp}
+          RUN cp #{tmp} #{r.destination}
+        )
+      end
+    end
+
+    def seeds
       %Q(
         RUN \
-          /scripts/chown_app_dir.sh
+          cat /home/app//sql/create_tables.sql | sed "/TBLE/s//TABLE/" > /tmp/create_tables.sql.0&& \
+          cp /tmp/create_tables.sql.0 /home/app//sql/create_tables.sql&& \
+      ) # TODO: more to do here
+    end
+
+    def data_persistence
+      %Q(
+        /scripts/persistent_dirs.sh enginetest:/home/app/fresh_dir_perm_test enginetest:/home/app/home_persistent enginetest:/usr/local/local_persist enginetest:/home/home_dir/home_dir_persist enginetest:/home/app/test_package_dest/test_persist_dir data:/home/app/persistent && \
+        /scripts/persistent_files.sh enginetest:app/fresh_test_persistent_file data:app/test_package_dest/test_persist_file
+      )
+    end
+
+    def installs
+      %Q(
+        WORKDIR /home/
+        RUN \
+          bash /home/setup.sh
+      )
+    end
+
+    def source_persistence
+      %Q(
+        USER 0
+        RUN \
+          /scripts/prepare_persitent_source.sh
       )
     end
 
     def final
-      'RUN /home/spaces/scripts/build/post_build_clean.sh'
+      %Q(
+        RUN \
+          /scripts/set_data_permissions.sh && \
+          /scripts/_finalise_environment.sh && \
+          /home/spaces/scripts/build/post_build_clean.sh
+        ENV buildtime_only '.'
+        USER $ContUser
+        CMD ["#{start_script_path}"]
+      )
+    end
+
+    def start_script_path
+      '/home/spaces/scripts/startup/start.sh'
     end
 
     def file_path
@@ -98,6 +204,10 @@ module Container
 
     def descriptor
      tensor.descriptor
+    end
+
+    def package_class
+      Package
     end
 
     def initialize(tensor)
