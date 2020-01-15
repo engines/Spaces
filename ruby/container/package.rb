@@ -6,7 +6,6 @@ module Container
 
     def installation
       %Q(
-        echo "#App Archives" && \
         #{script} '#{download_type}' '#{source}' '#{name}' '#{extraction}' '#{destination}'  '#{extraction_path}'  '#{options}' && \
       )
     end

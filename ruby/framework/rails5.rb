@@ -32,11 +32,7 @@ module Framework
       ]
     end
 
-    def volumes
-      'VOLUME /home/fs_src/'
-    end
-
-    def scripts
+    def tasks
       %Q(
         RUN apt-get update &&\
         	chown $ContUser /opt &&\
@@ -44,24 +40,6 @@ module Framework
         	chown -R $ContUser /home/home_dir/.gem/ /home/home_dir/.bundle/ &&\
         	gem install bundle bundler &&\
         	gem update --system
-
-        USER 0
-        RUN \
-          /scripts/set_cont_user.sh && \
-          ln -s /usr/local/ /home/local && \
-          chown -R $ContUser /usr/local/ && \
-
-          echo "#Write Permissions  Recursive" && \
-          /scripts/recursive_write_permissions.sh && \
-          echo "#Write Permissions Non Recursive" && \
-          /scripts/write_permissions.sh && \
-          /scripts/install_templates.sh
-
-        USER $ContUser
-        RUN \
-          /scripts/persistent_dirs.sh files:/home/app/public && \
-          echo "#Persistant Files []"&& \
-          /scripts/persistent_files.sh
 
         USER 0
         RUN /scripts/configure_nginx.sh &&\
@@ -75,23 +53,6 @@ module Framework
           /scripts/run_rake_task.sh db:migrate&& \
           /scripts/run_rake_task.sh db:seed&& \
           /scripts/run_rake_task.sh assets:precompile
-
-        USER 0
-        RUN \
-          mkdir -p /home/fs/local/
-
-        USER 0
-        RUN \
-          /scripts/prepare_persitent_source.sh
-
-        RUN
-          /scripts/set_data_permissions.sh&& \
-          /scripts/_finalise_environment.sh
-
-        RUN ln -s /home/app /var/www &&\
-          usermod -G data-user -a www-data &&\
-          mkdir -p /home/app/tmp &&\
-          chmod u+w /home/app/tmp
       )
     end
   end
