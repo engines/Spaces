@@ -7,16 +7,21 @@ module Container
 
     class << self
       def collaborator_precedence
-        @collaborator_precedence ||= {
+        @@collaborator_precedence ||= {
           final:
             [:needs, :docker_file, :environment, :domain, :framework],
           default:
             [:framework, :needs, :docker_file, :environment, :domain]
         }
       end
+
+      def step_precedence
+        @@docker_file_step_precedence ||= [:preparations, :packages, :permissions, :templates, :source_protection, :replacements, :seeds, :tasks, :data_persistence, :installs, :source_persistence]
+      end
     end
 
     attr_reader *precedence
+    attr_reader *step_precedence
 
     relation_accessor :tensor,
       :dependencies
@@ -29,6 +34,14 @@ module Container
 
     def collaborator_precedence
       self.class.collaborator_precedence
+    end
+
+    def step_precedence
+      self.class.step_precedence
+    end
+
+    def step_precedence
+      @step_precedence ||= [:preparations, :packages, :permissions, :templates, :source_protection, :replacements, :seeds, :tasks, :data_persistence, :installs, :source_persistence]
     end
 
     def contents
