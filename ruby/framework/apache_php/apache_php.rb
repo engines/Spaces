@@ -1,4 +1,4 @@
-require_relative 'framework'
+require_relative '../framework'
 
 module Framework
   class ApachePHP < Framework
