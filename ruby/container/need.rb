@@ -1,8 +1,8 @@
-require_relative 'docker_file_layering'
+require_relative 'docker/layering'
 
 module Container
   class Need < ::Spaces::Model
-    include DockerFileLayering
+    include Docker::Layering
 
     relation_accessor :tensor
 

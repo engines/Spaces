@@ -1,7 +1,7 @@
 require_relative '../spaces/tensor'
 require_relative 'container'
-require_relative 'docker_file'
 require_relative 'need'
+require_relative 'docker/file'
 
 module Container
   class Tensor < ::Spaces::Tensor
@@ -85,7 +85,7 @@ module Container
 
 
     def docker_file_class
-      DockerFile
+      Docker::File
     end
 
     def need_class

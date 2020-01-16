@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
-require_relative '../container/docker_file_layering'
+require_relative '../container/docker/layering'
 
 module Framework
   class Framework < ::Spaces::Model
-    include Container::DockerFileLayering
+    include Container::Docker::Layering
 
     class << self
       def step_precedence

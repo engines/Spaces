@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
-require_relative '../container/docker_file_layering'
+require_relative '../container/docker/layering'
 
 module Environment
   class Environment < ::Spaces::Model
-    include Container::DockerFileLayering
+    include Container::Docker::Layering
     # The understanding of an executable inside an environment
 
     attr_reader *precedence
