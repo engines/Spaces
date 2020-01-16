@@ -46,7 +46,7 @@ module Container
         @step_precedence ||= [:preparations, :packages, :permissions, :templates, :source_protection, :replacements, :seeds, :tasks, :data_persistence, :installs, :source_persistence]
       end
 
-      def contents
+      def content
         layers.flatten.compact.join("\n")
       end
 
