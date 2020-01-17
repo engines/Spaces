@@ -11,7 +11,7 @@ module Container
       end
 
       def step_classes
-        @steps ||= step_precedence.map do |s|
+        @step_classes ||= step_precedence.map do |s|
           Module.const_get("#{step_module_name}::#{s.to_s.split('_').map { |i| i.capitalize }.join}")
         end
       end
