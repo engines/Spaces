@@ -14,7 +14,7 @@ module Spaces
       save_dependency_content_for(model) if model.respond_to?(:dependencies)
       f = File.open("#{file_name_for(model)}", 'w')
       begin
-        f.write(model.contents)
+        f.write(model.content)
       ensure
         f.close
       end

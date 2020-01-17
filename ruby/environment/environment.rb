@@ -1,20 +1,23 @@
 require_relative '../spaces/model'
-require_relative '../container/docker_file_layering'
+require_relative '../container/docker/collaboration'
 
 module Environment
   class Environment < ::Spaces::Model
-    include Container::DockerFileLayering
-    # The understanding of an executable inside an environment
+    include Container::Docker::Collaboration
 
-    attr_reader *precedence
-    attr_accessor :locale
+    class << self
+      def step_precedence
+        @@environment_step_precedence ||= [:variables]
+      end
+    end
 
-    def variables
-      %Q(
-        ENV LANGUAGE '#{locale.language}'
-        ENV LANG '#{locale.lang}'
-        ENV LC_ALL '#{locale.lc_all}'
-      )
+    def layers
+      step_precedence.each { |s| require_relative "steps/#{s}" }
+      super
+    end
+
+    def step_module_name
+      "Environment"
     end
 
     def locale

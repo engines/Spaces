@@ -1,5 +1,4 @@
 require_relative '../spaces/model'
-require_relative 'docker_file_layering'
 
 module Container
   class Package < ::Spaces::Model

@@ -1,31 +1,19 @@
 require_relative '../spaces/tensor'
 require_relative 'container'
-require_relative 'docker_file'
-require_relative 'need'
+require_relative 'docker/file'
+require_relative 'dependencies/dependencies'
 
 module Container
   class Tensor < ::Spaces::Tensor
-    # A sufficient set of values that guarantee a tranformation into a realiably predictable container
 
     relation_accessor :docker_file,
-      :dependencies,
       :framework,
-      :needs,
+      :dependencies,
       :environment,
       :domain
 
     def docker_file
       @docker_file ||= docker_file_class.new(self)
-    end
-
-    def dependencies
-      @dependencies ||= dependency_descriptors.map do |d|
-        universe.blueprints.by(d)&.tensor
-      end.compact
-    end
-
-    def dependency_descriptors
-      struct.dependencies&.map { |d| descriptor_class.new(d.descriptor) } || []
     end
 
     def framework
@@ -37,25 +25,8 @@ module Container
       end
     end
 
-    def resolution_for(h)
-      overrides_for(struct.dependents&.variables).merge(h)
-    end
-
-    def overrides_for(struct = OpenStruct.new)
-      h = struct.to_h
-      h.keys.inject({}) do |m, k|
-        m[k] =
-          begin
-            send(h[k])
-          rescue TypeError, NoMethodError
-            h[k]
-          end
-        m
-      end
-    end
-
-    def needs
-      @needs ||= struct.dependencies&.map { |d| need_class.new(d, self) } || []
+    def dependencies
+      @dependencies ||= dependencies_class.new(struct.dependencies, self)
     end
 
     def environment
@@ -67,29 +38,12 @@ module Container
       @domain ||= universe.domains.model_class.new(struct.descriptor)
     end
 
-    def host
-      "#{descriptor.identifier}.spaces.internal"
-    end
-
-    def name
-      descriptor.identifier
-    end
-
-    def username
-      descriptor.identifier
-    end
-
-    def password
-      @password ||= SecureRandom.hex(10)
-    end
-
-
     def docker_file_class
-      DockerFile
+      Docker::File
     end
 
-    def need_class
-      Need
+    def dependencies_class
+      Dependencies
     end
 
   end

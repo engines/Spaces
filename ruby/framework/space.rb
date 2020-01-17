@@ -13,7 +13,7 @@ module Framework
     end
 
     def load(identifier)
-      require_relative(identifier)
+      require_relative("#{identifier}/#{identifier}")
     end
 
   end

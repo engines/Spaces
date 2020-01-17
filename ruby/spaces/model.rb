@@ -1,7 +1,6 @@
 require 'yaml'
 require 'json'
 require 'ostruct'
-require_relative 'descriptor'
 require_relative 'error'
 
 module Spaces
