@@ -1,8 +1,5 @@
-require_relative '../docker/collaboration'
-
 module Container
   class Relationship < ::Spaces::Model
-    include Docker::Collaboration
 
     def overrides_for(struct = OpenStruct.new)
       h = struct.to_h

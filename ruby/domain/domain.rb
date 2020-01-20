@@ -5,19 +5,12 @@ module Domain
   class Domain < ::Spaces::Model
     include Container::Docker::Collaboration
 
+    Dir["#{__dir__}/steps/*"].each { |f| require f }
+
     class << self
       def step_precedence
-        @@domain_step_precedence ||= [:variables]
+        @@dependency_step_precedence ||= { anywhere: [:variables] }
       end
-    end
-
-    def layers
-      step_precedence.each { |s| require_relative "steps/#{s}" }
-      super
-    end
-
-    def step_module_name
-      "Domain"
     end
 
   end

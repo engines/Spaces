@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Framework
   class Rails5
-    class Initial < Container::Docker::Step
+    class FromImage < Container::Docker::Step
 
       def content
         "FROM spaces/ngpassenger:current"

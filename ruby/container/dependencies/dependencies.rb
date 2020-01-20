@@ -6,10 +6,12 @@ module Container
   class Dependencies < ::Spaces::Model
     include Docker::Collaboration
 
+    Dir["#{__dir__}/steps/*"].each { |f| require f }
+
     relation_accessor :tensor
 
-    def layers
-      all.map { |a| a.layers }
+    def layers_for(group)
+      all.map { |a| a.layers_for(group) }
     end
 
     def all
