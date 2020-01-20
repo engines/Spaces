@@ -1,24 +1,17 @@
+require_relative '../docker/collaboration'
 require_relative 'relationship'
 require_relative 'dependency'
 
 module Container
   class Dependent < Relationship
+    include Docker::Collaboration
 
     relation_accessor :tensor
 
     class << self
       def step_precedence
-        @@dependency_step_precedence ||= [:variables]
+        @@dependency_step_precedence ||= { anywhere: [:variables] }
       end
-    end
-
-    def layers
-      step_precedence.each { |s| require_relative "steps/#{s}" }
-      super
-    end
-
-    def step_module_name
-      "Container::Dependency"
     end
 
     def dependency

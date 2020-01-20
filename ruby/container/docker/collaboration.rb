@@ -6,14 +6,18 @@ module Container
         self.class.step_precedence
       end
 
-      def layers
-        step_classes.map { |s| s.new(self).content }
+      def layers_for(group)
+        step_precedence[group]&.map do |s|
+          step_class(s).new(self).content
+        end
       end
 
-      def step_classes
-        @step_classes ||= step_precedence.map do |s|
-          Module.const_get("#{step_module_name}::#{s.to_s.split('_').map { |i| i.capitalize }.join}")
-        end
+      def step_class(symbol)
+        Module.const_get("#{step_module_name}::#{symbol.to_s.split('_').map { |i| i.capitalize }.join}")
+      end
+
+      def step_module_name
+        self.class.name
       end
     end
   end

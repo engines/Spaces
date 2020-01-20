@@ -2,12 +2,14 @@ require_relative 'requires'
 
 module Container
   module Docker
-    class Templates < Step
+    class File
+      class Templates < Step
 
-      def content
-        '/scripts/install_templates.sh'
+        def content
+          '/scripts/install_templates.sh'
+        end
+
       end
-
     end
   end
 end

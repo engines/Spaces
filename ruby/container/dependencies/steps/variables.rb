@@ -1,7 +1,7 @@
 require_relative 'requires'
 
 module Container
-  class Dependency
+  class Dependent
     class Variables < Docker::Step
 
       def content
