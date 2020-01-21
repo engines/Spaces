@@ -6,10 +6,10 @@ module Container
       class Replacements < Step
 
         def content
-          context.tensor.struct.adaptations&.replacements&.map do |r|
+          context.tensor.struct.replacements&.map do |r|
             %Q(
-              RUN cat #{r.source} | sed #{r.string} > #{tmp}
-              RUN cp #{tmp} #{r.destination}
+              RUN cat #{r.source} | sed #{r.string} > tmp
+              RUN cp tmp #{r.destination}
             )
           end
         end

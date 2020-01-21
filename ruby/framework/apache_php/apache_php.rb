@@ -6,6 +6,10 @@ module Framework
       def identifier
         'apache_php'
       end
+
+      def step_precedence
+        @@apache_php_step_precedence ||= {}
+      end
     end
 
     def initial
