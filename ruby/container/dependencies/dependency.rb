@@ -12,7 +12,7 @@ module Container
     end
 
     def descriptor
-      @descriptor ||= descriptor_class.new(struct)
+      @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
   end

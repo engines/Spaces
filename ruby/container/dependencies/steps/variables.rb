@@ -6,7 +6,7 @@ module Container
 
       def content
         resolution.keys.map do |k|
-          "ENV #{k} '#{resolution[k]}'"
+          "ENV #{context.descriptor.identifier}_#{k} '#{resolution[k]}'"
         end
       end
 

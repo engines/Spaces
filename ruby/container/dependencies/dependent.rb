@@ -15,7 +15,7 @@ module Container
     end
 
     def dependency
-      @dependency ||= dependency_class.new(struct.descriptor)
+      @dependency ||= dependency_class.new(struct)
     end
 
     def dependency_class
@@ -23,7 +23,7 @@ module Container
     end
 
     def descriptor
-      tensor.descriptor
+      dependency.descriptor
     end
 
     def initialize(struct, tensor)

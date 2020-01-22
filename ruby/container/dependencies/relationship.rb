@@ -23,7 +23,7 @@ module Container
     end
 
     def username
-      descriptor.identifier
+      "#{descriptor.identifier}_user"
     end
 
     def password
