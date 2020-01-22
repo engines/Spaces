@@ -8,5 +8,6 @@ module Framework
     def identifier
       self.class.identifier
     end
+
   end
 end
