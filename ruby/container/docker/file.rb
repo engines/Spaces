@@ -11,7 +11,7 @@ module Container
 
       class << self
         def collaboration_precedence
-          @@collaboration_precedence ||= [:framework, :environment, :domain, :dependencies,  :docker_file]
+          @@collaboration_precedence ||= [:framework, :environment, :domain, :dependencies, :docker_file]
         end
 
         def step_group_precedence
