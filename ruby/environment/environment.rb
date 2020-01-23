@@ -10,13 +10,17 @@ module Environment
     class << self
       def step_precedence
         @@dependency_step_precedence ||= {
-          anywhere: [:variables]
+          anywhere: [:variables, :locale, :ports]
         }
       end
     end
 
     def locale
       @locale ||= struct.locale
+    end
+
+    def initialize(struct)
+      self.struct = struct
     end
 
   end

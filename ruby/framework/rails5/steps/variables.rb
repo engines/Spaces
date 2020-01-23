@@ -1,12 +1,12 @@
-require_relative 'requires'
+require_relative '../../steps/variables'
 
 module Framework
   class Rails5
-    class Variables < Container::Docker::Step
+    class Variables < Framework::Variables
 
       def content
         [
-          #super,
+          super,
           %Q(
             ENV WWW_DIR public
             ENV ContUser ruby

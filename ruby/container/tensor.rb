@@ -1,4 +1,5 @@
 require_relative '../spaces/tensor'
+require_relative '../environment/environment'
 require_relative 'container'
 require_relative 'docker/file'
 require_relative 'dependencies/dependencies'
@@ -17,7 +18,7 @@ module Container
     end
 
     def framework
-      if (f = struct.software.framework)
+      if (f = struct.framework)
         @framework ||=
           universe.frameworks.by(f).tap do |m|
             m.struct = duplicate(f)
@@ -30,7 +31,13 @@ module Container
     end
 
     def environment
-      @environment ||= universe.environments.by('')
+      @environment ||= environment_class.new(struct.environment).tap do |m|
+        m.struct.locale = OpenStruct.new.tap do |s|
+          s.language = 'en_AU:en'
+          s.lang = 'en_AU.UTF8'
+          s.lc_all = 'en_AU.UTF8'
+        end
+      end
     end
 
     def domain
@@ -44,6 +51,10 @@ module Container
 
     def dependencies_class
       Dependencies
+    end
+
+    def environment_class
+      Environment::Environment
     end
 
   end
