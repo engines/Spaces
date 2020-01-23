@@ -5,11 +5,11 @@ module Environment
     class Variables < Container::Docker::Step
 
       def content
-        %Q(
-          ENV LANGUAGE '#{context.locale.language}'
-          ENV LANG '#{context.locale.lang}'
-          ENV LC_ALL '#{context.locale.lc_all}'
-        )
+        variables.map { |v| "ENV #{v.name} '#{v.value}'" }
+      end
+
+      def variables
+        @variables ||= context.struct.variables || []
       end
 
     end

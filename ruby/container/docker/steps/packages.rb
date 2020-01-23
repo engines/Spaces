@@ -10,7 +10,7 @@ module Container
           [
             %Q(
               apt-get install -y mysql-client make && \
-            ), # TODO: how do we generalise this? with a dependency!
+            ), # TODO: how do we generalise this?
 
             package_class.new(context.tensor.descriptor).installation
           ]
