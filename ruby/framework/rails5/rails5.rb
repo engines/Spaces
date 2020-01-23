@@ -19,5 +19,9 @@ module Framework
       end
     end
 
+    def default_port
+      3000
+    end
+
   end
 end

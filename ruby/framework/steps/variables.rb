@@ -9,7 +9,7 @@ module Framework
           ENV CONTFSVolHome /home/fs/
           ENV FRAMEWORK '#{context.identifier}'
           ENV RUNTIME '#{context.identifier}'
-          ENV PORT '8000'
+          ENV PORT '#{context.port}'
         )
       end
 
