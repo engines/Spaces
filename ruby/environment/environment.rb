@@ -15,10 +15,6 @@ module Environment
       end
     end
 
-    def locale
-      @locale ||= struct.locale
-    end
-
     def initialize(struct)
       self.struct = struct
     end

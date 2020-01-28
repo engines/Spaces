@@ -9,7 +9,7 @@ module Environment
       end
 
       def variables
-        @variables ||= context.struct.variables || []
+        @variables ||= context.variables || []
       end
 
     end

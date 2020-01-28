@@ -4,7 +4,7 @@ module Blueprint
   class Dependency < Relationship
 
     def resolution_for(h)
-      overrides_for(tensor.struct.dependents&.variables).merge(h)
+      overrides_for(tensor.dependents&.variables).merge(h)
     end
 
     def tensor

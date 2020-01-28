@@ -20,7 +20,7 @@ module Environment
       end
 
       def ports
-        @ports ||= context.struct.ports || []
+        @ports ||= context.ports || []
       end
 
     end

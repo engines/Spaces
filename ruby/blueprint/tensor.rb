@@ -41,7 +41,7 @@ module Blueprint
 
     def domain
       #@domain ||= universe.domains.by('')
-      @domain ||= universe.domains.model_class.new(struct.descriptor)
+      @domain ||= universe.domains.model_class.new(struct)
     end
 
     def docker_file_class

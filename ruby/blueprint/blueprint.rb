@@ -14,7 +14,7 @@ module Blueprint
     end
 
     def dependency_descriptors
-      struct.dependencies&.map { |d|
+      dependencies&.map { |d|
         descriptor_class.new(d.descriptor)
       } || []
     end
