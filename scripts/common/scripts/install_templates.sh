@@ -2,9 +2,9 @@
 
 cd /home
 					
-if test -d /home/spaces/templates/
+if test -d /home/engines/templates/
  then
-templates=`find /home/spaces/templates/ -type f |grep -v keep_me`
+templates=`find /home/engines/templates/ -type f |grep -v keep_me`
  for file in $templates
    do     
      dest_file=`echo $file | sed "/^.*templates\//s///"`

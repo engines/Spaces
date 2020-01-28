@@ -8,8 +8,8 @@ module Framework
         %Q(
           ADD scripts /scripts
           ADD home home
-          ADD spaces home/spaces
-          ADD home/start.sh /home/spaces/scripts/startup/start.sh
+          ADD spaces home/engines
+          ADD home/start.sh /home/engines/scripts/startup/start.sh
         )
       end
 

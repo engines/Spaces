@@ -3,7 +3,7 @@
 
 set_guids()
 {
-user=`cat /home/spaces/etc/user/name`
+user=`cat /home/engines/etc/user/name`
 getent passwd $user | grep $user
  if test $? -eq 0
   then
@@ -12,7 +12,7 @@ getent passwd $user | grep $user
    /usr/sbin/useradd -u $cont_uid -d /home/home_dir/ $user 
  fi 	
 
-group=`cat /home/spaces/etc/group/name`
+group=`cat /home/engines/etc/group/name`
 
 /usr/bin/getent group $group | grep $group 
 if test $? -ne 0
@@ -36,9 +36,9 @@ fi
 set_permissions()
 {
 
-if test -f /home/spaces/etc/user/files
+if test -f /home/engines/etc/user/files
  then
-  for file in `cat /home/spaces/etc/user/files`
+  for file in `cat /home/engines/etc/user/files`
    do
     if ! test -f $file
     then
@@ -47,9 +47,9 @@ if test -f /home/spaces/etc/user/files
     chown $user $file
    done
 fi
-if test -f /home/spaces/etc/user/dirs
+if test -f /home/engines/etc/user/dirs
  then
-  for dir in  `cat /home/spaces/etc/user/dirs`
+  for dir in  `cat /home/engines/etc/user/dirs`
    do
     mkdir -p $dir
     chown -R $user $dir
@@ -59,9 +59,9 @@ fi
 
 
 
-if test -f /home/spaces/etc/group/files
+if test -f /home/engines/etc/group/files
  then
-  for file in  `cat /home/spaces/etc/group/files`
+  for file in  `cat /home/engines/etc/group/files`
    do
     if ! test -f $file
     then
@@ -71,9 +71,9 @@ if test -f /home/spaces/etc/group/files
     chown $group $file
    done
 fi
-if test -f /home/spaces/etc/group/dirs
+if test -f /home/engines/etc/group/dirs
  then
-  for dir in  `cat /home/spaces/etc/group/dirs`
+  for dir in  `cat /home/engines/etc/group/dirs`
    do
    mkdir -p $dir
     chown -R $group $dir

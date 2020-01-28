@@ -14,8 +14,8 @@ done
 chown www-data.$data_gid -R /home/app/public
 chown www-data.$data_gid -R /home/app/tmp/ /run/nginx /home/app/public/cache/
 
-mkdir -p /home/spaces/var/log/
-chmod -R g+w  /home/spaces/var/log/
+mkdir -p /home/engines/var/log/
+chmod -R g+w  /home/engines/var/log/
 
 if test -d /home/app/db
   then 

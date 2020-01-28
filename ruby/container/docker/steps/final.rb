@@ -10,10 +10,10 @@ module Container
             RUN \
               /scripts/set_data_permissions.sh && \
               /scripts/_finalise_environment.sh && \
-              /home/spaces/scripts/build/post_build_clean.sh
+              /home/engines/scripts/build/post_build_clean.sh
             ENV buildtime_only '.'
             USER $ContUser
-            CMD ['/home/spaces/scripts/startup/start.sh']
+            CMD ['/home/engines/scripts/startup/start.sh']
           )
         end
       end

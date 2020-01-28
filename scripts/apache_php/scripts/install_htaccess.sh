@@ -1,9 +1,9 @@
 #!/bin/sh
 cd /home
 			
-if test -d /home/spaces/htaccess_files/
+if test -d /home/engines/htaccess_files/
  then
-htaccess_files=`find /home/spaces/htaccess_files/ -type f |grep -v keep_me`
+htaccess_files=`find /home/engines/htaccess_files/ -type f |grep -v keep_me`
   for file in $htaccess_files
   	do     
      dest_file=`echo $file | sed "/^.*htaccess_files\//s///"`

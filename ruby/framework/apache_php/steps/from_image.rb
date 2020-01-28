@@ -5,7 +5,7 @@ module Framework
     class FromImage < Container::Docker::Step
 
       def content
-        "FROM spaces/php:current"
+        "FROM engines/php:current"
       end
 
     end

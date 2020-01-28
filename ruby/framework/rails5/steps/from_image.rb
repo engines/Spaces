@@ -5,7 +5,7 @@ module Framework
     class FromImage < Container::Docker::Step
 
       def content
-        "FROM spaces/ngpassenger:current"
+        "FROM engines/ngpassenger:current"
       end
 
     end
