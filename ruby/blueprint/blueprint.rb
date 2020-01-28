@@ -6,7 +6,6 @@ require_relative 'tensor'
 
 module Blueprint
   class Blueprint < ::Spaces::Model
-    # A plan for making software executable and usable, potentially many times over
 
     relation_accessor :tensor
 
