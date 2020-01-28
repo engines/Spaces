@@ -26,8 +26,6 @@ module Docker
       end
     end
 
-    relation_accessor :tensor
-
     def collaboration_precedence
       self.class.collaboration_precedence
     end
@@ -50,18 +48,6 @@ module Docker
 
     def file_path
       "#{identifier}/DockerFile"
-    end
-
-    def identifier
-      tensor.struct.software.title
-    end
-
-    def descriptor
-     tensor.descriptor
-    end
-
-    def initialize(tensor)
-      self.tensor = tensor
     end
 
   end
