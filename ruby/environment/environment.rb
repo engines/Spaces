@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
-require_relative '../container/docker/collaboration'
+require_relative '../docker/file/collaboration'
 
 module Environment
   class Environment < ::Spaces::Model
-    include Container::Docker::Collaboration
+    include Docker::File::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -13,10 +13,6 @@ module Environment
           anywhere: [:variables, :locale, :ports]
         }
       end
-    end
-
-    def locale
-      @locale ||= struct.locale
     end
 
     def initialize(struct)

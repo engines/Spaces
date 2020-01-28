@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Framework
   class Rails5
-    class Bundle < Container::Docker::Step
+    class Bundle < Docker::File::Step
 
       def content
         %Q(

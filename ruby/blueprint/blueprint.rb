@@ -2,11 +2,10 @@ require 'duplicate'
 
 require_relative '../spaces/model'
 require_relative '../spaces/descriptor'
-require_relative '../container/tensor'
+require_relative 'tensor'
 
 module Blueprint
   class Blueprint < ::Spaces::Model
-    # A plan for making software executable and usable, potentially many times over
 
     relation_accessor :tensor
 
@@ -15,7 +14,7 @@ module Blueprint
     end
 
     def dependency_descriptors
-      struct.dependencies&.map { |d|
+      dependencies&.map { |d|
         descriptor_class.new(d.descriptor)
       } || []
     end
@@ -25,7 +24,7 @@ module Blueprint
     end
 
     def tensor_class
-      Container::Tensor
+      Tensor
     end
   end
 end

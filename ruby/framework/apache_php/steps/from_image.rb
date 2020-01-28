@@ -2,10 +2,10 @@ require_relative 'requires'
 
 module Framework
   class ApachePHP
-    class FromImage < Container::Docker::Step
+    class FromImage < Docker::File::Step
 
       def content
-        "FROM spaces/php:current"
+        "FROM engines/php:current"
       end
 
     end
