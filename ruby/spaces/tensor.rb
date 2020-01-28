@@ -1,8 +1,7 @@
-require_relative 'product'
+require_relative 'model'
 
 module Spaces
-  class Tensor < Product
-    # A sufficient set of values that guarantee a tranformation into a corresponding model object
+  class Tensor < Model
 
     relation_accessor :blueprint,
       :precursor,
