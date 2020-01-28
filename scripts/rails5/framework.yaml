@@ -1,5 +1,0 @@
-framework: rails5
-user: www-data
-port: 8000
-log_dirs:
-- /home/engines/var/log/
