@@ -1,10 +1,10 @@
-require_relative '../docker/collaboration'
+require_relative '../../docker/file/collaboration'
 require_relative 'relationship'
 require_relative 'dependency'
 
-module Container
+module Blueprint
   class Dependent < Relationship
-    include Docker::Collaboration
+    include Docker::File::Collaboration
 
     relation_accessor :tensor
 

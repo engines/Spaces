@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Domain
   class Domain
-    class Variables < Container::Docker::Step
+    class Variables < Docker::File::Step
 
       def content
         %Q(

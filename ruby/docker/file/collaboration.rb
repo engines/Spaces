@@ -1,5 +1,7 @@
-module Container
-  module Docker
+require_relative '../../spaces/product'
+
+module Docker
+  class File < ::Spaces::Product
     module Collaboration
 
       def step_precedence

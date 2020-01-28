@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Environment
   class Environment
-    class Variables < Container::Docker::Step
+    class Variables < Docker::File::Step
 
       def content
         variables.map { |v| "ENV #{v.name} '#{v.value}'" }

@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Framework
   class Framework
-    class Adds < Container::Docker::Step
+    class Adds < Docker::File::Step
 
       def content
         %Q(

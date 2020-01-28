@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Environment
   class Environment
-    class Ports < Container::Docker::Step
+    class Ports < Docker::File::Step
 
       def content
         [

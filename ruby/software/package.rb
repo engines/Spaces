@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 
-module Container
+module Blueprint
   class Package < ::Spaces::Model
 
     def installation

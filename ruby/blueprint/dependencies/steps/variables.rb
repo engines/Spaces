@@ -1,8 +1,8 @@
 require_relative 'requires'
 
-module Container
+module Blueprint
   class Dependent
-    class Variables < Docker::Step
+    class Variables < Docker::File::Step
 
       def content
         resolution.keys.map do |k|

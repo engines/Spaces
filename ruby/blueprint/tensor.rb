@@ -1,10 +1,9 @@
 require_relative '../spaces/tensor'
 require_relative '../environment/environment'
-require_relative 'container'
-require_relative 'docker/file'
+require_relative '../docker/file/file'
 require_relative 'dependencies/dependencies'
 
-module Container
+module Blueprint
   class Tensor < ::Spaces::Tensor
 
     relation_accessor :docker_file,

@@ -1,6 +1,6 @@
 require_relative 'relationship'
 
-module Container
+module Blueprint
   class Dependency < Relationship
 
     def resolution_for(h)

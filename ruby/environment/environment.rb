@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
-require_relative '../container/docker/collaboration'
+require_relative '../docker/file/collaboration'
 
 module Environment
   class Environment < ::Spaces::Model
-    include Container::Docker::Collaboration
+    include Docker::File::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

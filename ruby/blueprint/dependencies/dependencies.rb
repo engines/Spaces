@@ -1,10 +1,10 @@
 require_relative '../../spaces/model'
-require_relative '../docker/collaboration'
+require_relative '../../docker/file/collaboration'
 require_relative 'dependent'
 
-module Container
+module Blueprint
   class Dependencies < ::Spaces::Model
-    include Docker::Collaboration
+    include Docker::File::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

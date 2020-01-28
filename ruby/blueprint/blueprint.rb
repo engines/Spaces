@@ -2,7 +2,7 @@ require 'duplicate'
 
 require_relative '../spaces/model'
 require_relative '../spaces/descriptor'
-require_relative '../container/tensor'
+require_relative 'tensor'
 
 module Blueprint
   class Blueprint < ::Spaces::Model
@@ -25,7 +25,7 @@ module Blueprint
     end
 
     def tensor_class
-      Container::Tensor
+      Tensor
     end
   end
 end
