@@ -1,6 +1,6 @@
 require_relative '../spaces/tensor'
 require_relative '../environment/environment'
-require_relative '../docker/file/file'
+require_relative '../docker/file'
 require_relative 'dependencies/dependencies'
 
 module Blueprint
