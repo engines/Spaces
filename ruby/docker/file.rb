@@ -24,14 +24,26 @@ module Docker
           last: [:final]
         }
       end
+
+      def script_collaborators
+        @@docker_file_script_collaborators ||= [:software]
+      end
     end
 
     def collaboration_precedence
       self.class.collaboration_precedence
     end
 
+    def script_collaborators
+      self.class.script_collaborators
+    end
+
     def step_group_precedence
       self.class.step_group_precedence
+    end
+
+    def scripts
+      script_collaborators.map { |c| tensor.send(c).scripts }.flatten.compact
     end
 
     def content
