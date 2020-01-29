@@ -1,6 +1,7 @@
 require_relative '../spaces/tensor'
 require_relative '../environment/environment'
 require_relative '../docker/file'
+require_relative '../software/software'
 require_relative 'dependencies/dependencies'
 
 module Blueprint
@@ -29,6 +30,10 @@ module Blueprint
       @dependencies ||= dependencies_class.new(struct.dependencies, self)
     end
 
+    def software
+      @software ||= software_class.new(struct.software)
+    end
+
     def environment
       @environment ||= environment_class.new(struct.environment).tap do |m|
         m.struct.locale = OpenStruct.new.tap do |s|
@@ -46,6 +51,10 @@ module Blueprint
 
     def docker_file_class
       Docker::File
+    end
+
+    def software_class
+      Software
     end
 
     def dependencies_class
