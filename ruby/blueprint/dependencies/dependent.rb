@@ -10,7 +10,7 @@ module Blueprint
 
     class << self
       def step_precedence
-        @@dependency_step_precedence ||= { anywhere: [:variables] }
+        @@dependent_step_precedence ||= { anywhere: [:variables] }
       end
     end
 

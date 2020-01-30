@@ -1,13 +1,13 @@
-require_relative '../../spaces/product'
-require_relative '../../blueprint/tensor'
-require_relative '../../software/package'
-require_relative 'collaboration'
+require_relative '../spaces/product'
+require_relative '../blueprint/tensor'
+require_relative '../software/package'
+require_relative 'file/collaboration'
 
 module Docker
   class File < ::Spaces::Product
     include Collaboration
 
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
+    Dir["#{__dir__}/file/steps/*"].each { |f| require f }
 
     class << self
       def collaboration_precedence
@@ -20,9 +20,13 @@ module Docker
 
       def step_precedence
         @@docker_file_step_precedence ||= {
-          late: [:preparations, :packages, :permissions, :templates, :source_protection, :replacements, :seeds, :data_persistence, :installs, :source_persistence],
+          late: [:preparations, :permissions, :templates, :source_protection, :replacements, :seeds, :data_persistence, :installs, :source_persistence],
           last: [:final]
         }
+      end
+
+      def script_collaborators
+        @@docker_file_script_collaborators ||= [:software]
       end
     end
 
@@ -30,8 +34,16 @@ module Docker
       self.class.collaboration_precedence
     end
 
+    def script_collaborators
+      self.class.script_collaborators
+    end
+
     def step_group_precedence
       self.class.step_group_precedence
+    end
+
+    def scripts
+      script_collaborators.map { |c| tensor.send(c).scripts }.flatten.compact
     end
 
     def content

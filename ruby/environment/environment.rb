@@ -9,7 +9,7 @@ module Environment
 
     class << self
       def step_precedence
-        @@dependency_step_precedence ||= {
+        @@environment_step_precedence ||= {
           anywhere: [:variables, :locale, :ports]
         }
       end

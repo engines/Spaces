@@ -1,5 +1,6 @@
 require_relative '../spaces/space'
 require_relative '../container/space'
+require_relative '../image/space'
 require_relative '../framework/space'
 require_relative '../environment/space'
 require_relative '../domain/space'
@@ -13,6 +14,10 @@ module Universal
     class << self
       def containers
         @@containers ||= Container::Space.new
+      end
+
+      def images
+        @@image_space ||= Image::Space.new
       end
 
       def frameworks
@@ -40,6 +45,10 @@ module Universal
       self.class.containers
     end
 
+    def images
+      self.class.images
+    end
+
     def frameworks
       self.class.frameworks
     end
@@ -61,7 +70,7 @@ module Universal
     end
 
     def path
-      "/opt/#{identifier}"
+      "/opt/engines/#{identifier}"
     end
   end
 end

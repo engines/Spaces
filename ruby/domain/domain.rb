@@ -9,7 +9,7 @@ module Domain
 
     class << self
       def step_precedence
-        @@dependency_step_precedence ||= { anywhere: [:variables] }
+        @@domain_step_precedence ||= { anywhere: [:variables] }
       end
     end
 
