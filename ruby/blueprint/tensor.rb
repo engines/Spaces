@@ -1,6 +1,7 @@
 require_relative '../spaces/tensor'
 require_relative '../environment/environment'
 require_relative '../docker/file'
+require_relative '../image/subject'
 require_relative '../software/software'
 require_relative 'dependencies/dependencies'
 
@@ -8,10 +9,15 @@ module Blueprint
   class Tensor < ::Spaces::Tensor
 
     relation_accessor :docker_file,
+      :image_subject,
       :framework,
       :dependencies,
       :environment,
       :domain
+
+    def image_subject
+      @image_subject ||= image_subject_class.new(self)
+    end
 
     def docker_file
       @docker_file ||= docker_file_class.new(self)
@@ -51,6 +57,10 @@ module Blueprint
 
     def docker_file_class
       Docker::File
+    end
+
+    def image_subject_class
+      Image::Subject
     end
 
     def software_class
