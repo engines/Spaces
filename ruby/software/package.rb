@@ -3,12 +3,6 @@ require_relative '../spaces/model'
 class Software < ::Spaces::Model
   class Package < ::Spaces::Model
 
-    def installation
-      %Q(
-        #{script} '#{download_type}' '#{source}' '#{name}' '#{extraction}' '#{destination}'  '#{extraction_path}'  '#{options}' && \
-      )
-    end
-
 #/home/app is prefaced by docker image build space dir
 # for each package
 #do
@@ -29,42 +23,6 @@ class Software < ::Spaces::Model
 #
 #clean up whateve is left in tmp
 # next
-
-    def script
-      '/scripts/package_installer.sh'
-    end
-
-    def download_type
-      descriptor.extension
-    end
-
-    def source
-      descriptor.value
-    end
-
-    def name
-      descriptor.identifier
-    end
-
-    def extraction
-      descriptor.extraction
-    end
-
-    def destination
-      '/home/app'
-    end
-
-    def extraction_path
-      descriptor.identifier
-    end
-
-    def options
-      ''
-    end
-
-    def initialize(descriptor)
-      self.descriptor = descriptor
-    end
 
   end
 end
