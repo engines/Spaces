@@ -3,6 +3,7 @@ require_relative '../environment/environment'
 require_relative '../docker/file'
 require_relative '../image/subject'
 require_relative '../software/software'
+require_relative '../nodule/nodules'
 require_relative 'dependencies/dependencies'
 
 module Blueprint
@@ -11,6 +12,7 @@ module Blueprint
     relation_accessor :docker_file,
       :image_subject,
       :framework,
+      :nodules,
       :dependencies,
       :environment,
       :domain
@@ -30,6 +32,10 @@ module Blueprint
             m.struct = duplicate(f)
           end
       end
+    end
+
+    def nodules
+      @nodules ||= nodules_class.new(struct.modules)
     end
 
     def dependencies
@@ -57,6 +63,10 @@ module Blueprint
 
     def docker_file_class
       Docker::File
+    end
+
+    def nodules_class
+      Nodule::Nodules
     end
 
     def image_subject_class
