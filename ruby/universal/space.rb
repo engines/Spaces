@@ -2,6 +2,7 @@ require_relative '../spaces/space'
 require_relative '../container/space'
 require_relative '../image/space'
 require_relative '../framework/space'
+require_relative '../nodule/space'
 require_relative '../environment/space'
 require_relative '../domain/space'
 require_relative '../blueprint/space'
@@ -22,6 +23,10 @@ module Universal
 
       def frameworks
         @@frameworks ||= Framework::Space.new
+      end
+
+      def nodules
+        @@nodules ||= Nodule::Space.new
       end
 
       def environments
@@ -51,6 +56,10 @@ module Universal
 
     def frameworks
       self.class.frameworks
+    end
+
+    def nodules
+      self.class.nodules
     end
 
     def environments

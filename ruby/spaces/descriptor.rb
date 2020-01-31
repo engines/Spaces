@@ -8,7 +8,8 @@ module Spaces
       :protocol,
       :branch,
       :extraction,
-      :extracted_path
+      :extracted_path,
+      :destination_path
 
     def initialize(struct = nil)
       if struct
@@ -18,6 +19,7 @@ module Spaces
         self.branch = struct.branch
         self.extraction = struct.extraction
         self.extracted_path = struct.extracted_path
+        self.destination_path = [home_path, struct.destination_path].compact.join('/')
       end
     end
 
@@ -39,6 +41,10 @@ module Spaces
 
     def extracted_path
       @extracted_path ||= identifier
+    end
+
+    def home_path
+      '/home/app'
     end
 
     def basename
