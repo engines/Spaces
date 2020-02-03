@@ -1,4 +1,4 @@
-require_relative 'requires'
+require_relative '../../../spaces/script'
 
 module Nodule
   class PHP
