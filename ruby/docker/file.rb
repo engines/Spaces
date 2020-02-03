@@ -20,6 +20,7 @@ module Docker
 
       def step_precedence
         @@docker_file_step_precedence ||= {
+          early: [:adds],
           late: [:preparations, :permissions, :templates, :source_protection, :replacements, :seeds, :data_persistence, :installs, :source_persistence],
           last: [:final]
         }

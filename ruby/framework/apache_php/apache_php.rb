@@ -13,7 +13,7 @@ module Framework
       def step_precedence
         @@apache_php_step_precedence ||= {
           first: [:from_image],
-          anywhere: [:variables, :adds],
+          anywhere: [:variables],
           last: [:configure]
         }
       end

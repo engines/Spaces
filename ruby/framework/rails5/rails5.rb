@@ -13,7 +13,7 @@ module Framework
       def step_precedence
         @@rails5_step_precedence ||= {
           first: [:from_image],
-          anywhere: [:variables, :adds],
+          anywhere: [:variables],
           last:  [:bundle, :rake_tasks]
         }
       end
