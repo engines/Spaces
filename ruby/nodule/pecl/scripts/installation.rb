@@ -1,11 +1,11 @@
 require_relative '../../../spaces/script'
 
 module Nodule
-  class Apache
+  class PECL
     class Installation < Spaces::Script
 
       def body
-        "a2enmod #{context.name}"
+        "echo \"  \" |  pecl install #{context.name}"
       end
 
     end

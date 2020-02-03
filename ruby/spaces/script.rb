@@ -9,12 +9,16 @@ module Spaces
     def content
       [
         header,
-        body
+        body,
+        final
       ].flatten.compact.join("\n")
     end
 
     def header
       '#!/bin/sh'
+    end
+    
+    def final
     end
 
     def body
