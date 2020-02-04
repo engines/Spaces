@@ -28,9 +28,5 @@ module Spaces
       self.context = context
     end
 
-    def file_path
-      "/#{context.path}/#{a.type}/#{a.name}.sh"
-    end
-
   end
 end

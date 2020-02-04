@@ -5,7 +5,7 @@ module Nodule
     class RunScripts < Docker::File::Step
 
       def content
-        context.scripts.map { |s| "RUN #{s.file_path" }
+        context.scripts.map { |a| "RUN /#{context.path}/#{a.type}/#{a.name}.sh" }
       end
 
     end
