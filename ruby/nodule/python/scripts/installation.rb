@@ -1,11 +1,11 @@
 require_relative '../../../spaces/script'
 
 module Nodule
-  class Apache
+  class Python
     class Installation < Spaces::Script
 
       def body
-        "a2enmod #{context.name}"
+        "python${python_version} -m pip install --upgrade #{context.name} "
       end
 
     end

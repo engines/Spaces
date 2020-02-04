@@ -1,11 +1,11 @@
 require_relative '../../../spaces/script'
 
 module Nodule
-  class Apache
+  class R
     class Installation < Spaces::Script
 
       def body
-        "a2enmod #{context.name}"
+        "R -e install.packages(\"#{context.name}\") "
       end
 
     end
