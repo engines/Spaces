@@ -35,7 +35,7 @@ module Blueprint
     end
 
     def nodules
-      @nodules ||= nodules_class.new(struct.modules)
+      @nodules ||= nodules_class.new(self)
     end
 
     def dependencies

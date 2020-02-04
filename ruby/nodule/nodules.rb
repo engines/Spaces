@@ -2,7 +2,7 @@ require_relative '../spaces/model'
 require_relative '../docker/file/collaboration'
 
 module Nodule
-  class Nodules < ::Spaces::Model
+  class Nodules < ::Spaces::Product
     include Docker::File::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
@@ -16,15 +16,11 @@ module Nodule
     end
 
     def all
-      @all ||= struct.map { |s| universe.nodules.by(s) }
+      @all ||= tensor.modules.map { |s| universe.nodules.by(struct: s, context: self) }
     end
 
     def scripts
-      all.map { |a| a.scripts }
-    end
-
-    def path
-      'modules'
+      all.map { |s| s.scripts }
     end
 
   end

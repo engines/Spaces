@@ -3,9 +3,11 @@ require_relative '../spaces/space'
 module Nodule
   class Space < ::Spaces::Space
 
-    def by(struct)
+    relation_accessor :context
+
+    def by(struct:, context:)
       load(struct.type)
-      loaded.detect { |k| k.identifier == struct.type }.new(struct)
+      loaded.detect { |k| k.identifier == struct.type }.new(struct: struct, context: context)
     end
 
     def loaded
