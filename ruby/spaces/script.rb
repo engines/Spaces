@@ -28,6 +28,30 @@ module Spaces
       context.descriptor
     end
 
+    def path
+      "#{image_space_path}/#{file_name}"
+    end
+
+    def file_path
+      "#{subspace_path}/#{file_name}"
+    end
+
+    def image_space_path
+      context.image_space_path
+    end
+
+    def subspace_path
+      context.subspace_path
+    end
+
+    def file_name
+      "#{identifier}.sh"
+    end
+
+    def identifier
+      context.identifier
+    end
+
     def initialize(context)
       self.context = context
     end

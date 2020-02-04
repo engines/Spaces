@@ -1,11 +1,11 @@
 require_relative '../spaces/model'
-require_relative '../docker/file/collaboration'
 require_relative '../image/subject/collaboration'
 
 module Nodule
   class Nodule < ::Spaces::Model
-    include Docker::File::Collaboration
     include Image::Subject::Collaboration
+
+    relation_accessor :context
 
     class << self
       def script_precedence
@@ -13,8 +13,21 @@ module Nodule
       end
     end
 
+    def subspace_path
+       "#{context.subspace_path}/#{image_space_path}"
+    end
+
+    def image_space_path
+       "modules/#{type}"
+    end
+
     def identifier
       name
+    end
+
+    def initialize(struct:, context:)
+      self.struct = struct
+      self.context = context
     end
 
   end

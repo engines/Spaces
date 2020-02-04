@@ -1,22 +1,16 @@
 require_relative '../spaces/model'
-require_relative '../image/subject/collaboration'
 require_relative 'package'
 
 class Software < ::Spaces::Model
-  include Image::Subject::Collaboration
-
-  Dir["#{__dir__}/scripts/*"].each { |f| require f }
 
   relation_accessor :packages
 
-  class << self
-    def script_precedence
-      @@software_script_precedence ||= [:installation]
-    end
+  def packages
+    @packages ||= struct.packages.map { |s| package_class.new(struct: s, context: self) }
   end
 
-  def packages
-    @packages ||= struct.packages.map { |p| package_class.new(p) }
+  def scripts
+    packages.map { |s| s.scripts }
   end
 
   def package_class
