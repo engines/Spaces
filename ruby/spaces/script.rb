@@ -25,11 +25,11 @@ module Spaces
     end
 
     def path
-      "#{image_space_path}/#{identifier}.sh"
+      "#{image_space_path}/#{file_name}"
     end
 
     def file_path
-      "#{subspace_path}/#{identifier}.sh"
+      "#{subspace_path}/#{file_name}"
     end
 
     def image_space_path
@@ -38,6 +38,10 @@ module Spaces
 
     def subspace_path
       context.subspace_path
+    end
+
+    def file_name
+      "#{identifier}.sh"
     end
 
     def identifier
