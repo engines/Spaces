@@ -22,8 +22,8 @@ module Nodule
 
       def final # once only
         %Q(
-          cd /tmp
-          rm go-pear.phar
+        cd /tmp
+        rm go-pear.phar
         )
       end
 

@@ -5,12 +5,12 @@ module Framework
     class Variables < Framework::Variables
 
       def content
-        [
-          super,
-          %Q(
-            ENV ContUser www-data
-          )
-        ]
+      [
+        super,
+        %Q(
+        ENV ContUser www-data
+        )
+      ]
       end
 
     end

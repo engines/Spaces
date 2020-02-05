@@ -6,10 +6,10 @@ module Docker
 
       def content
         %Q(
-          ADD scripts /scripts
-          ADD home home
-          ADD engines home/engines
-          ADD home/start.sh /home/engines/scripts/startup/start.sh
+        ADD scripts /scripts
+        ADD home home
+        ADD engines home/engines
+        ADD home/start.sh /home/engines/scripts/startup/start.sh
         )
       end
 

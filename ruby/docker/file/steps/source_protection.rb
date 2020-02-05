@@ -6,9 +6,9 @@ module Docker
 
       def content
         %Q(
-          USER 0
-          RUN \
-          /scripts/chown_app_dir.sh
+        USER 0
+        RUN \
+        /scripts/chown_app_dir.sh
         )
       end
 
