@@ -80,6 +80,10 @@ module Spaces
       @universal_space ||= Universal::Space.new
     end
 
+    def to_s
+      identifier
+    end
+
     def method_missing(m, *args, &block)
       if struct&.to_h&.keys&.include?(m)
         struct.send(m, *args, &block)
