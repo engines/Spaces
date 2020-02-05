@@ -38,7 +38,6 @@ class Software
 
       def extracting
         %Q(
-        cd /#{image_space_path}
   			#{extraction} #{identifier}
         )
       end
