@@ -1,7 +1,7 @@
 require_relative '../../../spaces/script'
 
 module Nodule
-  class PECL
+  class Pecl
     class Installation < Spaces::Script
 
       def body
