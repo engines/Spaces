@@ -3,8 +3,8 @@ require_relative '../../../spaces/script'
 module Nodule
   class Pear
     class Installation < Spaces::Script
-      
-      def header
+
+      def header # once only
         [
           super,
           %Q(
@@ -20,8 +20,11 @@ module Nodule
         "pear install #{context.name}"
       end
 
-      def final
-        'rm go-pear.phar'
+      def final # once only
+        %Q(
+          cd /tmp
+          rm go-pear.phar
+        )
       end
 
     end
