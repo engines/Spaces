@@ -32,10 +32,6 @@ module Spaces
     attr_accessor :struct
     relation_accessor :descriptor
 
-    def initialize(struct = nil)
-      self.struct = struct
-    end
-
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
@@ -78,6 +74,10 @@ module Spaces
 
     def universe
       @universal_space ||= Universal::Space.new
+    end
+
+    def initialize(struct = nil)
+      self.struct = struct
     end
 
     def to_s
