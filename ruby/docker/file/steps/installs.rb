@@ -6,9 +6,9 @@ module Docker
 
       def content
         %Q(
-          WORKDIR /home/
-          RUN \
-            bash /home/setup.sh
+        WORKDIR /home/
+        RUN \
+          bash /home/setup.sh
         )
       end
 

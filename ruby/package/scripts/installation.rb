@@ -1,27 +1,17 @@
-require_relative '../../spaces/script'
+require_relative 'requires'
 
-class Software
+module Package
   class Package < ::Spaces::Model
     class Installation < Spaces::Script
 
       relation_accessor :package
 
-      def header
-        [
-          super,
-          %Q(
-            mkdir /#{image_space_path}
-            cd /#{image_space_path}
-          )
-        ]
-      end
-
       def body
-        [
-          downloading,
-          (extracting unless git?),
-          placing
-        ]
+      [
+        downloading,
+        (extracting unless git?),
+        placing
+      ]
       end
 
       def downloading
@@ -38,38 +28,37 @@ class Software
 
       def extracting
         %Q(
-          cd /#{image_space_path}
-    			#{extraction} #{identifier}
+  			#{extraction} #{identifier}
         )
       end
 
       def placing
         %Q(
-          if test ! -d "./#{extracted_path}"
-          then
-            mkdir -p "#{destination_path}"
-          fi
+        if test ! -d "./#{extracted_path}"
+        then
+          mkdir -p "#{destination_path}"
+        fi
 
-          if test -d "#{destination_path}"
+        if test -d "#{destination_path}"
+        then
+          if test -f  ./"#{extracted_path}"
           then
-            if test -f  ./"#{extracted_path}"
-            then
-              cp -rp "./#{extracted_path}" #{destination_path}
-            else
-          		cp -rp "./#{extracted_path}/." #{destination_path}
-          	fi
+            cp -rp "./#{extracted_path}" #{destination_path}
           else
-            if ! test -d #{directory_name}
-            then
-           	  mkdir -p #{directory_name}
-            fi
-          	mv "./#{extracted_path}" #{destination_path}
-          fi
-
-          if test -f /#{image_space_path}/#{extracted_path}
+        		cp -rp "./#{extracted_path}/." #{destination_path}
+        	fi
+        else
+          if ! test -d #{directory_name}
           then
-          	rm -rf /#{image_space_path}/#{extracted_path}
+         	  mkdir -p #{directory_name}
           fi
+        	mv "./#{extracted_path}" #{destination_path}
+        fi
+
+        if test -f /#{image_space_path}/#{extracted_path}
+        then
+        	rm -rf /#{image_space_path}/#{extracted_path}
+        fi
         )
       end
 

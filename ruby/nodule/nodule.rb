@@ -13,12 +13,16 @@ module Nodule
       end
     end
 
+    def os_package
+      struct.os_package
+    end
+
     def subspace_path
-       "#{context.subspace_path}/#{image_space_path}"
+      "#{context.subspace_path}/#{image_space_path}"
     end
 
     def image_space_path
-       "modules/#{type}"
+      "#{context.image_space_path}/#{type}"
     end
 
     def identifier

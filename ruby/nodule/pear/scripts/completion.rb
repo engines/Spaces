@@ -2,10 +2,13 @@ require_relative 'requires'
 
 module Nodule
   class Pear
-    class Installation < Spaces::Script
+    class Completion < Spaces::Script
 
       def body
-        "pear install #{context.name}"
+        %Q(
+        cd /tmp
+        rm go-pear.phar
+        )
       end
 
     end

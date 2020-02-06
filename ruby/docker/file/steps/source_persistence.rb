@@ -6,9 +6,9 @@ module Docker
 
       def content
         %Q(
-          USER 0
-          RUN \
-            /scripts/prepare_persitent_source.sh
+        USER 0
+        RUN \
+          /scripts/prepare_persitent_source.sh
         )
       end
 

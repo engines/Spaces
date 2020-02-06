@@ -6,10 +6,10 @@ module Framework
 
       def content
         %Q(
-          ADD scripts /scripts
-          ADD home home
-          ADD spaces home/engines
-          ADD home/start.sh /home/engines/scripts/startup/start.sh
+        ADD scripts /scripts
+        ADD home home
+        ADD spaces home/engines
+        ADD home/start.sh /home/engines/scripts/startup/start.sh
         )
       end
 

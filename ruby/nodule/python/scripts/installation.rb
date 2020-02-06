@@ -5,7 +5,7 @@ module Nodule
     class Installation < Spaces::Script
 
       def body
-        "python${python_version} -m pip install --upgrade #{context.name} "
+        "python${python_version} -m pip install --upgrade #{context.name}"
       end
 
     end

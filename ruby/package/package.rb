@@ -1,7 +1,7 @@
 require_relative '../spaces/model'
 require_relative '../image/subject/collaboration'
 
-class Software < ::Spaces::Model
+module Package
   class Package < ::Spaces::Model
     include Image::Subject::Collaboration
 
@@ -16,11 +16,11 @@ class Software < ::Spaces::Model
     relation_accessor :context
 
     def subspace_path
-       "#{context.subspace_path}/#{image_space_path}"
+      "#{context.subspace_path}/#{image_space_path}"
     end
 
     def image_space_path
-       'packages'
+       context.image_space_path
     end
 
     def initialize(struct:, context:)

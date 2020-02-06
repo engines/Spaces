@@ -6,9 +6,9 @@ module Docker
 
       def content
         %Q(
-          RUN \
-            cat /home/app//sql/create_tables.sql | sed "/TBLE/s//TABLE/" > /tmp/create_tables.sql.0&& \
-            cp /tmp/create_tables.sql.0 /home/app//sql/create_tables.sql&& \
+        RUN \
+          cat /home/app//sql/create_tables.sql | sed "/TBLE/s//TABLE/" > /tmp/create_tables.sql.0&& \
+          cp /tmp/create_tables.sql.0 /home/app//sql/create_tables.sql&& \
         ) # TODO: more to do here
       end
 

@@ -6,12 +6,12 @@ module Framework
 
       def content
         %Q(
-          RUN apt-get update &&\
-            chown $ContUser /opt &&\
-            mkdir -p /home/home_dir/.bundle/ &&\
-            chown -R $ContUser /home/home_dir/.gem/ /home/home_dir/.bundle/ &&\
-            gem install bundle bundler &&\
-            gem update --system
+        RUN apt-get update &&\
+          chown $ContUser /opt &&\
+          mkdir -p /home/home_dir/.bundle/ &&\
+          chown -R $ContUser /home/home_dir/.gem/ /home/home_dir/.bundle/ &&\
+          gem install bundle bundler &&\
+          gem update --system
         )
       end
 
