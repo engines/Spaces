@@ -22,7 +22,7 @@ module Nodule
     end
 
     def image_space_path
-      type
+      "#{context.image_space_path}/#{type}"
     end
 
     def identifier

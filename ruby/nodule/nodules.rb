@@ -1,4 +1,4 @@
-require_relative '../spaces/model'
+require_relative '../spaces/product'
 require_relative '../image/subject/collaboration'
 require_relative '../docker/file/collaboration'
 
@@ -21,7 +21,7 @@ module Nodule
     end
 
     def all
-      @all ||= tensor.modules.map { |s| universe.nodules.by(struct: s, context: self) }
+      @all ||= tensor.struct.modules.map { |s| universe.nodules.by(struct: s, context: self) }
     end
 
     def scripts
@@ -29,10 +29,6 @@ module Nodule
         super,
         all.map { |s| s.scripts }
       ].flatten
-    end
-
-    def subspace_path
-       "#{super}/#{image_space_path}"
     end
 
     def image_space_path
