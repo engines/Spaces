@@ -1,20 +1,10 @@
-require_relative '../../spaces/script'
+require_relative 'requires'
 
-class Software
+module Package
   class Package < ::Spaces::Model
     class Installation < Spaces::Script
 
       relation_accessor :package
-
-      def header
-      [
-        super,
-        %Q(
-          mkdir /#{image_space_path}
-          cd /#{image_space_path}
-        )
-      ]
-      end
 
       def body
       [

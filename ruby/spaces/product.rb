@@ -6,7 +6,7 @@ module Spaces
     relation_accessor :tensor
 
     def identifier
-      tensor.software.title
+      tensor.title
     end
 
     def descriptor

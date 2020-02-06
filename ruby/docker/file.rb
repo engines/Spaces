@@ -1,6 +1,5 @@
 require_relative '../spaces/product'
 require_relative '../blueprint/tensor'
-require_relative '../software/package'
 require_relative 'file/collaboration'
 
 module Docker
@@ -11,7 +10,7 @@ module Docker
 
     class << self
       def collaboration_precedence
-        @@collaboration_precedence ||= [:framework, :environment, :domain, :dependencies, :nodules, :software, :docker_file]
+        @@collaboration_precedence ||= [:framework, :environment, :domain, :dependencies, :nodules, :packages, :docker_file]
       end
 
       def step_group_precedence

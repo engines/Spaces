@@ -2,9 +2,9 @@ require_relative '../spaces/tensor'
 require_relative '../environment/environment'
 require_relative '../docker/file'
 require_relative '../image/subject'
-require_relative '../software/software'
+require_relative '../package/packages'
 require_relative '../nodule/nodules'
-require_relative 'dependencies/dependencies'
+require_relative 'dependency/dependencies'
 
 module Blueprint
   class Tensor < ::Spaces::Tensor
@@ -38,12 +38,12 @@ module Blueprint
       @nodules ||= nodules_class.new(self)
     end
 
-    def dependencies
-      @dependencies ||= dependencies_class.new(struct.dependencies, self)
+    def packages
+      @packages ||= packages_class.new(self)
     end
 
-    def software
-      @software ||= software_class.new(struct.software)
+    def dependencies
+      @dependencies ||= dependencies_class.new(struct.dependencies, self)
     end
 
     def environment
@@ -73,8 +73,8 @@ module Blueprint
       Image::Subject
     end
 
-    def software_class
-      Software
+    def packages_class
+      Package::Packages
     end
 
     def dependencies_class
