@@ -10,22 +10,18 @@ module Spaces
       [
         header,
         body,
-        final
+        footer
       ].flatten.compact.join("\n")
     end
 
     def header
       '#!/bin/sh'
     end
-    
-    def final
-    end
 
     def body
     end
 
-    def descriptor
-      context.descriptor
+    def footer
     end
 
     def path
@@ -36,16 +32,16 @@ module Spaces
       "#{subspace_path}/#{file_name}"
     end
 
-    def image_space_path
-      context.image_space_path
+    def file_name
+      "#{identifier}.sh"
+    end
+
+    def descriptor
+      context.descriptor
     end
 
     def subspace_path
       context.subspace_path
-    end
-
-    def file_name
-      "#{identifier}.sh"
     end
 
     def identifier
@@ -54,6 +50,14 @@ module Spaces
 
     def initialize(context)
       self.context = context
+    end
+
+    def method_missing(m, *args, &block)
+      if context.respond_to?(m)
+        context.send(m, *args, &block)
+      else
+        super
+      end
     end
 
   end
