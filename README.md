@@ -69,18 +69,18 @@ blueprint_space.by(descriptor)
 ```
 
 # Containers
-## Generating a Container::Tensor
+## Generating a Containers::Tensor
 
-A `Container::Tensor` is what will generate a DockerFile. You create a tensor from a blueprint like so:
+A `Containers::Tensor` is what will generate a DockerFile. You create a tensor from a blueprint like so:
 
 ```
 blueprint = universe.blueprints.by(descriptor)
 tensor = blueprint.tensor
 ```
 
-## Saving a Container::Tensor
+## Saving a Containers::Tensor
 
-Save `Container::Tensor` to container space with:
+Save `Containers::Tensor` to container space with:
 
 ```
 container_space = universe.containers
