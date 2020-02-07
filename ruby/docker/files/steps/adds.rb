@@ -1,8 +1,8 @@
 require_relative 'requires'
 
 module Docker
-  class File < ::Spaces::Product
-    class Adds < Docker::File::Step
+  module Files
+    class Adds < Docker::Files::Step
 
       def content
         %Q(

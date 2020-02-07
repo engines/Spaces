@@ -3,7 +3,7 @@ require_relative '../docker/files/collaboration'
 
 module Nodules
   class Nodules < ::Spaces::Product
-    include Docker::File::Collaboration
+    include Docker::Files::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

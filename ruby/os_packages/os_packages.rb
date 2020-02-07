@@ -5,7 +5,7 @@ require_relative 'os_package'
 
 module OsPackages
   class OsPackages < ::Spaces::Product
-    include Docker::File::Collaboration
+    include Docker::Files::Collaboration
     include Images::Subject::Collaboration
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }

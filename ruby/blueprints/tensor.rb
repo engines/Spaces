@@ -69,7 +69,7 @@ module Blueprints
     end
 
     def docker_file_class
-      Docker::File
+      Docker::Files::File
     end
 
     def nodules_class

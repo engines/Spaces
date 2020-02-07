@@ -1,7 +1,7 @@
 require_relative 'requires'
 
 module Docker
-  class File < ::Spaces::Product
+  module Files
     class DataPersistence < Step
 
       def content

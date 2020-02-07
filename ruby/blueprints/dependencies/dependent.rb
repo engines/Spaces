@@ -4,7 +4,7 @@ require_relative 'dependency'
 
 module Blueprints
   class Dependent < Relationship
-    include Docker::File::Collaboration
+    include Docker::Files::Collaboration
 
     relation_accessor :tensor
 

@@ -3,7 +3,7 @@ require_relative '../docker/files/collaboration'
 
 module Frameworks
   class Framework < ::Spaces::Model
-    include Docker::File::Collaboration
+    include Docker::Files::Collaboration
 
     def port
       @port ||= struct.port || default_port

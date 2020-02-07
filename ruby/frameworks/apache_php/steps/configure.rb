@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Frameworks
   class ApachePHP
-    class Configure < Docker::File::Step
+    class Configure < Docker::Files::Step
 
       def content
       %Q(

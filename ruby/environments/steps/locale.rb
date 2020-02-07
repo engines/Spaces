@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Environments
   class Environment
-    class Locale < Docker::File::Step
+    class Locale < Docker::Files::Step
 
       def content
         %Q(

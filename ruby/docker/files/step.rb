@@ -1,7 +1,7 @@
 require_relative '../../spaces/model'
 
 module Docker
-  class File < ::Spaces::Product
+  module Files
     class Step < ::Spaces::Model
 
       relation_accessor :context

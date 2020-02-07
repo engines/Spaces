@@ -3,7 +3,7 @@ require_relative '../docker/files/collaboration'
 
 module Domains
   class Domain < ::Spaces::Model
-    include Docker::File::Collaboration
+    include Docker::Files::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

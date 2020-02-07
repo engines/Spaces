@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Frameworks
   class Rails5
-    class RakeTasks < Docker::File::Step
+    class RakeTasks < Docker::Files::Step
 
       def content
         %Q(

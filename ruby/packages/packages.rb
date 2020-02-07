@@ -4,7 +4,7 @@ require_relative 'package'
 
 module Packages
   class Packages < ::Spaces::Product
-    include Docker::File::Collaboration
+    include Docker::Files::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
