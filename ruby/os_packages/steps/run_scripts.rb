@@ -1,6 +1,6 @@
 require_relative '../../docker/files/step'
 
-module OsPackage
+module OsPackages
   class OsPackages < ::Spaces::Product
     class RunScripts < Docker::File::Step
 

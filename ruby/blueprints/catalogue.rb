@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 
-module Blueprint
+module Blueprints
   class Catalogue < ::Spaces::Model
     # A collection of blueprints for the purpose of grouping, locating, accessing and maintaining
 

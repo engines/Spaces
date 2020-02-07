@@ -2,7 +2,7 @@ require_relative '../../docker/files/collaboration'
 require_relative 'relationship'
 require_relative 'dependency'
 
-module Blueprint
+module Blueprints
   class Dependent < Relationship
     include Docker::File::Collaboration
 

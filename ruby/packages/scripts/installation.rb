@@ -1,6 +1,6 @@
 require_relative 'requires'
 
-module Package
+module Packages
   class Package < ::Spaces::Model
     class Installation < Spaces::Script
 

@@ -1,4 +1,4 @@
-module Blueprint
+module Blueprints
   class Relationship < ::Spaces::Model
 
     def overrides_for(struct = OpenStruct.new)

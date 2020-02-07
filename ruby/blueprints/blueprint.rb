@@ -4,7 +4,7 @@ require_relative '../spaces/model'
 require_relative '../spaces/descriptor'
 require_relative 'tensor'
 
-module Blueprint
+module Blueprints
   class Blueprint < ::Spaces::Model
 
     relation_accessor :tensor

@@ -1,7 +1,7 @@
 require_relative '../spaces/product'
 require_relative '../docker/files/collaboration'
 
-module Nodule
+module Nodules
   class Nodules < ::Spaces::Product
     include Docker::File::Collaboration
 

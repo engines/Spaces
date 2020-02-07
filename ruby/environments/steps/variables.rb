@@ -1,6 +1,6 @@
 require_relative 'requires'
 
-module Environment
+module Environments
   class Environment
     class Variables < Docker::File::Step
 

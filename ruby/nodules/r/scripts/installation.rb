@@ -1,6 +1,6 @@
 require_relative '../../../spaces/script'
 
-module Nodule
+module Nodules
   class R
     class Installation < Spaces::Script
 

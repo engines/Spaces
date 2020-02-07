@@ -14,31 +14,31 @@ module Universal
 
     class << self
       def containers
-        @@containers ||= Container::Space.new
+        @@containers ||= Containers::Space.new
       end
 
       def images
-        @@image_space ||= Image::Space.new
+        @@image_space ||= Images::Space.new
       end
 
       def frameworks
-        @@frameworks ||= Framework::Space.new
+        @@frameworks ||= Frameworks::Space.new
       end
 
       def nodules
-        @@nodules ||= Nodule::Space.new
+        @@nodules ||= Nodules::Space.new
       end
 
       def environments
-        @@environments ||= Environment::Space.new
+        @@environments ||= Environments::Space.new
       end
 
       def domains
-        @@domains ||= Domain::Space.new
+        @@domains ||= Domains::Space.new
       end
 
       def blueprints
-        @@blueprints ||= Blueprint::Space.new
+        @@blueprints ||= Blueprints::Space.new
       end
 
       def outer

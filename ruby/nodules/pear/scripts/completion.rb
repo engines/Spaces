@@ -1,6 +1,6 @@
 require_relative 'requires'
 
-module Nodule
+module Nodules
   class Pear
     class Completion < Spaces::Script
 

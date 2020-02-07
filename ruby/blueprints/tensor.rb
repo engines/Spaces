@@ -7,7 +7,7 @@ require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative 'dependencies/dependencies'
 
-module Blueprint
+module Blueprints
   class Tensor < ::Spaces::Tensor
 
     relation_accessor :docker_file,
@@ -73,19 +73,19 @@ module Blueprint
     end
 
     def nodules_class
-      Nodule::Nodules
+      Nodules::Nodules
     end
 
     def image_subject_class
-      Image::Subject
+      Images::Subject
     end
 
     def packages_class
-      Package::Packages
+      Packages::Packages
     end
 
     def os_packages_class
-      OsPackage::OsPackages
+      OsPackages::OsPackages
     end
 
     def dependencies_class
@@ -93,7 +93,7 @@ module Blueprint
     end
 
     def environment_class
-      Environment::Environment
+      Environments::Environment
     end
 
   end

@@ -1,7 +1,7 @@
 require_relative '../spaces/model'
 require_relative '../docker/files/collaboration'
 
-module Framework
+module Frameworks
   class Framework < ::Spaces::Model
     include Docker::File::Collaboration
 

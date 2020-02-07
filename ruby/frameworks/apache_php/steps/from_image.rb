@@ -1,6 +1,6 @@
 require_relative 'requires'
 
-module Framework
+module Frameworks
   class ApachePHP
     class FromImage < Docker::File::Step
 

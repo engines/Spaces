@@ -1,6 +1,6 @@
 require_relative '../spaces/space'
 
-module Framework
+module Frameworks
   class Space < ::Spaces::Space
 
     def by(descriptor)

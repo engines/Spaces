@@ -1,6 +1,6 @@
 require_relative '../../spaces/product'
 
-module Image
+module Images
   class Subject < ::Spaces::Product
     module Collaboration
 

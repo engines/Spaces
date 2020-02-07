@@ -1,6 +1,6 @@
 require_relative '../nodule'
 
-module Nodule
+module Nodules
   class R < Nodule
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }

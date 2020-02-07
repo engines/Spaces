@@ -1,7 +1,7 @@
 require_relative '../spaces/model'
 require_relative '../docker/files/collaboration'
 
-module Domain
+module Domains
   class Domain < ::Spaces::Model
     include Docker::File::Collaboration
 

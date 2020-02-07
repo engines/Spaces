@@ -1,6 +1,6 @@
 require_relative '../spaces/space'
 
-module Image
+module Images
   class Space < ::Spaces::Space
 
     def save(model)

@@ -1,6 +1,6 @@
 require_relative '../framework'
 
-module Framework
+module Frameworks
   class Rails5 < Framework
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }

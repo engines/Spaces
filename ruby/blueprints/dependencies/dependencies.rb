@@ -2,7 +2,7 @@ require_relative '../../spaces/model'
 require_relative '../../docker/files/collaboration'
 require_relative 'dependent'
 
-module Blueprint
+module Blueprints
   class Dependencies < ::Spaces::Model
     include Docker::File::Collaboration
 

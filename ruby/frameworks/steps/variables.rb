@@ -1,6 +1,6 @@
 require_relative 'requires'
 
-module Framework
+module Frameworks
   class Framework
     class Variables < Docker::File::Step
 

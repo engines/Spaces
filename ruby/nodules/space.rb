@@ -1,6 +1,6 @@
 require_relative '../spaces/space'
 
-module Nodule
+module Nodules
   class Space < ::Spaces::Space
 
     relation_accessor :context

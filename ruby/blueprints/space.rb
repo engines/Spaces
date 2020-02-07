@@ -1,7 +1,7 @@
 require_relative '../blueprints/blueprint'
 require_relative '../universal/space'
 
-module Blueprint
+module Blueprints
   class Space < ::Spaces::Space
     # The dimensions in which blueprints exist
 

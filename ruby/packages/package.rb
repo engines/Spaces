@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
 require_relative '../images/subjects/collaboration'
 
-module Package
+module Packages
   class Package < ::Spaces::Model
-    include Image::Subject::Collaboration
+    include Images::Subject::Collaboration
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
 

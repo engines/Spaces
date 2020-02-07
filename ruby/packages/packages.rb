@@ -2,7 +2,7 @@ require_relative '../spaces/product'
 require_relative '../docker/files/collaboration'
 require_relative 'package'
 
-module Package
+module Packages
   class Packages < ::Spaces::Product
     include Docker::File::Collaboration
 

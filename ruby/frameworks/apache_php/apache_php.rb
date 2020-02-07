@@ -1,6 +1,6 @@
 require_relative '../framework'
 
-module Framework
+module Frameworks
   class ApachePHP < Framework
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }

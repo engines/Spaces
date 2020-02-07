@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 
-module OsPackage
+module OsPackages
   class OsPackage < ::Spaces::Model
 
     relation_accessor :context

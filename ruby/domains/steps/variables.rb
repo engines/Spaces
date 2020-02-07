@@ -1,6 +1,6 @@
 require_relative 'requires'
 
-module Domain
+module Domains
   class Domain
     class Variables < Docker::File::Step
 

@@ -1,6 +1,6 @@
 require_relative '../../steps/variables'
 
-module Framework
+module Frameworks
   class ApachePHP
     class Variables < Framework::Variables
 
