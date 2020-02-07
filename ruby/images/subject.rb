@@ -1,11 +1,9 @@
 require_relative '../spaces/product'
-require_relative 'subjects/collaboration'
+require_relative 'collaboration'
 
 module Images
   class Subject < ::Spaces::Product
     include Collaboration
-
-    Dir["#{__dir__}/subjects/scripts/*"].each { |f| require f }
 
     class << self
       def script_collaborators

@@ -1,4 +1,4 @@
-require_relative 'requires'
+require_relative '../../docker/files/step'
 
 module Domains
   class Domain

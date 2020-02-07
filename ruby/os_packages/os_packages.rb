@@ -1,12 +1,12 @@
 require_relative '../spaces/product'
-require_relative '../images/subjects/collaboration'
+require_relative '../images/collaboration'
 require_relative '../docker/files/collaboration'
 require_relative 'os_package'
 
 module OsPackages
   class OsPackages < ::Spaces::Product
     include Docker::Files::Collaboration
-    include Images::Subject::Collaboration
+    include Images::Collaboration
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }

@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
-require_relative '../images/subjects/collaboration'
+require_relative '../images/collaboration'
 
 module Nodules
   class Nodule < ::Spaces::Model
-    include Images::Subject::Collaboration
+    include Images::Collaboration
 
     relation_accessor :context
 
