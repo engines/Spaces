@@ -1,12 +1,12 @@
-require_relative '../spaces/product'
-require_relative '../blueprints/tensor'
-require_relative 'files/collaboration'
+require_relative '../../spaces/product'
+require_relative '../../blueprints/tensor'
+require_relative 'collaboration'
 
 module Docker
   class File < ::Spaces::Product
     include Collaboration
 
-    Dir["#{__dir__}/files/steps/*"].each { |f| require f }
+    Dir["#{__dir__}/steps/*"].each { |f| require f }
 
     class << self
       def collaboration_precedence

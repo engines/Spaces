@@ -1,6 +1,6 @@
 require_relative '../spaces/tensor'
 require_relative '../environments/environment'
-require_relative '../docker/file'
+require_relative '../docker/files/file'
 require_relative '../images/subject'
 require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
