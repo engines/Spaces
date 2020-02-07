@@ -4,8 +4,6 @@ module Package
   class Package < ::Spaces::Model
     class Installation < Spaces::Script
 
-      relation_accessor :package
-
       def body
       [
         downloading,
@@ -60,10 +58,6 @@ module Package
         	rm -rf /#{image_space_path}/#{extracted_path}
         fi
         )
-      end
-
-      def image_space_path
-        context.image_space_path
       end
 
       def identifier

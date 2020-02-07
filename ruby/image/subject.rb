@@ -9,7 +9,7 @@ module Image
 
     class << self
       def script_collaborators
-        @@subject_script_collaborators ||= [:nodules, :packages]
+        @@subject_script_collaborators ||= [:os_packages, :nodules, :packages]
       end
     end
 
