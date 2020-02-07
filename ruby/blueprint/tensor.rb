@@ -3,6 +3,7 @@ require_relative '../environment/environment'
 require_relative '../docker/file'
 require_relative '../image/subject'
 require_relative '../package/packages'
+require_relative '../os_package/os_packages'
 require_relative '../nodule/nodules'
 require_relative 'dependency/dependencies'
 
@@ -12,7 +13,9 @@ module Blueprint
     relation_accessor :docker_file,
       :image_subject,
       :framework,
+      :os_packages,
       :nodules,
+      :packages,
       :dependencies,
       :environment,
       :domain
@@ -40,6 +43,10 @@ module Blueprint
 
     def packages
       @packages ||= packages_class.new(self)
+    end
+
+    def os_packages
+      @os_packages ||= os_packages_class.new(self)
     end
 
     def dependencies
@@ -75,6 +82,10 @@ module Blueprint
 
     def packages_class
       Package::Packages
+    end
+
+    def os_packages_class
+      OsPackage::OsPackages
     end
 
     def dependencies_class

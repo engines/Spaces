@@ -16,7 +16,7 @@ module Package
     relation_accessor :context
 
     def subspace_path
-      "#{context.subspace_path}/#{image_space_path}"
+      context.subspace_path
     end
 
     def image_space_path

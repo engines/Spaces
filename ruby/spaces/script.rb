@@ -41,7 +41,11 @@ module Spaces
     end
 
     def subspace_path
-      context.subspace_path
+      "#{context.subspace_path}/#{image_space_path}"
+    end
+
+    def image_space_path
+      context.image_space_path
     end
 
     def identifier
