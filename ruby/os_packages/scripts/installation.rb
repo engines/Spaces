@@ -1,7 +1,7 @@
 require_relative '../../spaces/script'
 
 module OsPackages
-  class OsPackages < ::Spaces::Product
+  module Scripts
     class Installation < Spaces::Script
 
       def body

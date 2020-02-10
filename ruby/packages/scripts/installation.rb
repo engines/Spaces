@@ -1,7 +1,7 @@
 require_relative 'requires'
 
 module Packages
-  class Package < ::Spaces::Model
+  module Scripts
     class Installation < Spaces::Script
 
       def body
