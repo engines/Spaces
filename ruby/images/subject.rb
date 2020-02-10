@@ -1,8 +1,8 @@
-require_relative '../spaces/product'
+require_relative '../products/product'
 require_relative 'collaboration'
 
 module Images
-  class Subject < ::Spaces::Product
+  class Subject < ::Products::Product
     include Collaboration
 
     class << self

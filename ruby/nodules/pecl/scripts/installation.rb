@@ -1,13 +1,15 @@
-require_relative '../../../spaces/script'
+require_relative '../../../products/script'
 
 module Nodules
-  class Pecl
-    class Installation < Spaces::Script
+  module Pecl
+    module Scripts
+      class Installation < Products::Script
 
-      def body
-        "echo \"  \" |  pecl install #{context.name}"
+        def body
+          "echo \"  \" |  pecl install #{context.name}"
+        end
+
       end
-
     end
   end
 end

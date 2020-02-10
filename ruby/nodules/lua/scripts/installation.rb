@@ -1,13 +1,16 @@
-require_relative '../../../spaces/script'
+require_relative '../../../products/script'
 
 module Nodules
-  class Lua
-    class Installation < Spaces::Script
+  module Lua
+    module Scripts
 
-      def body
-        "luarocks install #{context.name}"
+      class Installation < Products::Script
+
+        def body
+          "luarocks install #{context.name}"
+        end
+
       end
-
     end
   end
 end

@@ -1,9 +1,9 @@
-require_relative '../spaces/product'
+require_relative '../products/product'
 require_relative '../docker/files/collaboration'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Spaces::Product
+  class Packages < ::Products::Product
     include Docker::Files::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }

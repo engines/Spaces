@@ -1,6 +1,6 @@
 require_relative 'product'
 
-module Spaces
+module Products
   class Script < Product
 
     relation_accessor :context

@@ -1,7 +1,7 @@
 require_relative '../../docker/files/step'
 
 module Domains
-  class Domain
+  module Steps
     class Variables < Docker::Files::Step
 
       def content

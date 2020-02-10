@@ -1,10 +1,10 @@
-require_relative '../spaces/product'
+require_relative '../products/product'
 require_relative '../images/collaboration'
 require_relative '../docker/files/collaboration'
 require_relative 'os_package'
 
 module OsPackages
-  class OsPackages < ::Spaces::Product
+  class OsPackages < ::Products::Product
     include Docker::Files::Collaboration
     include Images::Collaboration
 

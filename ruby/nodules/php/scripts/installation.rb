@@ -1,13 +1,15 @@
-require_relative '../../../spaces/script'
+require_relative '../../../products/script'
 
 module Nodules
-  class PHP
-    class Installation < Spaces::Script
+  module PHP
+    module Scripts
+      class Installation < Products::Script
 
-      def body
-        "phpenmod #{context.name}"
+        def body
+          "phpenmod #{context.name}"
+        end
+
       end
-
     end
   end
 end

@@ -8,10 +8,18 @@ module Docker
 
       def layers_for(group)
         step_precedence[group]&.map do |s|
-          scoped_class(s).new(self).content
+          step_class(s).new(self).content
         end
       end
-    end
 
+      def step_class(symbol)
+        Module.const_get(namespaced_name(step_namespace, symbol))
+      end
+
+      def step_namespace
+        [self.class.name.split('::')[0 .. -2], 'Steps'].flatten.join('::')
+      end
+
+    end
   end
 end

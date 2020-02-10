@@ -2,7 +2,8 @@ require_relative '../../steps/variables'
 
 module Frameworks
   class Rails5
-    class Variables < Framework::Variables
+    module ApachePHP
+    class Variables < Steps::Variables
 
       def content
         [

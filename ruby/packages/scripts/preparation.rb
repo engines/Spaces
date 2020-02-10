@@ -1,8 +1,8 @@
 require_relative 'requires'
 
 module Packages
-  class Package < ::Spaces::Model
-    class Preparation < Spaces::Script
+  module Scripts
+    class Preparation < Products::Script
 
       relation_accessor :package
 

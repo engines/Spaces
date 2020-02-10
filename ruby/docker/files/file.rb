@@ -1,10 +1,10 @@
-require_relative '../../spaces/product'
 require_relative '../../blueprints/tensor'
+require_relative '../../products/product'
 require_relative 'collaboration'
 
 module Docker
   module Files
-    class File < ::Spaces::Product
+    class File < ::Products::Product
       include Collaboration
 
       Dir["#{__dir__}/steps/*"].each { |f| require f }
@@ -50,10 +50,6 @@ module Docker
       def file_path
         "#{identifier}/DockerFile"
       end
-
-          def scope_module_name
-            self.class.name.split('::')[0 .. -2].join('::')
-          end
 
     end
   end

@@ -1,15 +1,17 @@
 require_relative '../nodule'
 
 module Nodules
-  class Python < Nodule
+  module Python
+    class Python < Nodule
 
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
+      Dir["#{__dir__}/scripts/*"].each { |f| require f }
 
-    class << self
-      def identifier
-        'python'
+      class << self
+        def identifier
+          'python'
+        end
       end
-    end
 
+    end
   end
 end

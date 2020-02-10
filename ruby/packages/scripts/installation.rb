@@ -1,8 +1,8 @@
 require_relative 'requires'
 
 module Packages
-  class Package < ::Spaces::Model
-    class Installation < Spaces::Script
+  module Scripts
+    class Installation < Products::Script
 
       def body
       [

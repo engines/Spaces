@@ -1,13 +1,15 @@
-require_relative '../../../spaces/script'
+require_relative '../../../products/script'
 
 module Nodules
-  class NPM
-    class Installation < Spaces::Script
+  module NPM
+    module Scripts
+      class Installation < Products::Script
 
-      def body
-        "npm install #{context.name}"
+        def body
+          "npm install #{context.name}"
+        end
+
       end
-
     end
   end
 end

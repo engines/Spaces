@@ -1,7 +1,7 @@
-require_relative '../spaces/product'
+require_relative '../products/product'
 
 module Containers
-  class Container < ::Spaces::Product
+  class Container < ::Products::Product
     # A mechanism by which software can be made executable.
 
   end

@@ -1,13 +1,15 @@
 require_relative 'requires'
 
 module Nodules
-  class Pear
-    class Installation < Spaces::Script
+  module Pear
+    module Scripts
+      class Installation < Products::Script
 
-      def body
-        "pear install #{context.name}"
+        def body
+          "pear install #{context.name}"
+        end
+
       end
-
     end
   end
 end
