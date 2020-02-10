@@ -1,4 +1,4 @@
-require_relative '../spaces/product'
+require_relative '../products/product'
 
 module Images
   module Collaboration

@@ -1,7 +1,7 @@
-require_relative 'model'
+require_relative '../spaces/model'
 
-module Spaces
-  class Product < Model
+module Products
+  class Product < ::Spaces::Model
 
     relation_accessor :tensor
 

@@ -2,7 +2,7 @@ require_relative 'requires'
 
 module Packages
   module Scripts
-    class Preparation < Spaces::Script
+    class Preparation < Products::Script
 
       relation_accessor :package
 

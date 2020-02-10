@@ -1,9 +1,9 @@
-require_relative '../../../spaces/script'
+require_relative '../../../products/script'
 
 module Nodules
   module R
     module Scripts
-      class Installation < Spaces::Script
+      class Installation < Products::Script
 
         def body
           "R -e install.packages(\"#{context.name}\") "
