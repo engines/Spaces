@@ -1,7 +1,7 @@
 require_relative 'requires'
 
 module Blueprints
-  class Dependent
+  module Steps
     class Variables < Docker::Files::Step
 
       def content

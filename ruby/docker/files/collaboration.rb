@@ -11,7 +11,11 @@ module Docker
           scoped_class(s).new(self).content
         end
       end
-    end
 
+      def scope_module_name
+        [self.class.name.split('::')[0 .. -2], 'Steps'].flatten.join('::')
+      end
+
+    end
   end
 end

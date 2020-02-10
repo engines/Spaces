@@ -51,10 +51,6 @@ module Docker
         "#{identifier}/DockerFile"
       end
 
-          def scope_module_name
-            self.class.name.split('::')[0 .. -2].join('::')
-          end
-
     end
   end
 end

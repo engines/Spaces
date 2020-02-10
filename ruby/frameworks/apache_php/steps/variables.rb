@@ -1,18 +1,20 @@
 require_relative '../../steps/variables'
 
 module Frameworks
-  class ApachePHP
-    class Variables < Framework::Variables
+  module ApachePHP
+    module Steps
+      class Variables < Frameworks::Steps::Variables
 
-      def content
-      [
-        super,
-        %Q(
-        ENV ContUser www-data
-        )
-      ]
+        def content
+        [
+          super,
+          %Q(
+          ENV ContUser www-data
+          )
+        ]
+        end
+
       end
-
     end
   end
 end
