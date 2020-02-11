@@ -1,8 +1,8 @@
 require_relative 'requires'
 
 module Frameworks
-  class Rails5
-    module ApachePHP
+  module Rails5
+    module Steps
       class RakeTasks < Docker::Files::Step
 
         def content
