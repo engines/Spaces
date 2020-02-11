@@ -1,8 +1,10 @@
-require_relative '../spaces/model'
+require_relative '../products/product'
+require_relative '../images/collaboration'
 require_relative '../docker/files/collaboration'
 
 module Frameworks
-  class Framework < ::Spaces::Model
+  class Framework < ::Products::Product
+    include Images::Collaboration
     include Docker::Files::Collaboration
 
     def port
@@ -12,8 +14,12 @@ module Frameworks
     def default_port
     end
 
-    def identifier
-      self.class.identifier
+    def build_script_path
+       "#{super}/framework/#{self.class.identifier}"
+    end
+
+    def struct
+      @struct ||= tensor.struct.framework
     end
 
   end
