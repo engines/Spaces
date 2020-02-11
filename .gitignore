@@ -52,3 +52,4 @@ build-iPhoneSimulator/
 .irb_history
 x.rb
 ruby/x_*.rb
+/.project
