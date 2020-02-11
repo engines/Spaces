@@ -4,7 +4,7 @@ module Images
   class Space < ::Spaces::Space
 
     def save(model)
-      model.scripts.map do |s|
+      model.all_scripts.map do |s|
         super(s)
         "#{s}"
       end
