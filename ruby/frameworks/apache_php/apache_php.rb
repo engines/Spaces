@@ -4,11 +4,16 @@ module Frameworks
   module ApachePHP
     class ApachePHP < Framework
 
+      Dir["#{__dir__}/scripts/*"].each { |f| require f }
       Dir["#{__dir__}/steps/*"].each { |f| require f }
 
       class << self
         def identifier
           'apache_php'
+        end
+
+        def script_precedence
+          @@apache_php_script_precedence ||= [:configuration, :installation, :completion]
         end
 
         def step_precedence

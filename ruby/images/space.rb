@@ -6,7 +6,7 @@ module Images
     def save(model)
       model.all_scripts.map do |s|
         super(s)
-        "#{s}"
+        "#{s.path}"
       end
     end
 

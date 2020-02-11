@@ -29,12 +29,7 @@ module Blueprints
     end
 
     def framework
-      if (f = struct.framework)
-        @framework ||=
-          universe.frameworks.by(f).tap do |m|
-            m.struct = duplicate(f)
-          end
-      end
+      @framework ||= universe.frameworks.by(self)
     end
 
     def nodules
