@@ -7,7 +7,11 @@ module Images
 
     class << self
       def script_collaborators
-        @@subject_script_collaborators ||= [:os_packages, :nodules, :packages]
+        @@subject_script_collaborators ||= [:os_packages, :nodules, :packages, :image_subject]
+      end
+
+      def script_precedence
+        @@subject_script_precedence ||= [] # JAMES: put your script class syblos here!
       end
     end
 
@@ -15,7 +19,7 @@ module Images
       self.class.script_collaborators
     end
 
-    def scripts
+    def all_scripts
       script_collaborators.map { |c| tensor.send(c).scripts }.flatten.compact
     end
 

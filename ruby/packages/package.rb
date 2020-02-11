@@ -19,8 +19,8 @@ module Packages
       context.subspace_path
     end
 
-    def image_space_path
-       context.image_space_path
+    def build_script_path
+       context.build_script_path
     end
 
     def initialize(struct:, context:)

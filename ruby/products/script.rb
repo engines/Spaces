@@ -25,7 +25,7 @@ module Products
     end
 
     def path
-      "#{image_space_path}/#{file_name}"
+      "#{build_script_path}/#{file_name}"
     end
 
     def file_path
@@ -41,11 +41,11 @@ module Products
     end
 
     def subspace_path
-      "#{context.subspace_path}/#{image_space_path}"
+      "#{context.subspace_path}/#{build_script_path}"
     end
 
-    def image_space_path
-      context.image_space_path
+    def build_script_path
+      context.build_script_path
     end
 
     def identifier

@@ -25,8 +25,8 @@ module OsPackages
       @all ||= tensor.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
     end
 
-    def image_space_path
-      'os_packages'
+    def build_script_path
+      "#{super}/os_packages"
     end
 
     def os_package_class

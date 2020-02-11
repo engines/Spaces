@@ -47,7 +47,11 @@ module Spaces
     def subspace_path
       identifier
     end
-    
+
+    def build_script_path
+      'build_scripts'
+    end
+
     def namespaced_name(namespace, symbol)
       "#{namespace}::#{symbol.to_s.split('_').map { |i| i.capitalize }.join}"
     end
