@@ -15,7 +15,7 @@ module Packages
     end
 
     def all
-      @all ||= tensor.struct.packages.map { |s| package_class.new(struct: s, context: self) }
+      @all ||= tensor.struct.packages&.map { |s| package_class.new(struct: s, context: self) } || []
     end
 
     def scripts
