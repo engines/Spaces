@@ -7,7 +7,7 @@ module Images
 
     class << self
       def script_collaborators
-        @@subject_script_collaborators ||= [:os_packages, :nodules, :packages, :image_subject]
+        @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :image_subject]
       end
 
       def script_precedence
