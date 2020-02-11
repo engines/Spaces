@@ -17,8 +17,8 @@ module Nodules
       context.subspace_path
     end
 
-    def image_space_path
-      "#{context.image_space_path}/#{type}"
+    def build_script_path
+      "#{context.build_script_path}/#{type}"
     end
 
     def identifier

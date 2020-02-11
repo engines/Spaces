@@ -21,8 +21,8 @@ module Nodules
       all.map { |s| s.scripts }
     end
 
-    def image_space_path
-       'modules'
+    def build_script_path
+       "#{super}/modules"
     end
 
   end

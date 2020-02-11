@@ -8,8 +8,8 @@ module Packages
 
       def body
         %Q(
-        mkdir /#{image_space_path}
-        cd /#{image_space_path}
+        mkdir /#{build_script_path}
+        cd /#{build_script_path}
         )
       end
 

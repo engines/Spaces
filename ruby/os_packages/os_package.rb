@@ -6,11 +6,11 @@ module OsPackages
     relation_accessor :context
 
     def subspace_path
-      "#{context.subspace_path}/#{image_space_path}"
+      "#{context.subspace_path}/#{build_script_path}"
     end
 
-    def image_space_path
-      context.image_space_path
+    def build_script_path
+      context.build_script_path
     end
 
     def initialize(struct:, context:)

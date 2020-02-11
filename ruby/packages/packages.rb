@@ -22,8 +22,8 @@ module Packages
       all.map { |s| s.scripts }
     end
 
-    def image_space_path
-       'packages'
+    def build_script_path
+      "#{super}/packages"
     end
 
     def package_class
