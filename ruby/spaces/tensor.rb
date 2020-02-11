@@ -1,3 +1,5 @@
+# TODO: decide where this should go
+
 require_relative 'model'
 
 module Spaces

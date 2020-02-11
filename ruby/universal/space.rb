@@ -1,11 +1,11 @@
 require_relative '../spaces/space'
-require_relative '../container/space'
-require_relative '../image/space'
-require_relative '../framework/space'
-require_relative '../nodule/space'
-require_relative '../environment/space'
-require_relative '../domain/space'
-require_relative '../blueprint/space'
+require_relative '../containers/space'
+require_relative '../images/space'
+require_relative '../frameworks/space'
+require_relative '../nodules/space'
+require_relative '../environments/space'
+require_relative '../domains/space'
+require_relative '../blueprints/space'
 require_relative '../outer/space'
 
 module Universal
@@ -14,31 +14,31 @@ module Universal
 
     class << self
       def containers
-        @@containers ||= Container::Space.new
+        @@containers ||= Containers::Space.new
       end
 
       def images
-        @@image_space ||= Image::Space.new
+        @@image_space ||= Images::Space.new
       end
 
       def frameworks
-        @@frameworks ||= Framework::Space.new
+        @@frameworks ||= Frameworks::Space.new
       end
 
       def nodules
-        @@nodules ||= Nodule::Space.new
+        @@nodules ||= Nodules::Space.new
       end
 
       def environments
-        @@environments ||= Environment::Space.new
+        @@environments ||= Environments::Space.new
       end
 
       def domains
-        @@domains ||= Domain::Space.new
+        @@domains ||= Domains::Space.new
       end
 
       def blueprints
-        @@blueprints ||= Blueprint::Space.new
+        @@blueprints ||= Blueprints::Space.new
       end
 
       def outer

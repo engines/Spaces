@@ -32,10 +32,6 @@ module Spaces
     attr_accessor :struct
     relation_accessor :descriptor
 
-    def initialize(struct = nil)
-      self.struct = struct
-    end
-
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
@@ -52,16 +48,12 @@ module Spaces
       identifier
     end
 
-    def scoped_class(symbol)
-      Module.const_get(scoped_class_name(scope_module_name, symbol))
+    def build_script_path
+      'build_scripts'
     end
 
-    def scoped_class_name(module_name, symbol)
-      "#{module_name}::#{symbol.to_s.split('_').map { |i| i.capitalize }.join}"
-    end
-
-    def scope_module_name
-      self.class.name
+    def namespaced_name(namespace, symbol)
+      "#{namespace}::#{symbol.to_s.split('_').map { |i| i.capitalize }.join}"
     end
 
     def to_yaml
@@ -78,6 +70,14 @@ module Spaces
 
     def universe
       @universal_space ||= Universal::Space.new
+    end
+
+    def initialize(struct = nil)
+      self.struct = struct
+    end
+
+    def to_s
+      identifier
     end
 
     def method_missing(m, *args, &block)

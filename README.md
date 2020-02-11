@@ -68,24 +68,25 @@ Once you've imported a blueprint, you can retrieve it with:
 blueprint_space.by(descriptor)
 ```
 
-# Containers
-## Generating a Container::Tensor
+## Generating a Blueprints::Tensor
 
-A `Container::Tensor` is what will generate a DockerFile. You create a tensor from a blueprint like so:
+A `Blueprints::Tensor` is what will generate a DockerFile. You create a tensor from a blueprint like so:
 
 ```
 blueprint = universe.blueprints.by(descriptor)
 tensor = blueprint.tensor
 ```
 
-## Saving a Container::Tensor
+## Saving a Blueprints::Tensor
 
-Save `Container::Tensor` to container space with:
+Save `Blueprints::Tensor` to blueprint space with:
 
 ```
-container_space = universe.containers
-container_space.save_yaml(tensor)
+blueprint_space = universe.blueprints
+blueprint_space.save_yaml(tensor)
 ```
+
+# Containers
 
 ## Generating DockerFile content
 
@@ -101,4 +102,23 @@ Save docker file content to container space with:
 
 ```
 container_space.save(content)
+```
+
+# Image Subjects
+## Generating an Images::Subject
+
+An `Images::Subject` is what will manage a folder structure that you'll eventually be able to use as an image to build a container. Generate an
+image subject from a tensor in a similar way to generating a docker file:
+
+```
+content = tensor.image_subject
+```
+
+## Saving image file content to image space
+
+Save the image subject's folders and files to image space with:
+
+```
+image_space = universe.images
+image_space.save(content)
 ```
