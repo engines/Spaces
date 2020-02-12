@@ -5,10 +5,6 @@ module Products
 
     relation_accessor :tensor
 
-    def identifier
-      tensor.title
-    end
-
     def descriptor
      tensor.descriptor
     end
