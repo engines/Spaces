@@ -45,7 +45,7 @@ module Blueprints
     end
 
     def dependencies
-      @dependencies ||= dependencies_class.new(struct.dependencies, self)
+      @dependencies ||= dependencies_class.new(self)
     end
 
     def environment

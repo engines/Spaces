@@ -15,15 +15,14 @@ module Blueprints
     end
 
     def all
-      @all ||= struct.map { |d| dependent_class.new(d, tensor) } || []
+      @all ||= tensor.struct.dependencies.map { |d| dependent_class.new(d, tensor) } || []
     end
 
     def dependent_class
       Dependent
     end
 
-    def initialize(struct, tensor)
-      self.struct = struct
+    def initialize(tensor)
       self.tensor = tensor
     end
 
