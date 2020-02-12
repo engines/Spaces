@@ -1,4 +1,4 @@
-require_relative '../../products/script'
+require_relative '../../../products/script'
 
 module Images
   module Scripts
@@ -19,15 +19,15 @@ module Images
           echo "add contuser to data group"
             usermod -G $data_gid -a $ContUser
           fi
-          chown -R  $data_uid.$data_gid  /home/app
+          chown -R  $data_uid.$data_gid #{context.home_app_path}
           chown -R $ContUser /home/home_dir
            mkdir -p ~$ContUser/.ssh
              chown -R $ContUser ~$ContUser/.ssh
 
-          if test -f /build_scripts/finalisation.sh
+          if test -f #{framework_script_file_name}
             then
               echo "running finalisation.sh"
-              /build_scripts/finalisation.sh
+              #{framework_script_file_name}
           fi
           if ! test -z "$VOLDIR"
           then
@@ -41,6 +41,14 @@ module Images
            fi
         chown -R  $ContUser $HOME
         )
+      end
+
+      def framework_script_file_name
+        "/#{framework_build_script_path}/#{identifier}.sh"
+      end
+
+      def framework_build_script_path
+        context.tensor.framework.build_script_path
       end
 
       def identifier

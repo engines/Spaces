@@ -5,7 +5,7 @@ module Images
   class Subject < ::Products::Product
     include Collaboration
 
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
+    Dir["#{__dir__}/scripts/*/*"].each { |f| require f }
 
     class << self
       def script_collaborators
@@ -25,5 +25,8 @@ module Images
       script_collaborators.map { |c| tensor.send(c).scripts }.flatten.compact
     end
 
+    def home_app_path
+      '/home/app'
+    end
   end
 end
