@@ -29,38 +29,35 @@ module Blueprints
     end
 
     def framework
-      @framework ||= universe.frameworks.by(self)
+      @framework ||= universe.frameworks.by(self) if struct.framework
     end
 
     def nodules
-      @nodules ||= nodules_class.new(self)
+      @nodules ||= nodules_class.new(self) if struct.modules
     end
 
     def packages
-      @packages ||= packages_class.new(self)
+      @packages ||= packages_class.new(self) if struct.packages
     end
 
     def os_packages
-      @os_packages ||= os_packages_class.new(self)
+      @os_packages ||= os_packages_class.new(self) if struct.os_packages
     end
 
     def dependencies
-      @dependencies ||= dependencies_class.new(self)
+      @dependencies ||= dependencies_class.new(self)if struct.dependencies
     end
 
     def environment
-      @environment ||= environment_class.new(struct.environment).tap do |m|
-        m.struct.locale = OpenStruct.new.tap do |s|
-          s.language = 'en_AU:en'
-          s.lang = 'en_AU.UTF8'
-          s.lc_all = 'en_AU.UTF8'
-        end
-      end
+      @environment ||= environment_class.new(self) if struct.environment
     end
 
     def domain
-      #@domain ||= universe.domains.by('')
-      @domain ||= universe.domains.model_class.new(struct)
+      @domain ||= domain_class.new(self) if struct.domain
+    end
+
+    def domain_class
+      Domains::Domain
     end
 
     def docker_file_class

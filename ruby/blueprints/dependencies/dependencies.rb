@@ -1,14 +1,12 @@
-require_relative '../../spaces/model'
+require_relative '../../products/product'
 require_relative '../../docker/files/collaboration'
 require_relative 'dependent'
 
 module Blueprints
-  class Dependencies < ::Spaces::Model
+  class Dependencies < ::Products::Product
     include Docker::Files::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
-
-    relation_accessor :tensor
 
     def layers_for(group)
       all.map { |a| a.layers_for(group) }
@@ -20,10 +18,6 @@ module Blueprints
 
     def dependent_class
       Dependent
-    end
-
-    def initialize(tensor)
-      self.tensor = tensor
     end
 
   end

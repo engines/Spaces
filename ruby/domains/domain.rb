@@ -1,8 +1,8 @@
-require_relative '../spaces/model'
+require_relative '../products/product'
 require_relative '../docker/files/collaboration'
 
 module Domains
-  class Domain < ::Spaces::Model
+  class Domain < ::Products::Product
     include Docker::Files::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
