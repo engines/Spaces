@@ -7,6 +7,10 @@ module Spaces
   class Model
 
     class << self
+      def universe
+        @@universal_space ||= Universal::Space.new
+      end
+
       def identifier
         name.split('::').join
       end
@@ -69,7 +73,7 @@ module Spaces
     end
 
     def universe
-      @universal_space ||= Universal::Space.new
+      self.class.universe
     end
 
     def initialize(struct = nil)

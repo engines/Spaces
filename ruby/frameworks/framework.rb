@@ -7,6 +7,12 @@ module Frameworks
     include Images::Collaboration
     include Docker::Files::Collaboration
 
+    class << self
+      def prototype(tensor)
+        universe.frameworks.by(tensor)
+      end
+    end
+
     def port
       @port ||= struct.port || default_port
     end
