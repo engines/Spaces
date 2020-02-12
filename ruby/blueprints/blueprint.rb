@@ -19,10 +19,6 @@ module Blueprints
       } || []
     end
 
-    def file_path
-      "#{name}/#{self.class.unqualified_identifier}"
-    end
-
     def tensor_class
       Tensor
     end

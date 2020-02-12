@@ -3,7 +3,7 @@ require_relative 'requires'
 module Nodules
   module Pear
     module Scripts
-      class Completion < Products::Script
+      class Finalisation < Products::Script
 
         def body
           %Q(

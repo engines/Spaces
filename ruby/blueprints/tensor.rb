@@ -29,12 +29,7 @@ module Blueprints
     end
 
     def framework
-      if (f = struct.framework)
-        @framework ||=
-          universe.frameworks.by(f).tap do |m|
-            m.struct = duplicate(f)
-          end
-      end
+      @framework ||= universe.frameworks.by(self)
     end
 
     def nodules
@@ -55,7 +50,7 @@ module Blueprints
 
     def environment
       @environment ||= environment_class.new(struct.environment).tap do |m|
-        m.struct.locale = OpenStruct.new.tap do |s|
+        m.struct&.locale = OpenStruct.new.tap do |s|
           s.language = 'en_AU:en'
           s.lang = 'en_AU.UTF8'
           s.lc_all = 'en_AU.UTF8'

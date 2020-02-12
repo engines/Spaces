@@ -4,11 +4,16 @@ module Frameworks
   module Rails5
     class Rails5 < Framework
 
+      Dir["#{__dir__}/scripts/*"].each { |f| require f }
       Dir["#{__dir__}/steps/*"].each { |f| require f }
 
       class << self
         def identifier
           'rails5'
+        end
+
+        def script_precedence
+          @@rails5_script_precedence ||= [:configuration, :database, :bundler, :rake, :finalisation]
         end
 
         def step_precedence
