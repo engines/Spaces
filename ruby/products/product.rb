@@ -3,11 +3,13 @@ require_relative '../spaces/model'
 module Products
   class Product < ::Spaces::Model
 
-    relation_accessor :tensor
-
-    def identifier
-      tensor.title
+    class << self
+      def prototype(tensor)
+        new(tensor)
+      end
     end
+
+    relation_accessor :tensor
 
     def descriptor
      tensor.descriptor

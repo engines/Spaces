@@ -22,7 +22,7 @@ module OsPackages
     end
 
     def all
-      @all ||= tensor.struct.os_packages&.map { |s| os_package_class.new(struct: s, context: self) } || []
+      @all ||= tensor.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
     end
 
     def build_script_path

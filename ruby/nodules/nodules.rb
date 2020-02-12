@@ -14,7 +14,7 @@ module Nodules
     end
 
     def all
-      @all ||= tensor.struct.modules&.map { |s| universe.nodules.by(struct: s, context: self) } || []
+      @all ||= tensor.struct.modules.map { |s| universe.nodules.by(struct: s, context: self) }
     end
 
     def scripts

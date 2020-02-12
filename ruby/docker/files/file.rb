@@ -21,7 +21,7 @@ module Docker
         def step_precedence
           @@docker_file_step_precedence ||= {
             early: [:adds],
-            late: [:preparations, :permissions, :templates, :source_protection, :replacements, :seeds, :data_persistence, :installs, :source_persistence],
+            late: [:preparations, :permissions, :templates, :source_protection, :seeds, :data_persistence, :installs, :source_persistence],
             last: [:final]
           }
         end
@@ -45,6 +45,16 @@ module Docker
             tensor.send(c).layers_for(g)
           end
         end
+      end
+
+      def layers
+        step_group_precedence.map do |g|
+          collaborators.map { |c| c.layers_for(g) }
+        end
+      end
+
+      def collaborators
+        collaboration_precedence.map { |c| tensor.send(c) }.compact
       end
 
       def file_path

@@ -22,7 +22,11 @@ module Images
     end
 
     def all_scripts
-      script_collaborators.map { |c| tensor.send(c).scripts }.flatten.compact
+      collaborators.map { |c| c.scripts }.flatten.compact
+    end
+
+    def collaborators
+      script_collaborators.map { |c| tensor.send(c) }.compact
     end
 
     def home_app_path

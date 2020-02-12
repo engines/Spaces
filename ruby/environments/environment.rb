@@ -1,8 +1,8 @@
-require_relative '../spaces/model'
+require_relative '../products/product'
 require_relative '../docker/files/collaboration'
 
 module Environments
-  class Environment < ::Spaces::Model
+  class Environment < ::Products::Product
     include Docker::Files::Collaboration
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
@@ -15,8 +15,9 @@ module Environments
       end
     end
 
-    def initialize(struct)
-      self.struct = struct
+    def initialize(tensor)
+      super
+      self.struct = tensor.struct.environment
     end
 
   end
