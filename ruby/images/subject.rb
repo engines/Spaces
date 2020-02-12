@@ -5,13 +5,15 @@ module Images
   class Subject < ::Products::Product
     include Collaboration
 
+    Dir["#{__dir__}/scripts/*/*"].each { |f| require f }
+
     class << self
       def script_collaborators
         @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :image_subject]
       end
 
       def script_precedence
-        @@subject_script_precedence ||= [] # JAMES: put your script class syblos here!
+        @@subject_script_precedence ||= [:finalisation]
       end
     end
 
@@ -23,5 +25,8 @@ module Images
       script_collaborators.map { |c| tensor.send(c).scripts }.flatten.compact
     end
 
+    def home_app_path
+      '/home/app'
+    end
   end
 end

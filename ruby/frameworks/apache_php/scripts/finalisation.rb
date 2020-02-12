@@ -3,7 +3,7 @@ require_relative '../../../products/script'
 module Frameworks
   module ApachePHP
     module Scripts
-      class Completion < Products::Script
+      class Finalisation < Products::Script
 
         def body
           %Q(
@@ -15,7 +15,7 @@ module Frameworks
         end
 
         def identifier
-          'completion'
+          'finalisation'
         end
 
       end

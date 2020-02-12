@@ -9,7 +9,7 @@ module Docker
           %Q(
           RUN \
             /scripts/set_data_permissions.sh && \
-            /scripts/_finalise_environment.sh && \
+            /scripts/_finalisation.sh && \
             /home/engines/scripts/build/post_build_clean.sh
           ENV buildtime_only '.'
           USER $ContUser
