@@ -1,11 +1,7 @@
-require_relative '../products/product'
-require_relative '../images/collaboration'
-require_relative '../docker/files/collaboration'
+require_relative '../collaborators/collaborator'
 
 module Frameworks
-  class Framework < ::Products::Product
-    include Images::Collaboration
-    include Docker::Files::Collaboration
+  class Framework < ::Collaborators::Collaborator
 
     class << self
       def prototype(tensor)

@@ -1,9 +1,7 @@
-require_relative '../products/product'
-require_relative '../docker/files/collaboration'
+require_relative '../collaborators/collaborator'
 
 module Domains
-  class Domain < ::Products::Product
-    include Docker::Files::Collaboration
+  class Domain < ::Collaborators::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

@@ -1,9 +1,7 @@
-require_relative '../products/product'
-require_relative 'collaboration'
+require_relative '../collaborators/collaborator'
 
 module Images
-  class Subject < ::Products::Product
-    include Collaboration
+  class Subject < ::Collaborators::Collaborator
 
     Dir["#{__dir__}/scripts/*/*"].each { |f| require f }
 
@@ -19,6 +17,10 @@ module Images
 
     def script_collaborators
       self.class.script_collaborators
+    end
+
+    def reduced_scripts
+      all_scripts.uniq{ |s| s.uniqueness } 
     end
 
     def all_scripts

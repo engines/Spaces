@@ -1,7 +1,11 @@
 require_relative '../spaces/model'
+require_relative '../images/collaboration'
+require_relative '../docker/files/collaboration'
 
-module Products
-  class Product < ::Spaces::Model
+module Collaborators
+  class Collaborator < ::Spaces::Model
+    include Images::Collaboration
+    include Docker::Files::Collaboration
 
     class << self
       def prototype(tensor)
@@ -12,7 +16,7 @@ module Products
     relation_accessor :tensor
 
     def descriptor
-     tensor.descriptor
+      tensor.descriptor
     end
 
     def initialize(tensor)

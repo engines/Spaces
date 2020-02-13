@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script_once'
 
 module Frameworks
   module ApachePHP
     module Scripts
-      class Finalisation < Products::Script
+      class Finalisation < Collaborators::ScriptOnce
 
         def body
           %Q(
@@ -12,10 +12,6 @@ module Frameworks
           mkdir  -p /run/apache2/
           chown www-data /run/apache2/
           )
-        end
-
-        def identifier
-          'finalisation'
         end
 
       end

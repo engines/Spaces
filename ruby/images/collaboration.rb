@@ -1,5 +1,3 @@
-require_relative '../products/product'
-
 module Images
   module Collaboration
 

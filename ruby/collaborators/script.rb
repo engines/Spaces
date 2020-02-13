@@ -1,7 +1,7 @@
-require_relative 'product'
+require_relative '../spaces/model'
 
-module Products
-  class Script < Product
+module Collaborators
+  class Script < ::Spaces::Model
 
     relation_accessor :context
     attr_reader :content

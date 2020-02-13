@@ -15,8 +15,8 @@ module Spaces
         name.split('::').join
       end
 
-      def unqualified_identifier
-        name.split('::').last
+      def qualifier
+        name.split('::').last.downcase
       end
 
       def from_yaml(yaml)
@@ -42,6 +42,14 @@ module Spaces
 
     def identifier
       descriptor.identifier
+    end
+
+    def uniqueness
+      [self.class.name, identifier]
+    end
+
+    def qualifier
+      self.class.qualifier
     end
 
     def file_path

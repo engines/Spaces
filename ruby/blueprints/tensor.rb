@@ -43,7 +43,7 @@ module Blueprints
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
         v = [all_collaborators[k]].flatten
-        m[k] = v.first.prototype(self) if outputs_keys.include?(k) || struct[v[2] || k]
+        m[k] = v.first.prototype(self) if outputs_keys.include?(k) || struct[v[1] || k]
         m
       end.compact
     end
@@ -57,7 +57,7 @@ module Blueprints
     end
 
     def method_missing(m, *args, &block)
-      if keys&.include?(m)
+      if keys.include?(m)
         collaborators[m.to_sym]
       else
         super

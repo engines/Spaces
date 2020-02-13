@@ -1,10 +1,9 @@
-require_relative '../../products/product'
+require_relative '../../collaborators/collaborator'
 require_relative '../../docker/files/collaboration'
 require_relative 'dependent'
 
 module Blueprints
-  class Dependencies < ::Products::Product
-    include Docker::Files::Collaboration
+  class Dependencies < ::Collaborators::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -13,7 +12,7 @@ module Blueprints
     end
 
     def all
-      @all ||= tensor.struct.dependencies.map { |d| dependent_class.new(d, tensor) } || []
+      @all ||= tensor.struct.dependencies.map { |d| dependent_class.new(struct: d, context: self) }
     end
 
     def dependent_class
