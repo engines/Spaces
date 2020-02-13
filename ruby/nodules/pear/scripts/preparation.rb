@@ -3,7 +3,7 @@ require_relative 'requires'
 module Nodules
   module Pear
     module Scripts
-      class Preparation < Products::Script
+      class Preparation < Products::ScriptOnce
 
         def body
           %Q(
@@ -12,10 +12,6 @@ module Nodules
           echo suhosin.executor.include.whitelist = phar >>/etc/php/7.?/cli/conf.d/suhosin.ini
           php go-pear.phar
           )
-        end
-
-        def identifier
-          'preparation'
         end
 
       end

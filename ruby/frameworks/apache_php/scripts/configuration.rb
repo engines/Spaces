@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../products/script_once'
 
 module Frameworks
   module ApachePHP
     module Scripts
-      class Configuration < Products::Script
+      class Configuration < Products::ScriptOnce
 
         def body
           %Q(
@@ -46,10 +46,6 @@ module Frameworks
 
          /build_scripts/install_htaccess.sh
          )
-        end
-
-        def identifier
-          'configuration'
         end
 
       end

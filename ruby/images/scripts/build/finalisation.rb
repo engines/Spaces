@@ -1,8 +1,8 @@
-require_relative '../../../products/script'
+require_relative '../../../products/script_once'
 
 module Images
   module Scripts
-    class Finalisation < Products::Script
+    class Finalisation < Products::ScriptOnce
       def body
         %Q(
         grep :$data_gid: /etc/group >/dev/null
@@ -51,9 +51,6 @@ module Images
         context.tensor.framework.build_script_path
       end
 
-      def identifier
-        'finalisation'
-      end
     end
   end
 end

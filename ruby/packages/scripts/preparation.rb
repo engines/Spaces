@@ -1,8 +1,8 @@
-require_relative 'requires'
+require_relative '../../products/script_once'
 
 module Packages
   module Scripts
-    class Preparation < Products::Script
+    class Preparation < Products::ScriptOnce
 
       relation_accessor :package
 
@@ -11,6 +11,10 @@ module Packages
         mkdir /#{build_script_path}
         cd /#{build_script_path}
         )
+      end
+
+      def identifier
+        qualifier
       end
 
     end
