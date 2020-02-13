@@ -13,10 +13,6 @@ module Packages
         )
       end
 
-      def identifier
-        qualifier
-      end
-
     end
   end
 end
