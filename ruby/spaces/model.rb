@@ -44,10 +44,14 @@ module Spaces
       descriptor.identifier
     end
 
+    def uniqueness
+      [self.class.name, identifier]
+    end
 
     def qualifier
       self.class.qualifier
     end
+
     def file_path
       "#{subspace_path}/#{self.class.identifier}"
     end
