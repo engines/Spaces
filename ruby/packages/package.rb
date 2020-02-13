@@ -9,7 +9,7 @@ module Packages
 
     class << self
       def script_precedence
-        @@package_script_precedence ||= [:installation]
+        @@package_script_precedence ||= [:preparation, :installation]
       end
     end
 
