@@ -15,8 +15,8 @@ module Spaces
         name.split('::').join
       end
 
-      def unqualified_identifier
-        name.split('::').last
+      def qualifier
+        name.split('::').last.downcase
       end
 
       def from_yaml(yaml)
@@ -44,6 +44,10 @@ module Spaces
       descriptor.identifier
     end
 
+
+    def qualifier
+      self.class.qualifier
+    end
     def file_path
       "#{subspace_path}/#{self.class.identifier}"
     end

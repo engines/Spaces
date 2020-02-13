@@ -38,7 +38,7 @@ module Blueprints
 
     def file_name_for(descriptor)
       ensure_subspace_for(descriptor)
-      "#{subspace_path_for(descriptor)}/#{model_class.unqualified_identifier}"
+      "#{subspace_path_for(descriptor)}/#{model_class.qualifier}"
     end
 
     def ensure_subspace_for(descriptor)
