@@ -25,10 +25,6 @@ module Frameworks
         end
       end
 
-      def default_port
-        8000
-      end
-
     end
   end
 end

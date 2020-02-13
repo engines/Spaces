@@ -7,7 +7,7 @@ module Frameworks
 
         def body
           %Q(
-          echo "Rails.application.routes.default_url_options[:host] = '$fqdn'" >> /home/app/config/environment.rb
+          echo "Rails.application.routes.default_url_options[:host] = '$fqdn'" >> #{home_app_path}/config/environment.rb
 
           if test -f Gemfile
          	  then
