@@ -21,6 +21,10 @@ module Images
       self.class.script_collaborators
     end
 
+    def reduced_scripts
+      all_scripts.uniq{ |s| s.uniqueness } 
+    end
+
     def all_scripts
       collaborators.map { |c| c.scripts }.flatten.compact
     end
