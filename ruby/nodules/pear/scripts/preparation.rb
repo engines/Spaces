@@ -14,6 +14,10 @@ module Nodules
           )
         end
 
+        def identifier
+          'preparation'
+        end
+
       end
     end
   end

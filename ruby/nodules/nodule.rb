@@ -1,15 +1,21 @@
-require_relative '../spaces/model'
+require_relative '../products/product'
 require_relative '../images/collaboration'
+require_relative '../docker/files/collaboration'
 
 module Nodules
-  class Nodule < ::Spaces::Model
+  class Nodule < ::Products::Product
     include Images::Collaboration
+    include Docker::Files::Collaboration
 
     relation_accessor :context
 
     class << self
       def script_precedence
         @@nodule_script_precedence ||= [:installation]
+      end
+
+      def step_precedence
+        @@nodule_step_precedence ||= {}
       end
     end
 

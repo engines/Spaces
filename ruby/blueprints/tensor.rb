@@ -57,7 +57,7 @@ module Blueprints
     end
 
     def method_missing(m, *args, &block)
-      if keys&.include?(m)
+      if keys.include?(m)
         collaborators[m.to_sym]
       else
         super

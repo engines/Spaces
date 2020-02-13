@@ -12,6 +12,10 @@ module Nodules
           )
         end
 
+        def identifier
+          'finalisation'
+        end
+
       end
     end
   end

@@ -10,6 +10,10 @@ module Nodules
         def identifier
           'pear'
         end
+
+        def script_precedence
+          @@pear_script_precedence ||= [:preparation, :installation, :finalisation]
+        end
       end
 
     end
