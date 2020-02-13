@@ -1,1 +1,1 @@
-require_relative '../../../products/script_once'
+require_relative '../../../collaborators/script_once'

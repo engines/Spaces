@@ -1,9 +1,9 @@
-require_relative '../../../products/script_once'
+require_relative '../../../collaborators/script_once'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Configuration < Products::ScriptOnce
+      class Configuration < Collaborators::ScriptOnce
 
         def body
           %Q(

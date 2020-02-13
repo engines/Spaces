@@ -6,7 +6,7 @@ module Blueprints
   class Dependent < Relationship
     include Docker::Files::Collaboration
 
-    relation_accessor :tensor
+    relation_accessor :context
 
     class << self
       def step_precedence
@@ -26,9 +26,9 @@ module Blueprints
       dependency.descriptor
     end
 
-    def initialize(struct, tensor)
+    def initialize(struct:, context:)
       self.struct = struct
-      self.tensor = tensor
+      self.context = context
     end
 
   end

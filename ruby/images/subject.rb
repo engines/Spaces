@@ -1,9 +1,7 @@
-require_relative '../products/product'
-require_relative 'collaboration'
+require_relative '../collaborators/collaborator'
 
 module Images
-  class Subject < ::Products::Product
-    include Collaboration
+  class Subject < ::Collaborators::Collaborator
 
     Dir["#{__dir__}/scripts/*/*"].each { |f| require f }
 

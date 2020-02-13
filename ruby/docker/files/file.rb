@@ -1,11 +1,9 @@
 require_relative '../../blueprints/tensor'
-require_relative '../../products/product'
-require_relative 'collaboration'
+require_relative '../../collaborators/collaborator'
 
 module Docker
   module Files
-    class File < ::Products::Product
-      include Collaboration
+    class File < ::Collaborators::Collaborator
 
       Dir["#{__dir__}/steps/*"].each { |f| require f }
 

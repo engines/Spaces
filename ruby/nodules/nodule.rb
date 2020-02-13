@@ -1,9 +1,9 @@
-require_relative '../products/product'
+require_relative '../spaces/model'
 require_relative '../images/collaboration'
 require_relative '../docker/files/collaboration'
 
 module Nodules
-  class Nodule < ::Products::Product
+  class Nodule < ::Spaces::Model
     include Images::Collaboration
     include Docker::Files::Collaboration
 
