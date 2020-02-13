@@ -7,7 +7,7 @@ module Nodules
 
     def by(struct:, context:)
       load(struct.type)
-      loaded.detect { |k| k.identifier == struct.type }.new(struct: struct, context: context)
+      loaded.detect { |k| k.qualifier == struct.type }.new(struct: struct, context: context)
     end
 
     def loaded
