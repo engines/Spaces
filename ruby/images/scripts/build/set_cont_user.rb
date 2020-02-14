@@ -1,8 +1,8 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script'
 
 module Images
   module Scripts
-    class SetContUser < Products::Script
+    class SetContUser < Collaborators::Script
       def body
         #Notes for future improvements
         %Q(             

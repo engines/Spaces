@@ -1,9 +1,7 @@
-require_relative '../products/product'
-require_relative '../docker/files/collaboration'
+require_relative '../collaborators/collaborator'
 
 module Nodules
-  class Nodules < ::Products::Product
-    include Docker::Files::Collaboration
+  class Nodules < ::Collaborators::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -13,12 +11,12 @@ module Nodules
       end
     end
 
-    def all
-      @all ||= tensor.struct.modules&.map { |s| universe.nodules.by(struct: s, context: self) } || []
-    end
-
     def scripts
       all.map { |s| s.scripts }
+    end
+
+    def all
+      @all ||= tensor.struct.modules.map { |s| universe.nodules.by(struct: s, context: self) }
     end
 
     def build_script_path

@@ -1,16 +1,12 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script_once'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Rake < Products::Script
+      class Rake < Collaborators::ScriptOnce
 
         def body
           "bundle exec rake $*"
-        end
-
-        def identifier
-          'rake'
         end
 
       end

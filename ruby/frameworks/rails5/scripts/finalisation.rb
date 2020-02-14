@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script_once'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Finalisation < Products::Script
+      class Finalisation < Collaborators::ScriptOnce
 
         def body
           %Q(
@@ -29,10 +29,6 @@ module Frameworks
              chmod -R g+w  #{home_app_path}/db
           fi
           )
-        end
-
-        def identifier
-          'finalisation'
         end
 
       end

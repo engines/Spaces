@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script_once'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Bundler < Products::Script
+      class Bundler < Collaborators::ScriptOnce
 
         def body
           %Q(
@@ -14,10 +14,6 @@ module Frameworks
          	  bundle --standalone install
           fi
           )
-        end
-
-        def identifier
-          'bundler'
         end
 
       end

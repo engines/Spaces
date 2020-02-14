@@ -7,12 +7,16 @@ module Spaces
   class Model
 
     class << self
+      def universe
+        @@universal_space ||= Universal::Space.new
+      end
+
       def identifier
         name.split('::').join
       end
 
-      def unqualified_identifier
-        name.split('::').last
+      def qualifier
+        name.split('::').last.downcase
       end
 
       def from_yaml(yaml)
@@ -38,6 +42,14 @@ module Spaces
 
     def identifier
       descriptor.identifier
+    end
+
+    def uniqueness
+      [self.class.name, identifier]
+    end
+
+    def qualifier
+      self.class.qualifier
     end
 
     def file_path
@@ -69,7 +81,7 @@ module Spaces
     end
 
     def universe
-      @universal_space ||= Universal::Space.new
+      self.class.universe
     end
 
     def initialize(struct = nil)

@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script_once'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Configuration < Products::Script
+      class Configuration < Collaborators::ScriptOnce
 
         def body
           %Q(
@@ -16,10 +16,6 @@ module Frameworks
           cat  /tmp/.000-default.conf  | sed "s/^#SERVER_NAME/ ServerName $fqdn/" > /tmp/.000-default.conf-2
           cp /tmp/.000-default.conf-2 /etc/nginx/sites-enabled/default
           )
-        end
-
-        def identifier
-          'configuration'
         end
 
       end

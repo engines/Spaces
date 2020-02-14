@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script'
 
 module Frameworks
   module Python37
     module Scripts
-      class Configuration < Products::Script
+      class Configuration < Collaborators::Script
 
         def body
           %Q(

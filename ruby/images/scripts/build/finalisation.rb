@@ -1,8 +1,8 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script_once'
 
 module Images
   module Scripts
-    class Finalisation < Products::Script
+    class Finalisation < Collaborators::ScriptOnce
       def body
         #Notes for future improvements
         #May be Dynamically setup but has default $data_gid $data_uid
@@ -23,7 +23,7 @@ module Images
           echo "add contuser to data group"
             usermod -G $data_gid -a #{cont_user}
           fi
-          chown -R  $data_uid.$data_gid #{context.home_app_path}
+          chown -R  $data_uid.$data_gid #{home_app_path}
           chown -R #{cont_user} /home/home_dir
            mkdir -p ~#{cont_user}/.ssh
              chown -R #{cont_user} ~#{cont_user}/.ssh
@@ -55,9 +55,6 @@ module Images
         "/#{framework_build_script_path}/#{identifier}.sh"
       end
 
-      def identifier
-        'finalisation'
-      end
     end
   end
 end

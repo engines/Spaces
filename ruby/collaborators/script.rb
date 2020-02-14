@@ -1,7 +1,7 @@
-require_relative 'product'
+require_relative '../spaces/model'
 
-module Products
-  class Script < Product
+module Collaborators
+  class Script < ::Spaces::Model
 
     relation_accessor :context
     attr_reader :content
@@ -38,6 +38,10 @@ module Products
 
     def descriptor
       context.descriptor
+    end
+
+    def home_app_path
+      descriptor.home_app_path
     end
 
     def subspace_path

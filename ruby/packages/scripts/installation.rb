@@ -1,8 +1,8 @@
-require_relative 'requires'
+require_relative '../../collaborators/script'
 
 module Packages
   module Scripts
-    class Installation < Products::Script
+    class Installation < Collaborators::Script
 
       def body
       [

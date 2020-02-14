@@ -1,8 +1,8 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script'
 
 module Images
   module Scripts
-    class PersistentDirs < Products::Script
+    class PersistentDirs < Collaborators::Script
       def body
         #Notes for future improvements
         #Most can be dynamically generated from persistent dirs in bp. 

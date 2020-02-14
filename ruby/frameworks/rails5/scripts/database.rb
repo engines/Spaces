@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script_once'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Database < Products::Script
+      class Database < Collaborators::ScriptOnce
 
         def body
           %Q(
@@ -27,10 +27,6 @@ module Frameworks
           echo wrote  $config_dir/database.yml
           ec
           )
-        end
-
-        def identifier
-          'database'
         end
 
       end

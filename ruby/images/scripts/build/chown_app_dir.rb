@@ -1,8 +1,8 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script'
 
 module Images
   module Scripts
-    class ChownAppDir < Products::Script
+    class ChownAppDir < Collaborators::Script
       def body
         #Notes for future improvements
         #group=`cat /home/engines/etc/group/name` and user=`cat /home/engines/etc/user/name` can be dynamic

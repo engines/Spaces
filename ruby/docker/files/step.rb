@@ -7,6 +7,14 @@ module Docker
       relation_accessor :context
       attr_reader :content
 
+      def home_app_path
+        descriptor.home_app_path
+      end
+
+      def descriptor
+        context.descriptor
+      end
+
       def initialize(context)
         self.context = context
       end

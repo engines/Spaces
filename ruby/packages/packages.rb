@@ -1,10 +1,8 @@
-require_relative '../products/product'
-require_relative '../docker/files/collaboration'
+require_relative '../collaborators/collaborator'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Products::Product
-    include Docker::Files::Collaboration
+  class Packages < ::Collaborators::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -15,7 +13,7 @@ module Packages
     end
 
     def all
-      @all ||= tensor.struct.packages&.map { |s| package_class.new(struct: s, context: self) } || []
+      @all ||= tensor.struct.packages.map { |s| package_class.new(struct: s, context: self) }
     end
 
     def scripts
