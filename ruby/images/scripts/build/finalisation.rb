@@ -23,7 +23,7 @@ module Images
           echo "add contuser to data group"
             usermod -G $data_gid -a #{cont_user}
           fi
-          chown -R  $data_uid.$data_gid #{context.home_app_path}
+          chown -R  $data_uid.$data_gid #{home_app_path}
           chown -R #{cont_user} /home/home_dir
            mkdir -p ~#{cont_user}/.ssh
              chown -R #{cont_user} ~#{cont_user}/.ssh

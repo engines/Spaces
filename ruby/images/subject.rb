@@ -21,7 +21,7 @@ module Images
     end
 
     def reduced_scripts
-      all_scripts.uniq{ |s| s.uniqueness } 
+      all_scripts.uniq{ |s| s.uniqueness }
     end
 
     def all_scripts
@@ -34,10 +34,6 @@ module Images
 
     def framework_build_script_path
       tensor.framework.build_script_path
-    end
-
-    def home_app_path
-      '#{home_app_path}'
     end
   end
 end

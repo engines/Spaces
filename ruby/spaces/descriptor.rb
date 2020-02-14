@@ -19,7 +19,7 @@ module Spaces
         self.branch = struct.branch
         self.extraction = struct.extraction
         self.extracted_path = struct.extracted_path
-        self.destination_path = [home_path, struct.destination_path].compact.join('/')
+        self.destination_path = [home_app_path, struct.destination_path].compact.join('/')
       end
     end
 
@@ -43,8 +43,8 @@ module Spaces
       @extracted_path ||= identifier
     end
 
-    def home_path
-      '#{home_app_path}'
+    def home_app_path
+      '/home/app'
     end
 
     def basename

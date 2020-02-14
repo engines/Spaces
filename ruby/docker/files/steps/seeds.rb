@@ -14,9 +14,6 @@ module Docker
           ) # TODO: more to do here
         end
 
-       def home_app_path
-         context.image.home_app_path
-       end
       end
     end
   end
