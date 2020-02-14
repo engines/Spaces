@@ -7,7 +7,7 @@ module Frameworks
 
         def body
           %Q(
-          for dir in /home/app/tmp/ /home/app/public/cache/ /home/app/public/assets /run/nginx
+          for dir in #{home_app_path}/tmp/ #{home_app_path}/public/cache/ #{home_app_path}/public/assets /run/nginx
            do
              if ! test -d $dir
               then
@@ -18,15 +18,15 @@ module Frameworks
              fi
           done
 
-          chown www-data.$data_gid -R /home/app/public
-          chown www-data.$data_gid -R /home/app/tmp/ /run/nginx /home/app/public/cache/
+          chown www-data.$data_gid -R #{home_app_path}/public
+          chown www-data.$data_gid -R #{home_app_path}/tmp/ /run/nginx #{home_app_path}/public/cache/
 
           mkdir -p /home/engines/var/log/
           chmod -R g+w  /home/engines/var/log/
 
-          if test -d /home/app/db
+          if test -d #{home_app_path}/db
             then
-             chmod -R g+w  /home/app/db
+             chmod -R g+w  #{home_app_path}/db
           fi
           )
         end

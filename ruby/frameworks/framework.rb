@@ -13,7 +13,12 @@ module Frameworks
       @port ||= struct.port || default_port
     end
 
+    def cont_user
+      'www-data'
+    end
+    
     def default_port
+      8000
     end
 
     def build_script_path

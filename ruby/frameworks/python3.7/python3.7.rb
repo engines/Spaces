@@ -1,32 +1,32 @@
 require_relative '../framework'
 
 module Frameworks
-  module Rails5
-    class Rails5 < Framework
+  module Python37
+    class Python37 < Framework
 
       Dir["#{__dir__}/scripts/*"].each { |f| require f }
       Dir["#{__dir__}/steps/*"].each { |f| require f }
 
       class << self
         def identifier
-          'rails5'
+          'python37'
+        end
+
+        def cont_user
+          'python'
         end
         
         def script_precedence
-          @@rails5_script_precedence ||= [:configuration, :database, :bundler, :rake, :finalisation]
+          @@apache_php_script_precedence ||= [:configuration, :installation, :finalisation]
         end
 
         def step_precedence
-          @@rails5_step_precedence ||= {
+          @@apache_php_step_precedence ||= {
             first: [:from_image],
             anywhere: [:variables],
-            last:  [:bundle, :rake_tasks]
+            last: [:configure]
           }
         end
-      end
-
-      def default_port
-        3000
       end
 
     end
