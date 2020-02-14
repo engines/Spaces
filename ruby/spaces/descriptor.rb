@@ -44,7 +44,7 @@ module Spaces
     end
 
     def home_path
-      '#{home_app_path}'
+      '/home/app'
     end
 
     def basename

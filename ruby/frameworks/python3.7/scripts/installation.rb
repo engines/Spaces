@@ -1,9 +1,9 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script'
 
 module Frameworks
   module ApachePHP
     module Scripts
-      class Installation < Products::Script
+      class Installation < Collaborators::Script
 
         def body
           %Q(

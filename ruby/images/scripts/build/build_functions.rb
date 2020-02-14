@@ -1,8 +1,8 @@
-require_relative '../../../products/script'
+require_relative '../../../collaborators/script'
 
 module Images
   module Scripts
-    class BuildFunctions < Products::Script
+    class BuildFunctions < Collaborators::Script
       def body
         %Q(
         install_template()
