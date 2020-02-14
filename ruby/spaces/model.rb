@@ -60,10 +60,6 @@ module Spaces
       identifier
     end
 
-    def build_script_path
-      'build_scripts'
-    end
-
     def namespaced_name(namespace, symbol)
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
     end

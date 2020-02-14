@@ -17,5 +17,9 @@ module Images
       [self.class.name.split('::')[0 .. -2], 'Scripts'].flatten.join('::')
     end
 
+    def build_script_path
+      'build/scripts'
+    end
+
   end
 end
