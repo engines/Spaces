@@ -14,9 +14,7 @@ module Blueprints
     end
 
     def dependency_descriptors
-      struct.dependencies&.map { |d|
-        descriptor_class.new(d.descriptor)
-      } || []
+      struct.dependencies&.map { |d| descriptor_class.new(d.descriptor) } || []
     end
 
     def tensor_class

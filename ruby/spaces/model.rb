@@ -65,7 +65,7 @@ module Spaces
     end
 
     def namespaced_name(namespace, symbol)
-      "#{namespace}::#{symbol.to_s.split('_').map { |i| i.capitalize }.join}"
+      "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
     end
 
     def to_yaml

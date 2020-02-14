@@ -5,7 +5,7 @@ module OsPackages
     class Installation < Collaborators::ScriptOnce
 
       def body
-        "apt-get -y #{context.all.map { |a| a.name }.compact.uniq.join(' ')}"
+        "apt-get -y #{context.all.map(&:name).compact.uniq.join(' ')}"
       end
 
     end
