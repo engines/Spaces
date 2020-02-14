@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script'
+require_relative '../../../collaborators/script_once'
 
 module Images
   module Scripts
-    class PersistentSource < Collaborators::Script
+    class PersistentSource < Collaborators::ScriptOnce
       def body
 
         %Q(
@@ -10,18 +10,14 @@ module Images
          then
           mv /home/volumes /home/fs
         fi
-        
+
         if test -d /home/fs
-         then 
+         then
           mv /home/fs /home/fs_src
           else
             mkdir /home/fs_src
         fi
         )
-      end
-
-      def identifier
-        'persistent_source'
       end
     end
   end

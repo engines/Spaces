@@ -1,15 +1,15 @@
-require_relative '../../../collaborators/script'
+require_relative '../../../collaborators/script_once'
 
 module Images
   module Scripts
-    class SetContUser < Collaborators::Script
+    class SetContUser < Collaborators::ScriptOnce
       def body
         #Notes for future improvements
-        %Q(             
+        %Q(
         . #{framework_build_script_path}/build_functions.sh
         set_permissions()
         {
-        
+
         if test -f /home/engines/etc/user/files
          then
           for file in `cat /home/engines/etc/user/files`
@@ -38,7 +38,7 @@ module Images
             then
              touch $file
             fi
-             
+
             chown $group $file
            done
         fi
@@ -49,17 +49,13 @@ module Images
            mkdir -p $dir
             chown -R $group $dir
            done
-        fi   
+        fi
         }
-        
+
         set_guids
         set_permissions
 
         )
-      end
-
-      def identifier
-        'set_cont_user'
       end
     end
   end

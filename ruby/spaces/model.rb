@@ -16,7 +16,7 @@ module Spaces
       end
 
       def qualifier
-        name.split('::').last.downcase
+        name.split('::').last.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
       end
 
       def from_yaml(yaml)

@@ -1,25 +1,25 @@
-require_relative '../../../collaborators/script'
+require_relative '../../../collaborators/script_once'
 
 module Images
   module Scripts
-    class ChownAppDir < Collaborators::Script
+    class ChownAppDir < Collaborators::ScriptOnce
       def body
         #Notes for future improvements
         #group=`cat /home/engines/etc/group/name` and user=`cat /home/engines/etc/user/name` can be dynamic
         #Paths referenced are static but global
-        %Q(          
+        %Q(
         if [ ! -d #{home_app_path} ]
-         then 
-           mkdir -p #{home_app_path} 
+         then
+           mkdir -p #{home_app_path}
           fi
-          
-        mkdir -p /home/fs ; mkdir -p /home/fs/local 
-        chown -R #{cont_user} #{home_app_path} /home/fs /home/fs/local   
-                
+
+        mkdir -p /home/fs ; mkdir -p /home/fs/local
+        chown -R #{cont_user} #{home_app_path} /home/fs /home/fs/local
+
          set_permissions()
         {
         user=`cat /home/engines/etc/user/name`
-        
+
         if test -f /home/engines/etc/user/files_post_install
          then
           for file in `cat /home/engines/etc/user/files_post_install`
@@ -39,9 +39,9 @@ module Images
             chown -R $user $dir
            done
         fi
-                
+
         group=`cat /home/engines/etc/group/name`
-        
+
         if test -f /home/engines/etc/group/files_post_install
          then
           for file in  `cat /home/engines/etc/group/files_post_install`
@@ -50,7 +50,7 @@ module Images
             then
              touch $file
             fi
-             
+
             chown $group $file
            done
         fi
@@ -61,20 +61,16 @@ module Images
            mkdir -p $dir
             chown -R $group $dir
            done
-        fi   
+        fi
         }
-        
+
         set_permissions
-         
+
         )
       end
 
       def cont_user
         context.tensor.framework.cont_user
-      end
-
-      def identifier
-        'chown_app_dir'
       end
     end
   end
