@@ -10,6 +10,11 @@ module Nodules
     relation_accessor :context
 
     class << self
+
+      def qualifier
+        name.split('::').last.downcase
+      end
+
       def script_precedence
         @@nodule_script_precedence ||= [:installation]
       end

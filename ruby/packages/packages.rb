@@ -17,7 +17,7 @@ module Packages
     end
 
     def scripts
-      all.map { |s| s.scripts }
+      all.map(&:scripts).flatten.uniq(&:uniqueness)
     end
 
     def build_script_path

@@ -16,7 +16,7 @@ module Spaces
       end
 
       def qualifier
-        name.split('::').last.downcase
+        name.split('::').last.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
       end
 
       def from_yaml(yaml)
@@ -60,12 +60,8 @@ module Spaces
       identifier
     end
 
-    def build_script_path
-      'build_scripts'
-    end
-
     def namespaced_name(namespace, symbol)
-      "#{namespace}::#{symbol.to_s.split('_').map { |i| i.capitalize }.join}"
+      "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
     end
 
     def to_yaml

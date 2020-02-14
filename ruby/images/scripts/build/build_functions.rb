@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script'
+require_relative '../../../collaborators/script_once'
 
 module Images
   module Scripts
-    class BuildFunctions < Collaborators::Script
+    class BuildFunctions < Collaborators::ScriptOnce
       def body
         %Q(
         install_template()
@@ -84,25 +84,21 @@ module Images
         }
         set_path_permission()
          {
-           if [ -h  #{home_app_path}/$path ] 
+           if [ -h  #{home_app_path}/$path ]
             then
             dest=`ls -la #{home_app_path}/$path |cut -f2 -d'>'`
               chmod -R gu+rw $dest
-           elif test -d  #{home_app_path}/$path 
+           elif test -d  #{home_app_path}/$path
             then
-            chmod  775 #{home_app_path}/$path   
-           elif test ! -f #{home_app_path}/$path 
+            chmod  775 #{home_app_path}/$path
+           elif test ! -f #{home_app_path}/$path
             then
             mkdir -p  `dirname #{home_app_path}/$path`
-            touch  #{home_app_path}/$path 
+            touch  #{home_app_path}/$path
          fi
-         chmod  ug+rw #{home_app_path}/$path   
+         chmod  ug+rw #{home_app_path}/$path
          }
         )
-      end
-
-      def identifier
-        'build_functions'
       end
     end
   end
