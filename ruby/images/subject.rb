@@ -35,9 +35,5 @@ module Images
     def framework_build_script_path
       tensor.framework.build_script_path
     end
-
-    def home_app_path
-      '/home/app'
-    end
   end
 end

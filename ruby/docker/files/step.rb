@@ -8,7 +8,11 @@ module Docker
       attr_reader :content
 
       def home_app_path
-        context.tensor.image_subject.home_app_path
+        descriptor.home_app_path
+      end
+
+      def descriptor
+        context.descriptor
       end
 
       def initialize(context)

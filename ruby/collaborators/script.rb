@@ -40,6 +40,10 @@ module Collaborators
       context.descriptor
     end
 
+    def home_app_path
+      descriptor.home_app_path
+    end
+
     def subspace_path
       "#{context.subspace_path}/#{build_script_path}"
     end
