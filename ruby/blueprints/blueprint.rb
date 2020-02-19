@@ -1,5 +1,3 @@
-require 'duplicate'
-
 require_relative '../spaces/model'
 require_relative '../spaces/descriptor'
 require_relative 'tensor'
@@ -10,7 +8,7 @@ module Blueprints
     relation_accessor :tensor
 
     def tensor
-      @tensor ||= tensor_class.new(duplicate(struct))
+      @tensor ||= tensor_class.new(self)
     end
 
     def dependency_descriptors
