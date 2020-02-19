@@ -4,15 +4,14 @@ require_relative '../uri/space'
 module Outer
   module Git
     class Space < ::Outer::Uri::Space
-      # The dimensions in which Git repos exist
 
       def encloses?(descriptor)
-        Dir.exist?("#{path}/#{descriptor.identifier}")
+        Dir.exist?(subspace_path_for(descriptor))
       end
 
       def file_name_for(descriptor)
         ensure_space
-        Dir["#{path}/#{descriptor.identifier}/*.json"].first
+        Dir["#{subspace_path_for(descriptor)}/*.json"].first
       end
 
       def import(descriptor)
@@ -22,8 +21,12 @@ module Outer
         g.checkout(descriptor.branch) if descriptor.branch
       end
 
+      def text_file_names_for(descriptor)
+        Dir["#{subspace_path_for(descriptor)}/files/**/*"].reject { |f| File.directory?(f) }
+      end
+
       def clear_for(descriptor)
-        FileUtils.rm_rf("#{path}/#{descriptor.identifier}")
+        FileUtils.rm_rf(subspace_path_for(descriptor))
       end
 
     end

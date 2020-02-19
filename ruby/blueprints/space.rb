@@ -3,7 +3,6 @@ require_relative '../universal/space'
 
 module Blueprints
   class Space < ::Spaces::Space
-    # The dimensions in which blueprints exist
 
     def new_for(descriptor)
       model_class.new(open_struct_from_json(outer.by(descriptor))).tap do |m|
@@ -43,6 +42,10 @@ module Blueprints
 
     def ensure_subspace_for(descriptor)
       FileUtils.mkdir_p(subspace_path_for(descriptor))
+    end
+
+    def text_file_names_for(descriptor)
+      outer.text_file_names_for(descriptor)
     end
 
     def imported?(descriptor)

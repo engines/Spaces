@@ -36,6 +36,10 @@ module Blueprints
       end
     end
 
+    def text_file_names
+      blueprint.text_file_names
+    end
+
     def all_collaborators
       self.class.all_collaborators
     end
