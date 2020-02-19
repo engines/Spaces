@@ -1,4 +1,5 @@
 require_relative '../collaborators/collaborator'
+require_relative 'text'
 
 module Images
   class Subject < ::Collaborators::Collaborator
@@ -11,8 +12,10 @@ module Images
       end
 
       def script_precedence
-        @@subject_script_precedence ||= [:build_functions,:finalisation,:chown_app_dir,:install_templates,:persistent_files,
-          :persistent_dirs,:persistent_source,:recursive_write_permissions,:set_cont_user,:set_data_permissions,:write_permissions]
+        @@subject_script_precedence ||= [
+          :build_functions, :finalisation, :chown_app_dir, :install_templates, :persistent_files,
+          :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_cont_user, :set_data_permissions, :write_permissions
+        ]
       end
     end
 
@@ -26,6 +29,14 @@ module Images
 
     def all_scripts
       collaborators.map(&:scripts).flatten.compact
+    end
+
+    def texts
+      tensor.text_file_names.map { |t| text_class.new(source_file_name: t, context: self) }
+    end
+
+    def text_class
+      Text
     end
 
     def collaborators

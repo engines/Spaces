@@ -21,12 +21,12 @@ module Outer
         g.checkout(descriptor.branch) if descriptor.branch
       end
 
-      def clear_for(descriptor)
-        FileUtils.rm_rf(subspace_path_for(descriptor))
+      def text_file_names_for(descriptor)
+        Dir["#{subspace_path_for(descriptor)}/files/**/*"].reject { |f| File.directory?(f) }
       end
 
-      def text_file_names_for(descriptor)
-        Dir["#{subspace_path_for(descriptor)}/files/**/*"]
+      def clear_for(descriptor)
+        FileUtils.rm_rf(subspace_path_for(descriptor))
       end
 
     end
