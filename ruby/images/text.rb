@@ -1,4 +1,5 @@
 require_relative '../spaces/model'
+require_relative 'expression'
 
 module Images
   class Text < ::Spaces::Model
@@ -8,11 +9,15 @@ module Images
       :content
 
     def resolved
-      immutable_strings.zip(expressions).flatten.join
+      immutable_strings.zip(expressions.map(&:resolved)).flatten.join
     end
 
     def expressions
-      splits(:odd?)
+      splits(:odd?).map { |s| expression_class.new(s) }
+    end
+
+    def expression_class
+      Expression
     end
 
     def immutable_strings
