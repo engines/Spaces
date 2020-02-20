@@ -1,4 +1,5 @@
 require_relative '../spaces/model'
+require_relative 'expression'
 
 module Images
   class Text < ::Spaces::Model
@@ -8,7 +9,23 @@ module Images
       :content
 
     def resolved
-      content
+      immutable_strings.zip(expressions.map(&:resolved)).flatten.join
+    end
+
+    def expressions
+      splits(:odd?).map { |s| expression_class.new(value: s, context: self) }
+    end
+
+    def expression_class
+      Expression
+    end
+
+    def immutable_strings
+      splits(:even?)
+    end
+
+    def splits(method)
+      content.split(interpolation_marker).select.with_index { |_, i| i.send(method) }
     end
 
     def content
@@ -41,7 +58,15 @@ module Images
     end
 
     def directory_structure_path
-      source_file_name.gsub(/.*?(?=files)/im, '').split('/')[0 .. -2].join('/')
+      source_file_name.gsub(/.*?(?=custom_files)/im, '').split('/')[0 .. -2].join('/')
+    end
+
+    def interpolation_marker
+      '^^'
+    end
+
+    def tensor
+      context.tensor
     end
 
     def initialize(source_file_name:, context:)

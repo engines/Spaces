@@ -22,7 +22,7 @@ module Outer
       end
 
       def text_file_names_for(descriptor)
-        Dir["#{subspace_path_for(descriptor)}/files/**/*"].reject { |f| File.directory?(f) }
+        Dir["#{subspace_path_for(descriptor)}/custom_files/**/*"].reject { |f| File.directory?(f) }
       end
 
       def clear_for(descriptor)
