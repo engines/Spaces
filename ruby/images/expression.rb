@@ -1,7 +1,11 @@
 require_relative '../spaces/model'
+require_relative '../domains/bucket'
+require_relative '../environments/bucket'
 
 module Images
   class Expression < ::Spaces::Model
+    include Domains::Bucket
+    include Envs::Bucket
 
     attr_accessor :value
 
