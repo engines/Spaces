@@ -13,7 +13,7 @@ module Images
     end
 
     def expressions
-      splits(:odd?).map { |s| expression_class.new(s) }
+      splits(:odd?).map { |s| expression_class.new(value: s, context: self) }
     end
 
     def expression_class
@@ -63,6 +63,10 @@ module Images
 
     def interpolation_marker
       '^^'
+    end
+
+    def tensor
+      context.tensor
     end
 
     def initialize(source_file_name:, context:)
