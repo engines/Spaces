@@ -15,6 +15,10 @@ module Blueprints
       @all ||= tensor.struct.dependencies.map { |d| dependent_class.new(struct: d, context: self) }
     end
 
+    def named(name)
+      all.detect { |d| d.name == name }
+    end
+
     def dependent_class
       Dependent
     end
