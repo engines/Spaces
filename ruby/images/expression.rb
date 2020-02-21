@@ -11,7 +11,11 @@ module Images
     attr_accessor :value
 
     def resolved
-      "--->#{value}<---"
+      begin
+        send(value)
+      rescue NoMethodError
+        "--->#{value}<---"
+      end
     end
 
     def initialize(value:, context:)
