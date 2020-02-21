@@ -14,6 +14,11 @@ module Blueprints
       end
     end
 
+    def resolved
+      @resolved ||= dependency.resolved_for(overrides_for(struct.variables))
+    end
+
+
     def dependency
       @dependency ||= dependency_class.new(struct)
     end

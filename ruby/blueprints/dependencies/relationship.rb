@@ -15,7 +15,7 @@ module Blueprints
     end
 
     def host
-      "#{descriptor.identifier}.spaces.internal"
+      "#{name}.spaces.internal"
     end
 
     def name
@@ -23,7 +23,7 @@ module Blueprints
     end
 
     def username
-      "#{descriptor.identifier}_user"
+      "#{name}_user"
     end
 
     def password
