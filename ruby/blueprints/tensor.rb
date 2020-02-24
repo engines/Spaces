@@ -19,8 +19,7 @@ module Blueprints
           nodules: [Nodules::Nodules, :modules],
           packages: Packages::Packages,
           dependencies: Dependencies,
-          environment: Environments::Environment,
-          domain: Domains::Domain
+          environment: Environments::Environment
         }
       end
 
@@ -31,8 +30,14 @@ module Blueprints
         }
       end
 
+      def internal_collaborators
+        @@internal_collaborators ||= {
+          domain: Domains::Domain
+        }
+      end
+
       def all_collaborators
-        @@all_collaborators ||= inputs.merge(outputs)
+        @@all_collaborators ||= inputs.merge(outputs).merge(internal_collaborators)
       end
     end
 
@@ -47,17 +52,26 @@ module Blueprints
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
         v = [all_collaborators[k]].flatten
-        m[k] = v.first.prototype(self) if outputs_keys.include?(k) || struct[v[1] || k]
+        m[k] = v.first.prototype(self) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
+    end
+
+    def collaborator_blueprinted?(key)
+      v = [all_collaborators[key]].flatten
+      struct[v[1] || key]
+    end
+
+    def collaborate_anyway?(key)
+      necessary_keys.include?(key)
     end
 
     def keys
       all_collaborators.keys
     end
 
-    def outputs_keys
-      self.class.outputs.keys
+    def necessary_keys
+      self.class.outputs.keys + self.class.internal_collaborators.keys
     end
 
     def method_missing(m, *args, &block)
