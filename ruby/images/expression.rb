@@ -12,22 +12,17 @@ module Images
 
     def resolved
       begin
-        value.split('.').last(2).reduce(self) { |m, i| m.send(i) }
+        vs = value.split('.').last(2)
+        collaborate_with(vs.first).send(vs.last)
       rescue NoMethodError
         "--->#{value}<---"
       end
     end
 
-    def send(*args)
-      begin
-        super(*args)
-      rescue NoMethodError
-        collaborate_with(args.first)
-      end
-    end
-
     def collaborate_with(name)
-      tensor.dependencies.named(name) || (raise NoMethodError)
+      tensor.dependencies.named(name) ||
+      tensor.domain ||
+      (raise NoMethodError)
     end
 
     def initialize(value:, context:)
@@ -45,3 +40,4 @@ module Images
 
   end
 end
+# admin_pager_email

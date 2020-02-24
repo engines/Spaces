@@ -15,7 +15,7 @@ module Blueprints
     end
 
     def host
-      "#{name}.spaces.internal"
+      "#{name}.#{universe.host}"
     end
 
     def name
