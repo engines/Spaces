@@ -12,10 +12,22 @@ module Images
 
     def resolved
       begin
-        send(value)
+        value.split('.').last(2).reduce(self) { |m, i| m.send(i) }
       rescue NoMethodError
         "--->#{value}<---"
       end
+    end
+
+    def send(*args)
+      begin
+        super(*args)
+      rescue NoMethodError
+        collaborate_with(args.first)
+      end
+    end
+
+    def collaborate_with(name)
+      tensor.dependencies.named(name) || (raise NoMethodError)
     end
 
     def initialize(value:, context:)
