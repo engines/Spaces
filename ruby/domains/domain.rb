@@ -11,5 +11,17 @@ module Domains
       end
     end
 
+    def fqdn
+      "#{host}.#{name}"
+    end
+
+    def host
+      identifier
+    end
+
+    def name
+      'current.engines.org'
+    end
+
   end
 end

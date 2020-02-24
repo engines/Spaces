@@ -81,5 +81,9 @@ module Universal
     def path
       "/opt/engines/#{identifier}"
     end
+
+    def host
+      'engines.internal'
+    end
   end
 end
