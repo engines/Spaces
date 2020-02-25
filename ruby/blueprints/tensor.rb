@@ -1,4 +1,5 @@
-require_relative '../spaces/tensor'
+require 'duplicate'
+require_relative '../spaces/model'
 require_relative '../docker/files/file'
 require_relative '../images/subject'
 require_relative '../frameworks/framework'
@@ -9,7 +10,7 @@ require_relative '../nodules/nodules'
 require_relative 'dependencies/dependencies'
 
 module Blueprints
-  class Tensor < ::Spaces::Tensor
+  class Tensor < ::Spaces::Model
 
     class << self
       def inputs
@@ -40,6 +41,8 @@ module Blueprints
         @@all_collaborators ||= inputs.merge(outputs).merge(internal_collaborators)
       end
     end
+
+    relation_accessor :blueprint
 
     def text_file_names
       blueprint.text_file_names
@@ -72,6 +75,14 @@ module Blueprints
 
     def necessary_keys
       self.class.outputs.keys + self.class.internal_collaborators.keys
+    end
+
+    def struct
+      @struct ||= duplicate(blueprint.struct)
+    end
+
+    def initialize(blueprint)
+      self.blueprint = blueprint
     end
 
     def method_missing(m, *args, &block)
