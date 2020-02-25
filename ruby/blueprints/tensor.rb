@@ -13,8 +13,8 @@ module Blueprints
   class Tensor < ::Spaces::Model
 
     class << self
-      def inputs
-        @@inputs ||= {
+      def blueprint_collaborators
+        @@blueprint_collaborators ||= {
           framework: Frameworks::Framework,
           os_packages: OsPackages::OsPackages,
           nodules: [Nodules::Nodules, :modules],
@@ -38,7 +38,7 @@ module Blueprints
       end
 
       def all_collaborators
-        @@all_collaborators ||= inputs.merge(outputs).merge(internal_collaborators)
+        @@all_collaborators ||= blueprint_collaborators.merge(outputs).merge(internal_collaborators)
       end
     end
 
