@@ -8,6 +8,7 @@ require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative 'dependencies/dependencies'
+require_relative 'identifiers'
 
 module Blueprints
   class Tensor < ::Spaces::Model
@@ -33,6 +34,7 @@ module Blueprints
 
       def internal_collaborators
         @@internal_collaborators ||= {
+          identifiers: Identifiers,
           domain: Domains::Domain
         }
       end
