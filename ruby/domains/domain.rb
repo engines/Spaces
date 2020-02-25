@@ -23,5 +23,10 @@ module Domains
       'current.engines.org'
     end
 
+    def initialize(tensor)
+      super
+      self.struct = OpenStruct.new(fqdn: fqdn, host: host, name: name)
+    end
+
   end
 end

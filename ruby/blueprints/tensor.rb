@@ -1,4 +1,5 @@
-require_relative '../spaces/tensor'
+require 'duplicate'
+require_relative '../spaces/model'
 require_relative '../docker/files/file'
 require_relative '../images/subject'
 require_relative '../frameworks/framework'
@@ -7,13 +8,14 @@ require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative 'dependencies/dependencies'
+require_relative 'identifiers'
 
 module Blueprints
-  class Tensor < ::Spaces::Tensor
+  class Tensor < ::Spaces::Model
 
     class << self
-      def inputs
-        @@inputs ||= {
+      def blueprint_collaborators
+        @@blueprint_collaborators ||= {
           framework: Frameworks::Framework,
           os_packages: OsPackages::OsPackages,
           nodules: [Nodules::Nodules, :modules],
@@ -30,16 +32,19 @@ module Blueprints
         }
       end
 
-      def internal_collaborators
-        @@internal_collaborators ||= {
+      def installation_collaborators
+        @@installation_collaborators ||= {
+          identifiers: Identifiers,
           domain: Domains::Domain
         }
       end
 
       def all_collaborators
-        @@all_collaborators ||= inputs.merge(outputs).merge(internal_collaborators)
+        @@all_collaborators ||= blueprint_collaborators.merge(outputs).merge(installation_collaborators)
       end
     end
+
+    relation_accessor :blueprint
 
     def text_file_names
       blueprint.text_file_names
@@ -47,6 +52,14 @@ module Blueprints
 
     def all_collaborators
       self.class.all_collaborators
+    end
+
+    def outputs
+      self.class.outputs
+    end
+
+    def installation_collaborators
+      self.class.installation_collaborators
     end
 
     def collaborators
@@ -71,7 +84,13 @@ module Blueprints
     end
 
     def necessary_keys
-      self.class.outputs.keys + self.class.internal_collaborators.keys
+      outputs.keys + installation_collaborators.keys
+    end
+
+    def initialize(blueprint)
+      self.blueprint = blueprint
+      self.struct = duplicate(blueprint.struct)
+      installation_collaborators.keys.each { |k| self.struct[k] = collaborators[k].struct }
     end
 
     def method_missing(m, *args, &block)
