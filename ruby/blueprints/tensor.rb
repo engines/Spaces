@@ -32,15 +32,15 @@ module Blueprints
         }
       end
 
-      def internal_collaborators
-        @@internal_collaborators ||= {
+      def installation_collaborators
+        @@installation_collaborators ||= {
           identifiers: Identifiers,
           domain: Domains::Domain
         }
       end
 
       def all_collaborators
-        @@all_collaborators ||= blueprint_collaborators.merge(outputs).merge(internal_collaborators)
+        @@all_collaborators ||= blueprint_collaborators.merge(outputs).merge(installation_collaborators)
       end
     end
 
@@ -58,8 +58,8 @@ module Blueprints
       self.class.outputs
     end
 
-    def internal_collaborators
-      self.class.all_collaborators
+    def installation_collaborators
+      self.class.installation_collaborators
     end
 
     def collaborators
@@ -84,16 +84,13 @@ module Blueprints
     end
 
     def necessary_keys
-      outputs.keys + internal_collaborators.keys
-    end
-
-    def struct
-      @struct ||= duplicate(blueprint.struct)
+      outputs.keys + installation_collaborators.keys
     end
 
     def initialize(blueprint)
       self.blueprint = blueprint
-      internal_collaborators.keys.each { |k| self.struct[k] = collaborators[k].struct }
+      self.struct = duplicate(blueprint.struct)
+      installation_collaborators.keys.each { |k| self.struct[k] = collaborators[k].struct }
     end
 
     def method_missing(m, *args, &block)
