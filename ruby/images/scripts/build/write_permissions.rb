@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Images
   module Scripts
-    class WritePermissions < Collaborators::ScriptOnce
+    class WritePermissions < Texts::ScriptOnce
       def body
         #Notes for future improvements
         #

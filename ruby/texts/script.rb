@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 
-module Collaborators
+module Texts
   class Script < ::Spaces::Model
 
     relation_accessor :context

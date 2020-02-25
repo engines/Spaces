@@ -1,8 +1,8 @@
-require_relative '../../collaborators/script_once'
+require_relative '../../texts/script_once'
 
 module OsPackages
   module Scripts
-    class Installation < Collaborators::ScriptOnce
+    class Installation < Texts::ScriptOnce
 
       def body
         "apt-get -y #{context.all.map(&:name).compact.uniq.join(' ')}"

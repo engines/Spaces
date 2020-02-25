@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Images
   module Scripts
-    class PersistentFiles < Collaborators::ScriptOnce
+    class PersistentFiles < Texts::ScriptOnce
       def body
         #Notes for future improvements
         #Most can be dynamically generated from persistent dirs in bp.

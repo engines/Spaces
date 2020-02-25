@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Images
   module Scripts
-    class BuildFunctions < Collaborators::ScriptOnce
+    class BuildFunctions < Texts::ScriptOnce
       def body
         %Q(
         install_template()

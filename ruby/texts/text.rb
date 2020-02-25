@@ -1,7 +1,7 @@
 require_relative '../spaces/model'
 require_relative 'expression'
 
-module Images
+module Texts
   class Text < ::Spaces::Model
 
     relation_accessor :context,

@@ -1,8 +1,8 @@
-require_relative '../../collaborators/script_once'
+require_relative '../../texts/script_once'
 
 module Packages
   module Scripts
-    class Preparation < Collaborators::ScriptOnce
+    class Preparation < Texts::ScriptOnce
 
       relation_accessor :package
 

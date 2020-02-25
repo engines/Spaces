@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Images
   module Scripts
-    class RecursiveWritePermissions < Collaborators::ScriptOnce
+    class RecursiveWritePermissions < Texts::ScriptOnce
       def body
         #Notes for future improvements
         #for each directory to permission #remove ^../ and /../ from string

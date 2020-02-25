@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script'
+require_relative '../../../texts/script'
 
 module Images
   module Scripts
-    class InstallTemplates < Collaborators::ScriptOnce
+    class InstallTemplates < Texts::ScriptOnce
       def body
         #Notes for future improvements
         #find /home/engines/templates/ and the following for can be replaced with a list of template files using the following format

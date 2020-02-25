@@ -1,6 +1,6 @@
 require_relative 'script'
 
-module Collaborators
+module Texts
   class ScriptOnce < Script
 
     def identifier

@@ -1,9 +1,9 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Database < Collaborators::ScriptOnce
+      class Database < Texts::ScriptOnce
 
         def body
           %Q(

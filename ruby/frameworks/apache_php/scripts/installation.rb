@@ -1,9 +1,9 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Frameworks
   module ApachePHP
     module Scripts
-      class Installation < Collaborators::ScriptOnce
+      class Installation < Texts::ScriptOnce
 
         def body
           %Q(

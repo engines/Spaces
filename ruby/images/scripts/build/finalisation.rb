@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Images
   module Scripts
-    class Finalisation < Collaborators::ScriptOnce
+    class Finalisation < Texts::ScriptOnce
       def body
         #Notes for future improvements
         #May be Dynamically setup but has default $data_gid $data_uid

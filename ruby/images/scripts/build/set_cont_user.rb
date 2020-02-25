@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/script_once'
 
 module Images
   module Scripts
-    class SetContUser < Collaborators::ScriptOnce
+    class SetContUser < Texts::ScriptOnce
       def body
         #Notes for future improvements
         %Q(
