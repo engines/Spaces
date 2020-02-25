@@ -9,15 +9,15 @@ module Texts
       :content
 
     def resolved
-      immutable_strings.zip(expressions.map(&:resolved)).flatten.join
+      immutable_strings.zip(infixes.map(&:resolved)).flatten.join
     end
 
-    def expressions
-      splits(:odd?).map { |s| expression_class.new(value: s, context: self) }
+    def infixes
+      splits(:odd?).map { |s| infix_class.new(value: s, context: self) }
     end
 
-    def expression_class
-      Expression
+    def infix_class
+      Infix
     end
 
     def immutable_strings

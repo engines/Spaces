@@ -3,7 +3,7 @@ require_relative '../domains/bucket'
 require_relative '../environments/bucket'
 
 module Texts
-  class Expression < ::Spaces::Model
+  class Infix < ::Spaces::Model
     include Domains::Bucket
     include Environments::Bucket
 

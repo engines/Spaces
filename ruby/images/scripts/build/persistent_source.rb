@@ -1,8 +1,8 @@
-require_relative '../../../texts/script_once'
+require_relative '../../../texts/one_time_script'
 
 module Images
   module Scripts
-    class PersistentSource < Texts::ScriptOnce
+    class PersistentSource < Texts::OneTimeScript
       def body
 
         %Q(

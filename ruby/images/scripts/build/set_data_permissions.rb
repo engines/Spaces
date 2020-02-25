@@ -1,8 +1,8 @@
-require_relative '../../../texts/script_once'
+require_relative '../../../texts/one_time_script'
 
 module Images
   module Scripts
-    class SetDataPermissions < Texts::ScriptOnce
+    class SetDataPermissions < Texts::OneTimeScript
       def body
         #Notes for future improvements
         %Q(

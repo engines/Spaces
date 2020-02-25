@@ -1,9 +1,9 @@
-require_relative '../../../texts/script_once'
+require_relative '../../../texts/one_time_script'
 
 module Frameworks
   module Rails5
     module Scripts
-      class Bundler < Texts::ScriptOnce
+      class Bundler < Texts::OneTimeScript
 
         def body
           %Q(

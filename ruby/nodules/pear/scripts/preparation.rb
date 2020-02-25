@@ -3,7 +3,7 @@ require_relative 'requires'
 module Nodules
   module Pear
     module Scripts
-      class Preparation < Texts::ScriptOnce
+      class Preparation < Texts::OneTimeScript
 
         def body
           %Q(

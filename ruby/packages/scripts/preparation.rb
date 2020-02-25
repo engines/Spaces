@@ -1,8 +1,8 @@
-require_relative '../../texts/script_once'
+require_relative '../../texts/one_time_script'
 
 module Packages
   module Scripts
-    class Preparation < Texts::ScriptOnce
+    class Preparation < Texts::OneTimeScript
 
       relation_accessor :package
 
