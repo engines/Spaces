@@ -52,6 +52,14 @@ module Blueprints
       self.class.all_collaborators
     end
 
+    def outputs
+      self.class.outputs
+    end
+
+    def internal_collaborators
+      self.class.all_collaborators
+    end
+
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
         v = [all_collaborators[k]].flatten
@@ -74,7 +82,7 @@ module Blueprints
     end
 
     def necessary_keys
-      self.class.outputs.keys + self.class.internal_collaborators.keys
+      outputs.keys + internal_collaborators.keys
     end
 
     def struct
@@ -83,6 +91,7 @@ module Blueprints
 
     def initialize(blueprint)
       self.blueprint = blueprint
+      internal_collaborators.keys.each { |k| self.struct[k] = collaborators[k].struct }
     end
 
     def method_missing(m, *args, &block)
