@@ -40,35 +40,3 @@ module Images
 
   end
 end
-
-
-# A LIST OF EXPRESSION PARAMETERS HARVESTED FROM VERSION 1 SYSTEM
-#
-# _Engines_Builder
-# http_protocol
-# fqdn
-# engine_name
-# data_uid
-# data_gid
-# domain_name
-# cont_user_id
-# action_val(export_pkcs12,common_name))
-# service_password(8)
-#
-# _Engines_Field
-# cn
-#
-# _Engines_Environment
-# dbhost
-# dbname
-# dbuser
-# dbpasswd
-# admin_email
-# VOLDIR
-# volume_name
-# service_account()
-# ldap_password
-# elasticsearch_uri
-# Admin_Password
-# admin_password
-# admin_pager_email
