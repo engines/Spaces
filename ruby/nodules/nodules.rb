@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../tensors/collaborator'
 
 module Nodules
-  class Nodules < ::Collaborators::Collaborator
+  class Nodules < ::Tensors::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

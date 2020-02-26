@@ -1,9 +1,9 @@
-require_relative '../../collaborators/collaborator'
+require_relative '../../tensors/collaborator'
 require_relative '../../docker/files/collaboration'
 require_relative 'dependent'
 
 module Blueprints
-  class Dependencies < ::Collaborators::Collaborator
+  class Dependencies < ::Tensors::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

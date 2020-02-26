@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 require_relative '../spaces/descriptor'
-require_relative 'tensor'
+require_relative '../tensors/tensor'
 
 module Blueprints
   class Blueprint < ::Spaces::Model
@@ -20,7 +20,7 @@ module Blueprints
     end
 
     def tensor_class
-      Tensor
+      ::Tensors::Tensor
     end
   end
 end

@@ -1,8 +1,8 @@
-require_relative '../collaborators/collaborator'
+require_relative '../tensors/collaborator'
 require_relative 'os_package'
 
 module OsPackages
-  class OsPackages < ::Collaborators::Collaborator
+  class OsPackages < ::Tensors::Collaborator
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }

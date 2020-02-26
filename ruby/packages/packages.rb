@@ -1,8 +1,8 @@
-require_relative '../collaborators/collaborator'
+require_relative '../tensors/collaborator'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Collaborators::Collaborator
+  class Packages < ::Tensors::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

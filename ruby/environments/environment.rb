@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../tensors/collaborator'
 
 module Environments
-  class Environment < ::Collaborators::Collaborator
+  class Environment < ::Tensors::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
