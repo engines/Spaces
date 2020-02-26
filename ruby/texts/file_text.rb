@@ -3,11 +3,13 @@ require_relative 'text'
 module Texts
   class FileText < Text
 
-    attr_accessor :source_file_name
+    attr_accessor :source_file_name,
+      :source_content
 
     def source_content
-      f = File.open(source_file_name, 'r')
+      @source_content ||=
       begin
+        f = File.open(source_file_name, 'r')
         f.read
       ensure
         f.close
