@@ -1,7 +1,7 @@
 require_relative 'script'
 
-module Collaborators
-  class ScriptOnce < Script
+module Texts
+  class OneTimeScript < Script
 
     def identifier
       qualifier

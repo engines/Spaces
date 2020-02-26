@@ -1,5 +1,6 @@
 require_relative '../../blueprints/tensor'
 require_relative '../../collaborators/collaborator'
+require_relative '../../texts/text'
 
 module Docker
   module Files
@@ -34,15 +35,15 @@ module Docker
       end
 
       def content
-        layers.flatten.compact.join("\n")
+        text_class.new(source_content: source_text, context: self).resolved
       end
 
-      def layers
-        step_group_precedence.map do |g|
-          collaboration_precedence.map do |c|
-            tensor.send(c).layers_for(g)
-          end
-        end
+      def text_class
+        Texts::Text
+      end
+
+      def source_text
+        layers.flatten.compact.join("\n")
       end
 
       def layers

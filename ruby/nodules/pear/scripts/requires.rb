@@ -1,1 +1,1 @@
-require_relative '../../../collaborators/script_once'
+require_relative '../../../texts/one_time_script'

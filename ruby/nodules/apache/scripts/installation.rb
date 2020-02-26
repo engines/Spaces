@@ -1,9 +1,9 @@
-require_relative '../../../collaborators/script'
+require_relative '../../../texts/script'
 
 module Nodules
   module Apache
     module Scripts
-      class Installation < Collaborators::Script
+      class Installation < Texts::Script
 
         def body
           "a2enmod #{context.name}"
