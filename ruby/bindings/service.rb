@@ -1,10 +1,10 @@
 require_relative 'relationship'
 
-module Blueprints
-  class Dependency < Relationship
+module Bindings
+  class Service < Relationship
 
     def resolved_for(h)
-      overrides_for(tensor.dependents&.variables).merge(h)
+      overrides_for(tensor.bindings&.variables).merge(h)
     end
 
     def tensor

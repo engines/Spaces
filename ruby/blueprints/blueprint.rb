@@ -15,7 +15,7 @@ module Blueprints
       universe.blueprints.text_file_names_for(descriptor)
     end
 
-    def dependency_descriptors
+    def service_descriptors
       struct.dependencies&.map { |d| descriptor_class.new(d.descriptor) } || []
     end
 

@@ -7,7 +7,7 @@ require_relative '../environments/environment'
 require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
-require_relative '../blueprints/dependencies/dependencies'
+require_relative '../bindings/bindings'
 require_relative 'identifiers'
 
 module Tensors
@@ -20,7 +20,7 @@ module Tensors
           os_packages: OsPackages::OsPackages,
           nodules: [Nodules::Nodules, :modules],
           packages: Packages::Packages,
-          dependencies: Blueprints::Dependencies,
+          bindings: [Bindings::Bindings, :dependencies],
           environment: Environments::Environment
         }
       end
