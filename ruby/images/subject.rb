@@ -1,5 +1,5 @@
 require_relative '../collaborators/collaborator'
-require_relative '../texts/text'
+require_relative '../texts/file_text'
 
 module Images
   class Subject < ::Collaborators::Collaborator
@@ -36,7 +36,7 @@ module Images
     end
 
     def text_class
-      Texts::Text
+      Texts::FileText
     end
 
     def collaborators
