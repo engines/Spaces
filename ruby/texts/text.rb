@@ -9,7 +9,7 @@ module Texts
       :content
 
     def resolved
-      immutable_strings.zip(infixes.map(&:resolved)).flatten.join
+      @resolved ||= immutable_strings.zip(infixes.map(&:resolved)).flatten.join
     end
 
     def infixes
@@ -25,11 +25,11 @@ module Texts
     end
 
     def splits(method)
-      content.split(interpolation_marker).select.with_index { |_, i| i.send(method) }
+      source_content.split(interpolation_marker).select.with_index { |_, i| i.send(method) }
     end
 
     def content
-      @content ||= source_content
+      @content ||= resolved
     end
 
     def source_content
