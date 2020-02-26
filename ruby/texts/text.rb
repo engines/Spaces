@@ -1,5 +1,5 @@
 require_relative '../spaces/model'
-require_relative 'expression'
+require_relative 'infix'
 
 module Texts
   class Text < ::Spaces::Model
