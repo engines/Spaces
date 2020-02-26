@@ -39,14 +39,6 @@ module Docker
 
       def layers
         step_group_precedence.map do |g|
-          collaboration_precedence.map do |c|
-            tensor.send(c).layers_for(g)
-          end
-        end
-      end
-
-      def layers
-        step_group_precedence.map do |g|
           collaborators.map { |c| c.layers_for(g) }
         end
       end
