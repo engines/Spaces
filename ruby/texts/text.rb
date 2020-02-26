@@ -9,7 +9,7 @@ module Texts
       :source_content
 
     def resolved
-      @resolved ||= immutable_strings.zip(infixes.map(&:resolved)).flatten.join
+      @resolved ||= immutables.zip(infixes.map(&:resolved)).flatten.join
     end
 
     def infixes
@@ -20,7 +20,7 @@ module Texts
       Infix
     end
 
-    def immutable_strings
+    def immutables
       splits(:even?)
     end
 
