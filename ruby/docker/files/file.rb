@@ -1,5 +1,6 @@
 require_relative '../../blueprints/tensor'
 require_relative '../../collaborators/collaborator'
+require_relative '../../texts/text'
 
 module Docker
   module Files
@@ -34,6 +35,14 @@ module Docker
       end
 
       def content
+        text_class.new(source_content: source_text, context: self).resolved
+      end
+
+      def text_class
+        Texts::Text
+      end
+
+      def source_text
         layers.flatten.compact.join("\n")
       end
 
