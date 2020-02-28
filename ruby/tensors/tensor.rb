@@ -7,10 +7,10 @@ require_relative '../environments/environment'
 require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
-require_relative 'dependencies/dependencies'
+require_relative '../bindings/bindings'
 require_relative 'identifiers'
 
-module Blueprints
+module Tensors
   class Tensor < ::Spaces::Model
 
     class << self
@@ -20,7 +20,7 @@ module Blueprints
           os_packages: OsPackages::OsPackages,
           nodules: [Nodules::Nodules, :modules],
           packages: Packages::Packages,
-          dependencies: Dependencies,
+          bindings: Bindings::Bindings,
           environment: Environments::Environment
         }
       end

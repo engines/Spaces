@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../tensors/collaborator'
 
 module Frameworks
-  class Framework < ::Collaborators::Collaborator
+  class Framework < ::Tensors::Collaborator
 
     class << self
       def prototype(tensor)

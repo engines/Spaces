@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 require_relative '../spaces/descriptor'
-require_relative 'tensor'
+require_relative '../tensors/tensor'
 
 module Blueprints
   class Blueprint < ::Spaces::Model
@@ -15,12 +15,12 @@ module Blueprints
       universe.blueprints.text_file_names_for(descriptor)
     end
 
-    def dependency_descriptors
-      struct.dependencies&.map { |d| descriptor_class.new(d.descriptor) } || []
+    def anchor_descriptors
+      struct.bindings&.map { |d| descriptor_class.new(d.descriptor) } || []
     end
 
     def tensor_class
-      Tensor
+      ::Tensors::Tensor
     end
   end
 end

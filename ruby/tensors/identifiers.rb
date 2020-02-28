@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative 'collaborator'
 
-module Blueprints
-  class Identifiers < ::Collaborators::Collaborator
+module Tensors
+  class Identifiers < Collaborator
 
     def initialize(tensor)
       super

@@ -1,16 +1,16 @@
-require_relative '../../blueprints/tensor'
-require_relative '../../collaborators/collaborator'
+require_relative '../../tensors/tensor'
+require_relative '../../tensors/collaborator'
 require_relative '../../texts/text'
 
 module Docker
   module Files
-    class File < ::Collaborators::Collaborator
+    class File < ::Tensors::Collaborator
 
       Dir["#{__dir__}/steps/*"].each { |f| require f }
 
       class << self
         def collaboration_precedence
-          @@collaboration_precedence ||= [:framework, :environment, :domain, :dependencies, :os_packages, :nodules, :packages, :docker_file]
+          @@collaboration_precedence ||= [:framework, :environment, :domain, :bindings, :os_packages, :nodules, :packages, :docker_file]
         end
 
         def step_group_precedence

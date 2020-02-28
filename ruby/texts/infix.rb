@@ -20,7 +20,7 @@ module Texts
     end
 
     def collaborate_with(name)
-      tensor.dependencies.named(name) ||
+      tensor.bindings.named(name) ||
       tensor.domain ||
       (raise NoMethodError)
     end

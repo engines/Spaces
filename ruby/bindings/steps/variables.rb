@@ -1,6 +1,6 @@
 require_relative 'requires'
 
-module Blueprints
+module Bindings
   module Steps
     class Variables < Docker::Files::Step
 

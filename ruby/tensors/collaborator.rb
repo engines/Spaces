@@ -2,7 +2,7 @@ require_relative '../spaces/model'
 require_relative '../images/collaboration'
 require_relative '../docker/files/collaboration'
 
-module Collaborators
+module Tensors
   class Collaborator < ::Spaces::Model
     include Images::Collaboration
     include Docker::Files::Collaboration

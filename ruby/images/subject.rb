@@ -1,8 +1,8 @@
-require_relative '../collaborators/collaborator'
+require_relative '../tensors/collaborator'
 require_relative '../texts/file_text'
 
 module Images
-  class Subject < ::Collaborators::Collaborator
+  class Subject < ::Tensors::Collaborator
 
     Dir["#{__dir__}/scripts/*/*"].each { |f| require f }
 
