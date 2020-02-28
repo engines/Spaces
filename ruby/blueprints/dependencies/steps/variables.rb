@@ -5,13 +5,9 @@ module Blueprints
     class Variables < Docker::Files::Step
 
       def content
-        resolution.keys.map do |k|
-          "ENV #{context.descriptor.identifier}_#{k} '#{resolution[k]}'"
+        context.resolved.keys.map do |k|
+          "ENV #{context.name}_#{k} '#{context.resolved[k]}'"
         end
-      end
-
-      def resolution
-        @resolution ||= context.dependency.resolution_for(context.overrides_for(context.struct.variables))
       end
 
     end

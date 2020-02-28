@@ -6,9 +6,9 @@ module Domains
 
       def content
         %Q(
-        ENV Hostname '#{context.identifier}'
-        ENV Domainname 'current.spaces.org'
-        ENV fqdn '#{context.identifier}.current.spaces.org'
+        ENV Hostname '#{context.host}'
+        ENV Domainname '#{context.name}'
+        ENV fqdn '#{context.fqdn}'
         )
       end
 

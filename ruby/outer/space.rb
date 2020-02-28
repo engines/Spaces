@@ -22,7 +22,7 @@ module Outer
         }
       end
     end
-    
+
     def encloses?(descriptor)
       route(:encloses?, descriptor)
     end
@@ -33,6 +33,14 @@ module Outer
 
     def import(descriptor)
       route(:import, descriptor)
+    end
+
+    def text_file_names_for(descriptor)
+      route(:text_file_names_for, descriptor)
+    end
+
+    def subspace_path_for(descriptor)
+      "#{path}/#{descriptor.identifier}"
     end
 
     def route(method, descriptor)

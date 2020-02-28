@@ -11,5 +11,22 @@ module Domains
       end
     end
 
+    def fqdn
+      "#{host}.#{name}"
+    end
+
+    def host
+      identifier
+    end
+
+    def name
+      'current.engines.org'
+    end
+
+    def initialize(tensor)
+      super
+      self.struct = OpenStruct.new(fqdn: fqdn, host: host, name: name)
+    end
+
   end
 end

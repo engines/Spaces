@@ -1,8 +1,8 @@
-require_relative '../../../collaborators/script'
+require_relative '../../../texts/script'
 
 module Images
   module Scripts
-    class InstallTemplates < Collaborators::Script
+    class InstallTemplates < Texts::OneTimeScript
       def body
         #Notes for future improvements
         #find /home/engines/templates/ and the following for can be replaced with a list of template files using the following format
@@ -12,7 +12,7 @@ module Images
         # function will need some minor changes to support replacing the sed line ...
         %Q(
         . #{framework_build_script_path}/build_functions.sh
-        
+
         cd /home
          if test -d /home/engines/templates/
           then
@@ -24,10 +24,7 @@ module Images
          fi
         )
       end
-      
-      def identifier
-        'install_templates'
-      end
+
     end
   end
 end

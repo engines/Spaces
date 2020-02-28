@@ -3,7 +3,7 @@ require_relative 'relationship'
 module Blueprints
   class Dependency < Relationship
 
-    def resolution_for(h)
+    def resolved_for(h)
       overrides_for(tensor.dependents&.variables).merge(h)
     end
 

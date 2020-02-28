@@ -16,7 +16,7 @@ module Environments
       end
 
       def worker_ports
-        "ENV WorkerPorts '#{ports.map { |p| p.port }.compact.join(' ')}'"
+        "ENV WorkerPorts '#{ports.map(&:port).compact.join(' ')}'"
       end
 
       def ports

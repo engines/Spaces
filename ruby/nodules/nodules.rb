@@ -12,7 +12,7 @@ module Nodules
     end
 
     def scripts
-      all.map { |s| s.scripts }
+      all.map(&:scripts)
     end
 
     def all
