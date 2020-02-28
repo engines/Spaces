@@ -12,7 +12,7 @@ module Bindings
     end
 
     def all
-      @all ||= tensor.struct.dependencies.map { |d| binding_class.new(struct: d, context: self) }
+      @all ||= tensor.struct.bindings.map { |d| binding_class.new(struct: d, context: self) }
     end
 
     def named(name)

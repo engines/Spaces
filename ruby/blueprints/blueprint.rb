@@ -15,8 +15,8 @@ module Blueprints
       universe.blueprints.text_file_names_for(descriptor)
     end
 
-    def service_descriptors
-      struct.dependencies&.map { |d| descriptor_class.new(d.descriptor) } || []
+    def anchor_descriptors
+      struct.bindings&.map { |d| descriptor_class.new(d.descriptor) } || []
     end
 
     def tensor_class

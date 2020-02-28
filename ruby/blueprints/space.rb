@@ -23,16 +23,16 @@ module Blueprints
       outer.import(descriptor)
       new_for(descriptor).tap do |m|
         save_yaml(m)
-        import_services_for(m)
+        import_anchors_for(m)
       end
     end
 
-    def import_services_for(model)
-      unimported_services_for(model).each { |d| import(d) }
+    def import_anchors_for(model)
+      unimported_anchors_for(model).each { |d| import(d) }
     end
 
-    def unimported_services_for(model)
-      model.service_descriptors&.reject { |d| imported?(d) } || []
+    def unimported_anchors_for(model)
+      model.anchor_descriptors&.reject { |d| imported?(d) } || []
     end
 
     def file_name_for(descriptor)

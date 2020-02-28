@@ -1,10 +1,10 @@
 require_relative 'relationship'
 
 module Bindings
-  class Service < Relationship
+  class Anchor < Relationship
 
     def resolved_for(h)
-      overrides_for(tensor.bindings&.variables).merge(h)
+      overrides_for(tensor.binding_anchor&.variables).merge(h)
     end
 
     def tensor

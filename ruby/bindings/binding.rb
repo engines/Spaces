@@ -1,6 +1,6 @@
 require_relative '../docker/files/collaboration'
 require_relative 'relationship'
-require_relative 'service'
+require_relative 'anchor'
 
 module Bindings
   class Binding < Relationship
@@ -15,19 +15,19 @@ module Bindings
     end
 
     def resolved
-      @resolved ||= service.resolved_for(overrides_for(struct.variables))
+      @resolved ||= anchor.resolved_for(overrides_for(struct.variables))
     end
 
-    def service
-      @service ||= service_class.new(struct)
-    end
-
-    def service_class
-      Service
+    def anchor
+      @banchor ||= anchor_class.new(struct)
     end
 
     def descriptor
-      service.descriptor
+      anchor.descriptor
+    end
+
+    def anchor_class
+      Anchor
     end
 
     def initialize(struct:, context:)

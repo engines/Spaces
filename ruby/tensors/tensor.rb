@@ -20,7 +20,7 @@ module Tensors
           os_packages: OsPackages::OsPackages,
           nodules: [Nodules::Nodules, :modules],
           packages: Packages::Packages,
-          bindings: [Bindings::Bindings, :dependencies],
+          bindings: Bindings::Bindings,
           environment: Environments::Environment
         }
       end
