@@ -24,7 +24,11 @@ module Spaces
     end
 
     def identifier
-      @identifier ||= value&.split('/').last.split('.').first
+      @identifier ||= static_identifier
+    end
+
+    def static_identifier
+      value&.split('/').last.split('.').first
     end
 
     def branch

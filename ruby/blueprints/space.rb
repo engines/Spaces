@@ -1,8 +1,9 @@
-require_relative '../blueprints/blueprint'
 require_relative '../universal/space'
+require_relative '../spaces/static_space'
+require_relative 'blueprint'
 
 module Blueprints
-  class Space < ::Spaces::Space
+  class Space < ::Spaces::StaticSpace
 
     def new_for(descriptor)
       model_class.new(open_struct_from_json(outer.by(descriptor))).tap do |m|
@@ -50,10 +51,6 @@ module Blueprints
 
     def imported?(descriptor)
       Dir.exist?(subspace_path_for(descriptor))
-    end
-
-    def subspace_path_for(descriptor)
-      "#{path}/#{descriptor.identifier}"
     end
 
     def model_class

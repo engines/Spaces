@@ -44,6 +44,10 @@ module Spaces
       descriptor.identifier
     end
 
+    def static_identifier
+      descriptor.static_identifier
+    end
+
     def uniqueness
       [self.class.name, identifier]
     end
