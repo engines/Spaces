@@ -1,10 +1,10 @@
 require 'open-uri'
 require 'resolv'
-require_relative '../space'
+require_relative '../../spaces/static_space'
 
 module Outer
   module Uri
-    class Space < ::Spaces::Space
+    class Space < ::Spaces::StaticSpace
       # The dimensions in which resources exist
 
       def encloses?(descriptor)

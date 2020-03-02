@@ -1,10 +1,9 @@
-require_relative '../spaces/space'
+require_relative '../spaces/static_space'
 require_relative 'git/space'
 require_relative 'uri/space'
 
 module Outer
-  class Space < ::Spaces::Space
-    # The dimensions in which long-lived recordings of software objects can be made and maintained.
+  class Space < ::Spaces::StaticSpace
 
     class << self
       def git
@@ -37,10 +36,6 @@ module Outer
 
     def text_file_names_for(descriptor)
       route(:text_file_names_for, descriptor)
-    end
-
-    def subspace_path_for(descriptor)
-      "#{path}/#{descriptor.identifier}"
     end
 
     def route(method, descriptor)
