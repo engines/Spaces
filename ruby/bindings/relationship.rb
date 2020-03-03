@@ -26,8 +26,8 @@ module Bindings
       "#{name}_user"
     end
 
-    def password
-      @password ||= SecureRandom.hex(10)
+    def random(length)
+      SecureRandom.hex(length.to_i)
     end
 
   end
