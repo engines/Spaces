@@ -13,8 +13,8 @@ module Texts
     def resolved
       begin
         vs = value.split('.').last(2)
-        collaborate_with(vs.first).send(vs.last)
-      rescue NoMethodError
+        collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
+      rescue ArgumentError, NoMethodError
         "--->#{value}<---"
       end
     end

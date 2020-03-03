@@ -35,5 +35,9 @@ module Bindings
       self.context = context
     end
 
+    def method_missing(m, *args, &block)
+      resolved[m] || super
+    end
+
   end
 end

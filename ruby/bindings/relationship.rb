@@ -6,8 +6,8 @@ module Bindings
       h.keys.inject({}) do |m, k|
         m[k] =
           begin
-            send(h[k])
-          rescue TypeError, NoMethodError
+            send(*h[k].split(/[()]+/))
+          rescue TypeError, ArgumentError, NoMethodError
             h[k]
           end
         m
@@ -15,7 +15,7 @@ module Bindings
     end
 
     def host
-      "#{name}.#{universe.host}"
+      "#{descriptor.static_identifier}.#{universe.host}"
     end
 
     def name
@@ -26,8 +26,8 @@ module Bindings
       "#{name}_user"
     end
 
-    def password
-      @password ||= SecureRandom.hex(10)
+    def random(length)
+      SecureRandom.hex(length.to_i)
     end
 
   end
