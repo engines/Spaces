@@ -15,7 +15,7 @@ module Bindings
     end
 
     def host
-      "#{name}.#{universe.host}"
+      "#{descriptor.static_identifier}.#{universe.host}"
     end
 
     def name
