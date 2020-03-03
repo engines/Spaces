@@ -6,8 +6,8 @@ module Bindings
       h.keys.inject({}) do |m, k|
         m[k] =
           begin
-            send(h[k])
-          rescue TypeError, NoMethodError
+            send(*h[k].split(/[()]+/))
+          rescue TypeError, ArgumentError, NoMethodError
             h[k]
           end
         m
