@@ -20,9 +20,7 @@ module Texts
     end
 
     def collaborate_with(name)
-      tensor.bindings.named(name) ||
-      tensor.domain ||
-      (raise NoMethodError)
+      tensor.bindings.named(name) || tensor.send(name) || (raise NoMethodError)
     end
 
     def initialize(value:, context:)
