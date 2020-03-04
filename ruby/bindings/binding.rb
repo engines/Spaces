@@ -39,5 +39,9 @@ module Bindings
       resolved[m] || super
     end
 
+    def method_missing(m, *args, &block)
+      resolved.keys&.include?(m) ? resolved[m] : super
+    end
+
   end
 end
