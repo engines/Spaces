@@ -20,7 +20,7 @@ module Texts
     end
 
     def collaborate_with(name)
-      tensor.bindings.named(name) || tensor.send(name) || (raise NoMethodError)
+      installation.bindings.named(name) || installation.send(name) || (raise NoMethodError)
     end
 
     def initialize(value:, context:)
@@ -28,8 +28,8 @@ module Texts
       self.context = context
     end
 
-    def tensor
-      context.tensor
+    def installation
+      context.installation
     end
 
     def to_s

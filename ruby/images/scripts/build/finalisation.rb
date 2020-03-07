@@ -48,7 +48,7 @@ module Images
       end
 
       def cont_user
-        context.tensor.framework.cont_user
+        context.installation.framework.cont_user
       end
 
       def framework_script_file_name

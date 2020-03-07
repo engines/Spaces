@@ -36,8 +36,8 @@ module Texts
       '^^'
     end
 
-    def tensor
-      context.tensor
+    def installation
+      context.installation
     end
 
     def initialize(source_content:, context:)

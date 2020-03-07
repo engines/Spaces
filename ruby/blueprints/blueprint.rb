@@ -1,14 +1,14 @@
 require_relative '../spaces/model'
 require_relative '../spaces/descriptor'
-require_relative '../tensors/tensor'
+require_relative '../installations/installation'
 
 module Blueprints
   class Blueprint < ::Spaces::Model
 
-    relation_accessor :tensor
+    relation_accessor :installation
 
-    def tensor
-      @tensor ||= tensor_class.new(self)
+    def installation
+      @installation ||= installation_class.new(self)
     end
 
     def text_file_names
@@ -19,8 +19,8 @@ module Blueprints
       struct.bindings&.map { |d| descriptor_class.new(d.descriptor) } || []
     end
 
-    def tensor_class
-      ::Tensors::Tensor
+    def installation_class
+      ::Installations::Installation
     end
   end
 end
