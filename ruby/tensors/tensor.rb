@@ -8,7 +8,7 @@ require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative '../bindings/bindings'
-require_relative 'identifiers'
+require_relative '../users/user'
 
 module Tensors
   class Tensor < ::Spaces::Model
@@ -34,7 +34,7 @@ module Tensors
 
       def installation_collaborators
         @@installation_collaborators ||= {
-          identifiers: Identifiers,
+          user: Users::User,
           domain: Domains::Domain
         }
       end

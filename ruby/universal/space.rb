@@ -5,6 +5,7 @@ require_relative '../frameworks/space'
 require_relative '../nodules/space'
 require_relative '../environments/space'
 require_relative '../domains/space'
+require_relative '../users/space'
 require_relative '../blueprints/space'
 require_relative '../outer/space'
 
@@ -41,6 +42,10 @@ module Universal
         @@blueprints ||= Blueprints::Space.new
       end
 
+      def users
+        @@users ||= Users::Space.new
+      end
+
       def outer
         @@outer ||= Outer::Space.new
       end
@@ -68,6 +73,10 @@ module Universal
 
     def domains
       self.class.domains
+    end
+
+    def users
+      self.class.users
     end
 
     def blueprints

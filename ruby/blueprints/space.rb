@@ -11,15 +11,6 @@ module Blueprints
       end
     end
 
-    def by(descriptor)
-      f = File.open("#{file_name_for(descriptor)}.yaml", 'r')
-      begin
-        model_class.new(model_class.from_yaml(f.read))
-      ensure
-        f.close
-      end
-    end
-
     def import(descriptor)
       outer.import(descriptor)
       new_for(descriptor).tap do |m|
