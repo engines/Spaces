@@ -8,8 +8,8 @@ module Tensors
     include Docker::Files::Collaboration
 
     class << self
-      def prototype(tensor)
-        new(tensor)
+      def prototype(tensor:, section:)
+        new(tensor: tensor, section: section)
       end
     end
 
@@ -19,9 +19,12 @@ module Tensors
       tensor.descriptor
     end
 
-    def initialize(tensor)
+    def initialize(struct: nil, tensor: nil, section: nil)
       self.tensor = tensor
+      self.struct = struct || tensor&.struct[section] || default
     end
+
+    def default; end
 
   end
 end

@@ -8,7 +8,7 @@ require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative '../bindings/bindings'
-require_relative 'identifiers'
+require_relative '../users/user'
 
 module Tensors
   class Tensor < ::Spaces::Model
@@ -34,7 +34,7 @@ module Tensors
 
       def installation_collaborators
         @@installation_collaborators ||= {
-          identifiers: Identifiers,
+          user: Users::User,
           domain: Domains::Domain
         }
       end
@@ -65,7 +65,7 @@ module Tensors
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
         v = [all_collaborators[k]].flatten
-        m[k] = v.first.prototype(self) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = v.first.prototype(tensor: self, section: k) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end

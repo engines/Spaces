@@ -6,17 +6,8 @@ module Blueprints
   class Space < ::Spaces::StaticSpace
 
     def new_for(descriptor)
-      model_class.new(open_struct_from_json(outer.by(descriptor))).tap do |m|
+      model_class.new(struct: open_struct_from_json(outer.by(descriptor))).tap do |m|
         m.struct.descriptor = descriptor
-      end
-    end
-
-    def by(descriptor)
-      f = File.open("#{file_name_for(descriptor)}.yaml", 'r')
-      begin
-        model_class.new(model_class.from_yaml(f.read))
-      ensure
-        f.close
       end
     end
 
