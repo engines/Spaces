@@ -6,7 +6,7 @@ module Frameworks
     def by(tensor)
       i = tensor.struct.framework.identifier
       load(i)
-      loaded.detect { |k| k.identifier == i }.new(tensor)
+      loaded.detect { |k| k.identifier == i }.new(tensor: tensor, section: :framework)
     end
 
     def loaded

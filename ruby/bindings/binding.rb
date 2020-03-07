@@ -19,7 +19,7 @@ module Bindings
     end
 
     def anchor
-      @anchor ||= anchor_class.new(struct)
+      @anchor ||= anchor_class.new(struct: struct)
     end
 
     def descriptor

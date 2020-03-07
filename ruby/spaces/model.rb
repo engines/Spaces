@@ -84,7 +84,7 @@ module Spaces
       self.class.universe
     end
 
-    def initialize(struct = nil)
+    def initialize(struct: nil)
       self.struct = struct
     end
 

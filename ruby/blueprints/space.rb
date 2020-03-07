@@ -6,7 +6,7 @@ module Blueprints
   class Space < ::Spaces::StaticSpace
 
     def new_for(descriptor)
-      model_class.new(open_struct_from_json(outer.by(descriptor))).tap do |m|
+      model_class.new(struct: open_struct_from_json(outer.by(descriptor))).tap do |m|
         m.struct.descriptor = descriptor
       end
     end

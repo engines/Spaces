@@ -4,7 +4,7 @@ module Frameworks
   class Framework < ::Tensors::Collaborator
 
     class << self
-      def prototype(tensor)
+      def prototype(tensor:, section:)
         universe.frameworks.by(tensor)
       end
     end
@@ -16,7 +16,7 @@ module Frameworks
     def cont_user
       'www-data'
     end
-    
+
     def default_port
       8000
     end

@@ -65,7 +65,7 @@ module Tensors
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
         v = [all_collaborators[k]].flatten
-        m[k] = v.first.prototype(self) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = v.first.prototype(tensor: self, section: k) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end
