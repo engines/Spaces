@@ -10,8 +10,8 @@ require_relative '../nodules/nodules'
 require_relative '../bindings/bindings'
 require_relative '../users/user'
 
-module Tensors
-  class Tensor < ::Spaces::Model
+module Installations
+  class Installation < ::Spaces::Model
 
     class << self
       def blueprint_collaborators
@@ -65,7 +65,7 @@ module Tensors
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
         v = [all_collaborators[k]].flatten
-        m[k] = v.first.prototype(tensor: self, section: k) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = v.first.prototype(installation: self, section: k) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end

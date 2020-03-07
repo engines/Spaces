@@ -1,9 +1,9 @@
-require_relative '../tensors/collaborator'
+require_relative '../installations/collaborator'
 require_relative '../docker/files/collaboration'
 require_relative 'binding'
 
 module Bindings
-  class Bindings < ::Tensors::Collaborator
+  class Bindings < ::Installations::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -12,7 +12,7 @@ module Bindings
     end
 
     def all
-      @all ||= tensor.struct.bindings.map { |d| binding_class.new(struct: d, context: self) }
+      @all ||= installation.struct.bindings.map { |d| binding_class.new(struct: d, context: self) }
     end
 
     def named(name)

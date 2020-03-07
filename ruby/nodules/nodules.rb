@@ -1,7 +1,7 @@
-require_relative '../tensors/collaborator'
+require_relative '../installations/collaborator'
 
 module Nodules
-  class Nodules < ::Tensors::Collaborator
+  class Nodules < ::Installations::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -16,7 +16,7 @@ module Nodules
     end
 
     def all
-      @all ||= tensor.struct.modules.map { |s| universe.nodules.by(struct: s, context: self) }
+      @all ||= installation.struct.modules.map { |s| universe.nodules.by(struct: s, context: self) }
     end
 
     def build_script_path

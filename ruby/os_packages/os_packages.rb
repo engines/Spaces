@@ -1,8 +1,8 @@
-require_relative '../tensors/collaborator'
+require_relative '../installations/collaborator'
 require_relative 'os_package'
 
 module OsPackages
-  class OsPackages < ::Tensors::Collaborator
+  class OsPackages < ::Installations::Collaborator
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }
@@ -18,7 +18,7 @@ module OsPackages
     end
 
     def all
-      @all ||= tensor.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
+      @all ||= installation.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
     end
 
     def build_script_path

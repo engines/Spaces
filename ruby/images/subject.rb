@@ -1,8 +1,8 @@
-require_relative '../tensors/collaborator'
+require_relative '../installations/collaborator'
 require_relative '../texts/file_text'
 
 module Images
-  class Subject < ::Tensors::Collaborator
+  class Subject < ::Installations::Collaborator
 
     Dir["#{__dir__}/scripts/*/*"].each { |f| require f }
 
@@ -32,7 +32,7 @@ module Images
     end
 
     def texts
-      tensor.text_file_names.map { |t| text_class.new(source_file_name: t, context: self) }
+      installation.text_file_names.map { |t| text_class.new(source_file_name: t, context: self) }
     end
 
     def text_class
@@ -40,11 +40,11 @@ module Images
     end
 
     def collaborators
-      script_collaborators.map { |c| tensor.send(c) }.compact
+      script_collaborators.map { |c| installation.send(c) }.compact
     end
 
     def framework_build_script_path
-      tensor.framework.build_script_path
+      installation.framework.build_script_path
     end
   end
 end

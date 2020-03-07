@@ -1,11 +1,11 @@
-require_relative '../tensors/collaborator'
+require_relative '../installations/collaborator'
 
 module Frameworks
-  class Framework < ::Tensors::Collaborator
+  class Framework < ::Installations::Collaborator
 
     class << self
-      def prototype(tensor:, section:)
-        universe.frameworks.by(tensor)
+      def prototype(installation:, section:)
+        universe.frameworks.by(installation)
       end
     end
 
@@ -26,7 +26,7 @@ module Frameworks
     end
 
     def struct
-      @struct ||= tensor.struct.framework
+      @struct ||= installation.struct.framework
     end
 
   end

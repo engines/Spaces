@@ -1,7 +1,7 @@
-require_relative '../tensors/collaborator'
+require_relative '../installations/collaborator'
 
 module Domains
-  class Domain < ::Tensors::Collaborator
+  class Domain < ::Installations::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

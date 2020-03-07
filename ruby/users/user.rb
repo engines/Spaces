@@ -1,7 +1,7 @@
-require_relative '../tensors/collaborator'
+require_relative '../installations/collaborator'
 
 module Users
-  class User < Tensors::Collaborator
+  class User < Installations::Collaborator
 
     def identifier
       struct.identifier

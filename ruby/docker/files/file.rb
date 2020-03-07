@@ -1,10 +1,10 @@
-require_relative '../../tensors/tensor'
-require_relative '../../tensors/collaborator'
+require_relative '../../installations/installation'
+require_relative '../../installations/collaborator'
 require_relative '../../texts/text'
 
 module Docker
   module Files
-    class File < ::Tensors::Collaborator
+    class File < ::Installations::Collaborator
 
       Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -53,7 +53,7 @@ module Docker
       end
 
       def collaborators
-        collaboration_precedence.map { |c| tensor.send(c) }.compact
+        collaboration_precedence.map { |c| installation.send(c) }.compact
       end
 
       def file_path
