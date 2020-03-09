@@ -19,8 +19,19 @@ module Bindings
       all.detect { |d| d.name == name }
     end
 
+    def resolved
+      all.reduce({}) do |m, a|
+        m[a.name] = a.resolved
+        m
+      end
+    end
+
     def binding_class
       Binding
+    end
+
+    def to_yaml
+      YAML.dump(resolved)
     end
 
   end
