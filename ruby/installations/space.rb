@@ -6,7 +6,7 @@ module Installations
     alias_method :super_save_yaml, :save_yaml
 
     def save_yaml(model)
-      model.collaborators.values.each { |c| super_save_yaml(c) }
+      (model.savable_collaborators).each { |s| super_save_yaml(s) }
     end
 
   end

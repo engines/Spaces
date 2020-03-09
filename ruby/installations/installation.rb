@@ -42,6 +42,10 @@ module Installations
       def all_classes
         @@all_classes ||= blueprint_classes.merge(output_classes).merge(installation_classes)
       end
+
+      def savable_collaborator_keys
+        [:bindings, :environment, :domain]
+      end
     end
 
     relation_accessor :blueprint
@@ -62,6 +66,10 @@ module Installations
       self.class.installation_classes
     end
 
+    def savable_collaborator_keys
+      self.class.savable_collaborator_keys
+    end
+
     def collaborators
       @classes ||= keys.reduce({}) do |m, k|
         v = [all_classes[k]].flatten
@@ -77,6 +85,10 @@ module Installations
 
     def collaborate_anyway?(key)
       necessary_keys.include?(key)
+    end
+
+    def savable_collaborators
+      savable_collaborator_keys.map { |k| collaborators[k] }
     end
 
     def keys
