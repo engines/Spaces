@@ -1,5 +1,6 @@
 require_relative '../spaces/space'
 require_relative '../containers/space'
+require_relative '../installations/space'
 require_relative '../images/space'
 require_relative '../frameworks/space'
 require_relative '../nodules/space'
@@ -11,11 +12,14 @@ require_relative '../outer/space'
 
 module Universal
   class Space < ::Spaces::Space
-    # The aggregation of all spaces
 
     class << self
       def containers
         @@containers ||= Containers::Space.new
+      end
+
+      def installations
+        @@installations ||= Installations::Space.new
       end
 
       def images
@@ -53,6 +57,10 @@ module Universal
 
     def containers
       self.class.containers
+    end
+
+    def installations
+      self.class.installations
     end
 
     def images
