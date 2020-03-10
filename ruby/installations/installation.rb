@@ -9,6 +9,7 @@ require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative '../bindings/bindings'
 require_relative '../users/user'
+require_relative 'anchor'
 
 module Installations
   class Installation < ::Spaces::Model
@@ -18,9 +19,10 @@ module Installations
         @@blueprint_classes ||= {
           framework: Frameworks::Framework,
           os_packages: OsPackages::OsPackages,
-          nodules: [Nodules::Nodules, :modules],
+          nodules: Nodules::Nodules,
           packages: Packages::Packages,
           bindings: Bindings::Bindings,
+          anchor: Anchor,
           environment: Environments::Environment
         }
       end
@@ -43,8 +45,15 @@ module Installations
         @@all_classes ||= blueprint_classes.merge(output_classes).merge(installation_classes)
       end
 
+      def section_map
+        @@section_map ||= {
+          nodules: :modules,
+          anchor: :binding_anchor
+        }
+      end
+
       def savable_collaborator_keys
-        [:bindings, :environment, :domain]
+        [:bindings, :anchor, :environment, :domain]
       end
     end
 
@@ -70,17 +79,19 @@ module Installations
       self.class.savable_collaborator_keys
     end
 
+    def section_for(key)
+      self.class.section_map[key] || key
+    end
+
     def collaborators
-      @classes ||= keys.reduce({}) do |m, k|
-        v = [all_classes[k]].flatten
-        m[k] = v.first.prototype(installation: self, section: k) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
+      @collaborators ||= keys.reduce({}) do |m, k|
+        m[k] = all_classes[k].prototype(installation: self, section: section_for(k)) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end
 
     def collaborator_blueprinted?(key)
-      v = [all_classes[key]].flatten
-      struct[v[1] || key]
+      struct[section_for(key)]
     end
 
     def collaborate_anyway?(key)
