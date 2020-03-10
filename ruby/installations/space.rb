@@ -7,7 +7,7 @@ module Installations
 
     def save_yaml(model)
       save_user_yaml(model)
-      (model.savable_collaborators).each { |s| super_save_yaml(s) }
+      (model.savable_collaborators.compact).each { |s| super_save_yaml(s) }
     end
 
     def save_user_yaml(model)
