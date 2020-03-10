@@ -44,7 +44,7 @@ module Images
     end
 
     def framework_build_script_path
-      installation.framework.build_script_path
+      installation.framework&.build_script_path
     end
   end
 end
