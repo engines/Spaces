@@ -27,9 +27,5 @@ module Bindings
       Binding
     end
 
-    def to_yaml
-      YAML.dump(resolved)
-    end
-
   end
 end

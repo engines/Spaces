@@ -1,7 +1,7 @@
-require_relative '../installations/user'
+require_relative '../installations/collaborator'
 
 module Users
-  class User < Installations::User
+  class User < ::Installations::Collaborator
 
     def identifier
       struct.identifier
@@ -13,14 +13,6 @@ module Users
 
     def default
       @default ||= OpenStruct.new(data_uid: '2222', data_gid: '3333')
-    end
-
-    def as_installation_user
-      installation_user_class.new(struct: struct, installation:installation)
-    end
-
-    def installation_user_class
-      Installations::User
     end
 
   end
