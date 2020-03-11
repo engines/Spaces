@@ -4,7 +4,7 @@ module Frameworks
   module Steps
     class Variables < Docker::Files::Step
 
-      def content
+      def product
         %Q(
         ENV CONTFSVolHome /home/fs/
         ENV FRAMEWORK '#{context.identifier}'

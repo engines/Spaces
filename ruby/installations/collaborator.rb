@@ -15,6 +15,10 @@ module Installations
 
     relation_accessor :installation
 
+    def product
+      duplicate(struct)
+    end
+
     def descriptor
       installation.descriptor
     end

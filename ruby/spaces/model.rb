@@ -1,6 +1,7 @@
 require 'yaml'
 require 'json'
-require 'ostruct'
+require 'duplicate'
+require_relative '../lib/ostruct'
 require_relative 'error'
 
 module Spaces
@@ -35,6 +36,10 @@ module Spaces
 
     attr_accessor :struct
     relation_accessor :descriptor
+
+    def product
+      self
+    end
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)

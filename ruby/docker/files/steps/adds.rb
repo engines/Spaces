@@ -5,7 +5,7 @@ module Docker
     module Steps
       class Adds < Docker::Files::Step
 
-        def content
+        def product
           %Q(
           ADD scripts /scripts
           ADD home home

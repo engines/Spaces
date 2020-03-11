@@ -5,7 +5,7 @@ module Docker
     module Steps
       class Templates < Step
 
-        def content
+        def product
           '/scripts/install_templates.sh'
         end
 

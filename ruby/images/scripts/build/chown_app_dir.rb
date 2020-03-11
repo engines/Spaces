@@ -70,7 +70,7 @@ module Images
       end
 
       def cont_user
-        context.installation.framework.cont_user
+        context.installation.framework&.cont_user
       end
     end
   end

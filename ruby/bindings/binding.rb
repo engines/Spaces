@@ -1,9 +1,7 @@
 require_relative '../docker/files/collaboration'
-require_relative 'relationship'
-require_relative 'anchor'
 
 module Bindings
-  class Binding < Relationship
+  class Binding < ::Spaces::Model
     include Docker::Files::Collaboration
 
     relation_accessor :context
@@ -14,20 +12,61 @@ module Bindings
       end
     end
 
-    def resolved
-      @resolved ||= anchor.resolved_for(overrides_for(struct.variables))
+    def product
+      duplicate(struct).tap { |s| s.variables = resolved }
     end
 
-    def anchor
-      @anchor ||= anchor_class.new(struct: struct)
+    def resolved
+      @resolved ||=
+        keys.inject(OpenStruct.new) do |s, k|
+          s[k] =
+            begin
+              send(*overrides[k].split(/[()]+/))
+            rescue TypeError, ArgumentError, NoMethodError
+              overrides[k]
+            end
+          s
+        end
+    end
+
+    def keys
+      overrides.to_h.keys
+    end
+
+    def overrides
+      @overrides ||= default_variables.merge(variables)
+    end
+
+    def variables
+      struct.variables || OpenStruct.new
+    end
+
+    def default_variables
+      @default_variables ||= installation.binding_anchor&.variables
+    end
+
+    def anchor_installation
+      @anchor_installation ||= universe.blueprints.by(descriptor).installation
     end
 
     def descriptor
-      anchor.descriptor
+      @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    def anchor_class
-      Anchor
+    def host
+      "#{descriptor.static_identifier}.#{universe.host}"
+    end
+
+    def name
+      descriptor.identifier
+    end
+
+    def username
+      "#{name}_user"
+    end
+
+    def random(length)
+      SecureRandom.hex(length.to_i)
     end
 
     def initialize(struct:, context:)
@@ -36,7 +75,7 @@ module Bindings
     end
 
     def method_missing(m, *args, &block)
-      resolved.keys&.include?(m) ? resolved[m] : super
+      keys&.include?(m) ? resolved[m] : super
     end
 
   end

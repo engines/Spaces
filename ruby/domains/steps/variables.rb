@@ -4,7 +4,7 @@ module Domains
   module Steps
     class Variables < Docker::Files::Step
 
-      def content
+      def product
         %Q(
         ENV Hostname '#{context.host}'
         ENV Domainname '#{context.name}'

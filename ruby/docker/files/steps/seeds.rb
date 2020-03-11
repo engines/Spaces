@@ -5,7 +5,7 @@ module Docker
     module Steps
       class Seeds < Step
 
-        def content
+        def product
           #FixME this is not the seeds script
           %Q(
           RUN \

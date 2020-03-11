@@ -23,6 +23,10 @@ module Images
       self.class.script_collaborators
     end
 
+    def product
+      [reduced_scripts, texts].flatten
+    end
+
     def reduced_scripts
       all_scripts.uniq(&:uniqueness)
     end
@@ -44,7 +48,7 @@ module Images
     end
 
     def framework_build_script_path
-      installation.framework.build_script_path
+      installation.framework&.build_script_path
     end
   end
 end

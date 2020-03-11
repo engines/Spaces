@@ -19,6 +19,10 @@ module Bindings
       all.detect { |d| d.name == name }
     end
 
+    def product
+      all.map { |a| a.product }
+    end
+
     def binding_class
       Binding
     end

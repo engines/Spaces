@@ -5,7 +5,7 @@ module Docker
     module Steps
       class Installs < Step
 
-        def content
+        def product
           %Q(
           WORKDIR /home/
           RUN \

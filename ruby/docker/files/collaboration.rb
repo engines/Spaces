@@ -8,7 +8,7 @@ module Docker
 
       def layers_for(group)
         step_precedence[group]&.map do |s|
-          step_class(s).new(self).content
+          step_class(s).new(self).product
         end
       end
 

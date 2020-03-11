@@ -1,7 +1,7 @@
 require_relative '../installations/collaborator'
 
 module Users
-  class User < Installations::Collaborator
+  class User < ::Installations::Collaborator
 
     def identifier
       struct.identifier

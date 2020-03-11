@@ -8,11 +8,7 @@ module Blueprints
     relation_accessor :installation
 
     def installation
-      @installation ||= installation_class.new(self)
-    end
-
-    def text_file_names
-      universe.blueprints.text_file_names_for(descriptor)
+      @installation ||= installation_class.new(struct: struct)
     end
 
     def anchor_descriptors
