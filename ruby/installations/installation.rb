@@ -57,10 +57,8 @@ module Installations
       end
     end
 
-    relation_accessor :blueprint
-
     def text_file_names
-      blueprint.text_file_names
+      universe.blueprints.text_file_names_for(descriptor)
     end
 
     def all_classes
@@ -108,11 +106,6 @@ module Installations
 
     def necessary_keys
       output_classes.keys + installation_classes.keys
-    end
-
-    def initialize(blueprint)
-      self.blueprint = blueprint
-      self.struct = duplicate(blueprint.struct)
     end
 
     def method_missing(m, *args, &block)
