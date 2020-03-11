@@ -4,7 +4,7 @@ module OsPackages
   module Steps
     class RunScripts < Docker::Files::Step
 
-      def content
+      def product
         context.scripts.flatten.map { |s| "RUN #{s.path}" }
       end
 

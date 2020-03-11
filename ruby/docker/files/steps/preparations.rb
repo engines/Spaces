@@ -5,7 +5,7 @@ module Docker
     module Steps
       class Preparations < Step
 
-        def content
+        def product
           %Q(
           "COPY sudo_list /etc/sudoers.d/container"
           USER 0

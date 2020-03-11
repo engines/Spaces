@@ -34,8 +34,8 @@ module Docker
         self.class.step_group_precedence
       end
 
-      def content
-        text_class.new(source_content: source_text, context: self).resolved
+      def product
+        text_class.new(source: source_text, context: self).resolved
       end
 
       def text_class

@@ -36,7 +36,7 @@ module Spaces
     attr_accessor :struct
     relation_accessor :descriptor
 
-    def content
+    def product
       self
     end
 

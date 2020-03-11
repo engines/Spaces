@@ -22,7 +22,7 @@ module Spaces
     def save(model)
       f = File.open("#{file_name_for(model)}", 'w')
       begin
-        f.write(model.content)
+        f.write(model.product)
       ensure
         f.close
       end
@@ -31,7 +31,7 @@ module Spaces
     def save_yaml(model)
       f = File.open("#{file_name_for(model)}.yaml", 'w')
       begin
-        f.write(model.content.to_yaml)
+        f.write(model.product.to_yaml)
       ensure
         f.close
       end
