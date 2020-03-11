@@ -1,6 +1,6 @@
 require 'yaml'
 require 'json'
-require 'ostruct'
+require_relative '../lib/ostruct'
 require_relative 'error'
 
 module Spaces
