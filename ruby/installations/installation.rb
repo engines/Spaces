@@ -1,4 +1,3 @@
-require 'duplicate'
 require_relative '../spaces/model'
 require_relative '../docker/files/file'
 require_relative '../images/subject'
@@ -52,8 +51,18 @@ module Installations
         }
       end
 
-      def savable_collaborator_keys
-        [:bindings, :anchor, :environment, :domain]
+      def resolvable_collaborator_keys
+        [:bindings, :user]
+      end
+    end
+
+    def product
+      struct.tap do |s|
+        resolvable_collaborator_keys.each do |k|
+          if c = collaborators[k]
+            s[section_for(k)] = c.product
+          end
+        end
       end
     end
 
@@ -73,8 +82,8 @@ module Installations
       self.class.installation_classes
     end
 
-    def savable_collaborator_keys
-      self.class.savable_collaborator_keys
+    def resolvable_collaborator_keys
+      self.class.resolvable_collaborator_keys
     end
 
     def section_for(key)
@@ -94,10 +103,6 @@ module Installations
 
     def collaborate_anyway?(key)
       necessary_keys.include?(key)
-    end
-
-    def savable_collaborators
-      savable_collaborator_keys.map { |k| collaborators[k] }
     end
 
     def keys

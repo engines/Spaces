@@ -12,6 +12,10 @@ module Bindings
       end
     end
 
+    def product
+      duplicate(struct).tap { |s| s.variables = resolved }
+    end
+
     def resolved
       @resolved ||=
         keys.inject(OpenStruct.new) do |s, k|

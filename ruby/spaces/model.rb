@@ -1,5 +1,6 @@
 require 'yaml'
 require 'json'
+require 'duplicate'
 require_relative '../lib/ostruct'
 require_relative 'error'
 

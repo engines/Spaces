@@ -19,11 +19,8 @@ module Bindings
       all.detect { |d| d.name == name }
     end
 
-    def resolved
-      all.reduce({}) do |m, a|
-        m[a.name] = a.resolved
-        m
-      end
+    def product
+      all.map { |a| a.product }
     end
 
     def binding_class
