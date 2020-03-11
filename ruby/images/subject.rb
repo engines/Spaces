@@ -23,6 +23,10 @@ module Images
       self.class.script_collaborators
     end
 
+    def product
+      [reduced_scripts, texts].flatten
+    end
+
     def reduced_scripts
       all_scripts.uniq(&:uniqueness)
     end
