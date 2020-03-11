@@ -56,10 +56,6 @@ module Docker
         collaboration_precedence.map { |c| installation.send(c) }.compact
       end
 
-      def file_path
-        "#{identifier}/DockerFile"
-      end
-
     end
   end
 end
