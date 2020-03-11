@@ -36,6 +36,10 @@ module Spaces
     attr_accessor :struct
     relation_accessor :descriptor
 
+    def content
+      self
+    end
+
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end

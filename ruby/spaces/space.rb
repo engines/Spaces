@@ -31,7 +31,7 @@ module Spaces
     def save_yaml(model)
       f = File.open("#{file_name_for(model)}.yaml", 'w')
       begin
-        f.write(model.to_yaml)
+        f.write(model.content.to_yaml)
       ensure
         f.close
       end
