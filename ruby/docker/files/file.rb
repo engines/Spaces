@@ -35,14 +35,14 @@ module Docker
       end
 
       def product
-        text_class.new(source: source_text, context: self).resolved
+        text_class.new(source: source, context: self).resolved
       end
 
       def text_class
         Texts::Text
       end
 
-      def source_text
+      def source
         layers.flatten.compact.join("\n")
       end
 
