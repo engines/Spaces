@@ -8,7 +8,7 @@ module Blueprints
     relation_accessor :installation
 
     def installation
-      @installation ||= installation_class.new(struct: self.struct)
+      @installation ||= installation_class.new(struct: struct)
     end
 
     def anchor_descriptors
