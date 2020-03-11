@@ -8,8 +8,8 @@ require_relative '../packages/packages'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative '../bindings/bindings'
+require_relative '../bindings/anchor'
 require_relative '../users/user'
-require_relative 'anchor'
 
 module Installations
   class Installation < ::Spaces::Model
@@ -22,7 +22,7 @@ module Installations
           nodules: Nodules::Nodules,
           packages: Packages::Packages,
           bindings: Bindings::Bindings,
-          anchor: Anchor,
+          anchor: Bindings::Anchor,
           environment: Environments::Environment
         }
       end
