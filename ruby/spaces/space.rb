@@ -10,10 +10,10 @@ module Spaces
       end
     end
 
-    def by(descriptor)
-      f = File.open("#{read_name_for(descriptor)}.yaml", 'r')
+    def by(descriptor, klass = model_class)
+      f = File.open("#{read_name_for(descriptor, klass)}.yaml", 'r')
       begin
-        model_class.new(struct: model_class.from_yaml(f.read))
+        klass.new(struct: klass.from_yaml(f.read))
       ensure
         f.close
       end
@@ -41,8 +41,8 @@ module Spaces
       Dir.exist?(file_name)
     end
 
-    def read_name_for(descriptor)
-      "#{path}/#{descriptor.send(model_class.subspace_path_method)}/#{model_class.identifier}"
+    def read_name_for(descriptor, klass = model_class)
+      "#{path}/#{descriptor.send(klass.subspace_path_method)}/#{klass.identifier}"
     end
 
     def write_name_for(model)

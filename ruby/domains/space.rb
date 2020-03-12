@@ -4,8 +4,8 @@ require_relative '../spaces/space'
 module Domains
   class Space < ::Spaces::Space
 
-    def by(descriptor)
-      model_class.new.tap do |m|
+    def by(descriptor, klass = model_class)
+      klass.new.tap do |m|
         m.struct = OpenStruct.new.tap do |s|
           s.name = 'current.spaces.org'
         end
