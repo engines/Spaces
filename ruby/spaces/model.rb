@@ -49,9 +49,6 @@ module Spaces
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    def identifier
-      descriptor.identifier
-    end
 
     def static_identifier
       descriptor.static_identifier

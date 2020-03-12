@@ -16,7 +16,7 @@ module Bindings
     end
 
     def named(name)
-      all.detect { |d| d.name == name }
+      all.detect { |b| b.name == name }
     end
 
     def product

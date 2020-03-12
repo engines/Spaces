@@ -59,7 +59,7 @@ module Bindings
     end
 
     def name
-      descriptor.identifier
+      identifier
     end
 
     def username

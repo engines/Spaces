@@ -19,6 +19,10 @@ module Installations
       duplicate(struct)
     end
 
+    def identifier
+      descriptor.identifier
+    end
+
     def descriptor
       installation.descriptor
     end

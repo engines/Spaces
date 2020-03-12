@@ -56,6 +56,10 @@ module Installations
       end
     end
 
+    def identifier
+      descriptor.identifier
+    end
+
     def product
       struct.tap do |s|
         resolvable_collaborator_keys.each do |k|
