@@ -1,18 +1,17 @@
 require 'open-uri'
 require 'resolv'
-require_relative '../../spaces/static_space'
+require_relative '../../spaces/space'
 
 module Outer
   module Uri
-    class Space < ::Spaces::StaticSpace
-      # The dimensions in which resources exist
+    class Space < ::Spaces::Space
 
       def encloses?(descriptor)
-        File.exist?(file_name_for(descriptor))
+        File.exist?(read_name_for(descriptor))
       end
 
       def by(descriptor)
-        f = File.open(file_name_for(descriptor), 'r')
+        f = File.open(read_name_for(descriptor), 'r')
         begin
           f.read
         ensure
@@ -20,7 +19,7 @@ module Outer
         end
       end
 
-      def file_name_for(descriptor)
+      def read_name_for(descriptor)
         ensure_space
         "#{path}/#{descriptor.basename}"
       end

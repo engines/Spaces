@@ -11,6 +11,10 @@ module Installations
     def save_user_yaml(model)
       universe.users.save_yaml(model.user)
     end
-    
+
+    def model_class
+      Installation
+    end
+
   end
 end

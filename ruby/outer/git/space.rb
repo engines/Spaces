@@ -9,7 +9,7 @@ module Outer
         Dir.exist?(subspace_path_for(descriptor))
       end
 
-      def file_name_for(descriptor)
+      def read_name_for(descriptor)
         ensure_space
         Dir["#{subspace_path_for(descriptor)}/*.json"].first
       end

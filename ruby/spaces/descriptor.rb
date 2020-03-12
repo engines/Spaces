@@ -3,6 +3,12 @@ require_relative 'model'
 module Spaces
   class Descriptor < ::Spaces::Model
 
+    class << self
+      def subspace_path_method
+        :static_identifier
+      end
+    end
+
     attr_accessor :value,
       :identifier,
       :protocol,
