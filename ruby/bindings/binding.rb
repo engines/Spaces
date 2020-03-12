@@ -42,11 +42,12 @@ module Bindings
     end
 
     def default_variables
-      @default_variables ||= installation.binding_anchor&.variables
+      @default_variables ||= anchor_installation.binding_anchor&.variables
     end
 
     def anchor_installation
       @anchor_installation ||= universe.blueprints.by(descriptor).installation
+      # @anchor_installation ||= universe.installations.by(descriptor)
     end
 
     def descriptor
