@@ -1,9 +1,9 @@
 require_relative '../universal/space'
-require_relative '../spaces/static_space'
+require_relative '../spaces/space'
 require_relative 'blueprint'
 
 module Blueprints
-  class Space < ::Spaces::StaticSpace
+  class Space < ::Spaces::Space
 
     def new_for(descriptor)
       model_class.new(struct: open_struct_from_json(outer.by(descriptor))).tap do |m|
@@ -25,11 +25,6 @@ module Blueprints
 
     def unimported_anchors_for(model)
       model.anchor_descriptors&.reject { |d| imported?(d) } || []
-    end
-
-    def file_name_for(descriptor)
-      ensure_subspace_for(descriptor)
-      "#{subspace_path_for(descriptor)}/#{model_class.qualifier}"
     end
 
     def ensure_subspace_for(descriptor)

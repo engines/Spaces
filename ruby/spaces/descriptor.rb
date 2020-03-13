@@ -3,8 +3,14 @@ require_relative 'model'
 module Spaces
   class Descriptor < ::Spaces::Model
 
+    class << self
+      def subspace_path_method
+        :blueprint_identifier
+      end
+    end
+
     attr_accessor :value,
-      :identifier,
+      :local_identifier,
       :protocol,
       :branch,
       :extraction,
@@ -14,7 +20,7 @@ module Spaces
     def initialize(struct = nil)
       if struct
         self.value = struct.value
-        self.identifier = struct.identifier
+        self.local_identifier = struct.local_identifier
         self.protocol = struct.protocol
         self.branch = struct.branch
         self.extraction = struct.extraction
@@ -24,10 +30,10 @@ module Spaces
     end
 
     def identifier
-      @identifier ||= static_identifier
+      @identifier ||= local_identifier || blueprint_identifier
     end
 
-    def static_identifier
+    def blueprint_identifier
       value&.split('/').last.split('.').first
     end
 

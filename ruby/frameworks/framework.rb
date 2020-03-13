@@ -9,6 +9,10 @@ module Frameworks
       end
     end
 
+    def framework_identifier
+      self.class.identifier
+    end
+
     def port
       @port ||= struct.port || default_port
     end
@@ -22,7 +26,7 @@ module Frameworks
     end
 
     def build_script_path
-       "#{super}/framework/#{self.class.identifier}"
+       "#{super}/framework/#{framework_identifier}"
     end
 
     def struct

@@ -1,9 +1,9 @@
-require_relative '../spaces/static_space'
+require_relative '../spaces/space'
 require_relative 'git/space'
 require_relative 'uri/space'
 
 module Outer
-  class Space < ::Spaces::StaticSpace
+  class Space < ::Spaces::Space
 
     class << self
       def git

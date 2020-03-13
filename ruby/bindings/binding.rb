@@ -42,11 +42,19 @@ module Bindings
     end
 
     def default_variables
-      @default_variables ||= installation.binding_anchor&.variables
+      @default_variables ||= anchor_installation.binding_anchor&.variables
     end
 
     def anchor_installation
-      @anchor_installation ||= universe.blueprints.by(descriptor).installation
+      @anchor_installation ||= local_installation || blueprint_installation
+    end
+
+    def local_installation
+      universe.installations.by(descriptor)
+    end
+
+    def blueprint_installation
+      universe.blueprints.by(descriptor).installation
     end
 
     def descriptor
@@ -54,11 +62,11 @@ module Bindings
     end
 
     def host
-      "#{descriptor.static_identifier}.#{universe.host}"
+      "#{descriptor.identifier}.#{universe.host}"
     end
 
     def name
-      descriptor.identifier
+      identifier
     end
 
     def username

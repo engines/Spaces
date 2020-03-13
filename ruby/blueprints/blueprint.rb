@@ -1,9 +1,14 @@
 require_relative '../spaces/model'
-require_relative '../spaces/descriptor'
 require_relative '../installations/installation'
 
 module Blueprints
   class Blueprint < ::Spaces::Model
+
+    class << self
+      def subspace_path_method
+        :blueprint_identifier
+      end
+    end
 
     relation_accessor :installation
 

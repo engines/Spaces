@@ -20,6 +20,10 @@ module Spaces
         name.split('::').last.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
       end
 
+      def subspace_path_method
+        :identifier
+      end
+
       def from_yaml(yaml)
         YAML::load(yaml)
       end
@@ -45,12 +49,9 @@ module Spaces
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    def identifier
-      descriptor.identifier
-    end
 
-    def static_identifier
-      descriptor.static_identifier
+    def blueprint_identifier
+      descriptor.blueprint_identifier
     end
 
     def uniqueness
@@ -66,7 +67,7 @@ module Spaces
     end
 
     def subspace_path
-      identifier
+      send(self.class.subspace_path_method)
     end
 
     def namespaced_name(namespace, symbol)

@@ -7,8 +7,8 @@ module Frameworks
       def product
         %Q(
         ENV CONTFSVolHome /home/fs/
-        ENV FRAMEWORK '#{context.identifier}'
-        ENV RUNTIME '#{context.identifier}'
+        ENV FRAMEWORK '#{context.framework_identifier}'
+        ENV RUNTIME '#{context.framework_identifier}'
         ENV PORT '#{context.port}'
         )
       end
