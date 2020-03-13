@@ -11,7 +11,7 @@ module Spaces
     end
 
     def by(descriptor, klass = model_class)
-      f = File.open("#{read_name_for(descriptor, klass)}.yaml", 'r')
+      f = File.open("#{reading_name_for(descriptor, klass)}.yaml", 'r')
       begin
         klass.new(struct: klass.from_yaml(f.read))
       ensure
@@ -20,7 +20,7 @@ module Spaces
     end
 
     def save(model)
-      f = File.open("#{write_name_for(model)}", 'w')
+      f = File.open("#{writing_name_for(model)}", 'w')
       begin
         f.write(model.product)
       ensure
@@ -29,7 +29,7 @@ module Spaces
     end
 
     def save_yaml(model)
-      f = File.open("#{write_name_for(model)}.yaml", 'w')
+      f = File.open("#{writing_name_for(model)}.yaml", 'w')
       begin
         f.write(model.product.to_yaml)
       ensure
@@ -41,11 +41,11 @@ module Spaces
       Dir.exist?(file_name)
     end
 
-    def read_name_for(descriptor, klass = model_class)
+    def reading_name_for(descriptor, klass = model_class)
       "#{path}/#{descriptor.send(klass.subspace_path_method)}/#{klass.identifier}"
     end
 
-    def write_name_for(model)
+    def writing_name_for(model)
       ensure_subspace_for(model)
       "#{path}/#{model.file_path}"
     end

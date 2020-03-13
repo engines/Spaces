@@ -7,11 +7,11 @@ module Outer
     class Space < ::Spaces::Space
 
       def encloses?(descriptor)
-        File.exist?(read_name_for(descriptor))
+        File.exist?(reading_name_for(descriptor))
       end
 
       def by(descriptor)
-        f = File.open(read_name_for(descriptor), 'r')
+        f = File.open(reading_name_for(descriptor), 'r')
         begin
           f.read
         ensure
@@ -19,7 +19,7 @@ module Outer
         end
       end
 
-      def read_name_for(descriptor)
+      def reading_name_for(descriptor)
         ensure_space
         "#{path}/#{descriptor.basename}"
       end
