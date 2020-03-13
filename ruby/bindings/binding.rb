@@ -62,7 +62,7 @@ module Bindings
     end
 
     def host
-      "#{descriptor.blueprint_identifier}.#{universe.host}"
+      "#{descriptor.identifier}.#{universe.host}"
     end
 
     def name
