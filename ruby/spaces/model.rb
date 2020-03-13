@@ -50,8 +50,8 @@ module Spaces
     end
 
 
-    def static_identifier
-      descriptor.static_identifier
+    def blueprint_identifier
+      descriptor.blueprint_identifier
     end
 
     def uniqueness
