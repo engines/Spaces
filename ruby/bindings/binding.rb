@@ -46,8 +46,15 @@ module Bindings
     end
 
     def anchor_installation
-      @anchor_installation ||= universe.blueprints.by(descriptor).installation
-      # @anchor_installation ||= universe.installations.by(descriptor)
+      @anchor_installation ||= local_installation || blueprint_installation
+    end
+
+    def local_installation
+      universe.installations.by(descriptor)
+    end
+
+    def blueprint_installation
+      universe.blueprints.by(descriptor).installation
     end
 
     def descriptor
