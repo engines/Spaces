@@ -2,7 +2,7 @@ require_relative '../../../texts/one_time_script'
 
 module Images
   module Scripts
-    class SetContUser < Texts::OneTimeScript
+    class SetUserIdentifier < Texts::OneTimeScript
       def body
         #Notes for future improvements
         %Q(

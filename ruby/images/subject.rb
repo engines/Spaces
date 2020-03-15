@@ -14,7 +14,7 @@ module Images
       def script_precedence
         @@subject_script_precedence ||= [
           :build_functions, :finalisation, :chown_app_dir, :install_templates, :persistent_files,
-          :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_cont_user, :set_data_permissions, :write_permissions
+          :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_user_identifier, :set_data_permissions, :write_permissions
         ]
       end
     end

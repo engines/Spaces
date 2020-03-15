@@ -14,19 +14,19 @@ module Images
            then
             groupadd -g $data_gid writegrp
           fi
-        echo "  id #{cont_user} | grep $data_gid '"
-         id #{cont_user} | grep $data_gid
+        echo "  id #{user_identifier} | grep $data_gid '"
+         id #{user_identifier} | grep $data_gid
 
-          id #{cont_user} | grep $data_gid >/dev/null
+          id #{user_identifier} | grep $data_gid >/dev/null
           if test $? -ne 0
            then
           echo "add contuser to data group"
-            usermod -G $data_gid -a #{cont_user}
+            usermod -G $data_gid -a #{user_identifier}
           fi
           chown -R  $data_uid.$data_gid #{home_app_path}
-          chown -R #{cont_user} /home/home_dir
-           mkdir -p ~#{cont_user}/.ssh
-             chown -R #{cont_user} ~#{cont_user}/.ssh
+          chown -R #{user_identifier} /home/home_dir
+           mkdir -p ~#{user_identifier}/.ssh
+             chown -R #{user_identifier} ~#{user_identifier}/.ssh
 
           if test -f #{framework_script_file_name}
             then
@@ -43,12 +43,12 @@ module Images
             service_path=`head -1 /home/database_seed | sed "/#/s///"`
             cat /home/database_seed | grep -v  ^\# | /home/engine/services/$service_path/restore.sh
            fi
-        chown -R #{cont_user} $HOME
+        chown -R #{user_identifier} $HOME
         )
       end
 
-      def cont_user
-        context.installation.framework&.cont_user
+      def user_identifier
+        context.installation.framework&.user_identifier
       end
 
       def framework_script_file_name

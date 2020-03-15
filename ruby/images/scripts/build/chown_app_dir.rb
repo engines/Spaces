@@ -14,7 +14,7 @@ module Images
           fi
 
         mkdir -p /home/fs ; mkdir -p /home/fs/local
-        chown -R #{cont_user} #{home_app_path} /home/fs /home/fs/local
+        chown -R #{user_identifier} #{home_app_path} /home/fs /home/fs/local
 
          set_permissions()
         {
@@ -69,8 +69,8 @@ module Images
         )
       end
 
-      def cont_user
-        context.installation.framework&.cont_user
+      def user_identifier
+        context.installation.framework&.user_identifier
       end
     end
   end

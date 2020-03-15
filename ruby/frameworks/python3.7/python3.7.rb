@@ -12,7 +12,7 @@ module Frameworks
           'python37'
         end
 
-        def cont_user
+        def user_identifier
           'python'
         end
         
