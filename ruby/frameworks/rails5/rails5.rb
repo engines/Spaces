@@ -11,7 +11,7 @@ module Frameworks
         def identifier
           'rails5'
         end
-        
+
         def script_precedence
           @@rails5_script_precedence ||= [:configuration, :database, :bundler, :rake, :finalisation]
         end
@@ -23,6 +23,10 @@ module Frameworks
             last:  [:bundle, :rake_tasks]
           }
         end
+      end
+
+      def user_identifier
+        'ruby'
       end
 
       def default_port
