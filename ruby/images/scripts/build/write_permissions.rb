@@ -11,7 +11,7 @@ module Images
         # then for each file_to_permission
         #Paths referenced are static but global
         %Q(
-        . #{framework_build_script_path}/build_functions.sh
+        . #{build_script_path}/build_functions.sh
 
         for path in $*
          do

@@ -8,8 +8,8 @@ module Packages
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
 
     class << self
-      def script_precedence
-        @@package_script_precedence ||= [:preparation, :installation]
+      def script_lot
+        @@package_script_lot ||= [:preparation, :installation]
       end
     end
 

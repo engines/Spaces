@@ -1,7 +1,7 @@
 require_relative '../../../texts/script'
 
 module Frameworks
-  module ApachePHP
+  module Python37
     module Scripts
       class Installation < Texts::Script
 
@@ -25,10 +25,6 @@ module Frameworks
               done
           fi
           )
-        end
-
-        def identifier
-          'installation'
         end
 
       end

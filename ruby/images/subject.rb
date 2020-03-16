@@ -11,10 +11,10 @@ module Images
         @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :image_subject]
       end
 
-      def script_precedence
+      def script_lot
         @@subject_script_precedence ||= [
-          :build_functions, :finalisation, :chown_app_dir, :install_templates, :persistent_files,
-          :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_cont_user, :set_data_permissions, :write_permissions
+          :build_functions, :install_templates, :persistent_files,
+          :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_user_identifier, :set_data_permissions, :write_permissions
         ]
       end
     end
@@ -47,8 +47,5 @@ module Images
       script_collaborators.map { |c| installation.send(c) }.compact
     end
 
-    def framework_build_script_path
-      installation.framework&.build_script_path
-    end
   end
 end

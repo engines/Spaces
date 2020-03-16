@@ -60,9 +60,6 @@ module Images
         )
       end
 
-      def identifier
-        'persistent_dirs'
-      end
     end
   end
 end

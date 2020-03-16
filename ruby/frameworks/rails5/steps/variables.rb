@@ -10,7 +10,6 @@ module Frameworks
             super,
             %Q(
             ENV WWW_DIR public
-            ENV ContUser ruby
             ENV RAILS_ENV production
 
             ENV SECRET_KEY_BASE	#{SecureRandom.hex(128)}
@@ -21,7 +20,7 @@ module Frameworks
             ENV volume_name 'files'
 
             ENV DATABASE_URL $rails_flavor://$dbuser:$dbpasswd@$dbhost/$dbname
-          )
+            )
           ]
         end
 

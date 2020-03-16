@@ -11,7 +11,7 @@ module Images
         #
         # function will need some minor changes to support replacing the sed line ...
         %Q(
-        . #{framework_build_script_path}/build_functions.sh
+        . #{build_script_path}/build_functions.sh
 
         cd /home
          if test -d /home/engines/templates/

@@ -11,7 +11,7 @@ module Images
         #directory=directory_to_permission
         #set_write_permissions
         %Q(
-        . #{framework_build_script_path}/build_functions.sh
+        . #{build_script_path}/build_functions.sh
 
         for directory in $*
          do

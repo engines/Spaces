@@ -12,12 +12,8 @@ module Frameworks
           'python37'
         end
 
-        def cont_user
+        def user_identifier
           'python'
-        end
-        
-        def script_precedence
-          @@apache_php_script_precedence ||= [:configuration, :installation, :finalisation]
         end
 
         def step_precedence
