@@ -11,10 +11,17 @@ module Images
 
     def script_class(symbol)
       Module.const_get(namespaced_name(script_namespace, symbol))
+
+      rescue NameError
+        Module.const_get(namespaced_name(generalised_namespace, symbol))
     end
 
     def script_namespace
       [self.class.name.split('::')[0 .. -2], 'Scripts'].flatten.join('::')
+    end
+
+    def generalised_namespace
+      [self.class.name.split('::').first, 'Scripts'].join('::')
     end
 
     def build_script_path
