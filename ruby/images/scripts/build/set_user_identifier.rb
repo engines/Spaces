@@ -6,7 +6,7 @@ module Images
       def body
         #Notes for future improvements
         %Q(
-        . #{framework_build_script_path}/build_functions.sh
+        . #{build_script_path}/build_functions.sh
         set_permissions()
         {
 
