@@ -12,8 +12,8 @@ module Frameworks
           'rails5'
         end
 
-        def script_precedence
-          @@rails5_script_precedence ||= [:configuration, :database, :bundler, :rake, :finalisation]
+        def script_lot
+          @@rails5_script_lot ||= [:configuration, :database, :bundler, :rake, :finalisation]
         end
 
         def step_precedence

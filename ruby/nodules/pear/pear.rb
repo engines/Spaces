@@ -6,8 +6,8 @@ module Nodules
       Dir["#{__dir__}/scripts/*"].each { |f| require f }
 
       class << self
-        def script_precedence
-          @@pear_script_precedence ||= [:preparation, :installation, :finalisation]
+        def script_lot
+          @@pear_script_lot ||= [:preparation, :installation, :finalisation]
         end
       end
 

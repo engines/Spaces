@@ -8,8 +8,8 @@ module OsPackages
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
     class << self
-      def script_precedence
-        @@os_packages_script_precedence ||= [:installation]
+      def script_lot
+        @@os_packages_script_lot ||= [:installation]
       end
 
       def step_precedence

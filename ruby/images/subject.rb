@@ -11,8 +11,8 @@ module Images
         @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :image_subject]
       end
 
-      def script_precedence
-        @@subject_script_precedence ||= [
+      def script_lot
+        @@subject_script_lot ||= [
           :build_functions, :finalisation, :chown_app_dir, :install_templates, :persistent_files,
           :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_user_identifier, :set_data_permissions, :write_permissions
         ]

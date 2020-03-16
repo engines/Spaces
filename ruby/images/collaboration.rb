@@ -1,12 +1,12 @@
 module Images
   module Collaboration
 
-    def script_precedence
-      self.class.script_precedence
+    def script_lot
+      self.class.script_lot
     end
 
     def scripts
-      script_precedence.map { |s| script_class(s).new(self) }
+      script_lot.map { |s| script_class(s).new(self) }
     end
 
     def script_class(symbol)

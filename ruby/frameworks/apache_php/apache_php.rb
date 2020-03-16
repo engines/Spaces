@@ -12,8 +12,8 @@ module Frameworks
           'apache_php'
         end
 
-        def script_precedence
-          @@apache_php_script_precedence ||= [:configuration, :installation, :finalisation]
+        def script_lot
+          @@apache_php_script_lot ||= [:configuration, :installation, :finalisation]
         end
 
         def step_precedence
