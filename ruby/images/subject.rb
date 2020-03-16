@@ -47,8 +47,5 @@ module Images
       script_collaborators.map { |c| installation.send(c) }.compact
     end
 
-    # def framework_build_script_path
-    #   installation.framework&.build_script_path
-    # end
   end
 end
