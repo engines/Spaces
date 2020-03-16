@@ -1,6 +1,6 @@
-require_relative '../../../texts/one_time_script'
+require_relative '../../texts/one_time_script'
 
-module Images
+module Frameworks
   module Scripts
     class Finalisation < Texts::OneTimeScript
       def body
@@ -28,10 +28,10 @@ module Images
            mkdir -p ~#{user_identifier}/.ssh
              chown -R #{user_identifier} ~#{user_identifier}/.ssh
 
-          if test -f #{framework_script_file_name}
+          if test -f #{script_file_name}
             then
               echo "running finalisation.sh"
-              #{framework_script_file_name}
+              #{script_file_name}
           fi
           if ! test -z "$VOLDIR"
           then
@@ -48,11 +48,11 @@ module Images
       end
 
       def user_identifier
-        context.installation.framework&.user_identifier
+        context.user_identifier
       end
 
-      def framework_script_file_name
-        "/#{framework_build_script_path}/#{identifier}.sh"
+      def script_file_name
+        "/#{context.build_script_path}/#{identifier}.sh"
       end
 
     end

@@ -27,10 +27,6 @@ module Frameworks
           )
         end
 
-        def identifier
-          'installation'
-        end
-
       end
     end
   end

@@ -12,8 +12,8 @@ module Images
       end
 
       def script_lot
-        @@subject_script_lot ||= [
-          :build_functions, :finalisation, :chown_app_dir, :install_templates, :persistent_files,
+        @@subject_script_precedence ||= [
+          :build_functions, :install_templates, :persistent_files,
           :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_user_identifier, :set_data_permissions, :write_permissions
         ]
       end
