@@ -13,14 +13,14 @@ module Images
       Module.const_get(namespaced_name(script_namespace, symbol))
 
       rescue NameError
-        Module.const_get(namespaced_name(generalised_namespace, symbol))
+        Module.const_get(namespaced_name(generalised_script_namespace, symbol))
     end
 
     def script_namespace
       [self.class.name.split('::')[0 .. -2], 'Scripts'].flatten.join('::')
     end
 
-    def generalised_namespace
+    def generalised_script_namespace
       [self.class.name.split('::').first, 'Scripts'].join('::')
     end
 

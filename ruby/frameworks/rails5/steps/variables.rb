@@ -20,7 +20,7 @@ module Frameworks
             ENV volume_name 'files'
 
             ENV DATABASE_URL $rails_flavor://$dbuser:$dbpasswd@$dbhost/$dbname
-          )
+            )
           ]
         end
 

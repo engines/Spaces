@@ -14,10 +14,17 @@ module Docker
 
       def step_class(symbol)
         Module.const_get(namespaced_name(step_namespace, symbol))
+
+        rescue NameError
+          Module.const_get(namespaced_name(generalised_step_namespace, symbol))
       end
 
       def step_namespace
         [self.class.name.split('::')[0 .. -2], 'Steps'].flatten.join('::')
+      end
+
+      def generalised_step_namespace
+        [self.class.name.split('::').first, 'Steps'].join('::')
       end
 
     end

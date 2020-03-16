@@ -4,6 +4,7 @@ module Frameworks
   class Framework < ::Installations::Collaborator
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
+    Dir["#{__dir__}/steps/*"].each { |f| require f }
 
     class << self
       def prototype(installation:, section:)
