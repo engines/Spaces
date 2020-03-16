@@ -3,9 +3,15 @@ require_relative '../installations/collaborator'
 module Frameworks
   class Framework < ::Installations::Collaborator
 
+    Dir["#{__dir__}/scripts/*"].each { |f| require f }
+
     class << self
       def prototype(installation:, section:)
         universe.frameworks.by(installation)
+      end
+
+      def script_lot
+        @@framework_script_lot ||= [:configuration, :installation, :finalisation, :chown_app_dir]
       end
     end
 

@@ -13,7 +13,7 @@ module Frameworks
         end
 
         def script_lot
-          @@rails5_script_lot ||= [:configuration, :database, :bundler, :rake, :finalisation]
+          @@rails5_script_lot ||= ([:database, :bundler, :rake] + super).uniq
         end
 
         def step_precedence
