@@ -66,6 +66,10 @@ module Bindings
       identifier
     end
 
+    def identifier
+      struct.identifier || descriptor.identifier
+    end
+
     def username
       "#{name}_user"
     end
