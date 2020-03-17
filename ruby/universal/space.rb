@@ -3,6 +3,7 @@ require_relative '../containers/space'
 require_relative '../installations/space'
 require_relative '../images/space'
 require_relative '../frameworks/space'
+require_relative '../web_servers/space'
 require_relative '../nodules/space'
 require_relative '../environments/space'
 require_relative '../domains/space'
@@ -28,6 +29,10 @@ module Universal
 
       def frameworks
         @@frameworks ||= Frameworks::Space.new
+      end
+
+      def web_servers
+        @@web_servers ||= WebServers::Space.new
       end
 
       def nodules
@@ -69,6 +74,10 @@ module Universal
 
     def frameworks
       self.class.frameworks
+    end
+
+    def web_servers
+      self.class.web_servers
     end
 
     def nodules
