@@ -1,7 +1,7 @@
-require_relative 'requires'
+require_relative '../../../docker/files/collaboration'
 
-module Frameworks
-  module Python37
+module WebServers
+  module Apache
     module Steps
       class Configure < Docker::Files::Step
 

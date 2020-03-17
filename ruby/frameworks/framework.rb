@@ -12,18 +12,24 @@ module Frameworks
       end
 
       def script_lot
-        @@framework_script_lot ||= [:configuration, :installation, :finalisation, :chown_app_dir]
+        @@framework_script_lot ||= [:installation, :finalisation, :chown_app_dir]
       end
     end
 
+    alias_method :super_build_script_path, :build_script_path
+
     relation_accessor :web_server
+
+    def scripts
+      [super, web_server.scripts]
+    end
+
+    def layers_for(group)
+      [super, web_server.layers_for(group)]
+    end
 
     def web_server
       @web_server ||= universe.web_servers.by(self)
-    end
-
-    def framework_identifier
-      self.class.identifier
     end
 
     def port
@@ -39,7 +45,11 @@ module Frameworks
     end
 
     def build_script_path
-       "#{super}/framework/#{framework_identifier}"
+       "#{super}/framework/#{class_identifier}"
+    end
+
+    def class_identifier
+      self.class.identifier
     end
 
     def struct

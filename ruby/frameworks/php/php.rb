@@ -15,8 +15,7 @@ module Frameworks
         def step_precedence
           @@php_step_precedence ||= {
             first: [:from_image],
-            anywhere: [:variables],
-            last: [:configure]
+            anywhere: [:variables]
           }
         end
       end

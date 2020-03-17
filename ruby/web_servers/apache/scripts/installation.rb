@@ -1,7 +1,7 @@
 require_relative '../../../texts/script'
 
-module Frameworks
-  module Python37
+module WebServers
+  module Apache
     module Scripts
       class Installation < Texts::Script
 
