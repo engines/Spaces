@@ -16,6 +16,12 @@ module Frameworks
       end
     end
 
+    relation_accessor :web_server
+
+    def web_server
+      @web_server ||= universe.web_servers.by(self)
+    end
+
     def framework_identifier
       self.class.identifier
     end
