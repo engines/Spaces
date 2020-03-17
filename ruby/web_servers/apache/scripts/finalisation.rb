@@ -1,9 +1,9 @@
-require_relative '../../scripts/finalisation'
+require_relative '../../../texts/one_time_script'
 
-module Frameworks
-  module Python37
+module WebServers
+  module Apache
     module Scripts
-      class Finalisation < Frameworks::Scripts::Finalisation
+      class Finalisation < Texts::OneTimeScript
 
         def body
           [

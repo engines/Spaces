@@ -46,15 +46,12 @@ module Bindings
     end
 
     def anchor_installation
-      @anchor_installation ||= local_installation || blueprint_installation
-    end
-
-    def local_installation
-      universe.installations.by(descriptor)
-    end
-
-    def blueprint_installation
-      universe.blueprints.by(descriptor).installation
+      @anchor_installation ||=
+        begin
+          universe.installations.by(descriptor)
+        rescue Errno::ENOENT
+          universe.blueprints.by(descriptor).installation
+        end
     end
 
     def descriptor
@@ -67,6 +64,10 @@ module Bindings
 
     def name
       identifier
+    end
+
+    def identifier
+      struct.identifier || descriptor.identifier
     end
 
     def username

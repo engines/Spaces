@@ -17,7 +17,7 @@ module Frameworks
         end
 
         def step_precedence
-          @@apache_php_step_precedence ||= {
+          @@python37_step_precedence ||= {
             first: [:from_image],
             anywhere: [:variables],
             last: [:configure]
