@@ -1,7 +1,7 @@
 require_relative '../../../texts/one_time_script'
 
 module Frameworks
-  module ApachePHP
+  module PHP
     module Scripts
       class Installation < Texts::OneTimeScript
 

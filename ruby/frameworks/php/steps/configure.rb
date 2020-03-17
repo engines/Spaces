@@ -1,7 +1,7 @@
 require_relative 'requires'
 
 module Frameworks
-  module ApachePHP
+  module PHP
     module Steps
       class Configure < Docker::Files::Step
 

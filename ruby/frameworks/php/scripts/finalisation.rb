@@ -1,7 +1,7 @@
 require_relative '../../scripts/finalisation'
 
 module Frameworks
-  module ApachePHP
+  module PHP
     module Scripts
       class Finalisation < Frameworks::Scripts::Finalisation
 
