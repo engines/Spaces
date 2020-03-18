@@ -3,10 +3,10 @@ require_relative '../spaces/space'
 module Frameworks
   class Space < ::Spaces::Space
 
-    def by(tensor)
-      i = tensor.struct.framework.identifier
+    def by(installation)
+      i = installation.struct.framework.identifier
       load(i)
-      loaded.detect { |k| k.identifier == i }.new(tensor)
+      loaded.detect { |k| k.identifier == i }.new(installation: installation, section: :framework)
     end
 
     def loaded

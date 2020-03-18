@@ -1,8 +1,8 @@
-require_relative '../collaborators/collaborator'
+require_relative '../installations/collaborator'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Collaborators::Collaborator
+  class Packages < ::Installations::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -13,7 +13,7 @@ module Packages
     end
 
     def all
-      @all ||= tensor.struct.packages.map { |s| package_class.new(struct: s, context: self) }
+      @all ||= installation.struct.packages.map { |s| package_class.new(struct: s, context: self) }
     end
 
     def scripts

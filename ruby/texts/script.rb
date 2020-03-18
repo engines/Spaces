@@ -4,9 +4,9 @@ module Texts
   class Script < ::Spaces::Model
 
     relation_accessor :context
-    attr_reader :content
+    attr_reader :product
 
-    def content
+    def product
       [
         header,
         body,

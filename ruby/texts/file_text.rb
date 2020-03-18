@@ -4,10 +4,10 @@ module Texts
   class FileText < Text
 
     attr_accessor :source_file_name,
-      :source_content
+      :source
 
-    def source_content
-      @source_content ||=
+    def source
+      @source ||=
       begin
         f = File.open(source_file_name, 'r')
         f.read

@@ -4,7 +4,7 @@ module Environments
   module Steps
     class Variables < Docker::Files::Step
 
-      def content
+      def product
         variables.map { |v| "ENV #{v.name} '#{v.value}'" }
       end
 

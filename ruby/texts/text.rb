@@ -5,8 +5,8 @@ module Texts
   class Text < ::Spaces::Model
 
     relation_accessor :context
-    attr_accessor :content,
-      :source_content
+    attr_accessor :product,
+      :source
 
     def resolved
       @resolved ||= immutables.zip(infixes.map(&:resolved)).flatten.join
@@ -25,24 +25,24 @@ module Texts
     end
 
     def splits(method)
-      source_content.split(interpolation_marker).select.with_index { |_, i| i.send(method) }
+      source.split(interpolation_marker).select.with_index { |_, i| i.send(method) }
     end
 
-    def content
-      @content ||= resolved
+    def product
+      @product ||= resolved
     end
 
     def interpolation_marker
       '^^'
     end
 
-    def tensor
-      context.tensor
+    def installation
+      context.installation
     end
 
-    def initialize(source_content:, context:)
+    def initialize(source:, context:)
       self.context = context
-      self.source_content = source_content
+      self.source = source
     end
 
   end

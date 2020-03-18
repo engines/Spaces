@@ -5,7 +5,7 @@ module Docker
     module Steps
       class SourceProtection < Step
 
-        def content
+        def product
           %Q(
           USER 0
           RUN \

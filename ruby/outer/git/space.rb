@@ -9,7 +9,7 @@ module Outer
         Dir.exist?(subspace_path_for(descriptor))
       end
 
-      def file_name_for(descriptor)
+      def reading_name_for(descriptor)
         ensure_space
         Dir["#{subspace_path_for(descriptor)}/*.json"].first
       end
@@ -17,7 +17,7 @@ module Outer
       def import(descriptor)
         ensure_space
         clear_for(descriptor)
-        g = ::Git.clone(descriptor.value, descriptor.identifier, path: path)
+        g = ::Git.clone(descriptor.value, descriptor.blueprint_identifier, path: path)
         g.checkout(descriptor.branch) if descriptor.branch
       end
 

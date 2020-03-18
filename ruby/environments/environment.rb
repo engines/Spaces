@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../installations/collaborator'
 
 module Environments
-  class Environment < ::Collaborators::Collaborator
+  class Environment < ::Installations::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -13,9 +13,16 @@ module Environments
       end
     end
 
-    def initialize(tensor)
-      super
-      self.struct = tensor.struct.environment
+    def variables
+      struct.variables
+    end
+
+    def variable(name)
+      variables.detect { |v| v.name == name.to_s }
+    end
+
+    def method_missing(m, *args, &block)
+      (v = variable(m)) ? v.value : super
     end
 
   end

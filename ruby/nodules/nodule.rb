@@ -15,8 +15,8 @@ module Nodules
         name.split('::').last.downcase
       end
 
-      def script_precedence
-        @@nodule_script_precedence ||= [:installation]
+      def script_lot
+        @@nodule_script_lot ||= [:installation]
       end
 
       def step_precedence

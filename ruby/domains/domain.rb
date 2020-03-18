@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../installations/collaborator'
 
 module Domains
-  class Domain < ::Collaborators::Collaborator
+  class Domain < ::Installations::Collaborator
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -23,9 +23,8 @@ module Domains
       'current.engines.org'
     end
 
-    def initialize(tensor)
-      super
-      self.struct = OpenStruct.new(fqdn: fqdn, host: host, name: name)
+    def default
+      @default ||= OpenStruct.new(fqdn: fqdn, host: host, name: name)
     end
 
   end

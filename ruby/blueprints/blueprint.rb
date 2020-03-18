@@ -1,26 +1,27 @@
 require_relative '../spaces/model'
-require_relative '../spaces/descriptor'
-require_relative 'tensor'
+require_relative '../installations/installation'
 
 module Blueprints
   class Blueprint < ::Spaces::Model
 
-    relation_accessor :tensor
-
-    def tensor
-      @tensor ||= tensor_class.new(self)
+    class << self
+      def subspace_path_method
+        :blueprint_identifier
+      end
     end
 
-    def text_file_names
-      universe.blueprints.text_file_names_for(descriptor)
+    relation_accessor :installation
+
+    def installation
+      @installation ||= installation_class.new(struct: struct)
     end
 
-    def dependency_descriptors
-      struct.dependencies&.map { |d| descriptor_class.new(d.descriptor) } || []
+    def anchor_descriptors
+      struct.bindings&.map { |d| descriptor_class.new(d.descriptor) } || []
     end
 
-    def tensor_class
-      Tensor
+    def installation_class
+      ::Installations::Installation
     end
   end
 end

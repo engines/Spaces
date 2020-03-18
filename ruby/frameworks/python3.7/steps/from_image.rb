@@ -5,7 +5,7 @@ module Frameworks
     module Steps
       class FromImage < Docker::Files::Step
 
-        def content
+        def product
           "FROM engines/python3.7:current"
         end
 

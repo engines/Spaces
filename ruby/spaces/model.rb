@@ -1,6 +1,7 @@
 require 'yaml'
 require 'json'
-require 'ostruct'
+require 'duplicate'
+require_relative '../lib/ostruct'
 require_relative 'error'
 
 module Spaces
@@ -17,6 +18,10 @@ module Spaces
 
       def qualifier
         name.split('::').last.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
+      end
+
+      def subspace_path_method
+        :identifier
       end
 
       def from_yaml(yaml)
@@ -36,12 +41,17 @@ module Spaces
     attr_accessor :struct
     relation_accessor :descriptor
 
+    def product
+      self
+    end
+
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    def identifier
-      descriptor.identifier
+
+    def blueprint_identifier
+      descriptor.blueprint_identifier
     end
 
     def uniqueness
@@ -57,7 +67,7 @@ module Spaces
     end
 
     def subspace_path
-      identifier
+      send(self.class.subspace_path_method)
     end
 
     def namespaced_name(namespace, symbol)
@@ -80,7 +90,7 @@ module Spaces
       self.class.universe
     end
 
-    def initialize(struct = nil)
+    def initialize(struct: nil)
       self.struct = struct
     end
 
@@ -95,5 +105,6 @@ module Spaces
         super
       end
     end
+
   end
 end

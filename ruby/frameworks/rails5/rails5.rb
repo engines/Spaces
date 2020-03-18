@@ -11,9 +11,9 @@ module Frameworks
         def identifier
           'rails5'
         end
-        
-        def script_precedence
-          @@rails5_script_precedence ||= [:configuration, :database, :bundler, :rake, :finalisation]
+
+        def script_lot
+          @@rails5_script_lot ||= ([:database, :bundler, :rake] + super).uniq
         end
 
         def step_precedence
@@ -23,6 +23,10 @@ module Frameworks
             last:  [:bundle, :rake_tasks]
           }
         end
+      end
+
+      def user_identifier
+        'ruby'
       end
 
       def default_port

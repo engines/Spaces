@@ -1,20 +1,26 @@
 require_relative '../spaces/space'
 require_relative '../containers/space'
+require_relative '../installations/space'
 require_relative '../images/space'
 require_relative '../frameworks/space'
+require_relative '../web_servers/space'
 require_relative '../nodules/space'
 require_relative '../environments/space'
 require_relative '../domains/space'
+require_relative '../users/space'
 require_relative '../blueprints/space'
 require_relative '../outer/space'
 
 module Universal
   class Space < ::Spaces::Space
-    # The aggregation of all spaces
 
     class << self
       def containers
         @@containers ||= Containers::Space.new
+      end
+
+      def installations
+        @@installations ||= Installations::Space.new
       end
 
       def images
@@ -23,6 +29,10 @@ module Universal
 
       def frameworks
         @@frameworks ||= Frameworks::Space.new
+      end
+
+      def web_servers
+        @@web_servers ||= WebServers::Space.new
       end
 
       def nodules
@@ -41,6 +51,10 @@ module Universal
         @@blueprints ||= Blueprints::Space.new
       end
 
+      def users
+        @@users ||= Users::Space.new
+      end
+
       def outer
         @@outer ||= Outer::Space.new
       end
@@ -50,12 +64,20 @@ module Universal
       self.class.containers
     end
 
+    def installations
+      self.class.installations
+    end
+
     def images
       self.class.images
     end
 
     def frameworks
       self.class.frameworks
+    end
+
+    def web_servers
+      self.class.web_servers
     end
 
     def nodules
@@ -68,6 +90,10 @@ module Universal
 
     def domains
       self.class.domains
+    end
+
+    def users
+      self.class.users
     end
 
     def blueprints

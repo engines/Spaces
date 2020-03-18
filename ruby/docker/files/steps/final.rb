@@ -5,7 +5,7 @@ module Docker
     module Steps
       class Final < Step
 
-        def content
+        def product
           %Q(
           RUN \
             /scripts/set_data_permissions.sh && \

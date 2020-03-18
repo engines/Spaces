@@ -1,15 +1,15 @@
-require_relative '../collaborators/collaborator'
+require_relative '../installations/collaborator'
 require_relative 'os_package'
 
 module OsPackages
-  class OsPackages < ::Collaborators::Collaborator
+  class OsPackages < ::Installations::Collaborator
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
     class << self
-      def script_precedence
-        @@os_packages_script_precedence ||= [:installation]
+      def script_lot
+        @@os_packages_script_lot ||= [:installation]
       end
 
       def step_precedence
@@ -18,7 +18,7 @@ module OsPackages
     end
 
     def all
-      @all ||= tensor.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
+      @all ||= installation.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
     end
 
     def build_script_path

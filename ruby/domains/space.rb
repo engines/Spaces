@@ -3,10 +3,9 @@ require_relative '../spaces/space'
 
 module Domains
   class Space < ::Spaces::Space
-    # The dimensions in which a running version of a software product can exist as a single entity
 
-    def by(descriptor)
-      model_class.new.tap do |m|
+    def by(descriptor, klass = model_class)
+      klass.new.tap do |m|
         m.struct = OpenStruct.new.tap do |s|
           s.name = 'current.spaces.org'
         end

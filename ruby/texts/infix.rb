@@ -13,16 +13,14 @@ module Texts
     def resolved
       begin
         vs = value.split('.').last(2)
-        collaborate_with(vs.first).send(vs.last)
-      rescue NoMethodError
+        collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
+      rescue ArgumentError, NoMethodError
         "--->#{value}<---"
       end
     end
 
     def collaborate_with(name)
-      tensor.dependencies.named(name) ||
-      tensor.domain ||
-      (raise NoMethodError)
+      installation.bindings.named(name) || installation.send(name) || (raise NoMethodError)
     end
 
     def initialize(value:, context:)
@@ -30,8 +28,8 @@ module Texts
       self.context = context
     end
 
-    def tensor
-      context.tensor
+    def installation
+      context.installation
     end
 
     def to_s

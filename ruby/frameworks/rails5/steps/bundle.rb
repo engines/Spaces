@@ -5,7 +5,7 @@ module Frameworks
     module Steps
       class Bundle < Docker::Files::Step
 
-        def content
+        def product
           %Q(
           RUN apt-get update &&\
             chown $ContUser /opt &&\
