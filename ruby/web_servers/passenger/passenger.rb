@@ -4,12 +4,17 @@ module WebServers
   module Passenger
     class Passenger < WebServer
 
-      # Dir["#{__dir__}/scripts/*"].each { |f| require f }
-      # Dir["#{__dir__}/steps/*"].each { |f| require f }
-
       class << self
         def identifier
           'passenger'
+        end
+
+        def step_precedence
+          @@passenger_step_precedence ||= {}
+        end
+
+        def script_lot
+          @@passenger_script_lot ||= []
         end
       end
 

@@ -4,7 +4,7 @@ require_relative '../texts/file_text'
 module Images
   class Subject < ::Installations::Collaborator
 
-    Dir["#{__dir__}/scripts/*/*"].each { |f| require f }
+    Dir["#{__dir__}/scripts/*"].each { |f| require f }
 
     class << self
       def script_collaborators
