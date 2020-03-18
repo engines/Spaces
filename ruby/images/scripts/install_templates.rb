@@ -1,4 +1,4 @@
-require_relative '../../../texts/script'
+require_relative '../../texts/one_time_script'
 
 module Images
   module Scripts
