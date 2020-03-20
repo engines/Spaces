@@ -5,20 +5,7 @@ module Images
     class BuildFunctions < Texts::OneTimeScript
       def body
         %Q(
-        install_template()
-        {
-        dest_file=`echo $file | sed "/^.*templates\//s///"`
-        dest_dir=`dirname $dest_file`
-        mkdir -p $dest_dir
-           # If soft link copy to destination
-         if test -h $dest_file
-          then
-            dest_file=`ls -l $dest_file |cut -f2 -d">"`
-          fi
-         echo Install template $dest_file
-         cp $file $dest_file
-        }
-
+      
         set_recursive_write_permissions()
           {
            #FixMe only change perms if not already set
