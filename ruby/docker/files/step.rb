@@ -8,11 +8,7 @@ module Docker
       attr_reader :product
 
       def home_app_path
-        descriptor.home_app_path
-      end
-
-      def descriptor
-        context.descriptor
+        context.home_app_path
       end
 
       def initialize(context)

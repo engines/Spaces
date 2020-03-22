@@ -56,6 +56,10 @@ module Installations
       end
     end
 
+    def home_app_path
+      descriptor.home_app_path
+    end
+
     def identifier
       descriptor.identifier
     end
