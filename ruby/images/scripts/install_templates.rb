@@ -11,12 +11,24 @@ module Images
         #
         # function will need some minor changes to support replacing the sed line ...
         %Q(
-        . #{build_script_path}/build_functions.sh
+        install_template()
+              {
+              dest_file=`echo $file | sed "/^.*application_files\//s///"`
+              dest_dir=`dirname $dest_file`
+              mkdir -p $dest_dir
+                 # If soft link copy to destination
+               if test -h $dest_file
+                then
+                  dest_file=`ls -l $dest_file |cut -f2 -d">"`
+                fi
+               echo Install template $dest_file
+               cp $file $dest_file
+              }
 
         cd /home
-         if test -d /home/engines/templates/
+         if test -d /home/engines/application_files/
           then
-           templates=`find /home/engines/templates/ -type f |grep -v keep_me`
+           templates=`find /home/engines/application_files/ -type f |grep -v keep_me`
             for file in $templates
               do
                install_template
