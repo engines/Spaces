@@ -13,7 +13,7 @@ module Images
 
       def script_lot
         @@subject_script_precedence ||= [
-          :build_functions, :install_templates, :persistent_files,
+          :build_functions, :injections, :persistent_files,
           :persistent_dirs, :persistent_source, :recursive_write_permissions, :set_user_identifier, :set_data_permissions, :write_permissions
         ]
       end
