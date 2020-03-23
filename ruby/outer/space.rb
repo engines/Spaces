@@ -34,8 +34,8 @@ module Outer
       route(:import, descriptor)
     end
 
-    def text_file_names_for(descriptor)
-      route(:text_file_names_for, descriptor)
+    def file_names_for(directory, descriptor)
+      maps[:"#{descriptor.extension}"].send(:file_names_for, directory, descriptor)
     end
 
     def route(method, descriptor)

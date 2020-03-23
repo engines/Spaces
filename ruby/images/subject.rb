@@ -24,19 +24,23 @@ module Images
     end
 
     def product
-      [reduced_scripts, texts].flatten
+      [collaborator_scripts, blueprinted_scripts, injections].flatten
     end
 
-    def reduced_scripts
-      all_scripts.uniq(&:uniqueness)
+    def collaborator_scripts
+      collaborators.map(&:scripts).flatten.compact.uniq(&:uniqueness)
     end
 
-    def all_scripts
-      collaborators.map(&:scripts).flatten.compact
+    def blueprinted_scripts
+      files_for('scripts')
     end
 
-    def texts
-      installation.text_file_names.map { |t| text_class.new(source_file_name: t, context: self) }
+    def injections
+      files_for('injections')
+    end
+
+    def files_for(directory)
+      installation.file_names_for(directory).map { |t| text_class.new(source_file_name: t, directory: directory, context: self) }
     end
 
     def text_class
