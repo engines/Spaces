@@ -79,7 +79,6 @@ module Installations
     end
 
     def file_names_for(directory)
-      pp descriptor
       universe.blueprints.file_names_for(directory, descriptor)
     end
 
