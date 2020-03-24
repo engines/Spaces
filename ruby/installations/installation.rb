@@ -9,6 +9,7 @@ require_relative '../nodules/nodules'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../users/user'
+require_relative '../file_permissions/file_permissions'
 
 module Installations
   class Installation < ::Spaces::Model
@@ -22,7 +23,8 @@ module Installations
           packages: Packages::Packages,
           bindings: Bindings::Bindings,
           anchor: Bindings::Anchor,
-          environment: Environments::Environment
+          environment: Environments::Environment,
+          file_permissions: FilePermissions::FilePermissions
         }
       end
 
