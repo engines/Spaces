@@ -2,7 +2,7 @@ require_relative '../../texts/one_time_script'
 
 module FilePermissions
   module Scripts
-    class WritePermissions < Texts::OneTimeScript
+    class FilePermissions < Texts::OneTimeScript
       def body
         #Notes for future improvements
         #
@@ -67,15 +67,15 @@ module FilePermissions
       end
 
       def file_permissions_commands
-        r = ''
-        context.all.each do |p|
-          if p[:recrusive] == false
-            r ="#{r} path=#{p[:path]}\m set_path_permissions \n"
+        context.all.map do |p|
+          if p.recursive?
+            "path=#{p.path} set_recursive_write_permissions"
           else
-            r ="#{r} path=#{p[:path]}\m set_recursive_write_permissions \n"
+            "path=#{p.path} set_path_permissions"
           end
-        end
+        end.join("\n")
       end
+
     end
   end
 end
