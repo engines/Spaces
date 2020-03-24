@@ -10,6 +10,9 @@ require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../users/user'
 require_relative '../file_permissions/file_permissions'
+require_relative '../persistent_dirs/persistent_dirs'
+require_relative '../persistent_files/persistent_files'
+
 
 module Installations
   class Installation < ::Spaces::Model
@@ -24,7 +27,9 @@ module Installations
           bindings: Bindings::Bindings,
           anchor: Bindings::Anchor,
           environment: Environments::Environment,
-          file_permissions: FilePermissions::FilePermissions
+          file_permissions: FilePermissions::FilePermissions,
+         persistent_dirs: PersistentDirs::PersistentDirs,
+          persistent_files: PersistentFiles::PersistentFiles
         }
       end
 
