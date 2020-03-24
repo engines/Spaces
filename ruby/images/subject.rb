@@ -8,13 +8,12 @@ module Images
 
     class << self
       def script_collaborators
-        @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :image_subject, :file_permissions]
+        @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :image_subject, :file_permissions, :persistent_dirs, :persistent_files]
       end
 
       def script_lot
         @@subject_script_precedence ||= [
-          :build_functions, :injections, :persistent_files,
-          :persistent_dirs, :persistent_source, :set_user_identifier, :set_data_permissions
+          :build_functions, :injections, :persistent_source, :set_user_identifier, :set_data_permissions
         ]
       end
     end

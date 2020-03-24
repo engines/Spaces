@@ -1,15 +1,11 @@
 require_relative '../spaces/model'
 require_relative '../images/collaboration'
 
-module FilePermissions
-  class FilePermission < ::Spaces::Model
+module PersistentFiles
+  class PersistentFile < ::Spaces::Model
     include Images::Collaboration
 
     relation_accessor :context
-
-    def recursive?
-      struct.recursive
-    end
 
     def subspace_path
       context.subspace_path
