@@ -1,6 +1,6 @@
 require_relative '../../docker/files/step'
 
-module Nodules
+module FilePermissions
   module Steps
     class RunScripts < Docker::Files::Step
 
