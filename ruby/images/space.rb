@@ -5,7 +5,7 @@ module Images
 
     alias_method :super_save, :save
 
-    def save(model)
+    def deep_save(model)
       model.product.map do |t|
         super_save(t)
         "#{t.path}"
