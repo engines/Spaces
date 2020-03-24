@@ -10,7 +10,7 @@ module Docker
 
       class << self
         def collaboration_precedence
-          @@collaboration_precedence ||= [:framework, :environment, :domain, :bindings, :os_packages, :nodules, :packages, :docker_file]
+          @@collaboration_precedence ||= [:framework, :environment, :domain, :bindings, :os_packages, :nodules, :packages, :file_permissions, :docker_file]
         end
 
         def step_group_precedence
@@ -20,7 +20,7 @@ module Docker
         def step_precedence
           @@docker_file_step_precedence ||= {
             early: [:adds],
-            late: [:preparations, :permissions, :templates, :source_protection, :seeds, :data_persistence, :installs, :source_persistence],
+            late: [:preparations, :templates, :source_protection, :seeds, :data_persistence, :installs, :source_persistence],
             last: [:final]
           }
         end

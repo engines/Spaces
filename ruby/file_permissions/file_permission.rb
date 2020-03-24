@@ -17,8 +17,12 @@ module FilePermissions
         @@file_permission_step_precedence ||= { late: [:run_scripts] }
       end
     end
-    
+
     relation_accessor :context
+
+    def recursive?
+      struct.recursive
+    end
 
     def subspace_path
       context.subspace_path
