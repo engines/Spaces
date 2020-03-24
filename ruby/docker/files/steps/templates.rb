@@ -6,7 +6,7 @@ module Docker
       class Templates < Step
 
         def product
-          '/scripts/install_templates.sh'
+          '/scripts/injections.sh'
         end
 
       end

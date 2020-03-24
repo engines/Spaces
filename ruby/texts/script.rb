@@ -36,12 +36,8 @@ module Texts
       "#{identifier}.sh"
     end
 
-    def descriptor
-      context.descriptor
-    end
-
     def home_app_path
-      descriptor.home_app_path
+      context.home_app_path
     end
 
     def subspace_path

@@ -19,12 +19,12 @@ module Installations
       duplicate(struct)
     end
 
-    def identifier
-      descriptor.identifier
+    def home_app_path
+      installation.home_app_path
     end
 
-    def descriptor
-      installation.descriptor
+    def identifier
+      installation.identifier
     end
 
     def initialize(struct: nil, installation: nil, section: nil)
