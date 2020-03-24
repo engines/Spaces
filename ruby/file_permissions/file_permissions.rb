@@ -13,7 +13,7 @@ module FilePermissions
       end
 
       def script_lot
-        @@file_permissions_script_lot ||= [:installation]
+        @@file_permissions_script_lot ||= [:file_permissions]
       end
     end
 

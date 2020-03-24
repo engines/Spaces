@@ -5,7 +5,7 @@ module FilePermissions
     class RunScripts < Docker::Files::Step
 
       def product
-        context.scripts.flatten.map { |s| "RUN #{s.path}" }
+        'RUN file_permissions.sh'
       end
 
     end
