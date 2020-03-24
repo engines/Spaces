@@ -2,7 +2,7 @@ require_relative '../../texts/one_time_script'
 
 module Images
   module Scripts
-    class InstallTemplates < Texts::OneTimeScript
+    class Injections < Texts::OneTimeScript
       def body
         #Notes for future improvements
         #find /home/engines/templates/ and the following for can be replaced with a list of template files using the following format
@@ -11,9 +11,9 @@ module Images
         #
         # function will need some minor changes to support replacing the sed line ...
         %Q(
-        install_template()
+        inject()
               {
-              dest_file=`echo $file | sed "/^.*application_files\//s///"`
+              dest_file=`echo $file | sed "/^.*injections\//s///"`
               dest_dir=`dirname $dest_file`
               mkdir -p $dest_dir
                  # If soft link copy to destination
@@ -26,12 +26,12 @@ module Images
               }
 
         cd /home
-         if test -d /home/engines/application_files/
+         if test -d /home/engines/injections/
           then
-           templates=`find /home/engines/application_files/ -type f |grep -v keep_me`
+           templates=`find /home/engines/injections/ -type f |grep -v keep_me`
             for file in $templates
               do
-               install_template
+               inject
               done
          fi
         )

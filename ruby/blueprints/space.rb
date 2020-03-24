@@ -31,8 +31,8 @@ module Blueprints
       FileUtils.mkdir_p(subspace_path_for(descriptor))
     end
 
-    def text_file_names_for(descriptor)
-      outer.text_file_names_for(descriptor)
+    def file_names_for(directory, descriptor)
+      outer.file_names_for(directory, descriptor)
     end
 
     def imported?(descriptor)

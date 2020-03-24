@@ -58,6 +58,14 @@ module Installations
       end
     end
 
+    def installation
+      itself
+    end
+
+    def home_app_path
+      descriptor.home_app_path
+    end
+
     def identifier
       descriptor.identifier
     end
@@ -72,8 +80,8 @@ module Installations
       end
     end
 
-    def text_file_names
-      universe.blueprints.text_file_names_for(descriptor)
+    def file_names_for(directory)
+      universe.blueprints.file_names_for(directory, descriptor)
     end
 
     def all_classes

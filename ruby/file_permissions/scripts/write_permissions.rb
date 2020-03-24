@@ -1,6 +1,6 @@
 require_relative '../../texts/one_time_script'
 
-module Images
+module FilePermissions
   module Scripts
     class WritePermissions < Texts::OneTimeScript
       def body
