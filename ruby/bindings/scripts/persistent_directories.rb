@@ -1,8 +1,8 @@
 require_relative '../../texts/one_time_script'
 
-module PersistentDirs
+module Bindings
   module Scripts
-    class PersistentDirs < Texts::OneTimeScript
+    class PersistentDirectories < Texts::OneTimeScript
       def body
         #Notes for future improvements
         #Most can be dynamically generated from persistent dirs in bp.
