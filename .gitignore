@@ -49,7 +49,4 @@ build-iPhoneSimulator/
 .rvmrc
 .DS_Store
 .irb_history
-x.rb
-ruby/x_*.rb
-ruby/x/*
 /.project
