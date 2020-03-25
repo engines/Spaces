@@ -8,7 +8,7 @@ module Images
 
     class << self
       def script_collaborators
-        @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :image_subject, :file_permissions, :persistent_dirs, :persistent_files]
+        @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :bindings, :image_subject, :file_permissions]
       end
 
       def script_lot
