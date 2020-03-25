@@ -1,6 +1,6 @@
 require_relative '../../texts/one_time_script'
 
-module Images
+module PersistentFiles
   module Scripts
     class PersistentFiles < Texts::OneTimeScript
       def body

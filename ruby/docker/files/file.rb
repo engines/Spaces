@@ -56,6 +56,10 @@ module Docker
         collaboration_precedence.map { |c| installation.send(c) }.compact
       end
 
+      def path
+        self.class.identifier
+      end
+
     end
   end
 end

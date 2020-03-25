@@ -23,7 +23,11 @@ module Images
     end
 
     def product
-      [collaborator_scripts, blueprinted_scripts, injections].flatten
+      [docker_file, collaborator_scripts, blueprinted_scripts, injections].flatten
+    end
+
+    def docker_file
+      @docker_file ||= installation.docker_file
     end
 
     def collaborator_scripts
