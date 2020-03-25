@@ -16,7 +16,7 @@ module Bindings
     end
 
     def named(name)
-      all.detect { |b| b.name == name }
+      all.detect { |b| b.name == name.to_s }
     end
 
     def product
@@ -25,6 +25,10 @@ module Bindings
 
     def binding_class
       Binding
+    end
+
+    def method_missing(m, *args, &block)
+      named(m) || super
     end
 
   end
