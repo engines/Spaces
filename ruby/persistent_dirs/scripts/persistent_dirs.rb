@@ -1,6 +1,6 @@
 require_relative '../../texts/one_time_script'
 
-module Images
+module PersistentDirs
   module Scripts
     class PersistentDirs < Texts::OneTimeScript
       def body
@@ -15,7 +15,7 @@ module Images
               echo "creating Destination $destination"
               mkdir -p `dirname $destination`
              fi
-        
+
              if ! test -d $dir_abs_path
               then
                echo "Creating Resolved path $dir_abs_path"
@@ -28,7 +28,7 @@ module Images
             echo "ln -s $ln_destination $dir_abs_path"
             ln -s $ln_destination $dir_abs_path
         }
-        
+
         if test -d /home/volumes/
                 then
                  for dir  in `cat /home/fs/vol_dir_maps | awk '{ print $1}'`
@@ -38,13 +38,13 @@ module Images
                    echo Dest Path $dest_path
                    ln_destination=$dest_path/$dir
                    destination=/home/fs/$dir
-       
+
                    echo $volume maps to $dest_path, for persistent dir $dir
                    dir_abs_path=resolve_abs_dir($dir)
                    setup_persistent_dir
           done
          fi
-        
+
         )
       end
       def resolve_abs_dir(d)
