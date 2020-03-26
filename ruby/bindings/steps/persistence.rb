@@ -6,8 +6,8 @@ module Bindings
 
       def product
       %Q(
-      'RUN persistent_directories.sh'
-      'RUN persistent_files.sh'
+      RUN persistent_directories.sh
+      RUN persistent_files.sh
       )
       end
 

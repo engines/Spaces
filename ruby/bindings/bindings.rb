@@ -14,7 +14,7 @@ module Bindings
       end
 
       def script_lot
-        @@bindings_script_lot ||= [:persistent_directories, :persistent_files]
+        @@bindings_script_lot ||= [:persistent_functions, :persistent_directories, :persistent_files]
       end
     end
 
