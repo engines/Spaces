@@ -9,11 +9,23 @@ module Texts
       :source
 
     def resolved
-      @resolved ||= immutables.zip(infixes.map(&:resolved)).flatten.join
+      @resolved ||= contains_interpolation? ? resolve : source
+    end
+
+    def resolve
+      immutables.zip(infixes.map(&:resolved)).flatten.join
+    end
+
+    def contains_interpolation?
+      source.include?(interpolation_marker)
+    rescue NoMethodError
+      false
+    rescue
+
     end
 
     def infixes
-      splits(:odd?).map { |s| infix_class.new(value: s, context: self) }
+      splits(:odd?).map { |s| infix_class.new(value: s, text: self) }
     end
 
     def infix_class

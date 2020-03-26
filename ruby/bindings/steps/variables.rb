@@ -6,7 +6,7 @@ module Bindings
 
       def product
         context.keys.map do |k|
-          "ENV #{context.name}_#{k} '#{context.resolved[k]}'"
+          "ENV #{context.identifier}_#{k} '#{context.resolved[k]}'"
         end
       end
 
