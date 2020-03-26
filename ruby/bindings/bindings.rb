@@ -34,6 +34,13 @@ module Bindings
       all.map { |a| a.product }
     end
 
+    def persistent(symbol)
+      all.inject({}) do |m, b|
+        m[b.identifier] = b.struct.dig(:persistent, symbol)
+        m
+      end.compact
+    end
+
     def binding_class
       Binding
     end
