@@ -27,7 +27,7 @@ module Bindings
     end
 
     def named(name)
-      all.detect { |b| b.name == name.to_s }
+      all.detect { |b| b.identifier == name.to_s }
     end
 
     def product

@@ -1,4 +1,5 @@
 require_relative '../docker/files/collaboration'
+require_relative '../texts/text'
 
 module Bindings
   class Binding < ::Spaces::Model
@@ -19,14 +20,13 @@ module Bindings
     def resolved
       @resolved ||=
         keys.inject(OpenStruct.new) do |s, k|
-          s[k] =
-            begin
-              send(*overrides[k].split(/[()]+/))
-            rescue TypeError, ArgumentError, NoMethodError
-              overrides[k]
-            end
+          s[k] = text_class.new(source: overrides[k], context: self).resolved
           s
         end
+    end
+
+    def text_class
+      Texts::Text
     end
 
     def keys
@@ -46,32 +46,21 @@ module Bindings
     end
 
     def anchor_installation
-      @anchor_installation ||=
-        begin
-          universe.installations.by(descriptor)
-        rescue Errno::ENOENT
-          universe.blueprints.by(descriptor).installation
-        end
+      @anchor_installation ||= universe.installations.by(descriptor)
+    rescue Errno::ENOENT
+      universe.blueprints.by(descriptor).installation
+    end
+
+    def installation
+      context.installation
     end
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    def host
-      "#{descriptor.identifier}.#{universe.host}"
-    end
-
-    def name
-      identifier
-    end
-
     def identifier
       struct.identifier || descriptor.identifier
-    end
-
-    def username
-      "#{name}_user"
     end
 
     def random(length)
