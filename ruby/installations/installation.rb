@@ -29,8 +29,8 @@ module Installations
         }
       end
 
-      def output_classes
-        @@output_classes ||= {
+      def product_classes
+        @@product_classes ||= {
           docker_file: Docker::Files::File,
           image_subject: Images::Subject
         }
@@ -44,7 +44,7 @@ module Installations
       end
 
       def all_classes
-        @@all_classes ||= blueprint_classes.merge(output_classes).merge(installation_classes)
+        @@all_classes ||= blueprint_classes.merge(product_classes).merge(installation_classes)
       end
 
       def blueprint_map
@@ -89,8 +89,8 @@ module Installations
       self.class.all_classes
     end
 
-    def output_classes
-      self.class.output_classes
+    def product_classes
+      self.class.product_classes
     end
 
     def installation_classes
@@ -125,7 +125,7 @@ module Installations
     end
 
     def necessary_keys
-      output_classes.keys + installation_classes.keys
+      product_classes.keys + installation_classes.keys
     end
 
     def method_missing(m, *args, &block)
