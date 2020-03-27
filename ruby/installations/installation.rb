@@ -11,7 +11,6 @@ require_relative '../bindings/anchor'
 require_relative '../users/user'
 require_relative '../file_permissions/file_permissions'
 
-
 module Installations
   class Installation < ::Spaces::Model
 
@@ -107,12 +106,12 @@ module Installations
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
-        m[k] = all_classes[k].prototype(installation: self, blueprint_label: blueprint_label_for(k)) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = all_classes[k].prototype(installation: self, blueprint_label: blueprint_label_for(k)) if blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end
 
-    def collaborator_blueprinted?(key)
+    def blueprinted?(key)
       struct[blueprint_label_for(key)]
     end
 
