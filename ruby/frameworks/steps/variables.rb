@@ -8,8 +8,8 @@ module Frameworks
         %Q(
         ENV CONTFSVolHome /home/fs/
         ENV ContUser '#{context.user_identifier}'
-        ENV FRAMEWORK '#{context.class_identifier}'
-        ENV RUNTIME '#{context.class_identifier}'
+        ENV FRAMEWORK '#{context.klass.identifier}'
+        ENV RUNTIME '#{context.klass.identifier}'
         ENV PORT '#{context.port}'
         )
       end

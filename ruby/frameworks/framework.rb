@@ -45,11 +45,7 @@ module Frameworks
     end
 
     def build_script_path
-       "#{super}/framework/#{class_identifier}"
-    end
-
-    def class_identifier
-      klass.identifier
+       "#{super}/framework/#{klass.identifier}"
     end
 
     def struct
