@@ -1,3 +1,4 @@
+require 'forwardable'
 require 'yaml'
 require 'json'
 require 'duplicate'
@@ -6,6 +7,7 @@ require_relative 'error'
 
 module Spaces
   class Model
+    extend Forwardable
 
     class << self
       def universe
@@ -38,32 +40,25 @@ module Spaces
       end
     end
 
-    attr_accessor :struct
+    attr_accessor :struct, :klass
     relation_accessor :descriptor
 
-    def product
-      self
-    end
+    delegate(
+      [:universe, :qualifier] => :klass,
+      product: :itself,
+      blueprint_identifier: :descriptor
+    )
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-
-    def blueprint_identifier
-      descriptor.blueprint_identifier
-    end
-
     def uniqueness
-      [self.class.name, identifier]
-    end
-
-    def qualifier
-      self.class.qualifier
+      [klass.name, identifier]
     end
 
     def file_path
-      "#{subspace_path}/#{self.class.identifier}"
+      "#{subspace_path}/#{klass.identifier}"
     end
 
     def subspace_path
@@ -86,8 +81,8 @@ module Spaces
       Descriptor
     end
 
-    def universe
-      self.class.universe
+    def klass
+      @klass ||= self.class
     end
 
     def initialize(struct: nil)
