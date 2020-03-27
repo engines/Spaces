@@ -1,9 +1,8 @@
-require_relative '../installations/collaborator'
-require_relative '../docker/files/collaboration'
+require_relative '../installations/division'
 require_relative 'binding'
 
 module Bindings
-  class Bindings < ::Installations::Collaborator
+  class Bindings < ::Installations::Division
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }

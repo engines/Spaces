@@ -1,8 +1,8 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 require_relative 'file_permission'
 
 module FilePermissions
-  class FilePermissions < ::Installations::Collaborator
+  class FilePermissions < ::Installations::Division
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }

@@ -1,4 +1,4 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 
 module Nodules
   class Nodules < ::Installations::Collaborator

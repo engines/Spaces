@@ -1,21 +1,10 @@
-require_relative '../spaces/model'
+require_relative '../installations/subdivision'
 
 module OsPackages
-  class OsPackage < ::Spaces::Model
-
-    relation_accessor :context
+  class OsPackage < ::Installations::Subdivision
 
     def subspace_path
-      "#{context.subspace_path}/#{build_script_path}"
-    end
-
-    def build_script_path
-      context.build_script_path
-    end
-
-    def initialize(struct:, context:)
-      self.struct = struct
-      self.context = context
+      "#{super}/#{build_script_path}"
     end
 
   end
