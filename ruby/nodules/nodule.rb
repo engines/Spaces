@@ -17,10 +17,6 @@ module Nodules
       end
     end
 
-    def subspace_path
-      context.subspace_path
-    end
-
     def build_script_path
       "#{context.build_script_path}/#{type}"
     end

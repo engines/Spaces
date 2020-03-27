@@ -7,9 +7,5 @@ module FilePermissions
       struct.recursive
     end
 
-    def subspace_path
-      context.subspace_path
-    end
-
   end
 end

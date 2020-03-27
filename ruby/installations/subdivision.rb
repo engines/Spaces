@@ -9,7 +9,9 @@ module Installations
 
     relation_accessor :context
 
-    delegate(installation: :context)
+    delegate(
+      [:installation,:subspace_path] => :context
+    )
 
     def initialize(struct:, context:)
       self.struct = struct
