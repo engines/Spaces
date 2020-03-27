@@ -1,16 +1,9 @@
-require_relative '../spaces/model'
-require_relative '../images/collaboration'
-require_relative '../docker/files/collaboration'
+require_relative '../installations/subdivision'
 
 module Nodules
-  class Nodule < ::Spaces::Model
-    include Images::Collaboration
-    include Docker::Files::Collaboration
-
-    relation_accessor :context
+  class Nodule < ::Installations::Subdivision
 
     class << self
-
       def qualifier
         name.split('::').last.downcase
       end
@@ -34,11 +27,6 @@ module Nodules
 
     def identifier
       name
-    end
-
-    def initialize(struct:, context:)
-      self.struct = struct
-      self.context = context
     end
 
   end

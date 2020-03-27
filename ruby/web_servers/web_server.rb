@@ -1,12 +1,7 @@
-require_relative '../images/collaboration'
-require_relative '../docker/files/collaboration'
+require_relative '../installations/subdivision'
 
 module WebServers
-  class WebServer < ::Spaces::Model
-    include Images::Collaboration
-    include Docker::Files::Collaboration
-
-    relation_accessor :context
+  class WebServer < ::Installations::Subdivision
 
     def struct
       @struct ||= context.struct.web_server
@@ -21,7 +16,7 @@ module WebServers
     end
 
     def class_identifier
-      self.class.identifier
+      klass.identifier
     end
 
     def initialize(context)

@@ -1,9 +1,7 @@
-require_relative '../spaces/model'
-require_relative '../images/collaboration'
+require_relative '../installations/subdivision'
 
 module Packages
-  class Package < ::Spaces::Model
-    include Images::Collaboration
+  class Package < ::Installations::Subdivision
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
 
@@ -13,19 +11,12 @@ module Packages
       end
     end
 
-    relation_accessor :context
-
     def subspace_path
       context.subspace_path
     end
 
     def build_script_path
        context.build_script_path
-    end
-
-    def initialize(struct:, context:)
-      self.struct = struct
-      self.context = context
     end
 
   end
