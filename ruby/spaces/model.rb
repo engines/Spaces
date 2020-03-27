@@ -43,9 +43,11 @@ module Spaces
     attr_accessor :struct, :klass
     relation_accessor :descriptor
 
+    alias_method :product, :itself
+
+
     delegate(
       [:universe, :qualifier] => :klass,
-      product: :itself,
       blueprint_identifier: :descriptor
     )
 
