@@ -11,10 +11,6 @@ module Nodules
       def script_lot
         @@nodule_script_lot ||= [:installation]
       end
-
-      def step_precedence
-        @@nodule_step_precedence ||= {}
-      end
     end
 
     def build_script_path
