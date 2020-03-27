@@ -16,9 +16,9 @@ module Frameworks
       end
     end
 
-    alias_method :super_build_script_path, :build_script_path
-
     relation_accessor :web_server
+
+    alias_method :super_build_script_path, :build_script_path
 
     def scripts
       [super, web_server.scripts]
@@ -49,7 +49,7 @@ module Frameworks
     end
 
     def class_identifier
-      self.class.identifier
+      klass.identifier
     end
 
     def struct

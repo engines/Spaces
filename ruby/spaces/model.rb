@@ -64,7 +64,7 @@ module Spaces
     end
 
     def subspace_path
-      send(self.class.subspace_path_method)
+      send(klass.subspace_path_method)
     end
 
     def namespaced_name(namespace, symbol)

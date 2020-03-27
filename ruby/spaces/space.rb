@@ -10,6 +10,8 @@ module Spaces
       end
     end
 
+    delegate([:identifier, :universe] => :klass)
+
     def by(descriptor, klass = model_class)
       f = File.open("#{reading_name_for(descriptor, klass)}.yaml", 'r')
       begin
@@ -70,16 +72,9 @@ module Spaces
       "#{universe.path}/#{identifier}"
     end
 
-    def identifier
-      self.class.identifier
-    end
-
     def ensure_space
       FileUtils.mkdir_p(path)
     end
 
-    def universe
-      self.class.universe
-    end
   end
 end
