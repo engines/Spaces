@@ -1,8 +1,8 @@
-require_relative '../installations/collaboration'
+require_relative '../spaces/constantizing'
 
 module Images
   module Collaboration
-    include Installations::Collaboration
+    include Spaces::Constantizing
 
     def script_lot
       self.class.script_lot
@@ -15,6 +15,6 @@ module Images
     def build_script_path
       'build/scripts'
     end
-    
+
   end
 end

@@ -1,9 +1,9 @@
-require_relative '../../installations/collaboration'
+require_relative '../../spaces/constantizing'
 
 module Docker
   module Files
     module Collaboration
-      include Installations::Collaboration
+      include Spaces::Constantizing
 
       def step_precedence
         self.class.step_precedence

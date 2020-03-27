@@ -1,5 +1,5 @@
-module Installations
-  module Collaboration
+module Spaces
+  module Constantizing
 
     def class_for(concern, symbol)
       Module.const_get(namespaced_name(namespace_for(concern), symbol))

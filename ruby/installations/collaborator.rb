@@ -15,16 +15,10 @@ module Installations
 
     relation_accessor :installation
 
+    delegate([:home_app_path, :identifier] => :installation)
+
     def product
       duplicate(struct)
-    end
-
-    def home_app_path
-      installation.home_app_path
-    end
-
-    def identifier
-      installation.identifier
     end
 
     def initialize(struct: nil, installation: nil, blueprint_label: nil)
