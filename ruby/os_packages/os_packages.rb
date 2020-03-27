@@ -1,8 +1,8 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 require_relative 'os_package'
 
 module OsPackages
-  class OsPackages < ::Installations::Collaborator
+  class OsPackages < ::Installations::Division
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }

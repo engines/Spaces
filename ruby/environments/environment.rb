@@ -1,15 +1,13 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 
 module Environments
-  class Environment < ::Installations::Collaborator
+  class Environment < ::Installations::Division
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
     class << self
       def step_precedence
-        @@environment_step_precedence ||= {
-          anywhere: [:variables, :locale, :ports]
-        }
+        @@environment_step_precedence ||= { anywhere: [:variables, :locale, :ports] }
       end
     end
 

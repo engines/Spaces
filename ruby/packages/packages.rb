@@ -1,8 +1,8 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Installations::Collaborator
+  class Packages < ::Installations::Division
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 

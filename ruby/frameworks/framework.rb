@@ -1,7 +1,7 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 
 module Frameworks
-  class Framework < ::Installations::Collaborator
+  class Framework < ::Installations::Division
 
     Dir["#{__dir__}/scripts/*"].each { |f| require f }
     Dir["#{__dir__}/steps/*"].each { |f| require f }
