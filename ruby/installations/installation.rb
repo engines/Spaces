@@ -54,7 +54,7 @@ module Installations
         }
       end
 
-      def resolvable_collaborator_keys
+      def mutable_divisions
         [:bindings, :user]
       end
     end
@@ -73,7 +73,7 @@ module Installations
 
     def product
       struct.tap do |s|
-        resolvable_collaborator_keys.each do |k|
+        mutable_divisions.each do |k|
           if c = collaborators[k]
             s[blueprint_label_for(k)] = c.product
           end
@@ -97,8 +97,8 @@ module Installations
       self.class.installation_classes
     end
 
-    def resolvable_collaborator_keys
-      self.class.resolvable_collaborator_keys
+    def mutable_divisions
+      self.class.mutable_divisions
     end
 
     def blueprint_label_for(key)
