@@ -60,49 +60,19 @@ module Universal
       end
     end
 
-    def containers
-      self.class.containers
-    end
-
-    def installations
-      self.class.installations
-    end
-
-    def images
-      self.class.images
-    end
-
-    def frameworks
-      self.class.frameworks
-    end
-
-    def web_servers
-      self.class.web_servers
-    end
-
-    def nodules
-      self.class.nodules
-    end
-
-    def environments
-      self.class.environments
-    end
-
-    def domains
-      self.class.domains
-    end
-
-    def users
-      self.class.users
-    end
-
-    def blueprints
-      self.class.blueprints
-    end
-
-    def outer
-      self.class.outer
-    end
+    delegate([
+      :containers,
+      :installations,
+      :images,
+      :frameworks,
+      :web_servers,
+      :nodules,
+      :environments,
+      :domains,
+      :users,
+      :blueprints,
+      :outer
+    ] => :klass)
 
     def path
       "/opt/engines/#{identifier}"

@@ -11,7 +11,6 @@ require_relative '../bindings/anchor'
 require_relative '../users/user'
 require_relative '../file_permissions/file_permissions'
 
-
 module Installations
   class Installation < ::Spaces::Model
 
@@ -29,8 +28,8 @@ module Installations
         }
       end
 
-      def output_classes
-        @@output_classes ||= {
+      def product_classes
+        @@product_classes ||= {
           docker_file: Docker::Files::File,
           image_subject: Images::Subject
         }
@@ -44,38 +43,37 @@ module Installations
       end
 
       def all_classes
-        @@all_classes ||= blueprint_classes.merge(output_classes).merge(installation_classes)
+        @@all_classes ||= blueprint_classes.merge(product_classes).merge(installation_classes)
       end
 
-      def section_map
-        @@section_map ||= {
+      def blueprint_map
+        @@blueprint_map ||= {
           nodules: :modules,
           anchor: :binding_anchor
         }
       end
 
-      def resolvable_collaborator_keys
+      def mutable_divisions
         [:bindings, :user]
       end
     end
 
-    def installation
-      itself
-    end
-
-    def home_app_path
-      descriptor.home_app_path
-    end
-
-    def identifier
-      descriptor.identifier
-    end
+    delegate(
+      [
+        :all_classes,
+        :product_classes,
+        :installation_classes,
+        :mutable_divisions
+      ] => :klass,
+      installation: :itself,
+      [:identifier, :home_app_path] => :descriptor
+    )
 
     def product
       struct.tap do |s|
-        resolvable_collaborator_keys.each do |k|
+        mutable_divisions.each do |k|
           if c = collaborators[k]
-            s[section_for(k)] = c.product
+            s[blueprint_label_for(k)] = c.product
           end
         end
       end
@@ -85,35 +83,19 @@ module Installations
       universe.blueprints.file_names_for(directory, descriptor)
     end
 
-    def all_classes
-      self.class.all_classes
-    end
-
-    def output_classes
-      self.class.output_classes
-    end
-
-    def installation_classes
-      self.class.installation_classes
-    end
-
-    def resolvable_collaborator_keys
-      self.class.resolvable_collaborator_keys
-    end
-
-    def section_for(key)
-      self.class.section_map[key] || key
+    def blueprint_label_for(key)
+      klass.blueprint_map[key] || key
     end
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
-        m[k] = all_classes[k].prototype(installation: self, section: section_for(k)) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = all_classes[k].prototype(installation: self, blueprint_label: blueprint_label_for(k)) if blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end
 
-    def collaborator_blueprinted?(key)
-      struct[section_for(key)]
+    def blueprinted?(key)
+      struct[blueprint_label_for(key)]
     end
 
     def collaborate_anyway?(key)
@@ -125,7 +107,7 @@ module Installations
     end
 
     def necessary_keys
-      output_classes.keys + installation_classes.keys
+      product_classes.keys + installation_classes.keys
     end
 
     def method_missing(m, *args, &block)

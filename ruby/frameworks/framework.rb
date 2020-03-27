@@ -7,7 +7,7 @@ module Frameworks
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
     class << self
-      def prototype(installation:, section:)
+      def prototype(installation:, blueprint_label:)
         universe.frameworks.by(installation)
       end
 
@@ -16,9 +16,9 @@ module Frameworks
       end
     end
 
-    alias_method :super_build_script_path, :build_script_path
-
     relation_accessor :web_server
+
+    alias_method :super_build_script_path, :build_script_path
 
     def scripts
       [super, web_server.scripts]
@@ -49,7 +49,7 @@ module Frameworks
     end
 
     def class_identifier
-      self.class.identifier
+      klass.identifier
     end
 
     def struct

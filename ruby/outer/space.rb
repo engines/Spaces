@@ -22,6 +22,8 @@ module Outer
       end
     end
 
+    delegate [:git, :uri, :maps] => :klass
+
     def encloses?(descriptor)
       route(:encloses?, descriptor)
     end
@@ -40,18 +42,6 @@ module Outer
 
     def route(method, descriptor)
       maps[:"#{descriptor.extension}"].send(method, descriptor)
-    end
-
-    def git
-      self.class.git
-    end
-
-    def uri
-      self.class.uri
-    end
-
-    def maps
-      self.class.maps
     end
 
   end
