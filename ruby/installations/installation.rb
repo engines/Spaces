@@ -47,8 +47,8 @@ module Installations
         @@all_classes ||= blueprint_classes.merge(output_classes).merge(installation_classes)
       end
 
-      def section_map
-        @@section_map ||= {
+      def blueprint_map
+        @@blueprint_map ||= {
           nodules: :modules,
           anchor: :binding_anchor
         }
@@ -75,7 +75,7 @@ module Installations
       struct.tap do |s|
         resolvable_collaborator_keys.each do |k|
           if c = collaborators[k]
-            s[section_for(k)] = c.product
+            s[blueprint_label_for(k)] = c.product
           end
         end
       end
@@ -101,19 +101,19 @@ module Installations
       self.class.resolvable_collaborator_keys
     end
 
-    def section_for(key)
-      self.class.section_map[key] || key
+    def blueprint_label_for(key)
+      self.class.blueprint_map[key] || key
     end
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
-        m[k] = all_classes[k].prototype(installation: self, section: section_for(k)) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = all_classes[k].prototype(installation: self, blueprint_label: blueprint_label_for(k)) if collaborator_blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end
 
     def collaborator_blueprinted?(key)
-      struct[section_for(key)]
+      struct[blueprint_label_for(key)]
     end
 
     def collaborate_anyway?(key)

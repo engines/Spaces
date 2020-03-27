@@ -8,8 +8,8 @@ module Installations
     include Docker::Files::Collaboration
 
     class << self
-      def prototype(installation:, section:)
-        new(installation: installation, section: section)
+      def prototype(installation:, blueprint_label:)
+        new(installation: installation, blueprint_label: blueprint_label)
       end
     end
 
@@ -27,9 +27,9 @@ module Installations
       installation.identifier
     end
 
-    def initialize(struct: nil, installation: nil, section: nil)
+    def initialize(struct: nil, installation: nil, blueprint_label: nil)
       self.installation = installation
-      self.struct = struct || installation&.struct[section] || default
+      self.struct = struct || installation&.struct[blueprint_label] || default
     end
 
     def default; end

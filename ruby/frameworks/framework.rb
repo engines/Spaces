@@ -7,7 +7,7 @@ module Frameworks
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
     class << self
-      def prototype(installation:, section:)
+      def prototype(installation:, blueprint_label:)
         universe.frameworks.by(installation)
       end
 
