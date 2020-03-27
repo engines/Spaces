@@ -10,7 +10,7 @@ module Installations
     relation_accessor :context
 
     delegate(
-      [:installation,:subspace_path] => :context
+      [:installation, :subspace_path, :build_script_path] => :context
     )
 
     def initialize(struct:, context:)

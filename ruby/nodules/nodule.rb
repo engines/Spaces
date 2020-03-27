@@ -18,7 +18,7 @@ module Nodules
     end
 
     def build_script_path
-      "#{context.build_script_path}/#{type}"
+      "#{super}/#{type}"
     end
 
     def identifier

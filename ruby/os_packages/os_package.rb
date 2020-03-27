@@ -7,9 +7,5 @@ module OsPackages
       "#{super}/#{build_script_path}"
     end
 
-    def build_script_path
-      context.build_script_path
-    end
-
   end
 end
