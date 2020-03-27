@@ -9,8 +9,8 @@ module Docker
       Dir["#{__dir__}/steps/*"].each { |f| require f }
 
       class << self
-        def collaboration_precedence
-          @@collaboration_precedence ||= [:framework, :environment, :domain, :os_packages, :nodules, :packages, :file_permissions, :bindings, :docker_file]
+        def division_precedence
+          @@division_precedence ||= [:framework, :environment, :domain, :os_packages, :nodules, :packages, :file_permissions, :bindings, :docker_file]
         end
 
         def step_group_precedence
@@ -26,13 +26,9 @@ module Docker
         end
       end
 
-      def collaboration_precedence
-        self.class.collaboration_precedence
-      end
-
-      def step_group_precedence
-        self.class.step_group_precedence
-      end
+      delegate(
+        [:division_precedence, :step_group_precedence] => :klass
+      )
 
       def product
         text_class.new(source: source, context: self).resolved
@@ -53,11 +49,11 @@ module Docker
       end
 
       def collaborators
-        collaboration_precedence.map { |c| installation.send(c) }.compact
+        division_precedence.map { |c| installation.send(c) }.compact
       end
 
       def path
-        self.class.identifier
+        klass.identifier
       end
 
     end
