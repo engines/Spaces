@@ -2,7 +2,7 @@ require_relative '../../spaces/constantizing'
 
 module Docker
   module Files
-    module Collaboration
+    module Production
       include Spaces::Constantizing
 
       def step_precedence

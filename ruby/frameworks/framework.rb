@@ -3,18 +3,16 @@ require_relative '../installations/division'
 module Frameworks
   class Framework < ::Installations::Division
 
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
-
     class << self
       def prototype(installation:, blueprint_label:)
         universe.frameworks.by(installation)
       end
 
-      def script_lot
-        @@framework_script_lot ||= [:installation, :finalisation, :chown_app_dir]
-      end
+      def here; __dir__; end
     end
+
+    require_files_in :steps
+    require_files_in :scripts
 
     relation_accessor :web_server
 
@@ -30,6 +28,10 @@ module Frameworks
 
     def web_server
       @web_server ||= universe.web_servers.by(self)
+    end
+
+    def all
+      [web_server]
     end
 
     def port

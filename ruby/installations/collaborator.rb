@@ -1,11 +1,7 @@
-require_relative '../spaces/model'
-require_relative '../images/collaboration'
-require_relative '../docker/files/collaboration'
+require_relative 'production'
 
 module Installations
-  class Collaborator < ::Spaces::Model
-    include Images::Collaboration
-    include Docker::Files::Collaboration
+  class Collaborator < Production
 
     class << self
       def prototype(installation:, blueprint_label:)
@@ -14,15 +10,13 @@ module Installations
     end
 
     relation_accessor :installation
+    attr_accessor :blueprint_label
 
     delegate([:home_app_path, :identifier] => :installation)
 
-    def product
-      duplicate(struct)
-    end
-
     def initialize(struct: nil, installation: nil, blueprint_label: nil)
       self.installation = installation
+      self.blueprint_label = blueprint_label
       self.struct = struct || installation&.struct[blueprint_label] || default
     end
 

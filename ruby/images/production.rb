@@ -1,7 +1,7 @@
 require_relative '../spaces/constantizing'
 
 module Images
-  module Collaboration
+  module Production
     include Spaces::Constantizing
 
     def script_lot
@@ -9,7 +9,7 @@ module Images
     end
 
     def scripts
-      script_lot.map { |s| class_for('Scripts', s).new(self) }
+      script_lot&.map { |s| class_for('Scripts', s).new(self) }
     end
 
     def build_script_path
