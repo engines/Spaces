@@ -1,7 +1,7 @@
 require_relative '../spaces/constantizing'
 
 module Images
-  module Collaboration
+  module Production
     include Spaces::Constantizing
 
     def script_lot

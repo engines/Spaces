@@ -1,16 +1,7 @@
-require_relative '../spaces/model'
-require_relative '../docker/files/collaboration'
-require_relative '../images/collaboration'
+require_relative 'production'
 
 module Installations
-  class Subdivision < ::Spaces::Model
-    include Docker::Files::Collaboration
-    include Images::Collaboration
-
-    class << self
-      def step_precedence; end
-      def script_lot; end
-    end
+  class Subdivision < Production
 
     relation_accessor :context
 
