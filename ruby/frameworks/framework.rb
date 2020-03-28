@@ -24,15 +24,16 @@ module Frameworks
       [super, web_server.scripts]
     end
 
-    def all
-    end
-
     def layers_for(group)
       [super, web_server.layers_for(group)]
     end
 
     def web_server
       @web_server ||= universe.web_servers.by(self)
+    end
+
+    def all
+      [web_server]
     end
 
     def port
