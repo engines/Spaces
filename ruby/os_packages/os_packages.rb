@@ -17,15 +17,11 @@ module OsPackages
       end
     end
 
-    def all
-      @all ||= installation.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
-    end
-
     def build_script_path
       "#{super}/os_packages"
     end
 
-    def os_package_class
+    def subdivision_class
       OsPackage
     end
 

@@ -17,11 +17,7 @@ module FilePermissions
       end
     end
 
-    def all
-      @all ||= installation.struct.file_permissions.map { |s| file_permission_class.new(struct: s, context: self) }
-    end
-
-    def file_permission_class
+    def subdivision_class
       FilePermission
     end
 

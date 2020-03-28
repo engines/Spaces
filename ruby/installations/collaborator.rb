@@ -14,6 +14,7 @@ module Installations
     end
 
     relation_accessor :installation
+    attr_accessor :blueprint_label
 
     delegate([:home_app_path, :identifier] => :installation)
 
@@ -23,6 +24,7 @@ module Installations
 
     def initialize(struct: nil, installation: nil, blueprint_label: nil)
       self.installation = installation
+      self.blueprint_label = blueprint_label
       self.struct = struct || installation&.struct[blueprint_label] || default
     end
 

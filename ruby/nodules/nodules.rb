@@ -11,8 +11,8 @@ module Nodules
       end
     end
 
-    def all
-      @all ||= installation.struct.modules.map { |s| universe.nodules.by(struct: s, context: self) }
+    def subdivision_for(struct)
+      universe.nodules.by(struct: struct, context: self)
     end
 
     def build_script_path

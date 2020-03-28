@@ -12,15 +12,11 @@ module Packages
       end
     end
 
-    def all
-      @all ||= installation.struct.packages.map { |s| package_class.new(struct: s, context: self) }
-    end
-
     def build_script_path
       "#{super}/packages"
     end
 
-    def package_class
+    def subdivision_class
       Package
     end
 

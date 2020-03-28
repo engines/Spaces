@@ -21,10 +21,6 @@ module Bindings
       [super, all.map { |a| a.layers_for(group) }]
     end
 
-    def all
-      @all ||= installation.struct.bindings.map { |d| binding_class.new(struct: d, context: self) }
-    end
-
     def named(name)
       all.detect { |b| b.identifier == name.to_s }
     end
@@ -40,7 +36,7 @@ module Bindings
       end.compact
     end
 
-    def binding_class
+    def subdivision_class
       Binding
     end
 
