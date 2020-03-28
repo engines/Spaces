@@ -24,6 +24,9 @@ module Frameworks
       [super, web_server.scripts]
     end
 
+    def all
+    end
+
     def layers_for(group)
       [super, web_server.layers_for(group)]
     end

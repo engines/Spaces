@@ -9,7 +9,7 @@ module Images
     end
 
     def scripts
-      script_lot.map { |s| class_for('Scripts', s).new(self) }
+      script_lot&.map { |s| class_for('Scripts', s).new(self) }
     end
 
     def build_script_path

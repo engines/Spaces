@@ -7,6 +7,11 @@ module Installations
     include Docker::Files::Collaboration
     include Images::Collaboration
 
+    class << self
+      def step_precedence; end
+      def script_lot; end
+    end
+
     relation_accessor :context
 
     delegate(

@@ -1,7 +1,7 @@
 require_relative '../installations/division'
 
 module Nodules
-  class Nodules < ::Installations::Collaborator
+  class Nodules < ::Installations::Division
 
     Dir["#{__dir__}/steps/*"].each { |f| require f }
 
@@ -9,10 +9,6 @@ module Nodules
       def step_precedence
         @@nodules_step_precedence ||= { late: [:run_scripts] }
       end
-    end
-
-    def scripts
-      all.map(&:scripts)
     end
 
     def all

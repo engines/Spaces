@@ -16,10 +16,6 @@ module Packages
       @all ||= installation.struct.packages.map { |s| package_class.new(struct: s, context: self) }
     end
 
-    def scripts
-      all.map(&:scripts).flatten.uniq(&:uniqueness)
-    end
-
     def build_script_path
       "#{super}/packages"
     end
