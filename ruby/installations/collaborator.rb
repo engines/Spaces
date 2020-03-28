@@ -8,6 +8,20 @@ module Installations
     include Docker::Files::Collaboration
 
     class << self
+      def step_precedence; end
+
+      def script_lot
+        files_in(:scripts).map { |f| File.basename(f, '.rb') }
+      end
+
+      def require_files_in(folder)
+        files_in(folder).each { |f| require f }
+      end
+
+      def files_in(folder)
+        Dir["#{here}/#{folder}/*"]
+      end
+
       def prototype(installation:, blueprint_label:)
         new(installation: installation, blueprint_label: blueprint_label)
       end

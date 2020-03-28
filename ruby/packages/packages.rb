@@ -4,13 +4,16 @@ require_relative 'package'
 module Packages
   class Packages < ::Installations::Division
 
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
-
     class << self
       def step_precedence
-        @@packages_step_precedence ||= { late: [:run_scripts] }
+        { late: [:run_scripts] }
       end
+
+      def script_lot; end
+      def here; __dir__; end
     end
+
+    require_files_in :steps
 
     def build_script_path
       "#{super}/packages"

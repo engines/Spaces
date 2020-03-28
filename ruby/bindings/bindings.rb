@@ -4,18 +4,16 @@ require_relative 'binding'
 module Bindings
   class Bindings < ::Installations::Division
 
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
-
     class << self
       def step_precedence
-        @@bindings_step_precedence ||= { late: [:persistence] }
+        { late: [:persistence] }
       end
 
-      def script_lot
-        @@bindings_script_lot ||= [:persistent_directories, :persistent_files]
-      end
+      def here; __dir__; end
     end
+
+    require_files_in :steps
+    require_files_in :scripts
 
     def layers_for(group)
       [super, all.map { |a| a.layers_for(group) }]

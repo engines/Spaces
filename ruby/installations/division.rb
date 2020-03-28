@@ -3,11 +3,6 @@ require_relative 'collaborator'
 module Installations
   class Division < Collaborator
 
-    class << self
-      def step_precedence; end
-      def script_lot; end
-    end
-
     def all
       @all ||= struct.map { |s| subdivision_for(s) }
     end

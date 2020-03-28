@@ -4,18 +4,16 @@ require_relative 'file_permission'
 module FilePermissions
   class FilePermissions < ::Installations::Division
 
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
-
     class << self
       def step_precedence
-        @@file_permissions_step_precedence ||= { late: [:run_scripts] }
+        { late: [:run_scripts] }
       end
 
-      def script_lot
-        @@file_permissions_script_lot ||= [:file_permissions]
-      end
+      def here; __dir__; end
     end
+
+    require_files_in :steps
+    require_files_in :scripts
 
     def subdivision_class
       FilePermission
