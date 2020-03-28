@@ -3,13 +3,11 @@ require_relative '../installations/subdivision'
 module Packages
   class Package < ::Installations::Subdivision
 
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-
     class << self
-      def script_lot
-        @@package_script_lot ||= [:preparation, :installation]
-      end
+      def here; __dir__; end
     end
+
+    require_files_in :scripts
 
   end
 end
