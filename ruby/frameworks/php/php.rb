@@ -16,9 +16,7 @@ module Frameworks
           }
         end
 
-        def inheritance_paths
-          [__dir__, super]
-        end
+        def inheritance_paths; [__dir__, super]; end
       end
 
       require_files_in :steps

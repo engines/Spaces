@@ -17,13 +17,10 @@ module Frameworks
           }
         end
 
-        def inheritance_paths
-          [__dir__, super]
-        end
+        def inheritance_paths; [__dir__, super]; end
       end
 
-      require_files_in :steps
-      require_files_in :scripts
+      require_files_in :steps, :scripts
 
       def user_identifier
         'ruby'

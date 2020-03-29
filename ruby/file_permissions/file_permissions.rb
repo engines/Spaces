@@ -12,8 +12,7 @@ module FilePermissions
       def inheritance_paths; __dir__; end
     end
 
-    require_files_in :steps
-    require_files_in :scripts
+    require_files_in :steps, :scripts
 
     def subdivision_class
       FilePermission
