@@ -14,15 +14,15 @@ module Installations
         files_in(:scripts).map { |f| File.basename(f, '.rb') }
       end
 
-      def require_files_in(folder)
-        files_in(folder).each { |f| require f }
+      def require_files_in(*folders)
+        [*folders].each { |f| files_in(f).each { |f| require f } }
       end
 
       def files_in(folder)
-        Dir["#{here}/#{folder}/*"]
+        [inheritance_paths].flatten.map { |h| Dir["#{h}/#{folder}/*"] }.flatten
       end
 
-      def here; end
+      def inheritance_paths; end
     end
 
     def product
