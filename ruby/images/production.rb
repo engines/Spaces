@@ -5,7 +5,7 @@ module Images
     include Spaces::Constantizing
 
     def script_lot
-      self.class.script_lot
+      klass.script_lot
     end
 
     def scripts

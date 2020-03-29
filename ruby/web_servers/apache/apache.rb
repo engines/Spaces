@@ -13,7 +13,7 @@ module WebServers
         end
 
         def step_precedence
-          @@apache_step_precedence ||= { last: [:configure] }
+          { last: [:configure] }
         end
 
         def script_lot
