@@ -7,10 +7,6 @@ module Nodules
       def qualifier
         name.split('::').last.downcase
       end
-
-      def script_lot
-        @@nodule_script_lot ||= [:installation]
-      end
     end
 
     def build_script_path

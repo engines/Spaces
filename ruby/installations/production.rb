@@ -19,10 +19,10 @@ module Installations
       end
 
       def files_in(folder)
-        Dir["#{here}/#{folder}/*"]
+        [inheritance_paths].flatten.map { |h| Dir["#{h}/#{folder}/*"] }.flatten
       end
 
-      def here; end
+      def inheritance_paths; end
     end
 
     def product

@@ -3,13 +3,12 @@ require_relative '../nodule'
 module Nodules
   module Pear
     class Pear < Nodule
-      Dir["#{__dir__}/scripts/*"].each { |f| require f }
 
       class << self
-        def script_lot
-          @@pear_script_lot ||= [:preparation, :installation, :finalisation]
-        end
+        def inheritance_paths; __dir__; end
       end
+
+      require_files_in :scripts
 
     end
   end
