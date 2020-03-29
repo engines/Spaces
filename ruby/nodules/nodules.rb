@@ -8,7 +8,7 @@ module Nodules
         { late: [:run_scripts] }
       end
 
-      def here; __dir__; end
+      def inheritance_paths; __dir__; end
     end
 
     require_files_in :steps

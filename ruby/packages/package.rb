@@ -4,7 +4,7 @@ module Packages
   class Package < ::Installations::Subdivision
 
     class << self
-      def here; __dir__; end
+      def inheritance_paths; __dir__; end
     end
 
     require_files_in :scripts
