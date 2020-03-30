@@ -2,19 +2,24 @@ require_relative '../../texts/one_time_script'
 
 module Bindings
   module Scripts
-    class PersistentDirectories < Texts::OneTimeScript
+    class PersistentDirectories <  Texts::OneTimeScript
       def body
         #FIXME /home/fs/vol_dir_maps and /home/volumes/$volume are also used by fsconfigurator (static scripts in a static image) so may need to write these files
         r = ". ./persistent_functions.sh"
-        r += write_files
+        r += write_files           
         r += write_directories
         r
       end
 
       def write_files
         r= ' '
+        r += "Context #{context.file_system_1.path} "
         context.persistent(:files).each do |p|
-          r += "Pfiles #{p}"
+          r += "Pfiles Volume path #{context.send(p[0]).path } persistent paths #{p[1]} "
+        # p.each_pair  do | k, v| 
+          # r += "[ #[k} #{q} ]"
+         #end
+      
 #          r += %Q(
 #                 dest_path=#{context}
 #                 ln_destination=#{context.path}/#{p.path}

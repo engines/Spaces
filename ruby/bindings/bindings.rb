@@ -33,7 +33,7 @@ module Bindings
       end.compact
     end
 
-    def binding_class
+    def subdivision_class
       Binding
     end
 

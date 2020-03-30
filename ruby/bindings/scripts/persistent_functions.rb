@@ -2,7 +2,7 @@ require_relative '../../texts/one_time_script'
 
 module Bindings
   module Scripts
-    class PersistentFunctions < Texts::OneTimeScript
+    class PersistentFunctions <  Texts::OneTimeScript
       def body
         #Notes for future improvements
         #Most can be dynamically generated from persistent dirs in bp.
