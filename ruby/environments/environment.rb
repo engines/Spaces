@@ -4,10 +4,6 @@ module Environments
   class Environment < ::Installations::Division
 
     class << self
-      def step_precedence
-        { anywhere: [:variables, :locale, :ports] }
-      end
-
       def inheritance_paths; __dir__; end
     end
 

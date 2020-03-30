@@ -8,7 +8,9 @@ module Installations
     include Docker::Files::Production
 
     class << self
-      def step_precedence; end
+      def step_precedence
+        { anywhere: files_in(:steps).map { |f| File.basename(f, '.rb') } }
+      end
 
       def script_lot
         files_in(:scripts).map { |f| File.basename(f, '.rb') }
