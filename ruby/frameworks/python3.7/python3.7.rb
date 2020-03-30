@@ -4,9 +4,6 @@ module Frameworks
   module Python37
     class Python37 < Framework
 
-      Dir["#{__dir__}/scripts/*"].each { |f| require f }
-      Dir["#{__dir__}/steps/*"].each { |f| require f }
-
       class << self
         def identifier
           'python37'
@@ -17,13 +14,17 @@ module Frameworks
         end
 
         def step_precedence
-          @@python37_step_precedence ||= {
+          {
             first: [:from_image],
             anywhere: [:variables],
             last: [:configure]
           }
         end
+
+        def inheritance_paths; [__dir__, super]; end
       end
+
+      require_files_in :steps, :scripts
 
     end
   end

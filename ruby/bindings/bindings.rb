@@ -1,29 +1,21 @@
-require_relative '../installations/collaborator'
-require_relative '../docker/files/collaboration'
+require_relative '../installations/division'
 require_relative 'binding'
 
 module Bindings
-  class Bindings < ::Installations::Collaborator
-
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
+  class Bindings < ::Installations::Division
 
     class << self
       def step_precedence
-        @@bindings_step_precedence ||= { late: [:persistence] }
+        { late: [:persistence] }
       end
-
-      def script_lot
-        @@bindings_script_lot ||= [:persistent_functions, :persistent_directories, :persistent_files]
-      end
+      
+      def inheritance_paths; __dir__; end
     end
+
+    require_files_in :steps, :scripts
 
     def layers_for(group)
       [super, all.map { |a| a.layers_for(group) }]
-    end
-
-    def all
-      @all ||= installation.struct.bindings.map { |d| binding_class.new(struct: d, context: self) }
     end
 
     def named(name)

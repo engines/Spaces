@@ -6,7 +6,7 @@ module Frameworks
     def by(installation)
       i = installation.struct.framework.identifier
       load(i)
-      loaded.detect { |k| k.identifier == i }.new(installation: installation, section: :framework)
+      loaded.detect { |k| k.identifier == i }.new(installation: installation, blueprint_label: :framework)
     end
 
     def loaded

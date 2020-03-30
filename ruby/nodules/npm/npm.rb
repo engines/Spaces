@@ -4,7 +4,11 @@ module Nodules
   module NPM
     class NPM < Nodule
 
-      Dir["#{__dir__}/scripts/*"].each { |f| require f }
+      class << self
+        def inheritance_paths; __dir__; end
+      end
+
+      require_files_in :scripts
 
     end
   end

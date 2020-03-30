@@ -1,4 +1,4 @@
-require_relative '../../../docker/files/collaboration'
+require_relative '../../../docker/files/step'
 
 module WebServers
   module Apache

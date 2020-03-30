@@ -1,4 +1,4 @@
-require_relative 'requires'
+require_relative '../../steps/requires'
 
 module Frameworks
   module Python37

@@ -1,32 +1,13 @@
-require_relative '../spaces/model'
-require_relative '../images/collaboration'
+require_relative '../installations/subdivision'
 
 module Packages
-  class Package < ::Spaces::Model
-    include Images::Collaboration
-
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
+  class Package < ::Installations::Subdivision
 
     class << self
-      def script_lot
-        @@package_script_lot ||= [:preparation, :installation]
-      end
+      def inheritance_paths; __dir__; end
     end
 
-    relation_accessor :context
-
-    def subspace_path
-      context.subspace_path
-    end
-
-    def build_script_path
-       context.build_script_path
-    end
-
-    def initialize(struct:, context:)
-      self.struct = struct
-      self.context = context
-    end
+    require_files_in :scripts
 
   end
 end

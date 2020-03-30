@@ -1,17 +1,17 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 
 module Environments
-  class Environment < ::Installations::Collaborator
-
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
+  class Environment < ::Installations::Division
 
     class << self
       def step_precedence
-        @@environment_step_precedence ||= {
-          anywhere: [:variables, :locale, :ports]
-        }
+        { anywhere: [:variables, :locale, :ports] }
       end
+
+      def inheritance_paths; __dir__; end
     end
+
+    require_files_in :steps
 
     def variables
       struct.variables

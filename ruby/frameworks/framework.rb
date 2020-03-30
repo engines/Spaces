@@ -1,24 +1,21 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 
 module Frameworks
-  class Framework < ::Installations::Collaborator
-
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
+  class Framework < ::Installations::Division
 
     class << self
-      def prototype(installation:, section:)
+      def prototype(installation:, blueprint_label:)
         universe.frameworks.by(installation)
       end
 
-      def script_lot
-        @@framework_script_lot ||= [:installation, :finalisation, :chown_app_dir]
-      end
+      def inheritance_paths; __dir__; end
     end
 
-    alias_method :super_build_script_path, :build_script_path
+    require_files_in :steps, :scripts
 
     relation_accessor :web_server
+
+    alias_method :super_build_script_path, :build_script_path
 
     def scripts
       [super, web_server.scripts]
@@ -30,6 +27,10 @@ module Frameworks
 
     def web_server
       @web_server ||= universe.web_servers.by(self)
+    end
+
+    def all
+      [web_server]
     end
 
     def port
@@ -45,11 +46,7 @@ module Frameworks
     end
 
     def build_script_path
-       "#{super}/framework/#{class_identifier}"
-    end
-
-    def class_identifier
-      self.class.identifier
+       "#{super}/framework/#{klass.identifier}"
     end
 
     def struct

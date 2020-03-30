@@ -4,30 +4,23 @@ require_relative '../texts/file_text'
 module Images
   class Subject < ::Installations::Collaborator
 
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-
     class << self
-      def script_collaborators
-        @@subject_script_collaborators ||= [:framework, :os_packages, :nodules, :packages, :bindings, :image_subject, :file_permissions]
+      def divisions
+        [:framework, :os_packages, :nodules, :packages, :bindings, :image_subject, :file_permissions]
       end
 
-      def script_lot
-        @@subject_script_precedence ||= [
-          :build_functions, :injections, :persistent_source, :set_user_identifier, :set_data_permissions
-        ]
-      end
+      def inheritance_paths; __dir__; end
     end
 
-    def script_collaborators
-      self.class.script_collaborators
-    end
+    require_files_in :scripts
+
+    delegate(
+      divisions: :klass,
+      docker_file: :installation
+    )
 
     def product
       [docker_file, collaborator_scripts, blueprinted_scripts, injections].flatten
-    end
-
-    def docker_file
-      @docker_file ||= installation.docker_file
     end
 
     def collaborator_scripts
@@ -51,7 +44,7 @@ module Images
     end
 
     def collaborators
-      script_collaborators.map { |c| installation.send(c) }.compact
+      @collaborators ||= divisions.map { |c| installation.send(c) }.compact
     end
 
   end

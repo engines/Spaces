@@ -1,30 +1,25 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Installations::Collaborator
-
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
+  class Packages < ::Installations::Division
 
     class << self
       def step_precedence
-        @@packages_step_precedence ||= { late: [:run_scripts] }
+        { late: [:run_scripts] }
       end
+
+      def script_lot; end
+      def inheritance_paths; __dir__; end
     end
 
-    def all
-      @all ||= installation.struct.packages.map { |s| package_class.new(struct: s, context: self) }
-    end
-
-    def scripts
-      all.map(&:scripts).flatten.uniq(&:uniqueness)
-    end
+    require_files_in :steps
 
     def build_script_path
       "#{super}/packages"
     end
 
-    def package_class
+    def subdivision_class
       Package
     end
 

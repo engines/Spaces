@@ -1,31 +1,24 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 require_relative 'os_package'
 
 module OsPackages
-  class OsPackages < ::Installations::Collaborator
-
-    Dir["#{__dir__}/scripts/*"].each { |f| require f }
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
+  class OsPackages < ::Installations::Division
 
     class << self
-      def script_lot
-        @@os_packages_script_lot ||= [:installation]
-      end
-
       def step_precedence
-        @@os_packages_step_precedence ||= { late: [:run_scripts] }
+        { late: [:run_scripts] }
       end
+
+      def inheritance_paths; __dir__; end
     end
 
-    def all
-      @all ||= installation.struct.os_packages.map { |s| os_package_class.new(struct: s, context: self) }
-    end
+    require_files_in :steps, :scripts
 
     def build_script_path
       "#{super}/os_packages"
     end
 
-    def os_package_class
+    def subdivision_class
       OsPackage
     end
 
