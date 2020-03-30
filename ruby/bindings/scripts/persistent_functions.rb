@@ -8,6 +8,26 @@ module Bindings
         #Most can be dynamically generated from persistent dirs in bp.
         #/home/fs/vol_dir_maps and /home/volumes/$volume are also used by fsconfigurator (static scripts in a static image)
         %Q(
+        
+        setup_persistent_file()
+        {
+        if ! test -d `dirname $destination`
+         then
+         echo "mkdir -p $destination"
+           mkdir -p `dirname $destination`
+         fi
+          
+         if ! test -f $file_abs_path
+          then
+           touch $file_abs_path
+         fi
+         echo cp -np $file_abs_path $destination
+       cp -np $file_abs_path $destination
+       rm $file_abs_path
+       echo "ln -s $ln_destination $file_abs_path"
+       ln -s $ln_destination $file_abs_path
+        }
+        
         setup_persistent_dir()
         {
             if ! test -d `dirname $destination`

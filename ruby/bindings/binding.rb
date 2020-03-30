@@ -1,15 +1,12 @@
-require_relative '../docker/files/collaboration'
 require_relative '../texts/text'
+require_relative '../installations/subdivision'
 
 module Bindings
-  class Binding < ::Spaces::Model
-    include Docker::Files::Collaboration
-
-    relation_accessor :context
+  class Binding < ::Installations::Subdivision
 
     class << self
       def step_precedence
-        @@binding_step_precedence ||= { anywhere: [:variables] }
+        { anywhere: [:variables] }
       end
     end
 
@@ -51,10 +48,6 @@ module Bindings
       universe.blueprints.by(descriptor).installation
     end
 
-    def installation
-      context.installation
-    end
-
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
@@ -65,11 +58,6 @@ module Bindings
 
     def random(length)
       SecureRandom.hex(length.to_i)
-    end
-
-    def initialize(struct:, context:)
-      self.struct = struct
-      self.context = context
     end
 
     def method_missing(m, *args, &block)
