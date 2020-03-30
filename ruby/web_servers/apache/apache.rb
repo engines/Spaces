@@ -4,22 +4,19 @@ module WebServers
   module Apache
     class Apache < WebServer
 
-      Dir["#{__dir__}/scripts/*"].each { |f| require f }
-      Dir["#{__dir__}/steps/*"].each { |f| require f }
-
       class << self
         def identifier
           'apache'
         end
 
         def step_precedence
-          @@apache_step_precedence ||= { last: [:configure] }
+          { last: [:configure] }
         end
 
-        def script_lot
-          @@apache_script_lot ||= [:configuration]
-        end
+        def inheritance_paths; __dir__; end
       end
+
+      require_files_in :steps, :scripts
 
     end
   end

@@ -3,13 +3,15 @@ require_relative '../installations/collaborator'
 module Domains
   class Domain < ::Installations::Collaborator
 
-    Dir["#{__dir__}/steps/*"].each { |f| require f }
-
     class << self
       def step_precedence
-        @@domain_step_precedence ||= { anywhere: [:variables] }
+        { anywhere: [:variables] }
       end
+
+      def inheritance_paths; __dir__; end
     end
+
+    require_files_in :steps
 
     def fqdn
       "#{host}.#{name}"
