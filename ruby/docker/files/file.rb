@@ -6,15 +6,13 @@ module Docker
   module Files
     class File < ::Installations::Collaborator
 
-      Dir["#{__dir__}/steps/*"].each { |f| require f }
-
       class << self
         def division_precedence
-          @@division_precedence ||= [:framework, :environment, :domain, :os_packages, :nodules, :packages, :file_permissions, :bindings, :docker_file]
+          [:framework, :environment, :domain, :os_packages, :nodules, :packages, :file_permissions, :bindings, :docker_file]
         end
 
         def step_group_precedence
-          @@step_group_precedence ||= [:first, :early, :anywhere, :late, :last]
+          [:first, :early, :anywhere, :late, :last]
         end
 
         def step_precedence
@@ -24,7 +22,11 @@ module Docker
             last: [:final]
           }
         end
+
+        def inheritance_paths; __dir__; end
       end
+
+      require_files_in :steps
 
       delegate(
         [:division_precedence, :step_group_precedence] => :klass
