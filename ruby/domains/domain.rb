@@ -4,10 +4,6 @@ module Domains
   class Domain < ::Installations::Collaborator
 
     class << self
-      def step_precedence
-        { anywhere: [:variables] }
-      end
-
       def inheritance_paths; __dir__; end
     end
 
