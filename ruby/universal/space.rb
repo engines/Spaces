@@ -8,6 +8,7 @@ module Universal
         [
           :containers,
           :images,
+          :docker,
           :installations,
           :frameworks,
           :web_servers,
