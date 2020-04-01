@@ -2,21 +2,22 @@ require_relative '../../texts/one_time_script'
 
 module Bindings
   module Scripts
-    class PersistentFunctions <  Texts::OneTimeScript
+    class PersistentFunctions < Texts::OneTimeScript
+
       def body
         #Notes for future improvements
         #Most can be dynamically generated from persistent dirs in bp.
         #/home/fs/vol_dir_maps and /home/volumes/$volume are also used by fsconfigurator (static scripts in a static image)
         %Q(
-        
-        setup_persistent_file()
+
+        setup_files()
         {
         if ! test -d `dirname $destination`
          then
          echo "mkdir -p $destination"
            mkdir -p `dirname $destination`
          fi
-          
+
          if ! test -f $file_abs_path
           then
            touch $file_abs_path
@@ -27,8 +28,8 @@ module Bindings
        echo "ln -s $ln_destination $file_abs_path"
        ln -s $ln_destination $file_abs_path
         }
-        
-        setup_persistent_dir()
+
+        setup_directories()
         {
             if ! test -d `dirname $destination`
              then
@@ -49,6 +50,7 @@ module Bindings
             ln -s $ln_destination $dir_abs_path
         })
       end
+
     end
   end
 end
