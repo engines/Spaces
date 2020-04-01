@@ -19,7 +19,7 @@ module Bindings
             %Q(
             ln_destination=#{p}/#{f}
             destination=#{p}
-            dir_abs_path=#{abs_path(f)}
+            abs_path=#{abs_path(f)}
             #{function_for(symbol)}\n\n
             )
           end
