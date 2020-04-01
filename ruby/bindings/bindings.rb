@@ -8,7 +8,7 @@ module Bindings
       def step_precedence
         { late: [:persistence] }
       end
-
+      
       def inheritance_paths; __dir__; end
     end
 
