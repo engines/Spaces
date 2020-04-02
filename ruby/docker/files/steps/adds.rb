@@ -7,9 +7,8 @@ module Docker
 
         def product
           %Q(
-          ADD scripts /scripts
+          ADD scripts /build
           ADD home home
-          ADD engines home/engines
           ADD home/start.sh /home/engines/scripts/startup/start.sh
           )
         end
