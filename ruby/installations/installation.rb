@@ -10,6 +10,7 @@ require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../users/user'
 require_relative '../file_permissions/file_permissions'
+require_relative '../sudos/sudos'
 
 module Installations
   class Installation < ::Spaces::Model
@@ -24,7 +25,8 @@ module Installations
           bindings: Bindings::Bindings,
           anchor: Bindings::Anchor,
           environment: Environments::Environment,
-          file_permissions: FilePermissions::FilePermissions
+          file_permissions: FilePermissions::FilePermissions,
+          sudos: Sudos::Sudos
         }
       end
 

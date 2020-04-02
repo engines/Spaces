@@ -6,7 +6,7 @@ module Images
 
     class << self
       def divisions
-        [:framework, :os_packages, :nodules, :packages, :bindings, :image_subject, :file_permissions]
+        [:framework, :sudos, :os_packages, :nodules, :packages, :bindings, :image_subject, :file_permissions]
       end
 
       def inheritance_paths; __dir__; end
