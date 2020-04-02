@@ -15,9 +15,5 @@ module Packages
 
     require_files_in :steps
 
-    def build_script_path
-      "#{super}/packages"
-    end
-
   end
 end

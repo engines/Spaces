@@ -19,5 +19,9 @@ module Installations
       Module.const_get(klass.name.singularize)
     end
 
+    def build_script_path
+       "#{super}/#{blueprint_label}"
+    end
+
   end
 end

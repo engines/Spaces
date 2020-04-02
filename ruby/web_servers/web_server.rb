@@ -12,7 +12,7 @@ module WebServers
     end
 
     def build_script_path
-       "#{context.super_build_script_path}/web_server/#{klass.identifier}"
+      "#{production_build_script_path}/web_server/#{klass.identifier}"
     end
 
     def initialize(context)
