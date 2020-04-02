@@ -5,17 +5,12 @@ module Images
   class Subject < ::Installations::Collaborator
 
     class << self
-      def divisions
-        [:framework, :os_packages, :nodules, :packages, :bindings, :image_subject, :file_permissions]
-      end
-
       def inheritance_paths; __dir__; end
     end
 
     require_files_in :scripts
 
     delegate(
-      divisions: :klass,
       docker_file: :installation
     )
 
@@ -44,7 +39,7 @@ module Images
     end
 
     def collaborators
-      @collaborators ||= divisions.map { |c| installation.send(c) }.compact
+      @collaborators ||= installation.collaborators.values.compact
     end
 
   end
