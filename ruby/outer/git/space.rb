@@ -6,12 +6,12 @@ module Outer
     class Space < ::Outer::Uri::Space
 
       def encloses?(descriptor)
-        Dir.exist?(subspace_path_for(descriptor))
+        Dir.exist?(path_for(descriptor))
       end
 
       def reading_name_for(descriptor)
         ensure_space
-        Dir["#{subspace_path_for(descriptor)}/*.json"].first
+        Dir["#{path_for(descriptor)}/*.json"].first
       end
 
       def import(descriptor)
@@ -22,11 +22,11 @@ module Outer
       end
 
       def file_names_for(directory, descriptor)
-        Dir["#{subspace_path_for(descriptor)}/#{directory}/**/*"].reject { |f| File.directory?(f) }
+        Dir["#{path_for(descriptor)}/#{directory}/**/*"].reject { |f| File.directory?(f) }
       end
 
       def clear_for(descriptor)
-        FileUtils.rm_rf(subspace_path_for(descriptor))
+        FileUtils.rm_rf(path_for(descriptor))
       end
 
     end
