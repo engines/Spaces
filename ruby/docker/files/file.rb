@@ -7,10 +7,6 @@ module Docker
     class File < ::Installations::Collaborator
 
       class << self
-        def division_precedence
-          [:framework, :environment, :domain, :os_packages, :nodules, :packages, :file_permissions, :bindings, :docker_file]
-        end
-
         def step_group_precedence
           [:first, :early, :anywhere, :late, :last]
         end
@@ -29,7 +25,7 @@ module Docker
       require_files_in :steps
 
       delegate(
-        [:division_precedence, :step_group_precedence] => :klass
+        step_group_precedence: :klass
       )
 
       def product
@@ -51,7 +47,7 @@ module Docker
       end
 
       def collaborators
-        division_precedence.map { |c| installation.send(c) }.compact
+        @collaborators ||= installation.collaborators.values.compact
       end
 
       def path
