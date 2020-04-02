@@ -38,9 +38,5 @@ module Images
       Texts::FileText
     end
 
-    def collaborators
-      @collaborators ||= installation.collaborators.values.compact
-    end
-
   end
 end

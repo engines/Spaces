@@ -14,6 +14,10 @@ module Installations
 
     delegate([:home_app_path, :identifier] => :installation)
 
+    def collaborators
+      @collaborators ||= installation.collaborators.values.compact
+    end
+
     def initialize(struct: nil, installation: nil, blueprint_label: nil)
       self.installation = installation
       self.blueprint_label = blueprint_label

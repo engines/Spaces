@@ -46,10 +46,6 @@ module Docker
         end
       end
 
-      def collaborators
-        @collaborators ||= installation.collaborators.values.compact
-      end
-
       def path
         klass.identifier
       end
