@@ -22,11 +22,11 @@ module Images
     end
 
     def blueprinted_scripts
-      files_for('scripts')
+      files_for(:scripts)
     end
 
     def injections
-      files_for('injections')
+      files_for(:injections)
     end
 
     def files_for(directory)
