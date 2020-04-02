@@ -14,9 +14,5 @@ module FilePermissions
 
     require_files_in :steps, :scripts
 
-    def subdivision_class
-      FilePermission
-    end
-
   end
 end

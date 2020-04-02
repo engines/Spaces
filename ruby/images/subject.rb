@@ -3,19 +3,13 @@ require_relative '../texts/file_text'
 
 module Images
   class Subject < ::Installations::Collaborator
-
     class << self
-      def divisions
-        [:framework, :sudos, :os_packages, :nodules, :packages, :bindings, :image_subject, :file_permissions]
-      end
-
       def inheritance_paths; __dir__; end
     end
 
     require_files_in :scripts
 
     delegate(
-      divisions: :klass,
       docker_file: :installation
     )
 
@@ -41,10 +35,6 @@ module Images
 
     def text_class
       Texts::FileText
-    end
-
-    def collaborators
-      @collaborators ||= divisions.map { |c| installation.send(c) }.compact
     end
 
   end

@@ -8,7 +8,7 @@ module Bindings
       def step_precedence
         { late: [:persistence] }
       end
-      
+
       def inheritance_paths; __dir__; end
     end
 
@@ -31,10 +31,6 @@ module Bindings
         m[b.identifier] = b.struct.dig(:persistent, symbol)
         m
       end.compact
-    end
-
-    def subdivision_class
-      Binding
     end
 
     def method_missing(m, *args, &block)

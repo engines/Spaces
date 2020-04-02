@@ -17,9 +17,5 @@ module Nodules
       universe.nodules.by(struct: struct, context: self)
     end
 
-    def build_script_path
-       "#{super}/modules"
-    end
-
   end
 end

@@ -3,6 +3,10 @@ require_relative 'collaborator'
 module Installations
   class Division < Collaborator
 
+    def scripts
+      [super, all&.map(&:scripts)].flatten.compact.uniq(&:uniqueness)
+    end
+
     def all
       @all ||= struct.map { |s| subdivision_for(s) }
     end
@@ -11,8 +15,12 @@ module Installations
       subdivision_class.new(struct: struct, context: self)
     end
 
-    def scripts
-      [super, all&.map(&:scripts)].flatten.compact.uniq(&:uniqueness)
+    def subdivision_class
+      Module.const_get(klass.name.singularize)
+    end
+
+    def build_script_path
+       "#{super}/#{blueprint_label}"
     end
 
   end

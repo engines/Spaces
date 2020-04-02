@@ -7,4 +7,12 @@ class String
     s
   end
 
+  def singularize
+    chomp('s')
+  end
+
+  def pluralize
+    "#{itself}s"
+  end
+
 end
