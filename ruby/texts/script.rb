@@ -24,6 +24,13 @@ module Texts
     def footer
     end
 
+    def echo(string)
+    %Q(
+    echo "#{string}"
+    #{string}
+    )
+    end
+
     def path
       "#{build_script_path}/#{file_name}"
     end
