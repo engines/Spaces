@@ -13,14 +13,5 @@ module Sudos
     end
 
     require_files_in :steps, :scripts
-
-    def build_script_path
-      "#{super}/sudoers"
-    end
-
-    def subdivision_class
-      Sudo
-    end
-
   end
 end

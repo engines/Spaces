@@ -25,7 +25,8 @@ module Installations
           file_permissions: FilePermissions::FilePermissions,
           bindings: Bindings::Bindings,
           anchor: Bindings::Anchor,
-          environment: Environments::Environment
+          environment: Environments::Environment,
+          sudo: Sudos::Sudos
         }
       end
 
@@ -108,11 +109,11 @@ module Installations
     end
 
     def keys
-      all_classes.keys
+      all_collaborators.keys
     end
 
     def necessary_keys
-      product_classes.keys + installation_classes.keys
+      product_collaborators.keys + installation_divisions.keys
     end
 
     def method_missing(m, *args, &block)
