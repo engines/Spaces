@@ -1,5 +1,6 @@
 require_relative '../installations/collaborator'
 require_relative '../texts/file_text'
+require_relative 'image'
 
 module Images
   class Subject < ::Installations::Collaborator

@@ -10,5 +10,9 @@ module Images
       end
     end
 
+    def build(image)
+      Docker::Image.build_from_dir(path_for(image), { 'dockerfile' => 'DockerFilesFile' })
+    end
+
   end
 end
