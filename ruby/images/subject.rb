@@ -3,7 +3,6 @@ require_relative '../texts/file_text'
 
 module Images
   class Subject < ::Installations::Collaborator
-
     class << self
       def inheritance_paths; __dir__; end
     end
