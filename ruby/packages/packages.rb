@@ -19,9 +19,5 @@ module Packages
       "#{super}/packages"
     end
 
-    def subdivision_class
-      Package
-    end
-
   end
 end

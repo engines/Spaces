@@ -18,9 +18,5 @@ module OsPackages
       "#{super}/os_packages"
     end
 
-    def subdivision_class
-      OsPackage
-    end
-
   end
 end
