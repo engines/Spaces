@@ -14,13 +14,5 @@ module OsPackages
 
     require_files_in :steps, :scripts
 
-    def build_script_path
-      "#{super}/os_packages"
-    end
-
-    def subdivision_class
-      OsPackage
-    end
-
   end
 end

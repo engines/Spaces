@@ -27,6 +27,8 @@ module Installations
       def inheritance_paths; end
     end
 
+    alias_method :production_build_script_path, :build_script_path
+
     def product
       duplicate(struct)
     end

@@ -15,35 +15,35 @@ module Installations
   class Installation < ::Spaces::Model
 
     class << self
-      def blueprint_classes
-        @@blueprint_classes ||= {
+      def blueprint_divisions
+        @@blueprint_divisions ||= {
           framework: Frameworks::Framework,
           os_packages: OsPackages::OsPackages,
           nodules: Nodules::Nodules,
           packages: Packages::Packages,
+          file_permissions: FilePermissions::FilePermissions,
           bindings: Bindings::Bindings,
           anchor: Bindings::Anchor,
-          environment: Environments::Environment,
-          file_permissions: FilePermissions::FilePermissions
+          environment: Environments::Environment
         }
       end
 
-      def product_classes
-        @@product_classes ||= {
+      def product_collaborators
+        @@product_collaborators ||= {
           docker_file: Docker::Files::File,
           image_subject: Images::Subject
         }
       end
 
-      def installation_classes
-        @@installation_classes ||= {
+      def installation_divisions
+        @@installation_divisions ||= {
           user: Users::User,
           domain: Domains::Domain
         }
       end
 
-      def all_classes
-        @@all_classes ||= blueprint_classes.merge(product_classes).merge(installation_classes)
+      def all_collaborators
+        @@all_collaborators ||= blueprint_divisions.merge(installation_divisions).merge(product_collaborators)
       end
 
       def blueprint_map
@@ -60,9 +60,9 @@ module Installations
 
     delegate(
       [
-        :all_classes,
-        :product_classes,
-        :installation_classes,
+        :all_collaborators,
+        :product_collaborators,
+        :installation_divisions,
         :mutable_divisions
       ] => :klass,
       installation: :itself,
@@ -89,9 +89,13 @@ module Installations
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
-        m[k] = all_classes[k].prototype(installation: self, blueprint_label: blueprint_label_for(k)) if blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = collaborator_for(k) if blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
+    end
+
+    def collaborator_for(key)
+      all_collaborators[key].prototype(installation: self, blueprint_label: blueprint_label_for(key))
     end
 
     def blueprinted?(key)
@@ -103,11 +107,11 @@ module Installations
     end
 
     def keys
-      all_classes.keys
+      all_collaborators.keys
     end
 
     def necessary_keys
-      product_classes.keys + installation_classes.keys
+      product_collaborators.keys + installation_divisions.keys
     end
 
     def method_missing(m, *args, &block)
