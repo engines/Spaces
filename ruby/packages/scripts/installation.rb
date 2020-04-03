@@ -17,11 +17,11 @@ module Packages
       end
 
       def downloading_with_git
-        "git clone #{options} --depth 1 -b #{branch} #{value} #{extracted_path}"
+        "git clone #{options} --depth 1 -b #{branch} #{repository} #{extracted_path}"
       end
 
       def downloading_with_wget
-        "wget #{options} -O #{identifier} #{value}"
+        "wget #{options} -O #{identifier} #{repository}"
       end
 
       def extracting
@@ -68,8 +68,8 @@ module Packages
         descriptor.branch
       end
 
-      def value
-        descriptor.value
+      def repository
+        descriptor.repository
       end
 
       def extraction
