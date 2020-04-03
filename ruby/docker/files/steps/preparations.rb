@@ -7,8 +7,7 @@ module Docker
 
         def product
           %Q(
-          "COPY sudo_list /etc/sudoers.d/container"
-          USER 0
+         USER 0
           RUN \
             /scripts/set_user_identifier.sh && \
             ln -s /usr/local/ /home/local && \
