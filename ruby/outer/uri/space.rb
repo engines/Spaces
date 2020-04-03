@@ -26,9 +26,9 @@ module Outer
 
       def import(descriptor)
         d = if nullify_ssl?
-          open(descriptor.value, { ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE })
+          open(descriptor.repository, { ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE })
         else
-          open(descriptor.value)
+          open(descriptor.repository)
         end
 
         IO.copy_stream(d, "#{path}/#{descriptor.basename}")

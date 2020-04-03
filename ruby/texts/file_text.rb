@@ -38,7 +38,7 @@ module Texts
     end
 
     def break_point
-      source_file_name.index(directory)
+      source_file_name.index("#{directory}")
     end
 
     def initialize(source_file_name:, directory:, context:)

@@ -3,6 +3,6 @@ require_relative 'save'
 
 def descriptor
   @descriptor ||= Spaces::Descriptor.new.tap do |m|
-    m.value = 'https://github.com/MarkRatjens/filesystem.git'
+    m.repository = 'https://github.com/MarkRatjens/filesystem.git'
   end
 end
