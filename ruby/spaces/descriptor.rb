@@ -46,6 +46,10 @@ module Spaces
       @protocol ||= extension
     end
 
+    def git?
+      protocol == 'git'
+    end
+
     def extraction
       @extraction ||= extension
     end
