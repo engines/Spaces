@@ -40,7 +40,7 @@ module Spaces
     end
 
     def save_tar(model)
-      %x(cd #{tar_name_for(model)}; tar -czf #{tar_name_for(model)}.tgz . 2>&1)
+      %x(cd #{path_for(model)}; tar -czf #{path_for(model)}.tgz . 2>&1)
     end
 
     def encloses?(file_name)
@@ -56,15 +56,11 @@ module Spaces
       "#{path}/#{model.file_path}"
     end
 
-    def tar_name_for(model)
-      "#{path}/#{model.identifier}"
-    end
-
     def ensure_subspace_for(model)
-      FileUtils.mkdir_p(subspace_path_for(model))
+      FileUtils.mkdir_p(path_for(model))
     end
 
-    def subspace_path_for(model)
+    def path_for(model)
       "#{path}/#{model.subspace_path}"
     end
 

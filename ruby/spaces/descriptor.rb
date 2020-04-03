@@ -9,7 +9,8 @@ module Spaces
       end
     end
 
-    attr_accessor :value,
+    attr_accessor :repository,
+      :identifier,
       :local_identifier,
       :protocol,
       :branch,
@@ -19,7 +20,7 @@ module Spaces
 
     def initialize(struct = nil)
       if struct
-        self.value = struct.value
+        self.repository = struct.repository
         self.local_identifier = struct.local_identifier
         self.protocol = struct.protocol
         self.branch = struct.branch
@@ -34,7 +35,7 @@ module Spaces
     end
 
     def blueprint_identifier
-      value&.split('/').last.split('.').first
+      repository&.split('/').last.split('.').first
     end
 
     def branch
@@ -58,11 +59,11 @@ module Spaces
     end
 
     def basename
-      File.basename(value)
+      File.basename(repository)
     end
 
     def extension
-      value&.split('.')&.last
+      repository&.split('.')&.last
     end
 
   end

@@ -35,7 +35,7 @@ a common starting point is to start with a descriptor to locate a source bluepri
 ```
 require_relative 'ruby/spaces/descriptor'
 descriptor = Spaces::Descriptor.new.tap do |m|
-  m.value = 'https://github.com/MarkRatjens/publify.git'
+  m.repository = 'https://github.com/MarkRatjens/publify.git'
 end
 ```
 
@@ -45,7 +45,7 @@ There are optional attributes you can declare for a blueprint:
 
 ```
 descriptor = Spaces::Descriptor.new.tap do |m|
-  m.value = 'https://github.com/MarkRatjens/publify.git'
+  m.repository = 'https://github.com/MarkRatjens/publify.git'
   m.branch = 'current'
 end
 ```

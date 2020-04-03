@@ -28,7 +28,7 @@ module Blueprints
     end
 
     def ensure_subspace_for(descriptor)
-      FileUtils.mkdir_p(subspace_path_for(descriptor))
+      FileUtils.mkdir_p(path_for(descriptor))
     end
 
     def file_names_for(directory, descriptor)
@@ -36,7 +36,7 @@ module Blueprints
     end
 
     def imported?(descriptor)
-      Dir.exist?(subspace_path_for(descriptor))
+      Dir.exist?(path_for(descriptor))
     end
 
     def model_class
