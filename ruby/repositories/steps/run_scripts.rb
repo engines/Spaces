@@ -1,11 +1,11 @@
 require_relative '../../docker/files/step'
 
-module Respositories
+module Repositories
   module Steps
     class RunScripts < Docker::Files::Step
 
       def product
-        context.scripts.map { |s| "RUN #{s.path}" }
+        context.scripts.flatten.map { |s| "RUN #{s.path}" }
       end
 
     end

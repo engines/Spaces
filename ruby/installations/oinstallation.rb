@@ -11,79 +11,50 @@ require_relative '../bindings/anchor'
 require_relative '../users/user'
 require_relative '../file_permissions/file_permissions'
 require_relative '../sudos/sudos'
-require_relative '../repositories/repositories'
+require_relative '../repositories/respositories'
 
 module Installations
   class Installation < ::Spaces::Model
 
     class << self
-      def blueprint_classes
-        [
-          Frameworks::Framework,
-          OsPackages::OsPackages,
-          Nodules::Nodules,
-          Packages::Packages,
-          FilePermissions::FilePermissions,
-          Bindings::Bindings,
-          Bindings::Anchor,
-          Environments::Environment,
-          Sudos::Sudos,
-          Repositories::Repositories
-        ]
-      end
-
-      def product_classes
-        [
-          Docker::Files::File,
-          Images::Subject
-        ]
-      end
-
-      def installation_classes
-        [
-          Users::User,
-          Domains::Domain
-        ]
-      end
-
-      def division_map
-        @@division_map ||= {
-          nodules: :modules,
-          anchor: :binding_anchor,
-          file: :docker_file,
-          subject: :image_subject
+      def blueprint_divisions
+        @@blueprint_divisions ||= {
+          framework: Frameworks::Framework,
+          os_packages: OsPackages::OsPackages,
+          nodules: Nodules::Nodules,
+          packages: Packages::Packages,
+          file_permissions: FilePermissions::FilePermissions,
+          bindings: Bindings::Bindings,
+          anchor: Bindings::Anchor,
+          environment: Environments::Environment,
+          sudo: Sudos::Sudos,
+          repository: Respositories::Respositories
         }
       end
 
-      def blueprint_divisions
-        @@blueprint_divisions ||= map_for(blueprint_classes)
-      end
-
       def product_collaborators
-        @@product_collaborators ||= map_for(product_classes)
+        @@product_collaborators ||= {
+          docker_file: Docker::Files::File,
+          image_subject: Images::Subject
+        }
       end
 
       def installation_divisions
-        @@installation_divisions ||= map_for(installation_classes)
-      end
-
-      def map_for(classes)
-        classes.inject({}) do |m, k|
-          m[key_for(k)] = k
-          m
-        end
+        @@installation_divisions ||= {
+          user: Users::User,
+          domain: Domains::Domain
+        }
       end
 
       def all_collaborators
         @@all_collaborators ||= blueprint_divisions.merge(installation_divisions).merge(product_collaborators)
       end
 
-      def key_for(klass)
-        mapped_key_for(klass.to_s.snakize.split('/').last.to_sym)
-      end
-
-      def mapped_key_for(key)
-        division_map[key] || key
+      def blueprint_map
+        @@blueprint_map ||= {
+          nodules: :modules,
+          anchor: :binding_anchor
+        }
       end
 
       def mutable_divisions
@@ -106,7 +77,7 @@ module Installations
       struct.tap do |s|
         mutable_divisions.each do |k|
           if c = collaborators[k]
-            s[k] = c.product
+            s[blueprint_label_for(k)] = c.product
           end
         end
       end
@@ -114,6 +85,10 @@ module Installations
 
     def file_names_for(directory)
       universe.blueprints.file_names_for(directory, descriptor)
+    end
+
+    def blueprint_label_for(key)
+      klass.blueprint_map[key] || key
     end
 
     def collaborators
@@ -124,11 +99,11 @@ module Installations
     end
 
     def collaborator_for(key)
-      all_collaborators[key].prototype(installation: self, blueprint_label: key)
+      all_collaborators[key].prototype(installation: self, blueprint_label: blueprint_label_for(key))
     end
 
     def blueprinted?(key)
-      struct[key]
+      struct[blueprint_label_for(key)]
     end
 
     def collaborate_anyway?(key)

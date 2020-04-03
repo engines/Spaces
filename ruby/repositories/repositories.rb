@@ -1,12 +1,12 @@
 require_relative '../installations/division'
-require_relative 'respository'
+require_relative 'repositorie'
 
-module Respositories
-  class Respositories < ::Installations::Division
+module Repositories
+  class Repositories < ::Installations::Division
 
     class << self
       def step_precedence
-        { late: [:run_scripts] }
+        { early: [:run_scripts] }
       end
 
       def inheritance_paths; __dir__; end
