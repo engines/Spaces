@@ -4,7 +4,6 @@ require_relative 'image'
 
 module Images
   class Subject < ::Installations::Collaborator
-
     class << self
       def inheritance_paths; __dir__; end
     end
@@ -24,11 +23,11 @@ module Images
     end
 
     def blueprinted_scripts
-      files_for('scripts')
+      files_for(:scripts)
     end
 
     def injections
-      files_for('injections')
+      files_for(:injections)
     end
 
     def files_for(directory)
