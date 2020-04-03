@@ -1,6 +1,6 @@
 require_relative '../../docker/files/step'
 
-module Sudoers
+module Sudos
   module Steps
     class RunScripts < Docker::Files::Step
 
