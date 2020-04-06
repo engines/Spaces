@@ -20,15 +20,15 @@ module Installations
       def blueprint_classes
         [
           Frameworks::Framework,
+          Repositories::Repositories,
+          Sudos::Sudos,
           OsPackages::OsPackages,
           Nodules::Nodules,
           Packages::Packages,
           FilePermissions::FilePermissions,
           Bindings::Bindings,
           Bindings::Anchor,
-          Environments::Environment,
-          Sudos::Sudos,
-          Repositories::Repositories
+          Environments::Environment
         ]
       end
 

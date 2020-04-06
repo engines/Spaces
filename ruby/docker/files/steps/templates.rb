@@ -6,7 +6,7 @@ module Docker
       class Templates < Step
 
         def product
-          '/scripts/injections.sh'
+          'RUN /scripts/injections.sh'
         end
 
       end

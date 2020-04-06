@@ -5,7 +5,7 @@ module Repositories
     class AddRepository < Texts::Script
       def body
         %Q(
-        add-apt-repository '#{repo}'
+        echo "\n" | add-apt-repository '#{repo}'
         #{add_key_cmd}
      )
       end

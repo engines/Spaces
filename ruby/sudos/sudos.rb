@@ -6,7 +6,7 @@ module Sudos
 
     class << self
       def step_precedence
-        { early: [:run_scripts] }
+        { late: [:run_scripts] }
       end
 
       def inheritance_paths; __dir__; end

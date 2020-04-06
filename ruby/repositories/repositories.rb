@@ -6,7 +6,7 @@ module Repositories
 
     class << self
       def step_precedence
-        { early: [:run_scripts] }
+        { late: [:run_scripts] }
       end
 
       def script_lot; end
