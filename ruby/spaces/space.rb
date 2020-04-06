@@ -21,6 +21,15 @@ module Spaces
       end
     end
 
+    def by_json(descriptor, klass = model_class)
+      f = File.open("#{reading_name_for(descriptor, klass)}.json", 'r')
+      begin
+        klass.new(struct: open_struct_from_json(f.read))
+      ensure
+        f.close
+      end
+    end
+
     def save(model)
       f = File.open("#{writing_name_for(model)}", 'w')
       begin
