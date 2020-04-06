@@ -60,40 +60,13 @@ module Packages
         )
       end
 
-      def identifier
-        descriptor.identifier
-      end
-
-      def branch
-        descriptor.branch
-      end
-
-      def repository
-        descriptor.repository
-      end
-
-      def extraction
-        descriptor.extraction
-      end
-
-      def extracted_path
-        descriptor.extracted_path
-      end
-
-      def destination_path
-        descriptor.destination_path
-      end
+      delegate(
+        descriptor: :context,
+        [:identifier, :branch, :repository, :extraction, :extracted_path, :destination_path, :git? ] => :descriptor
+      )
 
       def directory_name
-        File.dirname(descriptor.destination_path)
-      end
-
-      def git?
-        descriptor.protocol == 'git'
-      end
-
-      def descriptor
-        context.descriptor
+        File.dirname(destination_path)
       end
 
       def options

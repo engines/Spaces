@@ -17,7 +17,7 @@ module Outer
       def import(descriptor)
         ensure_space
         clear_for(descriptor)
-        g = ::Git.clone(descriptor.repository, descriptor.blueprint_identifier, path: path)
+        g = ::Git.clone(descriptor.repository, descriptor.project_identifier, path: path)
         g.checkout(descriptor.branch) if descriptor.branch
       end
 
