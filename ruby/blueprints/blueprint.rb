@@ -12,6 +12,10 @@ module Blueprints
 
     relation_accessor :installation
 
+    delegate(
+      project_identifier: :descriptor
+    )
+
     def installation
       @installation ||= installation_class.new(struct: struct)
     end
