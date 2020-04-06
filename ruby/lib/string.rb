@@ -7,6 +7,16 @@ class String
     s
   end
 
+  def snakize
+    gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      tr("-", "_").
+      downcase
+  end
+
+  alias_method :underscore, :snakize
+
   def singularize
     chomp('s')
   end

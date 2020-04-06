@@ -3,9 +3,11 @@ require_relative '../installations/subdivision'
 module Repositories
   class Repositorie < ::Installations::Subdivision
 
-    def subspace_path
-      "#{super}/#{build_script_path}"
+    class << self
+      def inheritance_paths; __dir__; end
     end
 
+    require_files_in :scripts
+    
   end
 end

@@ -9,10 +9,11 @@ module Repositories
         { early: [:run_scripts] }
       end
 
-      def inheritance_paths; __dir__; end
-    end
-
-    require_files_in :steps, :scripts
+      def script_lot; end
+        def inheritance_paths; __dir__; end
+      end
+  
+      require_files_in :steps
     
   end
 end
