@@ -5,7 +5,7 @@ module Spaces
 
     class << self
       def subspace_path_method
-        :blueprint_identifier
+        :project_identifier
       end
     end
 
@@ -31,11 +31,11 @@ module Spaces
     end
 
     def identifier
-      @identifier ||= local_identifier || blueprint_identifier
+      @identifier ||= local_identifier || project_identifier
     end
 
-    def blueprint_identifier
-      repository&.split('/').last.split('.').first
+    def project_identifier
+      repository.split('/').last.split('.').first if repository
     end
 
     def branch
@@ -44,6 +44,10 @@ module Spaces
 
     def protocol
       @protocol ||= extension
+    end
+
+    def git?
+      protocol == 'git'
     end
 
     def extraction
