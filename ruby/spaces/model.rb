@@ -48,8 +48,7 @@ module Spaces
 
 
     delegate(
-      [:universe, :qualifier] => :klass,
-      blueprint_identifier: :descriptor
+      [:universe, :qualifier] => :klass
     )
 
     def descriptor

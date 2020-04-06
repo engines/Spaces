@@ -6,7 +6,7 @@ module Blueprints
 
     class << self
       def subspace_path_method
-        :blueprint_identifier
+        :project_identifier
       end
     end
 
