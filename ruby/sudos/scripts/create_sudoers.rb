@@ -4,7 +4,7 @@ module Sudos
   module Scripts
     class CreateSudoers < Texts::OneTimeScript
       def body
-        [
+        [          
           write(:runtime),
           write(:install)
         ].join("\n")
@@ -16,7 +16,7 @@ module Sudos
            echo $CONT_USER ALL=(ALL) NOPASSWD: #{c} >> /etc/sudoers.d/#{sym}
            echo >> /etc/sudoers.d/#{sym}
           )
-        end
+        end.join("\n")
       end
 
     end

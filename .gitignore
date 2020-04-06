@@ -50,3 +50,4 @@ build-iPhoneSimulator/
 .DS_Store
 .irb_history
 /.project
+/bundle/
