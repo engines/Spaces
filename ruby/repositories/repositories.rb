@@ -1,5 +1,5 @@
 require_relative '../installations/division'
-require_relative 'repositorie'
+require_relative 'repository'
 
 module Repositories
   class Repositories < ::Installations::Division
@@ -12,8 +12,12 @@ module Repositories
       def script_lot; end
         def inheritance_paths; __dir__; end
       end
-  
+        
       require_files_in :steps
+      
+    def subdivision_class
+      Repository
+    end
     
   end
 end

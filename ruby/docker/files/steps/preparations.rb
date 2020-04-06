@@ -11,9 +11,7 @@ module Docker
           RUN \
             /scripts/set_user_identifier.sh && \
             ln -s /usr/local/ /home/local && \
-            chown -R $ContUser /usr/local/ && \
-            add-apt-repository  -y ppa:opencpn/opencpn && \
-            apt-get -y update && \
+            chown -R $ContUser /usr/local/ 
           )
         end
 

@@ -1,4 +1,4 @@
-require_relative '../../texts/one_time_script'
+require_relative '../../texts/script'
 
 module Repositories
   module Scripts
@@ -13,7 +13,7 @@ module Repositories
       def identifier
         descriptor.identifier
       end
-      
+
       def repo
         descriptor.repository
       end
@@ -22,14 +22,26 @@ module Repositories
         descriptor.key_url
       end
 
+      def has_key_url?
+        descriptor.respond_to?(:key_url)
+      end
+
+      def has_key_id?
+        descriptor.respond_to?(:key_id)
+      end
+
       def key_id
-        c.descriptor.key_id
+        descriptor.key_id
       end
 
       def add_key_cmd
         # :key_url and key_id optional and mutually exclusion can both be nil. key_id overides key_url
-        "wget -qO - #{key_url} | sudo apt-key add - " unless  key_url.nil?
-        "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys #{key_id} " unless c.descriptor.key_id.nil?
+        "wget -qO - #{key_url} | sudo apt-key add - " if has_key_url?
+        "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys #{key_id} " if has_key_id?
+      end
+
+      def descriptor
+        context.descriptor
       end
     end
   end
