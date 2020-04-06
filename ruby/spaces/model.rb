@@ -46,7 +46,6 @@ module Spaces
 
     alias_method :product, :itself
 
-
     delegate(
       [:universe, :qualifier] => :klass
     )
