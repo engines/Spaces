@@ -1,7 +1,7 @@
 require_relative '../installations/subdivision'
 
 module Repositories
-  class Repositorie < ::Installations::Subdivision
+  class Repository < ::Installations::Subdivision
 
     class << self
       def inheritance_paths; __dir__; end
