@@ -18,6 +18,10 @@ module Texts
       '#!/bin/sh'
     end
 
+    def permission
+     0755  
+    end
+    
     def body
     end
 

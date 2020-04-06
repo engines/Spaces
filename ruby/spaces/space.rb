@@ -25,6 +25,7 @@ module Spaces
       f = File.open("#{writing_name_for(model)}", 'w')
       begin
         f.write(model.product)
+        FileUtils.chmod(model.permission, writing_name_for(model)) if model.respond_to?(:permission)
       ensure
         f.close
       end
