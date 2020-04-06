@@ -5,21 +5,9 @@ module Repositories
     class AddRepository < Texts::Script
       def body
         %Q(
-        echo "\n" | add-apt-repository '#{repo}'
+        echo "\n" | add-apt-repository '#{repository}'
         #{add_key_cmd}
      )
-      end
-
-      def identifier
-        descriptor.identifier
-      end
-
-      def repo
-        descriptor.repository
-      end
-
-      def key_url
-        descriptor.key_url
       end
 
       def has_key_url?
@@ -29,10 +17,11 @@ module Repositories
       def has_key_id?
         descriptor.respond_to?(:key_id)
       end
-
-      def key_id
-        descriptor.key_id
-      end
+      
+      delegate(
+        descriptor: :context,
+        [:identifier, :repository, :key_url, :key_id ] => :descriptor
+      )
 
       def add_key_cmd
         # :key_url and key_id optional and mutually exclusion can both be nil. key_id overides key_url
@@ -40,9 +29,6 @@ module Repositories
         "apt-key adv --keyserver keyserver.ubuntu.com --recv-keys #{key_id} " if has_key_id?
       end
 
-      def descriptor
-        context.descriptor
-      end
     end
   end
 end
