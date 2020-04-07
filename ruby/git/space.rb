@@ -13,6 +13,10 @@ module Git
       Dir["#{path_for(descriptor)}/*.json"].first.split('.').first
     end
 
+    def path_for(descriptor)
+      "#{path}/#{descriptor.project_identifier}"
+    end
+
     def import(descriptor)
       ensure_space
       begin

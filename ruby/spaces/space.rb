@@ -71,7 +71,7 @@ module Spaces
     end
 
     def reading_name_for(descriptor, klass = model_class)
-      "#{path}/#{descriptor.send(klass.subspace_path_method)}/#{klass.identifier}"
+      "#{path}/#{descriptor.identifier}/#{klass.identifier}"
     end
 
     def writing_name_for(model)
