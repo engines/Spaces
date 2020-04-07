@@ -2,7 +2,7 @@ require_relative '../universal/space'
 require_relative '../git/space'
 require_relative 'blueprint'
 
-module Blueprints
+module Projects
   class Space < Git::Space
 
     alias_method :by, :by_json

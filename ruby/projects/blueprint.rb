@@ -1,7 +1,7 @@
 require_relative '../spaces/model'
 require_relative '../installations/installation'
 
-module Blueprints
+module Projects
   class Blueprint < ::Spaces::Model
 
     relation_accessor :installation
