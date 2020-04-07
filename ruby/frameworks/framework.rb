@@ -50,6 +50,6 @@ module Frameworks
     def struct
       @struct ||= installation.struct.framework
     end
-
+    
   end
 end

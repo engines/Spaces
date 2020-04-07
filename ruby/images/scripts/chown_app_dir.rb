@@ -1,6 +1,6 @@
 require_relative '../../texts/one_time_script'
 
-module Frameworks
+module Images
   module Scripts
     class ChownAppDir < Texts::OneTimeScript
       def body
@@ -70,7 +70,7 @@ module Frameworks
       end
 
       def user_identifier
-        context.user_identifier
+        user.user_identifier
       end
     end
   end
