@@ -9,24 +9,18 @@ module Outer
         Dir.exist?(path_for(descriptor))
       end
 
-      def reading_name_for(descriptor)
+      def reading_name_for(descriptor, klass = nil)
         ensure_space
         Dir["#{path_for(descriptor)}/*.json"].first
       end
 
       def import(descriptor)
         ensure_space
-        clear_for(descriptor)
-        g = ::Git.clone(descriptor.repository, descriptor.project_identifier, path: path)
-        g.checkout(descriptor.branch) if descriptor.branch
-      end
-
-      def file_names_for(directory, descriptor)
-        Dir["#{path_for(descriptor)}/#{directory}/**/*"].reject { |f| File.directory?(f) }
-      end
-
-      def clear_for(descriptor)
-        FileUtils.rm_rf(path_for(descriptor))
+        begin
+          g = ::Git.clone(descriptor.repository, descriptor.project_identifier, path: path)
+          g.checkout(descriptor.branch) if descriptor.branch
+        rescue ::Git::GitExecuteError
+        end
       end
 
     end

@@ -1,19 +1,19 @@
 require_relative '../universal/space'
-require_relative '../spaces/space'
+require_relative '../outer/git/space'
 require_relative 'blueprint'
 
 module Blueprints
-  class Space < ::Spaces::Space
+  class Space < Outer::Git::Space
 
-    def new_for(descriptor)
-      model_class.new(struct: open_struct_from_json(outer.by(descriptor))).tap do |m|
+    def by(descriptor)
+      model_class.new(struct: open_struct_from_json(super)).tap do |m|
         m.struct.descriptor = descriptor
       end
     end
 
     def import(descriptor)
-      outer.import(descriptor)
-      new_for(descriptor).tap do |m|
+      super
+      by(descriptor).tap do |m|
         save_yaml(m)
         import_anchors_for(m)
       end
@@ -32,7 +32,7 @@ module Blueprints
     end
 
     def file_names_for(directory, descriptor)
-      outer.file_names_for(directory, descriptor)
+      Dir["#{path_for(descriptor)}/#{directory}/**/*"].reject { |f| File.directory?(f) }
     end
 
     def imported?(descriptor)
@@ -41,10 +41,6 @@ module Blueprints
 
     def model_class
       Blueprint
-    end
-
-    def outer
-      universe.outer
     end
   end
 end
