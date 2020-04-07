@@ -3,12 +3,6 @@ require_relative 'model'
 module Spaces
   class Descriptor < ::Spaces::Model
 
-    class << self
-      def subspace_path_method
-        :project_identifier
-      end
-    end
-
     attr_accessor :repository,
       :identifier,
       :local_identifier,

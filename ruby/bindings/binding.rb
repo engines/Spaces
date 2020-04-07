@@ -1,3 +1,4 @@
+require 'resolv'
 require_relative '../texts/text'
 require_relative '../installations/subdivision'
 

@@ -14,6 +14,8 @@ module Users
       end
     end
 
+    alias_method :save, :save_yaml
+
     def next_identifier
       (first_time? ? seed_identifier : next_running_identifier).tap do |id|
         increment(id)

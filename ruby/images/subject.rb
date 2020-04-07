@@ -15,14 +15,14 @@ module Images
     )
 
     def product
-      [docker_file, collaborator_scripts, blueprinted_scripts, injections].flatten
+      [docker_file, collaborator_scripts, project_scripts, injections].flatten
     end
 
     def collaborator_scripts
       collaborators.map(&:scripts).flatten.compact.uniq(&:uniqueness)
     end
 
-    def blueprinted_scripts
+    def project_scripts
       files_for(:scripts)
     end
 

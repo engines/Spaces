@@ -3,9 +3,9 @@ require_relative '../spaces/space'
 module Images
   class Space < ::Spaces::Space
 
-    def deep_save(subject)
+    def save(subject)
       subject.product.map do |t|
-        save(t)
+        save_text(t)
         "#{t.path}"
       end
     end

@@ -30,7 +30,7 @@ universe.containers
 # Spaces::Descriptor
 
 A `Spaces::Descriptor` object is the way spaces objects are saved and located in their various spaces. While Spaces generates its own descriptors internally,
-a common starting point is to start with a descriptor to locate a source blueprint. For example:
+a common starting point is to start with a descriptor to locate a source project. For example:
 
 ```
 require_relative 'ruby/spaces/descriptor'
@@ -39,9 +39,9 @@ descriptor = Spaces::Descriptor.new.tap do |m|
 end
 ```
 
-which can be used to import a blueprint from an external Git repo.
+which can be used to import a project from an external Git repo.
 
-There are optional attributes you can declare for a blueprint:
+There are optional attributes you can declare for a project:
 
 ```
 descriptor = Spaces::Descriptor.new.tap do |m|
@@ -50,40 +50,40 @@ descriptor = Spaces::Descriptor.new.tap do |m|
 end
 ```
 
-# Blueprints
+# Projects
 ## Importing
 
-You can import a blueprint into your universe with:
+You can import a project into your universe with:
 
 ```
-blueprint_space = universe.blueprints
-blueprint_space.import(descriptor)
+project_space = universe.blueprints
+project_space.import(descriptor)
 ```
 
-## Retrieving an imported blueprint
+## Retrieving an imported project
 
-Once you've imported a blueprint, you can retrieve it with:
+Once you've imported a project, you can retrieve it with:
 
 ```
-blueprint_space.by(descriptor)
+project_space.by(descriptor)
 ```
 
 ## Generating an Installations::Installation
 
-A `Installations::Installation` is what will generate a DockerFile. You create an installation from a blueprint like so:
+A `Installations::Installation` is what will generate a DockerFile. You create an installation from a project like so:
 
 ```
-blueprint = universe.blueprints.by(descriptor)
-installation = blueprint.installation
+project = universe.blueprints.by(descriptor)
+installation = project.installation
 ```
 
 ## Saving an Installations::Installation
 
-Save `Installations::Installation` to blueprint space with:
+Save `Installations::Installation` to installation space with:
 
 ```
-blueprint_space = universe.blueprints
-blueprint_space.save_yaml(installation)
+installation_space = universe.installations
+installation_space.save(installation)
 ```
 
 # Containers

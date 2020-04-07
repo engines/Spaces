@@ -12,10 +12,12 @@ module Spaces
 
     delegate([:identifier, :universe] => :klass)
 
-    def by(descriptor, klass = model_class)
+    def by_yaml(descriptor, klass = model_class)
       f = File.open("#{reading_name_for(descriptor, klass)}.yaml", 'r')
       begin
-        klass.new(struct: klass.from_yaml(f.read))
+        klass.new(struct: klass.from_yaml(f.read)).tap do |m|
+          m.struct.descriptor = descriptor
+        end
       ensure
         f.close
       end
@@ -24,13 +26,15 @@ module Spaces
     def by_json(descriptor, klass = model_class)
       f = File.open("#{reading_name_for(descriptor, klass)}.json", 'r')
       begin
-        klass.new(struct: open_struct_from_json(f.read))
+        klass.new(struct: open_struct_from_json(f.read)).tap do |m|
+          m.struct.descriptor = descriptor
+        end
       ensure
         f.close
       end
     end
 
-    def save(model)
+    def save_text(model)
       f = File.open("#{writing_name_for(model)}", 'w')
       begin
         f.write(model.product)
@@ -67,7 +71,7 @@ module Spaces
     end
 
     def reading_name_for(descriptor, klass = model_class)
-      "#{path}/#{descriptor.send(klass.subspace_path_method)}/#{klass.identifier}"
+      "#{path}/#{descriptor.identifier}/#{klass.identifier}"
     end
 
     def writing_name_for(model)

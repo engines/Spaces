@@ -16,8 +16,7 @@ module Universal
           :environments,
           :domains,
           :users,
-          :blueprints,
-          :outer
+          :projects
         ]
       end
 
@@ -28,6 +27,10 @@ module Universal
           m
         end
       end
+    end
+
+    def blueprints
+      projects
     end
 
     def path

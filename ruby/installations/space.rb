@@ -3,13 +3,16 @@ require_relative '../spaces/space'
 module Installations
   class Space < ::Spaces::Space
 
+    alias_method :by, :by_yaml
+    alias_method :save, :save_yaml
+
     def save_yaml(model)
-      save_user_yaml(model)
+      save_user(model)
       super
     end
 
-    def save_user_yaml(model)
-      universe.users.save_yaml(model.user)
+    def save_user(model)
+      universe.users.save(model.user)
     end
 
     def model_class
