@@ -16,8 +16,7 @@ module Universal
           :environments,
           :domains,
           :users,
-          :blueprints,
-          :outer
+          :blueprints
         ]
       end
 

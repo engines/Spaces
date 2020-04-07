@@ -1,9 +1,18 @@
 require 'git'
-require_relative '../uri/space'
+require_relative '../../spaces/space'
 
 module Outer
   module Git
-    class Space < ::Outer::Uri::Space
+    class Space < ::Spaces::Space
+
+      def by(descriptor)
+        f = File.open(reading_name_for(descriptor), 'r')
+        begin
+          f.read
+        ensure
+          f.close
+        end
+      end
 
       def encloses?(descriptor)
         Dir.exist?(path_for(descriptor))
