@@ -1,9 +1,9 @@
 require_relative '../universal/space'
-require_relative '../outer/git/space'
+require_relative '../git/space'
 require_relative 'blueprint'
 
 module Blueprints
-  class Space < Outer::Git::Space
+  class Space < Git::Space
 
     def by(descriptor)
       model_class.new(struct: open_struct_from_json(super)).tap do |m|
