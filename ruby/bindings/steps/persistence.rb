@@ -5,9 +5,7 @@ module Bindings
     class Persistence < Docker::Files::Step
 
       def product
-      %Q(
-      RUN persistence.sh
-      )
+        context.scripts.map { |s| "RUN #{s.path}" }
       end
 
     end

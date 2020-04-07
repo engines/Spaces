@@ -6,10 +6,14 @@ module Bindings
       def body
         #FIXME /home/fs/vol_dir_maps and /home/volumes/$volume are also used by fsconfigurator (static scripts in a static image) so may need to write these files
         [
-          '. ./persistent_functions.sh',
+          ". #{script_path}/persistent_functions.sh",
           write(:files),
           write(:directories)
         ].join("\n")
+      end
+      
+      def script_path
+        subspace_path.sub(/^[a-zA-Z]*\//, '/')
       end
 
       def write(symbol)
@@ -17,6 +21,7 @@ module Bindings
           p = binding_for(k).path
           v.map do |f|
             %Q(
+            mkdir -p #{p}
             ln_destination=#{p}/#{f}
             destination=#{p}
             abs_path=#{abs_path(f)}

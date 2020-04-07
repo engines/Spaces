@@ -8,7 +8,7 @@ module Nodules
         def body
           %Q(
           cd /tmp
-          rm go-pear.phar
+          rm install-pear-nozlib.phar
           )
         end
 
