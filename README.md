@@ -79,11 +79,11 @@ installation = blueprint.installation
 
 ## Saving an Installations::Installation
 
-Save `Installations::Installation` to blueprint space with:
+Save `Installations::Installation` to installation space with:
 
 ```
-blueprint_space = universe.blueprints
-blueprint_space.save_yaml(installation)
+installation_space = universe.installations
+installation_space.save(installation)
 ```
 
 # Containers

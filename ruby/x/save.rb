@@ -33,7 +33,7 @@ def clear
 end
 
 def save_image_subject
-  universe.images.deep_save(installation.image_subject)
+  universe.images.save(installation.image_subject)
 end
 
 def save_installation
