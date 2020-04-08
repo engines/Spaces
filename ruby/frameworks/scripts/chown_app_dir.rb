@@ -14,7 +14,7 @@ module Frameworks
           fi
 
         mkdir -p /home/fs ; mkdir -p /home/fs/local
-        chown -R #{user_identifier} #{home_app_path} /home/fs /home/fs/local
+        chown -R #{user_name} #{home_app_path} /home/fs /home/fs/local
 
          set_permissions()
         {
@@ -69,8 +69,8 @@ module Frameworks
         )
       end
 
-      def user_identifier
-        context.user_identifier
+      def user_name
+        context.user_name
       end
     end
   end
