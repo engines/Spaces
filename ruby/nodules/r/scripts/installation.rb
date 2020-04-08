@@ -6,7 +6,7 @@ module Nodules
       class Installation < Texts::Script
 
         def body
-          "R -e install.packages(\"#{context.name}\") "
+          "R -e 'install.packages(\"#{context.name}\")' "
         end
 
       end

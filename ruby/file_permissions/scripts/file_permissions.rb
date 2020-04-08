@@ -11,7 +11,7 @@ module FilePermissions
         # then for each file_to_permission
         #Paths referenced are static but global
         %Q(
-         set_path_permission()
+         set_path_permissions()
           {
            if [ -h  #{home_app_path}/$path ]
             then
