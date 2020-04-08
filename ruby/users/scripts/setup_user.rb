@@ -87,15 +87,15 @@ module Users
       end
 
       def user_id
-        context.user.identifier
+        context.identifier
       end
 
       def data_uid
-        context.user.data_uid
+        context.data_uid
       end
 
       def data_gid
-        context.user.data_gid
+        context.data_gid
       end
     end
   end
