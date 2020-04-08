@@ -14,19 +14,19 @@ module Frameworks
            then
             groupadd -g $data_gid writegrp
           fi
-        echo "  id #{user_identifier} | grep $data_gid '"
-         id #{user_identifier} | grep $data_gid
+        echo "  id #{user_name} | grep $data_gid '"
+         id #{user_name} | grep $data_gid
 
-          id #{user_identifier} | grep $data_gid >/dev/null
+          id #{user_name} | grep $data_gid >/dev/null
           if test $? -ne 0
            then
           echo "add contuser to data group"
-            usermod -G $data_gid -a #{user_identifier}
+            usermod -G $data_gid -a #{user_name}
           fi
           chown -R  $data_uid.$data_gid #{home_app_path}
-          chown -R #{user_identifier} /home/home_dir
-           mkdir -p ~#{user_identifier}/.ssh
-             chown -R #{user_identifier} ~#{user_identifier}/.ssh
+          chown -R #{user_name} /home/home_dir
+           mkdir -p ~#{user_name}/.ssh
+             chown -R #{user_name} ~#{user_name}/.ssh
 
           if test -f #{script_file_name}
             then
@@ -43,12 +43,12 @@ module Frameworks
             service_path=`head -1 /home/database_seed | sed "/#/s///"`
             cat /home/database_seed | grep -v  ^\# | /home/engine/services/$service_path/restore.sh
            fi
-        chown -R #{user_identifier} $HOME
+        chown -R #{user_name} $HOME
         )
       end
 
-      def user_identifier
-        context.user_identifier
+      def user_name
+        context.user_name
       end
 
       def script_file_name

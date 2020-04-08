@@ -15,6 +15,10 @@ module Frameworks
 
     relation_accessor :web_server
 
+    delegate(
+      user: :installation
+    )
+
     def scripts
       [super, web_server.scripts]
     end
@@ -35,7 +39,7 @@ module Frameworks
       @port ||= struct.port || default_port
     end
 
-    def user_identifier
+    def user_name
       'www-data'
     end
 

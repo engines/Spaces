@@ -22,7 +22,7 @@ module Frameworks
 
       require_files_in :steps, :scripts
 
-      def user_identifier
+      def user_name
         'ruby'
       end
 
