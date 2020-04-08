@@ -70,9 +70,6 @@ module Frameworks
         )
       end
 
-      def user_name
-        context.user_name
-      end
     end
   end
 end

@@ -35,7 +35,7 @@ module Frameworks
       @port ||= struct.port || default_port
     end
 
-    def user_identifier
+    def user_name
       'www-data'
     end
 

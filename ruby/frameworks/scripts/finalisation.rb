@@ -13,16 +13,16 @@ module Frameworks
            then
             groupadd -g #{data_gid} writegrp
           fi
-        echo "  id #{user_name} | grep $data_gid '"
-         id #{user_name} | grep $data_gid
+        echo "  id #{user_name} | grep #{data_gid} '"
+         id #{user_name} | grep #{data_gid}
 
-          id #{user_name} | grep $data_gid >/dev/null
+          id #{user_name} | grep #{data_gid} >/dev/null
           if test $? -ne 0
            then
           echo "add contuser to data group"
-            usermod -G $data_gid -a #{user_name}
+            usermod -G #{data_gid} -a #{user_name}
           fi
-          chown -R  $data_uid.$data_gid #{home_app_path}
+          chown -R  $data_uid.#{data_gid} #{home_app_path}
           chown -R #{user_name} /home/home_dir
            mkdir -p ~#{user_name}/.ssh
              chown -R #{user_name} ~#{user_name}/.ssh
@@ -37,12 +37,12 @@ module Frameworks
             ln -s $VOLDIR /data
           fi
 
-        chown -R #{user_identifier} $HOME
+        chown -R #{user_name} $HOME
         )
       end
 
-      def user_name
-        context.user_name
+      def data_gid
+        context.installation.user.data_gid
       end
 
       def script_file_name

@@ -9,7 +9,7 @@ module Frameworks
           'python37'
         end
 
-        def user_identifier
+        def user_name
           'python'
         end
 
