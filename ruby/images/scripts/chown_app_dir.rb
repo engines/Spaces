@@ -70,7 +70,7 @@ module Images
       end
 
       def user_identifier
-        user.user_identifier
+        context.installation.framework.user_identifier
       end
     end
   end

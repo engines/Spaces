@@ -46,11 +46,11 @@ module Frameworks
       end
      
       def data_gid
-        1111 #context.user.data_gid
+        context.installation.user.data_gid
       end
 
       def data_uid
-        1111 # context.user.data_uid
+        context.installation.user.data_uid
       end
 
       def script_file_name

@@ -1,6 +1,6 @@
 require_relative '../../texts/one_time_script'
 
-module Images
+module Users
   module Scripts
     class SetUser < Texts::OneTimeScript
       def body
