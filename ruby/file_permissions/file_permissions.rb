@@ -6,7 +6,7 @@ module FilePermissions
 
     class << self
       def step_precedence
-        { late: [:run_scripts] }
+        { late: [:runs] }
       end
 
       def inheritance_paths; __dir__; end
