@@ -53,10 +53,6 @@ module Texts
       "#{context.subpath}/#{path}"
     end
 
-    def path
-      context.path
-    end
-
     def identifier
       context.identifier
     end
