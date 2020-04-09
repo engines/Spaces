@@ -13,52 +13,33 @@ module Spaces
     delegate([:identifier, :universe] => :klass)
 
     def by_yaml(descriptor, klass = default_model_class)
-      f = File.open("#{reading_name_for(descriptor, klass)}.yaml", 'r')
-      begin
-        klass.new(struct: klass.from_yaml(f.read)).tap do |m|
-          m.struct.descriptor = descriptor
-        end
-      ensure
-        f.close
+      _by(descriptor, klass, as: :yaml) do |f|
+        klass.new(struct: klass.from_yaml(f.read))
       end
     end
 
     def by_json(descriptor, klass = default_model_class)
-      f = File.open("#{reading_name_for(descriptor, klass)}.json", 'r')
-      begin
-        klass.new(struct: open_struct_from_json(f.read)).tap do |m|
-          m.struct.descriptor = descriptor
-        end
-      ensure
-        f.close
+      _by(descriptor, klass, as: :json) do |f|
+        klass.new(struct: open_struct_from_json(f.read))
       end
     end
 
     def save_text(model)
-      f = File.open("#{writing_name_for(model)}", 'w')
-      begin
+      _save(model) do |f|
         f.write(model.product)
         FileUtils.chmod(model.permission, writing_name_for(model)) if model.respond_to?(:permission)
-      ensure
-        f.close
       end
     end
 
     def save_yaml(model)
-      f = File.open("#{writing_name_for(model)}.yaml", 'w')
-      begin
+      _save(model, as: :yaml) do |f|
         f.write(model.product.to_yaml)
-      ensure
-        f.close
       end
     end
 
     def save_json(model)
-      f = File.open("#{writing_name_for(model)}.json", 'w')
-      begin
+      _save(model, as: :json) do |f|
         f.write(model.struct.deep_to_h.to_json)
-      ensure
-        f.close
       end
     end
 
@@ -93,6 +74,24 @@ module Spaces
 
     def encloses?(file_name)
       Dir.exist?(file_name)
+    end
+
+    def _by(descriptor, klass = default_model_class, as:, &block)
+      f = File.open("#{reading_name_for(descriptor, klass)}.#{as}", 'r')
+      begin
+        block.call(f).tap { |m| m.struct.descriptor = descriptor }
+      ensure
+        f.close
+      end
+    end
+
+    def _save(model, as: nil, &block)
+      f = File.open([writing_name_for(model), as].compact.join('.'), 'w')
+      begin
+        block.call(f)
+      ensure
+        f.close
+      end
     end
 
   end
