@@ -24,7 +24,7 @@ module Projects
       model.anchor_descriptors&.reject { |d| imported?(d) } || []
     end
 
-    def ensure_subspace_for(descriptor)
+    def ensure_space_for(descriptor)
       FileUtils.mkdir_p(path_for(descriptor))
     end
 
@@ -36,7 +36,7 @@ module Projects
       Dir.exist?(path_for(descriptor))
     end
 
-    def model_class
+    def default_model_class
       Blueprint
     end
   end

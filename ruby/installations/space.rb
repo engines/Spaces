@@ -15,7 +15,7 @@ module Installations
       universe.users.save(model.user)
     end
 
-    def model_class
+    def default_model_class
       Installation
     end
 

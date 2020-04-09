@@ -9,7 +9,7 @@ module Nodules
       end
     end
 
-    def build_script_path
+    def path
       "#{super}/#{type}"
     end
 

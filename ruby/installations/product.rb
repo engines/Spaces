@@ -1,11 +1,11 @@
 require_relative '../spaces/model'
-require_relative '../images/production'
-require_relative '../docker/files/production'
+require_relative '../images/product'
+require_relative '../docker/files/product'
 
 module Installations
-  class Production < ::Spaces::Model
-    include Images::Production
-    include Docker::Files::Production
+  class Product < ::Spaces::Model
+    include Images::Product
+    include Docker::Files::Product
 
     class << self
       def step_precedence
@@ -27,7 +27,11 @@ module Installations
       def inheritance_paths; end
     end
 
-    alias_method :production_build_script_path, :build_script_path
+    def path
+      "build/#{super}"
+    end
+
+    alias_method :collaborator_path, :path
 
     def product
       duplicate(struct)

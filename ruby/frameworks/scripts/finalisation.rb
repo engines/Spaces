@@ -46,7 +46,7 @@ module Frameworks
       end
 
       def script_file_name
-        "/#{context.build_script_path}/#{identifier}.sh"
+        "/#{context.path}/#{identifier}.sh"
       end
 
     end

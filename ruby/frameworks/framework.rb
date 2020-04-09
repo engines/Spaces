@@ -43,7 +43,7 @@ module Frameworks
       8000
     end
 
-    def build_script_path
+    def path
       "#{super}/#{klass.identifier}"
     end
 

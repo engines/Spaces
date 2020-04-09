@@ -6,11 +6,9 @@ module Projects
 
     relation_accessor :installation
 
-    delegate(
-      project_identifier: :descriptor
-    )
+    delegate(project_identifier: :descriptor)
 
-    alias_method :subspace_path, :project_identifier
+    alias_method :identifier, :project_identifier
 
     def installation
       @installation ||= installation_class.new(struct: struct)

@@ -6,6 +6,8 @@ module Texts
     relation_accessor :context
     attr_reader :product
 
+    delegate(context_identifier: :context)
+
     def product
       [
         header,
@@ -19,9 +21,9 @@ module Texts
     end
 
     def permission
-     0755  
+      0755
     end
-    
+
     def body
     end
 
@@ -36,11 +38,7 @@ module Texts
     end
 
     def path
-      "#{build_script_path}/#{file_name}"
-    end
-
-    def file_path
-      "#{subspace_path}/#{file_name}"
+      "#{context.path}/#{file_name}"
     end
 
     def file_name
@@ -51,12 +49,12 @@ module Texts
       context.home_app_path
     end
 
-    def subspace_path
-      "#{context.subspace_path}/#{build_script_path}"
+    def subpath
+      "#{context.subpath}/#{path}"
     end
 
-    def build_script_path
-      context.build_script_path
+    def path
+      context.path
     end
 
     def identifier

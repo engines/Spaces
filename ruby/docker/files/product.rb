@@ -2,7 +2,7 @@ require_relative '../../spaces/constantizing'
 
 module Docker
   module Files
-    module Production
+    module Product
       include Spaces::Constantizing
 
       def layers_for(group)

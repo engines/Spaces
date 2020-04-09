@@ -8,7 +8,7 @@ module WebServers
         def product
         %Q(
           USER 0
-          RUN #{context.build_script_path}/configure.sh
+          RUN #{context.path}/configure.sh
         )
         end
 

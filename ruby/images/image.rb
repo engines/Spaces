@@ -6,9 +6,7 @@ module Images
 
     relation_accessor :subject
 
-    delegate(
-      [:docker_file, :identifier] => :subject
-    )
+    delegate(docker_file: :subject)
 
     def initialize(subject)
       self.subject = subject

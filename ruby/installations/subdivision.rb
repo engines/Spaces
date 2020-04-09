@@ -1,13 +1,11 @@
-require_relative 'production'
+require_relative 'product'
 
 module Installations
-  class Subdivision < Production
+  class Subdivision < Product
 
     relation_accessor :context
 
-    delegate(
-      [:installation, :subspace_path, :build_script_path] => :context
-    )
+    delegate([:installation, :path, :context_identifier] => :context)
 
     def initialize(struct:, context:)
       self.struct = struct

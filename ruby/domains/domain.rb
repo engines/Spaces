@@ -14,7 +14,7 @@ module Domains
     end
 
     def host
-      identifier
+      context_identifier
     end
 
     def name

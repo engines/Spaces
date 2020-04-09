@@ -4,7 +4,7 @@ module Images
   module Steps
     class ChownAppDir < Docker::Files::Step
       def product
-        "RUN   #{context.build_script_path}/chown_app_dir.sh"
+        "RUN   #{context.path}/chown_app_dir.sh"
       end
 
     end
