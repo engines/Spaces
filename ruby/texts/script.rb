@@ -20,14 +20,12 @@ module Texts
       '#!/bin/sh'
     end
 
+    def body; end
+
+    def footer; end
+
     def permission
       0755
-    end
-
-    def body
-    end
-
-    def footer
     end
 
     def echo(string)
@@ -37,8 +35,12 @@ module Texts
     )
     end
 
+    def full_path
+      "#{path}/#{file_name}"
+    end
+
     def path
-      "#{context.path}/#{file_name}"
+      context.path
     end
 
     def file_name

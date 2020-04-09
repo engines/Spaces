@@ -6,7 +6,7 @@ module Docker
       class Runs < Step
 
         def product
-          context.scripts.map { |s| "RUN #{s.path}" }
+          context.scripts.map { |s| "RUN #{s.full_path}" }
         end
 
       end
