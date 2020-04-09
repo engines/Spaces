@@ -76,11 +76,7 @@ module Spaces
     end
 
     def path_for(model)
-      [path, context_identifier_for(model), model.subpath].compact.join('/')
-    end
-
-    def context_identifier_for(model)
-      model.context_identifier
+      [path, model.context_identifier, model.subpath].compact.join('/')
     end
 
     def path
