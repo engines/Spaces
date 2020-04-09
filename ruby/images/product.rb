@@ -1,7 +1,7 @@
 require_relative '../spaces/constantizing'
 
 module Images
-  module Production
+  module Product
     include Spaces::Constantizing
 
     def scripts
@@ -15,8 +15,8 @@ module Images
       klass.script_lot
     end
 
-    def build_script_path
-      'build/scripts'
+    def path
+      'scripts'
     end
 
   end

@@ -7,6 +7,8 @@ module Texts
       :directory
       :source
 
+    delegate(context_identifier: :context)
+
     def source
       @source ||=
       begin
@@ -21,19 +23,15 @@ module Texts
       source_file_name
     end
 
-    def file_path
-      "#{subspace_path}/#{file_name}"
-    end
-
     def file_name
       source_file_name.split('/').last
     end
 
-    def subspace_path
-      "#{context.subspace_path}/home/engines/#{short_path}"
+    def subpath
+      "home/run/#{source_path}"
     end
 
-    def short_path
+    def source_path
       source_file_name[break_point .. -1].split('/')[0 .. -2].join('/')
     end
 

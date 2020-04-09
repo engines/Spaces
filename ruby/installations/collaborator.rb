@@ -1,7 +1,7 @@
-require_relative 'production'
+require_relative 'product'
 
 module Installations
-  class Collaborator < Production
+  class Collaborator < Product
 
     class << self
       def prototype(installation:, blueprint_label:)
@@ -12,7 +12,7 @@ module Installations
     relation_accessor :installation
     attr_accessor :blueprint_label
 
-    delegate([:home_app_path, :identifier] => :installation)
+    delegate([:home_app_path, :context_identifier] => :installation)
 
     def collaborators
       @collaborators ||= installation.collaborators.values.compact

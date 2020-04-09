@@ -6,13 +6,9 @@ module WebServers
     def struct
       @struct ||= context.struct.web_server
     end
-
-    def subspace_path
-      context.identifier
-    end
-
-    def build_script_path
-      "#{production_build_script_path}/web_server/#{klass.identifier}"
+    
+    def path
+      "#{collaborator_path}/web_server/#{klass.identifier}"
     end
 
     def initialize(context)

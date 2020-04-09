@@ -15,7 +15,7 @@ module WebServers
          www_dir=''
           if ! test -z $WWW_DIR
            then
-         	www_dir=$WWW_DIR
+         	  www_dir=$WWW_DIR
            fi
 
          APACHE_LOG_DIR=/var/log/
@@ -43,8 +43,6 @@ module WebServers
          		then
          		 cp /home/engines/configs/apache2/site.conf /etc/apache2/sites-enabled/000-default.conf
          	fi
-
-         /build_scripts/install_htaccess.sh
          )
         end
 

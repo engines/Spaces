@@ -4,26 +4,25 @@ module Frameworks
   module Scripts
     class Finalisation < Texts::OneTimeScript
       def body
-        #Notes for future improvements
-        #May be Dynamically setup but has default $data_gid $data_uid
+        #Notes for future improveme
         #$HOME is a shell env from base
         #Paths referenced are static but global
         %Q(
-        grep :$data_gid: /etc/group >/dev/null
+        grep :#{data_gid}: /etc/group >/dev/null
           if test $? -ne 0
            then
-            groupadd -g $data_gid writegrp
+            groupadd -g #{data_gid} writegrp
           fi
-        echo "  id #{user_name} | grep $data_gid '"
-         id #{user_name} | grep $data_gid
+        echo "  id #{user_name} | grep #{data_gid} '"
+         id #{user_name} | grep #{data_gid}
 
-          id #{user_name} | grep $data_gid >/dev/null
+          id #{user_name} | grep #{data_gid} >/dev/null
           if test $? -ne 0
            then
           echo "add contuser to data group"
-            usermod -G $data_gid -a #{user_name}
+            usermod -G #{data_gid} -a #{user_name}
           fi
-          chown -R  $data_uid.$data_gid #{home_app_path}
+          chown -R  $data_uid.#{data_gid} #{home_app_path}
           chown -R #{user_name} /home/home_dir
            mkdir -p ~#{user_name}/.ssh
              chown -R #{user_name} ~#{user_name}/.ssh
@@ -38,21 +37,16 @@ module Frameworks
             ln -s $VOLDIR /data
           fi
 
-          if test -f /home/database_seed
-           then
-            service_path=`head -1 /home/database_seed | sed "/#/s///"`
-            cat /home/database_seed | grep -v  ^\# | /home/engine/services/$service_path/restore.sh
-           fi
         chown -R #{user_name} $HOME
         )
       end
 
-      def user_name
-        context.user_name
+      def data_gid
+        context.installation.user.data_gid
       end
 
       def script_file_name
-        "/#{context.build_script_path}/#{identifier}.sh"
+        "/#{context.path}/#{identifier}.sh"
       end
 
     end

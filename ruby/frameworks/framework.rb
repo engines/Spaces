@@ -15,10 +15,6 @@ module Frameworks
 
     relation_accessor :web_server
 
-    delegate(
-      user: :installation
-    )
-
     def scripts
       [super, web_server.scripts]
     end
@@ -47,13 +43,13 @@ module Frameworks
       8000
     end
 
-    def build_script_path
+    def path
       "#{super}/#{klass.identifier}"
     end
 
     def struct
       @struct ||= installation.struct.framework
     end
-
+    
   end
 end

@@ -42,25 +42,21 @@ module Spaces
 
     alias_method :product, :itself
 
-    delegate(
-      [:universe, :qualifier] => :klass
-    )
+    delegate([:universe, :qualifier] => :klass)
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    def uniqueness
-      [klass.name, identifier]
-    end
-
-    def file_path
-      "#{subspace_path}/#{klass.identifier}"
-    end
-
-    def subspace_path
+    def context_identifier
       identifier
     end
+
+    def file_name
+      klass.identifier
+    end
+
+    def subpath; end
 
     def namespaced_name(namespace, symbol)
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
@@ -72,6 +68,10 @@ module Spaces
 
     def open_struct_from_json(json)
       JSON.parse(json, object_class: OpenStruct)
+    end
+
+    def uniqueness
+      [klass.name, identifier]
     end
 
     def descriptor_class

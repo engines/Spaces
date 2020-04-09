@@ -24,9 +24,7 @@ module Docker
 
       require_files_in :steps
 
-      delegate(
-        step_group_precedence: :klass
-      )
+      delegate(step_group_precedence: :klass)
 
       def product
         text_class.new(source: source, context: self).resolved

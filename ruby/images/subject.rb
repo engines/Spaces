@@ -8,11 +8,9 @@ module Images
       def inheritance_paths; __dir__; end
     end
 
-    require_files_in :scripts
+    require_files_in :scripts, :steps
 
-    delegate(
-      docker_file: :installation
-    )
+    delegate(docker_file: :installation)
 
     def product
       [docker_file, collaborator_scripts, project_scripts, injections].flatten

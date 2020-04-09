@@ -12,7 +12,7 @@ module Spaces
 
     delegate([:identifier, :universe] => :klass)
 
-    def by_yaml(descriptor, klass = model_class)
+    def by_yaml(descriptor, klass = default_model_class)
       f = File.open("#{reading_name_for(descriptor, klass)}.yaml", 'r')
       begin
         klass.new(struct: klass.from_yaml(f.read)).tap do |m|
@@ -23,7 +23,7 @@ module Spaces
       end
     end
 
-    def by_json(descriptor, klass = model_class)
+    def by_json(descriptor, klass = default_model_class)
       f = File.open("#{reading_name_for(descriptor, klass)}.json", 'r')
       begin
         klass.new(struct: open_struct_from_json(f.read)).tap do |m|
@@ -66,25 +66,17 @@ module Spaces
       %x(cd #{path_for(model)}; tar -czf #{path_for(model)}.tgz . 2>&1)
     end
 
-    def encloses?(file_name)
-      Dir.exist?(file_name)
-    end
-
-    def reading_name_for(descriptor, klass = model_class)
+    def reading_name_for(descriptor, klass = default_model_class)
       "#{path}/#{descriptor.identifier}/#{klass.identifier}"
     end
 
     def writing_name_for(model)
-      ensure_subspace_for(model)
-      "#{path}/#{model.file_path}"
-    end
-
-    def ensure_subspace_for(model)
-      FileUtils.mkdir_p(path_for(model))
+      ensure_space_for(model)
+      "#{path_for(model)}/#{model.file_name}"
     end
 
     def path_for(model)
-      "#{path}/#{model.subspace_path}"
+      [path, model.context_identifier, model.subpath].compact.join('/')
     end
 
     def path
@@ -93,6 +85,14 @@ module Spaces
 
     def ensure_space
       FileUtils.mkdir_p(path)
+    end
+
+    def ensure_space_for(model)
+      FileUtils.mkdir_p(path_for(model))
+    end
+
+    def encloses?(file_name)
+      Dir.exist?(file_name)
     end
 
   end

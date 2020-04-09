@@ -11,9 +11,9 @@ module Bindings
           write(:directories)
         ].join("\n")
       end
-      
+
       def script_path
-        subspace_path.sub(/^[a-zA-Z]*\//, '/')
+        subpath.sub(/^[a-zA-Z]*\//, '/')
       end
 
       def write(symbol)

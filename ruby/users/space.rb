@@ -54,7 +54,7 @@ module Users
       "#{path}/#{identifier}"
     end
 
-    def model_class
+    def default_model_class
       User
     end
   end

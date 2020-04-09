@@ -3,12 +3,14 @@ require_relative '../installations/collaborator'
 module Users
   class User < ::Installations::Collaborator
 
-    def identifier
-      struct.identifier
+    class << self
+      def inheritance_paths; __dir__; end
     end
 
-    def file_path
-      identifier
+    require_files_in :steps, :scripts
+
+    def identifier
+      struct.identifier
     end
 
     def default
