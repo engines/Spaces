@@ -1,4 +1,5 @@
 require_relative 'model'
+require_relative 'descriptor'
 
 module Spaces
   class Space < Model
@@ -14,6 +15,13 @@ module Spaces
 
     def identifiers
       Dir["#{path}/*"].map { |d| d.split('/').last }
+    end
+
+    def all(klass = default_model_class)
+      d = Descriptor.new
+      identifiers.map do |i|
+        by(d.tap { |m| m.identifier = i }, klass)
+      end
     end
 
     def by_yaml(descriptor, klass = default_model_class)

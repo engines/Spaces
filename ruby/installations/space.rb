@@ -6,8 +6,8 @@ module Installations
 
     delegate([:blueprints, :users] => :universe)
 
-    def by(descriptor)
-      by_yaml(descriptor)
+    def by(descriptor, klass = default_model_class)
+      by_yaml(descriptor, klass)
     rescue Errno::ENOENT
       default_model_class.new(blueprint: blueprints.by(descriptor))
     end
