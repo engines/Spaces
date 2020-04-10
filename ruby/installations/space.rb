@@ -4,7 +4,7 @@ require_relative 'installation'
 module Installations
   class Space < ::Spaces::Space
 
-    delegate([:blueprints, :users] => :universe)
+    delegate(blueprints: :universe)
 
     def by(descriptor, klass = default_model_class)
       by_yaml(descriptor, klass)
@@ -13,8 +13,8 @@ module Installations
     end
 
     def save(model)
-      users.save(model.user)
-      save_yaml(model)
+      universe.users.save(model.user)
+      super
     end
 
     def default_model_class

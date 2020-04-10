@@ -17,6 +17,10 @@ module Spaces
       Dir["#{path}/*"].map { |d| d.split('/').last }
     end
 
+    def descriptors
+      all.map(&:descriptor)
+    end
+
     def all(klass = default_model_class)
       d = Descriptor.new
       identifiers.map do |i|
@@ -29,6 +33,8 @@ module Spaces
         klass.new(struct: klass.from_yaml(f.read))
       end
     end
+
+    alias_method :by, :by_yaml
 
     def by_json(descriptor, klass = default_model_class)
       _by(descriptor, klass, as: :json) do |f|
@@ -48,6 +54,8 @@ module Spaces
         f.write(model.product.to_yaml)
       end
     end
+
+    alias_method :save, :save_yaml
 
     def save_json(model)
       _save(model, as: :json) do |f|
@@ -91,7 +99,7 @@ module Spaces
     def _by(descriptor, klass = default_model_class, as:, &block)
       f = File.open("#{reading_name_for(descriptor, klass)}.#{as}", 'r')
       begin
-        block.call(f).tap { |m| m.struct.descriptor = descriptor }
+        block.call(f)
       ensure
         f.close
       end
