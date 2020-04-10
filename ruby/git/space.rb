@@ -8,15 +8,6 @@ module Git
       Dir.exist?(path_for(descriptor))
     end
 
-    def reading_name_for(descriptor, klass = nil)
-      ensure_space
-      Dir["#{path_for(descriptor)}/*.json"].first.split('.').first
-    end
-
-    def path_for(descriptor)
-      "#{path}/#{descriptor.identifier}"
-    end
-
     def import(descriptor)
       ensure_space
       begin
