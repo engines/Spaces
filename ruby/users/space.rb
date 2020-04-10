@@ -8,7 +8,7 @@ module Users
       super.map { |i| i.split('.').first }  - [increment_file_name]
     end
 
-    def save_yaml(model)
+    def save(model)
       model.struct.identifier ||= next_identifier
       f = File.open("#{file_name_for(model.identifier)}.yaml", 'w')
       begin
@@ -17,8 +17,6 @@ module Users
         f.close
       end
     end
-
-    alias_method :save, :save_yaml
 
     def next_identifier
       (first_time? ? seed_identifier : next_running_identifier).tap do |id|
