@@ -18,12 +18,7 @@ def blueprint
 end
 
 def installation
-  @installation ||=
-  begin
-    universe.installations.by(descriptor)
-  rescue Errno::ENOENT
-    blueprint.installation
-  end
+  @installation ||= universe.installations.by(descriptor)
 end
 
 def clear
@@ -37,5 +32,5 @@ def save_image_subject
 end
 
 def save_installation
-  universe.installations.save_yaml(blueprint.installation)
+  universe.installations.save(installation)
 end

@@ -102,6 +102,8 @@ module Installations
       [:identifier, :home_app_path] => :descriptor
     )
 
+    relation_accessor :blueprint
+
     def product
       struct.tap do |s|
         mutable_divisions.each do |k|
@@ -149,6 +151,10 @@ module Installations
       else
         super
       end
+    def initialize(struct: nil, blueprint: nil, descriptor: nil)
+      self.blueprint = blueprint
+      self.struct = struct || blueprint&.struct
+      self.struct.descriptor = descriptor.struct if descriptor
     end
 
   end
