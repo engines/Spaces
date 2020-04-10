@@ -5,7 +5,6 @@ module Spaces
 
     attr_accessor :repository,
       :identifier,
-      :local_identifier,
       :protocol,
       :branch,
       :extraction,
@@ -15,7 +14,7 @@ module Spaces
     def initialize(struct = nil)
       if struct
         self.repository = struct.repository
-        self.local_identifier = struct.local_identifier
+        self.identifier = struct.identifier
         self.protocol = struct.protocol
         self.branch = struct.branch
         self.extraction = struct.extraction
@@ -25,10 +24,10 @@ module Spaces
     end
 
     def identifier
-      @identifier ||= local_identifier || project_identifier
+      @identifier ||= default_identifier
     end
 
-    def project_identifier
+    def default_identifier
       repository.split('/').last.split('.').first if repository
     end
 

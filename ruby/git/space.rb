@@ -14,13 +14,13 @@ module Git
     end
 
     def path_for(descriptor)
-      "#{path}/#{descriptor.project_identifier}"
+      "#{path}/#{descriptor.identifier}"
     end
 
     def import(descriptor)
       ensure_space
       begin
-        g = ::Git.clone(descriptor.repository, descriptor.project_identifier, path: path)
+        g = ::Git.clone(descriptor.repository, descriptor.identifier, path: path)
         g.checkout(descriptor.branch) if descriptor.branch
       rescue ::Git::GitExecuteError
       end
