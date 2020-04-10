@@ -12,6 +12,10 @@ module Spaces
 
     delegate([:identifier, :universe] => :klass)
 
+    def identifiers
+      Dir["#{path}/*"].map { |d| d.split('/').last }
+    end
+
     def by_yaml(descriptor, klass = default_model_class)
       _by(descriptor, klass, as: :yaml) do |f|
         klass.new(struct: klass.from_yaml(f.read))

@@ -4,6 +4,10 @@ require_relative '../spaces/space'
 module Users
   class Space < ::Spaces::Space
 
+    def identifiers
+      super.map { |i| i.split('.').first }  - [increment_file_name]
+    end
+
     def save_yaml(model)
       model.struct.identifier ||= next_identifier
       f = File.open("#{file_name_for(model.identifier)}.yaml", 'w')
@@ -23,11 +27,11 @@ module Users
     end
 
     def first_time?
-      !File.exist?(file_name_for('next'))
+      !File.exist?(file_name_for(increment_file_name))
     end
 
     def next_running_identifier
-      f = File.open(file_name_for('next'), 'r')
+      f = File.open(file_name_for(increment_file_name), 'r')
       begin
         f.read.strip
       ensure
@@ -40,13 +44,17 @@ module Users
     end
 
     def increment(identifier)
-      f = File.open(file_name_for('next'), 'w+')
+      f = File.open(file_name_for(increment_file_name), 'w+')
       begin
         i = identifier.to_i
         f.puts(i += 1)
       ensure
         f.close
       end
+    end
+
+    def increment_file_name
+      'next'
     end
 
     def file_name_for(identifier)
