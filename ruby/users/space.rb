@@ -1,11 +1,20 @@
-require_relative 'user'
+require_relative '../spaces/descriptor'
 require_relative '../spaces/space'
+require_relative 'user'
 
 module Users
   class Space < ::Spaces::Space
 
     def identifiers
       super.map { |i| i.split('.').first }  - [increment_file_name]
+    end
+
+    def descriptors
+      identifiers.map { |i| descriptor_class.new.tap { |m| m.identifier = i } }
+    end
+
+    def reading_name_for(descriptor, klass = default_model_class)
+      "#{path}/#{descriptor.identifier}"
     end
 
     def save(model)
@@ -62,6 +71,10 @@ module Users
 
     def default_model_class
       User
+    end
+
+    def descriptor_class
+      Spaces::Descriptor
     end
   end
 end
