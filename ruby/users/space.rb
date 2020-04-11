@@ -1,9 +1,11 @@
 require_relative '../spaces/descriptor'
 require_relative '../spaces/space'
 require_relative 'user'
+require_relative 'incremental_identifier_strategy'
 
 module Users
   class Space < ::Spaces::Space
+    include IncrementalIdentifierStrategy
 
     def identifiers
       super.map { |i| i.split('.').first }  - [increment_file_name]
@@ -11,10 +13,6 @@ module Users
 
     def descriptors
       identifiers.map { |i| descriptor_class.new.tap { |m| m.identifier = i } }
-    end
-
-    def reading_name_for(descriptor, klass = default_model_class)
-      "#{path}/#{descriptor.identifier}"
     end
 
     def save(model)
@@ -27,41 +25,8 @@ module Users
       end
     end
 
-    def next_identifier
-      (first_time? ? seed_identifier : next_running_identifier).tap do |id|
-        increment(id)
-      end
-    end
-
-    def first_time?
-      !File.exist?(file_name_for(increment_file_name))
-    end
-
-    def next_running_identifier
-      f = File.open(file_name_for(increment_file_name), 'r')
-      begin
-        f.read.strip
-      ensure
-        f.close
-      end
-    end
-
-    def seed_identifier
-      '100000'
-    end
-
-    def increment(identifier)
-      f = File.open(file_name_for(increment_file_name), 'w+')
-      begin
-        i = identifier.to_i
-        f.puts(i += 1)
-      ensure
-        f.close
-      end
-    end
-
-    def increment_file_name
-      'next'
+    def reading_name_for(descriptor, klass = default_model_class)
+      "#{path}/#{descriptor.identifier}"
     end
 
     def file_name_for(identifier)
