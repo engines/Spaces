@@ -17,19 +17,14 @@ module Users
 
     def save(model)
       model.struct.identifier ||= next_identifier
-      f = File.open("#{file_name_for(model.identifier)}.yaml", 'w')
-      begin
-        f.write(model.to_yaml)
-      ensure
-        f.close
-      end
+      super
     end
 
     def reading_name_for(descriptor, klass = default_model_class)
       "#{path}/#{descriptor.identifier}"
     end
 
-    def file_name_for(identifier)
+    def writing_name_for(identifier)
       ensure_space
       "#{path}/#{identifier}"
     end
