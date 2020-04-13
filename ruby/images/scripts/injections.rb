@@ -13,7 +13,7 @@ module Images
         %Q(
         inject()
               {
-              dest_file=`echo $file | sed "/^.*injections\//s///"`
+              dest_file=`echo $file | sed "/^.*injections\\//s///"`
               dest_dir=`dirname $dest_file`
               mkdir -p $dest_dir
                  # If soft link copy to destination

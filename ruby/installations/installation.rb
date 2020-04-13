@@ -12,6 +12,7 @@ require_relative '../users/user'
 require_relative '../file_permissions/file_permissions'
 require_relative '../sudos/sudos'
 require_relative '../repositories/repositories'
+require_relative '../replacements/replacements'
 
 module Installations
   class Installation < ::Spaces::Model
@@ -25,6 +26,7 @@ module Installations
           OsPackages::OsPackages,
           Nodules::Nodules,
           Packages::Packages,
+          Replacements::Replacement,
           FilePermissions::FilePermissions,
           Bindings::Bindings,
           Bindings::Anchor,
