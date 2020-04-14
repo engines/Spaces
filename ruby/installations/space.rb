@@ -1,18 +1,20 @@
-require_relative '../spaces/space'
+require_relative '../universal/space'
+require_relative 'installation'
 
 module Installations
   class Space < ::Spaces::Space
 
-    alias_method :by, :by_yaml
-    alias_method :save, :save_yaml
+    delegate(blueprints: :universe)
 
-    def save_yaml(model)
-      save_user(model)
-      super
+    def by(descriptor, klass = default_model_class)
+      by_yaml(descriptor, klass)
+    rescue Errno::ENOENT
+      default_model_class.new(blueprint: blueprints.by(descriptor))
     end
 
-    def save_user(model)
+    def save(model)
       universe.users.save(model.user)
+      super
     end
 
     def default_model_class
