@@ -6,6 +6,8 @@ module Docker
       class Installs < Step
 
         def product
+          if File.exist?()
+          end
           %Q(
           WORKDIR /home/
           RUN \
