@@ -1,5 +1,4 @@
 require_relative '../spaces/space'
-require_relative '../docker/image_space'
 
 module Images
   class Space < ::Spaces::Space
@@ -11,16 +10,8 @@ module Images
       end
     end
 
-    def from_subject(subject)
-      bridge.from_directory(path_for(subject))
-    end
-
-    def from_tar(subject)
-      bridge.from_tar(path_for(subject))
-    end
-
-    def bridge
-      @bridge ||= Docker::ImageSpace.new
+    def build(image)
+      Docker::Image.build_from_dir(path_for(image), { 'dockerfile' => 'DockerFilesFile' })
     end
 
   end
