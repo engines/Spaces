@@ -5,12 +5,10 @@ require_relative 'blueprint'
 module Projects
   class Space < Git::Space
 
-    alias_method :by, :by_json
-    alias_method :save, :save_yaml
-
     def import(descriptor)
       super
-      by(descriptor).tap do |m|
+      by_json(descriptor).tap do |m|
+        m.struct.descriptor = descriptor
         save(m)
         import_anchors_for(m)
       end
