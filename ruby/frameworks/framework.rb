@@ -43,13 +43,13 @@ module Frameworks
       8000
     end
 
-    def path
+    def product_path
       "#{super}/#{klass.identifier}"
     end
 
     def struct
       @struct ||= installation.struct.framework
     end
-    
+
   end
 end

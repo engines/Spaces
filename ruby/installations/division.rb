@@ -19,7 +19,7 @@ module Installations
       Module.const_get(klass.name.singularize)
     end
 
-    def path
+    def product_path
        "#{super}/#{blueprint_label}"
     end
 

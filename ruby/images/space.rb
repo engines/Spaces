@@ -6,7 +6,7 @@ module Images
     def save(subject)
       subject.product.map do |t|
         save_text(t)
-        "#{t.path}"
+        "#{t.product_path}"
       end
     end
 

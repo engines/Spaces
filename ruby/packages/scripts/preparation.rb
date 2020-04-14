@@ -6,8 +6,8 @@ module Packages
 
       def body
         %Q(
-        mkdir /#{path}
-        cd /#{path}
+        mkdir /#{product_path}
+        cd /#{product_path}
         )
       end
 

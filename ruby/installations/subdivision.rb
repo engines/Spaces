@@ -5,7 +5,7 @@ module Installations
 
     relation_accessor :context
 
-    delegate([:installation, :path, :context_identifier] => :context)
+    delegate([:installation, :product_path, :context_identifier] => :context)
 
     def initialize(struct:, context:)
       self.struct = struct
