@@ -27,11 +27,11 @@ module Installations
       def inheritance_paths; end
     end
 
-    def path
+    def product_path
       "build/#{super}"
     end
 
-    alias_method :collaborator_path, :path
+    alias_method :collaborator_path, :product_path
 
     def product
       duplicate(struct)

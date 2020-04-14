@@ -6,7 +6,7 @@ module Texts
     relation_accessor :context
     attr_reader :product
 
-    delegate([:path, :home_app_path, :identifier, :context_identifier] => :context)
+    delegate([:product_path, :home_app_path, :identifier, :context_identifier] => :context)
 
     def product
       [
@@ -36,7 +36,7 @@ module Texts
     end
 
     def full_path
-      "#{path}/#{file_name}"
+      "#{product_path}/#{file_name}"
     end
 
     def file_name
@@ -44,7 +44,7 @@ module Texts
     end
 
     def subpath
-      "#{context.subpath}/#{path}"
+      "#{context.subpath}/#{product_path}"
     end
 
     def initialize(context)

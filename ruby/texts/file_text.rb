@@ -19,7 +19,7 @@ module Texts
       end
     end
 
-    def path
+    def product_path
       source_file_name
     end
 

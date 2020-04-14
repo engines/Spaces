@@ -44,7 +44,7 @@ module Docker
         end
       end
 
-      def path
+      def product_path
         klass.identifier
       end
 

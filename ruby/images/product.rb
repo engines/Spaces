@@ -15,7 +15,7 @@ module Images
       klass.script_lot
     end
 
-    def path
+    def product_path
       'scripts'
     end
 
