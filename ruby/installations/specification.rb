@@ -4,6 +4,7 @@ require_relative '../sudos/sudos'
 require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative '../packages/packages'
+require_relative '../replacements/replacements'
 require_relative '../file_permissions/file_permissions'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
@@ -23,6 +24,7 @@ module Installations
         OsPackages::OsPackages,
         Nodules::Nodules,
         Packages::Packages,
+        Replacements::Replacement,        
         FilePermissions::FilePermissions,
         Bindings::Bindings,
         Bindings::Anchor,

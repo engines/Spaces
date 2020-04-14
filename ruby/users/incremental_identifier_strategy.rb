@@ -9,11 +9,11 @@ module Users
     end
 
     def first_time?
-      !File.exist?(file_name_for(increment_file_name))
+      !File.exist?(writing_name_for(increment_file_name))
     end
 
     def next_running_identifier
-      f = File.open(file_name_for(increment_file_name), 'r')
+      f = File.open(writing_name_for(increment_file_name), 'r')
       begin
         f.read.strip
       ensure
@@ -22,7 +22,7 @@ module Users
     end
 
     def increment(identifier)
-      f = File.open(file_name_for(increment_file_name), 'w+')
+      f = File.open(writing_name_for(increment_file_name), 'w+')
       begin
         i = identifier.to_i
         f.puts(i += 1)

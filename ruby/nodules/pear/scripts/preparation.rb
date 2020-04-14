@@ -7,10 +7,8 @@ module Nodules
 
         def body
           %Q(
-          cd /tmp
-          wget https://pear.php.net/install-pear-nozlib.phar
-          echo suhosin.executor.include.whitelist = phar >>/etc/php/7.?/cli/conf.d/suhosin.ini
-          php install-pear-nozlib.phar
+          apt-get -y install php-pear
+          pear channel-update pear.php.net
           )
         end
 
