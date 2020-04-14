@@ -1,5 +1,4 @@
-require_relative '../spaces/space'
-require_relative '../docker/image_space'
+require_relative '../docker/images/space'
 
 module Images
   class Space < ::Spaces::Space
@@ -20,7 +19,7 @@ module Images
     end
 
     def bridge
-      @bridge ||= Docker::ImageSpace.new
+      @bridge ||= Docker::Images::Space.new
     end
 
   end
