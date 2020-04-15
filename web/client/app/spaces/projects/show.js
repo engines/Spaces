@@ -1,5 +1,9 @@
 app.spaces.projects.show = controller => (a,x) => [
-  app.close( controller ),
+  app.button( {
+    label: app.icon( 'fa fa-trash', 'Delete' ),
+    onclick: () => controller.open( '~delete' ),
+    class: 'btn app-btn-danger'
+  } ),
   app.button( {
     label: app.icon( 'fa fa-caret-right', 'Installations' ),
     onclick: () => controller.open( 'installations' ),

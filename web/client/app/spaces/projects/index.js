@@ -1,6 +1,8 @@
 app.spaces.projects.index = controller => (a,x) => [
-  a.h1('Projects'),
-  app.close( controller ),
+  app.button( {
+    label: app.icon( 'fa fa-plus', 'New' ),
+    onclick: () => controller.open( '~new' ),
+  } ),
   app.http( {
     url: '/api/projects',
     placeholder: app.spinner( 'Loading projects' ),

@@ -1,6 +1,9 @@
 app.spaces.installations.show = controller => (a,x) => [
-  a.h1( `Installation ${ controller.params.installation_id }` ),
-  app.close( controller ),
+  app.button( {
+    label: app.icon( 'fa fa-trash', 'Delete' ),
+    onclick: () => controller.open( '~delete' ),
+    class: 'btn app-btn-danger'
+  } ),
   app.http( {
     url: `/api/installations/${ controller.params.installation_id }`,
     placeholder: app.spinner( `Loading installation ${ controller.params.installation_id }` ),
