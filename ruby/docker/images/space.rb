@@ -6,9 +6,13 @@ module Docker
   module Images
     class Space < ::Spaces::Space
 
+      delegate([:all, :get] => :bridge)
+
       def pull(identifier)
         create('fromImage' => identifier)
       end
+
+      alias_method :import, :pull
 
       def from_directory(path, &block)
         bridge.build_from_dir(path, { 'dockerfile' => Files::File.identifier }, &block)

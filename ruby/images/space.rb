@@ -3,6 +3,12 @@ require_relative '../docker/images/space'
 module Images
   class Space < ::Spaces::Space
 
+    delegate(all: :bridge)
+
+    def by(descriptor)
+      bridge.get(descriptor.identifier)
+    end
+
     def save(subject)
       subject.product.map do |t|
         save_text(t)
