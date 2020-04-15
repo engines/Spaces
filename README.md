@@ -123,14 +123,14 @@ image_space = universe.images
 image_space.save(content)
 ```
 
-## Client
+# Web client
 
 To run the GUI:
 1. `bundle`
 2. `npm i`
 3. `thin start`
 
-## Terms of use
+# Terms
 
 Copyright (C) 2020 P3 Nominees Pty Ltd
 
