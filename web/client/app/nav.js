@@ -1,4 +1,6 @@
-app.nav = (a,x) => a['div.container-fluid']( [
+app.nav = controller => (a,x) => a['p#nav']( [
   app.logo( 24 ),
   'Engines'
-] )
+], {
+  $update: function() {},
+} )

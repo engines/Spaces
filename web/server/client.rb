@@ -2,11 +2,12 @@ module Server
   class Client < Base
 
     get '/app.js' do
-      content_type :'application/javascript'
+      content_type :javascript
       concatenate 'web/client/**/*.js'
     end
 
     get '*' do
+      content_type :html
       erb :'index.html'
     end
 

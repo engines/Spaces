@@ -4,6 +4,15 @@ module Server
 
       set :logging, true
 
+      configure do
+        mime_type :javascript, 'application/javascript'
+        mime_type :json, 'application/json'
+      end
+
+      before do
+        content_type :json
+      end
+
       not_found do
         content_type :text
         status 404
