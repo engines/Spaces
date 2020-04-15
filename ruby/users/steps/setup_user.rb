@@ -4,7 +4,7 @@ module Users
   module Steps
     class SetupUser < Docker::Files::Step
       def product
-        "RUN #{context.product_path}/setup_user.sh"
+        "RUN /#{context.product_path}/setup_user.sh"
       end
 
     end

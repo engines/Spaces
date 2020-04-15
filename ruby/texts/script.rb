@@ -36,7 +36,7 @@ module Texts
     end
 
     def full_path
-      "#{product_path}/#{file_name}"
+      "/#{product_path}/#{file_name}"
     end
 
     def file_name
