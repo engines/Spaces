@@ -9,7 +9,7 @@ module Docker
       delegate([:all, :get] => :bridge)
 
       def pull(identifier)
-        create('fromImage' => identifier)
+        bridge.create('fromImage' => identifier)
       end
 
       alias_method :import, :pull

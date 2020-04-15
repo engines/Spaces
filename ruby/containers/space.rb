@@ -11,6 +11,13 @@ module Containers
       bridge.get(descriptor.identifier)
     end
 
+    def create(descriptor)
+      bridge.create(
+        'name' => descriptor.identifier,
+        'Image' => descriptor.identifier
+      )
+    end
+
     def bridge
       @bridge ||= Docker::Containers::Space.new
     end
