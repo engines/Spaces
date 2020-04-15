@@ -1,4 +1,5 @@
 require_relative '../universal/space'
+require_relative '../installations/installation'
 
 def universe
   @u ||= Universal::Space.new
@@ -18,7 +19,7 @@ def blueprint
 end
 
 def installation
-  @installation ||= universe.installations.by(descriptor)
+  @installation ||= Installations::Installation.new(blueprint: blueprint)
 end
 
 def clear
