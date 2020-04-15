@@ -14,7 +14,6 @@ ax.css( {
       backgroundColor: 'lightgray',
     }
 
-
   }
 
 } )

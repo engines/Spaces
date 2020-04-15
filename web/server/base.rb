@@ -1,5 +1,4 @@
 module Server
-
   class Base < Sinatra::Base
 
       set sessions: true,
@@ -32,5 +31,4 @@ module Server
       end
 
   end
-
 end
