@@ -8560,9 +8560,15 @@ ax.extension.form.async.shim = function() {
 
               } else {
 
+                let body
+                // Do not send empty form data. Some web servers don't lik it.
+                if ( Array.from( formData.entries() ).length > 0 ) {
+                  body = formData
+                }
+
                 outputEl.$nodes = (a,x) => x.http( {
                   url: el.getAttribute( 'action' ),
-                  body: formData,
+                  body: body,
                   method: el.getAttribute( 'method' ),
                   when: options.when,
                   success: options.success,

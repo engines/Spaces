@@ -1,6 +1,4 @@
 app.spaces.installations.index = controller => (a,x) => [
-  a.h1('Installations'),
-  app.close( controller ),
   app.http( {
     url: '/api/installations',
     placeholder: app.spinner( 'Loading installations' ),

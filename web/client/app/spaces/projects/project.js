@@ -1,7 +1,8 @@
 app.spaces.projects.project = controller => (a,x) => [
-  a.h1( `Project ${ controller.params.project_id }` ),
+  a.h2( controller.params.project_id ),
   controller.routes( {
     '/?': app.spaces.projects.show,
+    '/~delete': app.spaces.projects.delete,
     '/installations*': app.spaces.projects.installations,
   } ),
 ]
