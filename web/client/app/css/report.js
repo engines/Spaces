@@ -7,7 +7,6 @@ ax.css( {
       boxShadow: '0 0 0 .2rem #FFD70077',
     },
 
-
     '.form-control': {
       minHeight: 'calc(1.5em + .75rem + 2px)',
       maxHeight: '300px',
@@ -19,7 +18,7 @@ ax.css( {
       borderColor: '#CED4DA',
       boxShadow: 'unset',
     },
-    
+
     '|appkit-report-checkbox-wrapper, |appkit-report-checkboxs, |appkit-report-radios': {
       pointerEvents: 'none',
     },
@@ -47,7 +46,5 @@ ax.css( {
     }
 
   },
-
-
 
 } )

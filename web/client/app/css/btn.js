@@ -5,7 +5,6 @@ ax.css( {
   },
 
   '.app-btn:hover': {
-    // color: '#fff',
     backgroundColor: 'lightgray',
   },
 
@@ -21,6 +20,5 @@ ax.css( {
   '.app-btn-danger': {
     color: '#C33',
   },
-
 
 } )

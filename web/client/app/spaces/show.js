@@ -4,4 +4,8 @@ app.spaces.show = controller => (a,x) => [
     label: app.icon( 'fa fa-caret-right', 'Projects' ),
     onclick: ( e, el ) => controller.open( 'projects' ),
   } ) ),
+  a.div( app.button( {
+    label: app.icon( 'fa fa-caret-right', 'Installations' ),
+    onclick: ( e, el ) => controller.open( 'installations' ),
+  } ) ),
 ]
