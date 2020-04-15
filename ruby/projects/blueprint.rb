@@ -1,7 +1,7 @@
-require_relative '../spaces/model'
+require_relative 'collaboration'
 
 module Projects
-  class Blueprint < ::Spaces::Model
+  class Blueprint < Collaboration
 
     delegate(identifier: :descriptor)
 

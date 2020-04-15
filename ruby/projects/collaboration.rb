@@ -1,27 +1,14 @@
 require_relative '../spaces/model'
-require_relative '../projects/specification'
 require_relative 'specification'
 
-module Installations
+module Projects
   class Collaboration < ::Spaces::Model
     extend Specification
 
     class << self
 
-      def blueprint
-        Projects::Blueprint
-      end
-
       def blueprint_divisions
-        @@blueprint_divisions ||= map_for(blueprint.division_classes)
-      end
-
-      def product_collaborators
-        @@product_collaborators ||= map_for(product_classes)
-      end
-
-      def installation_divisions
-        @@installation_divisions ||= map_for(installation_classes)
+        @@blueprint_divisions ||= map_for(division_classes)
       end
 
       def map_for(classes)
@@ -32,7 +19,7 @@ module Installations
       end
 
       def all_collaborators
-        @@all_collaborators ||= blueprint_divisions.merge(installation_divisions).merge(product_collaborators)
+        @@all_collaborators ||= blueprint_divisions
       end
 
       def key_for(klass)
@@ -42,28 +29,18 @@ module Installations
       def mapped_key_for(key)
         division_map[key] || key
       end
-
-      def division_map
-        blueprint.division_map.merge(super)
-      end
-
-      def mutable_divisions
-        blueprint.mutable_divisions + super
-      end
     end
 
     delegate(
       [
         :all_collaborators,
-        :product_collaborators,
-        :installation_divisions,
         :mutable_divisions
       ] => :klass
     )
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
-        m[k] = collaborator_for(k) if blueprinted?(k) || collaborate_anyway?(k)
+        m[k] = collaborator_for(k) if blueprinted?(k)
         m
       end.compact
     end
@@ -76,16 +53,8 @@ module Installations
       struct[key]
     end
 
-    def collaborate_anyway?(key)
-      necessary_keys.include?(key)
-    end
-
     def keys
       all_collaborators.keys
-    end
-
-    def necessary_keys
-      product_collaborators.keys + installation_divisions.keys
     end
 
     def method_missing(m, *args, &block)
