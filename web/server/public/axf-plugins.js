@@ -8806,6 +8806,7 @@ ax.extension.simplemde.form.control = function( f, options ) {
         placeholder: options.placeholder,
         autoDownloadFontAwesome: false,
         spellChecker: false,
+        previewRender: options.preview,
         ...options.simplemde
       } )
 
