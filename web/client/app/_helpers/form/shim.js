@@ -123,7 +123,7 @@ app.form.shim = {
 
         if ( ax.is.object( options.mode) ) {
           options.mode = {
-            value: options.mode.value,  // || localStorage.editorDefaultMode,
+            value: options.mode.value,
             selections: options.mode.selections,
           }
         }

@@ -13,13 +13,13 @@ module Server
 
     private
 
-    def concatenate( source )
-      Dir.glob( [ source ] ).select do |file|
+    def concatenate(source)
+      Dir.glob([source]).select do |file|
         File.file?(file)
       end.sort do |a, b|
         a.count('/') <=> b.count('/')
       end.map do |file|
-        File.read( file )
+        File.read(file)
       end.join("\n")
     end
 
