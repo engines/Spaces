@@ -1,4 +1,5 @@
 require_relative '../spaces/model'
+require_relative '../projects/specification'
 require_relative 'specification'
 
 module Installations
@@ -7,8 +8,12 @@ module Installations
 
     class << self
 
+      def blueprint
+        Projects::Blueprint
+      end
+
       def blueprint_divisions
-        @@blueprint_divisions ||= map_for(blueprint_classes)
+        @@blueprint_divisions ||= map_for(blueprint.division_classes)
       end
 
       def product_collaborators
@@ -36,6 +41,14 @@ module Installations
 
       def mapped_key_for(key)
         division_map[key] || key
+      end
+
+      def division_map
+        blueprint.division_map.merge(super)
+      end
+
+      def mutable_divisions
+        blueprint.mutable_divisions + super
       end
     end
 

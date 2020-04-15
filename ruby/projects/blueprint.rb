@@ -1,7 +1,9 @@
 require_relative '../spaces/model'
+require_relative 'specification'
 
 module Projects
   class Blueprint < ::Spaces::Model
+    extend Specification
 
     delegate(identifier: :descriptor)
 
