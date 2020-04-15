@@ -26,8 +26,8 @@ module Installations
 
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint
+      self.descriptor = descriptor
       self.struct = struct || blueprint&.struct
-      self.struct.descriptor = descriptor.struct if descriptor
     end
 
   end
