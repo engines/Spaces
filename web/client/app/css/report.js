@@ -19,10 +19,6 @@ ax.css( {
       borderColor: '#CED4DA',
       boxShadow: 'unset',
     },
-
-    // 'input:focus, |appkit-report-control textarea:focus': {
-    //   boxShadow: 'none',
-    // },
     
     '|appkit-report-checkbox-wrapper, |appkit-report-checkboxs, |appkit-report-radios': {
       pointerEvents: 'none',

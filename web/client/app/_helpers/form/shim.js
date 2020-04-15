@@ -17,15 +17,6 @@ app.form.shim = {
     } )
 
   },
-  // field: ( f, target ) => ( options={} ) => {
-  //   // debugger
-  //   let help = options.help ? (a,x) => app.md( options.help ) : null
-  //   // debugger
-  //   return target( {
-  //     ...options,
-  //     help: help,
-  //   } )
-  // },
 
   help: ( f, target ) => ( options={} ) => {
     let help = options.help ? (a,x) => app.md( options.help ) : null
@@ -226,14 +217,6 @@ app.form.shim = {
     } ),
 
   },
-
-  // btns: (f) => ( controller, options={} ) => f.buttons( {
-  //   cancel: {
-  //     onclick: () => history.back(), // controller.open( '..', controller.query, controller.anchor ),
-  //     ...options.cancel
-  //   },
-  //   ...options
-  // } ),
 
   buttons: (f) => ( controller, options={} ) => (a,x) => a['app-form-buttons']( [
     ( options.cancel == false ) ? null:  f.button( {
