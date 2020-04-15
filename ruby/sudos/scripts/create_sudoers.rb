@@ -13,7 +13,7 @@ module Sudos
       def write(sym)
         context.send(sym).map do |c|
           %Q(
-           echo $CONT_USER 'ALL=(ALL)' NOPASSWD: #{c} >> /etc/sudoers.d/#{sym}
+           echo $ContUser 'ALL=(ALL)' NOPASSWD: #{c} >> /etc/sudoers.d/#{sym}
            echo >> /etc/sudoers.d/#{sym}
           )
         end.join("\n")

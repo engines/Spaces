@@ -3,7 +3,7 @@ require_relative '../../../texts/one_time_script'
 module WebServers
   module Apache
     module Scripts
-      class Configuration < Texts::OneTimeScript
+      class Configure < Texts::OneTimeScript
 
         def body
           %Q(

@@ -8,8 +8,8 @@ module Docker
         def product
           %Q(
           USER 0
-          RUN \
-            /scripts/prepare_persitent_source.sh
+          WORKDIR /
+          RUN /build/scripts/persistent_source.sh
           )
         end
 
