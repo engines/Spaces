@@ -7,11 +7,13 @@ module Docker
 
         def product
           %Q(
-          RUN \
-            /scripts/set_data_permissions.sh && \
-            /scripts/_finalisation.sh && \
-            /home/engines/scripts/build/post_build_clean.sh
-          ENV buildtime_only '.'
+          RUN /build/scripts/set_data_permissions.sh && \
+              /build/scripts/framework/#{context.installation.framework.identifier}/finalisation.sh && \
+              apt-get -y clean;\
+              apt-get  -y autoremove;\
+              apt-get  -y autoclean;\
+              rm -r /tmp/* 
+
           USER $ContUser
           CMD ['/home/engines/scripts/startup/start.sh']
           )
