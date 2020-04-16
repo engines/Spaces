@@ -3,28 +3,12 @@ require_relative 'model'
 module Spaces
   class Descriptor < ::Spaces::Model
 
-    attr_accessor :repository,
-      :identifier,
-      :protocol,
-      :branch,
-      :extraction,
-      :extracted_path,
-      :destination_path
-
-    def initialize(struct = nil)
-      if struct
-        self.repository = struct.repository
-        self.identifier = struct.identifier
-        self.protocol = struct.protocol
-        self.branch = struct.branch
-        self.extraction = struct.extraction
-        self.extracted_path = struct.extracted_path
-        self.destination_path = [home_app_path, struct.destination_path].compact.join('/')
-      end
+    def initialize(args)
+      self.struct = args[:struct] || OpenStruct.new(args)
     end
 
     def identifier
-      @identifier ||= default_identifier
+      struct.identifier ||= default_identifier
     end
 
     def default_identifier
@@ -32,11 +16,11 @@ module Spaces
     end
 
     def branch
-      @branch ||= 'master'
+      struct.branch ||= 'master'
     end
 
     def protocol
-      @protocol ||= extension
+      struct.protocol ||= extension
     end
 
     def git?
@@ -44,11 +28,15 @@ module Spaces
     end
 
     def extraction
-      @extraction ||= extension
+      struct.extraction ||= extension
     end
 
     def extracted_path
-      @extracted_path ||= identifier
+      struct.extracted_path ||= identifier
+    end
+
+    def destination_path
+      [home_app_path, struct.destination_path].compact.join('/')
     end
 
     def home_app_path

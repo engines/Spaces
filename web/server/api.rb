@@ -37,9 +37,7 @@ module Server
     end
 
     def descriptor_for(id)
-      Spaces::Descriptor.new.tap do |m|
-        m.identifier = id
-      end
+      Spaces::Descriptor.new(identifier: id)
     end
 
   end

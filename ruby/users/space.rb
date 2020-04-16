@@ -12,7 +12,7 @@ module Users
     end
 
     def descriptors
-      identifiers.map { |i| descriptor_class.new.tap { |m| m.identifier = i } }
+      identifiers.map { |i| descriptor_class.new(identifier: i) }
     end
 
     def save(model)
