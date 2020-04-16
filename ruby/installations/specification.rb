@@ -1,9 +1,11 @@
 require_relative '../docker/files/file'
 require_relative '../images/subject'
 require_relative '../users/user'
+require_relative '../projects/specification'
 
 module Installations
   module Specification
+    include ::Projects::Specification
 
     def product_classes
       [
@@ -20,14 +22,14 @@ module Installations
     end
 
     def division_map
-      @@division_map ||= {
+      super.merge({
         file: :docker_file,
         subject: :image_subject
-      }
+      })
     end
 
     def mutable_divisions
-      [:user]
+      super + [:user]
     end
   end
 end
