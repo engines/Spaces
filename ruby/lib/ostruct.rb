@@ -4,11 +4,11 @@ require_relative 'hash'
 class OpenStruct
 
   def merge(other)
-    OpenStruct.new(self.to_h.merge(other&.to_h))
+    other ? OpenStruct.new(self.to_h.merge(other.to_h)) : self
   end
 
   def reverse_merge(other)
-    OpenStruct.new(self.to_h.reverse_merge(other&.to_h))
+    other ? OpenStruct.new(self.to_h.reverse_merge(other.to_h)) : self
   end
 
   def deep_to_h

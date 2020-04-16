@@ -18,6 +18,10 @@ def blueprint
   end
 end
 
+def project
+  blueprint
+end
+
 def installation
   @installation ||= Installations::Installation.new(blueprint: blueprint)
 end

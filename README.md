@@ -34,9 +34,9 @@ a common starting point is to start with a descriptor to locate a source project
 
 ```
 require_relative 'ruby/spaces/descriptor'
-descriptor = Spaces::Descriptor.new.tap do |m|
-  m.repository = 'https://github.com/MarkRatjens/publify.git'
-end
+descriptor = Spaces::Descriptor.new(
+  repository: 'https://github.com/MarkRatjens/publify.git'
+)
 ```
 
 which can be used to import a project from an external Git repo.
@@ -44,10 +44,10 @@ which can be used to import a project from an external Git repo.
 There are optional attributes you can declare for a project:
 
 ```
-descriptor = Spaces::Descriptor.new.tap do |m|
-  m.repository = 'https://github.com/MarkRatjens/publify.git'
-  m.branch = 'current'
-end
+descriptor = Spaces::Descriptor.new(
+  repository: 'https://github.com/MarkRatjens/publify.git',
+  branch: 'current'
+)
 ```
 
 # Projects
