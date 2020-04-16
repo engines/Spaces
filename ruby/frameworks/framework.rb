@@ -35,6 +35,14 @@ module Frameworks
       @port ||= struct.port || default_port
     end
 
+    def data_uid
+      installation.user.data_uid
+    end
+    
+    def data_gid
+      installation.user.data_gid
+    end
+
     def user_name
       'www-data'
     end

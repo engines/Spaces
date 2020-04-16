@@ -22,7 +22,7 @@ module Frameworks
           echo "add contuser to data group"
             usermod -G #{data_gid} -a #{user_name}
           fi
-          chown -R  $data_uid.#{data_gid} #{home_app_path}
+          chown -R  #{data_uid}.#{data_gid} #{home_app_path}
           chown -R #{user_name} /home/home_dir
            mkdir -p ~#{user_name}/.ssh
              chown -R #{user_name} ~#{user_name}/.ssh
@@ -46,7 +46,7 @@ module Frameworks
       end
 
       def script_file_name
-        "/#{context.product_path}/#{identifier}.sh"
+        "#{context.product_path}/#{identifier}.sh"
       end
 
     end
