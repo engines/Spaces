@@ -64,6 +64,10 @@ module Spaces
       %x(cd #{path_for(model)}; tar -czf #{path_for(model)}.tgz . 2>&1)
     end
 
+    def delete(model)
+      FileUtils.rm_rf("#{path}/#{model.identifier}")
+    end
+
     def reading_name_for(descriptor, klass = default_model_class)
       "#{path}/#{descriptor.identifier}/#{klass.identifier}"
     end

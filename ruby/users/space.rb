@@ -20,6 +20,10 @@ module Users
       super
     end
 
+    def delete(model, extension = :yaml)
+      FileUtils.rm_rf("#{path}/#{model.identifier}.#{extension}")
+    end
+
     def reading_name_for(descriptor, klass = default_model_class)
       "#{path}/#{descriptor.identifier}"
     end
