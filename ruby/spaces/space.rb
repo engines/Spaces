@@ -22,10 +22,7 @@ module Spaces
     end
 
     def all(klass = default_model_class)
-      d = Descriptor.new
-      identifiers.map do |i|
-        by(d.tap { |m| m.identifier = i }, klass)
-      end
+      identifiers.map { |i| by(Descriptor.new(identifier: i), klass) }
     end
 
     def by_yaml(descriptor, klass = default_model_class)

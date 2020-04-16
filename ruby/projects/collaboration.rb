@@ -6,7 +6,6 @@ module Projects
     extend Specification
 
     class << self
-
       def blueprint_divisions
         @@blueprint_divisions ||= map_for(division_classes)
       end
@@ -19,7 +18,7 @@ module Projects
       end
 
       def all_collaborators
-        @@all_collaborators ||= blueprint_divisions
+        @@all_project_collaborators ||= blueprint_divisions
       end
 
       def key_for(klass)
@@ -40,7 +39,7 @@ module Projects
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
-        m[k] = collaborator_for(k) if blueprinted?(k)
+        m[k] = collaborator_for(k) if blueprinted?(k) || collaborate_anyway?(k)
         m
       end.compact
     end
@@ -51,6 +50,10 @@ module Projects
 
     def blueprinted?(key)
       struct[key]
+    end
+
+    def collaborate_anyway?(key)
+      false
     end
 
     def keys

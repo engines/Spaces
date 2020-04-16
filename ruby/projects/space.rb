@@ -8,7 +8,7 @@ module Projects
     def import(descriptor)
       super
       by_json(descriptor).tap do |m|
-        m.struct.descriptor = descriptor
+        m.struct.descriptor = descriptor.struct
         save(m)
         import_anchors_for(m)
       end

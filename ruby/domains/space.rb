@@ -6,9 +6,7 @@ module Domains
 
     def by(descriptor, klass = default_model_class)
       klass.new.tap do |m|
-        m.struct = OpenStruct.new.tap do |s|
-          s.name = 'current.spaces.org'
-        end
+        m.struct = OpenStruct.new(name: 'current.spaces.org')
       end
     end
 

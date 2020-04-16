@@ -30,7 +30,7 @@ module Projects
     end
 
     def division_map
-      @@division_map ||= {
+      {
         nodules: :modules,
         anchor: :binding_anchor
       }
