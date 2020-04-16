@@ -1,7 +1,12 @@
 app.nav = controller => (a,x) => a['p#nav']( [
-  app.logo( 24 ),
-  'Engines',
-
+  app.button( {
+    label: [
+      a( { $nodes: app.logo( 24 ), style: { margin: '-6px -2px -6px -6px'} } ),
+      'Engines'
+    ],
+    onclick: () => window.location = '/',
+    class: 'btn app-btn app-nav-btn',
+  } ),
   a['div.float-right']( [
     app.button( {
       label: app.icon( 'fa fa-cog' ),

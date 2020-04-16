@@ -1,9 +1,9 @@
-module Server
+module App
   class Base < Sinatra::Base
 
       set sessions: true,
           session_secret: ENV.fetch('SESSION_SECRET') { Sinatra::Base.development? ? '0' : SecureRandom.hex(64) },
-          session_timeout_seconds: ( ENV['SESSION_TIMEOUT_MINUTES'] || 15 ).to_f * 60,
+          session_timeout_seconds: (ENV['SESSION_TIMEOUT_MINUTES'] || 15).to_f * 60,
           show_exceptions: false,
           dump_errors: Sinatra::Base.development?,
           logging: Sinatra::Base.development? ? Logger::DEBUG : Logger::INFO,
@@ -22,13 +22,13 @@ module Server
       not_found do
         content_type :text
         status 404
-        "Server 404. Route not found: #{ request.request_method } '#{ request.path_info }'."
+        "Server 404. Route not found: #{request.request_method} '#{request.path_info}'."
       end
 
       error do |e|
         content_type :terminal
         status 500
-        e.full_message.tap { |message| logger.error message }
+        e.full_message.tap { |message| logger.error(message) }
       end
 
   end
