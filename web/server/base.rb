@@ -6,7 +6,8 @@ module Server
           session_timeout_seconds: ( ENV['SESSION_TIMEOUT_MINUTES'] || 15 ).to_f * 60,
           show_exceptions: false,
           dump_errors: Sinatra::Base.development?,
-          logging: Sinatra::Base.development? ? Logger::DEBUG : Logger::INFO
+          logging: Sinatra::Base.development? ? Logger::DEBUG : Logger::INFO,
+          root: File.dirname(__FILE__)
 
       configure do
         mime_type :javascript, 'application/javascript'
