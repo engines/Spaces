@@ -26,8 +26,12 @@ module Installations
 
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint
-      self.struct = struct || blueprint&.struct
+      self.struct = duplicate(struct || blueprint&.struct)
       self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.struct)
+    end
+
+    def capture_foreign_keys
+      struct.blueprint_identifier = blueprint&.identifier
     end
 
   end

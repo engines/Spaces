@@ -107,6 +107,7 @@ module Spaces
     end
 
     def _save(model, as: nil, &block)
+      model.capture_foreign_keys
       f = File.open([writing_name_for(model), as].compact.join('.'), 'w')
       begin
         block.call(f)
