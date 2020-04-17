@@ -86,6 +86,8 @@ module Spaces
       self.struct = struct
     end
 
+    def capture_foreign_keys; end
+
     def to_s
       identifier
     end
