@@ -11,7 +11,7 @@ module Projects
 
     def initialize(struct: nil, descriptor: nil)
       self.struct = duplicate(struct) || OpenStruct.new
-      self.struct.descriptor = descriptor&.struct
+      self.struct.descriptor = descriptor&.struct if descriptor
     end
 
   end
