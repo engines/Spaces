@@ -31,7 +31,7 @@ module Installations
     end
 
     def capture_foreign_keys
-      struct.blueprint_identifier = blueprint&.identifier
+      struct.blueprint_identifier ||= blueprint&.identifier
     end
 
   end
