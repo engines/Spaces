@@ -42,10 +42,10 @@ module FilePermissions
           elif [ ! -d #{home_app_path}/$path ]
             then
               mkdir  -p #{home_app_path}/$path
-              chown $data_uid  #{home_app_path}/$path
+              chown #{data_uid}  #{home_app_path}/$path
               chmod -R gu+rw #{home_app_path}/$path
            else
-              chgrp $data_gid -R #{home_app_path}/$path
+              chgrp #{data_uid} -R #{home_app_path}/$path
               chmod -R gu+rw #{home_app_path}/$path
           fi
          dirs=`find #{home_app_path}/$path -type d -print0`
@@ -75,7 +75,14 @@ module FilePermissions
           end
         end.join("\n")
       end
-
+      
+      def data_uid
+        context.installation.user.data_uid
+      end
+      
+      def data_gid
+        context.installation.user.data_gid
+      end
     end
   end
 end
