@@ -6,7 +6,14 @@ module Docker
   module Containers
     class Space < ::Spaces::Space
 
-      delegate([:all, :get, :create] => :bridge)
+      delegate([:all, :get] => :bridge)
+
+      def create(descriptor)
+        bridge.create(
+          'name' => descriptor.identifier,
+          'Image' => descriptor.identifier
+        )
+      end
 
       def bridge
         Docker::Container
