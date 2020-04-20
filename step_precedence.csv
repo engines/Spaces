@@ -1,0 +1,16 @@
+collaborators,first,early,anywhere,late,last
+Frameworks::Framework,,,variables adds requires,,
+Repositories::Repositories,,,,runs,
+Sudos::Sudos,,,,runs,
+OsPackages::OsPackages,,,,runs,
+Nodules::Nodules,,,,runs,
+Packages::Packages,,,,runs,
+Replacements::Replacement,,,run_scripts,,
+FilePermissions::FilePermissions,,,,runs,
+Bindings::Bindings,,,,runs,
+Bindings::Anchor,,,"",,
+Environments::Environment,,,locale variables ports,,
+Users::User,,,setup_user,,
+Domains::Domain,,,variables,,
+Docker::Files::File,,adds,,preparations source_persistence,final
+Images::Subject,,,injections installs chown_app_dir,,
