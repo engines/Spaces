@@ -3,7 +3,7 @@ require_relative '../docker/images/space'
 module Images
   class Space < ::Spaces::Space
 
-    delegate(all: :bridge)
+    delegate([:all, :from_subject, :from_tar] => :bridge)
 
     def by(descriptor)
       bridge.get(descriptor.identifier)
@@ -16,16 +16,8 @@ module Images
       end
     end
 
-    def from_subject(subject)
-      bridge.from_directory(path_for(subject))
-    end
-
-    def from_tar(subject)
-      bridge.from_tar(path_for(subject))
-    end
-
     def bridge
-      @bridge ||= Docker::Images::Space.new
+      @bridge ||= Docker::Images::Space.new(self)
     end
 
   end
