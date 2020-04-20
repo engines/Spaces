@@ -1,16 +1,14 @@
 require_relative '../../installations/installation'
 require_relative '../../installations/collaborator'
 require_relative '../../texts/text'
+require_relative 'group_precedence'
 
 module Docker
   module Files
     class File < ::Installations::Collaborator
+      extend GroupPrecedence
 
       class << self
-        def step_group_precedence
-          [:first, :early, :anywhere, :late, :last]
-        end
-
         def step_precedence
           {
             early: [:adds],
@@ -24,7 +22,7 @@ module Docker
 
       require_files_in :steps
 
-      delegate(step_group_precedence: :klass)
+      delegate(group_precedence: :klass)
 
       def product
         text_class.new(source: source, context: self).resolved
@@ -39,7 +37,7 @@ module Docker
       end
 
       def layers
-        step_group_precedence.map do |g|
+        group_precedence.map do |g|
           collaborators.map { |c| c.layers_for(g) }
         end
       end

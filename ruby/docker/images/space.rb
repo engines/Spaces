@@ -8,8 +8,10 @@ module Docker
 
       relation_accessor :abstract
 
-      delegate([:all, :get] => :bridge)
-      delegate(path_for: :abstract)
+      delegate(
+        path_for: :abstract,
+        [:all, :get] => :bridge
+      )
 
       def pull(identifier)
         bridge.create('fromImage' => identifier)

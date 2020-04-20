@@ -9,9 +9,11 @@ module Spaces
         require_relative '../universal/space'
         @@universe ||= Universal::Space.new
       end
+
+      def default_model_class; end
     end
 
-    delegate([:identifier, :universe] => :klass)
+    delegate([:identifier, :universe, :default_model_class] => :klass)
 
     def identifiers
       Dir["#{path}/*"].map { |d| d.split('/').last }

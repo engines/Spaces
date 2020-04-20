@@ -30,12 +30,7 @@ module Projects
       end
     end
 
-    delegate(
-      [
-        :all_collaborators,
-        :mutable_divisions
-      ] => :klass
-    )
+    delegate([:all_collaborators, :mutable_divisions] => :klass)
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
