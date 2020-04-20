@@ -6,7 +6,7 @@ module Frameworks
       class FromImage < Docker::Files::Step
 
         def product
-          "FROM engines/php:current"
+          "FROM engines/php:v2"
         end
 
       end
