@@ -19,7 +19,7 @@ module Docker
 
       def from_subject(subject)
         bridge.build_from_dir(path_for(subject), options_for(subject)).tap do |i|
-          i.tag('repo' => subject.identifier)
+          i.tag(repo: subject.identifier)
         end
       end
 
@@ -33,9 +33,9 @@ module Docker
 
       def default_options
         {
-          'dockerfile' => file_class.identifier,
-          'force' => true,
-          'rm' => true
+          dockerfile: file_class.identifier,
+          force: true,
+          rm: true
         }
       end
 
