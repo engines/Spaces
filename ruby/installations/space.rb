@@ -4,6 +4,12 @@ require_relative 'installation'
 module Installations
   class Space < ::Spaces::Space
 
+    class << self
+      def default_model_class
+        Installation
+      end
+    end
+
     delegate(blueprints: :universe)
 
     def by(descriptor, klass = default_model_class)
@@ -15,10 +21,6 @@ module Installations
     def save(model)
       universe.users.save(model.user)
       super
-    end
-
-    def default_model_class
-      Installation
     end
 
   end

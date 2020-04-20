@@ -1,9 +1,20 @@
 collaborators,first,early,anywhere,late,last
 Frameworks::Framework,,,variables adds requires,,
+Frameworks::PHP::PHP,from_image,,variables,,
+Frameworks::Rails5::Rails5,from_image,,variables,,bundle rake_tasks
+Frameworks::Python37::Python37,from_image,,variables,,configure
 Repositories::Repositories,,,,runs,
 Sudos::Sudos,,,,runs,
 OsPackages::OsPackages,,,,runs,
 Nodules::Nodules,,,,runs,
+Nodules::R::R,,,"",,
+Nodules::Python::Python,,,"",,
+Nodules::PHP::PHP,,,"",,
+Nodules::Pecl::Pecl,,,"",,
+Nodules::Apache::Apache,,,"",,
+Nodules::Pear::Pear,,,"",,
+Nodules::NPM::NPM,,,"",,
+Nodules::Lua::Lua,,,"",,
 Packages::Packages,,,,runs,
 Replacements::Replacement,,,run_scripts,,
 FilePermissions::FilePermissions,,,,runs,

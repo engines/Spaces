@@ -5,6 +5,12 @@ require_relative 'blueprint'
 module Projects
   class Space < Git::Space
 
+    class << self
+      def default_model_class
+        Blueprint
+      end
+    end
+
     def import(descriptor)
       super
       by_json(descriptor).tap do |m|
@@ -32,10 +38,6 @@ module Projects
 
     def imported?(descriptor)
       Dir.exist?(path_for(descriptor))
-    end
-
-    def default_model_class
-      Blueprint
     end
   end
 end
