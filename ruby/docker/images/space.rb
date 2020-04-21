@@ -1,5 +1,6 @@
 require 'docker-api'
 require_relative '../../spaces/space'
+require_relative '../monkeys/image'
 require_relative '../files/file'
 
 module Docker
@@ -8,17 +9,21 @@ module Docker
 
       relation_accessor :abstract
 
-      delegate([:all, :get] => :bridge)
-      delegate(path_for: :abstract)
+      delegate(
+        path_for: :abstract,
+        [:all, :get] => :bridge
+      )
 
       def pull(identifier)
-        bridge.create('fromImage' => identifier)
+        bridge.create(fromImage: identifier)
       end
 
       alias_method :import, :pull
 
       def from_subject(subject)
-        bridge.build_from_dir(path_for(subject), options_for(subject)).tap do |i|
+        bridge.build_from_dir(path_for(subject), options_for(subject), connection, default_header) do |k|
+          pp "#{k}"
+        end.tap do |i|
           i.tag(repo: subject.identifier)
         end
       end
@@ -39,8 +44,21 @@ module Docker
         }
       end
 
+      def default_header
+        {
+          'Content-Type': 'application/tar',
+          'Accept-Encoding': 'gzip',
+          Accept: '*/*'
+          # 'Content-Length': "#{File.size(?)}"
+        }
+      end
+
       def initialize(abstract)
         self.abstract = abstract
+      end
+
+      def connection
+        Docker.connection
       end
 
       def bridge

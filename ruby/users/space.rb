@@ -7,6 +7,12 @@ module Users
   class Space < ::Spaces::Space
     include IncrementalIdentifierStrategy
 
+    class << self
+      def default_model_class
+        User
+      end
+    end
+
     def identifiers
       super.map { |i| i.split('.').first }  - [increment_file_name]
     end
@@ -31,10 +37,6 @@ module Users
     def writing_name_for(identifier)
       ensure_space
       "#{path}/#{identifier}"
-    end
-
-    def default_model_class
-      User
     end
 
     def descriptor_class

@@ -1,6 +1,7 @@
 require_relative '../docker/files/file'
 require_relative '../images/subject'
 require_relative '../users/user'
+require_relative '../domains/domain'
 require_relative '../projects/specification'
 
 module Installations

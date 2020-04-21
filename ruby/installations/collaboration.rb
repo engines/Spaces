@@ -19,12 +19,7 @@ module Installations
       end
     end
 
-    delegate(
-      [
-        :product_collaborators,
-        :installation_divisions
-      ] => :klass
-    )
+    delegate([:product_collaborators, :installation_divisions] => :klass)
 
     def collaborate_anyway?(key)
       necessary_keys.include?(key)
