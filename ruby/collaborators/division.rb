@@ -1,6 +1,6 @@
 require_relative 'collaborator'
 
-module Installations
+module Collaborators
   class Division < Collaborator
 
     def scripts

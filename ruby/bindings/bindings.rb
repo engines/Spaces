@@ -1,8 +1,8 @@
-require_relative '../installations/division'
+require_relative '../collaborators/division'
 require_relative 'binding'
 
 module Bindings
-  class Bindings < ::Installations::Division
+  class Bindings < ::Collaborators::Division
 
     class << self
       def step_precedence
