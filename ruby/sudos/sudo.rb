@@ -1,7 +1,7 @@
-require_relative '../installations/subdivision'
+require_relative '../collaborators/subdivision'
 
 module Sudos
-  class Sudo < ::Installations::Subdivision
+  class Sudo < ::Collaborators::Subdivision
 
   end
 end

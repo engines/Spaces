@@ -1,8 +1,8 @@
-require_relative '../installations/division'
+require_relative '../collaborators/division'
 require_relative 'file_permission'
 
 module FilePermissions
-  class FilePermissions < ::Installations::Division
+  class FilePermissions < ::Collaborators::Division
 
     class << self
       def step_precedence

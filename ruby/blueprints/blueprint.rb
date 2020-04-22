@@ -1,6 +1,6 @@
 require_relative 'active_schema'
 
-module Projects
+module Blueprints
   class Blueprint < ActiveSchema
 
     delegate(identifier: :descriptor)

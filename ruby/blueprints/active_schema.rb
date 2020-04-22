@@ -1,7 +1,7 @@
 require_relative '../spaces/model'
 require_relative 'schema'
 
-module Projects
+module Blueprints
   class ActiveSchema < ::Spaces::Model
     extend Schema
 

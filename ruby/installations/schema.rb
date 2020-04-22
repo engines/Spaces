@@ -2,11 +2,11 @@ require_relative '../docker/files/file'
 require_relative '../images/subject'
 require_relative '../users/user'
 require_relative '../domains/domain'
-require_relative '../projects/schema'
+require_relative '../blueprints/schema'
 
 module Installations
   module Schema
-    include ::Projects::Schema
+    include ::Blueprints::Schema
 
     def product_classes
       [

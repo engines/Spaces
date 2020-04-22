@@ -1,8 +1,8 @@
-require_relative '../installations/division'
+require_relative '../collaborators/division'
 require_relative 'sudo'
 
 module Sudos
-  class Sudos < ::Installations::Division
+  class Sudos < ::Collaborators::Division
 
     class << self
       def step_precedence

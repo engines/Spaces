@@ -1,9 +1,9 @@
-require_relative '../installations/collaborator'
+require_relative '../collaborators/collaborator'
 require_relative '../texts/file_text'
 require_relative 'image'
 
 module Images
-  class Subject < ::Installations::Collaborator
+  class Subject < ::Collaborators::Collaborator
     class << self
       def inheritance_paths; __dir__; end
     end

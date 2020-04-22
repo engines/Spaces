@@ -1,7 +1,7 @@
-require_relative '../installations/subdivision'
+require_relative '../collaborators/subdivision'
 
 module OsPackages
-  class OsPackage < ::Installations::Subdivision
+  class OsPackage < ::Collaborators::Subdivision
 
   end
 end

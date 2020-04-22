@@ -1,7 +1,7 @@
-require_relative '../installations/subdivision'
+require_relative '../collaborators/subdivision'
 
 module Replacements
-  class Replacement < ::Installations::Subdivision
+  class Replacement < ::Collaborators::Subdivision
 
     class << self
       def inheritance_paths; __dir__; end

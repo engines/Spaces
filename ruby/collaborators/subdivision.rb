@@ -1,6 +1,6 @@
 require_relative 'product'
 
-module Installations
+module Collaborators
   class Subdivision < Product
 
     relation_accessor :context

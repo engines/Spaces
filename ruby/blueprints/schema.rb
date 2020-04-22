@@ -10,7 +10,7 @@ require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../environments/environment'
 
-module Projects
+module Blueprints
   module Schema
 
     def division_classes
