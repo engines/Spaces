@@ -3,6 +3,7 @@ require 'yaml'
 require 'json'
 require 'duplicate'
 require_relative '../lib/ostruct'
+require_relative '../lib/array'
 require_relative '../lib/string'
 require_relative 'error'
 
@@ -67,6 +68,10 @@ module Spaces
 
     def to_yaml
       YAML.dump(struct)
+    end
+
+    def to_json
+      struct&.deep_to_h&.to_json
     end
 
     def open_struct_from_json(json)
