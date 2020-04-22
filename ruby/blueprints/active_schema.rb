@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
-require_relative 'specification'
+require_relative 'schema'
 
-module Projects
-  class Collaboration < ::Spaces::Model
-    extend Specification
+module Blueprints
+  class ActiveSchema < ::Spaces::Model
+    extend Schema
 
     class << self
       def blueprint_divisions

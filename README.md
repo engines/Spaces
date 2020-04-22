@@ -50,7 +50,7 @@ descriptor = Spaces::Descriptor.new(
 )
 ```
 
-# Projects
+# Blueprints
 ## Importing
 
 You can import a project into your universe with:

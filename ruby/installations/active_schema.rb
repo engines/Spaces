@@ -1,9 +1,9 @@
-require_relative '../projects/collaboration'
-require_relative 'specification'
+require_relative '../blueprints/active_schema'
+require_relative 'schema'
 
 module Installations
-  class Collaboration < ::Projects::Collaboration
-    extend Specification
+  class ActiveSchema < ::Blueprints::ActiveSchema
+    extend Schema
 
     class << self
       def product_collaborators

@@ -1,8 +1,8 @@
-require_relative '../installations/division'
+require_relative '../collaborators/division'
 require_relative 'os_package'
 
 module OsPackages
-  class OsPackages < ::Installations::Division
+  class OsPackages < ::Collaborators::Division
 
     class << self
       def step_precedence

@@ -1,7 +1,7 @@
-require_relative '../installations/subdivision'
+require_relative '../collaborators/subdivision'
 
 module FilePermissions
-  class FilePermission < ::Installations::Subdivision
+  class FilePermission < ::Collaborators::Subdivision
 
     def recursive?
       struct.recursive
