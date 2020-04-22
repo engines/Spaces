@@ -11,7 +11,7 @@ require_relative '../bindings/anchor'
 require_relative '../environments/environment'
 
 module Projects
-  module Specification
+  module Schema
 
     def division_classes
       [

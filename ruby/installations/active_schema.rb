@@ -1,9 +1,9 @@
-require_relative '../projects/collaboration'
-require_relative 'specification'
+require_relative '../projects/active_schema'
+require_relative 'schema'
 
 module Installations
-  class Collaboration < ::Projects::Collaboration
-    extend Specification
+  class ActiveSchema < ::Projects::ActiveSchema
+    extend Schema
 
     class << self
       def product_collaborators
