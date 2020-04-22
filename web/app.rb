@@ -3,6 +3,7 @@ require './web/app/helpers'
 require './web/app/client'
 require './web/app/api'
 
+# TODO: move this monkey patch to a sensible location
 class String
   def camelize
     return self.split('_').map(&:camelize).join if self.match(/_/)

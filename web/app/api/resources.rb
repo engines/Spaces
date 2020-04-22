@@ -21,8 +21,13 @@ module App
 
       def index
         Proc.new do
-          Object.const_get(:projects.camelize)::Controller.new(params).index
-          # space::Controller.new(params).index
+          begin
+            space::Controller.new(params).index
+          rescue NameError => e
+            p e
+            # Well that didn't work, so just index Projects
+            Projects::Controller.new(params).index
+          end
         end
       end
 
@@ -45,10 +50,6 @@ module App
       def space
         parent ? parent.space.const_get( klass ) : Object.const_get(klass)
       end
-      #
-      # def controller
-      #   @controller ||= space::Controller.new
-      # end
 
     end
   end
