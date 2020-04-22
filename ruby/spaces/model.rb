@@ -42,7 +42,10 @@ module Spaces
 
     alias_method :product, :itself
 
-    delegate([:universe, :qualifier] => :klass)
+    delegate(
+      [:universe, :qualifier] => :klass,
+      to_h: :struct
+    )
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
