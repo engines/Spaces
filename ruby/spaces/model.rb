@@ -53,7 +53,7 @@ module Spaces
     end
 
     def file_name
-      klass.identifier
+      klass.qualifier
     end
 
     def subpath; end

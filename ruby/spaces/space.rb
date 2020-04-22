@@ -71,7 +71,7 @@ module Spaces
     end
 
     def reading_name_for(descriptor, klass = default_model_class)
-      "#{path}/#{descriptor.identifier}/#{klass.identifier}"
+      "#{path}/#{descriptor.identifier}/#{klass.qualifier}"
     end
 
     def writing_name_for(model)
