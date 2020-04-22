@@ -1,11 +1,11 @@
 require_relative '../../installations/installation'
-require_relative '../../installations/collaborator'
+require_relative '../../collaborators/collaborator'
 require_relative '../../texts/text'
 require_relative 'group_precedence'
 
 module Docker
   module Files
-    class File < ::Installations::Collaborator
+    class File < ::Collaborators::Collaborator
       extend GroupPrecedence
 
       class << self

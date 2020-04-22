@@ -2,7 +2,7 @@ require_relative '../spaces/model'
 require_relative '../images/product'
 require_relative '../docker/files/product'
 
-module Installations
+module Collaborators
   class Product < ::Spaces::Model
     include Images::Product
     include Docker::Files::Product

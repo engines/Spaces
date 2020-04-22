@@ -3,6 +3,7 @@ require 'yaml'
 require 'json'
 require 'duplicate'
 require_relative '../lib/ostruct'
+require_relative '../lib/array'
 require_relative '../lib/string'
 require_relative 'error'
 
@@ -42,7 +43,10 @@ module Spaces
 
     alias_method :product, :itself
 
-    delegate([:universe, :qualifier] => :klass)
+    delegate(
+      [:universe, :qualifier] => :klass,
+      to_h: :struct
+    )
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
@@ -53,7 +57,7 @@ module Spaces
     end
 
     def file_name
-      klass.identifier
+      klass.qualifier
     end
 
     def subpath; end
@@ -64,6 +68,10 @@ module Spaces
 
     def to_yaml
       YAML.dump(struct)
+    end
+
+    def to_json
+      struct&.deep_to_h&.to_json
     end
 
     def open_struct_from_json(json)

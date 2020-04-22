@@ -1,7 +1,7 @@
-require_relative '../installations/subdivision'
+require_relative '../collaborators/subdivision'
 
 module Packages
-  class Package < ::Installations::Subdivision
+  class Package < ::Collaborators::Subdivision
 
     class << self
       def inheritance_paths; __dir__; end

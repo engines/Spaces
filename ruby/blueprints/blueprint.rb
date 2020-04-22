@@ -1,7 +1,7 @@
-require_relative 'collaboration'
+require_relative 'active_schema'
 
-module Projects
-  class Blueprint < Collaboration
+module Blueprints
+  class Blueprint < ActiveSchema
 
     delegate(identifier: :descriptor)
 

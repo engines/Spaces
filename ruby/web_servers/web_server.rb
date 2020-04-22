@@ -1,7 +1,7 @@
-require_relative '../installations/subdivision'
+require_relative '../collaborators/subdivision'
 
 module WebServers
-  class WebServer < ::Installations::Subdivision
+  class WebServer < ::Collaborators::Subdivision
 
     def struct
       @struct ||= context.struct.web_server

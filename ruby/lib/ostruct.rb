@@ -13,14 +13,7 @@ class OpenStruct
 
   def deep_to_h
     to_h.transform_values do |v|
-      case v
-      when OpenStruct
-        v.deep_to_h
-      when Array
-        v.map(&:deep_to_h)
-      else
-        v
-      end
+      v.deep_to_h
     rescue NoMethodError
       v
     end

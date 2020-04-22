@@ -1,7 +1,7 @@
-require_relative '../installations/division'
+require_relative '../collaborators/division'
 
 module Frameworks
-  class Framework < ::Installations::Division
+  class Framework < ::Collaborators::Division
 
     class << self
       def prototype(installation:, blueprint_label:)

@@ -1,13 +1,13 @@
 require_relative '../universal/space'
 require_relative '../git/space'
-require_relative 'blueprint'
+require_relative '../blueprints/blueprint'
 
 module Projects
   class Space < Git::Space
 
     class << self
       def default_model_class
-        Blueprint
+        ::Blueprints::Blueprint
       end
     end
 
