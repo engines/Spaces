@@ -38,7 +38,7 @@ module Docker
 
       def default_options
         {
-          dockerfile: file_class.identifier,
+          dockerfile: file_class.qualifier,
           force: true,
           rm: true
         }
