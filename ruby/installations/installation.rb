@@ -1,4 +1,5 @@
 require_relative '../spaces/model'
+require_relative 'active_schema'
 require_relative 'collaboration'
 
 module Installations
@@ -33,6 +34,10 @@ module Installations
 
     def capture_foreign_keys
       struct.blueprint_identifier ||= blueprint&.identifier
+    end
+
+    def schema_class
+      ActiveSchema
     end
 
   end

@@ -25,7 +25,7 @@ module Docker
       def as_csv
         CSV.generate do |csv|
           csv << ['collaborators'] + group_precedence
-          Installations::Collaboration.all_collaborators.values.each do |c|
+          Installations::Collaboration.collaborator_map.values.each do |c|
             csv << line_for(c)
             Frameworks::Space.loaded.each { |l| csv << line_for(l) } if c == Frameworks::Framework
             Nodules::Space.loaded.each { |l| csv << line_for(l) } if c == Nodules::Nodules

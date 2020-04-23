@@ -22,7 +22,7 @@ module Installations
       ]
     end
 
-    def division_map
+    def outline_map
       super.merge({
         file: :docker_file,
         subject: :image_subject
@@ -30,7 +30,7 @@ module Installations
     end
 
     def mutable_divisions
-      super + [:user]
+      [:bindings, :user]
     end
   end
 end
