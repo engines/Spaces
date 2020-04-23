@@ -1,8 +1,7 @@
-app.spaces = controller => (a,x) => [
-  controller.routes( {
+app.spaces = controller => (a, x) => [
+  controller.routes({
     '/?': app.spaces.show,
-    '/projects*': app.spaces.projects,
+    '/blueprints*': app.spaces.blueprints,
     '/installations*': app.spaces.installations,
-  }, { home: '/projects' } ),
-
+  }),
 ]

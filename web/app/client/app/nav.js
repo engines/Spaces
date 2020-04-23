@@ -1,7 +1,7 @@
 app.nav = controller => (a,x) => a['p#nav']( [
   app.button( {
     label: [
-      a( { $nodes: app.logo( 24 ), style: { margin: '-6px -2px -6px -6px'} } ),
+      a( { $nodes: [ app.logo( 24 ) ], style: { margin: '-6px -2px -6px -6px'} } ),
       'Engines'
     ],
     onclick: () => window.location = '/',

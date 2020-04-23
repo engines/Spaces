@@ -37,7 +37,7 @@ app.form.shim = {
         'click: change button label': (e,el) => {
           let to = options.to
           el.$from = el.innerHTML
-          if ( to ) el.$nodes = to
+          if ( to ) el.$nodes = [to]
         },
         ...( options.buttonTag || {} ).$on
       },
