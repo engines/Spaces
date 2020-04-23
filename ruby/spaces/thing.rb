@@ -12,9 +12,8 @@ module Spaces
     extend Forwardable
 
     class << self
-      def identifier
-        name.split('::').join
-      end
+
+      def identifier; name.split('::').join; end
 
       def qualifier
         name.split('::').last.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
@@ -35,6 +34,8 @@ module Spaces
     end
 
     attr_accessor :struct, :klass
+
+    delegate([:identifier, :qualifier] => :klass)
 
     def klass
       @klass ||= self.class

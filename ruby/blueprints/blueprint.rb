@@ -5,6 +5,12 @@ require_relative 'collaboration'
 module Blueprints
   class Blueprint < Collaboration
 
+    class << self
+      def schema_class
+        ActiveSchema
+      end
+    end
+
     delegate(identifier: :descriptor)
 
     def anchor_descriptors
@@ -14,10 +20,6 @@ module Blueprints
     def initialize(struct: nil, descriptor: nil)
       self.struct = duplicate(struct) || OpenStruct.new
       self.struct.descriptor = descriptor&.struct if descriptor
-    end
-
-    def schema_class
-      ActiveSchema
     end
 
   end

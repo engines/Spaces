@@ -33,7 +33,7 @@ module Blueprints
       }
     end
 
-    def division_classes
+    def collaborating_classes
       [
         Frameworks::Framework,
         Repositories::Repositories,
@@ -49,15 +49,11 @@ module Blueprints
       ]
     end
 
-    def division_map
+    def outline_map
       {
         nodules: :modules,
         anchor: :binding_anchor
       }
-    end
-
-    def mutable_divisions
-      [:bindings]
     end
 
   end
