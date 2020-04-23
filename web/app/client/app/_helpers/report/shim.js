@@ -9,7 +9,6 @@ app.report.shim = {
   },
 
   template: ( r, target ) => ( options={} ) => {
-    // debugger
     let template = options.template ? (a,x) => app.md( options.template(r) ) : null
     return template
   },

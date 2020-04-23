@@ -4,6 +4,7 @@ app.spaces.blueprints.installations.index = controller => (a,x) => [
     label: app.icon( 'fa fa-plus', 'New' ),
     onclick: () => controller.open( '~new' ),
   } ),
+  a.hr,
   app.http( {
     url: `/api/blueprints/${ controller.params.blueprint_id }/installations`,
     placeholder: app.spinner( 'Loading installations' ),

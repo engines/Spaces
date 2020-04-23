@@ -14,7 +14,7 @@ module Spaces
     end
 
     def show
-      space.by(descriptor_for({identifier: params[:id]})).to_h
+      space.by(descriptor_for({identifier: params[:id]}))
     end
 
     def create
@@ -27,7 +27,7 @@ module Spaces
 
     def delete
       space.delete(
-        member.new(descriptor: descriptor_for({identifier: params[:id]}))
+        space.by(descriptor_for({identifier: params[:id]}))
       )
       true
     end

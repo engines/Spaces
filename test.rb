@@ -89,10 +89,15 @@ test do
 end
 
 test do
+  puts "#{n1}.#{n2 += 1} #{idb} present"
+  p b.to_json
+end
+
+test do
   puts "#{n1}.#{n2 += 1} create on blueprint"
   p universe.installations.save(
     Installations::Installation.new(
-      blueprint: universe.blueprints.by(db),
+      blueprint: b,
       descriptor: di
     )
   )
