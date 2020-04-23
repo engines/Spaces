@@ -17,6 +17,7 @@ module Spaces
 
     delegate(
       [:universe, :qualifier] => :klass,
+      outline: :schema,
       to_h: :struct
     )
 
