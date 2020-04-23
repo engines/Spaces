@@ -7,39 +7,39 @@ module App
       extend Sinatra::Extension
 
       get '/blueprints' do
-        Blueprints::Controller.new(params).index
+        Blueprints::Controller.new(params).index.to_json
       end
 
       post '/blueprints' do
-        Blueprints::Controller.new(params).create
+        Blueprints::Controller.new(params).create.to_json
       end
 
       get '/blueprints/:id' do
-        Blueprints::Controller.new(params).show
+        Blueprints::Controller.new(params).show.to_json
       end
 
       delete '/blueprints/:id' do
-        Blueprints::Controller.new(params).delete
+        Blueprints::Controller.new(params).delete.to_json
       end
 
       get '/blueprints/:blueprint_id/installations' do
-        Blueprints::Installations::Controller.new(params).index
+        Blueprints::Installations::Controller.new(params).index.to_json
       end
 
       post '/blueprints/:blueprint_id/installations' do
-        Blueprints::Installations::Controller.new(params).create
+        Blueprints::Installations::Controller.new(params).create.to_json
       end
 
       get '/installations' do
-        Installations::Controller.new(params).index
+        Installations::Controller.new(params).index.to_json
       end
 
       get '/installations/:id' do
-        Installations::Controller.new(params).show
+        Installations::Controller.new(params).show.to_json
       end
 
       delete '/installations/:id' do
-        Installations::Controller.new(params).delete
+        Installations::Controller.new(params).delete.to_json
       end
 
     end

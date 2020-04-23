@@ -8,17 +8,35 @@ app.spaces.blueprints.show = controller => (a,x) => [
     label: app.icon( 'fa fa-caret-right', 'Installations' ),
     onclick: () => controller.open( 'installations' ),
   } ),
+  a.hr,
   app.http( {
     url: `/api/blueprints/${ controller.params.blueprint_id }`,
     placeholder: app.spinner( `Loading blueprint ${ controller.params.blueprint_id }` ),
+    // TODO: custom success handler
+    //
     // success: (blueprint, el) => el.$nodes = [ app.report({
     //   object: blueprint,
+    //   layout: 'vertical',
     //   report: r => [
     //     r.field({ key: 'title'}),
     //     r.field({ key: 'description'}),
-    //     r.field({ key: 'memory_usage'}),
+    //     r.field({
+    //       key: 'memory_usage',
+    //       as: 'one',
+    //       report: rr => [
+    //         rr.field({ key: 'required' }),
+    //         rr.field({ key: 'recommended' }),
+    //       ],
+    //     }),
     //     r.field({ key: 'protocol'}),
-    //     r.field({ key: 'licenses'}),
+    //     r.field({
+    //       key: 'licenses',
+    //       // as: 'many',
+    //       report: rr => [
+    //         rr.field({ key: 'label' }),
+    //         rr.field({ key: 'url' }),
+    //       ],
+    //     }),
     //     r.field({ key: 'sudos'}),
     //     r.field({ key: 'packages'}),
     //     r.field({ key: 'framework'}),
