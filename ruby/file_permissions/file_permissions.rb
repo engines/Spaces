@@ -1,5 +1,4 @@
 require_relative '../collaborators/division'
-require_relative 'file_permission'
 
 module FilePermissions
   class FilePermissions < ::Collaborators::Division
