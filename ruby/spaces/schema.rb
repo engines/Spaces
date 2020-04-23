@@ -4,6 +4,24 @@ module Spaces
   class Schema < Thing
 
     class << self
+
+      def deep_outline
+        outline.keys.inject({}) do |m, k|
+          m[k] = if (s = collaborator_map[k]&.schema)
+            [outline[k], s.deep_outline]
+          else
+            outline[k]
+          end
+          m
+        rescue NoMethodError
+          m[k] = outline[k]
+        end
+      end
+
+      def outline
+        {}
+      end
+
       def outline_map
         {}
       end
@@ -32,7 +50,19 @@ module Spaces
       end
     end
 
-    delegate([:outline, :outline_map, :collaborator_map] => :klass)
+    delegate([:deep_outline, :outline, :collaborator_map, :outline_map] => :klass)
+
+    def keys
+      collaborator_map.keys
+    end
+
+    # def method_missing(m, *args, &block)
+    #   if keys.include?(m)
+    #     collaborator_map[m.to_sym]
+    #   else
+    #     super
+    #   end
+    # end
 
   end
 end

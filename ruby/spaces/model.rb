@@ -6,24 +6,28 @@ module Spaces
 
     class << self
       def universe
-        @@universal_space ||= Universal::Space.new
+        @universal_space ||= Universal::Space.new
+      end
+
+      def schema
+        @schema ||= schema_class.new
+      end
+
+      def schema_class
+        Schema
       end
     end
 
     attr_accessor :struct
-    relation_accessor :schema, :descriptor
+    relation_accessor :descriptor
 
     alias_method :product, :itself
 
     delegate(
-      [:universe, :qualifier] => :klass,
-      outline: :schema,
+      [:universe, :schema, :schema_class] => :klass,
+      [:outline, :deep_outline] => :schema,
       to_h: :struct
     )
-
-    def schema
-      @schema ||= schema_class.new
-    end
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
@@ -46,8 +50,6 @@ module Spaces
     def uniqueness
       [klass.name, identifier]
     end
-
-    def schema_class; end
 
     def descriptor_class
       Descriptor

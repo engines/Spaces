@@ -5,7 +5,7 @@ module Blueprints
   class Collaboration < ::Spaces::Model
     extend ::Blueprints::Schema
 
-    delegate([:outline, :collaborator_map] => :schema)
+    delegate([:outline, :collaborator_map, :keys] => :schema)
 
     def collaborators
       @collaborators ||= keys.reduce({}) do |m, k|
@@ -24,10 +24,6 @@ module Blueprints
 
     def collaborate_anyway?(key)
       false
-    end
-
-    def keys
-      collaborator_map.keys
     end
 
     def method_missing(m, *args, &block)

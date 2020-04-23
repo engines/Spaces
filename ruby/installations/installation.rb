@@ -5,6 +5,12 @@ require_relative 'collaboration'
 module Installations
   class Installation < Collaboration
 
+    class << self
+      def schema_class
+        ActiveSchema
+      end
+    end
+
     delegate(
       installation: :itself,
       [:identifier, :home_app_path] => :descriptor
@@ -34,10 +40,6 @@ module Installations
 
     def capture_foreign_keys
       struct.blueprint_identifier ||= blueprint&.identifier
-    end
-
-    def schema_class
-      ActiveSchema
     end
 
   end
