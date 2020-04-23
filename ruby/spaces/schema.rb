@@ -56,13 +56,5 @@ module Spaces
       collaborator_map.keys
     end
 
-    # def method_missing(m, *args, &block)
-    #   if keys.include?(m)
-    #     collaborator_map[m.to_sym]
-    #   else
-    #     super
-    #   end
-    # end
-
   end
 end
