@@ -1,11 +1,11 @@
-app.spaces.projects.installations.index = controller => (a,x) => [
+app.spaces.blueprints.installations.index = controller => (a,x) => [
   a.h2( 'Installations' ),
   app.button( {
     label: app.icon( 'fa fa-plus', 'New' ),
     onclick: () => controller.open( '~new' ),
   } ),
   app.http( {
-    url: `/api/projects/${ controller.params.project_id }/installations`,
+    url: `/api/blueprints/${ controller.params.blueprint_id }/installations`,
     placeholder: app.spinner( 'Loading installations' ),
     success: ( installations, el ) => el.$nodes = installations.length ?
     installations.map(

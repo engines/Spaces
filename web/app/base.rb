@@ -19,6 +19,11 @@ module App
         content_type :json
       end
 
+      after do
+        response.body = response.body.to_json if
+          content_type == 'application/json'
+      end
+
       not_found do
         content_type :text
         status 404

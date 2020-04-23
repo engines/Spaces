@@ -1,8 +1,8 @@
-app.spaces.projects.installations.new = controller => (a,x) => [
+app.spaces.blueprints.installations.new = controller => (a,x) => [
   a.h2( 'New installation' ),
   app.form( {
-    url: `/api/projects/${ controller.params.project_id }/installations`,
-    object: { identifier: controller.params.project_id },
+    url: `/api/blueprints/${ controller.params.blueprint_id }/installations`,
+    object: { identifier: controller.params.blueprint_id },
     scope: 'installation',
     form: f => [
       f.field( {
