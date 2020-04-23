@@ -13,6 +13,26 @@ require_relative '../environments/environment'
 module Blueprints
   module Schema
 
+    def outline
+      {
+        title: 0,
+        description: 0,
+        memory_usage: [0, { required: 0, recommended: 0 }],
+        protocol: 1,
+        licenses: [(1..), { label: 1, url: 1 }],
+        framework: 0,
+        repositories: 0,
+        sudos: 0,
+        os_packages: 0,
+        modules: 0,
+        packages: 0,
+        replacements: 0,
+        file_permissions: 0,
+        bindings: 0,
+        environment: 0
+      }
+    end
+
     def division_classes
       [
         Frameworks::Framework,

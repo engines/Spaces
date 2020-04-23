@@ -1,8 +1,8 @@
-require_relative '../blueprints/active_schema'
+require_relative '../blueprints/collaboration'
 require_relative 'schema'
 
 module Installations
-  class ActiveSchema < ::Blueprints::ActiveSchema
+  class Collaboration < ::Blueprints::Collaboration
     extend Schema
 
     class << self

@@ -13,6 +13,8 @@ module Collaborators
 
     def subdivision_for(struct)
       subdivision_class.new(struct: struct, context: self)
+    rescue NameError
+      struct
     end
 
     def subdivision_class
