@@ -1,45 +1,17 @@
-require 'forwardable'
-require 'yaml'
-require 'json'
-require 'duplicate'
-require_relative '../lib/ostruct'
-require_relative '../lib/array'
-require_relative '../lib/string'
-require_relative 'error'
+require_relative 'thing'
 
 module Spaces
-  class Model
+  class Model < Thing
     extend Forwardable
 
     class << self
       def universe
         @@universal_space ||= Universal::Space.new
       end
-
-      def identifier
-        name.split('::').join
-      end
-
-      def qualifier
-        name.split('::').last.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
-      end
-
-      def from_yaml(yaml)
-        YAML::load(yaml)
-      end
-
-      def relation_accessor(*args)
-        attr_accessor(*args)
-      end
-
-      def alias_accessor(to, from)
-        alias_method to, from
-        alias_method "#{to}=", "#{from}="
-      end
     end
 
-    attr_accessor :struct, :klass
-    relation_accessor :descriptor
+    attr_accessor :struct
+    relation_accessor :schema, :descriptor
 
     alias_method :product, :itself
 
@@ -47,6 +19,10 @@ module Spaces
       [:universe, :qualifier] => :klass,
       to_h: :struct
     )
+
+    def schema
+      @schema ||= schema_class.new
+    end
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
@@ -66,28 +42,14 @@ module Spaces
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
     end
 
-    def to_yaml
-      YAML.dump(struct)
-    end
-
-    def to_json
-      struct&.deep_to_h&.to_json
-    end
-
-    def open_struct_from_json(json)
-      JSON.parse(json, object_class: OpenStruct)
-    end
-
     def uniqueness
       [klass.name, identifier]
     end
 
+    def schema_class; end
+
     def descriptor_class
       Descriptor
-    end
-
-    def klass
-      @klass ||= self.class
     end
 
     def initialize(struct: nil)
@@ -95,10 +57,6 @@ module Spaces
     end
 
     def capture_foreign_keys; end
-
-    def to_s
-      identifier
-    end
 
     def method_missing(m, *args, &block)
       if struct&.to_h&.keys&.include?(m)

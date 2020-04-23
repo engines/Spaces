@@ -1,5 +1,4 @@
 require_relative '../collaborators/division'
-require_relative 'os_package'
 
 module OsPackages
   class OsPackages < ::Collaborators::Division

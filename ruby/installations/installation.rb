@@ -1,7 +1,8 @@
-require_relative 'active_schema'
+require_relative '../spaces/model'
+require_relative 'collaboration'
 
 module Installations
-  class Installation < ActiveSchema
+  class Installation < Collaboration
 
     delegate(
       installation: :itself,
