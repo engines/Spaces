@@ -5,12 +5,6 @@ require_relative 'collaboration'
 module Blueprints
   class Blueprint < Collaboration
 
-    class << self
-      def schema_class
-        Schema
-      end
-    end
-
     delegate(identifier: :descriptor)
 
     def anchor_descriptors

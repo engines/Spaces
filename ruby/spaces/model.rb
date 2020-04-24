@@ -14,6 +14,9 @@ module Spaces
       end
 
       def schema_class
+        require_relative("../#{namespace}/schema")
+        Module.const_get("#{namespace}/schema".camelize)
+      rescue LoadError
         Schema
       end
     end

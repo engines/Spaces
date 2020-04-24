@@ -10,10 +10,6 @@ module FilePermissions
       end
 
       def inheritance_paths; __dir__; end
-
-      def schema_class
-        Schema
-      end
     end
 
     require_files_in :steps, :scripts

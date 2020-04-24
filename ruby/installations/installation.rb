@@ -5,12 +5,6 @@ require_relative 'collaboration'
 module Installations
   class Installation < Collaboration
 
-    class << self
-      def schema_class
-        Schema
-      end
-    end
-
     delegate(
       installation: :itself,
       [:identifier, :home_app_path] => :descriptor

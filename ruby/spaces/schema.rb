@@ -18,21 +18,11 @@ module Spaces
         end
       end
 
-      def outline
-        {}
-      end
+      define_method (:outline) {{}}
+      define_method (:outline_map) {{}}
+      define_method (:collaborating_classes) {[]}
 
-      def outline_map
-        {}
-      end
-
-      def collaborating_classes
-        []
-      end
-
-      def collaborator_map
-        @collaborator_map ||= map_for(collaborating_classes)
-      end
+      define_method (:collaborator_map) { @collaborator_map ||= map_for(collaborating_classes) }
 
       def map_for(classes)
         classes.inject({}) do |m, k|
@@ -41,20 +31,13 @@ module Spaces
         end
       end
 
-      def key_for(klass)
-        mapped_key_for(klass.to_s.snakize.split('/').last.to_sym)
-      end
-
-      def mapped_key_for(key)
-        outline_map[key] || key
-      end
+      define_method (:key_for) { |klass| mapped_key_for(klass.to_s.snakize.split('/').last.to_sym) }
+      define_method (:mapped_key_for) { |key| outline_map[key] || key }
     end
 
     delegate([:deep_outline, :outline, :collaborator_map, :outline_map] => :klass)
 
-    def keys
-      collaborator_map.keys
-    end
+    define_method (:keys) { collaborator_map.keys }
 
   end
 end

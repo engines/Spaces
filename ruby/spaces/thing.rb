@@ -12,20 +12,12 @@ module Spaces
     extend Forwardable
 
     class << self
+      define_method (:identifier) { name.split('::').join }
+      define_method (:namespace) { name.split('::')[..-2].join.snakize }
+      define_method (:qualifier) { name.split('::').last.snakize }
+      define_method (:from_yaml) { |y| YAML::load(y) }
 
-      def identifier; name.split('::').join; end
-
-      def qualifier
-        name.split('::').last.gsub(/([^\^])([A-Z])/,'\1_\2').downcase
-      end
-
-      def from_yaml(yaml)
-        YAML::load(yaml)
-      end
-
-      def relation_accessor(*args)
-        attr_accessor(*args)
-      end
+      define_method (:relation_accessor) { |*args| attr_accessor(*args) }
 
       def alias_accessor(to, from)
         alias_method to, from
@@ -35,27 +27,13 @@ module Spaces
 
     attr_accessor :struct, :klass
 
-    delegate([:identifier, :qualifier] => :klass)
+    delegate([:identifier, :namespace, :qualifier] => :klass)
 
-    def klass
-      @klass ||= self.class
-    end
-
-    def to_yaml
-      YAML.dump(struct)
-    end
-
-    def to_json
-      struct&.deep_to_h&.to_json
-    end
-
-    def open_struct_from_json(json)
-      JSON.parse(json, object_class: OpenStruct)
-    end
-
-    def to_s
-      identifier
-    end
+    define_method (:klass) { @klass ||= self.class }
+    define_method (:to_yaml) { YAML.dump(struct) }
+    define_method (:to_json) { struct&.deep_to_h&.to_jsonn }
+    define_method (:open_struct_from_json) { |j| JSON.parse(j, object_class: OpenStruct) }
+    define_method (:to_s) { identifier }
 
   end
 end
