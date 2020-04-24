@@ -24,8 +24,7 @@ module Environments
               ask_at_build_time: 0,
               build_time_only: 0
             }
-          ],
-
+          ]
         }
       end
     end
