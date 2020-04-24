@@ -1,5 +1,5 @@
 require_relative '../spaces/model'
-require_relative 'active_schema'
+require_relative 'schema'
 require_relative 'collaboration'
 
 module Blueprints
@@ -7,7 +7,7 @@ module Blueprints
 
     class << self
       def schema_class
-        ActiveSchema
+        Schema
       end
     end
 

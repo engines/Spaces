@@ -1,11 +1,12 @@
+require_relative '../spaces/schema'
 
 module FilePermissions
-  module Schema
+  class Schema < ::Spaces::Schema
 
-    def outline
-      {
-        file_permission: [(1..), { path: 1, recursive: 0 }]
-      }
+    class << self
+      def outline
+        { all: [(1..), { path: 1, recursive: 0 }] }
+      end
     end
 
   end

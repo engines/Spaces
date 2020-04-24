@@ -1,5 +1,5 @@
 require_relative '../collaborators/division'
-require_relative 'active_schema'
+require_relative 'schema'
 
 module FilePermissions
   class FilePermissions < ::Collaborators::Division
@@ -12,7 +12,7 @@ module FilePermissions
       def inheritance_paths; __dir__; end
 
       def schema_class
-        ActiveSchema
+        Schema
       end
     end
 
