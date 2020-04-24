@@ -1,11 +1,11 @@
 require_relative '../spaces/schema'
 
-module FilePermissions
+module WebServers
   class Schema < ::Spaces::Schema
 
     class << self
       def outline
-        { all: [(1..), { path: 1, recursive: 0 }] }
+        { identifier: 1, root_directory: 1 }
       end
     end
 

@@ -3,7 +3,6 @@ require_relative 'schema'
 
 module Blueprints
   class Collaboration < ::Spaces::Model
-    extend ::Blueprints::Schema
 
     delegate([:outline, :collaborator_map, :keys] => :schema)
 
