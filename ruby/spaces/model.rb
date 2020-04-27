@@ -39,13 +39,5 @@ module Spaces
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
     end
 
-    def method_missing(m, *args, &block)
-      if struct&.to_h&.keys&.include?(m.to_s.sub('=', '').to_sym)
-        struct.send(m, *args, &block)
-      else
-        super
-      end
-    end
-
   end
 end
