@@ -27,13 +27,30 @@ module Spaces
 
     attr_accessor :struct, :klass
 
-    delegate([:identifier, :namespace, :qualifier] => :klass)
+    delegate(
+      [:identifier, :namespace, :qualifier] => :klass,
+      to_h: :struct
+    )
+
+    alias_method :context_identifier, :qualifier
 
     define_method (:klass) { @klass ||= self.class }
     define_method (:to_yaml) { YAML.dump(struct) }
     define_method (:to_json) { struct&.deep_to_h&.to_jsonn }
     define_method (:open_struct_from_json) { |j| JSON.parse(j, object_class: OpenStruct) }
     define_method (:to_s) { identifier }
+
+    def initialize(struct: nil)
+      self.struct = struct
+    end
+
+    def method_missing(m, *args, &block)
+      if struct&.to_h&.keys&.include?(m.to_s.sub('=', '').to_sym)
+        struct.send(m, *args, &block)
+      else
+        super
+      end
+    end
 
   end
 end

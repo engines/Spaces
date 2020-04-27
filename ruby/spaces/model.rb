@@ -5,13 +5,8 @@ module Spaces
     extend Forwardable
 
     class << self
-      def universe
-        @universal_space ||= Universal::Space.new
-      end
-
-      def schema
-        @schema ||= schema_class.new
-      end
+      define_method (:universe) { @universal_space ||= Universal::Space.new }
+      define_method (:schema) { @schema ||= schema_class.new }
 
       def schema_class
         require_relative("../#{namespace}/schema")
@@ -21,55 +16,27 @@ module Spaces
       end
     end
 
-    attr_accessor :struct
     relation_accessor :descriptor
-
-    alias_method :product, :itself
 
     delegate(
       [:universe, :schema, :schema_class] => :klass,
-      [:outline, :deep_outline] => :schema,
-      to_h: :struct
+      [:outline, :deep_outline] => :schema
     )
+
+    alias_method :product, :itself
 
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    def context_identifier
-      identifier
-    end
-
-    def file_name
-      klass.qualifier
-    end
-
-    def subpath; end
+    define_method (:file_name) { klass.qualifier }
+    define_method (:subpath) {}
+    define_method (:uniqueness) { [klass.name, identifier] }
+    define_method (:capture_foreign_keys) {}
+    define_method (:descriptor_class) { Descriptor }
 
     def namespaced_name(namespace, symbol)
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
-    end
-
-    def uniqueness
-      [klass.name, identifier]
-    end
-
-    def descriptor_class
-      Descriptor
-    end
-
-    def initialize(struct: nil)
-      self.struct = struct
-    end
-
-    def capture_foreign_keys; end
-
-    def method_missing(m, *args, &block)
-      if struct&.to_h&.keys&.include?(m)
-        struct.send(m, *args, &block)
-      else
-        super
-      end
     end
 
   end
