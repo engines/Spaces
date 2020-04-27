@@ -32,8 +32,7 @@ module Spaces
       to_h: :struct
     )
 
-    alias_method :context_identifier, :qualifier
-
+    define_method (:context_identifier) { identifier }
     define_method (:klass) { @klass ||= self.class }
     define_method (:to_yaml) { YAML.dump(struct) }
     define_method (:to_json) { struct&.deep_to_h&.to_json }
