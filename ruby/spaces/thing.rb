@@ -36,7 +36,7 @@ module Spaces
 
     define_method (:klass) { @klass ||= self.class }
     define_method (:to_yaml) { YAML.dump(struct) }
-    define_method (:to_json) { struct&.deep_to_h&.to_jsonn }
+    define_method (:to_json) { struct&.deep_to_h&.to_json }
     define_method (:open_struct_from_json) { |j| JSON.parse(j, object_class: OpenStruct) }
     define_method (:to_s) { identifier }
 
