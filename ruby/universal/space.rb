@@ -8,7 +8,9 @@ module Universal
         [
           :containers,
           :images,
+          :volumes,
           :docker,
+          :projects,
           :installations,
           :frameworks,
           :web_servers,
@@ -16,7 +18,6 @@ module Universal
           :environments,
           :domains,
           :users,
-          :projects
         ]
       end
 
@@ -29,17 +30,9 @@ module Universal
       end
     end
 
-    def blueprints
-      projects
-    end
-
-    def path
-      "/opt/engines/#{identifier}"
-    end
-
-    def host
-      'engines.internal'
-    end
+    define_method (:blueprints) { projects }
+    define_method (:path) { "/opt/engines/#{identifier}" }
+    define_method (:host) { 'engines.internal' }
 
     def method_missing(m, *args, &block)
       klass.space_map[m] || super
