@@ -1,13 +1,10 @@
+require_relative '../bridges/space'
 require_relative '../docker/images/space'
 
 module Images
-  class Space < ::Spaces::Space
+  class Space < ::Bridges::Space
 
-    delegate([:all, :from_subject, :from_tar] => :bridge)
-
-    def by(descriptor)
-      bridge.get(descriptor.identifier)
-    end
+    delegate([:from_subject, :from_tar] => :bridge)
 
     def save(subject)
       subject.product.map do |t|
@@ -16,9 +13,7 @@ module Images
       end
     end
 
-    def bridge
-      @bridge ||= Docker::Images::Space.new(self)
-    end
+    define_method (:bridge) { @bridge ||= Docker::Images::Space.new(self) }
 
   end
 end
