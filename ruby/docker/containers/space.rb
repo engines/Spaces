@@ -10,7 +10,8 @@ module Docker
       def create(descriptor)
         bridge.create(
           name: descriptor.identifier,
-          Image: descriptor.identifier
+          Image: descriptor.identifier,
+          Volumes: { descriptor.identifier => {} }
         )
       end
 
