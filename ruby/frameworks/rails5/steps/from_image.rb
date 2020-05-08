@@ -5,7 +5,7 @@ module Frameworks
     module Steps
       class FromImage < Docker::Files::Step
 
-        def product
+        def instructions
           "FROM engines/ngpassenger:current"
         end
 

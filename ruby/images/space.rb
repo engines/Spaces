@@ -7,13 +7,13 @@ module Images
     delegate([:from_subject, :from_tar] => :bridge)
 
     def save(subject)
-      subject.product.map do |t|
+      subject.components.map do |t|
         save_text(t)
-        "#{t.product_path}"
+        "#{t.installation_path}"
       end
     end
 
-    define_method (:bridge) { @bridge ||= Docker::Images::Space.new(self) }
+    def bridge; @bridge ||= Docker::Images::Space.new(self) ;end
 
   end
 end

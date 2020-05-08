@@ -5,9 +5,9 @@ module OsPackages
     class Installation < Texts::OneTimeScript
 
       def body
-        %Q( 
+        %Q(
            apt-get update -y
-           apt-get install -y #{context.all.map(&:name).compact.uniq.join(' ')} 
+           apt-get install -y #{context.struct.map(&:name).compact.uniq.join(' ')} 
         )
       end
 

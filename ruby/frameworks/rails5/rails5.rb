@@ -13,11 +13,11 @@ module Frameworks
           {
             first: [:from_image],
             anywhere: [:variables],
-            last:  [:bundle, :rake_tasks]
+            last: [:bundle, :rake_tasks, :chown_app_dir, :final]
           }
         end
 
-        def inheritance_paths; [__dir__, super]; end
+        def inheritance_paths; [__dir__, super] ;end
       end
 
       require_files_in :steps, :scripts

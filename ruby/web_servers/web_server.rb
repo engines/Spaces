@@ -5,14 +5,14 @@ module WebServers
   class WebServer < ::Collaborators::Subdivision
 
     class << self
-      define_method (:schema_class) { Schema }
+      def schema_class; Schema ;end
     end
 
-    define_method (:struct) { @struct ||= context.struct.web_server }
-    define_method (:path) { "#{collaborator_path}/web_server/#{klass.identifier}" }
+    def struct; @struct ||= division.struct.web_server ;end
+    def path; "#{collaborator_path}/web_server/#{klass.identifier}" ;end
 
-    def initialize(context)
-      self.context = context
+    def initialize(division)
+      self.division = division
     end
 
   end

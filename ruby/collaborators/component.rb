@@ -1,11 +1,11 @@
 require_relative '../spaces/model'
-require_relative '../images/product'
-require_relative '../docker/files/product'
+require_relative '../images/scripts'
+require_relative '../docker/files/steps'
 
 module Collaborators
-  class Product < ::Spaces::Model
-    include Images::Product
-    include Docker::Files::Product
+  class Component < ::Spaces::Model
+    include Images::Scripts
+    include Docker::Files::Steps
 
     class << self
       def step_precedence
@@ -24,18 +24,14 @@ module Collaborators
         [inheritance_paths].flatten.map { |h| Dir["#{h}/#{folder}/*"] }.flatten
       end
 
-      def inheritance_paths; end
+      def inheritance_paths ;end
     end
 
-    def product_path
-      "build/#{super}"
-    end
+    relation_accessor :collaboration
 
-    alias_method :collaborator_path, :product_path
+    delegate([:home_app_path, :context_identifier] => :collaboration)
 
-    def product
-      duplicate(struct)
-    end
+    def installation_path; "installation/#{script_path}" ;end
 
   end
 end

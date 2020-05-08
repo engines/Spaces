@@ -13,9 +13,9 @@ module Nodules
 
     relation_accessor :context
 
-    def by(struct:, context:)
+    def by(struct:, division:)
       load(struct.type)
-      loaded.detect { |k| k.qualifier == struct.type }.new(struct: struct, context: context)
+      loaded.detect { |k| k.qualifier == struct.type }.new(struct: struct, division: division)
     end
 
     def load(type)

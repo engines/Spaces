@@ -5,7 +5,7 @@ module Docker
     class Step < ::Spaces::Model
 
       relation_accessor :context
-      attr_reader :product
+      attr_reader :value
 
       def home_app_path
         context.home_app_path

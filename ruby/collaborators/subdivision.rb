@@ -1,15 +1,15 @@
-require_relative 'product'
+require_relative 'component'
 
 module Collaborators
-  class Subdivision < Product
+  class Subdivision < Component
 
-    relation_accessor :context
+    relation_accessor :division
 
-    delegate([:installation, :product_path, :context_identifier] => :context)
+    delegate([:collaboration, :installation_path, :context_identifier] => :division)
 
-    def initialize(struct:, context:)
+    def initialize(struct:, division:)
       self.struct = struct
-      self.context = context
+      self.division = division
     end
 
   end

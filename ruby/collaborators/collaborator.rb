@@ -1,30 +1,27 @@
-require_relative 'product'
+require_relative 'component'
 
 module Collaborators
-  class Collaborator < Product
+  class Collaborator < Component
 
     class << self
-      def prototype(installation:, blueprint_label:)
-        new(installation: installation, blueprint_label: blueprint_label)
+      def prototype(collaboration:, label:)
+        new(collaboration: collaboration, label: label)
       end
     end
 
-    relation_accessor :installation
-    attr_accessor :blueprint_label
+    attr_accessor :label
 
-    delegate([:home_app_path, :context_identifier] => :installation)
-
-    def collaborators
-      @collaborators ||= installation.collaborators.values.compact
+    def related_collaborators
+      @related_collaborators ||= collaboration.collaborators
     end
 
-    def initialize(struct: nil, installation: nil, blueprint_label: nil)
-      self.installation = installation
-      self.blueprint_label = blueprint_label
-      self.struct = struct || installation&.struct[blueprint_label] || default
+    def initialize(struct: nil, collaboration: nil, label: nil)
+      self.collaboration = collaboration
+      self.label = label
+      self.struct = struct || collaboration&.struct[label] || default
     end
 
-    def default; end
+    def default ;end
 
   end
 end

@@ -67,7 +67,7 @@ module FilePermissions
       end
 
       def file_permissions_commands
-        context.all.map do |p|
+        context.struct.map do |p|
           if p.recursive?
             "path=#{p.path} set_recursive_write_permissions"
           else
@@ -75,13 +75,13 @@ module FilePermissions
           end
         end.join("\n")
       end
-      
+
       def data_uid
-        context.installation.user.data_uid
+        context.collaboration.user.data_uid
       end
-      
+
       def data_gid
-        context.installation.user.data_gid
+        context.collaboration.user.data_gid
       end
     end
   end

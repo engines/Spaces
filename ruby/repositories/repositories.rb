@@ -9,15 +9,15 @@ module Repositories
         { late: [:runs] }
       end
 
-      def script_lot; end
-        def inheritance_paths; __dir__; end
-      end
+      def script_lot ;end
+      def inheritance_paths; __dir__ ;end
+    end
         
-      require_files_in :steps
-      
+    require_files_in :steps
+
     def subdivision_class
       Repository
     end
-    
+
   end
 end

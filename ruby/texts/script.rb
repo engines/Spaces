@@ -4,11 +4,11 @@ module Texts
   class Script < ::Spaces::Model
 
     relation_accessor :context
-    attr_reader :product
+    attr_reader :text
 
-    delegate([:product_path, :home_app_path, :identifier, :context_identifier] => :context)
+    delegate([:installation_path, :home_app_path, :identifier, :context_identifier] => :context)
 
-    def product
+    def instructions
       [
         header,
         body,
@@ -16,17 +16,12 @@ module Texts
       ].flatten.compact.join("\n")
     end
 
-    def header
-      '#!/bin/sh'
-    end
+    alias_method :content, :instructions
 
-    def body; end
-
-    def footer; end
-
-    def permission
-      0755
-    end
+    def header; '#!/bin/sh' ;end
+    def body ;end
+    def footer ;end
+    def permission; 0755 ;end
 
     def echo(string)
     %Q(
@@ -35,17 +30,9 @@ module Texts
     )
     end
 
-    def full_path
-      "/#{product_path}/#{file_name}"
-    end
-
-    def file_name
-      "#{identifier}.sh"
-    end
-
-    def subpath
-      "#{context.subpath}/#{product_path}"
-    end
+    def full_path; "/#{installation_path}/#{file_name}" ;end
+    def file_name; "#{identifier}.sh" ;end
+    def subpath; "#{context.subpath}/#{installation_path}" ;end
 
     def initialize(context)
       self.context = context

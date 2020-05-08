@@ -10,18 +10,13 @@ module Spaces
         @@universe ||= Universal::Space.new
       end
 
-      def default_model_class; end
+      def default_model_class ;end
     end
 
     delegate([:identifier, :universe, :default_model_class] => :klass)
 
-    def identifiers
-      Dir["#{path}/*"].map { |d| d.split('/').last }
-    end
-
-    def descriptors
-      all.map(&:descriptor)
-    end
+    def identifiers; Dir["#{path}/*"].map { |d| d.split('/').last } ;end
+    def descriptors; all.map(&:descriptor) ;end
 
     def all(klass = default_model_class)
       identifiers.map { |i| by(Descriptor.new(identifier: i), klass) }
@@ -43,14 +38,14 @@ module Spaces
 
     def save_text(model)
       _save(model) do |f|
-        f.write(model.product)
+        f.write(model.content)
         FileUtils.chmod(model.permission, writing_name_for(model)) if model.respond_to?(:permission)
       end
     end
 
     def save_yaml(model)
       _save(model, as: :yaml) do |f|
-        f.write(model.product.to_yaml)
+        f.write(model.memento.to_yaml)
       end
     end
 
@@ -58,7 +53,7 @@ module Spaces
 
     def save_json(model)
       _save(model, as: :json) do |f|
-        f.write(model.struct.deep_to_h.to_json)
+        f.write(model.memento.deep_to_h.to_json)
       end
     end
 

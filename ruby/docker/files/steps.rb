@@ -2,7 +2,7 @@ require_relative '../../spaces/constantizing'
 
 module Docker
   module Files
-    module Product
+    module Steps
       include Spaces::Constantizing
 
       def layers_for(group)
@@ -11,13 +11,11 @@ module Docker
             class_for('Steps', s)
           rescue NameError
             general_steps[s]
-          end.new(self).product
+          end.new(self).instructions
         end
       end
 
-      def step_precedence
-        klass.step_precedence
-      end
+      def step_precedence; klass.step_precedence ;end
 
       def general_steps
         {

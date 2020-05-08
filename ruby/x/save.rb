@@ -39,3 +39,7 @@ end
 def save_installation
   universe.installations.save(installation)
 end
+
+def save_blueprint
+  universe.projects.save(blueprint)
+end

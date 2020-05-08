@@ -1,39 +1,30 @@
-require_relative '../collaborators/collaborator'
-require_relative '../texts/file_text'
-require_relative 'image'
+require_relative '../installations/collaborator'
 
 module Images
-  class Subject < ::Collaborators::Collaborator
+  class Subject < ::Installations::Collaborator
     class << self
-      def inheritance_paths; __dir__; end
+      def inheritance_paths; __dir__ ;end
     end
 
     require_files_in :scripts, :steps
 
     delegate([:docker_file, :identifier] => :installation)
 
-    def product
+    def components
       [docker_file, collaborator_scripts, project_scripts, injections].flatten
     end
 
     def collaborator_scripts
-      collaborators.map(&:scripts).flatten.compact.uniq(&:uniqueness)
+      related_collaborators.map(&:scripts).flatten.compact.uniq(&:uniqueness)
     end
 
-    def project_scripts
-      files_for(:scripts)
-    end
-
-    def injections
-      files_for(:injections)
-    end
+    def project_scripts; files_for(:scripts) ;end
+    def injections; files_for(:injections) ;end
 
     def files_for(directory)
-      installation.file_names_for(directory).map { |t| text_class.new(source_file_name: t, directory: directory, context: self) }
-    end
-
-    def text_class
-      Texts::FileText
+      installation.file_names_for(directory).map do |t|
+        text_class.new(origin: t, directory: directory, context: self)
+      end
     end
 
   end

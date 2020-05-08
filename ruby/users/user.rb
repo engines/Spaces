@@ -4,7 +4,7 @@ module Users
   class User < ::Collaborators::Collaborator
 
     class << self
-      def inheritance_paths; __dir__; end
+      def inheritance_paths; __dir__ ;end
     end
 
     require_files_in :steps, :scripts

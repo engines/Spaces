@@ -30,9 +30,9 @@ module Universal
       end
     end
 
-    define_method (:blueprints) { projects }
-    define_method (:path) { "/opt/engines/#{identifier}" }
-    define_method (:host) { 'engines.internal' }
+    def blueprints; projects ;end
+    def path; "/opt/engines/#{identifier}" ;end
+    def host; 'engines.internal' ;end
 
     def method_missing(m, *args, &block)
       klass.space_map[m] || super

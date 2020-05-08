@@ -11,37 +11,21 @@ module Bindings
       end
     end
 
-    def product
-      duplicate(struct).tap { |s| s.variables = resolved }
-    end
+    def override_keys; overrides.to_h.keys ;end
 
-    def resolved
-      @resolved ||=
-        keys.inject(OpenStruct.new) do |s, k|
-          s[k] = text_class.new(source: overrides[k], context: self).resolved
-          s
-        end
-    end
+    def memento; resolution ;end
 
-    def text_class
-      Texts::Text
-    end
+    def resolution; @resolution ||= duplicate(struct).tap { |s| s.variables = variables } ;end
+    def variables; @variables ||= OpenStruct.new(texts.transform_values(&:resolution)) ;end
 
-    def keys
-      overrides.to_h.keys
-    end
+    def texts; overrides.to_h.transform_values { |v| text_from(v) } ;end
+    def overrides; default_variables.merge(struct_variables) ;end
 
-    def overrides
-      @overrides ||= default_variables.merge(variables)
-    end
+    def default_variables; @default_variables ||= anchor_installation.binding_anchor&.variables ;end
+    def struct_variables; struct.variables || OpenStruct.new ;end
 
-    def variables
-      struct.variables || OpenStruct.new
-    end
-
-    def default_variables
-      @default_variables ||= anchor_installation.binding_anchor&.variables
-    end
+    def text_from(value); text_class.new(origin: value, context: self) ;end
+    def text_class; Texts::Text ;end
 
     def anchor_installation
       @anchor_installation ||= universe.installations.by(descriptor)
@@ -49,20 +33,13 @@ module Bindings
       universe.blueprints.by(descriptor).installation
     end
 
-    def descriptor
-      @descriptor ||= descriptor_class.new(struct.descriptor)
-    end
+    def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end
+    def identifier; struct.identifier || descriptor.identifier ;end
 
-    def identifier
-      struct.identifier || descriptor.identifier
-    end
-
-    def random(length)
-      SecureRandom.hex(length.to_i)
-    end
+    def random(length); SecureRandom.hex(length.to_i) ;end
 
     def method_missing(m, *args, &block)
-      keys&.include?(m) ? resolved[m] : super
+      override_keys&.include?(m) ? variables[m] : super
     end
 
   end
