@@ -12,12 +12,12 @@ module Spaces
     extend Forwardable
 
     class << self
-      define_method (:identifier) { name.split('::').join }
-      define_method (:namespace) { name.split('::')[..-2].join.snakize }
-      define_method (:qualifier) { name.split('::').last.snakize }
-      define_method (:from_yaml) { |y| YAML::load(y) }
+      def identifier; name.split('::').join ;end
+      def namespace; name.split('::')[..-2].join.snakize ;end
+      def qualifier; name.split('::').last.snakize ;end
+      def from_yaml(y); YAML::load(y) ;end
 
-      define_method (:relation_accessor) { |*args| attr_accessor(*args) }
+      def relation_accessor(*args); attr_accessor(*args) ;end
 
       def alias_accessor(to, from)
         alias_method to, from
@@ -32,23 +32,29 @@ module Spaces
       to_h: :struct
     )
 
-    define_method (:context_identifier) { identifier }
-    define_method (:klass) { @klass ||= self.class }
-    define_method (:to_yaml) { YAML.dump(struct) }
-    define_method (:to_json) { struct&.deep_to_h&.to_json }
-    define_method (:open_struct_from_json) { |j| JSON.parse(j, object_class: OpenStruct) }
-    define_method (:to_s) { identifier }
+    def klass; @klass ||= self.class ;end
+    def keys; struct&.to_h&.keys ;end
+    def memento; duplicate(struct) ;end
+
+    def context_identifier; identifier ;end
+
+    def to_yaml; YAML.dump(struct) ;end
+    def to_json; struct&.deep_to_h&.to_json ;end
+    def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
+    def to_s; identifier ;end
 
     def initialize(struct: nil)
       self.struct = struct
     end
 
     def method_missing(m, *args, &block)
-      if struct&.to_h&.keys&.include?(m.to_s.sub('=', '').to_sym)
+      if keys&.include?(m.to_s.sub('=', '').to_sym)
         struct.send(m, *args, &block)
       else
         super
       end
+    rescue TypeError
+      super
     end
 
   end

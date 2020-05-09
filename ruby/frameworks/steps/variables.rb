@@ -4,7 +4,7 @@ module Frameworks
   module Steps
     class Variables < Docker::Files::Step
 
-      def product
+      def instructions
         %Q(
         ENV CONTFSVolHome /home/fs/
         ENV ContUser '#{context.user_name}'

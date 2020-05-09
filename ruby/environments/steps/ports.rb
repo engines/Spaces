@@ -4,7 +4,7 @@ module Environments
   module Steps
     class Ports < Docker::Files::Step
 
-      def product
+      def instructions
         [
           worker_ports,
           ports.map { |p| expose(p)}

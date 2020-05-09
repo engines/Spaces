@@ -1,36 +1,69 @@
 require_relative '../spaces/model'
-require_relative 'schema'
+require_relative 'importing'
 
 module Blueprints
   class Collaboration < ::Spaces::Model
+    include Importing
 
-    delegate([:outline, :collaborator_map, :keys] => :schema)
+    relation_accessor :predecessor
+    relation_accessor :assembly
+    relation_accessor :stages
+
+    delegate([:outline, :collaborating_classes_map] => :schema)
+
+    def memento; OpenStruct.new(to_h) ;end
 
     def collaborators
-      @collaborators ||= keys.reduce({}) do |m, k|
-        m[k] = collaborator_for(k) if blueprinted?(k) || collaborate_anyway?(k)
+      @collaborators ||= [stages&.map(&:collaborators), collaborator_map.values].flatten.compact
+    end
+
+    def stages
+      @stages ||= struct.stages&.map { |s| stage_for(s) }
+    end
+
+    def collaborator_map
+      @collaborator_map ||= keys.inject({}) do |m, k|
+        m[k] = protoype_for(k)
         m
       end.compact
     end
 
-    def collaborator_for(key)
-      collaborator_map[key].prototype(installation: self, blueprint_label: key)
-    end
-
-    def blueprinted?(key)
-      struct[key]
-    end
-
-    def collaborate_anyway?(key)
-      false
-    end
+    def schema_keys; schema.keys ;end
+    def collaborator_keys; collaborator_map.keys ;end
 
     def method_missing(m, *args, &block)
-      if keys.include?(m)
-        collaborators[m.to_sym]
+      if collaborator_keys.include?(m)
+        collaborator_map[m.to_sym] || struct[m]
       else
-        super
+        assembly&.send(m, *args, &block) || super
       end
+    end
+
+    def to_h
+      keys.inject({}) do |m, k|
+        m[k] =
+        if k == :stages
+          stages.map(&:memento)
+        else
+          collaborator_map[k]&.memento || struct[k]
+        end
+        m
+      end.compact
+    end
+
+    protected
+
+    def stage_for(struct)
+      stage_class.new(struct: struct, assembly: self)
+    end
+
+    require_relative 'stage'
+    def stage_class; Stage ;end
+
+    private
+
+    def protoype_for(key)
+      collaborating_classes_map[key]&.prototype(collaboration: self, label: key)
     end
 
   end

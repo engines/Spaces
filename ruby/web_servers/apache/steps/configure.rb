@@ -5,10 +5,10 @@ module WebServers
     module Steps
       class Configure < Docker::Files::Step
 
-        def product
+        def instructions
         %Q(
           USER 0
-          RUN /#{context.product_path}/configure.sh
+          RUN /#{context.installation_path}/configure.sh
         )
         end
 

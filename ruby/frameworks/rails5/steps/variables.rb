@@ -5,7 +5,7 @@ module Frameworks
     module Steps
       class Variables < Frameworks::Steps::Variables
 
-        def product
+        def instructions
           [
             super,
             %Q(

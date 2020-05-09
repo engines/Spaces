@@ -4,7 +4,7 @@ module Environments
   module Steps
     class Locale < Docker::Files::Step
 
-      def product
+      def instructions
         # %Q(
         # ENV LANGUAGE '#{context.locale.language}'
         # ENV LANG '#{context.locale.lang}'

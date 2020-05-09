@@ -10,20 +10,10 @@ module Installations
       [:identifier, :home_app_path] => :descriptor
     )
 
-    relation_accessor :blueprint
-
-    def product
-      struct.tap do |s|
-        mutable_divisions.each do |k|
-          if c = collaborators[k]
-            s[k] = c.product
-          end
-        end
-      end
-    end
+    alias_accessor :blueprint, :predecessor
 
     def file_names_for(directory)
-      universe.blueprints.file_names_for(directory, descriptor)
+      universe.projects.file_names_for(directory, descriptor)
     end
 
     def initialize(struct: nil, blueprint: nil, descriptor: nil)

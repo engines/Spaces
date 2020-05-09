@@ -5,7 +5,7 @@ module Docker
     module Steps
       class Preparations < Step
 
-        def product
+        def instructions
           %Q(
          USER 0
           RUN \

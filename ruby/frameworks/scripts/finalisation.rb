@@ -41,12 +41,16 @@ module Frameworks
         )
       end
 
+      def user_name
+        context.user_name
+      end
+
       def data_gid
-        context.installation.user.data_gid
+        context.data_gid
       end
 
       def script_file_name
-        "#{context.product_path}/#{identifier}.sh"
+        "#{context.installation_path}/#{identifier}.sh"
       end
 
     end

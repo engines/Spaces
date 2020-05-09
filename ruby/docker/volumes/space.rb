@@ -5,7 +5,7 @@ module Docker
   module Volumes
     class Space < ::Docker::Space
 
-      define_method (:bridge) { Docker::Volume }
+      def bridge; Docker::Volume ;end
 
     end
   end

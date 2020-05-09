@@ -6,7 +6,9 @@ module Texts
     relation_accessor :text
     attr_accessor :value
 
-    def resolved
+    delegate(collaboration: :text)
+
+    def resolution
       vs = ([:unqualified] + value.split('.')).last(2)
       collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError
@@ -15,14 +17,10 @@ module Texts
 
     def collaborate_with(name)
       unless name == :unqualified
-        installation.bindings.named(name) || installation.send(name) || (raise NoMethodError)
+        collaboration.bindings.named(name) || collaboration.send(name) || (raise NoMethodError)
       else
         text.context
       end
-    end
-
-    def installation
-      text.installation
     end
 
     def initialize(value:, text:)
@@ -30,9 +28,7 @@ module Texts
       self.text = text
     end
 
-    def to_s
-      resolved
-    end
+    def to_s; resolution ;end
 
   end
 end

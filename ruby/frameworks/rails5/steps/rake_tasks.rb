@@ -5,7 +5,7 @@ module Frameworks
     module Steps
       class RakeTasks < Docker::Files::Step
 
-        def product
+        def instructions
           %Q(
           USER 0
           RUN /scripts/configure_nginx.sh &&\

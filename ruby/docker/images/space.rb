@@ -33,9 +33,9 @@ module Docker
         bridge.build_from_tar(file_class.open("#{path_for(subject)}.tar", 'r'))
       end
 
-      define_method (:options_for) { |subject| default_options }
-      define_method (:bridge) { Docker::Image }
-      define_method (:file_class) { Files::File }
+      def options_for(subject); default_options ;end
+      def bridge; Docker::Image ;end
+      def file_class; Files::File ;end
 
       def default_options
         {

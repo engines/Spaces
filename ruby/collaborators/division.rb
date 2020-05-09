@@ -12,18 +12,15 @@ module Collaborators
     end
 
     def subdivision_for(struct)
-      subdivision_class.new(struct: struct, context: self)
+      subdivision_class.new(struct: struct, division: self)
     rescue NameError
       struct
     end
 
-    def subdivision_class
-      Module.const_get(klass.name.singularize)
-    end
+    def subdivision_class; Module.const_get(klass.name.singularize) ;end
+    def installation_path; "#{super}/#{label}" ;end
 
-    def product_path
-       "#{super}/#{blueprint_label}"
-    end
+    def memento; all&.map(&:memento) || super ;end
 
   end
 end

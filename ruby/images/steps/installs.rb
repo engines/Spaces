@@ -3,7 +3,7 @@ require_relative '../../docker/files/step'
 module Images
   module Steps
     class Installs <  Docker::Files::Step
-      def product
+      def instructions
         if context.project_scripts.map(&:file_name).include?('install.sh')
           %Q(
           WORKDIR /home/

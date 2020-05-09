@@ -4,7 +4,7 @@ module Replacements
   module Steps
     class RunScripts < Docker::Files::Step
 
-      def product
+      def instructions
         context.scripts.flatten.map { |s| "RUN #{s.path}" }
       end
 

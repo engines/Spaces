@@ -5,7 +5,7 @@ module Docker
   module Containers
     class Space < ::Docker::Space
 
-      define_method (:bridge) { Docker::Container }
+      def bridge; Docker::Container ;end
 
       def create(descriptor)
         bridge.create(

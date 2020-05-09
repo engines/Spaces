@@ -4,9 +4,9 @@ module Bindings
   module Steps
     class Variables < Docker::Files::Step
 
-      def product
-        context.keys.map do |k|
-          "ENV #{context.identifier}_#{k} '#{context.resolved[k]}'"
+      def instructions
+        context.override_keys.map do |k|
+          "ENV #{context.identifier}_#{k} '#{context.variables[k]}'"
         end
       end
 

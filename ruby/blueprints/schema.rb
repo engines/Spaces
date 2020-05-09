@@ -7,9 +7,8 @@ require_relative '../nodules/nodules'
 require_relative '../packages/packages'
 require_relative '../replacements/replacements'
 require_relative '../file_permissions/file_permissions'
-require_relative '../bindings/bindings'
-require_relative '../bindings/anchor'
 require_relative '../environments/environment'
+require_relative 'stage'
 
 module Blueprints
   class Schema < ::Spaces::Schema
@@ -22,16 +21,27 @@ module Blueprints
           memory_usage: [0, { required: 0, recommended: 0 }],
           protocol: 1,
           licenses: [(1..), { label: 1, url: 1 }],
-          framework: 0,
-          repositories: 0,
-          sudos: 0,
-          os_packages: 0,
-          modules: 0,
-          packages: 0,
-          replacements: 0,
-          file_permissions: 0,
           bindings: 0,
-          environment: 0
+          stages: [
+            (1..),
+            {
+              framework: 0,
+              repositories: 0,
+              sudos: 0,
+              os_packages: 0,
+              modules: 0,
+              packages: 0,
+              replacements: 0,
+              file_permissions: 0,
+              environment: 0
+            }
+          ]
+        }
+      end
+
+      def naming_map
+        {
+          nodules: :modules
         }
       end
 
@@ -45,17 +55,8 @@ module Blueprints
           Packages::Packages,
           Replacements::Replacement,
           FilePermissions::FilePermissions,
-          Bindings::Bindings,
-          Bindings::Anchor,
           Environments::Environment
         ]
-      end
-
-      def outline_map
-        {
-          nodules: :modules,
-          anchor: :binding_anchor
-        }
       end
     end
 

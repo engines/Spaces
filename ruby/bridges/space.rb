@@ -13,7 +13,7 @@ module Bridges
       bridge.get(descriptor.identifier)
     end
 
-    define_method (:bridge) {}
+    def bridge; {} ;end
 
   end
 end

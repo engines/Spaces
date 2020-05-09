@@ -1,12 +1,13 @@
 require_relative 'thing'
+require_relative 'descriptor'
 
 module Spaces
   class Model < Thing
     extend Forwardable
 
     class << self
-      define_method (:universe) { @universal_space ||= Universal::Space.new }
-      define_method (:schema) { @schema ||= schema_class.new }
+      def universe; @universal_space ||= Universal::Space.new ;end
+      def schema; @schema ||= schema_class.new ;end
 
       def schema_class
         require_relative("../#{namespace}/schema")
@@ -23,17 +24,15 @@ module Spaces
       [:outline, :deep_outline] => :schema
     )
 
-    alias_method :product, :itself
-
     def descriptor
       @descriptor ||= descriptor_class.new(struct.descriptor)
     end
 
-    define_method (:file_name) { klass.qualifier }
-    define_method (:subpath) {}
-    define_method (:uniqueness) { [klass.name, identifier] }
-    define_method (:capture_foreign_keys) {}
-    define_method (:descriptor_class) { Descriptor }
+    def file_name; klass.qualifier ;end
+    def subpath; end
+    def uniqueness; [klass.name, identifier] ;end
+    def capture_foreign_keys; end
+    def descriptor_class; Descriptor ;end
 
     def namespaced_name(namespace, symbol)
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"

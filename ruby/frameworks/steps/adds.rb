@@ -4,7 +4,7 @@ module Frameworks
   module Steps
     class Adds < Docker::Files::Step
 
-      def product
+      def instructions
         %Q(
         ADD scripts /scripts
         ADD home home
