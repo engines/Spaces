@@ -1,5 +1,4 @@
 require_relative 'thing'
-require_relative 'descriptor'
 
 module Spaces
   class Model < Thing
