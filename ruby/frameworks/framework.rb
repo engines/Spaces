@@ -13,14 +13,6 @@ module Frameworks
 
     require_files_in :steps, :scripts
 
-    relation_accessor :web_server
-
-    def scripts; [super, web_server.scripts] ;end
-    def layers_for(group); [super, web_server.layers_for(group)] ;end
-
-    def web_server; @web_server ||= universe.web_servers.by(self) ;end
-    def all; [web_server] ;end
-
     def port; @port ||= struct.port || default_port ;end
     def default_port; 8000 ;end
 

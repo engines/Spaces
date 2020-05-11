@@ -1,19 +1,20 @@
-require_relative '../collaborators/subdivision'
+require_relative '../collaborators/division'
 require_relative 'schema'
 
 module WebServers
-  class WebServer < ::Collaborators::Subdivision
+  class WebServer < ::Collaborators::Division
 
     class << self
-      def schema_class; Schema ;end
+      def prototype(collaboration:, label:)
+        universe.web_servers.by(collaboration)
+      end
+
+      def inheritance_paths; __dir__ ;end
     end
 
-    def struct; @struct ||= division.struct.web_server ;end
-    def path; "#{collaborator_path}/web_server/#{klass.identifier}" ;end
-
-    def initialize(division)
-      self.division = division
-    end
+    def installation_path; "#{super}/#{klass.identifier}" ;end
+    
+    def struct; @struct ||= collaboration.struct.web_server ;end
 
   end
 end

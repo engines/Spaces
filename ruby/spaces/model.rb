@@ -1,4 +1,5 @@
 require_relative 'thing'
+require_relative 'error'
 
 module Spaces
   class Model < Thing
@@ -11,7 +12,8 @@ module Spaces
       def schema_class
         require_relative("../#{namespace}/schema")
         Module.const_get("#{namespace}/schema".camelize)
-      rescue LoadError
+      rescue LoadError => e
+        Error.new(e)
         Schema
       end
     end
