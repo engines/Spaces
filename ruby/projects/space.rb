@@ -39,5 +39,9 @@ module Projects
     def imported?(descriptor)
       Dir.exist?(path_for(descriptor))
     end
+
+    def delete(descriptor)
+      FileUtils.rm_rf(path_for(descriptor))
+    end
   end
 end
