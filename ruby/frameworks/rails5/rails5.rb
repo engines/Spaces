@@ -11,7 +11,6 @@ module Frameworks
 
         def step_precedence
           {
-            first: [:from_image],
             anywhere: [:variables],
             last: [:bundle, :rake_tasks, :chown_app_dir, :final]
           }

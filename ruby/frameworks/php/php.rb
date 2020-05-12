@@ -11,7 +11,6 @@ module Frameworks
 
         def step_precedence
           {
-            first: [:from_image],
             anywhere: [:variables],
             last: [:chown_app_dir, :final]
           }
@@ -19,8 +18,6 @@ module Frameworks
 
         def inheritance_paths; [__dir__, super] ;end
       end
-
-      require_files_in :steps
 
     end
   end

@@ -1,4 +1,4 @@
-require_relative 'requires'
+require_relative '../../../docker/files/step'
 
 module Frameworks
   module Rails5

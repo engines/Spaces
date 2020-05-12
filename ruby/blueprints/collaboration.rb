@@ -28,17 +28,6 @@ module Blueprints
       end.compact
     end
 
-    def schema_keys; schema.keys ;end
-    def collaborator_keys; collaborator_map.keys ;end
-
-    def method_missing(m, *args, &block)
-      if collaborator_keys.include?(m)
-        collaborator_map[m.to_sym] || struct[m]
-      else
-        assembly&.send(m, *args, &block) || super
-      end
-    end
-
     def to_h
       keys.inject({}) do |m, k|
         m[k] =
@@ -49,6 +38,17 @@ module Blueprints
         end
         m
       end.compact
+    end
+
+    def schema_keys; schema.keys ;end
+    def collaborator_keys; collaborator_map.keys ;end
+
+    def method_missing(m, *args, &block)
+      if collaborator_keys.include?(m)
+        collaborator_map[m.to_sym] || struct[m]
+      else
+        assembly&.send(m, *args, &block) || super
+      end
     end
 
     protected

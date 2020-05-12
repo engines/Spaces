@@ -1,6 +1,6 @@
-require_relative 'requires'
+require_relative '../../docker/files/step'
 
-module Frameworks
+module Starters
   module Steps
     class Adds < Docker::Files::Step
 

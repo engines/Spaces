@@ -1,5 +1,7 @@
 require_relative '../spaces/schema'
+require_relative '../starters/starter'
 require_relative '../frameworks/framework'
+require_relative '../web_servers/web_server'
 require_relative '../repositories/repositories'
 require_relative '../sudos/sudos'
 require_relative '../os_packages/os_packages'
@@ -25,7 +27,9 @@ module Blueprints
           stages: [
             (1..),
             {
+              starter: 1,
               framework: 0,
+              web_server: 0,
               repositories: 0,
               sudos: 0,
               os_packages: 0,
@@ -47,7 +51,9 @@ module Blueprints
 
       def collaborating_classes
         [
+          Starters::Starter,
           Frameworks::Framework,
+          WebServers::WebServer,
           Repositories::Repositories,
           Sudos::Sudos,
           OsPackages::OsPackages,
