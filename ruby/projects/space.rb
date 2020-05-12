@@ -43,5 +43,9 @@ module Projects
     def delete(descriptor)
       FileUtils.rm_rf(path_for(descriptor))
     end
+
+    def create(descriptor)
+      save(default_model_class.new(descriptor: descriptor))
+    end
   end
 end
