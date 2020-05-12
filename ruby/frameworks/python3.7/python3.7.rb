@@ -19,7 +19,7 @@ module Frameworks
             last: [:configure, :chown_app_dir, :final]
           }
         end
-        
+
         def inheritance_paths; [__dir__, super] ;end
       end
 
