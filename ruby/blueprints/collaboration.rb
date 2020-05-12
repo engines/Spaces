@@ -9,7 +9,7 @@ module Blueprints
     relation_accessor :assembly
     relation_accessor :stages
 
-    delegate([:outline, :collaborating_classes_map] => :schema)
+    delegate([:outline, :collaborating_divisions] => :schema)
 
     def memento; OpenStruct.new(to_h) ;end
 
@@ -63,7 +63,7 @@ module Blueprints
     private
 
     def protoype_for(key)
-      collaborating_classes_map[key]&.prototype(collaboration: self, label: key)
+      collaborating_divisions[key]&.prototype(collaboration: self, label: key)
     end
 
   end

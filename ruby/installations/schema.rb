@@ -40,11 +40,16 @@ module Installations
       end
 
       def associative_divisions; @associative_divisions ||= map_for(associative_classes) ;end
-      def component_class_map; @component_class_map ||= map_for(component_classes) ;end
-      def collaborating_classes_map; component_class_map.merge(associative_divisions).merge(super) ;end
+      def component_divisions; @component_divisions ||= map_for(component_classes) ;end
+
+      def mandatory_divisions; @mandatory_divisions ||= component_divisions.merge(associative_divisions) ;end
+      def mandatory_keys; @mandatory_divisions.keys ;end
+
+      def collaborating_divisions; mandatory_divisions.merge(super) ;end
+
     end
 
-    delegate([:associative_divisions, :component_class_map] => :klass)
+    delegate(mandatory_keys: :klass)
 
   end
 end
