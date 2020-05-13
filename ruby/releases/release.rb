@@ -14,7 +14,7 @@ module Releases
     end
 
     def stage_for(struct)
-      stage_class.new(struct: struct, assembly: self)
+      stage_class.new(struct: struct, release: self)
     end
 
     def stage_class; Stage ;end

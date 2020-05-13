@@ -4,7 +4,6 @@ module Releases
   class Collaboration < ::Spaces::Model
 
     relation_accessor :predecessor
-    relation_accessor :assembly
 
     delegate([:outline, :collaborating_divisions] => :schema)
 
@@ -41,7 +40,7 @@ module Releases
       if collaborator_keys.include?(m)
         collaborator_map[m.to_sym] || struct[m]
       else
-        assembly&.send(m, *args, &block) || super
+        super
       end
     end
 
