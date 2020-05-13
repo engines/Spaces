@@ -4,7 +4,7 @@ module Images
   module Steps
     class Installs <  Docker::Files::Step
       def instructions
-        if context.project_scripts.map(&:file_name).include?('install.sh')
+        if context.blueprint_scripts.map(&:file_name).include?('install.sh')
           %Q(
           WORKDIR /home/
           RUN bash /home/engines/scripts/run/install.sh

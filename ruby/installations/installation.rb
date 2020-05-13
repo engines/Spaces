@@ -13,7 +13,7 @@ module Installations
     alias_accessor :blueprint, :predecessor
 
     def file_names_for(directory)
-      universe.projects.file_names_for(directory, descriptor)
+      universe.blueprints.file_names_for(directory, descriptor)
     end
 
     def initialize(struct: nil, blueprint: nil, descriptor: nil)

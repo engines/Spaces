@@ -18,10 +18,6 @@ def blueprint
   end
 end
 
-def project
-  blueprint
-end
-
 def installation
   @installation ||= Installations::Installation.new(blueprint: blueprint)
 end
@@ -41,5 +37,5 @@ def save_installation
 end
 
 def save_blueprint
-  universe.projects.save(blueprint)
+  universe.blueprints.save(blueprint)
 end
