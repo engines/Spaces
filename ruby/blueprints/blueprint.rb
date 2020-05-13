@@ -5,6 +5,10 @@ module Blueprints
 
     delegate(identifier: :descriptor)
 
+    def anchor_descriptors
+      @anchor_descriptors ||= struct.bindings&.map { |d| descriptor_class.new(d.descriptor) }
+    end
+
     def memento; duplicate(struct) ;end
 
     def initialize(struct: nil, descriptor: nil)
