@@ -1,7 +1,7 @@
-require_relative '../blueprints/collaboration'
+require_relative '../projects/collaboration'
 
 module Installations
-  class Collaboration < ::Blueprints::Collaboration
+  class Collaboration < ::Projects::Collaboration
 
     delegate(mandatory_keys: :schema)
 

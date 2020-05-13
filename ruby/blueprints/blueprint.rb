@@ -1,9 +1,13 @@
-require_relative 'collaboration'
+require_relative '../projects/collaboration'
 
 module Blueprints
-  class Blueprint < Collaboration
+  class Blueprint < Projects::Collaboration
 
     delegate(identifier: :descriptor)
+
+    def anchor_descriptors
+      @anchor_descriptors ||= struct.bindings&.map { |d| descriptor_class.new(d.descriptor) }
+    end
 
     def memento; duplicate(struct) ;end
 
