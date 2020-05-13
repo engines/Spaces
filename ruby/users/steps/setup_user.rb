@@ -4,7 +4,7 @@ module Users
   module Steps
     class SetupUser < Docker::Files::Step
       def instructions
-        "RUN /#{context.installation_path}/setup_user.sh"
+        "RUN /#{context.release_path}/setup_user.sh"
       end
 
     end

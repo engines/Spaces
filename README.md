@@ -30,7 +30,7 @@ universe.containers
 # Spaces::Descriptor
 
 A `Spaces::Descriptor` object is the way spaces objects are saved and located in their various spaces. While Spaces generates its own descriptors internally,
-a common starting point is to start with a descriptor to locate a source project. For example:
+a common starting point is to start with a descriptor to locate a source blueprint. For example:
 
 ```
 require_relative 'ruby/spaces/descriptor'
@@ -39,9 +39,9 @@ descriptor = Spaces::Descriptor.new(
 )
 ```
 
-which can be used to import a project from an external Git repo.
+which can be used to import a blueprint from an external Git repo.
 
-There are optional attributes you can declare for a project:
+There are optional attributes you can declare for a blueprint:
 
 ```
 descriptor = Spaces::Descriptor.new(
@@ -53,28 +53,28 @@ descriptor = Spaces::Descriptor.new(
 # Blueprints
 ## Importing
 
-You can import a project into your universe with:
+You can import a blueprint into your universe with:
 
 ```
-project_space = universe.blueprints
-project_space.import(descriptor)
+blueprint_space = universe.blueprints
+blueprint_space.import(descriptor)
 ```
 
-## Retrieving an imported project
+## Retrieving an imported blueprint
 
-Once you've imported a project, you can retrieve it with:
+Once you've imported a blueprint, you can retrieve it with:
 
 ```
-project_space.by(descriptor)
+blueprint_space.by(descriptor)
 ```
 
 ## Generating an Installations::Installation
 
-A `Installations::Installation` is what will generate a DockerFile. You create an installation from a project like so:
+A `Installations::Installation` is what will generate a DockerFile. You create an installation from a blueprint like so:
 
 ```
-project = universe.blueprints.by(descriptor)
-installation = project.installation
+blueprint = universe.blueprints.by(descriptor)
+installation = blueprint.installation
 ```
 
 ## Saving an Installations::Installation

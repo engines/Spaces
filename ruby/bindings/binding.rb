@@ -1,9 +1,9 @@
 require 'resolv'
 require_relative '../texts/text'
-require_relative '../collaborators/subdivision'
+require_relative '../releases/subdivision'
 
 module Bindings
-  class Binding < ::Collaborators::Subdivision
+  class Binding < ::Releases::Subdivision
 
     class << self
       def step_precedence

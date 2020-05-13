@@ -19,11 +19,11 @@ module Images
       end
 
       def data_uid
-        context.collaboration.user.data_uid
+        context.stage.user.data_uid
       end
 
       def data_gid
-        context.collaboration.user.data_gid
+        context.stage.user.data_gid
       end
     end
 

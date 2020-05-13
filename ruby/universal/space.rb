@@ -10,7 +10,7 @@ module Universal
           :images,
           :volumes,
           :docker,
-          :projects,
+          :blueprints,
           :installations,
           :frameworks,
           :web_servers,
@@ -30,7 +30,6 @@ module Universal
       end
     end
 
-    def blueprints; projects ;end
     def path; "/opt/engines/#{identifier}" ;end
     def host; 'engines.internal' ;end
 

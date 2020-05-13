@@ -14,7 +14,7 @@ module Frameworks
     def by(stage)
       i = stage.struct.framework.identifier
       load(i)
-      loaded.detect { |k| k.identifier == i }.new(collaboration: stage, label: :framework)
+      loaded.detect { |k| k.identifier == i }.new(stage: stage, label: :framework)
     end
 
     def load(identifier)

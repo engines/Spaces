@@ -1,7 +1,7 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 
 module Environments
-  class Environment < ::Collaborators::Division
+  class Environment < ::Releases::Division
 
     class << self
       def inheritance_paths; __dir__ ;end

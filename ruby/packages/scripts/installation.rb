@@ -53,9 +53,9 @@ module Packages
         	mv "./#{extracted_path}" #{destination_path}
         fi
 
-        if test -f /#{installation_path}/#{extracted_path}
+        if test -f /#{release_path}/#{extracted_path}
         then
-        	rm -rf /#{installation_path}/#{extracted_path}
+        	rm -rf /#{release_path}/#{extracted_path}
         fi
         )
       end

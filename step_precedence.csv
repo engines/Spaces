@@ -1,4 +1,4 @@
-collaborators,first,early,anywhere,late,last
+divisions,first,early,anywhere,late,last
 Frameworks::Framework,,,variables adds requires,,
 Frameworks::PHP::PHP,from_image,,variables,,
 Frameworks::Rails5::Rails5,from_image,,variables,,bundle rake_tasks

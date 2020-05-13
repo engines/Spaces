@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../releases/division'
 
 module Domains
-  class Domain < ::Collaborators::Collaborator
+  class Domain < ::Releases::Division
 
     class << self
       def inheritance_paths; __dir__ ;end

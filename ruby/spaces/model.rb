@@ -13,7 +13,6 @@ module Spaces
         require_relative("../#{namespace}/schema")
         Module.const_get("#{namespace}/schema".camelize)
       rescue LoadError => e
-        Error.new(e)
         Schema
       end
     end

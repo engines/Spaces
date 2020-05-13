@@ -19,7 +19,7 @@ module Texts
       end
     end
 
-    def installation_path
+    def release_path
       origin_file_name
     end
 
