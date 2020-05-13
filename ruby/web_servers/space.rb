@@ -14,7 +14,7 @@ module WebServers
     def by(stage)
       i = stage.struct.web_server.identifier
       load(i)
-      loaded.detect { |k| k.identifier == i }.new(collaboration: stage, label: :web_server)
+      loaded.detect { |k| k.identifier == i }.new(stage: stage, label: :web_server)
     end
 
 

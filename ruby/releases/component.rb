@@ -27,9 +27,9 @@ module Releases
       def inheritance_paths ;end
     end
 
-    relation_accessor :collaboration
+    relation_accessor :stage
 
-    delegate([:home_app_path, :context_identifier] => :collaboration)
+    delegate([:home_app_path, :context_identifier] => :stage)
 
     def release_path; "installation/#{script_path}" ;end
 

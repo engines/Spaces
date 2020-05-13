@@ -19,7 +19,7 @@ module Releases
     end
 
     def division_for(key)
-      collaborating_divisions[key]&.prototype(collaboration: self, label: key)
+      collaborating_divisions[key]&.prototype(stage: self, label: key)
     end
 
     def to_h

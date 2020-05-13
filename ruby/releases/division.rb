@@ -4,15 +4,15 @@ module Releases
   class Division < Component
 
     class << self
-      def prototype(collaboration:, label:)
-        new(collaboration: collaboration, label: label)
+      def prototype(stage:, label:)
+        new(stage: stage, label: label)
       end
     end
 
     attr_accessor :label
 
     def related_divisions
-      @related_divisions ||= collaboration.divisions
+      @related_divisions ||= stage.divisions
     end
 
     def scripts
@@ -34,10 +34,10 @@ module Releases
 
     def memento; all&.map(&:memento) || super ;end
 
-    def initialize(struct: nil, collaboration: nil, label: nil)
-      self.collaboration = collaboration
+    def initialize(struct: nil, stage: nil, label: nil)
+      self.stage = stage
       self.label = label
-      self.struct = struct || collaboration&.struct[label] || default
+      self.struct = struct || stage&.struct[label] || default
     end
 
     def default ;end
