@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../../installations/collaboration'
+require_relative '../../installations/release'
 require_relative '../../frameworks/space'
 require_relative '../../frameworks/subclasses'
 require_relative '../../nodules/space'

@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../releases/collaborator'
 
 module Bindings
-  class Anchor < ::Collaborators::Collaborator
+  class Anchor < ::Releases::Collaborator
 
   end
 end

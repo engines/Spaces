@@ -1,8 +1,8 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 require_relative 'schema'
 
 module WebServers
-  class WebServer < ::Collaborators::Division
+  class WebServer < ::Releases::Division
 
     class << self
       def prototype(collaboration:, label:)

@@ -1,6 +1,6 @@
 require_relative 'component'
 
-module Collaborators
+module Releases
   class Collaborator < Component
 
     class << self

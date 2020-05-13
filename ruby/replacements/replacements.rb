@@ -1,8 +1,8 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 require_relative 'replacement'
 
 module Replacements
-  class Replacements < ::Collaborators::Division
+  class Replacements < ::Releases::Division
 
     class << self
       def step_precedence

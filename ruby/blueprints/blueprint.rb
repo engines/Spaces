@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaboration'
+require_relative '../releases/release'
 
 module Blueprints
-  class Blueprint < Collaborators::Collaboration
+  class Blueprint < Releases::Release
 
     delegate(identifier: :descriptor)
 

@@ -1,7 +1,7 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 
 module Frameworks
-  class Framework < ::Collaborators::Division
+  class Framework < ::Releases::Division
 
     class << self
       def prototype(collaboration:, label:)

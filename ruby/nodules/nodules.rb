@@ -1,7 +1,7 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 
 module Nodules
-  class Nodules < ::Collaborators::Division
+  class Nodules < ::Releases::Division
 
     class << self
       def step_precedence

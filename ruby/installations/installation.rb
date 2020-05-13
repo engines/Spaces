@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
 require_relative 'schema'
-require_relative 'collaboration'
+require_relative 'release'
 
 module Installations
-  class Installation < Collaboration
+  class Installation < Release
 
     delegate(
       installation: :itself,

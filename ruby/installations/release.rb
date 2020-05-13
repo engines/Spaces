@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaboration'
+require_relative '../releases/release'
 
 module Installations
-  class Collaboration < ::Collaborators::Collaboration
+  class Release < ::Releases::Release
 
     delegate(mandatory_keys: :schema)
 

@@ -2,7 +2,7 @@ require_relative '../spaces/model'
 require_relative '../images/scripts'
 require_relative '../docker/files/steps'
 
-module Collaborators
+module Releases
   class Component < ::Spaces::Model
     include Images::Scripts
     include Docker::Files::Steps

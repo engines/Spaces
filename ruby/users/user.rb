@@ -1,7 +1,7 @@
-require_relative '../collaborators/collaborator'
+require_relative '../releases/collaborator'
 
 module Users
-  class User < ::Collaborators::Collaborator
+  class User < ::Releases::Collaborator
 
     class << self
       def inheritance_paths; __dir__ ;end

@@ -1,6 +1,6 @@
 require_relative 'component'
 
-module Collaborators
+module Releases
   class Subdivision < Component
 
     relation_accessor :division

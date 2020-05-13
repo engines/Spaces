@@ -1,8 +1,8 @@
-require_relative '../collaborators/collaborator'
+require_relative '../releases/collaborator'
 require_relative '../texts/file_text'
 
 module Installations
-  class Collaborator < ::Collaborators::Collaborator
+  class Collaborator < ::Releases::Collaborator
 
     alias_method :installation, :collaboration
 
