@@ -30,7 +30,7 @@ module Releases
     end
 
     def subdivision_class; Module.const_get(klass.name.singularize) ;end
-    def installation_path; "#{super}/#{label}" ;end
+    def release_path; "#{super}/#{label}" ;end
 
     def memento; all&.map(&:memento) || super ;end
 

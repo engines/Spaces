@@ -12,7 +12,7 @@ module WebServers
       def inheritance_paths; __dir__ ;end
     end
 
-    def installation_path; "#{super}/#{klass.identifier}" ;end
+    def release_path; "#{super}/#{klass.identifier}" ;end
     
     def struct; @struct ||= collaboration.struct.web_server ;end
 

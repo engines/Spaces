@@ -31,7 +31,7 @@ module Releases
 
     delegate([:home_app_path, :context_identifier] => :collaboration)
 
-    def installation_path; "installation/#{script_path}" ;end
+    def release_path; "installation/#{script_path}" ;end
 
   end
 end

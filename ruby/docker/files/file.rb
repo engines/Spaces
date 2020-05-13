@@ -40,7 +40,7 @@ module Docker
       end
 
       def text_class; Texts::Text ;end
-      def installation_path; klass.identifier ;end
+      def release_path; klass.identifier ;end
 
     end
   end

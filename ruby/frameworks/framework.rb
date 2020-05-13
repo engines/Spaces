@@ -20,7 +20,7 @@ module Frameworks
     def data_gid; collaboration.user.data_gid ;end
     def user_name; 'www-data' ;end
 
-    def installation_path; "#{super}/#{klass.identifier}" ;end
+    def release_path; "#{super}/#{klass.identifier}" ;end
 
     def struct; @struct ||= collaboration.struct.framework ;end
 
