@@ -12,7 +12,7 @@ require_relative '../file_permissions/file_permissions'
 require_relative '../environments/environment'
 require_relative 'stage'
 
-module Blueprints
+module Projects
   class Schema < ::Spaces::Schema
 
     class << self

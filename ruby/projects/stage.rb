@@ -1,6 +1,6 @@
 require_relative 'collaboration'
 
-module Blueprints
+module Projects
   class Stage < Collaboration
 
     delegate([:identifier, :home_app_path] => :assembly)

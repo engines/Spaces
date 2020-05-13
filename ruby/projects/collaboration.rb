@@ -1,9 +1,7 @@
 require_relative '../spaces/model'
-require_relative 'importing'
 
-module Blueprints
+module Projects
   class Collaboration < ::Spaces::Model
-    include Importing
 
     relation_accessor :predecessor
     relation_accessor :assembly
