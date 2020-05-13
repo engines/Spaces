@@ -24,7 +24,7 @@ module Installations
         ]
       end
 
-      def collaborating_classes
+      def division_classes
         [
           Bindings::Bindings,
           Bindings::Anchor
@@ -45,7 +45,7 @@ module Installations
       def mandatory_divisions; @mandatory_divisions ||= component_divisions.merge(associative_divisions) ;end
       def mandatory_keys; @mandatory_divisions.keys ;end
 
-      def collaborating_divisions; mandatory_divisions.merge(super) ;end
+      def divisions; mandatory_divisions.merge(super) ;end
 
     end
 

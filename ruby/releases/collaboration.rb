@@ -5,7 +5,7 @@ module Releases
 
     relation_accessor :predecessor
 
-    delegate([:outline, :collaborating_divisions] => :schema)
+    delegate(outline: :schema)
 
     def memento; OpenStruct.new(to_h) ;end
 
@@ -19,7 +19,7 @@ module Releases
     end
 
     def division_for(key)
-      collaborating_divisions[key]&.prototype(stage: self, label: key)
+      schema.divisions[key]&.prototype(stage: self, label: key)
     end
 
     def to_h

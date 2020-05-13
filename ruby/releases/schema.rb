@@ -49,7 +49,7 @@ module Releases
         }
       end
 
-      def collaborating_classes
+      def division_classes
         [
           Starters::Starter,
           Frameworks::Framework,
