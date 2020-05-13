@@ -1,10 +1,10 @@
-require_relative '../../installations/collaborator'
+require_relative '../../installations/division'
 require_relative '../../texts/text'
 require_relative 'group_precedence'
 
 module Docker
   module Files
-    class File < ::Installations::Collaborator
+    class File < ::Installations::Division
       extend GroupPrecedence
 
       class << self
@@ -35,7 +35,7 @@ module Docker
 
       def layers
         group_precedence.map do |g|
-          related_collaborators.map { |c| c.layers_for(g) }
+          related_divisions.map { |c| c.layers_for(g) }
         end
       end
 

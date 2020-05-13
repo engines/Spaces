@@ -1,7 +1,7 @@
-require_relative '../installations/collaborator'
+require_relative '../installations/division'
 
 module Images
-  class Subject < ::Installations::Collaborator
+  class Subject < ::Installations::Division
     class << self
       def inheritance_paths; __dir__ ;end
     end
@@ -11,11 +11,11 @@ module Images
     delegate([:docker_file, :identifier] => :installation)
 
     def components
-      [docker_file, collaborator_scripts, blueprint_scripts, injections].flatten
+      [docker_file, division_scripts, blueprint_scripts, injections].flatten
     end
 
-    def collaborator_scripts
-      related_collaborators.map(&:scripts).flatten.compact.uniq(&:uniqueness)
+    def division_scripts
+      related_divisions.map(&:scripts).flatten.compact.uniq(&:uniqueness)
     end
 
     def blueprint_scripts; files_for(:scripts) ;end

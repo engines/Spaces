@@ -13,7 +13,11 @@ module Releases
     end
 
     def method_missing(m, *args, &block)
-      release.send(m, *args, &block) || super
+      if division_keys.include?(m)
+        division_map[m.to_sym] || struct[m]
+      else
+        release.send(m, *args, &block) || super
+      end
     end
 
   end

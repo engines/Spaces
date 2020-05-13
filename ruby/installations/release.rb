@@ -5,10 +5,10 @@ module Installations
 
     delegate(mandatory_keys: :schema)
 
-    def collaborator_map
-      @installation_collaborator_map ||= super.merge(
+    def division_map
+      @installation_division_map ||= super.merge(
         mandatory_keys.reduce({}) do |m, k|
-          m[k] = collaborator_for(k)
+          m[k] = division_for(k)
           m
         end.compact
       )

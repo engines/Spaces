@@ -9,16 +9,16 @@ module Releases
 
     def memento; OpenStruct.new(to_h) ;end
 
-    def collaborators; collaborator_map.values ;end
+    def divisions; division_map.values ;end
 
-    def collaborator_map
-      @collaborator_map ||= keys.inject({}) do |m, k|
-        m[k] = collaborator_for(k)
+    def division_map
+      @division_map ||= keys.inject({}) do |m, k|
+        m[k] = division_for(k)
         m
       end.compact
     end
 
-    def collaborator_for(key)
+    def division_for(key)
       collaborating_divisions[key]&.prototype(collaboration: self, label: key)
     end
 
@@ -30,15 +30,15 @@ module Releases
     end
 
     def memento_for(key)
-      collaborator_map[key]&.memento || struct[key]
+      division_map[key]&.memento || struct[key]
     end
 
     def schema_keys; schema.keys ;end
-    def collaborator_keys; collaborator_map.keys ;end
+    def division_keys; division_map.keys ;end
 
     def method_missing(m, *args, &block)
-      if collaborator_keys.include?(m)
-        collaborator_map[m.to_sym] || struct[m]
+      if division_keys.include?(m)
+        division_map[m.to_sym] || struct[m]
       else
         super
       end

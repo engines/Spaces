@@ -5,8 +5,8 @@ module Releases
   class Release < Collaboration
     relation_accessor :stages
 
-    def collaborators
-      @collaborators ||= [stages&.map(&:collaborators), super].flatten.compact
+    def divisions
+      @divisions ||= [stages&.map(&:divisions), super].flatten.compact
     end
 
     def stages
