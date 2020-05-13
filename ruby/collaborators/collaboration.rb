@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 
-module Blueprints
+module Collaborators
   class Collaboration < ::Spaces::Model
 
     relation_accessor :predecessor
