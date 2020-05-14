@@ -80,7 +80,7 @@ module Spaces
 
     def file_path_for(directory, context_identifier)
       [path, context_identifier, directory].compact.join('/')
-     end
+    end
 
     def path_for(model)
       [path, model.context_identifier, model.subpath].compact.join('/')
