@@ -32,10 +32,6 @@ module Blueprints
       FileUtils.mkdir_p(path_for(descriptor))
     end
 
-    def file_names_for(directory, descriptor)
-      Dir["#{path_for(descriptor)}/#{directory}/**/*"].reject { |f| File.directory?(f) }
-    end
-
     def imported?(descriptor)
       Dir.exist?(path_for(descriptor))
     end

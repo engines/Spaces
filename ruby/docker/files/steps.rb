@@ -1,4 +1,6 @@
 require_relative '../../spaces/constantizing'
+require_relative 'steps/runs'
+require_relative 'native_step'
 
 module Docker
   module Files
@@ -19,6 +21,7 @@ module Docker
 
       def general_steps
         {
+          native: ::Docker::Files::NativeStep,
           runs: ::Docker::Files::Steps::Runs
         }
       end
