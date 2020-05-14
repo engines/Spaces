@@ -8,7 +8,7 @@ module WebServers
         def instructions
         %Q(
           USER 0
-          RUN /#{context.installation_path}/configure.sh
+          RUN /#{context.release_path}/configure.sh
         )
         end
 

@@ -1,9 +1,9 @@
 require_relative '../spaces/model'
 require_relative 'schema'
-require_relative 'collaboration'
+require_relative 'release'
 
 module Installations
-  class Installation < Collaboration
+  class Installation < Release
 
     delegate(
       installation: :itself,
@@ -11,10 +11,6 @@ module Installations
     )
 
     alias_accessor :blueprint, :predecessor
-
-    def file_names_for(directory)
-      universe.projects.file_names_for(directory, descriptor)
-    end
 
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint

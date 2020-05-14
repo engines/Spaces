@@ -1,13 +1,13 @@
 require_relative '../universal/space'
 require_relative '../git/space'
-require_relative '../blueprints/blueprint'
+require_relative 'blueprint'
 
-module Projects
+module Blueprints
   class Space < Git::Space
 
     class << self
       def default_model_class
-        ::Blueprints::Blueprint
+        Blueprint
       end
     end
 
@@ -30,10 +30,6 @@ module Projects
 
     def ensure_space_for(descriptor)
       FileUtils.mkdir_p(path_for(descriptor))
-    end
-
-    def file_names_for(directory, descriptor)
-      Dir["#{path_for(descriptor)}/#{directory}/**/*"].reject { |f| File.directory?(f) }
     end
 
     def imported?(descriptor)

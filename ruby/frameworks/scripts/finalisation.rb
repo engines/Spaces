@@ -50,7 +50,7 @@ module Frameworks
       end
 
       def script_file_name
-        "#{context.installation_path}/#{identifier}.sh"
+        "#{context.release_path}/#{identifier}.sh"
       end
 
     end

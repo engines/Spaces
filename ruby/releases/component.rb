@@ -2,7 +2,7 @@ require_relative '../spaces/model'
 require_relative '../images/scripts'
 require_relative '../docker/files/steps'
 
-module Collaborators
+module Releases
   class Component < ::Spaces::Model
     include Images::Scripts
     include Docker::Files::Steps
@@ -27,11 +27,11 @@ module Collaborators
       def inheritance_paths ;end
     end
 
-    relation_accessor :collaboration
+    relation_accessor :stage
 
-    delegate([:home_app_path, :context_identifier] => :collaboration)
+    delegate([:home_app_path, :context_identifier] => :stage)
 
-    def installation_path; "installation/#{script_path}" ;end
+    def release_path; "installation/#{script_path}" ;end
 
   end
 end

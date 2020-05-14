@@ -9,7 +9,7 @@ module Images
     def save(subject)
       subject.components.map do |t|
         save_text(t)
-        "#{t.installation_path}"
+        "#{t.release_path}"
       end
     end
 

@@ -1,8 +1,8 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 require_relative 'repository'
 
 module Repositories
-  class Repositories < ::Collaborators::Division
+  class Repositories < ::Releases::Division
 
     class << self
       def step_precedence

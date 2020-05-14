@@ -6,7 +6,7 @@ module Texts
     relation_accessor :context
     attr_reader :text
 
-    delegate([:installation_path, :home_app_path, :identifier, :context_identifier] => :context)
+    delegate([:release_path, :home_app_path, :identifier, :context_identifier] => :context)
 
     def instructions
       [
@@ -30,9 +30,9 @@ module Texts
     )
     end
 
-    def full_path; "/#{installation_path}/#{file_name}" ;end
+    def full_path; "/#{release_path}/#{file_name}" ;end
     def file_name; "#{identifier}.sh" ;end
-    def subpath; "#{context.subpath}/#{installation_path}" ;end
+    def subpath; "#{context.subpath}/#{release_path}" ;end
 
     def initialize(context)
       self.context = context

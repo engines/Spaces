@@ -1,8 +1,8 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 require_relative 'schema'
 
 module FilePermissions
-  class FilePermissions < ::Collaborators::Collaborator
+  class FilePermissions < ::Releases::Division
 
     class << self
       def step_precedence

@@ -1,11 +1,11 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 
 module Starters
-  class Starter < ::Collaborators::Division
+  class Starter < ::Releases::Division
 
     class << self
       def step_precedence
-        { first: [:from, :adds] }
+        { first: [:from] }
       end
 
       def inheritance_paths; __dir__ ;end

@@ -1,7 +1,7 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 
 module OsPackages
-  class OsPackages < ::Collaborators::Collaborator
+  class OsPackages < ::Releases::Division
 
     class << self
       def step_precedence

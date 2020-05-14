@@ -20,10 +20,10 @@ module Spaces
 
       def outline; {} ;end
       def naming_map; {} ;end
-      def collaborating_classes; [] ;end
+      def division_classes; [] ;end
 
-      def schema_class_for(key); collaborating_classes_map[key]&.schema ;end
-      def collaborating_classes_map; @collaborating_classes_map ||= map_for(collaborating_classes) ;end
+      def schema_class_for(key); divisions[key]&.schema ;end
+      def divisions; @divisions ||= map_for(division_classes) ;end
 
       def map_for(classes)
         classes.inject({}) do |m, k|
@@ -36,9 +36,9 @@ module Spaces
       def mapped_key_for(key); naming_map[key] || key ;end
     end
 
-    delegate([:deep_outline, :outline, :collaborating_classes_map, :naming_map] => :klass)
+    delegate([:deep_outline, :outline, :divisions, :naming_map] => :klass)
 
-    def keys; collaborating_classes_map.keys ;end
+    def keys; divisions.keys ;end
 
   end
 end
