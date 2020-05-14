@@ -5,11 +5,8 @@ module Docker
     class Step < ::Spaces::Model
 
       relation_accessor :context
-      attr_reader :value
 
-      def home_app_path
-        context.home_app_path
-      end
+      delegate([:instructions, :home_app_path] =>  :context)
 
       def initialize(context)
         self.context = context

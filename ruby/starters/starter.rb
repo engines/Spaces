@@ -5,7 +5,7 @@ module Starters
 
     class << self
       def step_precedence
-        { first: [:from, :adds] }
+        { first: [:from] }
       end
 
       def inheritance_paths; __dir__ ;end

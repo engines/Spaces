@@ -5,6 +5,8 @@ module Releases
   class Release < Collaboration
     relation_accessor :stages
 
+    delegate(blueprints: :universe)
+
     def divisions
       @divisions ||= [stages&.map(&:divisions), super].flatten.compact
     end
@@ -18,6 +20,10 @@ module Releases
     end
 
     def stage_class; Stage ;end
+
+    def file_names_for(directory)
+      blueprints.file_names_for(directory, context_identifier)
+    end
 
     def memento_for(key)
       key == :stages ? stages.map(&:memento) : super

@@ -1,4 +1,4 @@
-require_relative 'requires'
+require_relative '../step'
 
 module Docker
   module Files
@@ -10,7 +10,7 @@ module Docker
          USER 0
           RUN \
             ln -s /usr/local/ /home/local && \
-            chown -R $ContUser /usr/local/ 
+            chown -R $ContUser /usr/local/
           )
         end
 

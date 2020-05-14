@@ -74,25 +74,24 @@ module Spaces
       "#{path_for(model)}/#{model.file_name}"
     end
 
+    def file_names_for(directory, descriptor);
+      Dir["#{file_path_for(directory, descriptor)}/**/*"].reject { |f| File.directory?(f) }
+    end
+
+    def file_path_for(directory, context_identifier)
+      [path, context_identifier, directory].compact.join('/')
+    end
+
     def path_for(model)
       [path, model.context_identifier, model.subpath].compact.join('/')
     end
 
-    def path
-      "#{universe.path}/#{identifier}"
-    end
+    def path; "#{universe.path}/#{identifier}" ;end
 
-    def ensure_space
-      FileUtils.mkdir_p(path)
-    end
+    def ensure_space; FileUtils.mkdir_p(path) ;end
+    def ensure_space_for(model); FileUtils.mkdir_p(path_for(model)) ;end
 
-    def ensure_space_for(model)
-      FileUtils.mkdir_p(path_for(model))
-    end
-
-    def encloses?(file_name)
-      Dir.exist?(file_name)
-    end
+    def encloses?(file_name); Dir.exist?(file_name) ;end
 
     def _by(descriptor, klass = default_model_class, as:, &block)
       f = File.open("#{reading_name_for(descriptor, klass)}.#{as}", 'r')

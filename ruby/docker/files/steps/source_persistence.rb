@@ -1,4 +1,4 @@
-require_relative 'requires'
+require_relative '../step'
 
 module Docker
   module Files
