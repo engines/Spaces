@@ -8,12 +8,16 @@ module Docker
       include Spaces::Constantizing
 
       def layers_for(group)
+        steps_for(group)&.map(&:instructions)
+      end
+
+      def steps_for(group)
         step_precedence[group]&.map do |s|
           begin
             class_for('Steps', s)
           rescue NameError
             general_steps[s]
-          end.new(self).instructions
+          end.new(self)
         end
       end
 
