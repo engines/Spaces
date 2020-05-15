@@ -25,4 +25,8 @@ class String
     "#{itself}s"
   end
 
+  def blank?
+    itself == ''
+  end
+
 end
