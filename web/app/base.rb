@@ -1,3 +1,5 @@
+require './ruby/spaces/controller'
+
 module App
   class Base < Sinatra::Base
 
@@ -23,6 +25,12 @@ module App
         content_type :text
         status 404
         "Server 404. Route not found: #{request.request_method} '#{request.path_info}'."
+      end
+
+      error Spaces::Controller::Error do |e|
+        content_type :text
+        status e.status
+        e.message
       end
 
       error do |e|
