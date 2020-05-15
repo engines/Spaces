@@ -1,6 +1,6 @@
-require './ruby/spaces/controller'
-require './ruby/universal/space'
 require './ruby/lib/string'
+require './ruby/universal/space'
+require './ruby/spaces/controller/error'
 
 module Spaces
   class Controller
@@ -8,6 +8,8 @@ module Spaces
     def initialize(params)
       @params = params
     end
+
+    attr_reader :params
 
     def index
       space.identifiers.sort
@@ -18,23 +20,21 @@ module Spaces
     end
 
     def create
-      d = descriptor_for(params[:blueprint])
-      space.save(
-        member.new(descriptor: d)
-      )
+      a = params[member_class.snakize]
+      raise Error::RequiresIdentifier if a[:identifier].blank?
+      d = descriptor_for(a)
+      raise Error::AlreadyExists if space.imported?(d)
+      space.create(d)
       d.identifier
     end
 
     def delete
-      space.delete(
-        space.by(descriptor_for({identifier: params[:id]}))
-      )
-      true
+      d = descriptor_for({identifier: params[:id]})
+      space.delete(d)
+      d.identifier
     end
 
     private
-
-    attr_reader :params
 
     def universe
       Universal::Space.new
@@ -52,13 +52,8 @@ module Spaces
       universe.send(space_class.snakize)
     end
 
-    def member
-      Object.const_get("#{space_class}::#{member_class}")
-    end
-
     def descriptor_for(attributes)
       Spaces::Descriptor.new(attributes)
     end
-
   end
 end
