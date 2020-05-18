@@ -11,7 +11,8 @@ module Texts
     def resolution
       vs = ([:unqualified] + value.split('.')).last(2)
       collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
-    rescue TypeError, ArgumentError, NoMethodError, SystemStackError
+    rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
+      warn(e, value: value)
       "--->#{value}<---"
     end
 

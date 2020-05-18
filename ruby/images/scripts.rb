@@ -7,7 +7,8 @@ module Images
     def scripts
       script_lot&.map do |s|
         class_for('Scripts', s).new(self)
-      rescue NameError
+      rescue NameError => e
+        warn(e, script: s)
       end
     end
 

@@ -33,5 +33,7 @@ module Releases
 
     def release_path; "installation/#{script_path}" ;end
 
+    def to_s; struct ;end
+
   end
 end

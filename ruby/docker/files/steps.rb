@@ -15,7 +15,8 @@ module Docker
         step_precedence[group]&.map do |s|
           begin
             class_for('Steps', s)
-          rescue NameError
+          rescue NameError => e
+            warn(e, group: group, step: s)
             general_steps[s]
           end.new(self)
         end

@@ -1,4 +1,4 @@
-module Spaces
+module Recovery
   class Error < StandardError
 
     def initialize(error)
