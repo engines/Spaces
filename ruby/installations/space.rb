@@ -14,8 +14,9 @@ module Installations
 
     def by(descriptor, klass = default_model_class)
       by_yaml(descriptor, klass)
-    rescue Errno::ENOENT
-      default_model_class.new(blueprint: blueprints.by(descriptor))
+    rescue Errno::ENOENT => e
+      warn(e, descriptor: descriptor, klass: klass)
+      klass.new(blueprint: blueprints.by(descriptor))
     end
 
     def save(model)

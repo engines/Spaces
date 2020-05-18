@@ -25,7 +25,8 @@ module Releases
 
     def subdivision_for(struct)
       subdivision_class.new(struct: struct, division: self)
-    rescue NameError
+    rescue NameError => e
+      warn(e, struct: struct)
       struct
     end
 
