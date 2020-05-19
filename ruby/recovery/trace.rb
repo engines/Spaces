@@ -12,7 +12,7 @@ module Recovery
 
     def identifier; [:trace, zipped_nodes].join('.') ;end
 
-    def zipped_nodes; path_nodes.zip(method_names).map{ |n| n.join('_') } ;end
+    def zipped_nodes; path_nodes.zip(method_names).map{ |n| n.join('/') } ;end
     def path_nodes; array.map(&:trace_path_nodes) ;end
     def method_names; array.map(&:trace_method_name) ;end
 
@@ -21,7 +21,7 @@ module Recovery
         s.include? 'Spaces' # FIX: will fail if project name changes
       end.reject do |s|
         s.include? 'method_missing'
-      end.take(2).map(&:shortened_trace_line)
+      end.take(4).reverse.map(&:shortened_trace_line)
     end
 
     def initialize(args)
@@ -41,11 +41,11 @@ class String
   end
 
   def trace_method_name
-    split('`').last.split("'").first
+    split('`').last.split("'").first.gsub(" ", "_")
   end
 
   def trace_path_nodes
-    split('.').first.split('/')
+    split('.').first.gsub('/', '::')
   end
 
   def break_text; '/ruby/' ;end # FIX: will fail if source code is not under ruby folder

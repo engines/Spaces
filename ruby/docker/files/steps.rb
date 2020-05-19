@@ -16,7 +16,7 @@ module Docker
           begin
             class_for('Steps', s)
           rescue NameError => e
-            warn(error: e, group: group, step: s)
+            warn(error: e, klass: namespaced_name(namespace_for('Step'), s))
             general_steps[s]
           end.new(self)
         end

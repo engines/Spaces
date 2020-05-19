@@ -2,10 +2,13 @@ module Spaces
   module Constantizing
 
     def class_for(concern, symbol)
-      Module.const_get(namespaced_name(namespace_for(concern), symbol))
+      n = namespaced_name(namespace_for(concern), symbol)
+      gn = namespaced_name(generalised_namespace_for(concern), symbol)
+
+      Module.const_get(n)
 
     rescue NameError => e
-        warn(error: e, concern: concern, symbol: symbol)
+        warn(error: e, name: n, generalisation: gn)
         Module.const_get(namespaced_name(generalised_namespace_for(concern), symbol))
     end
 

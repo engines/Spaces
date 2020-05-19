@@ -8,7 +8,7 @@ module Images
       script_lot&.map do |s|
         class_for('Scripts', s).new(self)
       rescue NameError => e
-        warn(error: e, script: s)
+        warn(error: e, klass: namespaced_name(namespace_for('Scripts'), s))
       end
     end
 
