@@ -10,17 +10,18 @@ module Recovery
 
     def t(id = identifier); super(id, witnesses) ;end
 
-    def identifier; [:trace, path_nodes.zip(method_names)].flatten.join('.') ;end
+    def identifier; [:trace, zipped_nodes].join('.') ;end
 
+    def zipped_nodes; path_nodes.zip(method_names).map{ |n| n.join('_') } ;end
     def path_nodes; array.map(&:trace_path_nodes) ;end
     def method_names; array.map(&:trace_method_name) ;end
 
     def array
-      @array ||= error.backtrace.select do |s|
+      @array ||= (error&.backtrace || []).select do |s|
         s.include? 'Spaces' # FIX: will fail if project name changes
       end.reject do |s|
         s.include? 'method_missing'
-      end.take(2)
+      end.take(2).map(&:shortened_trace_line)
     end
 
     def initialize(args)
@@ -35,15 +36,18 @@ end
 
 class String
 
+  def shortened_trace_line
+    split(break_text).last
+  end
+
   def trace_method_name
     split('`').last.split("'").first
   end
 
   def trace_path_nodes
-    split('.').first[break_point .. -1].split('/')
+    split('.').first.split('/')
   end
 
-  def break_point; index(break_text) + break_text.length ;end
   def break_text; '/ruby/' ;end # FIX: will fail if source code is not under ruby folder
 
 end
