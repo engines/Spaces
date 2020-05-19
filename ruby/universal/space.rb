@@ -37,5 +37,9 @@ module Universal
       klass.space_map[m] || super
     end
 
+    def respond_to_missing?(m, *)
+      klass.space_map[m] || super
+    end
+
   end
 end

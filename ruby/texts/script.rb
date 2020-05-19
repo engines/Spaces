@@ -46,5 +46,7 @@ module Texts
       end
     end
 
+    def respond_to_missing?(m, *); context.respond_to?(m) || super ;end
+
   end
 end

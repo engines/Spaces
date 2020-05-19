@@ -43,5 +43,9 @@ module Bindings
       override_keys&.include?(m) ? variables[m] : super
     end
 
+    def respond_to_missing?(m, *)
+      override_keys&.include?(m) || super
+    end
+
   end
 end

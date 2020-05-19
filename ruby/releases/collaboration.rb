@@ -44,5 +44,9 @@ module Releases
       end
     end
 
+    def respond_to_missing?(m, *)
+      division_keys.include?(m) || super
+    end
+
   end
 end
