@@ -5,10 +5,30 @@ I18n.load_path << Dir["#{__dir__}/i18n/*.yaml"]
 module Recovery
   class Trace < ::Spaces::Thing
 
-    attr_accessor :error
-    attr_accessor :witnesses
+    attr_accessor :error,
+      :witnesses,
+      :verbosity
 
     def t(id = identifier); super(id, witnesses) ;end
+
+    def spout_trace
+      if verbosity&.include?(:trace)
+        spout "\n#{array.join("\n")}" unless array.empty?
+      end
+    end
+
+    def spout_error
+      if verbosity&.include?(:error)
+        spout "\n#{error.message}" if error
+      end
+    end
+
+    def spout_witnesses
+      if verbosity&.include?(:witnesses) && tw = witnesses
+        spout "\nWitnesses#{'-' * 11}<<<<"
+        spout tw.map { |w| "#{w.first}: #{w.last}" }
+      end
+    end
 
     def identifier; [:trace, zipped_nodes].join('.') ;end
 
@@ -27,7 +47,9 @@ module Recovery
     def initialize(args)
       p = args.partition { |k, v| k == :error }.map(&:to_h)
       self.error = p.first[:error]
-      self.witnesses = p.last
+      q = p.last.partition { |k, v| k == :verbosity }.map(&:to_h)
+      self.verbosity = q.first[:verbosity]
+      self.witnesses = q.last
     end
 
   end

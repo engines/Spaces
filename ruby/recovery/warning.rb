@@ -8,15 +8,9 @@ module Recovery
       t = trace_class.new(args)
       spout "\n[WARNING]#{'-' * 88}<<<<"
       spout t.t
-
-      spout "\n#{t.array.join("\n")}" unless t.array.empty?
-
-      spout "\n#{t.error.message}" if t.error
-
-      if tw = t.witnesses
-        spout "\nWitnesses#{'-' * 11}<<<<"
-        spout tw.map { |w| "#{w.first}: #{w.last}" }
-      end
+      t.spout_trace
+      t.spout_error
+      t.spout_witnesses
       spout "\n"
     end
 
