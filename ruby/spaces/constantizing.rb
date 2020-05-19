@@ -5,7 +5,7 @@ module Spaces
       Module.const_get(namespaced_name(namespace_for(concern), symbol))
 
     rescue NameError => e
-        warn(e, concern: concern, symbol: symbol)
+        warn(error: e, concern: concern, symbol: symbol)
         Module.const_get(namespaced_name(generalised_namespace_for(concern), symbol))
     end
 

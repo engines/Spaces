@@ -15,7 +15,7 @@ module Installations
     def by(descriptor, klass = default_model_class)
       by_yaml(descriptor, klass)
     rescue Errno::ENOENT => e
-      warn(e, descriptor: descriptor, klass: klass)
+      warn(error: e, descriptor: descriptor, klass: klass)
       klass.new(blueprint: blueprints.by(descriptor))
     end
 

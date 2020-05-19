@@ -6,8 +6,9 @@ module Recovery
   class Trace < ::Spaces::Thing
 
     attr_accessor :error
+    attr_accessor :witnesses
 
-    def t(id = identifier); super ;end
+    def t(id = identifier); super(id, witnesses) ;end
 
     def identifier; [:trace, path_nodes.zip(method_names)].flatten.join('.') ;end
 
@@ -22,8 +23,10 @@ module Recovery
       end.take(2)
     end
 
-    def initialize(error)
-      self.error = error
+    def initialize(args)
+      p = args.partition { |k, v| k == :error }.map(&:to_h)
+      self.error = p.first[:error]
+      self.witnesses = p.last
     end
 
   end
