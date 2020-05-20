@@ -12,7 +12,7 @@ module Texts
       vs = ([:unqualified] + value.split('.')).last(2)
       collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
-      warn(e, value: value)
+      warn(error: e, text: text, value: value)
       "--->#{value}<---"
     end
 

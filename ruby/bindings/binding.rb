@@ -30,7 +30,7 @@ module Bindings
     def anchor_installation
       @anchor_installation ||= universe.installations.by(descriptor)
     rescue Errno::ENOENT => e
-      warn(e, descriptor: descriptor)
+      warn(error: e, descriptor: descriptor)
       universe.blueprints.by(descriptor).installation
     end
 
@@ -41,6 +41,10 @@ module Bindings
 
     def method_missing(m, *args, &block)
       override_keys&.include?(m) ? variables[m] : super
+    end
+
+    def respond_to_missing?(m, *)
+      override_keys&.include?(m) || super
     end
 
   end

@@ -63,5 +63,11 @@ module Spaces
       super
     end
 
+    def respond_to_missing?(m, *)
+      keys&.include?(m.to_s.sub('=', '').to_sym) || super
+    rescue TypeError
+      super
+    end
+
   end
 end

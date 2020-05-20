@@ -29,6 +29,7 @@ module Texts
 
     def interpolation_marker; '^^' ;end
     def infix_class; Infix ;end
+    def to_s; origin ;end
 
     def initialize(origin:, context:)
       self.context = context

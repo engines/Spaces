@@ -25,9 +25,8 @@ module Bindings
       end.compact
     end
 
-    def method_missing(m, *args, &block)
-      named(m) || super
-    end
+    def method_missing(m, *args, &block); named(m) || super ;end
+    def respond_to_missing?(m, *); named(m) || super ;end
 
   end
 end

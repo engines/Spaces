@@ -14,7 +14,7 @@ module Spaces
           end
           m
         rescue NoMethodError => e
-          warn(e, key: k, outine: outline[k])
+          warn(error: e, key: k, outline: outline[k])
           m[k] = outline[k]
         end
       end
