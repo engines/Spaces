@@ -1,4 +1,4 @@
-require_relative 'requires'
+require_relative '../../../texts/one_time_script'
 
 module Nodules
   module Pear
