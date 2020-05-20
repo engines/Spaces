@@ -10,9 +10,9 @@ en:
       docker::files::steps/general_step_for:
         Unable to find class %{name}.
 
-    spaces::constantizing/rescue_in_script_for:
-      docker::files::steps/general_script_for:
-        Unable to find %{klass}.
+    images::scripts/rescue_in_script_for:
+      images::scripts/general_script_for:
+        Unable to find class %{name}.
 
     releases::division/check_subdivision_class:
       releases::division/subdivision_class: |
