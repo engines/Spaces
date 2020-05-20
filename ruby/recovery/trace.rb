@@ -9,7 +9,7 @@ module Recovery
       :witnesses,
       :verbosity
 
-    def t(id = identifier); super(id, witnesses) ;end
+    def t(id = identifier); super(id, **witnesses) ;end
 
     def spout_trace
       if verbosity&.include?(:trace)
