@@ -12,15 +12,13 @@ module Recovery
     def t(id = identifier); super(id, **witnesses) ;end
 
     def spout_trace
-      if verbosity&.include?(:trace)
-        spout "\n#{array.join("\n")}" unless array.empty?
-      end
+      spout "\n#{array.join("\n")}" unless array.empty? if verbosity&.include?(:trace)
+
+      spout error.backtrace if verbosity&.include?(:full_trace)
     end
 
     def spout_error
-      if verbosity&.include?(:error)
-        spout "\n#{error.message}" if error
-      end
+      spout "\n#{error.message}" if error if verbosity&.include?(:error)
     end
 
     def spout_witnesses
@@ -40,8 +38,16 @@ module Recovery
       @array ||= (error&.backtrace || []).select do |s|
         s.include? 'Spaces' # FIX: will fail if project name changes
       end.reject do |s|
-        s.include?('method_missing') || s.include?('spaces/constantizing')
+        ignorable?(s)
       end.take(2).reverse.map(&:shortened_trace_line)
+    end
+
+    def ignorable?(line)
+      [
+        'spaces/space',
+        'spaces/constantizing',
+        'method_missing',
+      ].map { |s| line.include?(s) }.include?(true)
     end
 
     def initialize(args)

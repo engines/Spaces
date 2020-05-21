@@ -23,38 +23,28 @@ module Spaces
     end
 
     def by_yaml(descriptor, klass = default_model_class)
-      _by(descriptor, klass, as: :yaml) do |f|
-        klass.new(struct: klass.from_yaml(f.read))
-      end
+      klass.new(struct: klass.from_yaml(_by(descriptor, klass, as: :yaml)))
     end
 
     alias_method :by, :by_yaml
 
     def by_json(descriptor, klass = default_model_class)
-      _by(descriptor, klass, as: :json) do |f|
-        klass.new(struct: open_struct_from_json(f.read))
-      end
+      klass.new(struct: open_struct_from_json(_by(descriptor, klass, as: :json)))
     end
 
     def save_text(model)
-      _save(model) do |f|
-        f.write(model.content)
-        FileUtils.chmod(model.permission, writing_name_for(model)) if model.respond_to?(:permission)
-      end
+      _save(model, content: model.content)
+      FileUtils.chmod(model.permission, writing_name_for(model)) if model.respond_to?(:permission)
     end
 
     def save_yaml(model)
-      _save(model, as: :yaml) do |f|
-        f.write(model.memento.to_yaml)
-      end
+      _save(model, content: model.memento.to_yaml, as: :yaml)
     end
 
     alias_method :save, :save_yaml
 
     def save_json(model)
-      _save(model, as: :json) do |f|
-        f.write(model.memento.deep_to_h.to_json)
-      end
+      _save(model, content: model.memento.deep_to_h.to_json, as: json)
     end
 
     def save_tar(model)
@@ -75,7 +65,7 @@ module Spaces
     end
 
     def file_names_for(directory, descriptor);
-      Dir["#{file_path_for(directory, descriptor)}/**/*"].reject { |f| File.directory?(f) }
+      Dir["#{file_path_for(directory, descriptor)}/**/*"].reject { |f| ::File.directory?(f) }
     end
 
     def file_path_for(directory, context_identifier)
@@ -93,23 +83,13 @@ module Spaces
 
     def encloses?(file_name); Dir.exist?(file_name) ;end
 
-    def _by(descriptor, klass = default_model_class, as:, &block)
-      f = File.open("#{reading_name_for(descriptor, klass)}.#{as}", 'r')
-      begin
-        block.call(f)
-      ensure
-        f.close
-      end
+    def _by(descriptor, klass = default_model_class, as:)
+      ::File.read("#{reading_name_for(descriptor, klass)}.#{as}")
     end
 
-    def _save(model, as: nil, &block)
+    def _save(model, content:, as: nil)
       model.capture_foreign_keys
-      f = File.open([writing_name_for(model), as].compact.join('.'), 'w')
-      begin
-        block.call(f)
-      ensure
-        f.close
-      end
+      ::File.write([writing_name_for(model), as].compact.join('.'), content)
     end
 
   end
