@@ -1,56 +1,28 @@
 en:
   trace:
 
-    blueprints::space/each:
-      blueprints::space/block_in_import_anchors_for:
-        blueprints::space/import:
-          git::space/import:
-            An attempt to import blueprint for %{descriptor} finds it already exists. Moving on.
+    blueprints::space/import:
+      git::space/import: |
+        An attempt to import blueprint for %{descriptor} finds it already exists.
+        Moving on.
 
-    docker::files::steps/block_in_steps_for:
-      spaces::constantizing/class_for:
-        spaces::constantizing/rescue_in_class_for:
-          spaces::constantizing/const_get:
-            Unable to find %{klass}. Attempting to look it up in general step map.
+    docker::files::steps/rescue_in_step_for:
+      docker::files::steps/general_step_for:
+        Unable to find class %{name}.
 
-    docker::files::steps/map:
-      docker::files::steps/block_in_steps_for:
-        spaces::constantizing/class_for:
-          spaces::constantizing/const_get:
-            Unable to find class %{name}. Attempting to substitute %{generalisation}.
+    images::scripts/rescue_in_script_for:
+      images::scripts/general_script_for:
+        Unable to find class %{name}.
 
-    images::scripts/scripts:
-      images::scripts/map:
-        images::scripts/block_in_scripts:
-          spaces::constantizing/class_for:
-            Unable to find class %{name}. Attempting to substitute %{generalisation}.
+    releases::division/check_subdivision_class:
+      releases::division/subdivision_class: |
+        There is no subdivision class defined for %{klass}.
+        Substituting OpenStruct.
 
-    images::scripts/block_in_scripts:
-      spaces::constantizing/class_for:
-        spaces::constantizing/rescue_in_class_for:
-          spaces::constantizing/const_get:
-            Unable to find %{klass}.
+    spaces::space/open:
+      spaces::space/initialize:
+        An instance of %{klass} for %{descriptor} does not yet exist in its space.
 
-    images::scripts/map:
-      images::scripts/block_in_scripts:
-        spaces::constantizing/class_for:
-          spaces::constantizing/const_get:
-            Unable to find class %{name}. Attempting to substitute %{generalisation}.
-
-    releases::division/map:
-      releases::division/block_in_all:
-        releases::division/subdivision_for:
-          releases::division/subdivision_class:
-            There is no subdivision class defined for %{klass}. Substituting OpenStruct.
-
-    spaces::space/by_yaml:
-      spaces::space/_by:
-        spaces::space/open:
-          spaces::space/initialize:
-            An instance of %{klass} for %{descriptor} does not exist in its space.
-
-    texts::text/resolution:
-      texts::text/with_resolved_infixes:
-        texts::text/map:
-          texts::infix/resolution:
-            Unable to resolve text infix for %{value} in %{text}.
+    texts::text/map:
+      texts::infix/resolution:
+        Unable to resolve text infix for %{value} in %{text}.

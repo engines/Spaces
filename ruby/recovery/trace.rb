@@ -9,7 +9,7 @@ module Recovery
       :witnesses,
       :verbosity
 
-    def t(id = identifier); super(id, witnesses) ;end
+    def t(id = identifier); super(id, **witnesses) ;end
 
     def spout_trace
       if verbosity&.include?(:trace)
@@ -40,8 +40,8 @@ module Recovery
       @array ||= (error&.backtrace || []).select do |s|
         s.include? 'Spaces' # FIX: will fail if project name changes
       end.reject do |s|
-        s.include? 'method_missing'
-      end.take(4).reverse.map(&:shortened_trace_line)
+        s.include?('method_missing') || s.include?('spaces/constantizing')
+      end.take(2).reverse.map(&:shortened_trace_line)
     end
 
     def initialize(args)
