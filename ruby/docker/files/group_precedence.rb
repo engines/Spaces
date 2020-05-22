@@ -14,12 +14,7 @@ module Docker
       end
 
       def save_csv
-        f = ::File.open('step_precedence.csv', 'w')
-        begin
-          f.write(as_csv)
-        ensure
-          f.close
-        end
+        ::File.write('step_precedence.csv', as_csv)
       end
 
       def as_csv

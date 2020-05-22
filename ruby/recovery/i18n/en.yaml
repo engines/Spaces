@@ -1,6 +1,11 @@
 en:
   trace:
 
+    bindings::binding/anchor_installation:
+      installations::space/by: |
+        An anchor installation for %{descriptor} is yet to be saved.
+        Saving now.
+
     blueprints::space/import:
       git::space/import: |
         An attempt to import blueprint for %{descriptor} finds it already exists.

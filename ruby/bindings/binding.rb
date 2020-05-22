@@ -30,7 +30,6 @@ module Bindings
     def anchor_installation
       @anchor_installation ||= universe.installations.by(descriptor)
     rescue Errno::ENOENT => e
-      warn(error: e, descriptor: descriptor)
       universe.blueprints.by(descriptor).installation
     end
 

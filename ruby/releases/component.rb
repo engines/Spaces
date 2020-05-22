@@ -9,11 +9,11 @@ module Releases
 
     class << self
       def step_precedence
-        { anywhere: files_in(:steps).map { |f| File.basename(f, '.rb') } }
+        { anywhere: files_in(:steps).map { |f| ::File.basename(f, '.rb') } }
       end
 
       def script_lot
-        files_in(:scripts).map { |f| File.basename(f, '.rb') }
+        files_in(:scripts).map { |f| ::File.basename(f, '.rb') }
       end
 
       def require_files_in(*folders)

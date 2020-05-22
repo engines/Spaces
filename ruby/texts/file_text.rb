@@ -10,13 +10,7 @@ module Texts
     delegate(context_identifier: :context)
 
     def origin
-      @origin ||=
-      begin
-        f = File.open(origin_file_name, 'r')
-        f.read
-      ensure
-        f.close
-      end
+      @origin ||= ::File.read(origin_file_name)
     end
 
     def release_path; origin_file_name ;end
