@@ -1,10 +1,10 @@
 require_relative '../releases/division'
 require_relative '../texts/file_text'
 
-module Installations
+module Resolutions
   class Division < ::Releases::Division
 
-    alias_method :installation, :stage
+    alias_method :resolution, :stage
 
     def text_class; Texts::FileText ;end
 

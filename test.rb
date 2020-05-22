@@ -1,6 +1,6 @@
 require './ruby/universal/space'
 require './ruby/blueprints/blueprint'
-require './ruby/installations/installation'
+require './ruby/resolutions/resolution'
 require './ruby/domains/domain'
 require './ruby/users/user'
 require 'byebug'
@@ -72,12 +72,12 @@ test do
 end
 
 
-puts "#{n1 += 1}. Installations\n\n"
+puts "#{n1 += 1}. Resolutions\n\n"
 
 idb = 'waverton'
 idi = "#{idb}_install"
 sb = universe.blueprints
-si = universe.installations
+si = universe.resolutions
 db = Spaces::Descriptor.new(identifier: idb)
 di = Spaces::Descriptor.new(identifier: idi)
 b = sb.by(db)
@@ -95,8 +95,8 @@ end
 
 test do
   puts "#{n1}.#{n2 += 1} create on blueprint"
-  p universe.installations.save(
-    Installations::Installation.new(
+  p universe.resolutions.save(
+    Resolutions::Resolution.new(
       blueprint: b,
       descriptor: di
     )
@@ -111,7 +111,7 @@ end
 
 test do
   puts "#{n1}.#{n2 += 1} index on blueprint"
-  bi = universe.installations.descriptors.select do |d|
+  bi = universe.resolutions.descriptors.select do |d|
     d.repository == b.descriptor.repository
   end.map(&:identifier).map(&:to_s).sort
   p bi

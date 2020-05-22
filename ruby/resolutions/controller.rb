@@ -1,7 +1,7 @@
 require './ruby/spaces/controller'
-require './ruby/installations/installation'
+require './ruby/resolutions/resolution'
 
-module Installations
+module Resolutions
   class Controller < Spaces::Controller
 
   end

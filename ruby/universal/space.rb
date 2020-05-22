@@ -11,7 +11,7 @@ module Universal
           :volumes,
           :docker,
           :blueprints,
-          :installations,
+          :resolutions,
           :frameworks,
           :web_servers,
           :nodules,

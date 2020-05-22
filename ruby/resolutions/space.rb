@@ -1,12 +1,12 @@
 require_relative '../universal/space'
-require_relative 'installation'
+require_relative 'resolution'
 
-module Installations
+module Resolutions
   class Space < ::Spaces::Space
 
     class << self
       def default_model_class
-        Installation
+        Resolution
       end
     end
 

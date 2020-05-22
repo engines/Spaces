@@ -1,10 +1,10 @@
-require_relative '../../installations/division'
+require_relative '../../resolutions/division'
 require_relative '../../texts/text'
 require_relative 'group_precedence'
 
 module Docker
   module Files
-    class File < ::Installations::Division
+    class File < ::Resolutions::Division
       extend GroupPrecedence
 
       class << self
@@ -23,7 +23,7 @@ module Docker
       delegate(group_precedence: :klass)
 
       def instructions
-        text_class.new(origin: origin, context: self).resolution
+        text_class.new(origin: origin, context: self).resolved
       end
 
       alias_method :content, :instructions

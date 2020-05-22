@@ -2,11 +2,11 @@ require_relative '../spaces/model'
 require_relative 'schema'
 require_relative 'release'
 
-module Installations
-  class Installation < Release
+module Resolutions
+  class Resolution < Release
 
     delegate(
-      installation: :itself,
+      resolution: :itself,
       [:identifier, :home_app_path] => :descriptor
     )
 

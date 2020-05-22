@@ -3,6 +3,6 @@ app.spaces.blueprints.blueprint = controller => (a,x) => [
   controller.routes( {
     '/?': app.spaces.blueprints.show,
     '/~delete': app.spaces.blueprints.delete,
-    '/installations*': app.spaces.blueprints.installations,
+    '/resolutions*': app.spaces.blueprints.resolutions,
   } ),
 ]

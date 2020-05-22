@@ -10,11 +10,11 @@ module Texts
 
     delegate(stage: :context)
 
-    def resolution; @resolution ||= contains_interpolation? ? with_resolved_infixes : origin ;end
+    def resolved; @resolved ||= contains_interpolation? ? with_resolved_infixes : origin ;end
 
-    alias_method :content, :resolution
+    alias_method :content, :resolved
 
-    def with_resolved_infixes; immutables.zip(infixes.map(&:resolution)).flatten.join ;end
+    def with_resolved_infixes; immutables.zip(infixes.map(&:resolved)).flatten.join ;end
 
     def contains_interpolation?
       origin.include?(interpolation_marker)

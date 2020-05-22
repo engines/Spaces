@@ -8,7 +8,7 @@ module Texts
 
     delegate(stage: :text)
 
-    def resolution
+    def resolved
       vs = ([:unqualified] + value.split('.')).last(2)
       collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
@@ -29,7 +29,7 @@ module Texts
       self.text = text
     end
 
-    def to_s; resolution ;end
+    def to_s; resolved ;end
 
   end
 end

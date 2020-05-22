@@ -6,7 +6,7 @@ require_relative '../images/subject'
 require_relative '../users/user'
 require_relative '../domains/domain'
 
-module Installations
+module Resolutions
   class Schema < ::Spaces::Schema
 
     class << self
