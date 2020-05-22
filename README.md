@@ -70,7 +70,7 @@ blueprint_space.by(descriptor)
 
 ## Generating a Resolutions::Resolution
 
-A `Resolutions::Resolution` is what will generate a DockerFile. You create an resolution from a blueprint like so:
+A `Resolutions::Resolution` is what will generate a DockerFile. You create a Resolution from a blueprint like so:
 
 ```
 blueprint = universe.blueprints.by(descriptor)
@@ -108,7 +108,7 @@ container_space.save(content)
 ## Generating an Images::Subject
 
 An `Images::Subject` is what will manage a folder structure that you'll eventually be able to use as an image to build a container. Generate an
-image subject from an resolution in a similar way to generating a docker file:
+image subject from a Resolution in a similar way to generating a docker file:
 
 ```
 content = resolution.image_subject
