@@ -13,10 +13,10 @@ module Bindings
 
     def override_keys; overrides.to_h.keys ;end
 
-    def memento; resolution ;end
+    def memento; resolved ;end
 
-    def resolution; @resolution ||= duplicate(struct).tap { |s| s.variables = variables } ;end
-    def variables; @variables ||= OpenStruct.new(texts.transform_values(&:resolution)) ;end
+    def resolved; @resolved ||= duplicate(struct).tap { |s| s.variables = variables } ;end
+    def variables; @variables ||= OpenStruct.new(texts.transform_values(&:resolved)) ;end
 
     def texts; overrides.to_h.transform_values { |v| text_from(v) } ;end
     def overrides; default_variables.merge(struct_variables) ;end

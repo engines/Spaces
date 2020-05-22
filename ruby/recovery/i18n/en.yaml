@@ -29,5 +29,5 @@ en:
         An instance of %{klass} for %{descriptor} does not yet exist in its space.
 
     texts::text/map:
-      texts::infix/resolution:
+      texts::infix/resolved:
         Unable to resolve text infix for %{value} in %{text}.

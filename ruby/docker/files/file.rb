@@ -23,7 +23,7 @@ module Docker
       delegate(group_precedence: :klass)
 
       def instructions
-        text_class.new(origin: origin, context: self).resolution
+        text_class.new(origin: origin, context: self).resolved
       end
 
       alias_method :content, :instructions
