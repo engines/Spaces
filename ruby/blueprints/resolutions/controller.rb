@@ -1,18 +1,18 @@
 module Blueprints
-  module Installations
+  module Resolutions
     class Controller < Spaces::Controller
 
       def index
         b = space.by(descriptor_for({identifier: params[:blueprint_id]}))
-        universe.installations.descriptors.select do |d|
+        universe.resolutions.descriptors.select do |d|
           d.repository == b.descriptor.repository
         end.map(&:identifier).sort
       end
 
       def create
-        d = descriptor_for(params[:installation])
-        universe.installations.save(
-          ::Installations::Installation.new(
+        d = descriptor_for(params[:resolution])
+        universe.resolutions.save(
+          ::Resolutions::Resolution.new(
             blueprint: universe.blueprints.by(
               descriptor_for({identifier: params[:blueprint_id]})
             ),

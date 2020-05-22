@@ -68,32 +68,32 @@ Once you've imported a blueprint, you can retrieve it with:
 blueprint_space.by(descriptor)
 ```
 
-## Generating an Installations::Installation
+## Generating a Resolutions::Resolution
 
-A `Installations::Installation` is what will generate a DockerFile. You create an installation from a blueprint like so:
+A `Resolutions::Resolution` is what will generate a DockerFile. You create an resolution from a blueprint like so:
 
 ```
 blueprint = universe.blueprints.by(descriptor)
-installation = blueprint.installation
+resolution = blueprint.resolution
 ```
 
-## Saving an Installations::Installation
+## Saving a Resolutions::Resolution
 
-Save `Installations::Installation` to installation space with:
+Save `Resolutions::Resolution` to resolution space with:
 
 ```
-installation_space = universe.installations
-installation_space.save(installation)
+resolution_space = universe.resolutions
+resolution_space.save(resolution)
 ```
 
 # Containers
 
 ## Generating DockerFile content
 
-A installation can generate docker file content:
+A resolution can generate docker file content:
 
 ```
-content = installation.docker_file
+content = resolution.docker_file
 ```
 
 ## Saving docker file content to a file
@@ -108,10 +108,10 @@ container_space.save(content)
 ## Generating an Images::Subject
 
 An `Images::Subject` is what will manage a folder structure that you'll eventually be able to use as an image to build a container. Generate an
-image subject from an installation in a similar way to generating a docker file:
+image subject from an resolution in a similar way to generating a docker file:
 
 ```
-content = installation.image_subject
+content = resolution.image_subject
 ```
 
 ## Saving image file content to image space

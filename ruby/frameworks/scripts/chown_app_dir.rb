@@ -71,7 +71,7 @@ module Frameworks
       end
 
       # def user_name
-      #   context.installation.framework.user_name
+      #   context.resolution.framework.user_name
       # end
 
     end

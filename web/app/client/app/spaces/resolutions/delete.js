@@ -1,7 +1,7 @@
-app.spaces.installations.delete = controller => (a,x) => [
+app.spaces.resolutions.delete = controller => (a,x) => [
   a.h2( `Delete` ),
   app.form( {
-    url: `/api/installations/${ controller.params.installation_id }`,
+    url: `/api/resolutions/${ controller.params.resolution_id }`,
     method: 'DELETE',
     form: f => [
       f.buttons( controller ),

@@ -1,9 +1,9 @@
 en:
   trace:
 
-    bindings::binding/anchor_installation:
-      installations::space/by: |
-        An anchor installation for %{descriptor} is yet to be saved.
+    bindings::binding/anchor_resolution:
+      resolutions::space/by: |
+        An anchor resolution for %{descriptor} is yet to be saved.
         Saving now.
 
     blueprints::space/import:

@@ -1,6 +1,6 @@
-app.spaces.blueprints.installations = controller => (a,x) => [
+app.spaces.blueprints.resolutions = controller => (a,x) => [
   controller.routes( {
-    '/?': app.spaces.blueprints.installations.index,
-    '/~new': app.spaces.blueprints.installations.new,
+    '/?': app.spaces.blueprints.resolutions.index,
+    '/~new': app.spaces.blueprints.resolutions.new,
   } ),
 ]
