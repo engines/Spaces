@@ -16,7 +16,7 @@ module Frameworks
         def step_precedence
           {
             anywhere: [:variables],
-            last: [:configure, :chown_app_dir, :final]
+            last: [:configure, :chown_app_dir, :finish]
           }
         end
 

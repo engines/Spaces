@@ -6,7 +6,7 @@ module Packages
 
     class << self
       def step_precedence
-        { late: [:runs] }
+        { late: [:run] }
       end
 
       def script_lot ;end
