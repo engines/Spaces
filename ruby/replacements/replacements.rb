@@ -6,7 +6,7 @@ module Replacements
 
     class << self
       def step_precedence
-        { late: [:run_scripts] }
+        { late: [:run] }
       end
 
       def script_lot ;end
