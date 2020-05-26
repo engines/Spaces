@@ -1,5 +1,5 @@
 require_relative '../universal/space'
-require_relative '../installations/installation'
+require_relative '../resolutions/resolution'
 
 def universe
   @u ||= Universal::Space.new
@@ -14,28 +14,29 @@ def blueprint
   begin
     universe.blueprints.by(descriptor)
   rescue Errno::ENOENT
+    warn(error: e, descriptor: descriptor)
     import
   end
 end
 
-def project
-  blueprint
-end
-
-def installation
-  @installation ||= Installations::Installation.new(blueprint: blueprint)
+def resolution
+  @resolution ||= Resolutions::Resolution.new(blueprint: blueprint)
 end
 
 def clear
   @u = nil
   @blueprint = nil
-  @installation = nil
+  @resolution = nil
 end
 
 def save_image_subject
-  universe.images.save(installation.image_subject)
+  universe.images.save(resolution.image_subject)
 end
 
-def save_installation
-  universe.installations.save(installation)
+def save_resolution
+  universe.resolutions.save(resolution)
+end
+
+def save_blueprint
+  universe.blueprints.save(blueprint)
 end

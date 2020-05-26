@@ -1,11 +1,11 @@
-require_relative 'requires'
+require_relative '../step'
 
 module Docker
   module Files
     module Steps
       class SourcePersistence < Step
 
-        def product
+        def instructions
           %Q(
           USER 0
           WORKDIR /

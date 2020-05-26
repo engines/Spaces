@@ -4,39 +4,25 @@ module Users
 
     def next_identifier
       (first_time? ? seed_identifier : next_running_identifier).tap do |id|
-        increment(id)
+        i = id.to_i
+        save_new_next(identifier: i += 1)
       end
     end
 
     def first_time?
-      !File.exist?(writing_name_for(increment_file_name))
+      !::File.exist?(writing_name_for(increment_file_name))
     end
 
     def next_running_identifier
-      f = File.open(writing_name_for(increment_file_name), 'r')
-      begin
-        f.read.strip
-      ensure
-        f.close
-      end
+      ::File.read(writing_name_for(increment_file_name)).strip
     end
 
-    def increment(identifier)
-      f = File.open(writing_name_for(increment_file_name), 'w+')
-      begin
-        i = identifier.to_i
-        f.puts(i += 1)
-      ensure
-        f.close
-      end
+    def save_new_next(identifier:)
+      ::File.write(writing_name_for(increment_file_name), "#{identifier}")
     end
 
-    def seed_identifier
-      '100000'
-    end
+    def seed_identifier; '100000' ;end
 
-    def increment_file_name
-      'next'
-    end
+    def increment_file_name; 'next' ;end
   end
 end

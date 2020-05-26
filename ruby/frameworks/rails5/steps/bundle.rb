@@ -1,11 +1,11 @@
-require_relative 'requires'
+require_relative '../../../docker/files/step'
 
 module Frameworks
   module Rails5
     module Steps
       class Bundle < Docker::Files::Step
 
-        def product
+        def instructions
           %Q(
           RUN apt-get update &&\
             chown $ContUser /opt &&\

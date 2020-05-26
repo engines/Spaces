@@ -14,7 +14,7 @@
   "homepage": "https://github.com/engines/Spaces#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
-    "axf": "^0.0.1",
+    "axf": "^0.0.3",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.9.3",
     "codemirror": "^5.49.2",

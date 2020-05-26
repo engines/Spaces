@@ -6,23 +6,22 @@ module Texts
     relation_accessor :text
     attr_accessor :value
 
+    delegate(stage: :text)
+
     def resolved
       vs = ([:unqualified] + value.split('.')).last(2)
       collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
-    rescue TypeError, ArgumentError, NoMethodError, SystemStackError
+    rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
+      warn(error: e, text: text, value: value)
       "--->#{value}<---"
     end
 
     def collaborate_with(name)
       unless name == :unqualified
-        installation.bindings.named(name) || installation.send(name) || (raise NoMethodError)
+        stage.bindings.named(name) || stage.send(name) || (raise NoMethodError)
       else
         text.context
       end
-    end
-
-    def installation
-      text.installation
     end
 
     def initialize(value:, text:)
@@ -30,9 +29,7 @@ module Texts
       self.text = text
     end
 
-    def to_s
-      resolved
-    end
+    def to_s; resolved ;end
 
   end
 end

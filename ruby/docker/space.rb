@@ -3,12 +3,18 @@ require_relative '../spaces/space'
 
 module Docker
   class Space < ::Spaces::Space
+    extend Docker
 
-    delegate([:connection, :version, :info, :default_socket_url] => :bridge)
+    delegate(
+      [:connection, :version, :info, :default_socket_url] => :klass,
+      [:all, :get, :prune] => :bridge
+    )
 
-    def bridge
-      Docker
+    def create(descriptor)
+      bridge.create(name: descriptor.identifier)
     end
+
+    def bridge; {} ;end
 
   end
 end

@@ -1,22 +1,18 @@
 require 'docker-api'
-require_relative '../../spaces/space'
-require_relative '../files/file'
+require_relative '../space'
 
 module Docker
   module Containers
-    class Space < ::Spaces::Space
+    class Space < ::Docker::Space
 
-      delegate([:all, :get] => :bridge)
+      def bridge; Docker::Container ;end
 
       def create(descriptor)
         bridge.create(
           name: descriptor.identifier,
-          Image: descriptor.identifier
+          Image: descriptor.identifier,
+          Volumes: { descriptor.identifier => {} }
         )
-      end
-
-      def bridge
-        Docker::Container
       end
 
     end

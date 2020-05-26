@@ -1,0 +1,33 @@
+en:
+  trace:
+
+    bindings::binding/anchor_resolution:
+      resolutions::space/by: |
+        An anchor resolution for %{descriptor} is yet to be saved.
+        Saving now.
+
+    blueprints::space/import:
+      git::space/import: |
+        An attempt to import blueprint for %{descriptor} finds it already exists.
+        Moving on.
+
+    docker::files::steps/rescue_in_step_for:
+      docker::files::steps/general_step_for:
+        Unable to find class %{name}.
+
+    images::scripts/rescue_in_script_for:
+      images::scripts/general_script_for:
+        Unable to find class %{name}.
+
+    releases::division/check_subdivision_class:
+      releases::division/subdivision_class: |
+        There is no subdivision class defined for %{klass}.
+        Substituting OpenStruct.
+
+    spaces::space/open:
+      spaces::space/initialize:
+        An instance of %{klass} for %{descriptor} does not yet exist in its space.
+
+    texts::text/map:
+      texts::infix/resolved:
+        Unable to resolve text infix for %{value} in %{text}.

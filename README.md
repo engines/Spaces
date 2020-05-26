@@ -30,7 +30,7 @@ universe.containers
 # Spaces::Descriptor
 
 A `Spaces::Descriptor` object is the way spaces objects are saved and located in their various spaces. While Spaces generates its own descriptors internally,
-a common starting point is to start with a descriptor to locate a source project. For example:
+a common starting point is to start with a descriptor to locate a source blueprint. For example:
 
 ```
 require_relative 'ruby/spaces/descriptor'
@@ -39,9 +39,9 @@ descriptor = Spaces::Descriptor.new(
 )
 ```
 
-which can be used to import a project from an external Git repo.
+which can be used to import a blueprint from an external Git repo.
 
-There are optional attributes you can declare for a project:
+There are optional attributes you can declare for a blueprint:
 
 ```
 descriptor = Spaces::Descriptor.new(
@@ -53,47 +53,47 @@ descriptor = Spaces::Descriptor.new(
 # Blueprints
 ## Importing
 
-You can import a project into your universe with:
+You can import a blueprint into your universe with:
 
 ```
-project_space = universe.blueprints
-project_space.import(descriptor)
+blueprint_space = universe.blueprints
+blueprint_space.import(descriptor)
 ```
 
-## Retrieving an imported project
+## Retrieving an imported blueprint
 
-Once you've imported a project, you can retrieve it with:
-
-```
-project_space.by(descriptor)
-```
-
-## Generating an Installations::Installation
-
-A `Installations::Installation` is what will generate a DockerFile. You create an installation from a project like so:
+Once you've imported a blueprint, you can retrieve it with:
 
 ```
-project = universe.blueprints.by(descriptor)
-installation = project.installation
+blueprint_space.by(descriptor)
 ```
 
-## Saving an Installations::Installation
+## Generating a Resolutions::Resolution
 
-Save `Installations::Installation` to installation space with:
+A `Resolutions::Resolution` is what will generate a DockerFile. You create a Resolution from a blueprint like so:
 
 ```
-installation_space = universe.installations
-installation_space.save(installation)
+blueprint = universe.blueprints.by(descriptor)
+resolution = blueprint.resolution
+```
+
+## Saving a Resolutions::Resolution
+
+Save `Resolutions::Resolution` to resolution space with:
+
+```
+resolution_space = universe.resolutions
+resolution_space.save(resolution)
 ```
 
 # Containers
 
 ## Generating DockerFile content
 
-A installation can generate docker file content:
+A resolution can generate docker file content:
 
 ```
-content = installation.docker_file
+content = resolution.docker_file
 ```
 
 ## Saving docker file content to a file
@@ -108,10 +108,10 @@ container_space.save(content)
 ## Generating an Images::Subject
 
 An `Images::Subject` is what will manage a folder structure that you'll eventually be able to use as an image to build a container. Generate an
-image subject from an installation in a similar way to generating a docker file:
+image subject from a Resolution in a similar way to generating a docker file:
 
 ```
-content = installation.image_subject
+content = resolution.image_subject
 ```
 
 ## Saving image file content to image space

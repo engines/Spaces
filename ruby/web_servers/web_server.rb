@@ -1,19 +1,20 @@
-require_relative '../collaborators/subdivision'
+require_relative '../releases/division'
+require_relative 'schema'
 
 module WebServers
-  class WebServer < ::Collaborators::Subdivision
+  class WebServer < ::Releases::Division
 
-    def struct
-      @struct ||= context.struct.web_server
+    class << self
+      def prototype(stage:, label:)
+        universe.web_servers.by(stage)
+      end
+
+      def inheritance_paths; __dir__ ;end
     end
+
+    def release_path; "#{super}/#{klass.identifier}" ;end
     
-    def path
-      "#{collaborator_path}/web_server/#{klass.identifier}"
-    end
-
-    def initialize(context)
-      self.context = context
-    end
+    def struct; @struct ||= stage.struct.web_server ;end
 
   end
 end

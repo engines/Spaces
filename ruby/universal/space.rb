@@ -8,15 +8,16 @@ module Universal
         [
           :containers,
           :images,
+          :volumes,
           :docker,
-          :installations,
+          :blueprints,
+          :resolutions,
           :frameworks,
           :web_servers,
           :nodules,
           :environments,
           :domains,
           :users,
-          :projects
         ]
       end
 
@@ -29,19 +30,14 @@ module Universal
       end
     end
 
-    def blueprints
-      projects
-    end
-
-    def path
-      "/opt/engines/#{identifier}"
-    end
-
-    def host
-      'engines.internal'
-    end
+    def path; "/opt/engines/#{identifier}" ;end
+    def host; 'engines.internal' ;end
 
     def method_missing(m, *args, &block)
+      klass.space_map[m] || super
+    end
+
+    def respond_to_missing?(m, *)
       klass.space_map[m] || super
     end
 

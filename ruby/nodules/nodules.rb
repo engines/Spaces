@@ -1,20 +1,20 @@
-require_relative '../collaborators/division'
+require_relative '../releases/division'
 
 module Nodules
-  class Nodules < ::Collaborators::Division
+  class Nodules < ::Releases::Division
 
     class << self
       def step_precedence
-        { late: [:runs] }
+        { late: [:run] }
       end
 
-      def inheritance_paths; __dir__; end
+      def inheritance_paths; __dir__ ;end
     end
 
     require_files_in :steps
 
     def subdivision_for(struct)
-      universe.nodules.by(struct: struct, context: self)
+      universe.nodules.by(struct: struct, division: self)
     end
 
   end

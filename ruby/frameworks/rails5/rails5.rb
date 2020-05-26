@@ -11,13 +11,12 @@ module Frameworks
 
         def step_precedence
           {
-            first: [:from_image],
             anywhere: [:variables],
-            last:  [:bundle, :rake_tasks]
+            last: [:bundle, :rake, :chown_app_dir, :finish]
           }
         end
 
-        def inheritance_paths; [__dir__, super]; end
+        def inheritance_paths; [__dir__, super] ;end
       end
 
       require_files_in :steps, :scripts

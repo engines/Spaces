@@ -11,10 +11,10 @@ module Frameworks
 
     delegate(loaded: :klass)
 
-    def by(installation)
-      i = installation.struct.framework.identifier
+    def by(stage)
+      i = stage.struct.framework.identifier
       load(i)
-      loaded.detect { |k| k.identifier == i }.new(installation: installation, blueprint_label: :framework)
+      loaded.detect { |k| k.identifier == i }.new(stage: stage, label: :framework)
     end
 
     def load(identifier)
