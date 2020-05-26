@@ -31,7 +31,7 @@ module Releases
 
     delegate([:home_app_path, :context_identifier] => :stage)
 
-    def release_path; "resolution/#{script_path}" ;end
+    def release_path; "build/#{script_path}" ;end
 
     def to_s; struct ;end
 

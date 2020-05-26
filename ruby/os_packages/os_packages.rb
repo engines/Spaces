@@ -5,7 +5,9 @@ module OsPackages
 
     class << self
       def step_precedence
-        { late: [:run] }
+        { 
+          late: [:run] 
+        }
       end
 
       def inheritance_paths; __dir__ ;end

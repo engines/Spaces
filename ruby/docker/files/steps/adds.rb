@@ -3,13 +3,12 @@ require_relative '../step'
 module Docker
   module Files
     module Steps
-      class SourcePersistence < Step
+      class Adds < Docker::Files::Step
 
         def instructions
           %Q(
-          USER 0
-          WORKDIR /
-          RUN /build/scripts/image_subject/persistent_source.sh
+          ADD build build
+          ADD home home
           )
         end
 

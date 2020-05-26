@@ -9,7 +9,8 @@ module Docker
 
       class << self
         def step_precedence
-          {
+          {             
+            early: [:adds],
             late: [:prepare, :source_persistence],
             last: [:finish]
           }
