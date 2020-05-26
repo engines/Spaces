@@ -13,7 +13,7 @@ module Frameworks
            then
             groupadd -g #{data_gid} writegrp
           fi
-        echo "  id #{user_name} | grep #{data_gid} '"
+        echo "  id #{user_name} | grep #{data_gid} "
          id #{user_name} | grep #{data_gid}
 
           id #{user_name} | grep #{data_gid} >/dev/null
@@ -27,10 +27,10 @@ module Frameworks
            mkdir -p ~#{user_name}/.ssh
              chown -R #{user_name} ~#{user_name}/.ssh
 
-          if test -f #{script_file_name}
+          if test -f _#{script_file_name}
             then
-              echo "running finish.sh"
-              #{script_file_name}
+              echo "_#{script_file_name}"
+              _#{script_file_name}
           fi
           if ! test -z "$VOLDIR"
           then
