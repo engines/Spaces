@@ -11,8 +11,7 @@ module Docker
         def step_precedence
           {             
             early: [:adds],
-            late: [:prepare, :source_persistence],
-            last: [:finish]
+            late: [:prepare, :source_persistence]
           }
         end
 
