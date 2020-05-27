@@ -7,7 +7,7 @@ module Docker
 
         def instructions
           %Q(
-          RUN /build/scripts/image_subject//set_data_permissions.sh && \
+          RUN /build/scripts/image_subject/set_data_permissions.sh && \
             apt-get -y clean &&\
             apt-get -y autoremove &&\
             apt-get -y autoclean &&\

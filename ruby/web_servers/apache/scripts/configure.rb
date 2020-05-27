@@ -39,9 +39,9 @@ module WebServers
 
         def complete_config
           %Q(
-          www_dir=#{context.web_root_directory}
+          www_dir=#{context.root_directory}
           APACHE_LOG_DIR=/var/log/
-          echo  ServerName #{context.installation.domain.fqdn} > /etc/apache2/sites-enabled/000-default.conf
+          echo  ServerName #{context.stage.resolution.domain.fqdn} > /etc/apache2/sites-enabled/000-default.conf
           cat $SRC_FILE | while read LINE
            do
             eval echo \\"$LINE\\" >> /etc/apache2/sites-enabled/000-default.conf
