@@ -13,7 +13,7 @@ module WebServers
 
         def install_php_config
           %Q(
-          if test -f /home/engines/injections/framework/php/custom.ini 
+          if test -f /home/engines/injections/framework/php/custom.ini
            then
              cp /home/engines/injections/framework/php/custom.ini /etc/php/7.?/apache2/conf.d/
            fi
@@ -30,7 +30,7 @@ module WebServers
 
         def extra_config
           %Q(
-           if test -f /home/engines/injections/webserver/apache/extra.conf 
+           if test -f /home/engines/injections/webserver/apache/extra.conf
              then
               cp /home/engines/injections/webserver/apache/extra.conf /etc/apache2/conf-enabled/
            fi
@@ -39,9 +39,10 @@ module WebServers
 
         def complete_config
           %Q(
-          www_dir=#{context.web_root_directory}
+          www_dir=#{context.root_directory}
           APACHE_LOG_DIR=/var/log/
-          echo  ServerName #{context.installation.domain.fqdn} > /etc/apache2/sites-enabled/000-default.conf
+          ServerName=#{context.stage.release.domain.fqdn}
+          rm /etc/apache2/sites-enabled/000-default.conf
           cat $SRC_FILE | while read LINE
            do
             eval echo \\"$LINE\\" >> /etc/apache2/sites-enabled/000-default.conf

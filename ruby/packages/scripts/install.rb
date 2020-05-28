@@ -5,10 +5,12 @@ module Packages
     class Install < Texts::Script
 
       def body
-      [
+      [        
+        "cd /tmp",
         downloading,
         (extracting unless git?),
-        placing
+        placing,
+        (clean_up unless git?)
       ]
       end
 
@@ -20,13 +22,19 @@ module Packages
         "git clone #{options} --depth 1 -b #{branch} #{repository} #{extracted_path}"
       end
 
-      def downloading_with_wget
+      def downloading_with_wget       
         "wget #{options} -O #{identifier} #{repository}"
       end
 
       def extracting
         %Q(
   			#{extraction} #{identifier}
+        )
+      end
+      
+      def clean_up
+        %Q(
+        rm -r #{identifier}
         )
       end
 
@@ -36,7 +44,6 @@ module Packages
         then
           mkdir -p "#{destination_path}"
         fi
-
         if test -d "#{destination_path}"
         then
           if test -f  ./"#{extracted_path}"
@@ -46,7 +53,7 @@ module Packages
         		cp -rp "./#{extracted_path}/." #{destination_path}
         	fi
         else
-          if ! test -d #{directory_name}
+          if ! test -d `dirname #{directory_name}`
           then
          	  mkdir -p #{directory_name}
           fi

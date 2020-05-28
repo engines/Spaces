@@ -1,13 +1,11 @@
-require_relative '../step'
+require_relative '../../docker/files/step'
 
-module Docker
-  module Files
-    module Steps
-      class Finish < Step
-
-        def instructions
-          %Q(
-          RUN /build/scripts/image_subject//set_data_permissions.sh && \
+module Images
+  module Steps
+    class Finish < Docker::Files::Step
+      def instructions
+        %Q(
+          RUN #{context.release_path}/set_data_permissions.sh && \
             apt-get -y clean &&\
             apt-get -y autoremove &&\
             apt-get -y autoclean &&\
@@ -16,9 +14,9 @@ module Docker
           USER $ContUser
           CMD ['/home/engines/scripts/startup/start.sh']
           )
-        end
-
       end
+
     end
   end
 end
+

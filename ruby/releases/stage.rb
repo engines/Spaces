@@ -18,6 +18,8 @@ module Releases
       else
         release.send(m, *args, &block) || super
       end
+    rescue SystemStackError
+      super
     end
 
   end
