@@ -5,11 +5,7 @@ module Images
   class Image < ::Spaces::Model
 
     relation_accessor :subject
-    def step_precedence
-       {             
-         early: [:inject, :install],
-         late: [:source_persistence, :finish]
-       }
+
     delegate(docker_file: :subject)
 
     def initialize(subject)

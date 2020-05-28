@@ -6,7 +6,7 @@ module Frameworks
 
       def instructions
         %Q(
-        RUN #{context.release_path}/finish.sh
+        RUN /#{context.release_path}/finish.sh
         )
       end
 
