@@ -25,7 +25,7 @@ module Blueprints
     end
 
     def unimported_anchors_for(model)
-      model.anchor_descriptors&.reject { |d| imported?(d) } || []
+      model.anchor_descriptors&.uniq(&:uniqueness)&.reject { |d| imported?(d) } || []
     end
 
     def ensure_space_for(descriptor)
