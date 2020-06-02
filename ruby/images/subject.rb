@@ -3,9 +3,16 @@ require_relative '../resolutions/division'
 module Images
   class Subject < ::Resolutions::Division
     class << self
+      def step_precedence
+        {
+          late: [:install],
+          last: [:inject, :source_persistence, :finish]        
+        }
+      end
+
       def inheritance_paths; __dir__ ;end
     end
-
+    
     require_files_in :scripts, :steps
 
     delegate([:docker_file, :identifier] => :resolution)
@@ -19,6 +26,7 @@ module Images
     end
 
     def blueprint_scripts; files_for(:scripts) ;end
+
     def injections; files_for(:injections) ;end
 
     def files_for(directory)
