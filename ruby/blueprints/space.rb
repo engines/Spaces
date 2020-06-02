@@ -18,6 +18,8 @@ module Blueprints
         save(m)
         import_anchors_for(m)
       end
+    rescue JSON::ParserError => e
+      warn(error: e, descriptor: descriptor, verbosity: [:error])
     end
 
     def import_anchors_for(model)
