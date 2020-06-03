@@ -14,20 +14,21 @@
   "homepage": "https://github.com/engines/Spaces#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
-    "axf": "^0.0.3",
-    "bootstrap": "^4.3.1",
+    "axf": "^0.0.16",
+    "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
     "codemirror": "^5.49.2",
-    "dompurify": "^2.0.8",
-    "filepond": "^4.7.4",
+    "dompurify": "^2.0.11",
+    "filepond": "^4.13.6",
     "html5sortable": "^0.9.17",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "jsoneditor": "^7.2.1",
     "marked": "^0.7.0",
     "mustache": "^3.1.0",
     "popper.js": "^1.16.1",
     "simplemde": "^1.11.2",
     "text-security": "^1.2.0",
-    "xterm": "^3.14.5"
+    "xterm": "^4.6.0",
+    "xterm-addon-fit": "^0.3.0"
   }
 }
