@@ -10,13 +10,7 @@ module Docker
       )
 
       def instructions
-        @instructions ||=
-        begin
-          f = ::File.open(instruction_file_name, 'r')
-          f.read
-        ensure
-          f.close
-        end
+        @instructions ||= ::File.read(instruction_file_name)
       end
 
       def instruction_file_name

@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'yajl-ruby'
 gem 'git'
 gem 'duplicate'
+gem 'i18n'
 gem 'docker-api'
 
 # Gems to support GUI web app.

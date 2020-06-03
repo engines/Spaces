@@ -11,7 +11,7 @@ module Universal
           :volumes,
           :docker,
           :blueprints,
-          :installations,
+          :resolutions,
           :frameworks,
           :web_servers,
           :nodules,
@@ -34,6 +34,10 @@ module Universal
     def host; 'engines.internal' ;end
 
     def method_missing(m, *args, &block)
+      klass.space_map[m] || super
+    end
+
+    def respond_to_missing?(m, *)
       klass.space_map[m] || super
     end
 

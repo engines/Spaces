@@ -5,8 +5,8 @@ app.spaces.blueprints.show = controller => (a,x) => [
     class: 'btn app-btn-danger'
   } ),
   app.button( {
-    label: app.icon( 'fa fa-caret-right', 'Installations' ),
-    onclick: () => controller.open( 'installations' ),
+    label: app.icon( 'fa fa-caret-right', 'Resolutions' ),
+    onclick: () => controller.open( 'resolutions' ),
   } ),
   a.hr,
   app.http( {

@@ -12,7 +12,7 @@ module Frameworks
         def step_precedence
           {
             anywhere: [:variables],
-            last: [:bundle, :rake_tasks, :chown_app_dir, :final]
+            last: [:bundle, :rake, :chown_app_dir, :finish]
           }
         end
 

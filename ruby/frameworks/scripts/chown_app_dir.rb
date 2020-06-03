@@ -5,9 +5,6 @@ module Frameworks
   module Scripts
     class ChownAppDir < Texts::OneTimeScript
       def body
-        #Notes for future improvements
-        #group=`cat /home/engines/etc/group/name` and user=`cat /home/engines/etc/user/name` can be dynamic
-        #Paths referenced are static but global
         %Q(
         if [ ! -d #{home_app_path} ]
          then
@@ -59,19 +56,19 @@ module Frameworks
          then
           for dir in  `cat /home/engines/etc/group/dirs_post_install`
            do
-           mkdir -p $dir
-            chown -R $group $dir
+             mkdir -p $dir
+             chown -R $group $dir
            done
         fi
         }
-
+        chgrp -R containers /home/engines/
         set_permissions
 
         )
       end
 
       # def user_name
-      #   context.installation.framework.user_name
+      #   context.resolution.framework.user_name
       # end
 
     end

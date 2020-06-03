@@ -1,5 +1,5 @@
 require 'csv'
-require_relative '../../installations/release'
+require_relative '../../resolutions/release'
 require_relative '../../frameworks/space'
 require_relative '../../frameworks/subclasses'
 require_relative '../../nodules/space'
@@ -14,18 +14,13 @@ module Docker
       end
 
       def save_csv
-        f = ::File.open('step_precedence.csv', 'w')
-        begin
-          f.write(as_csv)
-        ensure
-          f.close
-        end
+        ::File.write('step_precedence.csv', as_csv)
       end
 
       def as_csv
         CSV.generate do |csv|
           csv << ['divisions'] + group_precedence
-          Installations::Installation.divisions.values.each do |c|
+          Resolutions::Resolution.divisions.values.each do |c|
             csv << line_for(c)
             Frameworks::Space.loaded.each { |l| csv << line_for(l) } if c == Frameworks::Framework
             Nodules::Space.loaded.each { |l| csv << line_for(l) } if c == Nodules::Nodules

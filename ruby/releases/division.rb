@@ -25,7 +25,7 @@ module Releases
 
     def subdivision_for(struct)
       subdivision_class.new(struct: struct, division: self)
-    rescue NameError
+    rescue NameError => e
       struct
     end
 
@@ -35,9 +35,16 @@ module Releases
     def memento; all&.map(&:memento) || super ;end
 
     def initialize(struct: nil, stage: nil, label: nil)
+      check_subdivision_class
       self.stage = stage
       self.label = label
       self.struct = struct || stage&.struct[label] || default
+    end
+
+    def check_subdivision_class
+      subdivision_class
+    rescue NameError => e
+      warn(error: e, klass: klass)
     end
 
     def default ;end

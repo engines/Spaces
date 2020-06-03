@@ -2,14 +2,19 @@ require 'forwardable'
 require 'yaml'
 require 'json'
 require 'duplicate'
+require 'i18n'
 require_relative '../lib/ostruct'
 require_relative '../lib/array'
 require_relative '../lib/string'
-require_relative 'error'
 
 module Spaces
   class Thing
     extend Forwardable
+
+    require_relative '../recovery/warning'
+    include Recovery::Warning
+
+    delegate t: I18n
 
     class << self
       def identifier; name.split('::').join ;end
@@ -37,10 +42,11 @@ module Spaces
     def memento; duplicate(struct) ;end
 
     def context_identifier; identifier ;end
-
     def to_yaml; YAML.dump(struct) ;end
     def to_json; struct&.deep_to_h&.to_json ;end
     def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
+
+    def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
     def to_s; identifier ;end
 
     def initialize(struct: nil)
@@ -53,6 +59,12 @@ module Spaces
       else
         super
       end
+    rescue TypeError
+      super
+    end
+
+    def respond_to_missing?(m, *)
+      keys&.include?(m.to_s.sub('=', '').to_sym) || super
     rescue TypeError
       super
     end

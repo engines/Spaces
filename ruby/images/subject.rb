@@ -1,14 +1,21 @@
-require_relative '../installations/division'
+require_relative '../resolutions/division'
 
 module Images
-  class Subject < ::Installations::Division
+  class Subject < ::Resolutions::Division
     class << self
+      def step_precedence
+        {
+          late: [:install],
+          last: [:inject, :source_persistence, :finish]        
+        }
+      end
+
       def inheritance_paths; __dir__ ;end
     end
-
+    
     require_files_in :scripts, :steps
 
-    delegate([:docker_file, :identifier] => :installation)
+    delegate([:docker_file, :identifier] => :resolution)
 
     def components
       [docker_file, division_scripts, blueprint_scripts, injections].flatten
@@ -19,10 +26,11 @@ module Images
     end
 
     def blueprint_scripts; files_for(:scripts) ;end
+
     def injections; files_for(:injections) ;end
 
     def files_for(directory)
-      installation.file_names_for(directory).map do |t|
+      resolution.file_names_for(directory).map do |t|
         text_class.new(origin: t, directory: directory, context: self)
       end
     end

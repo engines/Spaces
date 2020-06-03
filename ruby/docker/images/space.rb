@@ -50,7 +50,7 @@ module Docker
           'Content-Type': 'application/tar',
           'Accept-Encoding': 'gzip',
           Accept: '*/*'
-          # 'Content-Length': "#{File.size(?)}"
+          # 'Content-Length': "#{::File.size(?)}"
         }
       end
 
