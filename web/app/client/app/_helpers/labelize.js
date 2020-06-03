@@ -1,1 +1,1 @@
-app.labelize = text => ax.x.lib.text.labelize(text)
+app.labelize = (text) => ax.x.lib.text.labelize(text);

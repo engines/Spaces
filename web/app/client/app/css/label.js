@@ -1,5 +1,6 @@
-ax.css( {
+ax.css({
   label: {
-    overflowWrap: 'anywhere',
-  }
-} )
+    overflowWrap: "anywhere",
+    color: "gray",
+  },
+});

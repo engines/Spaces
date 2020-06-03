@@ -5,13 +5,7 @@ require './ruby/domains/domain'
 require './ruby/users/user'
 require 'byebug'
 
-universe = Universal::Space.new
-
-resources = {
-  blueprints: Blueprints::Blueprint,
-  # users: Users::User,
-  # domains: Domains::Domain,
-}
+u = Universal::Space.new
 
 @total = 0
 @fails = 0
@@ -33,7 +27,7 @@ puts "#{n1 += 1}. blueprints\n\n"
 id = 'blueprint_for_test'
 n2 = 0
 
-s = universe.blueprints
+s = u.blueprints
 d = Spaces::Descriptor.new(identifier: id)
 
 test do
@@ -76,8 +70,8 @@ puts "#{n1 += 1}. Installations\n\n"
 
 idb = 'waverton'
 idi = "#{idb}_install"
-sb = universe.blueprints
-si = universe.installations
+sb = u.blueprints
+si = u.installations
 db = Spaces::Descriptor.new(identifier: idb)
 di = Spaces::Descriptor.new(identifier: idi)
 b = sb.by(db)
@@ -95,7 +89,7 @@ end
 
 test do
   puts "#{n1}.#{n2 += 1} create on blueprint"
-  p universe.installations.save(
+  p u.installations.save(
     Installations::Installation.new(
       blueprint: b,
       descriptor: di
@@ -111,7 +105,7 @@ end
 
 test do
   puts "#{n1}.#{n2 += 1} index on blueprint"
-  bi = universe.installations.descriptors.select do |d|
+  bi = u.installations.descriptors.select do |d|
     d.repository == b.descriptor.repository
   end.map(&:identifier).map(&:to_s).sort
   p bi
@@ -130,3 +124,26 @@ test do
 end
 
 puts "\e[33mPassed #{ @total - @fails } of #{ @total }\e[0m\n"
+
+#
+# require './ruby/universal/space'
+# require './ruby/blueprints/blueprint'
+# u = Universal::Space.new
+# s = u.blueprints
+# id = 'blueprint_for_test'
+# d = Spaces::Descriptor.new(identifier: id)
+# o = Projects::Project.new(descriptor: d)
+# s.save(o)
+# s.identifiers.include?(id)
+#
+# # require './ruby/universal/space'
+# # require './ruby/blueprints/blueprint'
+# # u = Universal::Space.new
+# require './ruby/x/test_container'
+# s = universe.blueprints
+# s.identifiers
+# import
+# s.identifiers
+# d = Spaces::Descriptor.new(identifier: 'waverton')
+# o = s.by(d)
+# o.title

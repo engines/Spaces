@@ -22,13 +22,44 @@ module App
         Blueprints::Controller.new(params).delete.to_json
       end
 
-      get '/blueprints/:blueprint_id/installations' do
-        Blueprints::Installations::Controller.new(params).index.to_json
+      put '/blueprints/:id/title' do
+        Blueprints::Title::Controller.new(params).update.to_json
       end
 
-      post '/blueprints/:blueprint_id/installations' do
-        Blueprints::Installations::Controller.new(params).create.to_json
+      put '/blueprints/:id/description' do
+        Blueprints::Description::Controller.new(params).update.to_json
       end
+
+
+
+
+      # get '/blueprints' do
+      #   Blueprints::Controller.new(params).index.to_json
+      # end
+      #
+      # post '/blueprints' do
+      #   Blueprints::Controller.new(params).create.to_json
+      # end
+      #
+      # get '/blueprints/:id' do
+      #   Blueprints::Controller.new(params).show.to_json
+      # end
+      #
+      # post '/blueprints/:id' do
+      #   Blueprints::Controller.new(params).update.to_json
+      # end
+      #
+      # delete '/blueprints/:id' do
+      #   Blueprints::Controller.new(params).delete.to_json
+      # end
+      #
+      # get '/blueprints/:blueprint_id/installations' do
+      #   Blueprints::Installations::Controller.new(params).index.to_json
+      # end
+      #
+      # post '/blueprints/:blueprint_id/installations' do
+      #   Blueprints::Installations::Controller.new(params).create.to_json
+      # end
 
       get '/installations' do
         Installations::Controller.new(params).index.to_json

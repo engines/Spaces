@@ -1,5 +1,3 @@
-ax.css( {
-
-  '*': { borderRadius: '0px !important' },
-
-} )
+// ax.css({
+//   "*": { borderRadius: "0px !important" },
+// });
