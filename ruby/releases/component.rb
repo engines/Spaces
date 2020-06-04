@@ -29,7 +29,7 @@ module Releases
 
     relation_accessor :stage
 
-    delegate([:home_app_path, :context_identifier] => :stage)
+    delegate([:release, :home_app_path, :context_identifier] => :stage)
 
     def release_path; "build/#{script_path}" ;end
 

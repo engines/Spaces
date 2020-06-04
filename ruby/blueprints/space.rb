@@ -18,6 +18,8 @@ module Blueprints
         save(m)
         import_anchors_for(m)
       end
+    rescue JSON::ParserError => e
+      warn(error: e, descriptor: descriptor, verbosity: [:error])
     end
 
     def import_anchors_for(model)
@@ -25,7 +27,7 @@ module Blueprints
     end
 
     def unimported_anchors_for(model)
-      model.anchor_descriptors&.reject { |d| imported?(d) } || []
+      model.anchor_descriptors&.uniq(&:uniqueness)&.reject { |d| imported?(d) } || []
     end
 
     def ensure_space_for(descriptor)

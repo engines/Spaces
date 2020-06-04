@@ -18,7 +18,7 @@ module Recovery
     end
 
     def spout_error
-      spout "\n#{error.message}" if error if verbosity&.include?(:error)
+      spout "\n#{error}" if error if verbosity&.include?(:error)
     end
 
     def spout_witnesses
