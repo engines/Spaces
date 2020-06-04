@@ -21,6 +21,11 @@ en:
       images::scripts/general_script_for:
         Unable to find class %{name}.
 
+    releases::division/new:
+      releases::division/initialize: |
+        Malformed %{klass} declaration in %{blueprint} blueprint.
+        Ignoring %{content}
+
     releases::division/check_subdivision_class:
       releases::division/subdivision_class: |
         There is no subdivision class defined for %{klass}.
