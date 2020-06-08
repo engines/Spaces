@@ -12,8 +12,10 @@ module WebServers
       def inheritance_paths; __dir__ ;end
     end
 
+    def domain; stage.release.domain end
+
     def release_path; "#{super}/#{klass.identifier}" ;end
-    
+
     def struct; @struct ||= stage.struct.web_server ;end
 
   end

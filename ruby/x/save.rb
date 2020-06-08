@@ -14,7 +14,6 @@ def blueprint
   begin
     universe.blueprints.by(descriptor)
   rescue Errno::ENOENT
-    warn(error: e, descriptor: descriptor)
     import
   end
 end

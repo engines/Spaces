@@ -41,7 +41,7 @@ module WebServers
           %Q(
           www_dir=#{context.root_directory}
           APACHE_LOG_DIR=/var/log/
-          ServerName=#{context.stage.release.domain.fqdn}
+          ServerName=#{context.domain.fqdn}
           rm /etc/apache2/sites-enabled/000-default.conf
           cat $SRC_FILE | while read LINE
            do
