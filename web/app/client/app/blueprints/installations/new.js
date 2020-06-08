@@ -1,15 +1,15 @@
-app.blueprints.installations.new = (router) => (a, x) => [
-  a.h2("New installation"),
+app.blueprints.resolutions.new = (router) => (a, x) => [
+  a.h2("New resolution"),
   app.form({
-    url: `/api/blueprints/${router.params.blueprint_id}/installations`,
+    url: `/api/blueprints/${router.params.blueprint_id}/resolutions`,
     object: { identifier: router.params.blueprint_id },
-    scope: "installation",
+    scope: "resolution",
     form: (f) => [
       f.field({
         key: "identifier",
       }),
       f.buttons(router),
     ],
-    success: (identifier) => router.open(`/installations/${identifier}`),
+    success: (identifier) => router.open(`/resolutions/${identifier}`),
   }),
 ];

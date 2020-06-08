@@ -1,6 +1,8 @@
-app.blueprints.installations = (router) => (a, x) => [
-  router.routes({
-    "/?": app.blueprints.installations.index,
-    "/~new": app.blueprints.installations.new,
+app.blueprints.resolutions = (router) => (a, x) => [
+  router.nest({
+    routes: {
+      "/?": app.blueprints.resolutions.index,
+      "/~new": app.blueprints.resolutions.new,
+    }
   }),
 ];

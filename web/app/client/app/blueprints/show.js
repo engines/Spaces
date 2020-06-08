@@ -7,11 +7,13 @@ app.blueprints.show = (router) => (a, x) => [
       el.$nodes = a({
         $tag: 'app-blueprint',
         $state: blueprint,
-        $nodes: (el, blueprint) => router.routes({
-          '/?': app.blueprints.show.summary(blueprint),
-          "/edit/?*": app.blueprints.edit(blueprint),
-          "/delete": app.blueprints.delete,
-          // "/actions*": app.blueprints.actions,
+        $nodes: (el, blueprint) => router.nest({
+          routes: {
+            '/?': app.blueprints.show.summary(blueprint),
+            "/edit/?*": app.blueprints.edit(blueprint),
+            "/delete": app.blueprints.delete,
+            // "/actions*": app.blueprints.actions,
+          }
         }),
       })
 
@@ -38,8 +40,8 @@ app.blueprints.show = (router) => (a, x) => [
 app.blueprints.show.summary = blueprint => router => (a,x) => [
   app.float({
     left: app.button({
-      label: app.icon("fa fa-caret-right", "Installations"),
-      onclick: () => router.open("installations"),
+      label: app.icon("fa fa-caret-right", "Resolutions"),
+      onclick: () => router.open("resolutions"),
     }),
     right: [
       app.button({

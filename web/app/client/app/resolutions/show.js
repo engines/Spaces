@@ -1,4 +1,4 @@
-app.installations.show = (router) => (a, x) => [
+app.resolutions.show = (router) => (a, x) => [
   app.button({
     label: app.icon("fa fa-trash", "Delete"),
     onclick: () => router.open("delete"),
@@ -6,9 +6,9 @@ app.installations.show = (router) => (a, x) => [
   }),
   a.hr,
   app.http({
-    url: `/api/installations/${router.params.installation_id}`,
+    url: `/api/resolutions/${router.params.resolution_id}`,
     placeholder: app.spinner(
-      `Loading installation ${router.params.installation_id}`
+      `Loading resolution ${router.params.resolution_id}`
     ),
   }),
 ];

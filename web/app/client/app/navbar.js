@@ -40,19 +40,19 @@ app.navbar = (router) => (a, x) =>
               }
             ),
             a.li(
-              a.a( 'Installations',{
+              a.a( 'Resolutions',{
                 class: 'nav-link',
                 href: '#',
                 $on: {click: (e) => {
                   e.preventDefault();
-                  router.open("/installations")
+                  router.open("/resolutions")
                   $('#navbarCollapse').collapse('hide')
                 }},
               }),
               {
                 class: 'nav-item',
                 data: {
-                  path: '/installations'
+                  path: '/resolutions'
                 },
               }
             ),

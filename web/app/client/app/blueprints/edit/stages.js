@@ -56,5 +56,5 @@ app.blueprints.edit.stages = (router, blueprint) => (a, x) => {
     }
   });
 
-  return a.p(router.routes(routes));
+  return a.p(router.nest({routes: routes}));
 }

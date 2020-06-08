@@ -1,9 +1,9 @@
 require './ruby/universal/space'
 require './ruby/blueprints/blueprint'
-require './ruby/resolutions/resolution'
-require './ruby/domains/domain'
-require './ruby/users/user'
-require 'byebug'
+# require './ruby/resolutions/resolution'
+# require './ruby/domains/domain'
+# require './ruby/users/user'
+# require 'byebug'
 
 universe = Universal::Space.new
 
@@ -56,7 +56,7 @@ end
 test do
   puts "#{n1}.#{n2 += 1} show"
   p o = s.by(d)
-  puts o.to_h.to_yaml
+  puts o.to_json
 end
 
 test do

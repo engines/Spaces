@@ -101,5 +101,5 @@ app.blueprints.edit.action = (router, blueprint) => (a, x) => {
   });
   routes['*'] = null;
 
-  return a.p(options.router.routes(routes));
+  return a.p(options.router.nest({routes: routes}));
 }

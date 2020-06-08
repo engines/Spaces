@@ -1,5 +1,5 @@
 app.spaces.show.menu = (router,spaces) => (a, x) => [
-  ["blueprints", "installations"].map((space) =>
+  ["blueprints", "resolutions"].map((space) =>
     a.div(
       app.button({
         label: app.icon("fa fa-caret-right", app.labelize(space)),
