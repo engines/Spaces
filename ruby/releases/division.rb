@@ -20,13 +20,16 @@ module Releases
     end
 
     def all
-      @all ||= struct&.map { |s| subdivision_for(s) }
+      @all ||= struct&.map { |s| subdivision_for(s) }&.compact
     end
 
     def subdivision_for(struct)
       subdivision_class.new(struct: struct, division: self)
     rescue NameError => e
       struct
+    rescue ArgumentError => e
+      warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.deep_to_h)
+      nil
     end
 
     def subdivision_class; Module.const_get(klass.name.singularize) ;end

@@ -13,6 +13,7 @@ module Spaces
 
     require_relative '../recovery/warning'
     include Recovery::Warning
+    extend Recovery::Warning
 
     delegate t: I18n
 
@@ -21,6 +22,8 @@ module Spaces
       def namespace; name.split('::')[..-2].join.snakize ;end
       def qualifier; name.split('::').last.snakize ;end
       def from_yaml(y); YAML::load(y) ;end
+
+      def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
 
       def relation_accessor(*args); attr_accessor(*args) ;end
 
@@ -33,7 +36,7 @@ module Spaces
     attr_accessor :struct, :klass
 
     delegate(
-      [:identifier, :namespace, :qualifier] => :klass,
+      [:identifier, :namespace, :qualifier, :spout] => :klass,
       to_h: :struct
     )
 
@@ -46,7 +49,6 @@ module Spaces
     def to_json; struct&.deep_to_h&.to_json ;end
     def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
 
-    def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
     def to_s; identifier ;end
 
     def initialize(struct: nil)
