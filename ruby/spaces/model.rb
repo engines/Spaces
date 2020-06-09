@@ -2,7 +2,6 @@ require_relative 'thing'
 
 module Spaces
   class Model < Thing
-    extend Forwardable
 
     class << self
       def universe; @universal_space ||= Universal::Space.new ;end

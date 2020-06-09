@@ -13,6 +13,12 @@ module Blueprints
 
     def import(descriptor)
       super
+      import_by_json(descriptor)
+    rescue Errno::ENOENT => e
+      warn(error: e, descriptor: descriptor, verbosity: [:error])
+    end
+
+    def import_by_json(descriptor)
       by_json(descriptor).tap do |m|
         m.struct.descriptor = descriptor.struct
         save(m)
