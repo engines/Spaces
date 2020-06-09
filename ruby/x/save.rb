@@ -19,7 +19,7 @@ def blueprint
 end
 
 def resolution
-  @resolution ||= Resolutions::Resolution.new(blueprint: blueprint)
+  @resolution ||= universe.resolutions.by(descriptor) || Resolutions::Resolution.new(blueprint: blueprint)
 end
 
 def clear
