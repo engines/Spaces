@@ -15,7 +15,7 @@ module Resolutions
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint
       self.struct = duplicate(struct || blueprint&.struct)
-      self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.struct)
+      self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.memento) || descriptor&.memento
     end
 
     def capture_foreign_keys

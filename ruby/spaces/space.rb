@@ -23,13 +23,13 @@ module Spaces
     end
 
     def by_yaml(descriptor, klass = default_model_class)
-      klass.new(struct: klass.from_yaml(_by(descriptor, klass, as: :yaml)))
+      klass.new(descriptor: descriptor, struct: klass.from_yaml(_by(descriptor, klass, as: :yaml)))
     end
 
     alias_method :by, :by_yaml
 
     def by_json(descriptor, klass = default_model_class)
-      klass.new(struct: open_struct_from_json(_by(descriptor, klass, as: :json)))
+      klass.new(descriptor: descriptor, struct: open_struct_from_json(_by(descriptor, klass, as: :json)))
     end
 
     def save_text(model)

@@ -23,7 +23,7 @@ module Releases
     end
 
     def to_h
-      keys.inject({}) do |m, k|
+      division_keys.inject({}) do |m, k|
         m[k] = memento_for(k)
         m
       end.compact
