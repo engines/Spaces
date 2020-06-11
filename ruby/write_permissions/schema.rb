@@ -1,6 +1,6 @@
 require_relative '../spaces/schema'
 
-module FilePermissions
+module WritePermissions
   class Schema < ::Spaces::Schema
 
     class << self
