@@ -1,8 +1,8 @@
 require_relative '../releases/division'
 require_relative 'schema'
 
-module FilePermissions
-  class FilePermissions < ::Releases::Division
+module WritePermissions
+  class WritePermissions < ::Releases::Division
 
     class << self
       def step_precedence

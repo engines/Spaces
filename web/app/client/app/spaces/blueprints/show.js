@@ -45,7 +45,7 @@ app.spaces.blueprints.show = controller => (a,x) => [
     //     r.field({ key: 'modules'}),
     //     r.field({ key: 'bindings'}),
     //     r.field({ key: 'environment'}),
-    //     r.field({ key: 'file_permissions'}),
+    //     r.field({ key: 'write_permissions'}),
     //     r.field({ key: 'replacements'}),
     //     r.field({ key: 'workers'}),
     //     r.field({ key: 'schedules'}),

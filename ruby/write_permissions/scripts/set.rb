@@ -1,6 +1,6 @@
 require_relative '../../texts/one_time_script'
 
-module FilePermissions
+module WritePermissions
   module Scripts
     class Set < Texts::OneTimeScript
       def body
@@ -62,11 +62,11 @@ module FilePermissions
             find #{home_app_path}/$path -type d -print0 | xargs -0 chmod 775
           fi
         }
-            #{file_permissions_commands}
+            #{write_permissions_commands}
            )
       end
 
-      def file_permissions_commands
+      def write_permissions_commands
         context.struct.map do |p|
           if p.recursive?
             "path=#{p.path} set_recursive_write_permissions"
