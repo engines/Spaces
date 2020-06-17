@@ -8,10 +8,12 @@ en:
 
     blueprints::space/import:
       git::space/import: |
-        An attempt to import blueprint for %{descriptor} finds it already exists.
+        An attempt to import blueprint for '%{descriptor}' finds it already exists.
         Moving on.
       spaces::thing/open_struct_from_json:
         The blueprint for '%{descriptor}' is not well formed. Results are unpredictable.
+      blueprints::space/import_by_json:
+        The blueprint for '%{descriptor}' cannot be found.
 
     docker::files::steps/rescue_in_step_for:
       docker::files::steps/general_step_for:

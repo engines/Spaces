@@ -14,7 +14,7 @@ module Git
         g = ::Git.clone(descriptor.repository, descriptor.identifier, path: path)
         g.checkout(descriptor.branch) if descriptor.branch
       rescue ::Git::GitExecuteError => e
-        warn(error: e, descriptor: descriptor)
+        warn(error: e, descriptor: descriptor, verbosity: [:error])
       end
     end
 
