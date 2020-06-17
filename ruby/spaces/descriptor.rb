@@ -8,8 +8,8 @@ module Spaces
       def schema_class; DescriptorSchema ;end
     end
 
-    def identifier; struct.identifier ||= default_identifier ;end
-    def default_identifier; repository.split('/').last.split('.').first if repository ;end
+    def identifier; struct.identifier ||= root_identifier ;end
+    def root_identifier; repository.split('/').last.split('.').first if repository ;end
 
     def branch; struct.branch ||= 'master' ;end
     def protocol; struct.protocol ||= extension ;end
