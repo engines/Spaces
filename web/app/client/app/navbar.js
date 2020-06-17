@@ -1,5 +1,5 @@
 app.navbar = (router) => (a, x) =>
-  a["nav#navbar.navbar.navbar-expand-md.navbar-light.bg-white.mx-n3.mt-n1"](
+  a["nav#navbar.navbar.navbar-expand-md.navbar-light.bg-transparent.mx-n3.mt-n1.mb-1"](
     [
       a.a([
         a({
@@ -13,7 +13,6 @@ app.navbar = (router) => (a, x) =>
       }),
       a.button(a({class: "navbar-toggler-icon"}), {
         class: "navbar-toggler",
-        // dataToggle: 'collapse',
         data: {
           toggle: "collapse",
           target: "#navbarCollapse",
@@ -23,42 +22,42 @@ app.navbar = (router) => (a, x) =>
         a.ul(
           [
             a.li(
-              a.a( 'Blueprints',{
+              a.a(app.icon("fa fa-cog"), {
                 class: 'nav-link',
                 href: '#',
                 $on: {click: (e) => {
                   e.preventDefault();
-                  router.open("/blueprints")
+                  router.open("/settings")
                   $('#navbarCollapse').collapse('hide')
                 }},
               }),
               {
                 class: 'nav-item',
                 data: {
-                  path: '/blueprints'
+                  path: '/settings'
                 },
               }
             ),
             a.li(
-              a.a( 'Resolutions',{
+              a.a(app.icon("fa fa-sign-out-alt"), {
                 class: 'nav-link',
                 href: '#',
                 $on: {click: (e) => {
                   e.preventDefault();
-                  router.open("/resolutions")
+                  router.open("/logout")
                   $('#navbarCollapse').collapse('hide')
                 }},
               }),
               {
                 class: 'nav-item',
                 data: {
-                  path: '/resolutions'
+                  path: '/logout'
                 },
               }
             ),
           ],
           {
-            class: 'navbar-nav mr-auto mt-0',
+            class: 'navbar-nav ml-auto mt-0',
           }
         ),
         {
@@ -66,20 +65,6 @@ app.navbar = (router) => (a, x) =>
           class: 'collapse navbar-collapse',
         }
       ),
-      // a["div.float-right"]([
-      //   app.button({
-      //     label: app.icon("fa fa-cog"),
-      //     title: "Settings",
-      //     onclick: () => router.open("/settings"),
-      //     class: "nav-link app-nav-btn app-nav-btn-settings",
-      //   }),
-      //   app.button({
-      //     label: app.icon("fa fa-sign-out-alt"),
-      //     title: "Log out",
-      //     onclick: () => router.load("/logout"),
-      //     class: "nav-link app-nav-btn",
-      //   }),
-      // ]),
     ],
     {
       $activate: function() {

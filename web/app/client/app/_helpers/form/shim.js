@@ -3,15 +3,16 @@ app.form.shim = {
     target({
       ...options,
       asyncformTag: {
-        // $init: (el) => {
-        //   // Focus on first form control.
-        //   // Timout to allow dependent fields
-        //   // to init before trying to focus.
-        //   let first = el.$("|appkit-form-control, button");
-        //   first.$focus()
-        //   // debugger
-        //   // if (first) setTimeout(()=>{ debugger;  }, 1000);
-        // },
+        $init: (el) => {
+          // Focus on first form control.
+          setTimeout(
+            () => {
+              let first = el.$("|appkit-form-control, button");
+              console.log(first)
+              first.$focus()
+            }
+          )
+        },
         ...options.asyncformTag,
         $on: {
           "ax.appkit.form.async.complete: revert submit button label": (
@@ -226,7 +227,7 @@ app.form.shim = {
     //   }),
   },
 
-  buttons: (f) => (router, options = {}) => (a, x) =>
+  buttons: (f) => (options = {}) => (a, x) =>
     a["app-form-buttons"](
       [
         options.cancel == false
@@ -234,7 +235,7 @@ app.form.shim = {
           : f.button({
               label: app.icon("fa fa-times", "Cancel"),
               to: app.spinner("Cancelling…"),
-              onclick: () => router.open(".."),
+              onclick: () => options.router.open(".."),
               ...options.cancel,
             }),
         " ",

@@ -7,8 +7,8 @@ app.blueprints.new = (router) => (a, x) => [
       f.field({
         key: "identifier",
       }),
-      f.buttons(router),
+      f.buttons({router: router}),
     ],
-    success: (identifier) => router.open(`/blueprints/${identifier}`),
+    success: (identifier) => router.open(`../${identifier}`),
   }),
 ];

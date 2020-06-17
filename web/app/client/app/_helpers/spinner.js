@@ -1,5 +1,8 @@
-app.spinner = (text) => (a, x) =>
-  x.cycle({
+app.spinner = (text) => (a, x) => {
+
+  text = app.i18n(text)
+
+  return x.cycle({
     collection: [
       app.icon("far fa-hourglass", text),
       app.icon("fas fa-hourglass-start", text),
@@ -8,3 +11,5 @@ app.spinner = (text) => (a, x) =>
       app.icon("far fa-hourglass", text),
     ],
   });
+
+};

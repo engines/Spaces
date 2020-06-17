@@ -9,7 +9,7 @@ require_relative '../os_packages/os_packages'
 require_relative '../nodules/nodules'
 require_relative '../packages/packages'
 require_relative '../replacements/replacements'
-require_relative '../file_permissions/file_permissions'
+require_relative '../write_permissions/write_permissions'
 require_relative '../environments/environment'
 require_relative 'stage'
 
@@ -38,7 +38,7 @@ module Releases
               modules: 0,
               packages: 0,
               replacements: 0,
-              file_permissions: 0,
+              write_permissions: 0,
               environment: 0
             }
           ]
@@ -64,7 +64,7 @@ module Releases
           Nodules::Nodules,
           Packages::Packages,
           Replacements::Replacement,
-          FilePermissions::FilePermissions,
+          WritePermissions::WritePermissions,
           Environments::Environment
         ]
       end

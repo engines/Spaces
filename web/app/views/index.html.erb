@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="/node_modules/codemirror/lib/codemirror.css"> -->
   <!-- <link rel="stylesheet" href="/node_modules/codemirror/theme/neo.css"> -->
-  <!-- <link rel="stylesheet" href="/node_modules/simplemde/dist/simplemde.min.css"> -->
+  <link rel="stylesheet" href="/node_modules/simplemde/dist/simplemde.min.css">
   <!-- <link rel="stylesheet" href="/node_modules/jsoneditor/dist/jsoneditor.css"> -->
   <link rel="stylesheet" href="/node_modules/text-security/dist/text-security.css">
   <link rel="stylesheet" href="/node_modules/xterm/css/xterm.css">
@@ -38,7 +38,7 @@
   <script type="application/javascript" src="/node_modules/codemirror/keymap/emacs.js"></script>
   <script type="application/javascript" src="/node_modules/codemirror/keymap/sublime.js"></script> -->
   <script type="application/javascript" src="/node_modules/html5sortable/dist/html5sortable.js"></script>
-  <!-- <script type="application/javascript" src="/node_modules/simplemde/dist/simplemde.min.js"></script> -->
+  <script type="application/javascript" src="/node_modules/simplemde/dist/simplemde.min.js"></script>
   <!-- <script type="application/javascript" src="/node_modules/jsoneditor/dist/jsoneditor.js"></script> -->
   <script type="application/javascript" src="/node_modules/marked/marked.min.js"></script>
   <script type="application/javascript" src="/node_modules/dompurify/dist/purify.min.js"></script>
@@ -88,6 +88,7 @@
 
 let inDevelopment = <%= Sinatra::Base.development? %>
 
+// The UMD for FitAddon returns an object
 FitAddon = FitAddon.FitAddon
 
 window.onload = () => {
@@ -96,9 +97,11 @@ window.onload = () => {
       `app-theme-${ window.localStorage.cssTheme }`
     )
   }
-  loadingSpinner.style.opacity = 0
-  setTimeout( function() { loadingSpinner.remove() }, 1000 )
-  ax( app )
+  document.fonts.load('16px Cats').then(() => {
+    loadingSpinner.style.opacity = 0
+    setTimeout( function() { loadingSpinner.remove() }, 1000 )
+    ax( app )
+  })
 }
 </script>
 

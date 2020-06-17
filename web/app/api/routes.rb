@@ -22,6 +22,18 @@ module App
         Blueprints::Controller.new(params).delete.to_json
       end
 
+      put '/blueprints/:id/title' do
+        Blueprints::Title::Controller.new(params).update.to_json
+      end
+
+      put '/blueprints/:id/description' do
+        Blueprints::Description::Controller.new(params).update.to_json
+      end
+
+      put '/blueprints/:id/memory' do
+        Blueprints::Memory::Controller.new(params).update.to_json
+      end
+
       get '/blueprints/:blueprint_id/resolutions' do
         Blueprints::Resolutions::Controller.new(params).index.to_json
       end

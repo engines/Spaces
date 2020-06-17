@@ -25,7 +25,7 @@ app.settings = (router) => (a, x) => [
           sublime: "Sublime",
         },
       }),
-      f.buttons(router),
+      f.buttons({router: router}),
     ],
     action: (submition) => {
       window.localStorage.cssTheme = submition.data.theme;

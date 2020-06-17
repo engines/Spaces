@@ -1,7 +1,7 @@
 app.blueprints.index = (router) => (a, x) => [
   app.button({
     label: app.icon("fa fa-plus", "New"),
-    onclick: () => router.open("/blueprints/~new"),
+    onclick: () => router.open("~new"),
   }),
   a.hr,
   app.http({
@@ -13,10 +13,11 @@ app.blueprints.index = (router) => (a, x) => [
             a.div(
               app.button({
                 label: app.icon("fa fa-caret-right", blueprint),
-                onclick: (e, el) => router.open(`/blueprints/${blueprint}`),
+                onclick: (e, el) => router.open(blueprint),
               })
             )
           )
-        : a.i("None")),
+        : app.placeholder('None')
+      ),
   }),
 ];
