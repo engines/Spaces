@@ -5,6 +5,10 @@ module Resolutions
 
     delegate(mandatory_keys: :schema)
 
+    def memento
+      super.tap { |m| m.descriptor = struct.descriptor }
+    end
+
     def division_map
       @resolution_division_map ||= super.merge(
         mandatory_keys.reduce({}) do |m, k|
