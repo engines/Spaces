@@ -18,9 +18,5 @@ module Resolutions
       self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.memento) || descriptor&.memento
     end
 
-    def capture_foreign_keys
-      struct.blueprint_identifier ||= blueprint&.identifier
-    end
-
   end
 end

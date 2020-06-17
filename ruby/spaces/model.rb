@@ -30,7 +30,6 @@ module Spaces
     def file_name; klass.qualifier ;end
     def subpath; end
     def uniqueness; [klass.name, identifier] ;end
-    def capture_foreign_keys; end
     def descriptor_class; Descriptor ;end
 
     def namespaced_name(namespace, symbol)
