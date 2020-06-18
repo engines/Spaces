@@ -8,7 +8,7 @@ app.blueprints.licenses.edit = (router, blueprint) => app.blueprints.inplaceform
       as: 'many',
       addable: true,
       draggable: true,
-      deletable: true,
+      deletable: true,      
       form: (f) => [
         f.field({
           key: 'label',

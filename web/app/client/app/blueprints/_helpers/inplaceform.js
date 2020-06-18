@@ -24,22 +24,12 @@ app.blueprints.inplaceform = (options = {}) => (a, x) => a['app-blueprint-inplac
       el.$('^app-blueprint-inplaceform').$close()
     },
     formTag: {
-      ...options.formTag,
-      $submit: function() {
-        debugger
-        if ( this.checkValidity() ) {
-          this.$send('submit')
-        } else {
-          this.reportValidity()
-        }
-      },
       $on: {
         "keydown: cancel on ESC, submit on ENTER": (e, el) => {
           if (e.keyCode == 27) {
             el.$('^app-blueprint-inplaceform').$close()
           }
         },
-        // ...(options.formTag || {}).$on,
       },
     },
   })

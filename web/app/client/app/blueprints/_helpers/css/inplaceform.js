@@ -1,5 +1,9 @@
 ax.css({
   'app-blueprint-inplaceform': {
+    '|appkit-asyncform-output': {
+      position: 'relative',
+      zIndex: 1060,
+    },
     form: {
       position: 'relative',
       zIndex: 1050,

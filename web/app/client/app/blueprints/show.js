@@ -10,8 +10,8 @@ app.blueprints.show = (router) => (a, x) => [
         $nodes: (el, blueprint) => [
           app.float({
             left: app.button({
-              label: app.icon("fa fa-caret-right", "Resolutions"),
-              onclick: () => router.open("resolutions"),
+              label: app.icon("fas fa-drafting-compass", "Resolution"),
+              onclick: () => router.open("resolution"),
             }),
           }),
 

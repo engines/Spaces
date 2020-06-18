@@ -1,8 +1,7 @@
 app.blueprints.resolutions = (router) => (a, x) => [
-  router.nest({
-    routes: {
-      "/?": app.blueprints.resolutions.index,
-      "/~new": app.blueprints.resolutions.new,
-    }
+  a.h5('Resolution'),
+  app.http({
+    url: `/api/blueprints/${router.params.blueprint_id}/resolution`,
+    success: (resolution, el) => el.$nodes = [x.out(resolution)],
   }),
 ];

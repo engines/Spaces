@@ -80,51 +80,6 @@ app.form.shim = {
       },
     }),
 
-  // control: (f, target) => (options = {}) => {
-  //   if (options.collection) {
-  //     return target({
-  //       ...options,
-  //       sortOnButton: {
-  //         ...options.sortOnButton,
-  //         buttonTag: {
-  //           class: "btn app-btn",
-  //           ...(options.sortOnButton || {}).buttonTag,
-  //         },
-  //       },
-  //       addButton: {
-  //         ...options.addButton,
-  //         buttonTag: {
-  //           class: "btn app-btn",
-  //           ...(options.addButton || {}).buttonTag,
-  //         },
-  //       },
-  //       upButton: {
-  //         ...options.upButton,
-  //         buttonTag: {
-  //           class: "btn app-btn",
-  //           ...(options.upButton || {}).buttonTag,
-  //         },
-  //       },
-  //       downButton: {
-  //         ...options.downButton,
-  //         buttonTag: {
-  //           class: "btn app-btn",
-  //           ...(options.downButton || {}).buttonTag,
-  //         },
-  //       },
-  //       removeButton: {
-  //         ...options.removeButton,
-  //         buttonTag: {
-  //           class: "btn app-btn",
-  //           ...(options.removeButton || {}).buttonTag,
-  //         },
-  //       },
-  //     });
-  //   } else {
-  //     return target(options);
-  //   }
-  // },
-
   controls: {
     combobox: (f, target) => (options = {}) => (a, x) =>
       f.controls.selectinput(options),
@@ -146,85 +101,6 @@ app.form.shim = {
     markdown: (f, target) => (options = {}) => (a, x) =>
       x.simplemde.form.control(f, options),
 
-    // table: (f, target) => (options = {}) =>
-    //   target({
-    //     ...options,
-    //     sortOnButton: {
-    //       ...options.sortOnButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.sortOnButton || {}).buttonTag,
-    //       },
-    //     },
-    //     addButton: {
-    //       ...options.addButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.addButton || {}).buttonTag,
-    //       },
-    //     },
-    //     upButton: {
-    //       ...options.upButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.upButton || {}).buttonTag,
-    //       },
-    //     },
-    //     downButton: {
-    //       ...options.downButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.downButton || {}).buttonTag,
-    //       },
-    //     },
-    //     removeButton: {
-    //       ...options.removeButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.removeButton || {}).buttonTag,
-    //       },
-    //     },
-    //   }),
-    //
-    // many: (f, target) => (options = {}) =>
-    //   target({
-    //     ...options,
-    //     sortOnButton: {
-    //       ...options.sortOnButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.sortOnButton || {}).buttonTag,
-    //       },
-    //     },
-    //     addButton: {
-    //       ...options.addButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.addButton || {}).buttonTag,
-    //       },
-    //     },
-    //     upButton: {
-    //       ...options.upButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.upButton || {}).buttonTag,
-    //       },
-    //     },
-    //     downButton: {
-    //       ...options.downButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.downButton || {}).buttonTag,
-    //       },
-    //     },
-    //     removeButton: {
-    //       ...options.removeButton,
-    //       buttonTag: {
-    //         class: "btn app-btn",
-    //         ...(options.removeButton || {}).buttonTag,
-    //       },
-    //     },
-    //   }),
   },
 
   buttons: (f) => (options = {}) => (a, x) =>
