@@ -97,11 +97,9 @@ window.onload = () => {
       `app-theme-${ window.localStorage.cssTheme }`
     )
   }
-  document.fonts.load('16px Cats').then(() => {
-    loadingSpinner.style.opacity = 0
-    setTimeout( function() { loadingSpinner.remove() }, 1000 )
-    ax( app )
-  })
+  loadingSpinner.style.opacity = 0
+  setTimeout( function() { loadingSpinner.remove() }, 1000 )
+  ax( app )
 }
 </script>
 
