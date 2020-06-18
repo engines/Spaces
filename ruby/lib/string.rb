@@ -1,4 +1,5 @@
 class String
+  BLANK_RE = /\A[[:space:]]*\z/
 
   def camelize
     s = sub(/^[a-z\d]*/) { |match| match.capitalize }
@@ -26,7 +27,7 @@ class String
   end
 
   def blank?
-    itself == ''
+    empty? || BLANK_RE.match?(self)
   end
 
 end
