@@ -47,7 +47,7 @@ module Releases
     def check_subdivision_class
       subdivision_class
     rescue NameError => e
-      warn(error: e, klass: klass)
+      warn(error: e, klass: klass.name.singularize)
     end
 
     def default ;end
