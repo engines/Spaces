@@ -88,7 +88,6 @@ module Spaces
     end
 
     def _save(model, content:, as: nil)
-      model.capture_foreign_keys
       ::File.write([writing_name_for(model), as].compact.join('.'), content)
     end
 
