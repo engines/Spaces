@@ -5,7 +5,11 @@ module Releases
 
     relation_accessor :release
 
-    delegate([:identifier, :home_app_path] => :release)
+    delegate([:context_identifier, :home_app_path] => :release)
+
+    def identifier
+      starter&.identifier || release.stages.find_index(self)
+    end
 
     def initialize(struct:, release:)
       self.release = release

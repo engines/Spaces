@@ -30,7 +30,7 @@ en:
 
     releases::division/check_subdivision_class:
       releases::division/subdivision_class: |
-        There is no subdivision class defined for %{klass}.
+        There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
     spaces::space/open:
