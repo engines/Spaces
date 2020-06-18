@@ -1,4 +1,5 @@
 class String
+  BLANK_RE = /\A[[:space:]]*\z/
 
   def camelize
     s = sub(/^[a-z\d]*/) { |match| match.capitalize }
@@ -23,6 +24,10 @@ class String
 
   def pluralize
     "#{itself}s"
+  end
+
+  def blank?
+    empty? || BLANK_RE.match?(self)
   end
 
 end

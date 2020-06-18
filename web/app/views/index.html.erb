@@ -10,21 +10,22 @@
 
   <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/node_modules/codemirror/lib/codemirror.css">
-  <link rel="stylesheet" href="/node_modules/codemirror/theme/neo.css">
+  <!-- <link rel="stylesheet" href="/node_modules/codemirror/lib/codemirror.css"> -->
+  <!-- <link rel="stylesheet" href="/node_modules/codemirror/theme/neo.css"> -->
   <link rel="stylesheet" href="/node_modules/simplemde/dist/simplemde.min.css">
-  <link rel="stylesheet" href="/node_modules/jsoneditor/dist/jsoneditor.css">
+  <!-- <link rel="stylesheet" href="/node_modules/jsoneditor/dist/jsoneditor.css"> -->
   <link rel="stylesheet" href="/node_modules/text-security/dist/text-security.css">
-  <link rel="stylesheet" href="/node_modules/xterm/dist/xterm.css">
-  <link rel="stylesheet" href="/node_modules/xterm/dist/addons/fullscreen/fullscreen.css">
-  <link rel="stylesheet" href="/node_modules/chart.js/dist/Chart.css">
-  <link rel="stylesheet" href="/node_modules/filepond/dist/filepond.css">
+  <link rel="stylesheet" href="/node_modules/xterm/css/xterm.css">
+  <!-- <link rel="stylesheet" href="/node_modules/xterm/dist/addons/fullscreen/fullscreen.css"> -->
+  <!-- <link rel="stylesheet" href="/node_modules/chart.js/dist/Chart.css"> -->
+  <!-- <link rel="stylesheet" href="/node_modules/filepond/dist/filepond.css"> -->
 
   <script type="application/javascript" src="/node_modules/jquery/dist/jquery.slim.min.js"></script>
   <script type="application/javascript" src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
   <script type="application/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="application/javascript" src="/node_modules/codemirror/lib/codemirror.js"></script>
-  <script type="application/javascript" src="/node_modules/codemirror/addon/display/placeholder.js"></script>
+  <!-- <script type="application/javascript" src="/node_modules/codemirror/lib/codemirror.js"></script> -->
+  <!-- <script type="application/javascript" src="/node_modules/codemirror/addon/display/placeholder.js"></script>
+  <script type="application/javascript" src="/node_modules/codemirror/addon/fit/fit.js"></script>
   <script type="application/javascript" src="/node_modules/codemirror/mode/shell/shell.js"></script>
   <script type="application/javascript" src="/node_modules/codemirror/mode/javascript/javascript.js"></script>
   <script type="application/javascript" src="/node_modules/codemirror/mode/lua/lua.js"></script>
@@ -35,20 +36,20 @@
   <script type="application/javascript" src="/node_modules/codemirror/mode/yaml/yaml.js"></script>
   <script type="application/javascript" src="/node_modules/codemirror/keymap/vim.js"></script>
   <script type="application/javascript" src="/node_modules/codemirror/keymap/emacs.js"></script>
-  <script type="application/javascript" src="/node_modules/codemirror/keymap/sublime.js"></script>
+  <script type="application/javascript" src="/node_modules/codemirror/keymap/sublime.js"></script> -->
   <script type="application/javascript" src="/node_modules/html5sortable/dist/html5sortable.js"></script>
   <script type="application/javascript" src="/node_modules/simplemde/dist/simplemde.min.js"></script>
-  <script type="application/javascript" src="/node_modules/jsoneditor/dist/jsoneditor.js"></script>
+  <!-- <script type="application/javascript" src="/node_modules/jsoneditor/dist/jsoneditor.js"></script> -->
   <script type="application/javascript" src="/node_modules/marked/marked.min.js"></script>
   <script type="application/javascript" src="/node_modules/dompurify/dist/purify.min.js"></script>
-  <script type="application/javascript" src="/node_modules/mustache/mustache.min.js"></script>
-  <script type="application/javascript" src="/node_modules/xterm/dist/xterm.js"></script>
-  <script type="application/javascript" src="/node_modules/xterm/dist/addons/fit/fit.js"></script>
-  <script type="application/javascript" src="/node_modules/xterm/dist/addons/fullscreen/fullscreen.js"></script>
-  <script type="application/javascript" src="/node_modules/chart.js/dist/Chart.js"></script>
-  <script type="application/javascript" src="/node_modules/filepond/dist/filepond.js"></script>
-
-  <script type="application/javascript" src="/node_modules/axf/axf.js" ></script>
+  <!-- <script type="application/javascript" src="/node_modules/mustache/mustache.min.js"></script> -->
+  <script type="application/javascript" src="/node_modules/xterm/lib/xterm.js"></script>
+  <script type="application/javascript" src="/node_modules/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+  <!-- <script type="application/javascript" src="/node_modules/xterm/dist/addons/fullscreen/fullscreen.js"></script> -->
+  <!-- <script type="application/javascript" src="/node_modules/chart.js/dist/Chart.js"></script> -->
+  <!-- <script type="application/javascript" src="/node_modules/filepond/dist/filepond.js"></script> -->
+  <!-- <script type="application/javascript" src="/node_modules/axf/axf.js" ></script> -->
+  <script type="application/javascript" src="http://localhost:8000/axf/axf.js" ></script>
 
   <script type="application/javascript" src="/app.js" ></script>
 
@@ -62,6 +63,7 @@
   position: fixed;
   left: 0; top: 0; right: 0; bottom: 0;
   pointer-events: none;
+  z-index: 1;
   ">
   <svg width="100" height="100" style="vertical-align: middle;">
     <g transform="scale(0.33333)">
@@ -85,6 +87,9 @@
 <script>
 
 let inDevelopment = <%= Sinatra::Base.development? %>
+
+// The UMD for FitAddon returns an object
+FitAddon = FitAddon.FitAddon
 
 window.onload = () => {
   if( window.localStorage.cssTheme ) {
