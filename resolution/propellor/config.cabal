@@ -1,0 +1,32 @@
+name: config
+cabal-version: >= 1.8
+build-type: Simple
+version: 0
+
+Executable propellor-config
+  main-is:          config.hs
+  ghc-options:      -Wredundant-constraints -Wincomplete-uni-patterns -Wincomplete-record-updates -fhide-source-paths
+                    -Wall -Werror
+
+  extensions:       TypeOperators
+
+  build-Depends:    base           >= 4.12.0 && < 4.14
+                  , propellor      >= 5.10.2 && < 5.11
+                  , unix           >= 2.7.2  && < 2.8
+                  , config
+
+
+library
+  hs-source-dirs:   src
+  extensions:       TypeOperators
+  ghc-options:      -Wredundant-constraints -Wincomplete-uni-patterns -Wincomplete-record-updates -fhide-source-paths
+                    -Wall -Werror
+
+  build-Depends:    base           >= 4.12.0  && < 4.14
+                  , propellor      >= 5.10.2  && < 5.11
+                  , filepath       >= 1.4.2   && < 1.5
+                  , unix           >= 2.7.2   && < 2.8
+
+
+  exposed-modules:
+      Local.Property.LetsEncrypt
