@@ -10,8 +10,7 @@ module Bindings
             (1..),
             {
               identifier: 1,
-              descriptor: 1,
-              persistent: [(0..), directories: (0..), files: (0..)]
+              descriptor: 1
             }
           ]
         }

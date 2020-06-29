@@ -1,7 +1,6 @@
 require_relative '../spaces/schema'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
-require_relative '../docker/files/file'
 require_relative '../images/subject'
 require_relative '../users/user'
 require_relative '../domains/domain'
@@ -19,7 +18,6 @@ module Resolutions
 
       def component_classes
         [
-          Docker::Files::File,
           Images::Subject
         ]
       end
@@ -34,7 +32,6 @@ module Resolutions
       def naming_map
         {
           anchor: :binding_anchor,
-          file: :docker_file,
           subject: :image_subject
         }
       end

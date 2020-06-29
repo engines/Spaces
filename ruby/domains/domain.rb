@@ -3,12 +3,6 @@ require_relative '../releases/division'
 module Domains
   class Domain < ::Releases::Division
 
-    class << self
-      def inheritance_paths; __dir__ ;end
-    end
-
-    require_files_in :steps
-
     def fqdn
       "#{host}.#{name}"
     end
@@ -18,7 +12,7 @@ module Domains
     end
 
     def name
-      'current.engines.org'
+      'current.spaces.org'
     end
 
     def default

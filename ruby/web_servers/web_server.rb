@@ -8,8 +8,6 @@ module WebServers
       def prototype(stage:, label:)
         universe.web_servers.by(stage)
       end
-
-      def inheritance_paths; __dir__ ;end
     end
 
     def domain; stage.release.domain end

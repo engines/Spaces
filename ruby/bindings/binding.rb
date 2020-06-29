@@ -5,12 +5,6 @@ require_relative '../releases/subdivision'
 module Bindings
   class Binding < ::Releases::Subdivision
 
-    class << self
-      def step_precedence
-        { anywhere: [:variables] }
-      end
-    end
-
     def override_keys; overrides.to_h.keys ;end
 
     def memento; resolved ;end

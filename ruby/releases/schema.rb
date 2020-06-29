@@ -55,7 +55,6 @@ module Releases
       def division_classes
         [
           Starters::Starter,
-          Docker::Files::NativeSegment,
           Frameworks::Framework,
           WebServers::WebServer,
           Repositories::Repositories,
@@ -63,8 +62,6 @@ module Releases
           OsPackages::OsPackages,
           Nodules::Nodules,
           Packages::Packages,
-          Replacements::Replacement,
-          WritePermissions::WritePermissions,
           Environments::Environment
         ]
       end

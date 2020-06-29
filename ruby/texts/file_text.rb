@@ -17,7 +17,7 @@ module Texts
 
     def file_name; origin_file_name.split('/').last ;end
 
-    def subpath; "home/engines/#{origin_path}" ;end
+    def subpath; "home/spaces/#{origin_path}" ;end
     def origin_path; origin_file_name[break_point .. -1].split('/')[0 .. -2].join('/') ;end
     def break_point; origin_file_name.index("#{directory}") ;end
     def to_s; origin_file_name ;end

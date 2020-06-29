@@ -4,16 +4,5 @@ require_relative 'package'
 module Packages
   class Packages < ::Releases::Division
 
-    class << self
-      def step_precedence
-        { late: [:run] }
-      end
-
-      def script_lot ;end
-      def inheritance_paths; __dir__ ;end
-    end
-
-    require_files_in :steps
-
   end
 end

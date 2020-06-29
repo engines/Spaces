@@ -2,23 +2,11 @@ require_relative '../resolutions/division'
 
 module Images
   class Subject < ::Resolutions::Division
-    class << self
-      def step_precedence
-        {
-          late: [:install],
-          last: [:inject, :source_persistence, :finish]        
-        }
-      end
 
-      def inheritance_paths; __dir__ ;end
-    end
-    
-    require_files_in :scripts, :steps
-
-    delegate([:docker_file, :identifier] => :resolution)
+    delegate([:identifier] => :resolution)
 
     def components
-      [docker_file, division_scripts, blueprint_scripts, injections].flatten
+      [division_scripts, blueprint_scripts, injections].flatten
     end
 
     def division_scripts

@@ -20,9 +20,7 @@ module Environments
               name: 1,
               title: 0,
               type: 0,
-              value: 0,
-              ask_at_build_time: 0,
-              build_time_only: 0
+              value: 0
             }
           ]
         }

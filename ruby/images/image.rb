@@ -6,14 +6,11 @@ module Images
 
     relation_accessor :subject
 
-    delegate(docker_file: :subject)
-
     def initialize(subject)
       self.subject = subject
     end
 
     def build
-      Docker::Image.build_from_dir(path_for(subject), { 'dockerfile' =>  docker_file.path })
     end
 
   end

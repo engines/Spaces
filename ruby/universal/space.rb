@@ -9,7 +9,6 @@ module Universal
           :containers,
           :images,
           :volumes,
-          :docker,
           :blueprints,
           :resolutions,
           :frameworks,
@@ -17,7 +16,7 @@ module Universal
           :nodules,
           :environments,
           :domains,
-          :users,
+          :users
         ]
       end
 
@@ -30,8 +29,8 @@ module Universal
       end
     end
 
-    def path; "/opt/engines/#{identifier}" ;end
-    def host; 'engines.internal' ;end
+    def path; "/opt/spaces/#{identifier}" ;end
+    def host; 'spaces.internal' ;end
 
     def method_missing(m, *args, &block)
       klass.space_map[m] || super

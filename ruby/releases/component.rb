@@ -1,21 +1,9 @@
 require_relative '../spaces/model'
-require_relative '../images/scripts'
-require_relative '../docker/files/steps'
 
 module Releases
   class Component < ::Spaces::Model
-    include Images::Scripts
-    include Docker::Files::Steps
 
     class << self
-      def step_precedence
-        { anywhere: files_in(:steps).map { |f| ::File.basename(f, '.rb') } }
-      end
-
-      def script_lot
-        files_in(:scripts).map { |f| ::File.basename(f, '.rb') }
-      end
-
       def require_files_in(*folders)
         [*folders].each { |f| files_in(f).each { |f| require f } }
       end
@@ -31,7 +19,7 @@ module Releases
 
     delegate([:release, :home_app_path, :context_identifier] => :stage)
 
-    def release_path; "build/#{script_path}" ;end
+    def release_path; "release/#{script_path}" ;end
 
     def to_s; struct ;end
 

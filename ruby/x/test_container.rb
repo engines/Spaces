@@ -5,6 +5,6 @@ def descriptor
   @descriptor ||= Spaces::Descriptor.new(
     repository: 'https://github.com/MarkRatjens/test_container.git',
     identifier: 'waverton',
-    branch: 'spaces'
+    branch: 'hashicorp'
   )
 end
