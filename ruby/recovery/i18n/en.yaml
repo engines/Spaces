@@ -13,7 +13,10 @@ en:
       spaces::thing/open_struct_from_json:
         The blueprint for '%{descriptor}' is not well formed. Results are unpredictable.
       blueprints::space/import_by_json:
-        The blueprint for '%{descriptor}' cannot be found.
+        The blueprint for '%{descriptor}' is not well formed. Results are unpredictable.
+
+    blueprints::space/import_by_json:
+      spaces::thing/open_struct_from_json:
 
     docker::files::steps/rescue_in_step_for:
       docker::files::steps/general_step_for:
