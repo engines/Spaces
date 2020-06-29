@@ -6,11 +6,7 @@ module Images
     delegate([:identifier] => :resolution)
 
     def components
-      [division_scripts, blueprint_scripts, injections].flatten
-    end
-
-    def division_scripts
-      related_divisions.map(&:scripts).flatten.compact.uniq(&:uniqueness)
+      [blueprint_scripts, injections].flatten
     end
 
     def blueprint_scripts; files_for(:scripts) ;end
