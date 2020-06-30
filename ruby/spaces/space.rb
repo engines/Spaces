@@ -64,7 +64,7 @@ module Spaces
       "#{path_for(model)}/#{model.file_name}"
     end
 
-    def file_names_for(directory, descriptor);
+    def file_names_for(directory, descriptor)
       Dir["#{file_path_for(directory, descriptor)}/**/*"].reject { |f| ::File.directory?(f) }
     end
 
@@ -77,6 +77,14 @@ module Spaces
     end
 
     def path; "#{universe.path}/#{identifier}" ;end
+
+    def unresolved_names_for(directory)
+      Dir[File.join(File.dirname(__FILE__), "../../unresolved/#{directory}/**/*")].reject { |f| ::File.directory?(f) }
+    end
+
+    def unresolved_directory_for(directory)
+      File.join(File.dirname(__FILE__), "../../unresolved/#{directory}/**/*")
+    end
 
     def ensure_space; FileUtils.mkdir_p(path) ;end
     def ensure_space_for(model); FileUtils.mkdir_p(path_for(model)) ;end
