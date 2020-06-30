@@ -14,7 +14,7 @@ module Images
     def injections; files_for(:injections) ;end
 
     def files_for(directory)
-      resolution.file_names_for(directory).map do |t|
+      resolution.blueprint_file_names_for(directory).map do |t|
         text_class.new(origin: t, directory: directory, context: self)
       end
     end

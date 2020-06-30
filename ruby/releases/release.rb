@@ -21,7 +21,7 @@ module Releases
 
     def stage_class; Stage ;end
 
-    def file_names_for(directory)
+    def blueprint_file_names_for(directory)
       blueprints.file_names_for(directory, context_identifier)
     end
 
