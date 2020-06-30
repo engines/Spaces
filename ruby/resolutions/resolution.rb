@@ -14,10 +14,12 @@ module Resolutions
     alias_accessor :blueprint, :predecessor
 
     def components
-      [terraforms].flatten
+      [packing, fencing, stuffing].flatten
     end
 
-    def terraforms; resolutions_for(:terraform) ;end
+    def packing; resolutions_for(:packer) ;end
+    def fencing; resolutions_for(:terraform) ;end
+    def stuffing; resolutions_for(:propellor) ;end
 
     def resolutions_for(directory)
       resolutions.unresolved_names_for(directory).map do |t|
