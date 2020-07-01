@@ -79,7 +79,7 @@ module Spaces
     def path; "#{universe.path}/#{identifier}" ;end
 
     def unresolved_names_for(directory)
-      Dir[File.join(File.dirname(__FILE__), "../../unresolved/#{directory}/**/*")].reject { |f| ::File.directory?(f) }
+      Dir[unresolved_directory_for(directory)].reject { |f| ::File.directory?(f) }
     end
 
     def unresolved_directory_for(directory)

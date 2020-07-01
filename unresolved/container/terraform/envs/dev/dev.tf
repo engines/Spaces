@@ -9,23 +9,11 @@ provider "lxd" {
 
 
 # ------------------------------------------------------------
-# postgres container
+# ^^identifier^^ container
 # ------------------------------------------------------------
 
-module "postgres" {
+module "^^identifier^^" {
   source = "./modules/turtle-container"
-  name  = "postgres"
-  image = "engines/beowulf/base/20200623/1143"
-}
-
-module "rails" {
-  source = "./modules/turtle-container"
-  name  = "rails"
-  image = "engines/beowulf/base/20200623/1143"
-}
-
-module "wap" {
-  source = "./modules/turtle-container"
-  name  = "wap"
+  name  = "^^identifier^^"
   image = "engines/beowulf/base/20200623/1143"
 }

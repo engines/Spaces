@@ -14,15 +14,17 @@ module Resolutions
     alias_accessor :blueprint, :predecessor
 
     def components
-      [packing, fencing, stuffing].flatten
+      [image_components, container_components].flatten
     end
 
-    def packing; resolutions_for(:packer) ;end
-    def fencing; resolutions_for(:terraform) ;end
-    def stuffing; resolutions_for(:propellor) ;end
+    def image_components; resolutions_for(:image) ;end
+    def container_components; resolutions_for(:container) ;end
 
     def resolutions_for(directory)
-      resolutions.unresolved_names_for(directory).map do |t|
+      [
+        resolutions.unresolved_names_for(directory),
+        blueprint_file_names_for(directory)
+      ].flatten.compact.map do |t|
         text_class.new(origin: t, directory: directory, context: self)
       end
     end
