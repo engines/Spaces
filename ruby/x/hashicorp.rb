@@ -3,8 +3,8 @@ require_relative 'save'
 
 def descriptor
   @descriptor ||= Spaces::Descriptor.new(
-    repository: 'https://github.com/MarkRatjens/test_container.git',
-    identifier: 'waverton',
+    repository: 'https://github.com/MarkRatjens/hashicorp.git',
+    identifier: 'jackson',
     branch: 'spaces'
   )
 end

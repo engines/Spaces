@@ -7,10 +7,29 @@ module Resolutions
 
     delegate(
       resolution: :itself,
+      resolutions: :universe,
       [:identifier, :home_app_path] => :descriptor
     )
 
     alias_accessor :blueprint, :predecessor
+
+    def components
+      [image_components, container_components].flatten
+    end
+
+    def image_components; resolutions_for(:image) ;end
+    def container_components; resolutions_for(:container) ;end
+
+    def resolutions_for(directory)
+      [
+        resolutions.unresolved_names_for(directory),
+        blueprint_file_names_for(directory)
+      ].flatten.compact.map do |t|
+        text_class.new(origin: t, directory: directory, context: self)
+      end
+    end
+
+    def text_class; Texts::FileText ;end
 
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint

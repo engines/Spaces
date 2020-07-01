@@ -6,11 +6,7 @@ module Images
     delegate([:identifier] => :resolution)
 
     def components
-      [division_scripts, blueprint_scripts, injections].flatten
-    end
-
-    def division_scripts
-      related_divisions.map(&:scripts).flatten.compact.uniq(&:uniqueness)
+      [blueprint_scripts, injections].flatten
     end
 
     def blueprint_scripts; files_for(:scripts) ;end
@@ -18,7 +14,7 @@ module Images
     def injections; files_for(:injections) ;end
 
     def files_for(directory)
-      resolution.file_names_for(directory).map do |t|
+      resolution.blueprint_file_names_for(directory).map do |t|
         text_class.new(origin: t, directory: directory, context: self)
       end
     end

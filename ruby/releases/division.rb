@@ -50,7 +50,9 @@ module Releases
       warn(error: e, klass: klass.name.singularize)
     end
 
-    def default ;end
+    def default
+      @default ||= OpenStruct.new
+    end
 
   end
 end
