@@ -13,14 +13,14 @@ src=/etc/apt/sources.list.d/$suite.list
 
 heading "Setting up sources.list for: $suite"
 
-uri=http://aptcacher.int.filterfish.org:3142/auto.mirror.devuan.org/merged
+uri=http://auto.mirror.devuan.org/merged
 component=main
 apt_conf=/etc/apt/apt.conf.d/01-minimal-install
 
 suites="$suite $suite-updates $suite-backports $suite-security"
 
 # Install a sensible sources.list
-echo "# Set up by packer - probably best not to touch it.\n" > $src
+printf "# Set up by packer - probably best not to touch it.\n\n" > $src
 for s in $suites; do
   echo "deb $uri $s $component" >> $src
 done
@@ -30,11 +30,11 @@ done
 
 heading "Setting up apt"
 cat > $apt_conf << EOF
+quiet true;
 APT::Install-Suggests "false";
 APT::Install-Recommends "false";
 APT::AutoRemove::SuggestsImportant "false";
 APT::AutoRemove::RecommendsImportant "false";
-
 DPkg::options {
   "--force-confold";
 }

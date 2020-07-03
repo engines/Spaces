@@ -1,4 +1,4 @@
-resource "turtle_container" "container" {
+resource "lxd_container" "turtle" {
   name      = var.name
   image     = var.image
   ephemeral = false

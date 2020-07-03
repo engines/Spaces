@@ -1,6 +1,7 @@
 {
   "variables": {
     "suite": "beowulf",
+    "tag": "",
     "datestamp": "{{isotime \"20060102\/0304\"}}"
   },
   "builders": [
@@ -8,7 +9,7 @@
       "name": "{{user `suite`}}",
       "type": "lxd",
       "image": "smelt:devuan/beowulf/debootstrap",
-      "output_image": "engines/{{user `suite`}}/base/{{user `datestamp`}}",
+      "output_image": "engines/{{user `suite`}}/base/{{user `datestamp`}}{{user `tag`}}",
       "publish_properties": {
         "description": "Engines {{user `suite`}} image",
         "aliases": "{{user `suite`}}",
