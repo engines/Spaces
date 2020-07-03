@@ -4,6 +4,7 @@ gem 'yajl-ruby'
 gem 'git'
 gem 'duplicate'
 gem 'i18n'
+gem 'ruby-terraform'
 gem 'docker-api'
 
 # Gems to support GUI web app.
