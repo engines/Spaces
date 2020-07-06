@@ -31,6 +31,16 @@ module Spaces
         alias_method to, from
         alias_method "#{to}=", "#{from}="
       end
+
+      def require_files_in(*folders)
+        [*folders].each { |f| files_in(f).each { |f| require f } }
+      end
+
+      def files_in(folder)
+        [inheritance_paths].flatten.map { |h| Dir["#{h}/#{folder}/*"] }.flatten
+      end
+
+      def inheritance_paths ;end
     end
 
     attr_accessor :struct, :klass

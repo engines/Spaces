@@ -6,11 +6,12 @@ module Universal
     class << self
       def space_names
         [
+          :blueprints,
+          :resolutions,
+          :terraform,
           :containers,
           :images,
           :volumes,
-          :blueprints,
-          :resolutions,
           :frameworks,
           :web_servers,
           :nodules,

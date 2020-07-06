@@ -8,7 +8,7 @@ module Resolutions
     delegate(
       resolution: :itself,
       resolutions: :universe,
-      [:identifier, :home_app_path] => :descriptor
+      home_app_path: :descriptor
     )
 
     alias_accessor :blueprint, :predecessor

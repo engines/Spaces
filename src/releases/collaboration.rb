@@ -5,7 +5,10 @@ module Releases
 
     relation_accessor :predecessor
 
-    delegate(outline: :schema)
+    delegate(
+      identifier: :descriptor,
+      outline: :schema
+    )
 
     def memento; OpenStruct.new(to_h) ;end
 

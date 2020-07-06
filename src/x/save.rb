@@ -1,5 +1,7 @@
 require_relative '../universal/space'
+require_relative '../spaces/descriptor'
 require_relative '../resolutions/resolution'
+require_relative '../terraform/terraform'
 
 def universe
   @u ||= Universal::Space.new
@@ -22,10 +24,22 @@ def resolution
   @resolution ||= universe.resolutions.by(descriptor) || Resolutions::Resolution.new(blueprint: blueprint)
 end
 
+def terraform
+  @terraform ||= Terraform::Terraform.new(descriptor: terraform_descriptor)
+end
+
+def terraform_descriptor
+  @terraform_descriptor = Spaces::Descriptor.new(identifier: 'development')
+end
+
 def clear
   @u = nil
   @blueprint = nil
   @resolution = nil
+end
+
+def save_terraform
+  universe.terraform.save(terraform)
 end
 
 def save_image_subject
