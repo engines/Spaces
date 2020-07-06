@@ -1,0 +1,46 @@
+{
+  "variables": {
+    "suite": "beowulf",
+    "tag": "",
+    "datestamp": "{{isotime \"20060102\/0304\"}}"
+  },
+  "builders": [
+    {
+      "name": "{{user `suite`}}",
+      "type": "lxd",
+      "image": "smelt:devuan/beowulf/debootstrap",
+      "output_image": "engines/{{user `suite`}}/base/{{user `datestamp`}}{{user `tag`}}",
+      "publish_properties": {
+        "description": "Engines {{user `suite`}} image",
+        "aliases": "{{user `suite`}}",
+        "architecture": "amd64",
+        "os": "devuan",
+        "release": "Devuan GNU/Linux 3.0"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files",
+      "destination": "tmp/"
+    },
+    {
+      "type": "file",
+      "source": "scripts/",
+      "destination": "tmp"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/provision-files",
+        "scripts/locale",
+        "scripts/apt",
+        "scripts/packages",
+        "scripts/supervisor",
+        "scripts/sshd",
+        "scripts/cleanup"
+      ]
+    }
+  ]
+}
