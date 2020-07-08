@@ -1,9 +1,6 @@
 require_relative '../spaces/schema'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
-require_relative '../images/subject'
-require_relative '../users/user'
-require_relative '../domains/domain'
 
 module Resolutions
   class Schema < ::Spaces::Schema
@@ -11,14 +8,11 @@ module Resolutions
     class << self
       def associative_classes
         [
-          Users::User,
-          Domains::Domain
         ]
       end
 
       def component_classes
         [
-          Images::Subject
         ]
       end
 
@@ -31,8 +25,7 @@ module Resolutions
 
       def naming_map
         {
-          anchor: :binding_anchor,
-          subject: :image_subject
+          anchor: :binding_anchor
         }
       end
 

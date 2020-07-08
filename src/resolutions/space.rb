@@ -22,8 +22,6 @@ module Resolutions
     end
 
     def save(model)
-      universe.users.save(model.user)
-
       model.components.map do |t|
         save_text(t)
         "#{t.release_path}"
