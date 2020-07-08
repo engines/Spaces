@@ -1,5 +1,5 @@
-require './ruby/spaces/controller'
-require './ruby/resolutions/resolution'
+require './src/spaces/controller'
+require './src/resolutions/resolution'
 
 module Resolutions
   class Controller < Spaces::Controller

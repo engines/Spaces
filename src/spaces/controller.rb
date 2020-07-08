@@ -1,6 +1,6 @@
-require './ruby/lib/string'
-require './ruby/universal/space'
-require './ruby/spaces/controller/error'
+require './src/lib/string'
+require './src/universal/space'
+require './src/spaces/controller/error'
 
 module Spaces
   class Controller

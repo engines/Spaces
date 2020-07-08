@@ -1,8 +1,8 @@
-require './ruby/blueprints/blueprint'
-require './ruby/spaces/controller'
-require './ruby/blueprints/title/controller'
-require './ruby/blueprints/description/controller'
-require './ruby/blueprints/memory/controller'
+require './src/blueprints/blueprint'
+require './src/spaces/controller'
+require './src/blueprints/title/controller'
+require './src/blueprints/description/controller'
+require './src/blueprints/memory/controller'
 
 module Blueprints
   class Controller < Spaces::Controller

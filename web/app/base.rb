@@ -1,4 +1,4 @@
-require './ruby/spaces/controller'
+require './src/spaces/controller'
 
 module App
   class Base < Sinatra::Base
