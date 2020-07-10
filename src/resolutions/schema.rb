@@ -1,9 +1,9 @@
-require_relative '../spaces/schema'
+require_relative '../releases/schema'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 
 module Resolutions
-  class Schema < ::Spaces::Schema
+  class Schema < ::Releases::Schema
 
     class << self
       def associative_classes
@@ -14,19 +14,6 @@ module Resolutions
       def component_classes
         [
         ]
-      end
-
-      def division_classes
-        [
-          Bindings::Bindings,
-          Bindings::Anchor
-        ]
-      end
-
-      def naming_map
-        {
-          anchor: :binding_anchor
-        }
       end
 
       def associative_divisions; @associative_divisions ||= map_for(associative_classes) ;end

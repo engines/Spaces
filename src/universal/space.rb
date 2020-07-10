@@ -10,7 +10,8 @@ module Universal
           :resolutions,
           :terraform,
           :containers,
-          :images
+          :images,
+          :providers
         ]
       end
 

@@ -33,7 +33,7 @@ module Spaces
         end
       end
 
-      def key_for(klass); mapped_key_for(klass.to_s.snakize.split('/').last.to_sym) ;end
+      def key_for(klass); mapped_key_for(klass.qualifier.to_sym) ;end
       def mapped_key_for(key); naming_map[key] || key ;end
     end
 
