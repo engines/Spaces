@@ -22,7 +22,7 @@ module Releases
     end
 
     def division_for(key)
-      schema.divisions[key]&.prototype(stage: self, label: key)
+      schema.divisions[key]&.prototype(collaboration: self, label: key)
     end
 
     def to_h

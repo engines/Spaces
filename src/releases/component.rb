@@ -3,9 +3,9 @@ require_relative '../spaces/model'
 module Releases
   class Component < ::Spaces::Model
 
-    relation_accessor :stage
+    relation_accessor :collaboration
 
-    delegate([:release, :home_app_path, :context_identifier] => :stage)
+    delegate([:release, :home_app_path, :context_identifier] => :collaboration)
 
     def release_path; "release/#{script_path}" ;end
 

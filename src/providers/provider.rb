@@ -6,8 +6,8 @@ module Providers
     class << self
       def identifier; qualifier ;end
 
-      def prototype(stage:, label:)
-        universe.providers.by(stage)
+      def prototype(collaboration:, label:)
+        universe.providers.by(collaboration)
       end
 
       def inheritance_paths; __dir__ ;end
@@ -15,7 +15,7 @@ module Providers
 
     require_files_in :stanzas
 
-    def struct; @struct ||= stage.struct.provider ;end
+    def struct; @struct ||= collaboration.struct.provider ;end
 
   end
 end

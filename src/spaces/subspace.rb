@@ -14,7 +14,7 @@ module Spaces
     def by(collaboration)
       i = collaboration.struct[super_qualifier].identifier
       load(i)
-      loaded.detect { |k| k.identifier == i }.new(stage: collaboration, label: super_qualifier)
+      loaded.detect { |k| k.identifier == i }.new(collaboration: collaboration, label: super_qualifier)
     end
 
     def super_qualifier
