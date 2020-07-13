@@ -1,5 +1,6 @@
 require_relative '../texts/file_text'
 require_relative '../releases/release'
+require_relative '../releases/schema'
 require_relative 'stanzas'
 
 module Terraform
@@ -7,6 +8,8 @@ module Terraform
     include Stanzas
 
     class << self
+      def schema_class; ::Releases::Schema ;end
+
       def stanza_lot
         files_in(:stanzas).map { |f| ::File.basename(f, '.rb') }
       end
@@ -20,6 +23,13 @@ module Terraform
 
     def content
       stanzas.flatten.compact.join("\n")
+    end
+
+    def division_map
+      @division_map ||= schema.keys.inject({}) do |m, k|
+        m[k] = resolutions.map { |r| r.division_map[k] }.compact
+        m
+      end
     end
 
     def components; files_for(:modules) ;end

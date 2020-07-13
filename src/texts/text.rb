@@ -8,7 +8,7 @@ module Texts
 
     attr_accessor :origin
 
-    delegate(stage: :context)
+    delegate(collaboration: :context)
 
     def resolved; @resolved ||= contains_interpolation? ? with_resolved_infixes : origin ;end
 

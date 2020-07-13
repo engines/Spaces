@@ -16,7 +16,7 @@ James: perhaps you could advise how I programmatically create a new directory un
 Spaces exist in a universe which you can create with the `Universal::Space` class:
 
 ```
-require_relative 'ruby/universal/space'
+require_relative 'src/universal/space'
 universe = Universal::Space.new
 ```
 
@@ -33,7 +33,7 @@ A `Spaces::Descriptor` object is the way spaces objects are saved and located in
 a common starting point is to start with a descriptor to locate a source blueprint. For example:
 
 ```
-require_relative 'ruby/spaces/descriptor'
+require_relative 'src/spaces/descriptor'
 descriptor = Spaces::Descriptor.new(
   repository: 'https://github.com/MarkRatjens/publify.git'
 )

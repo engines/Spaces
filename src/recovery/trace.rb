@@ -76,6 +76,6 @@ class String
     split('.').first.gsub('/', '::')
   end
 
-  def break_text; '/ruby/' ;end # FIX: will fail if source code is not under ruby folder
+  def break_text; '/src/' ;end # FIX: will fail if source code is not under src folder
 
 end

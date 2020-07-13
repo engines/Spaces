@@ -11,13 +11,7 @@ module Universal
           :terraform,
           :containers,
           :images,
-          :volumes,
-          :frameworks,
-          :web_servers,
-          :nodules,
-          :environments,
-          :domains,
-          :users
+          :providers
         ]
       end
 

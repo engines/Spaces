@@ -1,5 +1,5 @@
-require './ruby/blueprints/controller'
-require './ruby/resolutions/controller'
+require './src/blueprints/controller'
+require './src/resolutions/controller'
 
 module App
   class Api < Base
