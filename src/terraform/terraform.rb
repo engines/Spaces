@@ -35,17 +35,17 @@ module Terraform
     def components; files_for(:modules) ;end
 
     def files_for(directory)
-      environment_file_names_for(directory).map do |t|
+      target_file_names_for(directory).map do |t|
         text_class.new(origin: t, directory: directory, context: self)
       end
     end
 
-    def environment_file_names_for(directory)
-      Dir[environment_directory_for(directory)].reject { |f| ::File.directory?(f) }
+    def target_file_names_for(directory)
+      Dir[target_directory_for(directory)].reject { |f| ::File.directory?(f) }
     end
 
-    def environment_directory_for(directory)
-      File.join(File.dirname(__FILE__), "environment/#{directory}/**/*")
+    def target_directory_for(directory)
+      File.join(File.dirname(__FILE__), "target/#{directory}/**/*")
     end
 
     def text_class; Texts::FileText ;end

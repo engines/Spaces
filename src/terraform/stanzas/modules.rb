@@ -8,7 +8,7 @@ module Terraform
         context.resolutions.map do |r|
           %Q(
             module "#{r.identifier}" {
-              source = "./modules/turtle-container"
+              source = "./modules/turtle"
               name  = "#{r.identifier}"
               image = "engines/beowulf/base/20200623/1143"
             }
