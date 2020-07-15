@@ -1,6 +1,5 @@
 require_relative '../releases/schema'
-require_relative '../bindings/bindings'
-require_relative '../bindings/anchor'
+require_relative '../clients/client'
 
 module Resolutions
   class Schema < ::Releases::Schema
@@ -8,6 +7,7 @@ module Resolutions
     class << self
       def associative_classes
         [
+          Clients::Client
         ]
       end
 
