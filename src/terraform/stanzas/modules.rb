@@ -10,7 +10,7 @@ module Terraform
             module "#{r.identifier}" {
               source = "./modules/turtle"
               name  = "#{r.identifier}"
-              image = "engines/beowulf/base/20200623/1143"
+              image = "#{r.image_name}"
             }
           )
         end

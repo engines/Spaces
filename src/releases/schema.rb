@@ -27,7 +27,8 @@ module Releases
         [
           Bindings::Bindings,
           Bindings::Anchor,
-          Providers::Provider
+          Providers::Provider,
+          Images::Image
         ]
       end
     end
