@@ -22,7 +22,11 @@ module Terraform
     def resolutions; universe.resolutions.all ;end
 
     def content
-      stanzas.flatten.compact.join("\n")
+      declaratives.flatten.compact.join("\n")
+    end
+
+    def declaratives
+      stanzas&.map(&:declaratives) || []
     end
 
     def division_map

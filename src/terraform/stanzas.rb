@@ -5,13 +5,13 @@ module Terraform
     include Spaces::Constantizing
 
     def stanzas
-      stanza_lot&.map { |s| stanza_for(s) }&.map(&:declaratives)
+      stanza_lot&.map { |s| stanza_for(s) }
     end
 
     def stanza_for(symbol)
       begin
         class_for(stanza_concern, symbol).new(self)
-      rescue NameError
+      rescue NameError => e
         warn(error: e, name: namespaced_name(namespace_for(stanza_concern), symbol))
       end
     end
