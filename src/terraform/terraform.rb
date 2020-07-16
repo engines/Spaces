@@ -21,6 +21,14 @@ module Terraform
 
     def resolutions; universe.resolutions.all ;end
 
+    def bindings
+      resolutions_with_bindings.map { |r| r.bindings.all }.flatten.compact
+    end
+
+    def resolutions_with_bindings
+      resolutions.select { |r| r.respond_to? :bindings }
+    end
+
     def content
       declaratives.flatten.compact.join("\n")
     end

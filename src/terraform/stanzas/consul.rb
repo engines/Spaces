@@ -8,7 +8,7 @@ module Terraform
         %Q(
           provider "#{identifier}" {
             address = "#{address}"
-            # datacenter = "#{datacenter_identifier || 'any'}"
+            # datacenter = "any"
           }
         )
       end
@@ -16,10 +16,9 @@ module Terraform
       def identifier; 'consul' ;end
 
       def address
-        "#{['consul', datacenter_identifier, universe.host].compact.join('.')}:#{port}"
+        "#{['consul', universe.host].join('.')}:#{port}"
       end
 
-      def datacenter_identifier; ;end
       def port; 8500 ;end
 
     end
