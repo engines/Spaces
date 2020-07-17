@@ -1,16 +1,10 @@
-require_relative '../spaces/model'
-require_relative 'subject'
+require_relative '../releases/division'
 
 module Images
-  class Image < ::Spaces::Model
+  class Image < ::Releases::Division
 
-    relation_accessor :subject
-
-    def initialize(subject)
-      self.subject = subject
-    end
-
-    def build
+    class << self
+      def default_name; 'engines/beowulf/base/20200623/1143' ;end
     end
 
   end

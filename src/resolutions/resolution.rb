@@ -1,5 +1,4 @@
-require_relative '../spaces/model'
-require_relative 'schema'
+require_relative '../images/image'
 require_relative 'release'
 
 module Resolutions
@@ -12,6 +11,14 @@ module Resolutions
     )
 
     alias_accessor :blueprint, :predecessor
+
+    def image_name
+      image&.name
+    rescue NoMethodError
+      image_class.default_name
+    end
+
+    def image_class; Images::Image ;end
 
     def components
       [image_components, container_components].flatten

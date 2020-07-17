@@ -1,4 +1,6 @@
 require_relative '../spaces/schema'
+require_relative '../bindings/bindings'
+require_relative '../bindings/anchor'
 require_relative '../providers/provider'
 
 module Releases
@@ -25,7 +27,8 @@ module Releases
         [
           Bindings::Bindings,
           Bindings::Anchor,
-          Providers::Provider
+          Providers::Provider,
+          Images::Image
         ]
       end
     end
