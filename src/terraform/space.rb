@@ -6,7 +6,7 @@ module Terraform
 
     def save(model)
       model.components.each { |t| save_text(t) }
-      _save(model, content: model.content, as: :tf)
+      model.stanzas.each { |s| _save(s, content: s.declaratives, as: :tf) }
     end
 
     def init(model); execute(:init, model) ;end

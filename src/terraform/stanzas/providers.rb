@@ -5,7 +5,7 @@ module Terraform
     class Providers < ::Terraform::Stanza
 
       def declaratives
-        divisions.map(&:declaratives)
+        divisions.map(&:declaratives).join("\n")
       end
 
       def divisions

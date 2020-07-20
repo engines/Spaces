@@ -13,7 +13,7 @@ module Terraform
               image = "#{r.image_name}"
             }
           )
-        end
+        end.join("\n")
       end
 
     end

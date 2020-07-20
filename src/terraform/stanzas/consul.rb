@@ -6,17 +6,15 @@ module Terraform
 
       def declaratives
         %Q(
-          provider "#{identifier}" {
+          provider "#{qualifier}" {
             address = "#{address}"
             # datacenter = "any"
           }
         )
       end
 
-      def identifier; 'consul' ;end
-
       def address
-        "#{['consul', universe.host].join('.')}:#{port}"
+        "#{[qualifier, universe.host].join('.')}:#{port}"
       end
 
       def port; 8500 ;end
