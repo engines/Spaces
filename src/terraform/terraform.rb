@@ -29,14 +29,6 @@ module Terraform
       resolutions.select { |r| r.respond_to? :bindings }
     end
 
-    def content
-      declaratives.flatten.compact.join("\n")
-    end
-
-    def declaratives
-      stanzas&.map(&:declaratives) || []
-    end
-
     def division_map
       @division_map ||= schema.keys.inject({}) do |m, k|
         m[k] = resolutions.map { |r| r.division_map[k] }.compact

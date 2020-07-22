@@ -17,7 +17,7 @@ module Terraform
               }
             }
           )
-        end
+        end.join("\n")
       end
 
       def bindings_with_variables; context.bindings.reject { |b| b.variables.to_h.empty? } ;end
