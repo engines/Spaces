@@ -1,6 +1,6 @@
 require_relative '../provider'
 
-module Terraform
+module Provisioning
   module Providers
     module Lxd
       class Lxd < Provider

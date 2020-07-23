@@ -3,7 +3,7 @@ require_relative '../releases/release'
 require_relative '../releases/schema'
 require_relative 'stanzas'
 
-module Terraform
+module Provisioning
   class Terraform < ::Releases::Release
     include Stanzas
 

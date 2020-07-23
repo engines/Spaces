@@ -1,6 +1,6 @@
 require_relative '../stanza'
 
-module Terraform
+module Provisioning
   module Stanzas
     class Providers < Stanza
 

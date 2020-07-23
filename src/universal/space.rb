@@ -8,7 +8,7 @@ module Universal
         [
           :blueprints,
           :resolutions,
-          :terraform,
+          :provisioning,
           :containers,
           :images
         ]

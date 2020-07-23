@@ -1,7 +1,7 @@
 require_relative '../releases/division'
 require_relative 'stanzas'
 
-module Terraform
+module Provisioning
   class Division < ::Releases::Division
     include Stanzas
 

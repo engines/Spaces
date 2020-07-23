@@ -1,6 +1,6 @@
 require_relative '../../../stanza'
 
-module Terraform
+module Provisioning
   module Providers
     module Docker
       module Stanzas

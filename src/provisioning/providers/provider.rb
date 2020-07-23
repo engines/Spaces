@@ -1,6 +1,6 @@
 require_relative '../division'
 
-module Terraform
+module Provisioning
   module Providers
     class Provider < Division
 
@@ -8,7 +8,7 @@ module Terraform
         def identifier; qualifier ;end
 
         def prototype(collaboration:, label:)
-          universe.terraform.providers.by(collaboration)
+          universe.provisioning.providers.by(collaboration)
         end
 
         def inheritance_paths; __dir__ ;end

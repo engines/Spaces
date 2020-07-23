@@ -1,6 +1,6 @@
 require_relative '../../spaces/subspace'
 
-module Terraform
+module Provisioning
   module Providers
     class Space < ::Spaces::Subspace
 
