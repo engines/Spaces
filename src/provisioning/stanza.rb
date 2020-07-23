@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 
-module Terraform
+module Provisioning
   class Stanza < ::Spaces::Model
 
     relation_accessor :context

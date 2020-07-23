@@ -1,7 +1,7 @@
 require_relative '../spaces/schema'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
-require_relative '../terraform/providers/provider'
+require_relative '../provisioning/providers/provider'
 
 module Releases
   class Schema < ::Spaces::Schema
@@ -27,7 +27,7 @@ module Releases
         [
           Bindings::Bindings,
           Bindings::Anchor,
-          Terraform::Providers::Provider,
+          Provisioning::Providers::Provider,
           Images::Image
         ]
       end

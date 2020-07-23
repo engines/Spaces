@@ -1,6 +1,6 @@
 require_relative '../spaces/constantizing'
 
-module Terraform
+module Provisioning
   module Stanzas
     include Spaces::Constantizing
 

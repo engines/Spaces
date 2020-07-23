@@ -2,11 +2,11 @@ require 'ruby_terraform'
 require_relative '../spaces/space'
 require_relative 'providers/space'
 
-module Terraform
+module Provisioning
   class Space < ::Spaces::Space
 
     def providers
-      @providers ||= ::Terraform::Providers::Space.new
+      @providers ||= ::Provisioning::Providers::Space.new
     end
 
     def save(model)
@@ -23,10 +23,10 @@ module Terraform
     def execute(command, model)
       Dir.chdir(path_for(model))
       bridge.send(command)
-    rescue RubyTerraform::Errors::ExecutionError => e
+    rescue RubyProvisioning::Errors::ExecutionError => e
       warn(error: e, descriptor: model.descriptor, verbosity: [:error])
     end
 
-    def bridge; RubyTerraform ;end
+    def bridge; RubyProvisioning ;end
   end
 end

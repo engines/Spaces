@@ -1,10 +1,10 @@
 require_relative '../bridges/space'
-require_relative '../terraform/space'
+require_relative '../provisioning/space'
 
 module Containers
   class Space < ::Bridges::Space
 
-    def bridge; @bridge ||= Terraform::Space.new ;end
+    def bridge; @bridge ||= Provisioning::Space.new ;end
 
   end
 end
