@@ -2,7 +2,7 @@ require_relative '../stanza'
 
 module Terraform
   module Stanzas
-    class Providers < ::Terraform::Stanza
+    class Providers < Stanza
 
       def declaratives
         divisions.map(&:declaratives).join("\n")

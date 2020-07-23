@@ -2,7 +2,7 @@ require_relative '../stanza'
 
 module Terraform
   module Stanzas
-    class ConsulKeys < ::Terraform::Stanza
+    class ConsulKeys < Stanza
 
       def declaratives
         bindings_with_variables.map do |b|

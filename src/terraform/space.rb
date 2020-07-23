@@ -1,8 +1,13 @@
 require 'ruby_terraform'
 require_relative '../spaces/space'
+require_relative 'providers/space'
 
 module Terraform
   class Space < ::Spaces::Space
+
+    def providers
+      @providers ||= ::Terraform::Providers::Space.new
+    end
 
     def save(model)
       model.components.each { |t| save_text(t) }
