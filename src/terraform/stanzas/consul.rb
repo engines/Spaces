@@ -2,7 +2,7 @@ require_relative '../stanza'
 
 module Terraform
   module Stanzas
-    class Consul < ::Terraform::Stanza
+    class Consul < Stanza
 
       def declaratives
         %Q(
