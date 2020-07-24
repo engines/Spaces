@@ -1,8 +1,8 @@
-require_relative '../../spaces/subspace'
+require_relative '../../releases/division_space'
 
 module Provisioning
   module Providers
-    class Space < ::Spaces::Subspace
+    class Space < Releases::DivisionSpace
 
       class << self
         def default_model_class
@@ -10,8 +10,8 @@ module Provisioning
         end
       end
 
-      def load(identifier)
-        require_relative("#{identifier}/#{identifier}")
+      def load(type)
+        require_relative("#{type}/#{type}")
       end
 
     end

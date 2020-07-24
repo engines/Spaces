@@ -8,6 +8,7 @@ module Universal
         [
           :blueprints,
           :resolutions,
+          :packing,
           :provisioning,
           :containers,
           :images
