@@ -23,10 +23,10 @@ module Provisioning
     def execute(command, model)
       Dir.chdir(path_for(model))
       bridge.send(command)
-    rescue RubyProvisioning::Errors::ExecutionError => e
+    rescue RubyTerraform::Errors::ExecutionError => e
       warn(error: e, descriptor: model.descriptor, verbosity: [:error])
     end
 
-    def bridge; RubyProvisioning ;end
+    def bridge; RubyTerraform ;end
   end
 end
