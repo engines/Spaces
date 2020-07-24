@@ -36,6 +36,11 @@ en:
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
+    releases::division/subdivision_class:
+      releases::division/const_get: |
+        There is no source code for subdivision class %{klass}.
+        Substituting OpenStruct.
+
     spaces::model/schema_class:
       spaces::model/require_relative:
         A schema for %{namespace} could not be found. Substituting %{subsitution}.

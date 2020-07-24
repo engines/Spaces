@@ -11,17 +11,11 @@ module Spaces
 
     delegate(loaded: :klass)
 
-    def by(collaboration)
-      i = collaboration.struct[super_qualifier].identifier
-      load(i)
-      loaded.detect { |k| k.identifier == i }.new(collaboration: collaboration, label: super_qualifier)
-    end
-
     def super_qualifier
       default_model_class.qualifier
     end
 
-    def load(identifier) ;end
+    def load(type) ;end
 
   end
 end

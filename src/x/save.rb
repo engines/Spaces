@@ -21,7 +21,7 @@ def blueprint
 end
 
 def resolution
-  @resolution ||= universe.resolutions.by(descriptor) || Resolutions::Resolution.new(blueprint: blueprint)
+  @resolution ||= universe.resolutions.by(descriptor)
 end
 
 def provisioning

@@ -6,7 +6,7 @@ module Provisioning
   class Space < ::Spaces::Space
 
     def providers
-      @providers ||= ::Provisioning::Providers::Space.new
+      @providers ||= Providers::Space.new
     end
 
     def save(model)

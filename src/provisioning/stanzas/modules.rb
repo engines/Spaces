@@ -10,10 +10,9 @@ module Provisioning
             module "#{r.identifier}" {
               source = "./modules/turtle"
               name  = "#{r.identifier}"
-              image = "#{r.image_name}"
             }
           )
-        end.join("\n")
+        end.flatten.join("\n")
       end
 
     end
