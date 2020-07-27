@@ -1,8 +1,8 @@
-require_relative '../stanza'
+require_relative '../../releases/stanza'
 
 module Provisioning
   module Stanzas
-    class Modules < Stanza
+    class Modules < ::Releases::Stanza
 
       def declaratives
         context.resolutions.map do |r|

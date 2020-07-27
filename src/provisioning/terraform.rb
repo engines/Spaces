@@ -1,18 +1,13 @@
 require_relative '../texts/file_text'
 require_relative '../releases/release'
 require_relative '../releases/schema'
-require_relative 'stanzas'
+require_relative 'providers/provider'
 
 module Provisioning
   class Terraform < ::Releases::Release
-    include Stanzas
 
     class << self
       def schema_class; ::Releases::Schema ;end
-
-      def stanza_lot
-        files_in(:stanzas).map { |f| ::File.basename(f, '.rb') }
-      end
 
       def inheritance_paths; __dir__ ;end
     end

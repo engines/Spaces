@@ -2,7 +2,7 @@ require_relative '../spaces/schema'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../packing/builders/builders'
-require_relative '../provisioning/providers/provider'
+require_relative '../provisioning/providers/providers'
 
 module Releases
   class Schema < ::Spaces::Schema
@@ -30,7 +30,7 @@ module Releases
           Bindings::Bindings,
           Bindings::Anchor,
           Packing::Builders::Builders,
-          Provisioning::Providers::Provider
+          Provisioning::Providers::Providers
         ]
       end
     end

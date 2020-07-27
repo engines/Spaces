@@ -1,8 +1,8 @@
-require_relative '../stanza'
+require_relative '../../releases/stanza'
 
 module Provisioning
   module Stanzas
-    class ConsulKeys < Stanza
+    class ConsulKeys < ::Releases::Stanza
 
       def declaratives
         bindings_with_variables.map do |b|
