@@ -15,10 +15,6 @@ module Releases
       @related_divisions ||= collaboration.divisions
     end
 
-    def scripts
-      [super, all&.map(&:scripts)].flatten.compact.uniq(&:uniqueness)
-    end
-
     def all
       @all ||= struct&.map { |s| subdivision_for(s) }&.compact
     end
@@ -33,7 +29,6 @@ module Releases
     end
 
     def subdivision_class; Module.const_get(klass.name.singularize) ;end
-    def release_path; "#{super}/#{label}" ;end
 
     def memento; all&.map(&:memento) || super ;end
 

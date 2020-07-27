@@ -19,7 +19,6 @@ module Releases
 
     delegate([:release, :home_app_path, :context_identifier] => :collaboration)
 
-    def release_path; "release/#{script_path}" ;end
     def declaratives
       stanzas.map(&:declaratives)
     end
