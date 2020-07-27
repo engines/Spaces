@@ -24,6 +24,24 @@ module Provisioning
       resolutions.select { |r| r.respond_to? :bindings }
     end
 
+    def providers
+      [explicit_providers, providers_implied_in_builders].flatten.uniq(&:uniqueness)
+    end
+
+    def explicit_providers
+      division_map[:providers]&.map(&:all) || []
+    end
+
+    def providers_implied_in_builders
+      builders.map do |b|
+        universe.provisioning.providers.by(struct: b.struct, division: self)
+      end
+    end
+
+    def builders
+      division_map[:builders]&.map(&:all)&.flatten || []
+    end
+
     def division_map
       @division_map ||= schema.keys.inject({}) do |m, k|
         m[k] = resolutions.map { |r| r.division_map[k] }.compact
