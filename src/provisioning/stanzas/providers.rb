@@ -1,15 +1,11 @@
-require_relative '../stanza'
+require_relative '../../releases/stanza'
 
 module Provisioning
   module Stanzas
-    class Providers < Stanza
+    class Providers < ::Releases::Stanza
 
       def declaratives
-        divisions.map(&:declaratives).join("\n")
-      end
-
-      def divisions
-        context.division_map[:provider].uniq(&:uniqueness)
+        context.providers.map(&:declaratives).join("\n")
       end
 
     end

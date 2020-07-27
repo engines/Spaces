@@ -1,7 +1,7 @@
-require_relative '../spaces/model'
+require_relative 'component'
 
 module Releases
-  class Collaboration < ::Spaces::Model
+  class Collaboration < Component
 
     relation_accessor :predecessor
 

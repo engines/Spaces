@@ -1,6 +1,6 @@
 require_relative '../spaces/constantizing'
 
-module Provisioning
+module Releases
   module Stanzas
     include Spaces::Constantizing
 

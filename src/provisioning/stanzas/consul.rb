@@ -1,8 +1,8 @@
-require_relative '../stanza'
+require_relative '../../releases/stanza'
 
 module Provisioning
   module Stanzas
-    class Consul < Stanza
+    class Consul < ::Releases::Stanza
 
       def declaratives
         %Q(

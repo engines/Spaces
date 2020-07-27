@@ -1,6 +1,6 @@
 require_relative '../spaces/model'
 
-module Provisioning
+module Releases
   class Stanza < ::Spaces::Model
 
     relation_accessor :context

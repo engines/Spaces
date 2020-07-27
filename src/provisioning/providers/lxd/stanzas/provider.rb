@@ -1,10 +1,10 @@
-require_relative '../../../stanza'
+require_relative '../../../../releases/stanza'
 
 module Provisioning
   module Providers
     module Lxd
       module Stanzas
-        class Provider < Stanza
+        class Provider < ::Releases::Stanza
 
           def declaratives
             %Q(
