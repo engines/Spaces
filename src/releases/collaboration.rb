@@ -10,6 +10,8 @@ module Releases
       outline: :schema
     )
 
+    def context_identifier; identifier ;end
+
     def memento; OpenStruct.new(to_h) ;end
 
     def divisions; division_map.values ;end
