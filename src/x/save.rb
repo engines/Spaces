@@ -1,6 +1,7 @@
 require_relative '../universal/space'
 require_relative '../spaces/descriptor'
 require_relative '../resolutions/resolution'
+require_relative '../packing/pack'
 require_relative '../provisioning/provisions'
 
 def universe
@@ -24,6 +25,10 @@ def resolution
   @resolution ||= universe.resolutions.by(descriptor)
 end
 
+def pack
+  @pack ||= Packing::Pack.new(resolution)
+end
+
 def provisions
   @provisions ||= Provisioning::Provisions.new(provisions_descriptor)
 end
@@ -42,8 +47,8 @@ def save_provisions
   universe.provisioning.save(provisions)
 end
 
-def save_image_subject
-  universe.images.save(resolution.image_subject)
+def save_pack
+  universe.packing.save(pack)
 end
 
 def save_resolution
