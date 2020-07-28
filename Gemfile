@@ -5,7 +5,7 @@ gem 'git'
 gem 'duplicate'
 gem 'i18n'
 gem 'ruby-terraform'
-gem 'docker-api'
+gem 'packer-client'
 
 # Gems to support GUI web app.
 gem 'sinatra'
