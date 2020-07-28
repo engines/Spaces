@@ -4,7 +4,7 @@ require_relative '../releases/schema'
 require_relative 'providers/provider'
 
 module Provisioning
-  class Terraform < ::Releases::Release
+  class Provisions < ::Releases::Release
 
     class << self
       def schema_class; ::Releases::Schema ;end
