@@ -1,7 +1,7 @@
 require_relative '../universal/space'
 require_relative '../spaces/descriptor'
 require_relative '../resolutions/resolution'
-require_relative '../provisioning/terraform'
+require_relative '../provisioning/provisions'
 
 def universe
   @u ||= Universal::Space.new
@@ -24,12 +24,12 @@ def resolution
   @resolution ||= universe.resolutions.by(descriptor)
 end
 
-def provisioning
-  @provisioning ||= Provisioning::Terraform.new(descriptor: provisioning_descriptor)
+def provisions
+  @provisions ||= Provisioning::Provisions.new(descriptor: provisions_descriptor)
 end
 
-def provisioning_descriptor
-  @provisioning_descriptor = Spaces::Descriptor.new(identifier: 'development')
+def provisions_descriptor
+  @provisions_descriptor = Spaces::Descriptor.new(identifier: 'development')
 end
 
 def clear
@@ -38,8 +38,8 @@ def clear
   @resolution = nil
 end
 
-def save_provisioning
-  universe.provisioning.save(provisioning)
+def save_provisions
+  universe.provisioning.save(provisions)
 end
 
 def save_image_subject
