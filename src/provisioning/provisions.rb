@@ -69,8 +69,8 @@ module Provisioning
 
     def file_name; identifier ;end
 
-    def initialize(struct: nil, descriptor: nil)
-      self.struct = duplicate(struct) || OpenStruct.new
+    def initialize(descriptor)
+      self.struct = OpenStruct.new
       self.struct.descriptor = descriptor&.memento if descriptor
     end
 

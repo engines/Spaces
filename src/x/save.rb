@@ -25,7 +25,7 @@ def resolution
 end
 
 def provisions
-  @provisions ||= Provisioning::Provisions.new(descriptor: provisions_descriptor)
+  @provisions ||= Provisioning::Provisions.new(provisions_descriptor)
 end
 
 def provisions_descriptor
