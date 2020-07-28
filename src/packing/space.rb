@@ -1,3 +1,4 @@
+require 'packer'
 require_relative '../spaces/space'
 require_relative 'builders/space'
 
