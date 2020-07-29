@@ -5,6 +5,10 @@ module Packing
     module Docker
       class Docker < Builder
 
+        class << self
+          def safety_overrides; { privileged: false } ;end
+        end
+
         def export
           memento.tap { |m| m[:export_path] = "#{identifier}.tar" }
         end
