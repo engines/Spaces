@@ -43,7 +43,7 @@ module Provisioning
     end
 
     def division_map
-      @division_map ||= schema.keys.inject({}) do |m, k|
+      @division_map ||= schema_keys.inject({}) do |m, k|
         m[k] = resolutions.map { |r| r.division_map[k] }.compact
         m
       end
