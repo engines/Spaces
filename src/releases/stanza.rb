@@ -5,7 +5,7 @@ module Releases
 
     relation_accessor :context
 
-    delegate(identifier: :context)
+    delegate([:identifier, :collaboration] => :context)
 
     def initialize(context)
       self.context = context

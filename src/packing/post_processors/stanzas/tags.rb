@@ -6,10 +6,10 @@ module Packing
       class Tags < ::Releases::Stanza
 
         def to_h
-          context.collaboration.builders.all.map do |b|
+          collaboration.builders.all.map do |b|
             {
               type: "#{b.type}-tag",
-              repository: "#{b.collaboration.client.identifier}/#{b.collaboration.identifier}",
+              repository: collaboration.repository_name,
               tag: 'latest'
             }
           end
