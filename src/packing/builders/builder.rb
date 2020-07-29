@@ -11,7 +11,7 @@ module Packing
       end
 
       def identifier
-        name
+        type
       end
 
     end
