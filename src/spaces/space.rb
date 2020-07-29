@@ -47,10 +47,6 @@ module Spaces
       _save(model, content: model.memento.deep_to_h.to_json, as: :json)
     end
 
-    def save_tar(model)
-      %x(cd #{path_for(model)}; tar -czf #{path_for(model)}.tgz . 2>&1)
-    end
-
     def delete(model)
       FileUtils.rm_rf("#{path}/#{model.identifier}")
     end
