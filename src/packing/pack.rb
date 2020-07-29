@@ -3,6 +3,12 @@ require_relative '../releases/release'
 module Packing
   class Pack < ::Releases::Release
 
+    # class << self
+    #   def inheritance_paths; __dir__ ;end
+    # end
+
+    require_files_in :stanzas
+
     delegate(
       [:identifier, :builders] => :resolution
     )
@@ -12,16 +18,22 @@ module Packing
     alias_method :memento, :struct
 
     def export
-      OpenStruct.new(builders: builders.all.map(&:export))
+      struct_for(builders.all.map(&:export))
     end
 
     def commit
-      OpenStruct.new(builders: builders.all.map(&:commit))
+      struct_for(builders.all.map(&:commit))
     end
 
     def initialize(resolution)
-      self.struct = OpenStruct.new(builders: resolution.memento.builders)
+      self.struct = struct_for(resolution.memento.builders)
       self.resolution = resolution
+    end
+
+    def struct_for(builders)
+      OpenStruct.new(
+        builders: builders
+      )
     end
 
   end
