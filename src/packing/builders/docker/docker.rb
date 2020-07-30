@@ -9,12 +9,14 @@ module Packing
           def safety_overrides; { privileged: false } ;end
         end
 
+        alias_method :super_memento, :memento
+
         def export
-          memento.tap { |m| m[:export_path] = "#{identifier}.tar" }
+          super_memento.tap { |m| m[:export_path] = "#{identifier}.tar" }
         end
 
-        def commit
-          memento.tap { |m| m[:commit] = true }
+        def memento
+          super.tap { |m| m[:commit] = true }
         end
 
       end
