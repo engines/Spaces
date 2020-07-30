@@ -92,7 +92,9 @@ module Spaces
     end
 
     def _save(model, content:, as: nil)
-      ::File.write([writing_name_for(model), as].compact.join('.'), content)
+      model.tap do |m|
+        ::File.write([writing_name_for(m), as].compact.join('.'), content)
+      end
     end
 
   end
