@@ -56,6 +56,14 @@ module Packing
     # def inspect(model) ;end
     def validate(model) ;end
 
+    def unexecuted_anchors_for(command, model)
+      unique_anchors_for(model)&.reject { |d| encloses_good_result?(command, d) } || []
+    end
+
+    def unique_anchors_for(model)
+      model.anchor_descriptors&.uniq(&:uniqueness)
+    end
+
     protected
 
     def execute(command, model)

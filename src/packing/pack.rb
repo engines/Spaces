@@ -4,7 +4,7 @@ module Packing
   class Pack < ::Releases::Release
 
     delegate(
-      [:identifier, :builders, :client] => :resolution
+      [:identifier, :builders, :client, :anchor_descriptors] => :resolution
     )
 
     alias_accessor :resolution, :predecessor
