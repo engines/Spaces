@@ -17,6 +17,28 @@ module Packing
       @builders ||= Builders::Space.new
     end
 
+    def encloses_commit?(descriptor); encloses_good_result?(:commit, descriptor) ;end
+    def encloses_export?(descriptor); encloses_good_result?(:export, descriptor) ;end
+
+    def encloses_good_result?(command, descriptor)
+      encloses_result?(command, descriptor) && with_good_artifacts?(command, descriptor)
+    end
+
+    def encloses_result?(command, descriptor)
+      Dir.exist?("#{path_for(descriptor)}/#{command}")
+    end
+
+    def with_good_artifacts?(command, descriptor)
+      artifacts_by(command, descriptor)&.any?(&:id)
+    end
+
+    def artifacts_by(command, descriptor)
+      Dir.chdir(path_for(descriptor))
+      YAML::load(::File.read("#{command}/artifacts.yaml"))
+    rescue Errno::ENOENT => e
+      nil
+    end
+
     def save_json(model)
       model.tap do |m|
         ::File.write("#{path_for(model)}/export.json", m.export.deep_to_h.to_json)
