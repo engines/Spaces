@@ -10,7 +10,7 @@ module Packing
             {
               type: "#{b.type}-tag",
               repository: collaboration.repository_name,
-              tag: 'latest'
+              tags: 'latest'
             }
           end
         end
