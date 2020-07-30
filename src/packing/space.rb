@@ -20,7 +20,6 @@ module Packing
     def save_json(model)
       super
       ::File.write(export_name_for(model), model.export.deep_to_h.to_json)
-      ::File.write(commit_name_for(model), model.commit.deep_to_h.to_json)
     end
 
     alias_method :save, :save_json
@@ -38,7 +37,7 @@ module Packing
     end
 
     def export_name_for(model); "#{path_for(model)}/export.json" ;end
-    def commit_name_for(model); "#{path_for(model)}/commit.json" ;end
+    def commit_name_for(model); "#{writing_name_for(model)}.json" ;end
 
     def push(model) ;end
     def fix(model) ;end
