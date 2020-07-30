@@ -14,7 +14,7 @@ module Packing
     def repository_name; "#{client.identifier}/#{identifier}" ;end
 
     def export; struct_for(builders.all.map(&:export)) ;end
-    def memento; super.merge(struct_for(builders.all.map(&:memento))) ;end
+    def memento; super.merge(struct_for(builders.all.map(&:commit))) ;end
 
     def struct_for(builders); OpenStruct.new(builders: builders) ;end
 
