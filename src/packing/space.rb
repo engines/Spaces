@@ -11,7 +11,16 @@ module Packing
       end
     end
 
-    alias_method :by, :by_json
+    delegate(resolutions: :universe)
+
+    def by(descriptor, klass = default_model_class)
+      by_json(descriptor, klass)
+    rescue Errno::ENOENT => e
+      warn(error: e, descriptor: descriptor, klass: klass)
+      klass.new(resolutions.by(descriptor)).tap do |m|
+        save(m)
+      end
+    end
 
     def builders
       @builders ||= Builders::Space.new
@@ -75,7 +84,12 @@ module Packing
           ::File.write("#{command}/output.yaml", b.to_yaml)
           ::File.write("#{command}/artifacts.yaml", b.artifacts.to_yaml)
         end
+        execute_on_anchors_for(command, model)
       end
+    end
+
+    def execute_on_anchors_for(command, model)
+      unexecuted_anchors_for(command, model).each { |d| execute(command, by(d)) }
     end
 
     def bridge
