@@ -15,12 +15,14 @@ en:
       blueprints::space/import_by_json:
         The blueprint for '%{descriptor}' is not well formed. Results are unpredictable.
 
-    blueprints::space/import_by_json:
-      spaces::thing/open_struct_from_json:
-
     docker::files::steps/rescue_in_step_for:
       docker::files::steps/general_step_for:
         Unable to find class %{name}.
+
+    packing::space/block_in_execute_on_anchors_for:
+      packing::space/by:
+        A %{klass} for %{descriptor} is yet to be saved.
+        Saving now.
 
     images::scripts/rescue_in_script_for:
       images::scripts/general_script_for:
