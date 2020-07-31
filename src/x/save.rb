@@ -38,9 +38,11 @@ def provisions_descriptor
 end
 
 def clear
-  @u = nil
-  @blueprint = nil
-  @resolution = nil
+  @u,
+  @blueprint,
+  @resolution,
+  @pack,
+  @provisions = nil
 end
 
 def save_provisions
