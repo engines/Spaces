@@ -6,12 +6,14 @@ module Provisioning
 
       def declaratives
         context.resolutions.map do |r|
-          %Q(
-            module "#{r.identifier}" {
-              source = "./modules/turtle"
-              name  = "#{r.identifier}"
-            }
-          )
+          r.builders.all.map do |b|
+            %Q(
+              module "#{r.identifier}_#{b.type}" {
+                source = "./modules/#{b.type}"
+                name  = "#{r.identifier}"
+              }
+            )
+          end
         end.flatten.join("\n")
       end
 
