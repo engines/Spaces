@@ -40,6 +40,7 @@ module Packing
     end
 
     def save_json(model)
+      ensure_space_for(model)
       model.tap do |m|
         ::File.write("#{path_for(model)}/export.json", m.export.deep_to_h.to_json)
         ::File.write("#{path_for(model)}/commit.json", m.memento.deep_to_h.to_json)
