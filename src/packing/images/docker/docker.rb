@@ -1,9 +1,9 @@
-require_relative '../builder'
+require_relative '../image'
 
 module Packing
-  module Builders
+  module Images
     module Docker
-      class Docker < Builder
+      class Docker < Image
 
         class << self
           def safety_overrides; { privileged: false } ;end

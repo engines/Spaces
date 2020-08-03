@@ -1,8 +1,8 @@
 require_relative '../../releases/subdivision'
 
 module Packing
-  module Builders
-    class Builder < ::Releases::Subdivision
+  module Images
+    class Image < ::Releases::Subdivision
 
       class << self
         def qualifier

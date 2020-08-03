@@ -1,6 +1,6 @@
 require 'packer'
 require_relative '../spaces/space'
-require_relative 'builders/space'
+require_relative 'images/space'
 
 module Packing
   class Space < ::Spaces::Space
@@ -22,9 +22,7 @@ module Packing
       end
     end
 
-    def builders
-      @builders ||= Builders::Space.new
-    end
+    def images; @images ||= Images::Space.new ;end
 
     def encloses_commit?(descriptor); encloses_good_result?(:commit, descriptor) ;end
     def encloses_export?(descriptor); encloses_good_result?(:export, descriptor) ;end
@@ -93,7 +91,7 @@ module Packing
     end
 
     def bridge
-      @builder ||= Packer::Client.new
+      @image ||= Packer::Client.new
     end
 
   end

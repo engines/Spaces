@@ -6,7 +6,7 @@ module Packing
       class Tags < ::Releases::Stanza
 
         def to_h
-          collaboration.builders.all.map do |b|
+          collaboration.images.all.map do |b|
             {
               type: "#{b.type}-tag",
               repository: collaboration.repository_name,
