@@ -1,7 +1,7 @@
 require_relative '../spaces/schema'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
-require_relative '../packing/builders/builders'
+require_relative '../packing/images/images'
 require_relative '../provisioning/providers/providers'
 
 module Releases
@@ -14,7 +14,7 @@ module Releases
           description: 0,
           licenses: [(1..), { label: 1, url: 1 }],
           provider: 1,
-          builders: 1,
+          images: 1,
           bindings: 0
         }
       end
@@ -29,7 +29,7 @@ module Releases
         [
           Bindings::Bindings,
           Bindings::Anchor,
-          Packing::Builders::Builders,
+          Packing::Images::Images,
           Provisioning::Providers::Providers
         ]
       end

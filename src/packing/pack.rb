@@ -4,7 +4,7 @@ module Packing
   class Pack < ::Releases::Release
 
     delegate(
-      [:identifier, :builders, :client, :anchor_descriptors] => :resolution
+      [:identifier, :images, :client, :anchor_descriptors] => :resolution
     )
 
     alias_accessor :resolution, :predecessor
@@ -13,13 +13,13 @@ module Packing
 
     def repository_name; "#{client.identifier}/#{identifier}" ;end
 
-    def export; struct_for(builders.all.map(&:export)) ;end
-    def memento; super.merge(struct_for(builders.all.map(&:commit))) ;end
+    def export; struct_for(images.all.map(&:export)) ;end
+    def memento; super.merge(struct_for(images.all.map(&:commit))) ;end
 
-    def struct_for(builders); OpenStruct.new(builders: builders) ;end
+    def struct_for(images); OpenStruct.new(builders: images) ;end
 
     def initialize(resolution)
-      self.struct = struct_for(resolution.memento.builders)
+      self.struct = struct_for(resolution.memento.images)
       self.resolution = resolution
     end
 

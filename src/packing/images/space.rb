@@ -1,13 +1,13 @@
 require_relative '../../releases/subdivision_space'
-require_relative 'builder'
+require_relative 'image'
 
 module Packing
-  module Builders
+  module Images
     class Space < Releases::SubdivisionSpace
 
       class << self
         def default_model_class
-          Builder
+          Image
         end
       end
 
