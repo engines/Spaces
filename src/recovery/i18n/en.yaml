@@ -24,10 +24,6 @@ en:
         A %{klass} for %{descriptor} is yet to be saved.
         Saving now.
 
-    images::scripts/rescue_in_script_for:
-      images::scripts/general_script_for:
-        Unable to find class %{name}.
-
     releases::division/new:
       releases::division/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.
