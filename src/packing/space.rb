@@ -91,7 +91,7 @@ module Packing
     end
 
     def bridge
-      @image ||= Packer::Client.new
+      @bridge ||= Packer::Client.new
     end
 
   end
