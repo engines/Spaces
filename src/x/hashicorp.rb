@@ -1,5 +1,5 @@
 require_relative '../spaces/descriptor'
-require_relative 'save'
+require_relative 'universe'
 
 def descriptor
   @descriptor ||= Spaces::Descriptor.new(
