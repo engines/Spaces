@@ -10,8 +10,8 @@ module Resolutions
     )
 
     alias_accessor :blueprint, :predecessor
-
-    def image_name; "#{client.identifier}/#{identifier}" ;end
+    
+    def repository_name; "#{client.identifier}/#{identifier}" ;end
 
     def components
       [image_components, container_components].flatten
