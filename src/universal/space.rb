@@ -10,8 +10,7 @@ module Universal
           :resolutions,
           :packing,
           :provisioning,
-          :containers,
-          :images
+          :containers
         ]
       end
 
