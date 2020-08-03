@@ -24,6 +24,14 @@ en:
         A %{klass} for %{descriptor} is yet to be saved.
         Saving now.
 
+    provisioning::space/apply:
+      provisioning::space/execute:
+        Provisioning failed while attempting to execute %{command} for %{identifier}.
+
+    provisioning::space/plan:
+      provisioning::space/execute:
+        Provisioning failed while attempting to execute %{command} for %{identifier}.
+
     releases::division/new:
       releases::division/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.

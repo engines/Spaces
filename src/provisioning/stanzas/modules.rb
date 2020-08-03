@@ -9,8 +9,9 @@ module Provisioning
           r.images.all.map do |b|
             %Q(
               module "#{r.identifier}_#{b.type}" {
-                source = "./modules/#{b.type}"
-                name  = "#{r.identifier}"
+                source  = "./modules/#{b.type}"
+                name    = "#{r.identifier}"
+                image   = "#{r.repository_name}"
               }
             )
           end
