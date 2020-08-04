@@ -16,6 +16,29 @@ module Packing
 
     def struct_for(images); OpenStruct.new(builders: images) ;end
 
+    def components
+      [files, scripts].flatten
+    end
+
+    def files; files_for(:files) ;end
+    def scripts; files_for(:scripts) ;end
+
+    def files_for(directory)
+      file_names_for(directory).map do |t|
+        text_class.new(origin: t, directory: directory, context: self)
+      end
+    end
+
+    def file_names_for(directory)
+      Dir[directory_for(directory)].reject { |f| ::File.directory?(f) }
+    end
+
+    def directory_for(directory)
+      File.join(File.dirname(__FILE__), "#{directory}/**/*")
+    end
+
+    def text_class; Texts::FileText ;end
+
     def initialize(resolution)
       self.struct = struct_for(resolution.memento.images)
       self.resolution = resolution
