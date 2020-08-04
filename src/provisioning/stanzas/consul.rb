@@ -15,6 +15,7 @@ module Provisioning
 
       def address
         "#{[qualifier, universe.host].join('.')}:#{port}"
+        # "localhost:#{port}"
       end
 
       def port; 8500 ;end
