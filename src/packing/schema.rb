@@ -1,4 +1,5 @@
 require_relative '../spaces/schema'
+require_relative 'provisioners/provisioners'
 require_relative 'post_processors/post_processors'
 
 module Packing
@@ -7,6 +8,7 @@ module Packing
     class << self
       def division_classes
         [
+          Provisioners::Provisioners,
           PostProcessors::PostProcessors
         ]
       end
