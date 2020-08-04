@@ -1,4 +1,4 @@
-resource "docker_container" "container" {
+resource "docker_container" "turtle" {
   image     = var.image
   name      = var.name
 }
