@@ -46,15 +46,14 @@ module Packing
       nil
     end
 
-    def save_json(model)
+    def save(model)
       ensure_space_for(model)
+      model.components.each { |t| save_text(t) }
       model.tap do |m|
         ::File.write("#{path_for(model)}/export.json", m.export.deep_to_h.to_json)
         ::File.write("#{path_for(model)}/commit.json", m.memento.deep_to_h.to_json)
       end
     end
-
-    alias_method :save, :save_json
 
     def export(model); execute(:export, model) ;end
     def commit(model); execute(:commit, model) ;end
