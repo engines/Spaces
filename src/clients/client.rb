@@ -7,7 +7,7 @@ module Clients
     delegate(identifier: :descriptor)
 
     def default
-      @default ||= OpenStruct.new(descriptor: descriptor_class.new(identifier: 'any').struct)
+      @default ||= OpenStruct.new(descriptor: descriptor_class.new(identifier: 'engines').struct)
     end
 
     def descriptor_class; Spaces::Descriptor ;end
