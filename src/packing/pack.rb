@@ -14,7 +14,13 @@ module Packing
     def export; struct_for(images.all.map(&:export)) ;end
     def memento; super.merge(struct_for(images.all.map(&:commit))) ;end
 
-    def struct_for(images); OpenStruct.new(builders: images) ;end
+    def struct_for(images)
+      OpenStruct.new(
+        builders: images.tap do |i|
+          i.each { |s| s.delete_field(:scripts) }
+        end
+      )
+     end
 
     def components
       [files, scripts].flatten
