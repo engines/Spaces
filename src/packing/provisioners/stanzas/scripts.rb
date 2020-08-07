@@ -5,27 +5,23 @@ module Packing
     module Stanzas
       class Scripts < ::Releases::Stanza
 
-        def to_h
-          [
-            {
-              type: 'file',
-              source: "#{directory}/",
-              destination: 'tmp'
-            },
-            {
-              type: 'shell',
-              scripts: locations
-            }
-          ]
-        end
+        delegate(script_file_names: :collaboration)
 
-        def locations
-          collaboration.file_names_for(directory).map do |n|
-            "#{directory}/#{n.split('/').last}"
+        def to_h
+          if script_file_names.any?
+            [
+              {
+                type: 'file',
+                source: 'scripts/',
+                destination: 'tmp'
+              },
+              {
+                type: 'shell',
+                scripts: script_file_names
+              }
+            ]
           end
         end
-
-        def directory; :scripts ;end
 
       end
     end

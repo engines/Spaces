@@ -1,0 +1,52 @@
+#!/bin/sh -e
+
+# taken from https://github.com/jakobadam/packer-qemu-templates
+
+install_packages="
+apt-transport-https
+locales-all
+openssh-server
+vim
+"
+
+uninstall_packages="
+bootlogd
+dmidecode
+eudev
+gdbm-l10n
+iptables
+iputils-ping
+kmod
+krb5-locales
+less
+libip4tc0
+libip6tc0
+libiptc0
+libkmod2
+libnetfilter-conntrack3
+libnfnetlink0
+libnftnl11
+libx11-6
+libx11-data
+libxau6
+libxcb1
+libxdmcp6
+libxext6
+libxmuu1
+nano
+tasksel
+tasksel-data
+xauth
+"
+
+# This little gem is because udev isn't running and start-stop-daemon shits
+# itself trying to stop it and the removal of the entire package fails.
+sed -i '/^kill_udevd.*{/,/^}/ckill_udevd() {\n  true\n}' /var/lib/dpkg/info/eudev.prerm
+
+
+# If this isn't included build will hang forever if dpkg asks any questions.
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get purge -y --autoremove $uninstall_packages || true
+
+apt-get install -y --no-install-recommends $install_packages || true

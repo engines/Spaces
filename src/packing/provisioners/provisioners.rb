@@ -11,7 +11,7 @@ module Packing
       require_files_in :stanzas
 
       def memento
-        stanzas.map(&:to_h).flatten
+        stanzas.map(&:to_h).flatten.compact
       end
 
     end

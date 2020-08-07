@@ -4,7 +4,8 @@ module Packing
   class Pack < ::Releases::Release
 
     delegate(
-      [:identifier, :images, :repository_name, :anchor_descriptors] => :resolution
+      [:identifier, :images, :repository_name, :anchor_descriptors] => :resolution,
+      script_file_names: :images
     )
 
     alias_accessor :resolution, :predecessor
@@ -17,16 +18,22 @@ module Packing
     def struct_for(images)
       OpenStruct.new(
         builders: images.tap do |i|
-          i.each { |s| s.delete_field(:scripts) }
+          i.each { |s| s.delete_field(:scripts) if s.dig(:scripts) }
         end
       )
      end
 
     def components
-      [scripts, injections].flatten
+      [nominated_scripts, injections].flatten
     end
 
-    def scripts; files_for(:scripts) ;end
+    def nominated_scripts
+      script_file_names.map do |t|
+        text_class.new(origin: "#{File.dirname(__FILE__)}/#{t}", directory: :scripts, context: self)
+      end
+    end
+
+    def injections; resolution.files_for(:injections) ;end
 
     def files_for(directory)
       file_names_for(directory).map do |t|
