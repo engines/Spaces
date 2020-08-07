@@ -31,6 +31,7 @@ module Releases
       key == :stages ? stages.map(&:memento) : super
     end
 
+    def text_class; Texts::FileText ;end
     def stage_class; Stage ;end
 
   end

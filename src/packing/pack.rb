@@ -42,8 +42,6 @@ module Packing
       File.join(File.dirname(__FILE__), "#{directory}/**/*")
     end
 
-    def text_class; Texts::FileText ;end
-
     def initialize(resolution)
       self.struct = struct_for(resolution.memento.images)
       self.resolution = resolution

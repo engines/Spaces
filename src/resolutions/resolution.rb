@@ -26,8 +26,6 @@ module Resolutions
       end
     end
 
-    def text_class; Texts::FileText ;end
-
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint
       self.struct = duplicate(struct || blueprint&.struct)
