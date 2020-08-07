@@ -10,17 +10,14 @@ module Resolutions
     )
 
     alias_accessor :blueprint, :predecessor
-    
+
     def repository_name; "#{client.identifier}/#{identifier}" ;end
 
     def components
-      [image_components, container_components].flatten
+      [files_for(:injections)].flatten
     end
 
-    def image_components; resolutions_for(:image) ;end
-    def container_components; resolutions_for(:container) ;end
-
-    def resolutions_for(directory)
+    def files_for(directory)
       [
         resolutions.unresolved_names_for(directory),
         blueprint_file_names_for(directory)

@@ -1,9 +1,0 @@
-#!/usr/lib/execline/bin/execlineb -P
-
-/usr/lib/execline/bin/exec -c
-/usr/bin/s6-setsid -qb
-/usr/lib/execline/bin/redirfd -r 0 /dev/null
-/usr/lib/execline/bin/redirfd -wnb 1 /var/log/s6/svscan.log
-/usr/lib/execline/bin/fdmove -c 2 1
-/usr/lib/execline/bin/exec -a s6-svscan
-/usr/bin/s6-svscan -t0 /etc/sv

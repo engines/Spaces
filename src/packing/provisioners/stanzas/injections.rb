@@ -3,12 +3,12 @@ require_relative '../../../releases/stanza'
 module Packing
   module Provisioners
     module Stanzas
-      class Files < ::Releases::Stanza
+      class Injections < ::Releases::Stanza
 
         def to_h
           {
             type: 'file',
-            source: 'files',
+            source: 'injections',
             destination: 'tmp/'
           }
         end

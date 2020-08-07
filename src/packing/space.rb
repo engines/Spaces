@@ -50,7 +50,6 @@ module Packing
       ensure_space_for(model)
       model.components.each { |t| save_text(t) }
       model.tap do |m|
-        ::File.write("#{path_for(model)}/export.json", m.export.deep_to_h.to_json)
         ::File.write("#{path_for(model)}/commit.json", m.memento.deep_to_h.to_json)
       end
     end

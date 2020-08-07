@@ -23,10 +23,9 @@ module Packing
      end
 
     def components
-      [files, scripts].flatten
+      [scripts, injections].flatten
     end
 
-    def files; files_for(:files) ;end
     def scripts; files_for(:scripts) ;end
 
     def files_for(directory)
