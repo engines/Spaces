@@ -19,8 +19,12 @@ module Releases
       stage_class.new(struct: struct, release: self)
     end
 
-    def anchor_descriptors
-      @anchor_descriptors ||= struct.bindings&.map { |d| descriptor_class.new(d.descriptor) }
+    def descriptors_for(division_identifier)
+      descriptors_structs_for(division_identifier).map { |d| descriptor_class.new(d) }
+    end
+
+    def descriptors_structs_for(division_identifier)
+      (struct[division_identifier] || [])&.map { |d| d[:descriptor] }.compact.uniq(&:uniqueness)
     end
 
     def blueprint_file_names_for(directory)

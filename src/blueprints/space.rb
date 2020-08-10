@@ -22,18 +22,23 @@ module Blueprints
       by_json(descriptor).tap do |m|
         m.struct.descriptor = descriptor.struct
         save(m)
+        import_inclusions_for(m)
         import_anchors_for(m)
       end
     rescue JSON::ParserError => e
       warn(error: e, descriptor: descriptor, verbosity: [:error])
     end
 
-    def import_anchors_for(model)
-      unimported_anchors_for(model).each { |d| import(d) }
+    def import_inclusions_for(model)
+      unimported_blueprints_for(model, :inclusions).each { |d| import(d) }
     end
 
-    def unimported_anchors_for(model)
-      model.anchor_descriptors&.uniq(&:uniqueness)&.reject { |d| imported?(d) } || []
+    def import_anchors_for(model)
+      unimported_blueprints_for(model, :bindings).each { |d| import(d) }
+    end
+
+    def unimported_blueprints_for(model, division)
+      model.descriptors_for(division).reject { |d| imported?(d) }
     end
 
     def ensure_space_for(descriptor)

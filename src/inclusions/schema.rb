@@ -1,6 +1,6 @@
 require_relative '../spaces/schema'
 
-module Bindings
+module Inclusions
   class Schema < ::Spaces::Schema
 
     class << self

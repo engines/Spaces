@@ -27,6 +27,8 @@ module Releases
 
       def division_classes
         [
+          Releases::LifeCycle,
+          Bindings::Bindings,
           Bindings::Bindings,
           Bindings::Anchor,
           Packing::Images::Images,
