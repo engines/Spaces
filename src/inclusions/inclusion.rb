@@ -1,16 +1,14 @@
-require_relative '../releases/subdivision'
+require_relative '../releases/descriptive_subdivision'
 
 module Inclusions
-  class Inclusion < ::Releases::Subdivision
+  class Inclusion < ::Releases::DescriptiveSubdivision
 
-    # def resolution
-    #   @resolution ||= universe.resolutions.by(descriptor)
-    # rescue Errno::ENOENT => e
-    #   universe.blueprints.by(descriptor).resolution
-    # end
-    #
-    # def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end
-    # def identifier; struct.identifier || descriptor.identifier ;end
+    def memento
+      [
+        struct,
+        resolution.memento_for(:inclusions)
+      ]
+    end
 
   end
 end

@@ -3,6 +3,7 @@ require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../packing/images/images'
 require_relative '../provisioning/providers/providers'
+require_relative '../inclusions/inclusions'
 
 module Releases
   class Schema < ::Spaces::Schema
@@ -30,7 +31,8 @@ module Releases
           Bindings::Bindings,
           Bindings::Anchor,
           Packing::Images::Images,
-          Provisioning::Providers::Providers
+          Provisioning::Providers::Providers,
+          Inclusions::Inclusions
         ]
       end
     end

@@ -1,11 +1,6 @@
 en:
   trace:
 
-    bindings::binding/anchor_resolution:
-      resolutions::space/by: |
-        An anchor resolution for %{descriptor} is yet to be saved.
-        Saving now.
-
     blueprints::space/import:
       git::space/import: |
         An attempt to import blueprint for '%{descriptor}' finds it already exists.
@@ -31,6 +26,11 @@ en:
     provisioning::space/plan:
       provisioning::space/execute:
         Provisioning failed while attempting to execute %{command} for %{identifier}.
+
+    releases::descriptive_subdivision/resolution:
+      resolutions::space/by:
+        A resolution for %{descriptor} is yet to be saved.
+        Saving now.
 
     releases::division/new:
       releases::division/initialize: |
