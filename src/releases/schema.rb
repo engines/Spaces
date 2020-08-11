@@ -28,7 +28,6 @@ module Releases
       def division_classes
         [
           Bindings::Bindings,
-          Bindings::Bindings,
           Bindings::Anchor,
           Packing::Images::Images,
           Provisioning::Providers::Providers
