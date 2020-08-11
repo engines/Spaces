@@ -1,4 +1,5 @@
 require_relative '../releases/division'
+require_relative 'binding'
 
 module Bindings
   class Bindings < ::Releases::Division
