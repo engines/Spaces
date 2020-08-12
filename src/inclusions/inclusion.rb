@@ -10,5 +10,11 @@ module Inclusions
       ]
     end
 
+    def descriptor; @descriptor ||= descriptor_class.new(root.descriptor) ;end
+
+    def root
+      @root ||= [struct].flatten.compact.first
+    end
+
   end
 end
