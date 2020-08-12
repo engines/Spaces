@@ -14,7 +14,7 @@ module Releases
           description: 0,
           licenses: [(1..), { label: 1, url: 1 }],
           provider: 0,
-          images: 0,
+          images: 1,
           bindings: 0
         }
       end

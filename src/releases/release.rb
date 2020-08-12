@@ -19,10 +19,6 @@ module Releases
       stage_class.new(struct: struct, release: self)
     end
 
-    def images
-      struct.images ? super : []
-    end
-
     def descriptors_for(division_identifier)
       descriptors_structs_for(division_identifier).map { |d| descriptor_class.new(d) }
     end
