@@ -14,9 +14,27 @@ en:
       docker::files::steps/general_step_for:
         Unable to find class %{name}.
 
+    packing::pack/components:
+      packing::pack/nominated_scripts:
+        There are no images given in the blueprint for '%{descriptor}'.
+        So there's nothing to pack.
+
+    packing::space/block_in_by:
+      packing::space/save:
+        There are no images given in the blueprint for '%{descriptor}'.
+        So there's no worthwhile pack to save.
+
     packing::space/block_in_execute_on_anchors_for:
       packing::space/by:
         A %{klass} for %{descriptor} is yet to be saved.
+        Saving now.
+
+    packing::space/block_(2_levels)_in_execute_on_anchors_for:
+      packing::space/execute:
+        There are no images given in the blueprint for '%{descriptor}'.
+        So there's no worthwhile pack to %{command}.
+      packing::space/by:
+        A pack for %{descriptor} is yet to be saved.
         Saving now.
 
     provisioning::space/apply:

@@ -47,11 +47,14 @@ module Packing
     end
 
     def save(model)
+      raise PackWithoutImagesError unless model.has_images?
       ensure_space_for(model)
       model.components.each { |t| save_text(t) }
       model.tap do |m|
         ::File.write("#{path_for(model)}/commit.json", m.memento.deep_to_h.to_json)
       end
+    rescue PackWithoutImagesError => e
+      warn(error: e, descriptor: model.identifier, klass: klass)
     end
 
     def export(model); execute(:export, model) ;end
@@ -67,30 +70,38 @@ module Packing
     end
 
     def unique_anchors_for(model)
-      model.anchor_descriptors&.uniq(&:uniqueness)
+      model.binding_descriptors&.uniq(&:uniqueness)
     end
 
     protected
 
     def execute(command, model)
-      save(model).tap do |m|
-        Dir.chdir(path_for(m))
-        bridge.build("#{command}.json").tap do |b|
-          FileUtils.mkdir_p("#{command}")
-          ::File.write("#{command}/output.yaml", b.to_yaml)
-          ::File.write("#{command}/artifacts.yaml", b.artifacts.to_yaml)
-        end
-        execute_on_anchors_for(command, model)
+      raise PackWithoutImagesError unless model.has_images?
+      save(model)
+      Dir.chdir(path_for(model))
+      bridge.build("#{command}.json").tap do |b|
+        FileUtils.mkdir_p("#{command}")
+        ::File.write("#{command}/output.yaml", b.to_yaml)
+        ::File.write("#{command}/artifacts.yaml", b.artifacts.to_yaml)
       end
+    rescue PackWithoutImagesError => e
+      warn(error: e, command: command, descriptor: model.identifier, klass: klass)
+    ensure
+      execute_on_anchors_for(command, model)
     end
 
     def execute_on_anchors_for(command, model)
-      unexecuted_anchors_for(command, model).each { |d| execute(command, by(d)) }
+      model.tap do |m|
+        unexecuted_anchors_for(command, m).each { |d| execute(command, by(d)) }
+      end
     end
 
     def bridge
       @bridge ||= Packer::Client.new
     end
 
+  end
+
+  class PackWithoutImagesError < StandardError
   end
 end

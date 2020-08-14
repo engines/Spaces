@@ -26,6 +26,10 @@ module Resolutions
       end
     end
 
+    def binding_descriptors
+      respond_to?(:bindings) ? bindings.all.map(&:descriptor) : []
+    end
+
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint
       self.struct = duplicate(struct || blueprint&.struct)
