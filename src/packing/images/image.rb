@@ -20,7 +20,7 @@ module Packing
       def commit; memento ;end
 
       def script_file_names
-        if struct.scripts?
+        if struct.scripts
           scripts.to_h.reduce([]) do |m, v|
             m << v.last.map { |l| "scripts/#{v.first}/#{l}" }
           end.flatten
