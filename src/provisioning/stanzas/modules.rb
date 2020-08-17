@@ -5,17 +5,17 @@ module Provisioning
     class Modules < ::Releases::Stanza
 
       def declaratives
-        context.resolutions.map do |r|
-          r.images.all.map do |b|
+        context.resolutions.select(&:has_containers?).map do |r|
+          r.containers.all.map do |c|
             %Q(
-              module "#{r.identifier}_#{b.type}" {
-                source  = "./modules/#{b.type}"
+              module "#{r.identifier}_#{c.type}" {
+                source  = "./modules/#{c.type}"
                 name    = "#{r.identifier}"
-                image   = "#{r.repository_name}"
+                image   = "#{c.image}"
               }
             )
           end
-        end.flatten.join("\n")
+        end.flatten.compact.join("\n")
       end
 
     end

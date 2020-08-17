@@ -11,7 +11,8 @@ module Resolutions
 
     alias_accessor :blueprint, :predecessor
 
-    def repository_name; "#{client.identifier}/#{identifier}" ;end
+    def has_images?; respond_to?(:images) ;end
+    def has_containers?; respond_to?(:containers) ;end
 
     def components
       [files_for(:injections)].flatten

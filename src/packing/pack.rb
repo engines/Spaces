@@ -4,7 +4,7 @@ module Packing
   class Pack < ::Releases::Release
 
     delegate(
-      [:identifier, :images, :repository_name, :binding_descriptors] => :resolution,
+      [:identifier, :has_images?, :images, :binding_descriptors] => :resolution,
       script_file_names: :images
     )
 
@@ -26,8 +26,6 @@ module Packing
     def components
       [nominated_scripts, injections].flatten
     end
-
-    def has_images?; resolution.respond_to?(:images) ;end
 
     def nominated_scripts
       script_file_names.map do |t|

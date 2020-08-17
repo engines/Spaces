@@ -66,11 +66,11 @@ module Packing
     def validate(model) ;end
 
     def unexecuted_anchors_for(command, model)
-      unique_anchors_for(model)&.reject { |d| encloses_good_result?(command, d) } || []
+      unique_anchors_for(model).reject { |d| encloses_good_result?(command, d) }
     end
 
     def unique_anchors_for(model)
-      model.binding_descriptors&.uniq(&:uniqueness)
+      model.binding_descriptors&.uniq(&:uniqueness) || []
     end
 
     protected

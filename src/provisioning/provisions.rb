@@ -25,21 +25,21 @@ module Provisioning
     end
 
     def providers
-      [explicit_providers, providers_implied_in_images].flatten.uniq(&:uniqueness)
+      [explicit_providers, providers_implied_in_containers].flatten.uniq(&:uniqueness)
     end
 
     def explicit_providers
       division_map[:providers]&.map(&:all) || []
     end
 
-    def providers_implied_in_images
-      images.map do |b|
+    def providers_implied_in_containers
+      containers.map do |b|
         universe.provisioning.providers.by(struct: b.struct, division: self)
       end
     end
 
-    def images
-      division_map[:images]&.map(&:all)&.flatten || []
+    def containers
+      division_map[:containers]&.map(&:all)&.flatten || []
     end
 
     def division_map

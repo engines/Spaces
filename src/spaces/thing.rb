@@ -19,7 +19,7 @@ module Spaces
 
     class << self
       def identifier; name.split('::').join ;end
-      def namespace; name.split('::')[..-2].join.snakize ;end
+      def namespace; name.split('::')[0..-2].join.snakize ;end
       def qualifier; name.split('::').last.snakize ;end
       def from_yaml(y); YAML::load(y) ;end
 

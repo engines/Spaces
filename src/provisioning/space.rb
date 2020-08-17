@@ -1,13 +1,13 @@
 require 'ruby_terraform'
 require_relative '../spaces/space'
 require_relative 'providers/space'
+require_relative 'containers/space'
 
 module Provisioning
   class Space < ::Spaces::Space
 
-    def providers
-      @providers ||= Providers::Space.new
-    end
+    def providers; @providers ||= Providers::Space.new ;end
+    def containers; @containers ||= Containers::Space.new ;end
 
     def save(model)
       model.components.each { |t| save_text(t) }

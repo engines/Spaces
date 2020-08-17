@@ -6,10 +6,10 @@ module Packing
       class DockerTags < ::Releases::Stanza
 
         def to_h
-          matching_images.map do |b|
+          matching_images.map do |i|
             {
-              type: "#{b.type}-tag",
-              repository: collaboration.repository_name,
+              type: "#{i.type}-tag",
+              repository: i.image,
               tags: 'latest'
             }
           end
