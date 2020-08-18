@@ -12,6 +12,7 @@ module Provisioning
                 source  = "./modules/#{c.type}"
                 name    = "#{r.identifier}"
                 image   = "#{c.image}"
+                zone    = local.domain
               }
             )
           end
