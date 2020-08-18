@@ -3,14 +3,6 @@ require_relative 'component'
 module Releases
   class Division < Component
 
-    class << self
-      def prototype(collaboration:, label:)
-        new(collaboration: collaboration, label: label)
-      end
-    end
-
-    attr_accessor :label
-
     def related_divisions
       @related_divisions ||= collaboration.divisions
     end
@@ -34,9 +26,7 @@ module Releases
 
     def initialize(struct: nil, collaboration: nil, label: nil)
       check_subdivision_class
-      self.collaboration = collaboration
-      self.label = label
-      self.struct = struct || collaboration&.struct[label] || default
+      super
     end
 
     def check_subdivision_class

@@ -5,7 +5,13 @@ module Releases
   class Component < ::Spaces::Model
     include Stanzas
 
+    attr_accessor :label
+
     class << self
+      def prototype(collaboration:, label:)
+        new(collaboration: collaboration, label: label)
+      end
+
       def stanza_lot
         files_in(:stanzas).map { |f| ::File.basename(f, '.rb') }
       end
@@ -21,6 +27,12 @@ module Releases
 
     def declaratives
       stanzas.map(&:declaratives)
+    end
+
+    def initialize(struct: nil, collaboration: nil, label: nil)
+      self.collaboration = collaboration
+      self.label = label
+      self.struct = struct || collaboration&.struct[label] || default
     end
 
     def to_s; struct ;end
