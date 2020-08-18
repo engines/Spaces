@@ -5,6 +5,10 @@ module Releases
 
     delegate(blueprints: :universe)
 
+    def count
+      respond_to?(:scaling) ? scaling.count : 1
+    end
+
     def descriptors_for(division_identifier)
       descriptors_structs_for(division_identifier).map { |d| descriptor_class.new(d) }
     end
