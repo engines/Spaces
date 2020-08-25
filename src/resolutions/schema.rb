@@ -7,7 +7,8 @@ module Resolutions
     class << self
       def associative_classes
         [
-          Clients::Client
+          Clients::Client,
+          DataCenters::DataCenter
         ]
       end
 

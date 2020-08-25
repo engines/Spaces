@@ -9,7 +9,8 @@ module Universal
           :blueprints,
           :resolutions,
           :packing,
-          :provisioning
+          :provisioning,
+          :data_centers
         ]
       end
 

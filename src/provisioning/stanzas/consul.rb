@@ -8,7 +8,7 @@ module Provisioning
         %Q(
           provider "#{qualifier}" {
             address = "#{address}"
-            # datacenter = "any"
+            datacenter = "#{data_center.identifier}"
           }
         )
       end
@@ -16,6 +16,10 @@ module Provisioning
       def address
         "#{[qualifier, universe.host].join('.')}:#{port}"
         # "localhost:#{port}"
+      end
+
+      def data_center
+        universe.data_centers.default
       end
 
       def port; 8500 ;end

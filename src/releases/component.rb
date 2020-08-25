@@ -32,7 +32,7 @@ module Releases
     def initialize(struct: nil, collaboration: nil, label: nil)
       self.collaboration = collaboration
       self.label = label
-      self.struct = struct || collaboration&.struct[label] || default
+      self.struct = struct || (collaboration.struct[label] if collaboration) || default
     end
 
     def to_s; struct ;end

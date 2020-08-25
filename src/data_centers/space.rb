@@ -1,11 +1,11 @@
 require_relative '../defaultables/space'
-require_relative 'client'
+require_relative 'data_center'
 
-module Clients
+module DataCenters
   class Space < ::Defaultables::Space
 
     def default_model_class
-      Client
+      DataCenter
     end
 
   end
