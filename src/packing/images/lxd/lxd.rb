@@ -2,8 +2,8 @@ require_relative '../image'
 
 module Packing
   module Images
-    module Lxd
-      class Lxd < Image
+    module LXD
+      class LXD < Image
 
         def default_resolution
           @default_resolution ||= {

@@ -2,7 +2,7 @@ require_relative '../../stanzas/resource'
 
 module Provisioning
   module Containers
-    module Lxd
+    module LXD
       module Stanzas
         class Resource < ::Provisioning::Containers::Stanzas::Resource
 

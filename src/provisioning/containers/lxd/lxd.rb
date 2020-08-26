@@ -2,8 +2,8 @@ require_relative '../container'
 
 module Provisioning
   module Containers
-    module Lxd
-      class Lxd < Container
+    module LXD
+      class LXD < Container
 
         class << self
           def inheritance_paths; __dir__ ;end

@@ -2,7 +2,7 @@ require_relative '../../../../releases/stanza'
 
 module Provisioning
   module Providers
-    module Lxd
+    module LXD
       module Stanzas
         class Provider < ::Releases::Stanza
 

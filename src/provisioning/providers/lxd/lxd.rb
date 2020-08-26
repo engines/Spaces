@@ -2,8 +2,8 @@ require_relative '../provider'
 
 module Provisioning
   module Providers
-    module Lxd
-      class Lxd < Provider
+    module LXD
+      class LXD < Provider
 
         class << self
           def inheritance_paths; [__dir__, super] ;end
