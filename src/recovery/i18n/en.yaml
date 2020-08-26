@@ -65,6 +65,10 @@ en:
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
+    releases::stanzas/block_in_stanzas:
+      releases::stanzas/stanza_for:
+        There is no source code for stanza %{name}.
+
     spaces::model/schema_class:
       spaces::model/require_relative:
         A schema for %{namespace} could not be found. Substituting %{subsitution}.
