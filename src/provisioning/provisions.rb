@@ -14,6 +14,14 @@ module Provisioning
 
     require_files_in :stanzas
 
+    def containers
+      resolutions_for_containers.map { |r| r.containers.all }.flatten.compact
+    end
+
+    def resolutions_for_containers
+      resolutions.select(&:has_containers?)
+    end
+
     def resolutions; universe.resolutions.all ;end
 
     def bindings

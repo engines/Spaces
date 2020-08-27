@@ -5,19 +5,21 @@ module Provisioning
     class ConsulKeys < ::Releases::Stanza
 
       def declaratives
-        bindings_with_variables.map do |b|
-          %Q(
-            resource "consul_key_prefix" "#{identifier_for(b)}" {
-              # datacenter = "any"
+        bindings_with_variables.map { |b| q(b) }.join("\n")
+      end
 
-              path_prefix = "#{path_prefix_for(b)}"
+      def q(binding)
+        %Q(
+          resource "consul_key_prefix" "#{identifier_for(binding)}" {
+            datacenter = "#{data_center.identifier}"
 
-              subkeys = {
-                #{subkeys_for(b)}
-              }
+            path_prefix = "#{path_prefix_for(binding)}"
+
+            subkeys = {
+              #{subkeys_for(binding)}
             }
-          )
-        end.join("\n")
+          }
+        )
       end
 
       def bindings_with_variables; context.bindings.reject { |b| b.variables.to_h.empty? } ;end

@@ -5,9 +5,7 @@ module Provisioning
     class Containers < ::Releases::Stanza
 
       def declaratives
-        context.resolutions.select(&:has_containers?).map do |r|
-          r.containers.all.map { |c| c.stanzas.map(&:declaratives) }
-        end.flatten.compact.join("\n")
+        context.containers.map(&:stanzas).flatten.map(&:declaratives).join("\n")
       end
 
     end
