@@ -38,6 +38,10 @@ module Provisioning
         binding.variables.to_h.map { |k, v| %Q("#{k}" = "#{v}") }.join("\n")
       end
 
+      def data_center
+        universe.data_centers.default
+      end
+
     end
   end
 end
