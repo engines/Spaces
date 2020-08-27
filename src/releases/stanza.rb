@@ -7,6 +7,10 @@ module Releases
 
     delegate([:identifier, :collaboration] => :context)
 
+    def declaratives
+      "#{klass} - nothing here yet"
+    end
+
     def initialize(context)
       self.context = context
     end
