@@ -1,10 +1,9 @@
 require_relative '../spaces/descriptor'
-require_relative '../releases/component'
 
 module Defaultables
-  class Defaultable < ::Releases::Component
+  module Defaultable
 
-    delegate(identifier: :descriptor)
+    def identifier; descriptor.identifier ;end
 
     def default
       OpenStruct.new(descriptor: descriptor_class.new(identifier: 'engines').struct)
