@@ -5,7 +5,9 @@ module Defaultables
   module Space
 
     def default
-      @default ||= default_model_class.new
+      @default ||= default_model_class.new.tap do |m|
+        m.struct = m.default
+      end
     end
 
   end
