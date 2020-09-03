@@ -46,10 +46,6 @@ module Provisioning
       end
     end
 
-    def containers
-      accumulation_map[:containers]&.map(&:all)&.flatten || []
-    end
-
     def accumulation_map
       @accumulation_map ||= schema_keys.inject({}) do |m, k|
         m.tap { m[k] = resolutions.map { |r| r.division_map[k] }.compact }
