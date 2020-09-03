@@ -5,7 +5,7 @@ module Provisioning
     class Containers < ::Releases::Stanza
 
       def declaratives
-        context.containers.map(&:stanzas).flatten.map(&:declaratives).join("\n")
+        context.all(:containers).map(&:stanzas).flatten.map(&:declaratives).join("\n")
       end
 
     end

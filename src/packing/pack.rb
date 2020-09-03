@@ -4,7 +4,7 @@ module Packing
   class Pack < ::Releases::Release
 
     delegate(
-      [:identifier, :has_images?, :images, :binding_descriptors] => :resolution,
+      [:identifier, :has?, :images, :binding_descriptors] => :resolution,
       script_file_names: :images
     )
 

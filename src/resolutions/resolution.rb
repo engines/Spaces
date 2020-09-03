@@ -11,9 +11,6 @@ module Resolutions
 
     alias_accessor :blueprint, :predecessor
 
-    def has_images?; respond_to?(:images) ;end
-    def has_containers?; respond_to?(:containers) ;end
-
     def components
       [files_for(:injections)].flatten
     end
@@ -28,7 +25,7 @@ module Resolutions
     end
 
     def binding_descriptors
-      respond_to?(:bindings) ? bindings.all.map(&:descriptor) : []
+      has?(:bindings) ? bindings.all.map(&:descriptor) : []
     end
 
     def initialize(struct: nil, blueprint: nil, descriptor: nil)

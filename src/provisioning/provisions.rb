@@ -11,41 +11,23 @@ module Provisioning
 
     require_files_in :stanzas
 
-    def containers
-      resolutions_for_containers.map { |r| r.containers.all }.flatten.compact
+    def all(division_identifier)
+      resolutions_with(division_identifier).map { |r| r.send(division_identifier).all }.flatten.compact
     end
 
-    def resolutions_for_containers
-      resolutions.select(&:has_containers?)
+    def resolutions_with(division_identifier)
+      resolutions.select { |r| r.has?(division_identifier) }
     end
 
     def resolutions; universe.resolutions.all ;end
 
-    def bindings
-      resolutions_with_bindings.map { |r| r.bindings.all }.flatten.compact
-    end
-
-    def resolutions_with_bindings
-      resolutions.select { |r| r.respond_to? :bindings }
-    end
-
     def providers
-      [explicit_providers, providers_implied_in_containers].flatten.uniq(&:uniqueness)
-    end
-
-    def explicit_providers
-      accumulation_map[:providers]&.map(&:all) || []
+      [all(:providers), providers_implied_in_containers].flatten.uniq(&:uniqueness)
     end
 
     def providers_implied_in_containers
-      containers.map do |b|
+      all(:containers).map do |b|
         universe.provisioning.providers.by(struct: b.struct, division: self)
-      end
-    end
-
-    def accumulation_map
-      @accumulation_map ||= schema_keys.inject({}) do |m, k|
-        m.tap { m[k] = resolutions.map { |r| r.division_map[k] }.compact }
       end
     end
 

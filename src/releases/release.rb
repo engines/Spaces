@@ -5,8 +5,10 @@ module Releases
 
     delegate(blueprints: :universe)
 
+    alias_method :has?, :respond_to?
+
     def count
-      respond_to?(:scaling) ? scaling.count : 1
+      has?(:scaling) ? scaling.count : 1
     end
 
     def descriptors_for(division_identifier)

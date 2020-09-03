@@ -22,7 +22,9 @@ module Provisioning
         )
       end
 
-      def bindings_with_variables; context.bindings.reject { |b| b.variables.to_h.empty? } ;end
+      def bindings_with_variables
+        context.all(:bindings).reject { |b| b.variables.to_h.empty? }
+      end
 
       def terraform_identifier_for(binding)
         identifier_for(binding).gsub('_', '-')

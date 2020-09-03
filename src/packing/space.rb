@@ -47,7 +47,7 @@ module Packing
     end
 
     def save(model)
-      raise PackWithoutImagesError unless model.has_images?
+      raise PackWithoutImagesError unless model.has?(:images)
       ensure_space_for(model)
       model.components.each { |t| save_text(t) }
       model.tap do |m|
@@ -76,7 +76,7 @@ module Packing
     protected
 
     def execute(command, model)
-      raise PackWithoutImagesError unless model.has_images?
+      raise PackWithoutImagesError unless model.has?(:images)
       save(model)
       Dir.chdir(path_for(model))
       bridge.build("#{command}.json").tap do |b|
