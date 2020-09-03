@@ -1,14 +1,11 @@
 require_relative '../texts/file_text'
-require_relative '../releases/release'
-require_relative '../releases/schema'
+require_relative 'release'
 require_relative 'providers/provider'
 
 module Provisioning
-  class Provisions < ::Releases::Release
+  class Provisions < Release
 
     class << self
-      def schema_class; ::Releases::Schema ;end
-
       def inheritance_paths; __dir__ ;end
     end
 

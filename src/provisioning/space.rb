@@ -12,6 +12,7 @@ module Provisioning
     def save(model)
       model.components.each { |t| save_text(t) }
       model.stanzas.each { |s| _save(s, content: s.declaratives, as: :tf) }
+      super
     end
 
     def init(model); execute(:init, model) ;end
