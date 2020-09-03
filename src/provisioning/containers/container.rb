@@ -12,6 +12,8 @@ module Provisioning
         def inheritance_paths; __dir__ ;end
       end
 
+      delegate(identifier: :collaboration)
+
       require_files_in :stanzas
 
     end

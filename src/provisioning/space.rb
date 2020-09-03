@@ -10,7 +10,6 @@ module Provisioning
     def containers; @containers ||= Containers::Space.new ;end
 
     def save(model)
-      model.components.each { |t| save_text(t) }
       model.stanzas.each { |s| _save(s, content: s.declaratives, as: :tf) }
       super
     end

@@ -11,6 +11,14 @@ module Provisioning
 
     require_files_in :stanzas
 
+    delegate(dns: :universe)
+
+    def dns_default
+      dns.default.tap do |m|
+        m.collaboration = self
+      end
+    end
+
     def all(division_identifier)
       resolutions_with(division_identifier).map { |r| r.send(division_identifier).all }.flatten.compact
     end
