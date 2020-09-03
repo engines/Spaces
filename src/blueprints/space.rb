@@ -32,8 +32,8 @@ module Blueprints
       unimported_blueprints_for(model, :bindings).each { |d| import(d) }
     end
 
-    def unimported_blueprints_for(model, division)
-      model.descriptors_for(division).reject { |d| imported?(d) }
+    def unimported_blueprints_for(model, division_identifier)
+      model.descriptors_for(division_identifier).reject { |d| imported?(d) }
     end
 
     def ensure_space_for(descriptor)
