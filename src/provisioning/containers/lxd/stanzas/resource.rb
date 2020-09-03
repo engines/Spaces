@@ -8,8 +8,8 @@ module Provisioning
 
           def q(identifier, container, iteration)
             %Q(
-              resource "lxd_container" "#{identifier}_#{iteration}" {
-                name      = "#{identifier}_#{iteration}"
+              resource "lxd_container" "#{identifier}-#{iteration}" {
+                name      = "#{identifier}-#{iteration}"
                 image     = "#{container.image}"
                 ephemeral = false
 

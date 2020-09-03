@@ -10,7 +10,7 @@ module Provisioning
 
       def q(binding)
         %Q(
-          resource "consul_key_prefix" "#{identifier_for(binding)}" {
+          resource "consul_key_prefix" "#{terraform_identifier_for(binding)}" {
             datacenter = "#{data_center.identifier}"
 
             path_prefix = "#{path_prefix_for(binding)}"
@@ -23,6 +23,10 @@ module Provisioning
       end
 
       def bindings_with_variables; context.bindings.reject { |b| b.variables.to_h.empty? } ;end
+
+      def terraform_identifier_for(binding)
+        identifier_for(binding).gsub('_', '-')
+      end
 
       def identifier_for(binding)
         "#{binding.collaboration.identifier}_#{binding.identifier}"
