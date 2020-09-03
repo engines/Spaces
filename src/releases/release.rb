@@ -10,11 +10,11 @@ module Releases
     end
 
     def descriptors_for(division_identifier)
-      descriptors_structs_for(division_identifier).map { |d| descriptor_class.new(d) }
+      descriptors_structs_for(division_identifier).map { |d| descriptor_class.new(d) }.uniq(&:uniqueness)
     end
 
     def descriptors_structs_for(division_identifier)
-      (struct[division_identifier] || [])&.map { |d| d[:descriptor] }.compact.uniq(&:uniqueness)
+      (struct[division_identifier] || []).map { |d| d[:descriptor] }.compact
     end
 
     def blueprint_file_names_for(directory)
