@@ -21,7 +21,7 @@ module Resolutions
       def component_divisions; @component_divisions ||= map_for(component_classes) ;end
 
       def mandatory_divisions; @mandatory_divisions ||= component_divisions.merge(associative_divisions) ;end
-      def mandatory_keys; @mandatory_divisions.keys ;end
+      def mandatory_keys; mandatory_divisions.keys ;end
 
       def divisions; mandatory_divisions.merge(super) ;end
 
