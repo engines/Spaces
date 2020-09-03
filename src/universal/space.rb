@@ -11,7 +11,7 @@ module Universal
           :packing,
           :provisioning,
           :data_centers,
-          :DNS
+          :dns
         ]
       end
 

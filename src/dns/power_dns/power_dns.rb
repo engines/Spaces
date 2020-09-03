@@ -1,8 +1,8 @@
 require_relative '../dns'
 
-module DNS
-  module PowerDNS
-    class PowerDNS < DNS
+module Dns
+  module PowerDns
+    class PowerDns < Dns
 
       class << self
         def inheritance_paths; __dir__ ;end

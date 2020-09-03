@@ -3,13 +3,13 @@ require_relative '../defaultables/space'
 require_relative 'dns'
 require_relative 'power_dns/power_dns'
 
-module DNS
+module Dns
   class Space < ::Spaces::Subspace
     include Defaultables::Space
 
     class << self
       def default_model_class
-        DNS
+        Dns
       end
     end
 
@@ -23,7 +23,7 @@ module DNS
       end
     end
 
-    def default_dns_class; PowerDNS::PowerDNS ;end
+    def default_dns_class; PowerDns::PowerDns ;end
 
   end
 end
