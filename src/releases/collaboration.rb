@@ -18,8 +18,9 @@ module Releases
 
     def division_map
       @division_map ||= keys.inject({}) do |m, k|
-        m[k] = division_for(k)
-        m
+        m.tap do
+          m[k] = division_for(k)
+        end
       end.compact
     end
 
@@ -29,8 +30,7 @@ module Releases
 
     def to_h
       division_keys.inject({}) do |m, k|
-        m[k] = memento_for(k)
-        m
+        m.tap { m[k] = memento_for(k) }
       end.compact
     end
 

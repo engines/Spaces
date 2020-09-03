@@ -12,8 +12,7 @@ module Resolutions
     def division_map
       @resolution_division_map ||= super.merge(
         mandatory_keys.reduce({}) do |m, k|
-          m[k] = division_for(k)
-          m
+          m.tap { m[k] = division_for(k) }
         end.compact
       )
     end

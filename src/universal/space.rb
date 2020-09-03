@@ -18,8 +18,7 @@ module Universal
       def space_map
         @@space_map ||= space_names.inject({}) do |m, i|
           require_relative "../#{i}/space"
-          m[i] = Module.const_get("#{i.to_s.camelize}::Space").new
-          m
+          m.tap { m[i] = Module.const_get("#{i.to_s.camelize}::Space").new }
         end
       end
     end

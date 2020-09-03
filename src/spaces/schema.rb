@@ -7,12 +7,13 @@ module Spaces
     class << self
       def deep_outline
         outline.keys.inject({}) do |m, k|
-          m[k] = if (s = schema_class_for(k))
-            [outline[k], s.deep_outline]
-          else
-            outline[k]
+          m.tap do
+            m[k] = if (s = schema_class_for(k))
+              [outline[k], s.deep_outline]
+            else
+              outline[k]
+            end
           end
-          m
         rescue NoMethodError => e
           warn(error: e, key: k, outline: outline[k])
           m[k] = outline[k]
@@ -28,8 +29,7 @@ module Spaces
 
       def map_for(classes)
         classes.inject({}) do |m, k|
-          m[key_for(k)] = k
-          m
+          m.tap { m[key_for(k)] = k }
         end
       end
 

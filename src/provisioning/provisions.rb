@@ -52,8 +52,7 @@ module Provisioning
 
     def division_map
       @division_map ||= schema_keys.inject({}) do |m, k|
-        m[k] = resolutions.map { |r| r.division_map[k] }.compact
-        m
+        m.tap { m[k] = resolutions.map { |r| r.division_map[k] }.compact }
       end
     end
 
