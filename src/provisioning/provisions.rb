@@ -37,7 +37,7 @@ module Provisioning
     end
 
     def explicit_providers
-      division_map[:providers]&.map(&:all) || []
+      accumulation_map[:providers]&.map(&:all) || []
     end
 
     def providers_implied_in_containers
@@ -47,11 +47,11 @@ module Provisioning
     end
 
     def containers
-      division_map[:containers]&.map(&:all)&.flatten || []
+      accumulation_map[:containers]&.map(&:all)&.flatten || []
     end
 
-    def division_map
-      @division_map ||= schema_keys.inject({}) do |m, k|
+    def accumulation_map
+      @accumulation_map ||= schema_keys.inject({}) do |m, k|
         m.tap { m[k] = resolutions.map { |r| r.division_map[k] }.compact }
       end
     end
