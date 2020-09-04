@@ -6,15 +6,11 @@ module Dns
     include Defaultables::Defaultable
 
     class << self
-      def qualifier
-        name.split('::').last.downcase
-      end
-
       def inheritance_paths; __dir__ ;end
     end
 
     require_files_in :stanzas
-    
+
     def default
       OpenStruct.new(type: :power_dns)
     end

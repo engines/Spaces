@@ -5,10 +5,6 @@ module Packing
     class Image < ::Releases::Subdivision
 
       class << self
-        def qualifier
-          name.split('::').last.downcase
-        end
-
         def safety_overrides; {} ;end
       end
 

@@ -5,10 +5,6 @@ module Provisioning
     class Container < ::Releases::Subdivision
 
       class << self
-        def qualifier
-          name.split('::').last.downcase
-        end
-
         def inheritance_paths; __dir__ ;end
       end
 
