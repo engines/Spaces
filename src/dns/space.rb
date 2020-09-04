@@ -17,13 +17,7 @@ module Dns
       require_relative("#{type}/#{type}")
     end
 
-    def default
-      @default ||= default_dns_class.new.tap do |m|
-        m.struct = m.default
-      end
-    end
-
-    def default_dns_class; PowerDns::PowerDns ;end
+    def default_specific_class; PowerDns::PowerDns ;end
 
   end
 end
