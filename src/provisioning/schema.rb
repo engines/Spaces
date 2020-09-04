@@ -1,4 +1,5 @@
 require_relative '../spaces/schema'
+require_relative '../service_networking/service_network'
 require_relative '../dns/dns'
 
 module Provisioning
@@ -7,6 +8,7 @@ module Provisioning
     class << self
       def associative_classes
         [
+          ServiceNetworking::ServiceNetwork,
           Dns::Dns
         ]
       end

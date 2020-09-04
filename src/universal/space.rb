@@ -10,6 +10,7 @@ module Universal
           :resolutions,
           :packing,
           :provisioning,
+          :service_networking,
           :data_centers,
           :dns
         ]

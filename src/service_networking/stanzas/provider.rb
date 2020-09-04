@@ -1,16 +1,12 @@
 require_relative '../../releases/stanza'
 
-module Provisioning
+module ServiceNetworking
   module Stanzas
-    class Consul < ::Releases::Stanza
+    class Provider < ::Releases::Stanza
+
 
       def declaratives
-        %Q(
-          provider "#{qualifier}" {
-            address = "#{address}"
-            datacenter = "#{data_center.identifier}"
-          }
-        )
+        q
       end
 
       def address
