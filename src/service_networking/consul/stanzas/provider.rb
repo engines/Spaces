@@ -7,7 +7,7 @@ module ServiceNetworking
 
         def q
           %Q(
-            provider "#{qualifier}" {
+            provider "#{context.qualifier}" {
               address = "#{address}"
               datacenter = "#{data_center.identifier}"
             }
