@@ -8,7 +8,7 @@ module Dns
         def q(collaboration, container, iteration)
           %Q(
             resource "powerdns_record" "#{container.identifier}-#{iteration}" {
-              zone    = #{universe.host}
+              zone    = "#{universe.host}"
               name    = "#{container.identifier}-#{iteration}.#{universe.host}"
               type    = "AAAA"
               ttl     = #{context.ttl}
