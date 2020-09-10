@@ -6,7 +6,7 @@ module Texts
     relation_accessor :text
     attr_accessor :value
 
-    delegate(collaboration: :text)
+    delegate([:collaboration, :context] => :text)
 
     def resolved
       vs = ([:unqualified] + value.split('.')).last(2)
@@ -18,9 +18,12 @@ module Texts
 
     def collaborate_with(name)
       unless name == :unqualified
-        collaboration.bindings.named(name) || collaboration.send(name) || (raise NoMethodError)
+        context.respond_to?(:bindings) && context.bindings.named(name) ||
+        collaboration.respond_to?(:bindings) && collaboration.bindings.named(name) ||
+        context.respond_to?(name) && context.send(name) ||
+        collaboration.respond_to?(name) && collaboration.send(name)
       else
-        text.context
+        context
       end
     end
 
