@@ -5,35 +5,37 @@ en:
       git::space/import: |
         An attempt to import blueprint for '%{descriptor}' finds it already exists.
         Moving on.
-      spaces::thing/open_struct_from_json:
-        The blueprint for '%{descriptor}' is not well formed. Results are unpredictable.
-      blueprints::space/import_by_json:
-        The blueprint for '%{descriptor}' is not well formed. Results are unpredictable.
+      spaces::thing/open_struct_from_json: |
+        The blueprint for '%{descriptor}' is not well formed.
+        Results are unpredictable.
+      blueprints::space/import_by_json: |
+        The blueprint for '%{descriptor}' is not well formed.
+        Results are unpredictable.
 
     docker::files::steps/rescue_in_step_for:
       docker::files::steps/general_step_for:
         Unable to find class %{name}.
 
     packing::pack/components:
-      packing::pack/nominated_scripts:
+      packing::pack/nominated_scripts: |
         There are no images given in the blueprint for '%{descriptor}'.
         So there's nothing to pack.
 
     packing::space/block_in_by:
-      packing::space/save:
+      packing::space/save: |
         There are no images given in the blueprint for '%{descriptor}'.
         So there's no worthwhile pack to save.
 
     packing::space/block_in_execute_on_anchors_for:
-      packing::space/by:
+      packing::space/by: |
         A %{klass} for %{descriptor} is yet to be saved.
         Saving now.
 
     packing::space/block_(2_levels)_in_execute_on_anchors_for:
-      packing::space/execute:
+      packing::space/execute: |
         There are no images given in the blueprint for '%{descriptor}'.
         So there's no worthwhile pack to %{command}.
-      packing::space/by:
+      packing::space/by: |
         A pack for %{descriptor} is yet to be saved.
         Saving now.
 
@@ -46,7 +48,7 @@ en:
         Provisioning failed while attempting to execute %{command} for %{identifier}.
 
     releases::descriptive_subdivision/resolution:
-      resolutions::space/by:
+      resolutions::space/by: |
         A resolution for %{descriptor} is yet to be saved.
         Saving now.
 
