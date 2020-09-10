@@ -19,4 +19,6 @@ class OpenStruct
     end
   end
 
+  def memento; duplicate(self) ;end
+
 end
