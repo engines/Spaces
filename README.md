@@ -16,7 +16,7 @@ James: perhaps you could advise how I programmatically create a new directory un
 Spaces exist in a universe which you can create with the `Universal::Space` class:
 
 ```
-require_relative 'ruby/universal/space'
+require_relative 'src/universal/space'
 universe = Universal::Space.new
 ```
 
@@ -24,7 +24,7 @@ From a universe you can access a variety of spaces. For example:
 
 ```
 universe.blueprints
-universe.containers
+universe.resolutions
 ```
 
 # Spaces::Descriptor
@@ -33,7 +33,7 @@ A `Spaces::Descriptor` object is the way spaces objects are saved and located in
 a common starting point is to start with a descriptor to locate a source blueprint. For example:
 
 ```
-require_relative 'ruby/spaces/descriptor'
+require_relative 'src/spaces/descriptor'
 descriptor = Spaces::Descriptor.new(
   repository: 'https://github.com/MarkRatjens/publify.git'
 )
@@ -73,8 +73,7 @@ blueprint_space.by(descriptor)
 A `Resolutions::Resolution` is what will generate a DockerFile. You create a Resolution from a blueprint like so:
 
 ```
-blueprint = universe.blueprints.by(descriptor)
-resolution = blueprint.resolution
+resolution = universe.resolutions.by(descriptor)
 ```
 
 ## Saving a Resolutions::Resolution
@@ -82,46 +81,10 @@ resolution = blueprint.resolution
 Save `Resolutions::Resolution` to resolution space with:
 
 ```
-resolution_space = universe.resolutions
-resolution_space.save(resolution)
+universe.resolutions.save(resolution)
 ```
 
 # Containers
-
-## Generating DockerFile content
-
-A resolution can generate docker file content:
-
-```
-content = resolution.docker_file
-```
-
-## Saving docker file content to a file
-
-Save docker file content to container space with:
-
-```
-container_space.save(content)
-```
-
-# Image Subjects
-## Generating an Images::Subject
-
-An `Images::Subject` is what will manage a folder structure that you'll eventually be able to use as an image to build a container. Generate an
-image subject from a Resolution in a similar way to generating a docker file:
-
-```
-content = resolution.image_subject
-```
-
-## Saving image file content to image space
-
-Save the image subject's folders and files to image space with:
-
-```
-image_space = universe.images
-image_space.save(content)
-```
 
 # Web client
 

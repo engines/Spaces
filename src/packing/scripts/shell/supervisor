@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+apt-get -yy install s6 execline
+
+mkdir -p /var/sv /etc/sv /var/log/s6
