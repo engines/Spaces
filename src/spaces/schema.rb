@@ -20,7 +20,6 @@ module Spaces
         end
       end
 
-      def outline; {} ;end
       def naming_map; {} ;end
       def division_classes; [] ;end
 

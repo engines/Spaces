@@ -14,19 +14,6 @@ module Releases
   class Schema < ::Spaces::Schema
 
     class << self
-      def outline
-        {
-          title: 0,
-          description: 0,
-          licenses: [(1..), { label: 1, url: 1 }],
-          scaling: 0,
-          bindings: 0,
-          provider: 0,
-          images: 0,
-          containers: 0
-        }
-      end
-
       def naming_map
         {
           anchor: :binding_anchor
