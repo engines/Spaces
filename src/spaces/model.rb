@@ -19,8 +19,7 @@ module Spaces
     relation_accessor :descriptor
 
     delegate(
-      [:universe, :schema, :schema_class] => :klass,
-      [:outline, :deep_outline] => :schema
+      [:universe, :schema, :schema_class] => :klass
     )
 
     def descriptor
