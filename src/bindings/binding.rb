@@ -34,7 +34,7 @@ module Bindings
     def struct_variables; struct.variables || OpenStruct.new ;end
 
     def text_from(value)
-      text_class.new(origin: value, context: self)
+      text_class.new(origin: value, division: self)
     end
 
     def text_class; Texts::Text ;end

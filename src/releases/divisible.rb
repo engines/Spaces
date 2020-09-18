@@ -4,7 +4,7 @@ module Releases
   class Divisible < Division
 
     def related_divisions
-      @related_divisions ||= collaboration.divisions
+      @related_divisions ||= release.divisions
     end
 
     def all
@@ -24,7 +24,7 @@ module Releases
 
     def memento; all&.map(&:memento) || super ;end
 
-    def initialize(struct: nil, collaboration: nil, label: nil)
+    def initialize(struct: nil, release: nil, label: nil)
       check_subdivision_class
       super
     end

@@ -5,7 +5,7 @@ module Dns
     module Stanzas
       class Records < ::Dns::Stanzas::Records
 
-        def q(collaboration, container, iteration)
+        def q(container, iteration)
           %Q(
             resource "powerdns_record" "#{container.identifier}-#{iteration}" {
               zone    = "#{universe.host}"

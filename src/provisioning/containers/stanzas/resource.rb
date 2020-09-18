@@ -6,8 +6,8 @@ module Provisioning
       class Resource < ::Releases::Stanza
 
         def declaratives
-          Array.new(collaboration.count) do |i|
-            q(collaboration.identifier, context, i)
+          Array.new(release.count) do |i|
+            q(release.identifier, context, i)
           end.join("\n")
         end
 

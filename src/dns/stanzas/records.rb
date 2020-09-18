@@ -5,9 +5,9 @@ module Dns
     class Records < ::Releases::Stanza
 
       def declaratives
-        Array.new(collaboration.count) do |i|
-          collaboration.all(:containers).map do |c|
-            q(collaboration, c, i)
+        Array.new(release.count) do |i|
+          release.all(:containers).map do |c|
+            q(c, i)
           end
         end.join("\n")
       end

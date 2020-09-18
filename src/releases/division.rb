@@ -1,38 +1,24 @@
-require_relative '../spaces/model'
-require_relative 'stanzas'
+require_relative 'transformable'
 
 module Releases
-  class Division < ::Spaces::Model
-    include Stanzas
+  class Division < Transformable
 
     attr_accessor :label
 
     class << self
-      def prototype(collaboration:, label:)
-        new(collaboration: collaboration, label: label)
+      def prototype(release:, label:)
+        new(release: release, label: label)
       end
-
-      def stanza_lot
-        files_in(:stanzas).map { |f| ::File.basename(f, '.rb') }
-      end
-
-      def inheritance_paths; __dir__ ;end
     end
 
-    require_files_in :stanzas
+    relation_accessor :release
 
-    relation_accessor :collaboration
+    delegate(context_identifier: :release)
 
-    delegate([:release, :home_app_path, :context_identifier] => :collaboration)
-
-    def declaratives
-      stanzas.map(&:declaratives)
-    end
-
-    def initialize(struct: nil, collaboration: nil, label: nil)
-      self.collaboration = collaboration
+    def initialize(struct: nil, release: nil, label: nil)
+      self.release = release
       self.label = label
-      self.struct = struct || (collaboration.struct[label] if collaboration) || default
+      self.struct = struct || (release.struct[label] if release) || default
     end
 
     def to_s; struct ;end

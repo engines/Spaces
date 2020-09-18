@@ -1,7 +1,7 @@
-require_relative 'division'
+require_relative 'transformable'
 
 module Releases
-  class Release < Division
+  class Release < Transformable
 
     relation_accessor :predecessor
 
@@ -32,7 +32,7 @@ module Releases
     end
 
     def division_for(key)
-      schema.divisions[key]&.prototype(collaboration: self, label: key)
+      schema.divisions[key]&.prototype(release: self, label: key)
     end
 
     def to_h

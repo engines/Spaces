@@ -15,7 +15,7 @@ module Provisioning
 
     def dns_default
       dns.default.tap do |m|
-        m.collaboration = self
+        m.release = self
       end
     end
 
@@ -43,7 +43,7 @@ module Provisioning
 
     def files_for(directory)
       target_file_names_for(directory).map do |t|
-        text_class.new(origin: t, directory: directory, context: self)
+        text_class.new(origin: t, directory: directory, division: self)
       end
     end
 

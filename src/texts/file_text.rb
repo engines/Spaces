@@ -22,7 +22,7 @@ module Texts
     def break_point; origin_file_name.index("#{directory}") ;end
     def to_s; origin_file_name ;end
 
-    def initialize(origin:, directory:, context:)
+    def initialize(origin:, directory:, division:)
       self.context = context
       self.origin_file_name = origin
       self.directory = directory

@@ -5,7 +5,7 @@ module Packing
     module Stanzas
       class Scripts < ::Releases::Stanza
 
-        delegate(script_file_names: :collaboration)
+        delegate(script_file_names: :release)
 
         def to_h
           if script_file_names.any?
