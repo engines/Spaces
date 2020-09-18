@@ -1,9 +1,9 @@
-require_relative '../releases/schema'
+require_relative '../releases/composition'
 require_relative '../clients/client'
 require_relative '../domains/domain'
 
 module Resolutions
-  class Schema < ::Releases::Schema
+  class Composition < ::Releases::Composition
 
     class << self
       def associative_classes

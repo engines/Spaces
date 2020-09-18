@@ -4,7 +4,7 @@ module Resolutions
   class Resolution < ::Releases::Release
 
     delegate(
-      mandatory_keys: :schema,
+      mandatory_keys: :composition,
       resolution: :itself,
       resolutions: :universe,
       home_app_path: :descriptor

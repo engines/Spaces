@@ -10,7 +10,7 @@ module Packing
 
     alias_accessor :resolution, :predecessor
     alias_method :context_identifier, :identifier
-    alias_method :keys, :schema_keys
+    alias_method :keys, :composition_keys
 
     def export; struct_for(images.all.map(&:export)) ;end
     def memento; super.merge(struct_for(images.all.map(&:commit))) ;end

@@ -32,7 +32,7 @@ module Releases
     end
 
     def division_for(key)
-      schema.divisions[key]&.prototype(release: self, label: key)
+      composition.divisions[key]&.prototype(release: self, label: key)
     end
 
     def to_h
@@ -45,7 +45,7 @@ module Releases
       division_map[key]&.memento || struct[key]
     end
 
-    def schema_keys; schema.keys ;end
+    def composition_keys; composition.keys ;end
     def division_keys; division_map.keys ;end
 
     def descriptors_for(division_identifier)

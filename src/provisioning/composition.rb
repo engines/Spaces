@@ -1,8 +1,8 @@
-require_relative '../spaces/schema'
+require_relative '../spaces/composition'
 require_relative '../dns/dns'
 
 module Provisioning
-  class Schema < ::Spaces::Schema
+  class Composition < ::Spaces::Composition
 
     class << self
       def associative_classes

@@ -1,4 +1,4 @@
-require_relative '../spaces/schema'
+require_relative '../spaces/composition'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../configuring/configuration'
@@ -11,7 +11,7 @@ require_relative '../provisioning/providers/providers'
 require_relative '../provisioning/containers/containers'
 
 module Releases
-  class Schema < ::Spaces::Schema
+  class Composition < ::Spaces::Composition
 
     class << self
       def naming_map

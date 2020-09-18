@@ -2,13 +2,13 @@ require_relative 'thing'
 require_relative 'descriptor'
 
 module Spaces
-  class Schema < Thing
+  class Composition < Thing
 
     class << self
       def naming_map; {} ;end
       def division_classes; [] ;end
 
-      def schema_class_for(key); divisions[key]&.schema ;end
+      def composition_class_for(key); divisions[key]&.composition ;end
       def divisions; @divisions ||= map_for(division_classes) ;end
 
       def map_for(classes)
