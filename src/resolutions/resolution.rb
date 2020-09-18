@@ -11,7 +11,7 @@ module Resolutions
 
     alias_accessor :blueprint, :predecessor
 
-    def components
+    def auxiliary_texts
       [files_for(:injections)].flatten
     end
 

@@ -12,7 +12,7 @@ en:
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
 
-    packing::pack/components:
+    packing::pack/auxiliary_texts:
       packing::pack/nominated_scripts: |
         There are no images given in the blueprint for '%{descriptor}'.
         So there's nothing to pack.

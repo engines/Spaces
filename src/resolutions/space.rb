@@ -24,7 +24,7 @@ module Resolutions
     def save(model)
       anchor_resolutions_for(model)
 
-      model.components.map do |t|
+      model.auxiliary_texts.map do |t|
         save_text(t)
         "#{t.release_path}"
       end

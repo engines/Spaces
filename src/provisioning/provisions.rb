@@ -39,7 +39,7 @@ module Provisioning
       end
     end
 
-    def components; files_for(:modules) ;end
+    def auxiliary_texts; files_for(:modules) ;end
 
     def files_for(directory)
       target_file_names_for(directory).map do |t|

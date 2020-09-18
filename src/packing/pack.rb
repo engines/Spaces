@@ -23,7 +23,7 @@ module Packing
       )
     end
 
-    def components
+    def auxiliary_texts
       [nominated_scripts, injections].flatten
     end
 
