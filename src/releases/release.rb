@@ -7,8 +7,7 @@ module Releases
 
     delegate(
       blueprints: :universe,
-      identifier: :descriptor,
-      outline: :schema
+      identifier: :descriptor
     )
 
     alias_method :has?, :respond_to?
