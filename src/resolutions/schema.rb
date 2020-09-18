@@ -1,7 +1,6 @@
 require_relative '../releases/schema'
 require_relative '../clients/client'
 require_relative '../domains/domain'
-require_relative '../data_centers/data_center'
 
 module Resolutions
   class Schema < ::Releases::Schema
@@ -10,8 +9,7 @@ module Resolutions
       def associative_classes
         [
           Clients::Client,
-          Domains::Domain,
-          DataCenters::DataCenter
+          Domains::Domain
         ]
       end
 

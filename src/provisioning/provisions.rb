@@ -11,13 +11,7 @@ module Provisioning
 
     require_files_in :stanzas
 
-    delegate([:dns, :service_networking] => :universe)
-
-    def service_networking_default
-      service_networking.default.tap do |m|
-        m.collaboration = self
-      end
-    end
+    delegate(dns: :universe)
 
     def dns_default
       dns.default.tap do |m|
