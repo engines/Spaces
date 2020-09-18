@@ -1,43 +1,41 @@
-require_relative 'component'
+require_relative '../spaces/model'
+require_relative 'stanzas'
 
 module Releases
-  class Division < Component
+  class Division < ::Spaces::Model
+    include Stanzas
 
-    def related_divisions
-      @related_divisions ||= collaboration.divisions
+    attr_accessor :label
+
+    class << self
+      def prototype(collaboration:, label:)
+        new(collaboration: collaboration, label: label)
+      end
+
+      def stanza_lot
+        files_in(:stanzas).map { |f| ::File.basename(f, '.rb') }
+      end
+
+      def inheritance_paths; __dir__ ;end
     end
 
-    def all
-      @all ||= struct&.map { |s| subdivision_for(s) }&.compact
+    require_files_in :stanzas
+
+    relation_accessor :collaboration
+
+    delegate([:release, :home_app_path, :context_identifier] => :collaboration)
+
+    def declaratives
+      stanzas.map(&:declaratives)
     end
-
-    def subdivision_for(struct)
-      subdivision_class.new(struct: struct, division: self)
-    rescue NameError => e
-      struct
-    rescue ArgumentError => e
-      warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.deep_to_h)
-      nil
-    end
-
-    def subdivision_class; Module.const_get(klass.name.singularize) ;end
-
-    def memento; all&.map(&:memento) || super ;end
 
     def initialize(struct: nil, collaboration: nil, label: nil)
-      check_subdivision_class
-      super
+      self.collaboration = collaboration
+      self.label = label
+      self.struct = struct || (collaboration.struct[label] if collaboration) || default
     end
 
-    def check_subdivision_class
-      subdivision_class
-    rescue NameError => e
-      warn(error: e, klass: klass.name.singularize)
-    end
-
-    def default
-      @default ||= OpenStruct.new
-    end
+    def to_s; struct ;end
 
   end
 end

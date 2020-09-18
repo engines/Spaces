@@ -1,8 +1,8 @@
-require_relative '../../releases/division'
+require_relative '../../releases/divisible'
 
 module Packing
   module Images
-    class Images < ::Releases::Division
+    class Images < ::Releases::Divisible
 
       def script_file_names
         all.map(&:script_file_names).flatten.uniq

@@ -1,8 +1,8 @@
-require_relative '../releases/division'
+require_relative '../releases/divisible'
 require_relative '../texts/file_text'
 
 module Resolutions
-  class Division < ::Releases::Division
+  class Divisible < ::Releases::Divisible
 
     alias_method :resolution, :collaboration
 

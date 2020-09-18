@@ -1,7 +1,7 @@
-require_relative '../releases/component'
+require_relative '../releases/divisible'
 
 module Configuring
-  class Configuration < ::Releases::Component
+  class Configuration < ::Releases::Division
 
         def memento; resolved ;end
 

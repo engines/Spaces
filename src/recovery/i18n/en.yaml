@@ -48,18 +48,18 @@ en:
         A resolution for %{descriptor} is yet to be saved.
         Saving now.
 
-    releases::division/new:
-      releases::division/initialize: |
+    releases::divisible/new:
+      releases::divisible/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.
         Ignoring %{content}
 
-    releases::division/check_subdivision_class:
-      releases::division/subdivision_class: |
+    releases::divisible/check_subdivision_class:
+      releases::divisible/subdivision_class: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
-    releases::division/subdivision_class:
-      releases::division/const_get: |
+    releases::divisible/subdivision_class:
+      releases::divisible/const_get: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 

@@ -1,7 +1,7 @@
-require_relative '../releases/division'
+require_relative '../releases/divisible'
 
 module Nodules
-  class Nodules < ::Releases::Division
+  class Nodules < ::Releases::Divisible
 
     def subdivision_for(struct)
       universe.nodules.by(struct: struct, division: self)

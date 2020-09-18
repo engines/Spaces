@@ -1,8 +1,8 @@
-require_relative '../releases/division'
+require_relative '../releases/divisible'
 require_relative 'binding'
 
 module Bindings
-  class Bindings < ::Releases::Division
+  class Bindings < ::Releases::Divisible
 
     def named(name)
       all.detect { |b| b.identifier == name.to_s }

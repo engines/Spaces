@@ -1,7 +1,7 @@
-require_relative 'component'
+require_relative 'division'
 
 module Releases
-  class Collaboration < Component
+  class Collaboration < Division
 
     relation_accessor :predecessor
 

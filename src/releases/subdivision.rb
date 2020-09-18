@@ -1,7 +1,7 @@
-require_relative 'component'
+require_relative 'division'
 
 module Releases
-  class Subdivision < Component
+  class Subdivision < Division
 
     relation_accessor :division
 

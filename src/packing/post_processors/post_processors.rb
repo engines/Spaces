@@ -1,8 +1,8 @@
-require_relative '../../releases/division'
+require_relative '../../releases/divisible'
 
 module Packing
   module PostProcessors
-    class PostProcessors < ::Releases::Division
+    class PostProcessors < ::Releases::Divisible
 
       class << self
         def inheritance_paths; __dir__ ;end
