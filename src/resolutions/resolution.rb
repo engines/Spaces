@@ -1,15 +1,20 @@
-require_relative 'release'
+require_relative '../releases/release'
 
 module Resolutions
-  class Resolution < Release
+  class Resolution < ::Releases::Release
 
     delegate(
+      mandatory_keys: :schema,
       resolution: :itself,
       resolutions: :universe,
       home_app_path: :descriptor
     )
 
     alias_accessor :blueprint, :predecessor
+
+    def memento
+      super.tap { |m| m.descriptor = struct.descriptor }
+    end
 
     def auxiliary_texts
       [files_for(:injections)].flatten
@@ -22,6 +27,14 @@ module Resolutions
       ].flatten.compact.map do |t|
         text_class.new(origin: t, directory: directory, division: self)
       end
+    end
+
+    def division_map
+      @resolution_division_map ||= super.merge(
+        mandatory_keys.reduce({}) do |m, k|
+          m.tap { m[k] = division_for(k) }
+        end.compact
+      )
     end
 
     def binding_descriptors
