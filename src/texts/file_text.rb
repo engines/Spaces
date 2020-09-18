@@ -7,7 +7,7 @@ module Texts
       :directory,
       :origin
 
-    delegate(context_identifier: :context)
+    delegate(context_identifier: :division)
 
     def origin
       @origin ||= ::File.read(origin_file_name)
@@ -23,7 +23,7 @@ module Texts
     def to_s; origin_file_name ;end
 
     def initialize(origin:, directory:, division:)
-      self.context = context
+      self.division = division
       self.origin_file_name = origin
       self.directory = directory
     end
