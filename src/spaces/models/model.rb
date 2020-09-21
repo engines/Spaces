@@ -8,9 +8,6 @@ module Spaces
       def composition; @composition ||= composition_class.new ;end
 
       def composition_class
-        pp '=' * 88
-        pp namespace
-        pp "#{namespace}/composition".camelize
         require_relative("../../#{namespace}/composition")
         Module.const_get("#{namespace}/composition".camelize)
       rescue LoadError => e
