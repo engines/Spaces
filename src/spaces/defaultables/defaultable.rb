@@ -1,4 +1,4 @@
-require_relative '../spaces/models/descriptor'
+require_relative '../models/descriptor'
 
 module Defaultables
   module Defaultable

@@ -1,5 +1,5 @@
+require_relative '../spaces/defaultables/defaultable'
 require_relative '../emitting/emissions/division'
-require_relative '../defaultables/defaultable'
 
 module Clients
   class Client < ::Emitting::Division

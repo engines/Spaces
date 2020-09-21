@@ -1,5 +1,4 @@
-require_relative '../spaces/models/space'
-require_relative '../defaultables/space'
+require_relative '../spaces/defaultables/space'
 require_relative 'client'
 
 module Clients

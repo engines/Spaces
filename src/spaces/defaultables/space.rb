@@ -1,4 +1,4 @@
-require_relative '../spaces/models/space'
+require_relative '../models/space'
 require_relative 'defaultable'
 
 module Defaultables
