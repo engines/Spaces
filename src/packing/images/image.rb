@@ -12,8 +12,8 @@ module Packing
 
       def identifier; type ;end
 
-      def export; memento ;end
-      def commit; memento ;end
+      def export; emit ;end
+      def commit; emit ;end
 
       def script_file_names
         if struct.scripts

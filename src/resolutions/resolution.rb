@@ -12,7 +12,7 @@ module Resolutions
 
     alias_accessor :blueprint, :predecessor
 
-    def memento
+    def emit
       super.tap { |m| m.descriptor = struct.descriptor }
     end
 
@@ -44,7 +44,7 @@ module Resolutions
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint
       self.struct = duplicate(struct || blueprint&.struct)
-      self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.memento) || descriptor&.memento
+      self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.emit) || descriptor&.emit
     end
 
   end

@@ -7,7 +7,7 @@ module Bindings
 
     def override_keys; overrides.to_h.keys ;end
 
-    def memento; resolved ;end
+    def emit; resolved ;end
 
     def resolved
       @resolved ||= duplicate(struct).tap { |s| s.variables = variables }

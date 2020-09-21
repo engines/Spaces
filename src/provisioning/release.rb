@@ -5,7 +5,7 @@ module Provisioning
 
     delegate(mandatory_keys: :composition)
 
-    def memento
+    def emit
       super.tap { |m| m.descriptor = struct.descriptor }
     end
 

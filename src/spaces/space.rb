@@ -38,13 +38,13 @@ module Spaces
     end
 
     def save_yaml(model)
-      _save(model, content: model.memento.to_yaml, as: :yaml)
+      _save(model, content: model.emit.to_yaml, as: :yaml)
     end
 
     alias_method :save, :save_yaml
 
     def save_json(model)
-      _save(model, content: model.memento.deep_to_h.to_json, as: :json)
+      _save(model, content: model.emit.deep_to_h.to_json, as: :json)
     end
 
     def delete(model)

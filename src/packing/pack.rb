@@ -13,7 +13,7 @@ module Packing
     alias_method :keys, :composition_keys
 
     def export; struct_for(images.all.map(&:export)) ;end
-    def memento; super.merge(struct_for(images.all.map(&:commit))) ;end
+    def emit; super.merge(struct_for(images.all.map(&:commit))) ;end
 
     def struct_for(images)
       OpenStruct.new(
@@ -50,7 +50,7 @@ module Packing
     end
 
     def initialize(resolution)
-      self.struct = struct_for(resolution.memento.images)
+      self.struct = struct_for(resolution.emit.images)
       self.resolution = resolution
     end
 

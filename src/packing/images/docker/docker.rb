@@ -10,11 +10,11 @@ module Packing
         end
 
         def export
-          memento.tap { |m| m[:export_path] = "#{identifier}.tar" }
+          emit.tap { |m| m[:export_path] = "#{identifier}.tar" }
         end
 
         def commit
-          memento.tap { |m| m[:commit] = true }
+          emit.tap { |m| m[:commit] = true }
         end
 
       end

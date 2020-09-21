@@ -52,7 +52,7 @@ module Spaces
 
     def klass; @klass ||= self.class ;end
     def keys; struct&.to_h&.keys ;end
-    def memento; duplicate(struct) ;end
+    def emit; duplicate(struct) ;end
 
     def context_identifier; identifier ;end
     def to_yaml; YAML.dump(struct) ;end

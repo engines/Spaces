@@ -61,7 +61,7 @@ module Provisioning
 
     def initialize(descriptor)
       self.struct = OpenStruct.new
-      self.struct.descriptor = descriptor&.memento if descriptor
+      self.struct.descriptor = descriptor&.emit if descriptor
     end
 
   end

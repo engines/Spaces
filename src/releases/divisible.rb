@@ -22,7 +22,7 @@ module Releases
 
     def subdivision_class; Module.const_get(klass.name.singularize) ;end
 
-    def memento; all&.map(&:memento) || super ;end
+    def emit; all&.map(&:emit) || super ;end
 
     def initialize(struct: nil, release: nil, label: nil)
       check_subdivision_class

@@ -18,7 +18,7 @@ module Releases
 
     def context_identifier; identifier ;end
 
-    def memento; OpenStruct.new(to_h) ;end
+    def emit; OpenStruct.new(to_h) ;end
 
     def divisions; division_map.values ;end
 
@@ -36,12 +36,12 @@ module Releases
 
     def to_h
       division_keys.inject({}) do |m, k|
-        m.tap { m[k] = memento_for(k) }
+        m.tap { m[k] = emit_for(k) }
       end.compact
     end
 
-    def memento_for(key)
-      division_map[key]&.memento || struct[key]
+    def emit_for(key)
+      division_map[key]&.emit || struct[key]
     end
 
     def composition_keys; composition.keys ;end

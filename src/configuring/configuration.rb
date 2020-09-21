@@ -3,7 +3,7 @@ require_relative '../releases/divisible'
 module Configuring
   class Configuration < ::Releases::Division
 
-        def memento; resolved ;end
+        def emit; resolved ;end
 
         def resolved
           @resolved ||= OpenStruct.new(texts.transform_values(&:resolved))

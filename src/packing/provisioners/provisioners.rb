@@ -10,7 +10,7 @@ module Packing
 
       require_files_in :stanzas
 
-      def memento
+      def emit
         stanzas.map(&:to_h).flatten.compact
       end
 
