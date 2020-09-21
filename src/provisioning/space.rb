@@ -1,5 +1,5 @@
 require 'ruby_terraform'
-require_relative '../spaces/space'
+require_relative '../spaces/models/space'
 require_relative 'providers/space'
 require_relative 'containers/space'
 

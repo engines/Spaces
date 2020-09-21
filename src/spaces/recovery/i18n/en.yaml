@@ -67,12 +67,12 @@ en:
       emitting::stanzas/stanza_for:
         There is no source code for stanza %{name}.
 
-    spaces::model/composition_class:
-      spaces::model/require_relative:
+    spaces::models::model/composition_class:
+      spaces::models::model/require_relative:
         A composition for %{namespace} could not be found. Substituting %{subsitution}.
 
-    spaces::space/open:
-      spaces::space/initialize:
+    spaces::models::space/open:
+      spaces::models::space/initialize:
         An instance of %{klass} for %{descriptor} does not yet exist in its space.
 
     texts::text/map:

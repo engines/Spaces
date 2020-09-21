@@ -1,4 +1,4 @@
-require_relative '../../spaces/subspace'
+require_relative '../../spaces/models/subspace'
 
 module Emitting
   class SubdivisionSpace < Spaces::Subspace

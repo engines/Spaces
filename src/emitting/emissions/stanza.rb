@@ -1,4 +1,4 @@
-require_relative '../../spaces/model'
+require_relative '../../spaces/models/model'
 
 module Emitting
   class Stanza < ::Spaces::Model

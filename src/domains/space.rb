@@ -1,4 +1,4 @@
-require_relative '../spaces/space'
+require_relative '../spaces/models/space'
 require_relative '../defaultables/space'
 require_relative 'domain'
 

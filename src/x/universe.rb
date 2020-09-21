@@ -1,5 +1,5 @@
 require_relative '../universal/space'
-require_relative '../spaces/descriptor'
+require_relative '../spaces/models/descriptor'
 require_relative 'blueprints'
 require_relative 'resolutions'
 require_relative 'packing'

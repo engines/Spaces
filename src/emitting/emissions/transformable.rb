@@ -1,4 +1,4 @@
-require_relative '../../spaces/model'
+require_relative '../../spaces/models/model'
 require_relative 'stanzas'
 
 module Emitting

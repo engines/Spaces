@@ -1,4 +1,4 @@
-require_relative '../spaces/thing'
+require_relative '../models/thing'
 
 I18n.load_path << Dir["#{__dir__}/i18n/*.yaml"]
 
@@ -44,7 +44,7 @@ module Recovery
 
     def ignorable?(line)
       [
-        'spaces/space',
+        'spaces/models/space',
         'spaces/constantizing',
         'method_missing',
       ].map { |s| line.include?(s) }.include?(true)

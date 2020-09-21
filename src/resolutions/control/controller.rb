@@ -1,4 +1,4 @@
-require './src/spaces/controller'
+require './src/spaces/models/controller'
 require './src/resolutions/resolution'
 
 module Resolutions

@@ -1,5 +1,5 @@
 require 'packer'
-require_relative '../spaces/space'
+require_relative '../spaces/models/space'
 require_relative 'images/space'
 
 module Packing

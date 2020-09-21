@@ -33,7 +33,7 @@ A `Spaces::Descriptor` object is the way spaces objects are saved and located in
 a common starting point is to start with a descriptor to locate a source blueprint. For example:
 
 ```
-require_relative 'src/spaces/descriptor'
+require_relative 'src/spaces/models/descriptor'
 descriptor = Spaces::Descriptor.new(
   repository: 'https://github.com/MarkRatjens/publify.git'
 )

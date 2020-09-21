@@ -1,5 +1,5 @@
 require './src/blueprints/blueprint'
-require './src/spaces/controller'
+require './src/spaces/models/controller'
 require './src/blueprints/title/controller'
 require './src/blueprints/description/controller'
 require './src/blueprints/memory/controller'

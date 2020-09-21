@@ -1,4 +1,4 @@
-require_relative '../spaces/subspace'
+require_relative '../spaces/models/subspace'
 require_relative '../defaultables/space'
 require_relative 'dns'
 require_relative 'power_dns/power_dns'

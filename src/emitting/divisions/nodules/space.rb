@@ -1,4 +1,4 @@
-require_relative '../../../spaces/space'
+require_relative '../../../spaces/models/space'
 
 module Nodules
   class Space < ::Spaces::Space

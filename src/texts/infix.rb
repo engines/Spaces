@@ -1,4 +1,4 @@
-require_relative '../spaces/model'
+require_relative '../spaces/models/model'
 
 module Texts
   class Infix < ::Spaces::Model
