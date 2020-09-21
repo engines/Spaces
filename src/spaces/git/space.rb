@@ -1,5 +1,5 @@
 require 'git'
-require_relative '../spaces/models/space'
+require_relative '../models/space'
 
 module Git
   class Space < ::Spaces::Space

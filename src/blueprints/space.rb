@@ -1,5 +1,5 @@
 require_relative '../universal/space'
-require_relative '../git/space'
+require_relative '../spaces/git/space'
 require_relative 'blueprint'
 
 module Blueprints
