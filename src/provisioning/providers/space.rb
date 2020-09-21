@@ -1,4 +1,4 @@
-require_relative '../../emitting/division_space'
+require_relative '../../emitting/emissions/division_space'
 
 module Provisioning
   module Providers

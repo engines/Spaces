@@ -1,5 +1,5 @@
 require_relative '../texts/file_text'
-require_relative '../emitting/emission'
+require_relative '../emitting/emissions/emission'
 require_relative 'providers/provider'
 
 module Provisioning

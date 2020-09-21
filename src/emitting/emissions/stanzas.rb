@@ -1,4 +1,4 @@
-require_relative '../spaces/constantizing'
+require_relative '../../spaces/constantizing'
 
 module Emitting
   module Stanzas

@@ -1,4 +1,4 @@
-require_relative '../emitting/division'
+require_relative '../emitting/emissions/division'
 require_relative '../defaultables/defaultable'
 
 module Dns

@@ -1,4 +1,4 @@
-require_relative '../emitting/division'
+require_relative '../emitting/emissions/division'
 
 module Scaling
   class Scaling < ::Emitting::Division

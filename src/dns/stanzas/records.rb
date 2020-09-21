@@ -1,4 +1,4 @@
-require_relative '../../emitting/stanza'
+require_relative '../../emitting/emissions/stanza'
 
 module Dns
   module Stanzas

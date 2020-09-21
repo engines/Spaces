@@ -1,4 +1,4 @@
-require_relative '../emitting/subdivision'
+require_relative '../emitting/emissions/subdivision'
 
 module Packages
   class Package < ::Emitting::Subdivision

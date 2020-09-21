@@ -1,4 +1,4 @@
-require_relative '../emitting/emission'
+require_relative '../emitting/emissions/emission'
 
 module Packing
   class Pack < ::Emitting::Emission

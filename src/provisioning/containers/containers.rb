@@ -1,4 +1,4 @@
-require_relative '../../emitting/divisible'
+require_relative '../../emitting/emissions/divisible'
 
 module Provisioning
   module Containers

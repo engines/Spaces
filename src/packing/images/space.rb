@@ -1,4 +1,4 @@
-require_relative '../../emitting/subdivision_space'
+require_relative '../../emitting/emissions/subdivision_space'
 require_relative 'image'
 
 module Packing

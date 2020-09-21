@@ -1,4 +1,4 @@
-require_relative '../spaces/subspace'
+require_relative '../../spaces/subspace'
 
 module Emitting
   class DivisionSpace < Spaces::Subspace

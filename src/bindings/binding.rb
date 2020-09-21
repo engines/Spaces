@@ -1,6 +1,6 @@
 require 'resolv'
 require_relative '../texts/text'
-require_relative '../emitting/descriptive_subdivision'
+require_relative '../emitting/emissions/descriptive_subdivision'
 
 module Bindings
   class Binding < ::Emitting::DescriptiveSubdivision

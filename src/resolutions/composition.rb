@@ -1,4 +1,4 @@
-require_relative '../emitting/composition'
+require_relative '../emitting/emissions/composition'
 require_relative '../clients/client'
 require_relative '../domains/domain'
 
