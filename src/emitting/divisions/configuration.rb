@@ -14,10 +14,10 @@ module Divisions
         end
 
         def text_from(value)
-          text_class.new(origin: value, division: self)
+          interpolating_class.new(origin: value, division: self)
         end
 
-        def text_class; Texts::Text ;end
+        def interpolating_class; Interpolating::Text ;end
 
   end
 end

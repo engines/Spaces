@@ -1,7 +1,7 @@
-require_relative '../spaces/models/model'
+require_relative '../models/model'
 require_relative 'infix'
 
-module Texts
+module Interpolating
   class Text < ::Spaces::Model
 
     relation_accessor :division

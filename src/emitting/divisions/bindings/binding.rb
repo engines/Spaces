@@ -1,5 +1,5 @@
 require 'resolv'
-require_relative '../../../texts/text'
+require_relative '../../../spaces/interpolating/text'
 require_relative '../../emissions/descriptive_subdivision'
 
 module Bindings
@@ -34,10 +34,10 @@ module Bindings
     def struct_variables; struct.variables || OpenStruct.new ;end
 
     def text_from(value)
-      text_class.new(origin: value, division: self)
+      interpolating_class.new(origin: value, division: self)
     end
 
-    def text_class; Texts::Text ;end
+    def interpolating_class; Interpolating::Text ;end
 
     def random(length); SecureRandom.hex(length.to_i) ;end
 

@@ -1,6 +1,6 @@
 require_relative 'script'
 
-module Texts
+module Interpolating
   class OneTimeScript < Script
 
     def identifier

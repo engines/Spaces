@@ -59,7 +59,7 @@ module Emitting
       blueprints.file_names_for(directory, context_identifier)
     end
 
-    def text_class; Texts::FileText ;end
+    def interpolating_class; Interpolating::FileText ;end
 
     def method_missing(m, *args, &block)
       if division_keys.include?(m)

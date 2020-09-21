@@ -1,4 +1,4 @@
-require_relative '../texts/file_text'
+require_relative '../spaces/interpolating/file_text'
 require_relative '../emitting/emissions/emission'
 require_relative 'providers/provider'
 
@@ -57,7 +57,7 @@ module Provisioning
 
     def files_for(directory)
       target_file_names_for(directory).map do |t|
-        text_class.new(origin: t, directory: directory, division: self)
+        interpolating_class.new(origin: t, directory: directory, division: self)
       end
     end
 
@@ -69,7 +69,7 @@ module Provisioning
       File.join(File.dirname(__FILE__), "target/#{directory}/**/*")
     end
 
-    def text_class; Texts::FileText ;end
+    def interpolating_class; Interpolating::FileText ;end
 
     def file_name; identifier ;end
 

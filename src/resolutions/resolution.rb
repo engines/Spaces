@@ -26,7 +26,7 @@ module Resolutions
         resolutions.unresolved_names_for(directory),
         blueprint_file_names_for(directory)
       ].flatten.compact.map do |t|
-        text_class.new(origin: t, directory: directory, division: self)
+        interpolating_class.new(origin: t, directory: directory, division: self)
       end
     end
 
