@@ -1,10 +1,10 @@
 require_relative 'division'
 
-module Releases
+module Emitting
   class Divisible < Division
 
     def related_divisions
-      @related_divisions ||= release.divisions
+      @related_divisions ||= emission.divisions
     end
 
     def all
@@ -24,7 +24,7 @@ module Releases
 
     def emit; all&.map(&:emit) || super ;end
 
-    def initialize(struct: nil, release: nil, label: nil)
+    def initialize(struct: nil, emission: nil, label: nil)
       check_subdivision_class
       super
     end

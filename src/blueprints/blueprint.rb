@@ -1,7 +1,7 @@
-require_relative '../releases/release'
+require_relative '../emitting/emission'
 
 module Blueprints
-  class Blueprint < Releases::Release
+  class Blueprint < Emitting::Emission
 
     def emit; duplicate(struct) ;end
 

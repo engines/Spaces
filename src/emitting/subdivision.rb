@@ -1,11 +1,11 @@
 require_relative 'division'
 
-module Releases
+module Emitting
   class Subdivision < Division
 
     relation_accessor :division
 
-    delegate([:release, :context_identifier] => :division)
+    delegate([:emission, :context_identifier] => :division)
 
     def initialize(struct:, division:)
       self.struct = struct

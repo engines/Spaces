@@ -1,8 +1,8 @@
-require_relative '../releases/division'
+require_relative '../emitting/division'
 require_relative '../defaultables/defaultable'
 
 module Dns
-  class Dns < ::Releases::Division
+  class Dns < ::Emitting::Division
     include Defaultables::Defaultable
 
     class << self

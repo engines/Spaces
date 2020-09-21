@@ -1,7 +1,7 @@
-require_relative '../releases/subdivision'
+require_relative '../emitting/subdivision'
 
 module Packages
-  class Package < ::Releases::Subdivision
+  class Package < ::Emitting::Subdivision
 
     class << self
       def inheritance_paths; __dir__ ;end

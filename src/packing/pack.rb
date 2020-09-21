@@ -1,7 +1,7 @@
-require_relative '../releases/release'
+require_relative '../emitting/emission'
 
 module Packing
-  class Pack < ::Releases::Release
+  class Pack < ::Emitting::Emission
 
     delegate(
       [:identifier, :has?, :images, :binding_descriptors] => :resolution,

@@ -1,7 +1,7 @@
-require_relative '../releases/release'
+require_relative '../emitting/emission'
 
 module Provisioning
-  class Release < ::Releases::Release
+  class Emission < ::Emitting::Emission
 
     delegate(mandatory_keys: :composition)
 

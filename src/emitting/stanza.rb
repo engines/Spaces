@@ -1,11 +1,11 @@
 require_relative '../spaces/model'
 
-module Releases
+module Emitting
   class Stanza < ::Spaces::Model
 
     relation_accessor :context
 
-    delegate([:identifier, :release] => :context)
+    delegate([:identifier, :emission] => :context)
 
     def declaratives
       "#{klass} - nothing here yet"

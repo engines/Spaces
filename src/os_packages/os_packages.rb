@@ -1,7 +1,7 @@
-require_relative '../releases/divisible'
+require_relative '../emitting/divisible'
 
 module OsPackages
-  class OsPackages < ::Releases::Divisible
+  class OsPackages < ::Emitting::Divisible
 
     class << self
       def inheritance_paths; __dir__ ;end

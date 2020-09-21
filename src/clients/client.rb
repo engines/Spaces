@@ -1,8 +1,8 @@
-require_relative '../releases/division'
+require_relative '../emitting/division'
 require_relative '../defaultables/defaultable'
 
 module Clients
-  class Client < ::Releases::Division
+  class Client < ::Emitting::Division
     include Defaultables::Defaultable
 
   end

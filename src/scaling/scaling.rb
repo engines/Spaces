@@ -1,7 +1,7 @@
-require_relative '../releases/division'
+require_relative '../emitting/division'
 
 module Scaling
-  class Scaling < ::Releases::Division
+  class Scaling < ::Emitting::Division
 
     def count; struct.provisions.to_h.values.max.to_i ;end
 

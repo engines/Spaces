@@ -1,7 +1,7 @@
-require_relative '../releases/divisible'
+require_relative '../emitting/divisible'
 
 module Configuring
-  class Configuration < ::Releases::Division
+  class Configuration < ::Emitting::Division
 
         def emit; resolved ;end
 

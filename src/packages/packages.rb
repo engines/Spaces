@@ -1,8 +1,8 @@
-require_relative '../releases/divisible'
+require_relative '../emitting/divisible'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Releases::Divisible
+  class Packages < ::Emitting::Divisible
 
     class << self
       def script_lot ;end

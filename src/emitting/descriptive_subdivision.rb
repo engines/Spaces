@@ -1,6 +1,6 @@
 require_relative 'subdivision'
 
-module Releases
+module Emitting
   class DescriptiveSubdivision < Subdivision
 
     def resolution

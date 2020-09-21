@@ -1,13 +1,13 @@
-require_relative '../../../releases/stanza'
+require_relative '../../../emitting/stanza'
 
 module Provisioning
   module Containers
     module Stanzas
-      class Resource < ::Releases::Stanza
+      class Resource < ::Emitting::Stanza
 
         def declaratives
-          Array.new(release.count) do |i|
-            q(release.identifier, context, i)
+          Array.new(emission.count) do |i|
+            q(emission.identifier, context, i)
           end.join("\n")
         end
 

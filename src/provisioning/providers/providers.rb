@@ -1,8 +1,8 @@
-require_relative '../../releases/divisible'
+require_relative '../../emitting/divisible'
 
 module Provisioning
   module Providers
-    class Providers < ::Releases::Divisible
+    class Providers < ::Emitting::Divisible
 
       def subdivision_for(struct)
         universe.provisioning.providers.by(struct: struct, division: self)

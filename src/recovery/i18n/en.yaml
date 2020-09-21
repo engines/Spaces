@@ -43,28 +43,28 @@ en:
       provisioning::space/execute:
         Provisioning failed while attempting to execute %{command} for %{identifier}.
 
-    releases::descriptive_subdivision/resolution:
+    emitting::descriptive_subdivision/resolution:
       resolutions::space/by: |
         A resolution for %{descriptor} is yet to be saved.
         Saving now.
 
-    releases::divisible/new:
-      releases::divisible/initialize: |
+    emitting::divisible/new:
+      emitting::divisible/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.
         Ignoring %{content}
 
-    releases::divisible/check_subdivision_class:
-      releases::divisible/subdivision_class: |
+    emitting::divisible/check_subdivision_class:
+      emitting::divisible/subdivision_class: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
-    releases::divisible/subdivision_class:
-      releases::divisible/const_get: |
+    emitting::divisible/subdivision_class:
+      emitting::divisible/const_get: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
-    releases::stanzas/block_in_stanzas:
-      releases::stanzas/stanza_for:
+    emitting::stanzas/block_in_stanzas:
+      emitting::stanzas/stanza_for:
         There is no source code for stanza %{name}.
 
     spaces::model/composition_class:

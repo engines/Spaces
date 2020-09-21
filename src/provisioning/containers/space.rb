@@ -1,9 +1,9 @@
-require_relative '../../releases/subdivision_space'
+require_relative '../../emitting/subdivision_space'
 require_relative 'container'
 
 module Provisioning
   module Containers
-    class Space < Releases::SubdivisionSpace
+    class Space < Emitting::SubdivisionSpace
 
       class << self
         def default_model_class

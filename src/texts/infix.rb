@@ -6,7 +6,7 @@ module Texts
     relation_accessor :text
     attr_accessor :value
 
-    delegate([:division, :release] => :text)
+    delegate([:division, :emission] => :text)
 
     def resolved
       vs = ([:unqualified] + value.split('.')).last(2)
@@ -18,9 +18,9 @@ module Texts
 
     def collaborate_with(name)
       unless name == :unqualified
-        release.respond_to?(:bindings) && release.bindings.named(name) ||
+        emission.respond_to?(:bindings) && emission.bindings.named(name) ||
         division.respond_to?(:bindings) && division.bindings.named(name) ||
-        release.respond_to?(name) && release.send(name) ||
+        emission.respond_to?(name) && emission.send(name) ||
         division.respond_to?(name) && division.send(name)
       else
         division

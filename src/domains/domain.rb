@@ -1,8 +1,8 @@
-require_relative '../releases/division'
+require_relative '../emitting/division'
 require_relative '../defaultables/defaultable'
 
 module Domains
-  class Domain < ::Releases::Division
+  class Domain < ::Emitting::Division
     include Defaultables::Defaultable
 
     def fqdn

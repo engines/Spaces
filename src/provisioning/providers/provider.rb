@@ -1,8 +1,8 @@
-require_relative '../../releases/subdivision'
+require_relative '../../emitting/subdivision'
 
 module Provisioning
   module Providers
-    class Provider < ::Releases::Subdivision
+    class Provider < ::Emitting::Subdivision
 
       class << self
         def identifier; qualifier ;end

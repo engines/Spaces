@@ -1,9 +1,9 @@
-require_relative '../../../releases/stanza'
+require_relative '../../../emitting/stanza'
 
 module Packing
   module Provisioners
     module Stanzas
-      class Injections < ::Releases::Stanza
+      class Injections < ::Emitting::Stanza
 
         def to_h
           {

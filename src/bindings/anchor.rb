@@ -1,7 +1,7 @@
-require_relative '../releases/divisible'
+require_relative '../emitting/divisible'
 
 module Bindings
-  class Anchor < ::Releases::Divisible
+  class Anchor < ::Emitting::Divisible
 
   end
 end

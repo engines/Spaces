@@ -1,7 +1,7 @@
 require_relative 'transformable'
 
-module Releases
-  class Release < Transformable
+module Emitting
+  class Emission < Transformable
 
     relation_accessor :predecessor
 
@@ -31,7 +31,7 @@ module Releases
     end
 
     def division_for(key)
-      composition.divisions[key]&.prototype(release: self, label: key)
+      composition.divisions[key]&.prototype(emission: self, label: key)
     end
 
     def to_h

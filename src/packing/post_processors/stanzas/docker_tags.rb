@@ -1,9 +1,9 @@
-require_relative '../../../releases/stanza'
+require_relative '../../../emitting/stanza'
 
 module Packing
   module PostProcessors
     module Stanzas
-      class DockerTags < ::Releases::Stanza
+      class DockerTags < ::Emitting::Stanza
 
         def to_h
           matching_images.map do |i|
@@ -16,7 +16,7 @@ module Packing
         end
 
         def matching_images
-          release.images.all.select { |i| matching_types.include?(i.type) }
+          emission.images.all.select { |i| matching_types.include?(i.type) }
         end
 
         def matching_types

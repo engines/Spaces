@@ -1,9 +1,9 @@
 require_relative '../texts/file_text'
-require_relative 'release'
+require_relative 'emission'
 require_relative 'providers/provider'
 
 module Provisioning
-  class Provisions < Release
+  class Provisions < Emission
 
     class << self
       def inheritance_paths; __dir__ ;end
@@ -15,7 +15,7 @@ module Provisioning
 
     def dns_default
       dns.default.tap do |m|
-        m.release = self
+        m.emission = self
       end
     end
 

@@ -1,8 +1,8 @@
-require_relative '../../releases/subdivision'
+require_relative '../../emitting/subdivision'
 
 module Packing
   module Images
-    class Image < ::Releases::Subdivision
+    class Image < ::Emitting::Subdivision
 
       class << self
         def safety_overrides; {} ;end

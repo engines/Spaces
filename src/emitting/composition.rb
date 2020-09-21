@@ -10,7 +10,7 @@ require_relative '../packing/images/images'
 require_relative '../provisioning/providers/providers'
 require_relative '../provisioning/containers/containers'
 
-module Releases
+module Emitting
   class Composition < ::Spaces::Composition
 
     class << self

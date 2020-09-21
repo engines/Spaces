@@ -1,8 +1,8 @@
-require_relative '../../releases/division_space'
+require_relative '../../emitting/division_space'
 
 module Provisioning
   module Providers
-    class Space < Releases::SubdivisionSpace
+    class Space < Emitting::SubdivisionSpace
 
       class << self
         def default_model_class

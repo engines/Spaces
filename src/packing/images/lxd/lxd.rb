@@ -14,7 +14,7 @@ module Packing
               aliases: '{{user `suite`}}',
               architecture: 'amd64',
               os: 'devuan',
-              release: 'Devuan GNU/Linux 3.0'
+              emission: 'Devuan GNU/Linux 3.0'
             }
           }
         end

@@ -1,8 +1,8 @@
-require_relative '../../releases/stanza'
+require_relative '../../emitting/stanza'
 
 module Provisioning
   module Stanzas
-    class Containers < ::Releases::Stanza
+    class Containers < ::Emitting::Stanza
 
       def declaratives
         context.all(:containers).map(&:stanzas).flatten.map(&:declaratives).join("\n")

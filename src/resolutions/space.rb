@@ -26,7 +26,7 @@ module Resolutions
 
       model.auxiliary_texts.map do |t|
         save_text(t)
-        "#{t.release_path}"
+        "#{t.emission_path}"
       end
 
       super

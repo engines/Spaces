@@ -1,9 +1,9 @@
 require 'resolv'
 require_relative '../texts/text'
-require_relative '../releases/descriptive_subdivision'
+require_relative '../emitting/descriptive_subdivision'
 
 module Bindings
-  class Binding < ::Releases::DescriptiveSubdivision
+  class Binding < ::Emitting::DescriptiveSubdivision
 
     def override_keys; overrides.to_h.keys ;end
 

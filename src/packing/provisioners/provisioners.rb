@@ -1,8 +1,8 @@
-require_relative '../../releases/divisible'
+require_relative '../../emitting/divisible'
 
 module Packing
   module Provisioners
-    class Provisioners < ::Releases::Divisible
+    class Provisioners < ::Emitting::Divisible
 
       class << self
         def inheritance_paths; __dir__ ;end

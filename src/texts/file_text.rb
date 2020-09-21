@@ -13,7 +13,7 @@ module Texts
       @origin ||= ::File.read(origin_file_name)
     end
 
-    def release_path; origin_file_name ;end
+    def emission_path; origin_file_name ;end
 
     def file_name; origin_file_name.split('/').last ;end
 

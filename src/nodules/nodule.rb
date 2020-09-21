@@ -1,7 +1,7 @@
-require_relative '../releases/subdivision'
+require_relative '../emitting/subdivision'
 
 module Nodules
-  class Nodule < ::Releases::Subdivision
+  class Nodule < ::Emitting::Subdivision
 
     class << self
       def qualifier

@@ -1,7 +1,7 @@
-require_relative '../releases/release'
+require_relative '../emitting/emission'
 
 module Resolutions
-  class Resolution < ::Releases::Release
+  class Resolution < ::Emitting::Emission
 
     delegate(
       mandatory_keys: :composition,
