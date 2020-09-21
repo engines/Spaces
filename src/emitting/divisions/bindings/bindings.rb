@@ -1,4 +1,4 @@
-require_relative '../emitting/emissions/divisible'
+require_relative '../../emissions/divisible'
 require_relative 'binding'
 
 module Bindings

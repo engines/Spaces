@@ -1,4 +1,5 @@
 require_relative '../emitting/emissions/emission'
+require_relative 'composition'
 
 module Resolutions
   class Resolution < ::Emitting::Emission

@@ -1,6 +1,6 @@
-require_relative '../emitting/emissions/divisible'
+require_relative '../emissions/divisible'
 
-module OsPackages
+module Divisions
   class OsPackages < ::Emitting::Divisible
 
     class << self

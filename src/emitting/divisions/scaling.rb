@@ -1,6 +1,6 @@
-require_relative '../emitting/emissions/division'
+require_relative '../emissions/division'
 
-module Scaling
+module Divisions
   class Scaling < ::Emitting::Division
 
     def count; struct.provisions.to_h.values.max.to_i ;end

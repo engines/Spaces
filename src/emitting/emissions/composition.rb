@@ -1,11 +1,11 @@
 require_relative '../../spaces/composition'
-require_relative '../../bindings/bindings'
-require_relative '../../bindings/anchor'
-require_relative '../../configuring/configuration'
-require_relative '../../scaling/scaling'
-require_relative '../../os_packages/os_packages'
-require_relative '../../nodules/nodules'
-require_relative '../../packages/packages'
+require_relative '../divisions/bindings/bindings'
+require_relative '../divisions/bindings/anchor'
+require_relative '../divisions/configuration'
+require_relative '../divisions/scaling'
+require_relative '../divisions/os_packages'
+require_relative '../divisions/nodules/nodules'
+require_relative '../divisions/packages/packages'
 require_relative '../../packing/images/images'
 require_relative '../../provisioning/providers/providers'
 require_relative '../../provisioning/containers/containers'
@@ -24,9 +24,9 @@ module Emitting
         [
           Bindings::Bindings,
           Bindings::Anchor,
-          Configuring::Configuration,
-          Scaling::Scaling,
-          OsPackages::OsPackages,
+          Divisions::Configuration,
+          Divisions::Scaling,
+          Divisions::OsPackages,
           Nodules::Nodules,
           Packages::Packages,
           Packing::Images::Images,
