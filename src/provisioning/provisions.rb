@@ -1,9 +1,9 @@
 require_relative '../texts/file_text'
-require_relative 'emission'
+require_relative '../emitting/emission'
 require_relative 'providers/provider'
 
 module Provisioning
-  class Provisions < Emission
+  class Provisions < ::Emitting::Emission
 
     class << self
       def inheritance_paths; __dir__ ;end
@@ -11,7 +11,21 @@ module Provisioning
 
     require_files_in :stanzas
 
-    delegate(dns: :universe)
+    delegate(
+      dns: :universe,
+      mandatory_keys: :composition
+    )
+
+    def emit
+      super.tap { |m| m.descriptor = struct.descriptor }
+    end
+
+    def division_map
+      @division_map ||=
+        mandatory_keys.reduce({}) do |m, k|
+          m.tap { m[k] = division_for(k) }
+        end.compact
+    end
 
     def dns_default
       dns.default.tap do |m|
