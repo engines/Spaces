@@ -11,9 +11,9 @@ class OpenStruct
     other ? OpenStruct.new(self.to_h.reverse_merge(other.to_h)) : self
   end
 
-  def deep_to_h
+  def to_h_deep
     to_h.transform_values do |v|
-      v.deep_to_h
+      v.to_h_deep
     rescue NoMethodError
       v
     end

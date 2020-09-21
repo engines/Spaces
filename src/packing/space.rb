@@ -51,7 +51,7 @@ module Packing
       ensure_space_for(model)
       model.auxiliary_texts.each { |t| save_text(t) }
       model.tap do |m|
-        ::File.write("#{path_for(model)}/commit.json", m.emit.deep_to_h.to_json)
+        ::File.write("#{path_for(model)}/commit.json", m.emit.to_h_deep.to_json)
       end
     rescue PackWithoutImagesError => e
       warn(error: e, descriptor: model.identifier, klass: klass)

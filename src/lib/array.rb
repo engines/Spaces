@@ -2,9 +2,9 @@ require_relative 'hash'
 
 class Array
 
-  def deep_to_h
+  def to_h_deep
     map do |i|
-      i.deep_to_h
+      i.to_h_deep
     rescue NoMethodError
       i
     end

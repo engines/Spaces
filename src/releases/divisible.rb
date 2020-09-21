@@ -16,7 +16,7 @@ module Releases
     rescue NameError => e
       struct
     rescue ArgumentError => e
-      warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.deep_to_h)
+      warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
       nil
     end
 

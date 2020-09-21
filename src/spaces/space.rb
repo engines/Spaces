@@ -44,7 +44,7 @@ module Spaces
     alias_method :save, :save_yaml
 
     def save_json(model)
-      _save(model, content: model.emit.deep_to_h.to_json, as: :json)
+      _save(model, content: model.emit.to_h_deep.to_json, as: :json)
     end
 
     def delete(model)
