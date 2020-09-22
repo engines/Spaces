@@ -1,6 +1,6 @@
 require_relative '../spaces/models/composition'
-require_relative 'provisioners/provisioners'
-require_relative 'post_processors/post_processors'
+require_relative 'divisions/provisioners/provisioners'
+require_relative 'divisions/post_processors/post_processors'
 
 module Packing
   class Composition < ::Spaces::Composition
