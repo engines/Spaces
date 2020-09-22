@@ -1,6 +1,6 @@
 require_relative 'subdivision'
 
-module Emitting
+module Emissions
   class DescriptiveSubdivision < Subdivision
 
     def resolution

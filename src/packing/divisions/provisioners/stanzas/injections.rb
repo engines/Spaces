@@ -3,7 +3,7 @@ require_relative '../../../../emitting/emissions/stanza'
 module Packing
   module Provisioners
     module Stanzas
-      class Injections < ::Emitting::Stanza
+      class Injections < ::Emissions::Stanza
 
         def to_h
           {

@@ -1,7 +1,7 @@
 require_relative '../emissions/divisible'
 
 module Divisions
-  class OsPackages < ::Emitting::Divisible
+  class OsPackages < ::Emissions::Divisible
 
     class << self
       def inheritance_paths; __dir__ ;end

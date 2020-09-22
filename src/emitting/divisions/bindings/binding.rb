@@ -3,7 +3,7 @@ require_relative '../../../spaces/interpolating/text'
 require_relative '../../emissions/descriptive_subdivision'
 
 module Bindings
-  class Binding < ::Emitting::DescriptiveSubdivision
+  class Binding < ::Emissions::DescriptiveSubdivision
 
     def override_keys; overrides.to_h.keys ;end
 

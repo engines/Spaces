@@ -3,7 +3,7 @@ require_relative '../../../../emitting/emissions/stanza'
 module Packing
   module PostProcessors
     module Stanzas
-      class DockerTags < ::Emitting::Stanza
+      class DockerTags < ::Emissions::Stanza
 
         def to_h
           matching_images.map do |i|

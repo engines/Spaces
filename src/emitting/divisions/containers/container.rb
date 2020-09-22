@@ -2,7 +2,7 @@ require_relative '../../emissions/subdivision'
 
 module Provisioning
   module Containers
-    class Container < ::Emitting::Subdivision
+    class Container < ::Emissions::Subdivision
 
       class << self
         def inheritance_paths; __dir__ ;end

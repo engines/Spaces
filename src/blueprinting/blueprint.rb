@@ -1,7 +1,7 @@
 require_relative '../emitting/emissions/emission'
 
 module Blueprinting
-  class Blueprint < Emitting::Emission
+  class Blueprint < Emissions::Emission
 
     def emit; duplicate(struct) ;end
 

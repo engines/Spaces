@@ -2,7 +2,7 @@ require_relative '../../emissions/divisible'
 require_relative 'binding'
 
 module Bindings
-  class Bindings < ::Emitting::Divisible
+  class Bindings < ::Emissions::Divisible
 
     def named(name)
       all.detect { |b| b.identifier == name.to_s }

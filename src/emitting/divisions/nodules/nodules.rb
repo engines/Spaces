@@ -1,7 +1,7 @@
 require_relative '../../emissions/divisible'
 
 module Nodules
-  class Nodules < ::Emitting::Divisible
+  class Nodules < ::Emissions::Divisible
 
     def subdivision_for(struct)
       universe.nodules.by(struct: struct, division: self)

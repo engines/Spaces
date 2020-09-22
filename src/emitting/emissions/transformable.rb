@@ -1,7 +1,7 @@
 require_relative '../../spaces/models/model'
 require_relative 'stanzas'
 
-module Emitting
+module Emissions
   class Transformable < ::Spaces::Model
     include Stanzas
 

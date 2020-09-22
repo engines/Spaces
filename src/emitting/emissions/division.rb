@@ -1,6 +1,6 @@
 require_relative 'transformable'
 
-module Emitting
+module Emissions
   class Division < Transformable
 
     attr_accessor :label

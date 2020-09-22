@@ -1,6 +1,6 @@
 require_relative '../../spaces/models/model'
 
-module Emitting
+module Emissions
   class Stanza < ::Spaces::Model
 
     relation_accessor :context

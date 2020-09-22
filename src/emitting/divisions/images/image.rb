@@ -2,7 +2,7 @@ require_relative '../../emissions/subdivision'
 
 module Packing
   module Images
-    class Image < ::Emitting::Subdivision
+    class Image < ::Emissions::Subdivision
 
       class << self
         def safety_overrides; {} ;end

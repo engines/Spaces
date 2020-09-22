@@ -1,6 +1,6 @@
 require_relative 'division'
 
-module Emitting
+module Emissions
   class Divisible < Division
 
     def related_divisions

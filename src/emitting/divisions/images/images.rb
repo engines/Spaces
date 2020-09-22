@@ -2,7 +2,7 @@ require_relative '../../emissions/divisible'
 
 module Packing
   module Images
-    class Images < ::Emitting::Divisible
+    class Images < ::Emissions::Divisible
 
       def script_file_names
         all.map(&:script_file_names).flatten.uniq

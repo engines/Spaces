@@ -2,7 +2,7 @@ require_relative '../../../../emitting/emissions/stanza'
 
 module Dns
   module Stanzas
-    class Records < ::Emitting::Stanza
+    class Records < ::Emissions::Stanza
 
       def declaratives
         Array.new(emission.count) do |i|

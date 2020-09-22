@@ -3,7 +3,7 @@ require_relative 'associations/clients/client'
 require_relative 'associations/domains/domain'
 
 module Resolving
-  class Composition < ::Emitting::Composition
+  class Composition < ::Emissions::Composition
 
     class << self
       def associative_classes

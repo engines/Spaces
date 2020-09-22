@@ -3,7 +3,7 @@ require_relative '../../../../emitting/emissions/stanza'
 module Packing
   module Provisioners
     module Stanzas
-      class Scripts < ::Emitting::Stanza
+      class Scripts < ::Emissions::Stanza
 
         delegate(script_file_names: :emission)
 

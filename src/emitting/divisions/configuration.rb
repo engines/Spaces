@@ -1,7 +1,7 @@
 require_relative '../emissions/divisible'
 
 module Divisions
-  class Configuration < ::Emitting::Division
+  class Configuration < ::Emissions::Division
 
         def emit; resolved ;end
 

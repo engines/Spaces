@@ -1,7 +1,7 @@
 require_relative '../../emissions/division_space'
 
 module Providers
-  class Space < Emitting::SubdivisionSpace
+  class Space < Emissions::SubdivisionSpace
 
     class << self
       def default_model_class

@@ -1,6 +1,6 @@
 require_relative '../../spaces/models/subspace'
 
-module Emitting
+module Emissions
   class DivisionSpace < Spaces::Subspace
 
     def by(division)

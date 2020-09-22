@@ -3,7 +3,7 @@ require_relative '../../../../emissions/stanza'
 module Providers
   module Docker
     module Stanzas
-      class Provider < ::Emitting::Stanza
+      class Provider < ::Emissions::Stanza
 
         def declaratives
           %Q(

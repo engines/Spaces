@@ -2,7 +2,7 @@ require_relative '../emitting/emissions/emission'
 require_relative 'composition'
 
 module Resolving
-  class Resolution < ::Emitting::Emission
+  class Resolution < ::Emissions::Emission
 
     class << self
       def composition_class; Composition ;end

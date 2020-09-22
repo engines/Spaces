@@ -1,7 +1,7 @@
 require_relative '../../emissions/subdivision'
 
 module Providers
-  class Provider < ::Emitting::Subdivision
+  class Provider < ::Emissions::Subdivision
 
     class << self
       def identifier; qualifier ;end

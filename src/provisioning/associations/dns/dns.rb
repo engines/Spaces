@@ -2,7 +2,7 @@ require_relative '../../../spaces/defaultables/defaultable'
 require_relative '../../../emitting/emissions/division'
 
 module Dns
-  class Dns < ::Emitting::Division
+  class Dns < ::Emissions::Division
     include Defaultables::Defaultable
 
     class << self

@@ -3,7 +3,7 @@ require_relative '../../../emissions/stanza'
 module Provisioning
   module Containers
     module Stanzas
-      class Resource < ::Emitting::Stanza
+      class Resource < ::Emissions::Stanza
 
         def declaratives
           Array.new(emission.count) do |i|

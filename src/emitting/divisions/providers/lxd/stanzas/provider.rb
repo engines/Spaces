@@ -3,7 +3,7 @@ require_relative '../../../emitting/emissions/stanza'
 module Providers
   module LXD
     module Stanzas
-      class Provider < ::Emitting::Stanza
+      class Provider < ::Emissions::Stanza
 
         def declaratives
           %Q(

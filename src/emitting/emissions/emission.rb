@@ -1,7 +1,7 @@
 require_relative 'transformable'
 require_relative 'composition'
 
-module Emitting
+module Emissions
   class Emission < Transformable
 
     class << self

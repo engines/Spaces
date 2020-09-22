@@ -3,7 +3,7 @@ require_relative 'image'
 
 module Packing
   module Images
-    class Space < Emitting::SubdivisionSpace
+    class Space < Emissions::SubdivisionSpace
 
       class << self
         def default_model_class

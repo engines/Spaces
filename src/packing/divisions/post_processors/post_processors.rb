@@ -2,7 +2,7 @@ require_relative '../../../emitting/emissions/divisible'
 
 module Packing
   module PostProcessors
-    class PostProcessors < ::Emitting::Divisible
+    class PostProcessors < ::Emissions::Divisible
 
       class << self
         def inheritance_paths; __dir__ ;end

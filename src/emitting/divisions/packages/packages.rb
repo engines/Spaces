@@ -2,7 +2,7 @@ require_relative '../../emissions/divisible'
 require_relative 'package'
 
 module Packages
-  class Packages < ::Emitting::Divisible
+  class Packages < ::Emissions::Divisible
 
     class << self
       def script_lot ;end

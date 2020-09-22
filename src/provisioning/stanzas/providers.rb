@@ -2,7 +2,7 @@ require_relative '../../emitting/emissions/stanza'
 
 module Provisioning
   module Stanzas
-    class Providers < ::Emitting::Stanza
+    class Providers < ::Emissions::Stanza
 
       def declaratives
         context.providers.map(&:declaratives).join("\n")

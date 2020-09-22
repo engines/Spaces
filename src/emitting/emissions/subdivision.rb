@@ -1,6 +1,6 @@
 require_relative 'division'
 
-module Emitting
+module Emissions
   class Subdivision < Division
 
     relation_accessor :division

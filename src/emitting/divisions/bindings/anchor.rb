@@ -1,7 +1,7 @@
 require_relative '../../emissions/divisible'
 
 module Bindings
-  class Anchor < ::Emitting::Divisible
+  class Anchor < ::Emissions::Divisible
 
   end
 end

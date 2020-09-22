@@ -2,7 +2,7 @@ require_relative '../../../../emitting/emissions/stanza'
 
 module Dns
   module Stanzas
-    class Provider < ::Emitting::Stanza
+    class Provider < ::Emissions::Stanza
 
       def declaratives
         q

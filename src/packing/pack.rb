@@ -2,7 +2,7 @@ require_relative '../emitting/emissions/emission'
 require_relative 'composition'
 
 module Packing
-  class Pack < ::Emitting::Emission
+  class Pack < ::Emissions::Emission
 
     class << self
       def composition_class; Composition ;end

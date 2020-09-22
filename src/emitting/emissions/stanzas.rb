@@ -1,6 +1,6 @@
 require_relative '../../spaces/constantizing'
 
-module Emitting
+module Emissions
   module Stanzas
     include Spaces::Constantizing
 
