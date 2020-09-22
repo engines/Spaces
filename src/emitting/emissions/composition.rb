@@ -6,7 +6,7 @@ require_relative '../divisions/scaling'
 require_relative '../divisions/os_packages'
 require_relative '../divisions/nodules/nodules'
 require_relative '../divisions/packages/packages'
-require_relative '../../packing/images/images'
+require_relative '../divisions/images/images'
 require_relative '../../provisioning/providers/providers'
 require_relative '../../provisioning/containers/containers'
 
