@@ -6,9 +6,9 @@ require_relative '../divisions/scaling'
 require_relative '../divisions/os_packages'
 require_relative '../divisions/nodules/nodules'
 require_relative '../divisions/packages/packages'
+require_relative '../divisions/providers/providers'
 require_relative '../divisions/images/images'
-require_relative '../../provisioning/providers/providers'
-require_relative '../../provisioning/containers/containers'
+require_relative '../divisions/containers/containers'
 
 module Emitting
   class Composition < ::Spaces::Composition
@@ -28,9 +28,9 @@ module Emitting
           Divisions::Scaling,
           Divisions::OsPackages,
           Nodules::Nodules,
+          Providers::Providers,
           Packages::Packages,
           Packing::Images::Images,
-          Provisioning::Providers::Providers,
           Provisioning::Containers::Containers
         ]
       end

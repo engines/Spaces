@@ -1,4 +1,4 @@
-require_relative '../../../emitting/emissions/stanza'
+require_relative '../../../emissions/stanza'
 
 module Provisioning
   module Containers

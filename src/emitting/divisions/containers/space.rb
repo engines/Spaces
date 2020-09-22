@@ -1,4 +1,4 @@
-require_relative '../../emitting/emissions/subdivision_space'
+require_relative '../../emissions/subdivision_space'
 require_relative 'container'
 
 module Provisioning

@@ -1,7 +1,7 @@
 require 'ruby_terraform'
 require_relative '../spaces/models/space'
-require_relative 'providers/space'
-require_relative 'containers/space'
+require_relative '../emitting/divisions/providers/space'
+require_relative '../emitting/divisions/containers/space'
 
 module Provisioning
   class Space < ::Spaces::Space
