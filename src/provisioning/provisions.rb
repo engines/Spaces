@@ -11,17 +11,11 @@ module Provisioning
 
     require_files_in :stanzas
 
-    delegate([:dns, :service_networking] => :universe)
-
-    def service_networking_default
-      service_networking.default.tap do |m|
-        m.collaboration = self
-      end
-    end
+    delegate(dns: :universe)
 
     def dns_default
       dns.default.tap do |m|
-        m.collaboration = self
+        m.release = self
       end
     end
 
@@ -45,11 +39,11 @@ module Provisioning
       end
     end
 
-    def components; files_for(:modules) ;end
+    def auxiliary_texts; files_for(:modules) ;end
 
     def files_for(directory)
       target_file_names_for(directory).map do |t|
-        text_class.new(origin: t, directory: directory, context: self)
+        text_class.new(origin: t, directory: directory, division: self)
       end
     end
 
@@ -67,7 +61,7 @@ module Provisioning
 
     def initialize(descriptor)
       self.struct = OpenStruct.new
-      self.struct.descriptor = descriptor&.memento if descriptor
+      self.struct.descriptor = descriptor&.emit if descriptor
     end
 
   end

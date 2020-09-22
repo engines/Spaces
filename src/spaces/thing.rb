@@ -52,11 +52,11 @@ module Spaces
 
     def klass; @klass ||= self.class ;end
     def keys; struct&.to_h&.keys ;end
-    def memento; duplicate(struct) ;end
+    def emit; duplicate(struct) ;end
 
     def context_identifier; identifier ;end
     def to_yaml; YAML.dump(struct) ;end
-    def to_json; struct&.deep_to_h&.to_json ;end
+    def to_json; struct&.to_h_deep&.to_json ;end
     def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
 
     def to_s; identifier ;end

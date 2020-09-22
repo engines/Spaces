@@ -1,4 +1,4 @@
-require_relative '../spaces/schema'
+require_relative '../spaces/composition'
 require_relative '../bindings/bindings'
 require_relative '../bindings/anchor'
 require_relative '../configuring/configuration'
@@ -11,22 +11,9 @@ require_relative '../provisioning/providers/providers'
 require_relative '../provisioning/containers/containers'
 
 module Releases
-  class Schema < ::Spaces::Schema
+  class Composition < ::Spaces::Composition
 
     class << self
-      def outline
-        {
-          title: 0,
-          description: 0,
-          licenses: [(1..), { label: 1, url: 1 }],
-          scaling: 0,
-          bindings: 0,
-          provider: 0,
-          images: 0,
-          containers: 0
-        }
-      end
-
       def naming_map
         {
           anchor: :binding_anchor

@@ -16,7 +16,7 @@ module Packing
         end
 
         def matching_images
-          collaboration.images.all.select { |i| matching_types.include?(i.type) }
+          release.images.all.select { |i| matching_types.include?(i.type) }
         end
 
         def matching_types

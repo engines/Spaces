@@ -5,7 +5,7 @@ module Releases
 
     relation_accessor :context
 
-    delegate([:identifier, :collaboration] => :context)
+    delegate([:identifier, :release] => :context)
 
     def declaratives
       "#{klass} - nothing here yet"

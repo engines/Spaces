@@ -7,7 +7,7 @@ module Texts
       :directory,
       :origin
 
-    delegate(context_identifier: :context)
+    delegate(context_identifier: :division)
 
     def origin
       @origin ||= ::File.read(origin_file_name)
@@ -22,8 +22,8 @@ module Texts
     def break_point; origin_file_name.index("#{directory}") ;end
     def to_s; origin_file_name ;end
 
-    def initialize(origin:, directory:, context:)
-      self.context = context
+    def initialize(origin:, directory:, division:)
+      self.division = division
       self.origin_file_name = origin
       self.directory = directory
     end

@@ -12,7 +12,7 @@ en:
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
 
-    packing::pack/components:
+    packing::pack/auxiliary_texts:
       packing::pack/nominated_scripts: |
         There are no images given in the blueprint for '%{descriptor}'.
         So there's nothing to pack.
@@ -48,18 +48,18 @@ en:
         A resolution for %{descriptor} is yet to be saved.
         Saving now.
 
-    releases::division/new:
-      releases::division/initialize: |
+    releases::divisible/new:
+      releases::divisible/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.
         Ignoring %{content}
 
-    releases::division/check_subdivision_class:
-      releases::division/subdivision_class: |
+    releases::divisible/check_subdivision_class:
+      releases::divisible/subdivision_class: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
-    releases::division/subdivision_class:
-      releases::division/const_get: |
+    releases::divisible/subdivision_class:
+      releases::divisible/const_get: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
@@ -67,9 +67,9 @@ en:
       releases::stanzas/stanza_for:
         There is no source code for stanza %{name}.
 
-    spaces::model/schema_class:
+    spaces::model/composition_class:
       spaces::model/require_relative:
-        A schema for %{namespace} could not be found. Substituting %{subsitution}.
+        A composition for %{namespace} could not be found. Substituting %{subsitution}.
 
     spaces::space/open:
       spaces::space/initialize:

@@ -10,10 +10,10 @@ module Packing
 
     alias_accessor :resolution, :predecessor
     alias_method :context_identifier, :identifier
-    alias_method :keys, :schema_keys
+    alias_method :keys, :composition_keys
 
     def export; struct_for(images.all.map(&:export)) ;end
-    def memento; super.merge(struct_for(images.all.map(&:commit))) ;end
+    def emit; super.merge(struct_for(images.all.map(&:commit))) ;end
 
     def struct_for(images)
       OpenStruct.new(
@@ -23,13 +23,13 @@ module Packing
       )
     end
 
-    def components
+    def auxiliary_texts
       [nominated_scripts, injections].flatten
     end
 
     def nominated_scripts
       script_file_names.map do |t|
-        text_class.new(origin: "#{File.dirname(__FILE__)}/#{t}", directory: :scripts, context: self)
+        text_class.new(origin: "#{File.dirname(__FILE__)}/#{t}", directory: :scripts, division: self)
       end
     end
 
@@ -37,7 +37,7 @@ module Packing
 
     def files_for(directory)
       file_names_for(directory).map do |t|
-        text_class.new(origin: t, directory: directory, context: self)
+        text_class.new(origin: t, directory: directory, division: self)
       end
     end
 
@@ -50,7 +50,7 @@ module Packing
     end
 
     def initialize(resolution)
-      self.struct = struct_for(resolution.memento.images)
+      self.struct = struct_for(resolution.emit.images)
       self.resolution = resolution
     end
 

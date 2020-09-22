@@ -5,22 +5,21 @@ module Spaces
 
     class << self
       def universe; @universal_space ||= Universal::Space.new ;end
-      def schema; @schema ||= schema_class.new ;end
+      def composition; @composition ||= composition_class.new ;end
 
-      def schema_class
-        require_relative("../#{namespace}/schema")
-        Module.const_get("#{namespace}/schema".camelize)
+      def composition_class
+        require_relative("../#{namespace}/composition")
+        Module.const_get("#{namespace}/composition".camelize)
       rescue LoadError => e
-        warn(error: e, namespace: namespace, subsitution: Schema, verbosity: [:error])
-        Schema
+        warn(error: e, namespace: namespace, subsitution: Composition, verbosity: [:error])
+        Composition
       end
     end
 
     relation_accessor :descriptor
 
     delegate(
-      [:universe, :schema, :schema_class] => :klass,
-      [:outline, :deep_outline] => :schema
+      [:universe, :composition, :composition_class] => :klass
     )
 
     def descriptor

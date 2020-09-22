@@ -1,9 +1,9 @@
-require_relative '../releases/component'
+require_relative '../releases/divisible'
 
 module Configuring
-  class Configuration < ::Releases::Component
+  class Configuration < ::Releases::Division
 
-        def memento; resolved ;end
+        def emit; resolved ;end
 
         def resolved
           @resolved ||= OpenStruct.new(texts.transform_values(&:resolved))
@@ -14,7 +14,7 @@ module Configuring
         end
 
         def text_from(value)
-          text_class.new(origin: value, context: self)
+          text_class.new(origin: value, division: self)
         end
 
         def text_class; Texts::Text ;end

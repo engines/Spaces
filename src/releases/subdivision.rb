@@ -1,11 +1,11 @@
-require_relative 'component'
+require_relative 'division'
 
 module Releases
-  class Subdivision < Component
+  class Subdivision < Division
 
     relation_accessor :division
 
-    delegate([:collaboration, :release_path, :context_identifier] => :division)
+    delegate([:release, :context_identifier] => :division)
 
     def initialize(struct:, division:)
       self.struct = struct

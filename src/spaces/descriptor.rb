@@ -1,12 +1,7 @@
 require_relative 'model'
-require_relative 'descriptor_schema'
 
 module Spaces
   class Descriptor < ::Spaces::Model
-
-    class << self
-      def schema_class; DescriptorSchema ;end
-    end
 
     def identifier; struct.identifier ||= root_identifier ;end
     def root_identifier; repository.split('/').last.split('.').first if repository ;end

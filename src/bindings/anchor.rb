@@ -1,7 +1,7 @@
-require_relative '../releases/division'
+require_relative '../releases/divisible'
 
 module Bindings
-  class Anchor < ::Releases::Division
+  class Anchor < ::Releases::Divisible
 
   end
 end

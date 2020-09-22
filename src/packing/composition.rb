@@ -1,9 +1,9 @@
-require_relative '../spaces/schema'
+require_relative '../spaces/composition'
 require_relative 'provisioners/provisioners'
 require_relative 'post_processors/post_processors'
 
 module Packing
-  class Schema < ::Spaces::Schema
+  class Composition < ::Spaces::Composition
 
     class << self
       def division_classes

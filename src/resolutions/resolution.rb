@@ -1,9 +1,10 @@
-require_relative 'release'
+require_relative '../releases/release'
 
 module Resolutions
-  class Resolution < Release
+  class Resolution < ::Releases::Release
 
     delegate(
+      mandatory_keys: :composition,
       resolution: :itself,
       resolutions: :universe,
       home_app_path: :descriptor
@@ -11,7 +12,11 @@ module Resolutions
 
     alias_accessor :blueprint, :predecessor
 
-    def components
+    def emit
+      super.tap { |m| m.descriptor = struct.descriptor }
+    end
+
+    def auxiliary_texts
       [files_for(:injections)].flatten
     end
 
@@ -20,8 +25,16 @@ module Resolutions
         resolutions.unresolved_names_for(directory),
         blueprint_file_names_for(directory)
       ].flatten.compact.map do |t|
-        text_class.new(origin: t, directory: directory, context: self)
+        text_class.new(origin: t, directory: directory, division: self)
       end
+    end
+
+    def division_map
+      @resolution_division_map ||= super.merge(
+        mandatory_keys.reduce({}) do |m, k|
+          m.tap { m[k] = division_for(k) }
+        end.compact
+      )
     end
 
     def binding_descriptors
@@ -31,7 +44,7 @@ module Resolutions
     def initialize(struct: nil, blueprint: nil, descriptor: nil)
       self.blueprint = blueprint
       self.struct = duplicate(struct || blueprint&.struct)
-      self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.memento) || descriptor&.memento
+      self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.emit) || descriptor&.emit
     end
 
   end

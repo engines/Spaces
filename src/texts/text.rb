@@ -4,11 +4,11 @@ require_relative 'infix'
 module Texts
   class Text < ::Spaces::Model
 
-    relation_accessor :context
+    relation_accessor :division
 
     attr_accessor :origin
 
-    delegate(collaboration: :context)
+    delegate(release: :division)
 
     def resolved; @resolved ||= contains_interpolation? ? with_resolved_infixes : origin ;end
 
@@ -31,8 +31,8 @@ module Texts
     def infix_class; Infix ;end
     def to_s; origin ;end
 
-    def initialize(origin:, context:)
-      self.context = context
+    def initialize(origin:, division:)
+      self.division = division
       self.origin = origin
     end
 
