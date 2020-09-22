@@ -1,19 +1,13 @@
 require_relative 'thing'
+require_relative 'composition'
 
 module Spaces
   class Model < Thing
 
     class << self
-      def universe; @universal_space ||= Universal::Space.new ;end
+      def universe; @universe ||= Universe.new ;end
       def composition; @composition ||= composition_class.new ;end
-
-      def composition_class
-        require_relative("../../#{namespace}/composition")
-        Module.const_get("#{namespace}/composition".camelize)
-      rescue LoadError => e
-        warn(error: e, namespace: namespace, subsitution: Composition, verbosity: [:error])
-        Composition
-      end
+      def composition_class; Composition ;end
     end
 
     relation_accessor :descriptor

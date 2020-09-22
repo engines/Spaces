@@ -1,14 +1,14 @@
 en:
   trace:
 
-    blueprints::space/import:
+    blueprinting::space/import:
       git::space/import: |
         An attempt to import blueprint for '%{descriptor}' finds it already exists.
         Moving on.
       spaces::thing/open_struct_from_json: |
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
-      blueprints::space/import_by_json: |
+      blueprinting::space/import_by_json: |
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
 
@@ -44,7 +44,7 @@ en:
         Provisioning failed while attempting to execute %{command} for %{identifier}.
 
     emitting::descriptive_subdivision/resolution:
-      resolutions::space/by: |
+      resolving::space/by: |
         A resolution for %{descriptor} is yet to be saved.
         Saving now.
 
@@ -69,7 +69,7 @@ en:
 
     spaces::models::model/composition_class:
       spaces::models::model/require_relative:
-        A composition for %{namespace} could not be found. Substituting %{subsitution}.
+        A composition for %{namespace} could not be found. Substituting %{substitution}.
 
     spaces::models::space/open:
       spaces::models::space/initialize:

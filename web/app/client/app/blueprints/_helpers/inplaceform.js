@@ -7,7 +7,7 @@ app.blueprints.inplaceform = (options = {}) => (a, x) => a['app-blueprint-inplac
     }
   }),
   app.form({
-    url: `/api/blueprints/${options.router.params.blueprint_id}/${options.keys.join('/')}`,
+    url: `/api/blueprinting/${options.router.params.blueprint_id}/${options.keys.join('/')}`,
     method: 'PUT',
     object: options.object,
     form: f => [

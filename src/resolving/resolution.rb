@@ -1,8 +1,12 @@
 require_relative '../emitting/emissions/emission'
 require_relative 'composition'
 
-module Resolutions
+module Resolving
   class Resolution < ::Emitting::Emission
+
+    class << self
+      def composition_class; Composition ;end
+    end
 
     delegate(
       mandatory_keys: :composition,

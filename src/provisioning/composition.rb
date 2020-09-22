@@ -1,5 +1,5 @@
-require_relative '../spaces/composition'
-require_relative '../dns/dns'
+require_relative '../spaces/models/composition'
+require_relative 'associations/dns/dns'
 
 module Provisioning
   class Composition < ::Spaces::Composition

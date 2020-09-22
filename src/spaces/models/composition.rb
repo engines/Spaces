@@ -1,5 +1,5 @@
-require_relative 'models/thing'
-require_relative 'models/descriptor'
+require_relative 'thing'
+require_relative 'descriptor'
 
 module Spaces
   class Composition < Thing

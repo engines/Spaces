@@ -9,11 +9,11 @@ let app = (a, x) =>
             router.nest({
               routes: {
                 '/settings/?*': app.settings,
-                "/blueprints/?*": app.blueprints,
+                "/blueprinting/?*": app.blueprints,
               },
             }),
           ],
-          home: '/blueprints',
+          home: '/blueprinting',
           lazy: true,
           transition: 'fade',
           default: (router) =>

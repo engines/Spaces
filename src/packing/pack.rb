@@ -1,7 +1,12 @@
 require_relative '../emitting/emissions/emission'
+require_relative 'composition'
 
 module Packing
   class Pack < ::Emitting::Emission
+
+    class << self
+      def composition_class; Composition ;end
+    end
 
     delegate(
       [:identifier, :has?, :images, :binding_descriptors] => :resolution,

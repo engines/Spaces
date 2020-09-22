@@ -1,7 +1,12 @@
 require_relative 'transformable'
+require_relative 'composition'
 
 module Emitting
   class Emission < Transformable
+
+    class << self
+      def composition_class; Composition ;end
+    end
 
     relation_accessor :predecessor
 

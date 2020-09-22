@@ -1,6 +1,6 @@
 app.blueprints.show = (router) => (a, x) => [
   app.http({
-    url: `/api/blueprints/${router.params.blueprint_id}`,
+    url: `/api/blueprinting/${router.params.blueprint_id}`,
     placeholder: app.spinner('Loading blueprint'),
     success: (blueprint, el) => {
       console.log("loaded a blueprint...", blueprint)

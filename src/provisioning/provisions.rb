@@ -1,11 +1,14 @@
 require_relative '../spaces/interpolating/file_text'
 require_relative '../emitting/emissions/emission'
+require_relative 'composition'
 require_relative 'providers/provider'
 
 module Provisioning
   class Provisions < ::Emitting::Emission
 
     class << self
+      def composition_class; Composition ;end
+
       def inheritance_paths; __dir__ ;end
     end
 

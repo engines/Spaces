@@ -6,8 +6,8 @@ module Spaces
 
     class << self
       def universe
-        require_relative '../../universal/space'
-        @@universe ||= Universal::Space.new
+        require_relative '../../universe'
+        @@universe ||= Universe.new
       end
 
       def default_model_class ;end

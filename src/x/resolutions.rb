@@ -1,4 +1,4 @@
-require_relative '../resolutions/resolution'
+require_relative '../resolving/resolution'
 
 def resolution; @resolution ||= universe.resolutions.by(descriptor) ;end
 

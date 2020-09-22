@@ -1,7 +1,7 @@
-require_relative '../universal/space'
+require_relative '../universe'
 require_relative 'resolution'
 
-module Resolutions
+module Resolving
   class Space < ::Spaces::Space
 
     class << self

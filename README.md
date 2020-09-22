@@ -5,7 +5,7 @@ Spaces
 
 You'll need to create a directory for Spaces to write all its data at:
 
-* `\opt\UniversalSpace`
+* `\opt\spaces\Universe`
 
 Ideally, Spaces should create this directory on first access, but I ran into permission problems and moved on.
 
@@ -13,11 +13,11 @@ James: perhaps you could advise how I programmatically create a new directory un
 
 # The Universe
 
-Spaces exist in a universe which you can create with the `Universal::Space` class:
+Spaces exist in a universe which you can create with the `Universe` class:
 
 ```
-require_relative 'src/universal/space'
-universe = Universal::Space.new
+require_relative 'src/universe'
+universe = Universe.new
 ```
 
 From a universe you can access a variety of spaces. For example:
@@ -50,7 +50,7 @@ descriptor = Spaces::Descriptor.new(
 )
 ```
 
-# Blueprints
+# Blueprinting
 ## Importing
 
 You can import a blueprint into your universe with:
@@ -68,17 +68,17 @@ Once you've imported a blueprint, you can retrieve it with:
 blueprint_space.by(descriptor)
 ```
 
-## Generating a Resolutions::Resolution
+## Generating a Resolving::Resolution
 
-A `Resolutions::Resolution` is what will generate a DockerFile. You create a Resolution from a blueprint like so:
+A `Resolving::Resolution` is what will generate a DockerFile. You create a Resolution from a blueprint like so:
 
 ```
 resolution = universe.resolutions.by(descriptor)
 ```
 
-## Saving a Resolutions::Resolution
+## Saving a Resolving::Resolution
 
-Save `Resolutions::Resolution` to resolution space with:
+Save `Resolving::Resolution` to resolution space with:
 
 ```
 universe.resolutions.save(resolution)

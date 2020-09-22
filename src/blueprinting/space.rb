@@ -1,8 +1,8 @@
-require_relative '../universal/space'
+require_relative '../universe'
 require_relative '../spaces/git/space'
 require_relative 'blueprint'
 
-module Blueprints
+module Blueprinting
   class Space < Git::Space
 
     class << self

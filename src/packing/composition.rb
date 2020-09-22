@@ -1,4 +1,4 @@
-require_relative '../spaces/composition'
+require_relative '../spaces/models/composition'
 require_relative 'provisioners/provisioners'
 require_relative 'post_processors/post_processors'
 
