@@ -1,7 +1,12 @@
-require_relative '../releases/release'
+require_relative '../emitting/emissions/emission'
+require_relative 'composition'
 
 module Packing
-  class Pack < ::Releases::Release
+  class Pack < ::Emissions::Emission
+
+    class << self
+      def composition_class; Composition ;end
+    end
 
     delegate(
       [:identifier, :has?, :images, :binding_descriptors] => :resolution,
@@ -29,7 +34,7 @@ module Packing
 
     def nominated_scripts
       script_file_names.map do |t|
-        text_class.new(origin: "#{File.dirname(__FILE__)}/#{t}", directory: :scripts, division: self)
+        interpolating_class.new(origin: "#{File.dirname(__FILE__)}/#{t}", directory: :scripts, division: self)
       end
     end
 
@@ -37,7 +42,7 @@ module Packing
 
     def files_for(directory)
       file_names_for(directory).map do |t|
-        text_class.new(origin: t, directory: directory, division: self)
+        interpolating_class.new(origin: t, directory: directory, division: self)
       end
     end
 

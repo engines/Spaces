@@ -1,8 +1,8 @@
-require_relative '../../releases/stanza'
+require_relative '../../emitting/emissions/stanza'
 
 module Provisioning
   module Stanzas
-    class Dns < ::Releases::Stanza
+    class Dns < ::Emissions::Stanza
 
       def declaratives
         context.dns_default.stanzas.map(&:declaratives).join("\n")

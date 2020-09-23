@@ -1,21 +1,36 @@
-require_relative '../texts/file_text'
-require_relative 'release'
-require_relative 'providers/provider'
+require_relative '../emitting/emissions/emission'
+require_relative 'composition'
 
 module Provisioning
-  class Provisions < Release
+  class Provisions < ::Emissions::Emission
 
     class << self
+      def composition_class; Composition ;end
+
       def inheritance_paths; __dir__ ;end
     end
 
     require_files_in :stanzas
 
-    delegate(dns: :universe)
+    delegate(
+      dns: :universe,
+      mandatory_keys: :composition
+    )
+
+    def emit
+      super.tap { |m| m.descriptor = struct.descriptor }
+    end
+
+    def division_map
+      @division_map ||=
+        mandatory_keys.reduce({}) do |m, k|
+          m.tap { m[k] = division_for(k) }
+        end.compact
+    end
 
     def dns_default
       dns.default.tap do |m|
-        m.release = self
+        m.emission = self
       end
     end
 
@@ -43,7 +58,7 @@ module Provisioning
 
     def files_for(directory)
       target_file_names_for(directory).map do |t|
-        text_class.new(origin: t, directory: directory, division: self)
+        interpolating_class.new(origin: t, directory: directory, division: self)
       end
     end
 
@@ -55,7 +70,7 @@ module Provisioning
       File.join(File.dirname(__FILE__), "target/#{directory}/**/*")
     end
 
-    def text_class; Texts::FileText ;end
+    def interpolating_class; Interpolating::FileText ;end
 
     def file_name; identifier ;end
 
