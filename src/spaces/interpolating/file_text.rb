@@ -1,5 +1,3 @@
-require_relative 'text'
-
 module Interpolating
   class FileText < Text
 

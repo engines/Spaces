@@ -1,5 +1,3 @@
-require_relative '../emitting/emissions/emission'
-
 module Blueprinting
   class Blueprint < Emissions::Emission
 

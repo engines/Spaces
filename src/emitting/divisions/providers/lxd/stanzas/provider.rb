@@ -1,5 +1,3 @@
-require_relative '../../../emitting/emissions/stanza'
-
 module Providers
   module LXD
     module Stanzas

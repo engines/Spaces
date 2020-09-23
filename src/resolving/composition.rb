@@ -1,7 +1,3 @@
-require_relative '../emitting/emissions/composition'
-require_relative 'associations/clients/client'
-require_relative 'associations/domains/domain'
-
 module Resolving
   class Composition < ::Emissions::Composition
 

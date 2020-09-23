@@ -1,5 +1,3 @@
-require_relative '../../emitting/emissions/stanza'
-
 module Provisioning
   module Stanzas
     class Containers < ::Emissions::Stanza

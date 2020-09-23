@@ -1,5 +1,3 @@
-require_relative '../../../../emissions/stanza'
-
 module Providers
   module Docker
     module Stanzas

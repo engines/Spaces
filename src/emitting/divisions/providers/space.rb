@@ -1,5 +1,3 @@
-require_relative '../../emissions/division_space'
-
 module Providers
   class Space < Emissions::SubdivisionSpace
 
@@ -7,10 +5,6 @@ module Providers
       def default_model_class
         Provider
       end
-    end
-
-    def load(type)
-      require_relative("#{type}/#{type}")
     end
 
   end

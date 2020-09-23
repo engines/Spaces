@@ -1,5 +1,3 @@
-require_relative '../../emissions/subdivision'
-
 module Packing
   module Images
     class Image < ::Emissions::Subdivision

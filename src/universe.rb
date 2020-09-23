@@ -1,9 +1,4 @@
-require_relative 'spaces/models/space'
-require_relative 'blueprinting/space'
-require_relative 'resolving/space'
-require_relative 'packing/space'
-require_relative 'provisioning/space'
-require_relative 'provisioning/associations/dns/space'
+require_relative 'requires'
 
 class Universe < ::Spaces::Space
 

@@ -1,5 +1,3 @@
-require_relative '../../emissions/subdivision'
-
 module Provisioning
   module Containers
     class Container < ::Emissions::Subdivision

@@ -1,5 +1,3 @@
-require_relative '../../emissions/divisible'
-
 module Provisioning
   module Containers
     class Containers < ::Emissions::Divisible

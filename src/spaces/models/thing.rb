@@ -3,17 +3,15 @@ require 'yaml'
 require 'json'
 require 'duplicate'
 require 'i18n'
-require_relative '../lib/ostruct'
-require_relative '../lib/array'
-require_relative '../lib/string'
 
 module Spaces
   class Thing
     extend Forwardable
 
-    require_relative '../recovery/warning'
-    include Recovery::Warning
-    extend Recovery::Warning
+    require_level 'spaces/models/recovery'
+
+    include ::Recovery::Warning
+    extend ::Recovery::Warning
 
     delegate t: I18n
 

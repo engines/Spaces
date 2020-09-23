@@ -1,5 +1,3 @@
-require_relative '../../../spaces/models/space'
-
 module Nodules
   class Space < ::Spaces::Space
 
@@ -14,12 +12,7 @@ module Nodules
     relation_accessor :context
 
     def by(struct:, division:)
-      load(struct.type)
       loaded.detect { |k| k.qualifier == struct.type }.new(struct: struct, division: division)
-    end
-
-    def load(type)
-      require_relative("#{type}/#{type}")
     end
 
   end

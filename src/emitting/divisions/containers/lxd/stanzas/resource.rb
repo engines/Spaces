@@ -1,5 +1,3 @@
-require_relative '../../stanzas/resource'
-
 module Provisioning
   module Containers
     module LXD

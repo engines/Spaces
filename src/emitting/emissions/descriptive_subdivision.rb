@@ -1,5 +1,3 @@
-require_relative 'subdivision'
-
 module Emissions
   class DescriptiveSubdivision < Subdivision
 

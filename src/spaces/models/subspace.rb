@@ -1,5 +1,3 @@
-require_relative 'space'
-
 module Spaces
   class Subspace < Space
 
@@ -14,8 +12,6 @@ module Spaces
     def super_qualifier
       default_model_class.qualifier
     end
-
-    def load(type) ;end
 
   end
 end

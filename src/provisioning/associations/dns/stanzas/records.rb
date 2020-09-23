@@ -1,5 +1,3 @@
-require_relative '../../../../emitting/emissions/stanza'
-
 module Dns
   module Stanzas
     class Records < ::Emissions::Stanza

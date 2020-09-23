@@ -1,5 +1,3 @@
-require_relative '../models/thing'
-
 I18n.load_path << Dir["#{__dir__}/i18n/*.yaml"]
 
 module Recovery

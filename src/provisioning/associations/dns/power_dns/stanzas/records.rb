@@ -1,5 +1,3 @@
-require_relative '../../stanzas/records'
-
 module Dns
   module PowerDns
     module Stanzas

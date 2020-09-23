@@ -1,5 +1,3 @@
-require_relative '../models/descriptor'
-
 module Defaultables
   module Defaultable
 

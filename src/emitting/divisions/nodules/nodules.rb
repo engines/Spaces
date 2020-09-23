@@ -1,5 +1,3 @@
-require_relative '../../emissions/divisible'
-
 module Nodules
   class Nodules < ::Emissions::Divisible
 

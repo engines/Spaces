@@ -1,5 +1,3 @@
-require_relative '../models/model'
-
 module Interpolating
   class Script < ::Spaces::Model
 

@@ -1,6 +1,4 @@
 require 'resolv'
-require_relative '../../../spaces/interpolating/text'
-require_relative '../../emissions/descriptive_subdivision'
 
 module Bindings
   class Binding < ::Emissions::DescriptiveSubdivision

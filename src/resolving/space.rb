@@ -1,6 +1,3 @@
-require_relative '../universe'
-require_relative 'resolution'
-
 module Resolving
   class Space < ::Spaces::Space
 

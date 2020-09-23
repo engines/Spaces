@@ -1,5 +1,3 @@
-require_relative '../../emissions/subdivision'
-
 module Nodules
   class Nodule < ::Emissions::Subdivision
 

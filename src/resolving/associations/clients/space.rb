@@ -1,6 +1,3 @@
-require_relative '../../spaces/defaultables/space'
-require_relative 'client'
-
 module Clients
   class Space < ::Spaces::Space
     include Defaultables::Space

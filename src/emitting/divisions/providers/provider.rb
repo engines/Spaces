@@ -1,5 +1,3 @@
-require_relative '../../emissions/subdivision'
-
 module Providers
   class Provider < ::Emissions::Subdivision
 

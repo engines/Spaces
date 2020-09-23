@@ -1,12 +1,10 @@
 require_relative 'model'
-require_relative 'descriptor'
 
 module Spaces
   class Space < Model
 
     class << self
       def universe
-        require_relative '../../universe'
         @@universe ||= Universe.new
       end
 

@@ -1,5 +1,3 @@
-require_relative '../../spaces/models/model'
-
 module Emissions
   class Stanza < ::Spaces::Model
 

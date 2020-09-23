@@ -1,5 +1,3 @@
-require_relative '../../emissions/divisible'
-
 module Packing
   module Images
     class Images < ::Emissions::Divisible

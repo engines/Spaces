@@ -1,5 +1,3 @@
-require_relative '../emissions/divisible'
-
 module Divisions
   class OsPackages < ::Emissions::Divisible
 

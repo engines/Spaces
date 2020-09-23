@@ -1,5 +1,3 @@
-require_relative '../provisioning/provisions'
-
 def provisions; @provisions ||= Provisioning::Provisions.new(provisions_descriptor) ;end
 
 def provisions_descriptor; @provisions_descriptor = Spaces::Descriptor.new(identifier: 'development') ;end

@@ -1,6 +1,3 @@
-require_relative '../../emissions/divisible'
-require_relative 'binding'
-
 module Bindings
   class Bindings < ::Emissions::Divisible
 

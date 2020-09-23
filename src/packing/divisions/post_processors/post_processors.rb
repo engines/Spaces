@@ -1,5 +1,3 @@
-require_relative '../../../emitting/emissions/divisible'
-
 module Packing
   module PostProcessors
     class PostProcessors < ::Emissions::Divisible

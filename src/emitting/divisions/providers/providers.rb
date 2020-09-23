@@ -1,5 +1,3 @@
-require_relative '../../emissions/divisible'
-
 module Providers
   class Providers < ::Emissions::Divisible
 

@@ -1,4 +1,3 @@
-require_relative '../../spaces/models/model'
 require_relative 'stanzas'
 
 module Emissions

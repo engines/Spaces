@@ -67,10 +67,6 @@ en:
       emissions::stanzas/stanza_for:
         There is no source code for stanza %{name}.
 
-    spaces::models::model/composition_class:
-      spaces::models::model/require_relative:
-        A composition for %{namespace} could not be found. Substituting %{substitution}.
-
     spaces::models::space/open:
       spaces::models::space/initialize:
         An instance of %{klass} for %{descriptor} does not yet exist in its space.

@@ -1,6 +1,3 @@
-require_relative '../../emissions/divisible'
-require_relative 'package'
-
 module Packages
   class Packages < ::Emissions::Divisible
 

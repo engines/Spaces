@@ -1,6 +1,3 @@
-require_relative '../emitting/emissions/emission'
-require_relative 'composition'
-
 module Provisioning
   class Provisions < ::Emissions::Emission
 

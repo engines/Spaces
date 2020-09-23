@@ -1,6 +1,4 @@
 require 'packer'
-require_relative '../spaces/models/space'
-require_relative '../emitting/divisions/images/space'
 
 module Packing
   class Space < ::Spaces::Space

@@ -1,5 +1,4 @@
 require_relative 'transformable'
-require_relative 'composition'
 
 module Emissions
   class Emission < Transformable

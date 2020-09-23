@@ -1,5 +1,3 @@
-require_relative '../nodule'
-
 module Nodules
   module R
     class R < Nodule

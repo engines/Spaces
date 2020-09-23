@@ -1,5 +1,3 @@
-require_relative '../../../emissions/stanza'
-
 module Provisioning
   module Containers
     module Stanzas

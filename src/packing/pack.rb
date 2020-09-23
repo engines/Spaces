@@ -1,6 +1,3 @@
-require_relative '../emitting/emissions/emission'
-require_relative 'composition'
-
 module Packing
   class Pack < ::Emissions::Emission
 

@@ -1,5 +1,3 @@
-require_relative '../../stanzas/provider'
-
 module Dns
   module PowerDns
     module Stanzas

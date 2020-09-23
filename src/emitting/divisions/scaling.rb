@@ -1,5 +1,3 @@
-require_relative '../emissions/division'
-
 module Divisions
   class Scaling < ::Emissions::Division
 

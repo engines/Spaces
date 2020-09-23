@@ -1,5 +1,3 @@
-require_relative '../../emissions/subdivision'
-
 module Packages
   class Package < ::Emissions::Subdivision
 

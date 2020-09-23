@@ -1,7 +1,3 @@
-require_relative '../universe'
-require_relative '../spaces/git/space'
-require_relative 'blueprint'
-
 module Blueprinting
   class Space < Git::Space
 

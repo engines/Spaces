@@ -1,5 +1,3 @@
-require_relative '../../spaces/constantizing'
-
 module Emissions
   module Stanzas
     include Spaces::Constantizing
