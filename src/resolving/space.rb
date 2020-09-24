@@ -1,5 +1,5 @@
 module Resolving
-  class Space < ::Spaces::Space
+  class Space < ::Spaces::TurtleSpace
 
     class << self
       def default_model_class
@@ -19,22 +19,12 @@ module Resolving
     end
 
     def save(model)
-      anchor_resolutions_for(model)
-
       model.auxiliary_texts.map do |t|
         save_text(t)
         "#{t.emission_path}"
       end
 
       super
-    end
-
-    def anchor_resolutions_for(model)
-      unique_anchors_for(model).map { |d| by(d) }
-    end
-
-    def unique_anchors_for(model)
-      model.binding_descriptors&.uniq(&:uniqueness) || []
     end
 
   end
