@@ -14,6 +14,8 @@ module Emissions
 
     require_files_in :stanzas
 
+    delegate(mandatory_keys: :composition)
+
     def declaratives
       stanzas.map(&:declaratives)
     end

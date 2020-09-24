@@ -6,7 +6,6 @@ module Resolving
     end
 
     delegate(
-      mandatory_keys: :composition,
       resolution: :itself,
       resolutions: :universe
     )

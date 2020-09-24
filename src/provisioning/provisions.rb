@@ -9,10 +9,7 @@ module Provisioning
 
     require_files_in :stanzas
 
-    delegate(
-      dns: :universe,
-      mandatory_keys: :composition
-    )
+    delegate(dns: :universe)
 
     def emit
       super.tap { |m| m.descriptor = struct.descriptor }
