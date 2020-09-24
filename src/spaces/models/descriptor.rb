@@ -10,8 +10,6 @@ module Spaces
     def extraction; struct.extraction ||= extension ;end
 
     def extracted_path; struct.extracted_path ||= identifier ;end
-    def destination_path; [home_app_path, struct.destination_path].compact.join('/') ;end
-    def home_app_path; '/home/app' ;end
     def basename; ::File.basename(repository) ;end
     def extension; repository&.split('.')&.last ;end
 

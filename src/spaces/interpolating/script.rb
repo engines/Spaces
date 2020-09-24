@@ -4,7 +4,7 @@ module Interpolating
     relation_accessor :context
     attr_reader :text
 
-    delegate([:emission_path, :home_app_path, :identifier, :context_identifier] => :context)
+    delegate([:emission_path, :identifier, :context_identifier] => :context)
 
     def instructions
       [

@@ -8,8 +8,7 @@ module Resolving
     delegate(
       mandatory_keys: :composition,
       resolution: :itself,
-      resolutions: :universe,
-      home_app_path: :descriptor
+      resolutions: :universe
     )
 
     alias_accessor :blueprint, :predecessor
