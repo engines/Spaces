@@ -10,7 +10,10 @@ class Universe < ::Spaces::Space
         resolutions: Resolving::Space.new,
         packing: Packing::Space.new,
         provisioning: Provisioning::Space.new,
-        dns: Dns::Space.new
+        arenas: Arenas::Space.new,
+
+        domains: Associations::Domains::Space.new,
+        tenants: Associations::Tenants::Space.new
       }
     end
   end

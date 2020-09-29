@@ -1,17 +1,14 @@
 module Spaces
   class TurtleSpace < Space
 
-    def save(model)
-      anchor_for(model)
-      super
+    delegate(resolutions: :universe)
+
+    def anchor_resolutions_for(resolution)
+      unique_anchor_resolutions_for(resolution).map { |d| resolutions.by(d) }
     end
 
-    def anchor_for(model)
-      unique_anchors_for(model).map { |d| by(d) }
-    end
-
-    def unique_anchors_for(model)
-      model.binding_descriptors&.uniq(&:uniqueness) || []
+    def unique_anchor_resolutions_for(resolution)
+      resolution.binding_descriptors&.uniq(&:uniqueness) || []
     end
 
   end

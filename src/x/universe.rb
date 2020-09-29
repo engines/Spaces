@@ -2,6 +2,7 @@ require_relative '../universe'
 require_relative 'blueprints'
 require_relative 'resolutions'
 require_relative 'packing'
+require_relative 'arenas'
 require_relative 'provisioning'
 
 
@@ -12,5 +13,6 @@ def clear
   @blueprint,
   @resolution,
   @pack,
+  @arena,
   @provisions = nil
 end
