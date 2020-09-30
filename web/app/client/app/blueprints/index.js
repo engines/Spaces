@@ -5,7 +5,7 @@ app.blueprints.index = (router) => (a, x) => [
   }),
   a.hr,
   app.http({
-    url: "/api/blueprints",
+    url: "/api/blueprinting",
     placeholder: app.spinner("Loading blueprints"),
     success: (blueprints, el) =>
       (el.$nodes = blueprints.length

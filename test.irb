@@ -1,4 +1,3 @@
-require_relative 'ruby/x/test_container'
+require_relative 'src/x/test_container'
 import
 save_resolution
-save_image_subject

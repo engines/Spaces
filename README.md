@@ -5,7 +5,7 @@ Spaces
 
 You'll need to create a directory for Spaces to write all its data at:
 
-* `\opt\UniversalSpace`
+* `\opt\spaces\Universe`
 
 Ideally, Spaces should create this directory on first access, but I ran into permission problems and moved on.
 
@@ -13,18 +13,18 @@ James: perhaps you could advise how I programmatically create a new directory un
 
 # The Universe
 
-Spaces exist in a universe which you can create with the `Universal::Space` class:
+Spaces exist in a universe which you can create with the `Universe` class:
 
 ```
-require_relative 'ruby/universal/space'
-universe = Universal::Space.new
+require_relative 'src/universe'
+universe = Universe.new
 ```
 
 From a universe you can access a variety of spaces. For example:
 
 ```
 universe.blueprints
-universe.containers
+universe.resolutions
 ```
 
 # Spaces::Descriptor
@@ -33,7 +33,7 @@ A `Spaces::Descriptor` object is the way spaces objects are saved and located in
 a common starting point is to start with a descriptor to locate a source blueprint. For example:
 
 ```
-require_relative 'ruby/spaces/descriptor'
+require_relative 'src/spaces/models/descriptor'
 descriptor = Spaces::Descriptor.new(
   repository: 'https://github.com/MarkRatjens/publify.git'
 )
@@ -50,7 +50,7 @@ descriptor = Spaces::Descriptor.new(
 )
 ```
 
-# Blueprints
+# Blueprinting
 ## Importing
 
 You can import a blueprint into your universe with:
@@ -68,60 +68,23 @@ Once you've imported a blueprint, you can retrieve it with:
 blueprint_space.by(descriptor)
 ```
 
-## Generating a Resolutions::Resolution
+## Generating a Resolving::Resolution
 
-A `Resolutions::Resolution` is what will generate a DockerFile. You create a Resolution from a blueprint like so:
-
-```
-blueprint = universe.blueprints.by(descriptor)
-resolution = blueprint.resolution
-```
-
-## Saving a Resolutions::Resolution
-
-Save `Resolutions::Resolution` to resolution space with:
+A `Resolving::Resolution` is what will generate a DockerFile. You create a Resolution from a blueprint like so:
 
 ```
-resolution_space = universe.resolutions
-resolution_space.save(resolution)
+resolution = universe.resolutions.by(descriptor)
+```
+
+## Saving a Resolving::Resolution
+
+Save `Resolving::Resolution` to resolution space with:
+
+```
+universe.resolutions.save(resolution)
 ```
 
 # Containers
-
-## Generating DockerFile content
-
-A resolution can generate docker file content:
-
-```
-content = resolution.docker_file
-```
-
-## Saving docker file content to a file
-
-Save docker file content to container space with:
-
-```
-container_space.save(content)
-```
-
-# Image Subjects
-## Generating an Images::Subject
-
-An `Images::Subject` is what will manage a folder structure that you'll eventually be able to use as an image to build a container. Generate an
-image subject from a Resolution in a similar way to generating a docker file:
-
-```
-content = resolution.image_subject
-```
-
-## Saving image file content to image space
-
-Save the image subject's folders and files to image space with:
-
-```
-image_space = universe.images
-image_space.save(content)
-```
 
 # Web client
 
