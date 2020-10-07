@@ -15,7 +15,7 @@ module Provisioning
     def save(model)
       anchor_provisionings_for(model).each { |p| save(p) }
 
-      _save(model, content: model.stanzas_content, as: :tf) unless model.stanzas_content.empty?
+      _save(model, content: model.stanzas_content, as: :tf) unless model.has?(:containers)
     end
 
     def anchor_provisionings_for(model)
