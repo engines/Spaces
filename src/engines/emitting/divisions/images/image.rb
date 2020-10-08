@@ -26,13 +26,7 @@ module Divisions
       end
     end
 
-    def packing_stanzas
-      {
-        type: 'file',
-        source: 'injections',
-        destination: 'tmp/'
-      }
-    end
+    def post_processor_stanzas; end
 
     def initialize(struct:, division:)
       self.struct = OpenStruct.new(default_resolution).merge(struct.merge(OpenStruct.new(safety_overrides)))

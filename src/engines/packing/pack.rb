@@ -7,7 +7,7 @@ module Packing
 
     delegate(
       [:identifier, :has?, :images, :binding_descriptors] => :resolution,
-      script_file_names: :images
+      [:script_file_names, :post_processor_stanzas] => :images
     )
 
     alias_accessor :resolution, :predecessor
