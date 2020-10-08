@@ -1,8 +1,0 @@
-require_relative 'apache/apache'
-require_relative 'lua/lua'
-require_relative 'npm/npm'
-require_relative 'pear/pear'
-require_relative 'pecl/pecl'
-require_relative 'php/php'
-require_relative 'python/python'
-require_relative 'r/r'

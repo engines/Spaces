@@ -1,4 +1,3 @@
-require_relative '../spaces/models/descriptor'
 require_relative 'universe'
 
 def descriptor

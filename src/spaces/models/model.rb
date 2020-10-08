@@ -1,6 +1,3 @@
-require_relative 'thing'
-require_relative 'composition'
-
 module Spaces
   class Model < Thing
 

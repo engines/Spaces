@@ -1,5 +1,3 @@
-require_relative 'script'
-
 module Interpolating
   class OneTimeScript < Script
 
