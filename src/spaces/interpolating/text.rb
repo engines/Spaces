@@ -1,6 +1,3 @@
-require_relative '../models/model'
-require_relative 'infix'
-
 module Interpolating
   class Text < ::Spaces::Model
 

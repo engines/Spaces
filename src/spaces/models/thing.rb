@@ -3,17 +3,15 @@ require 'yaml'
 require 'json'
 require 'duplicate'
 require 'i18n'
-require_relative '../lib/ostruct'
-require_relative '../lib/array'
-require_relative '../lib/string'
 
 module Spaces
   class Thing
     extend Forwardable
 
-    require_relative '../recovery/warning'
-    include Recovery::Warning
-    extend Recovery::Warning
+    require_level 'spaces/models/recovery'
+
+    include ::Recovery::Warning
+    extend ::Recovery::Warning
 
     delegate t: I18n
 
@@ -32,21 +30,15 @@ module Spaces
         alias_method "#{to}=", "#{from}="
       end
 
-      def require_files_in(*folders)
-        [*folders].each { |f| files_in(f).each { |f| require f } }
+      def klasses(inside:, inheriting:)
+        inside.constants.map { |c| inside.const_get(c) }.select {|k| k < inheriting }
       end
-
-      def files_in(folder)
-        [inheritance_paths].flatten.map { |h| Dir["#{h}/#{folder}/*"] }.flatten
-      end
-
-      def inheritance_paths ;end
     end
 
     attr_accessor :struct, :klass
 
     delegate(
-      [:identifier, :namespace, :qualifier, :spout] => :klass,
+      [:identifier, :namespace, :qualifier, :spout, :klasses] => :klass,
       to_h: :struct
     )
 

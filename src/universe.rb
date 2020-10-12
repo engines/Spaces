@@ -1,9 +1,4 @@
-require_relative 'spaces/models/space'
-require_relative 'blueprinting/space'
-require_relative 'resolving/space'
-require_relative 'packing/space'
-require_relative 'provisioning/space'
-require_relative 'provisioning/associations/dns/space'
+require_relative 'requires'
 
 class Universe < ::Spaces::Space
 
@@ -15,7 +10,10 @@ class Universe < ::Spaces::Space
         resolutions: Resolving::Space.new,
         packing: Packing::Space.new,
         provisioning: Provisioning::Space.new,
-        dns: Dns::Space.new
+        arenas: Arenas::Space.new,
+
+        domains: Associations::Domains::Space.new,
+        tenants: Associations::Tenants::Space.new
       }
     end
   end

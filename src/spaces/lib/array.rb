@@ -1,5 +1,3 @@
-require_relative 'hash'
-
 class Array
 
   def to_h_deep
