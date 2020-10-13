@@ -1,3 +1,5 @@
+require_relative 'space'
+
 module Spaces
   class Subspace < Space
 

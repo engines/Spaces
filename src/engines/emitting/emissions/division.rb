@@ -1,3 +1,5 @@
+require_relative 'transformable'
+
 module Emissions
   class Division < Transformable
 
