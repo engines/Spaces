@@ -1,9 +1,3 @@
-require 'forwardable'
-require 'yaml'
-require 'json'
-require 'duplicate'
-require 'i18n'
-
 module Spaces
   class Thing
     extend Forwardable
