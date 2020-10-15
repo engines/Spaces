@@ -59,7 +59,7 @@ module Spaces
     end
 
     def file_names_for(directory, descriptor)
-      Pathname.glob("#{file_path_for(directory, descriptor)}/**/*").reject { |p| p.directory? }.map &:to_s
+      Pathname.glob("#{file_path_for(directory, descriptor)}/**/*").reject { |p| p.directory? }.map(&:to_s)
     end
 
     def file_path_for(directory, context_identifier)
@@ -73,7 +73,7 @@ module Spaces
     def path; "#{universe.path}/#{identifier}" ;end
 
     def unresolved_names_for(directory)
-      Pathname.glob(unresolved_directory_for(directory)).reject { |p| p.directory? }.map &:to_s
+      Pathname.glob(unresolved_directory_for(directory)).reject { |p| p.directory? }.map(&:to_s)
     end
 
     def unresolved_directory_for(directory)
