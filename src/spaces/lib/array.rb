@@ -8,4 +8,12 @@ class Array
     end
   end
 
+  def to_struct
+    map do |i|
+      i.to_struct
+    rescue NoMethodError
+      OpenStruct.new(value: i)
+    end
+  end
+
 end

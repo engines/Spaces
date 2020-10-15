@@ -4,7 +4,7 @@ module Spaces
     def identifier; struct.identifier ||= root_identifier ;end
     def root_identifier; repository.split('/').last.split('.').first if repository ;end
 
-    def branch; struct.branch ||= 'master' ;end
+    def branch; struct.branch ||= 'main' ;end
     def protocol; struct.protocol ||= extension ;end
     def git?; protocol == 'git' ;end
     def extraction; struct.extraction ||= extension ;end
