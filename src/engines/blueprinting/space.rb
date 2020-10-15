@@ -33,15 +33,15 @@ module Blueprinting
     end
 
     def ensure_space_for(descriptor)
-      FileUtils.mkdir_p(path_for(descriptor))
+      Pathname.new(path_for(descriptor)).mkpath
     end
 
     def imported?(descriptor)
-      Dir.exist?(path_for(descriptor))
+      Pathname.new(path_for(descriptor)).exist?
     end
 
     def delete(descriptor)
-      FileUtils.rm_rf(path_for(descriptor))
+      Pathname.new(path_for(descriptor)).rmtree
     end
 
     def create(descriptor)

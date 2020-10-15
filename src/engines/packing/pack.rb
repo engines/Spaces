@@ -31,7 +31,7 @@ module Packing
 
     def nominated_scripts
       script_file_names.map do |t|
-        interpolating_class.new(origin: "#{File.dirname(__FILE__)}/#{t}", directory: :scripts, division: self)
+        interpolating_class.new(origin: "#{Pathname.new(__FILE__).dirname}/#{t}", directory: :scripts, division: self)
       end
     end
 
@@ -44,11 +44,11 @@ module Packing
     end
 
     def file_names_for(directory)
-      Dir[directory_for(directory)].reject { |f| ::File.directory?(f) }
+      Pathname.glob(directory_for(directory)).reject { |p| p.directory? }.map &:to_s
     end
 
     def directory_for(directory)
-      File.join(File.dirname(__FILE__), "#{directory}/**/*")
+      Pathname.new(Pathname.new(__FILE__).dirname).join("#{directory}/**/*")
     end
 
     def initialize(resolution)

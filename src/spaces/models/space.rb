@@ -13,7 +13,7 @@ module Spaces
 
     delegate([:identifier, :universe, :default_model_class] => :klass)
 
-    def identifiers; Dir["#{path}/*"].map { |d| d.split('/').last } ;end
+    def identifiers; Pathname.glob("#{path}/*").map { |p| p.basename } ;end
     def descriptors; all.map(&:descriptor) ;end
 
     def all(klass = default_model_class)
@@ -32,7 +32,7 @@ module Spaces
 
     def save_text(model)
       _save(model, content: model.content)
-      FileUtils.chmod(model.permission, writing_name_for(model)) if model.respond_to?(:permission)
+      Pathname.new(writing_name_for(model)).chmod(model.permission) if model.respond_to?(:permission)
     end
 
     def save_yaml(model)
@@ -46,7 +46,7 @@ module Spaces
     end
 
     def delete(model)
-      FileUtils.rm_rf("#{path}/#{model.identifier}")
+      Pathname.new("#{path}/#{model.identifier}").rmtree
     end
 
     def reading_name_for(descriptor, klass = default_model_class)
@@ -59,7 +59,7 @@ module Spaces
     end
 
     def file_names_for(directory, descriptor)
-      Dir["#{file_path_for(directory, descriptor)}/**/*"].reject { |f| ::File.directory?(f) }
+      Pathname.glob("#{file_path_for(directory, descriptor)}/**/*").reject { |p| p.directory? }.map &:to_s
     end
 
     def file_path_for(directory, context_identifier)
@@ -73,25 +73,25 @@ module Spaces
     def path; "#{universe.path}/#{identifier}" ;end
 
     def unresolved_names_for(directory)
-      Dir[unresolved_directory_for(directory)].reject { |f| ::File.directory?(f) }
+      Pathname.glob(unresolved_directory_for(directory)).reject { |p| p.directory? }.map &:to_s
     end
 
     def unresolved_directory_for(directory)
-      File.join(File.dirname(__FILE__), "../../unresolved/#{directory}/**/*")
+      Pathname.new(Pathname.new(__FILE__).dirname).join("../../unresolved/#{directory}/**/*")
     end
 
-    def ensure_space; FileUtils.mkdir_p(path) ;end
-    def ensure_space_for(model); FileUtils.mkdir_p(path_for(model)) ;end
+    def ensure_space; Pathname.new(path).mkpath ;end
+    def ensure_space_for(model); Pathname.new(path_for(model)).mkpath ;end
 
-    def encloses?(file_name); Dir.exist?(file_name) ;end
+    def encloses?(file_name); Pathname.new(file_name).exist? ;end
 
     def _by(descriptor, klass = default_model_class, as:)
-      ::File.read("#{reading_name_for(descriptor, klass)}.#{as}")
+      Pathname.new("#{reading_name_for(descriptor, klass)}.#{as}").read
     end
 
     def _save(model, content:, as: nil)
       model.tap do |m|
-        ::File.write([writing_name_for(m), as].compact.join('.'), content)
+        Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
       end
     end
 
