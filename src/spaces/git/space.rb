@@ -4,7 +4,7 @@ module Git
   class Space < ::Spaces::Space
 
     def encloses?(descriptor)
-      Dir.exist?(path_for(descriptor))
+      Pathname.new(path_for(descriptor)).exist?
     end
 
     def import(descriptor)
