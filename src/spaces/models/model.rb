@@ -1,3 +1,5 @@
+require_relative 'thing'
+
 module Spaces
   class Model < Thing
 

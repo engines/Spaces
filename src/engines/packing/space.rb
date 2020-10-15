@@ -26,7 +26,7 @@ module Packing
     end
 
     def encloses_result?(command, descriptor)
-      Dir.exist?("#{path_for(descriptor)}/#{command}")
+      Pathname.new("#{path_for(descriptor)}/#{command}").exist?
     end
 
     def with_good_artifacts?(command, descriptor)
@@ -35,7 +35,7 @@ module Packing
 
     def artifacts_by(command, descriptor)
       Dir.chdir(path_for(descriptor))
-      YAML::load(::File.read("#{command}/artifacts.yaml"))
+      YAML::load(Pathname.new("#{command}/artifacts.yaml").read)
     rescue Errno::ENOENT => e
       nil
     end
@@ -45,7 +45,7 @@ module Packing
       ensure_space_for(model)
       model.auxiliary_texts.each { |t| save_text(t) }
       model.tap do |m|
-        ::File.write("#{path_for(model)}/commit.json", m.emit.to_h_deep.to_json)
+        Pathname.new("#{path_for(model)}/commit.json").write(m.emit.to_h_deep.to_json)
       end
     rescue PackWithoutImagesError => e
       warn(error: e, descriptor: model.identifier, klass: klass)
@@ -74,9 +74,9 @@ module Packing
       save(model)
       Dir.chdir(path_for(model))
       bridge.build("#{command}.json").tap do |b|
-        FileUtils.mkdir_p("#{command}")
-        ::File.write("#{command}/output.yaml", b.to_yaml)
-        ::File.write("#{command}/artifacts.yaml", b.artifacts.to_yaml)
+        Pathname.new("#{command}").mkpath
+        Pathname.new("#{command}/output.yaml").write(b.to_yaml)
+        Pathname.new("#{command}/artifacts.yaml").write(b.artifacts.to_yaml)
       end
     rescue PackWithoutImagesError => e
       warn(error: e, command: command, descriptor: model.identifier, klass: klass)

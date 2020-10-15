@@ -10,7 +10,7 @@ module Spaces
     def extraction; struct.extraction ||= extension ;end
 
     def extracted_path; struct.extracted_path ||= identifier ;end
-    def basename; ::File.basename(repository) ;end
+    def basename; Pathname.new(repository).basename ;end
     def extension; repository&.split('.')&.last ;end
 
     def initialize(args)

@@ -8,7 +8,7 @@ module Interpolating
     delegate(context_identifier: :division)
 
     def origin
-      @origin ||= ::File.read(origin_file_name)
+      @origin ||= Pathname.new(origin_file_name).read
     end
 
     def emission_path; origin_file_name ;end
