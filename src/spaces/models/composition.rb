@@ -7,11 +7,11 @@ module Spaces
       def associative_classes; [] ;end
 
       def divisions
-        @@divisions ||= associative_divisions.merge(map_for(division_classes))
+        associative_divisions.merge(map_for(division_classes))
       end
 
       def associative_divisions
-        @@associative_divisions ||= map_for(associative_classes)
+        map_for(associative_classes)
       end
 
       def mandatory_keys
@@ -37,7 +37,7 @@ module Spaces
       end
     end
 
-    delegate([:divisions, :naming_map, :mandatory_keys] => :klass)
+    delegate([:divisions, :associative_divisions, :naming_map, :mandatory_keys] => :klass)
 
     def keys
       divisions.keys
