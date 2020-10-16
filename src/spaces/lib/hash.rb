@@ -3,13 +3,21 @@ class Hash
   def reverse_merge(other = {})
     other.merge(self)
   end
-  
+
   def reverse_merge!(other_hash)
     replace(reverse_merge(other_hash))
   end
 
   def to_struct
-    OpenStruct.new(itself)
+    OpenStruct.new(values_to_struct)
   end
-  
+
+  def values_to_struct
+    transform_values do |v|
+      v.to_struct
+    rescue NoMethodError
+      v
+    end
+  end
+
 end
