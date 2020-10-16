@@ -19,6 +19,7 @@ module Emissions
           Divisions::Nodules,
           Divisions::Providers,
           Divisions::Packages,
+          Divisions::Repositories,
           Divisions::Images,
           Divisions::Containers
         ]

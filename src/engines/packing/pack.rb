@@ -44,7 +44,7 @@ module Packing
     end
 
     def file_names_for(directory)
-      Pathname.glob(directory_for(directory)).reject { |p| p.directory? }.map &:to_s
+      Pathname.glob(directory_for(directory)).reject { |p| p.directory? }.map(&:to_s)
     end
 
     def directory_for(directory)
