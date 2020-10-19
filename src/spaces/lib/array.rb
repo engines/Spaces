@@ -16,4 +16,8 @@ class Array
     end
   end
 
+  def all_true?
+    !any?(false)
+  end
+
 end

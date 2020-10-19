@@ -1,6 +1,8 @@
 module Divisions
   class Bindings < ::Emissions::Divisible
 
+    def complete?; all_complete?(all) ;end
+
     def named(name)
       all.detect { |b| b.identifier == name.to_s }
     end

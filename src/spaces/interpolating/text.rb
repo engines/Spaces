@@ -1,11 +1,18 @@
 module Interpolating
   class Text < ::Spaces::Model
 
+    class << self
+      def interpolation_marker; '^^' ;end
+    end
+
     relation_accessor :division
 
     attr_accessor :origin
 
-    delegate(emission: :division)
+    delegate(
+      emission: :division,
+      interpolation_marker: :klass
+    )
 
     def resolved; @resolved ||= contains_interpolation? ? with_resolved_infixes : origin ;end
 
@@ -19,12 +26,15 @@ module Interpolating
       false
     end
 
+    def complete?
+      !resolved.include?(interpolation_marker)
+    end
+
     def immutables; splits(:even?) ;end
     def infixes; splits(:odd?).map { |s| infix_class.new(value: s, text: self) } ;end
 
     def splits(method); origin.split(interpolation_marker).select.with_index { |_, i| i.send(method) } ;end
 
-    def interpolation_marker; '^^' ;end
     def infix_class; Infix ;end
     def to_s; origin ;end
 
