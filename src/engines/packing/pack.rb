@@ -3,6 +3,18 @@ module Packing
 
     class << self
       def composition_class; Composition ;end
+
+      def script_choices(script_type)
+        Pathname.glob("#{__dir__}/scripts/#{script_type}/*")
+      end
+
+      def script_choices_names(script_type)
+        script_choices(script_type).map(&:basename).map(&:to_s).map(&:to_sym)
+      end
+
+      def script_type_choices
+        Pathname.glob("#{__dir__}/scripts/*").map(&:basename).map(&:to_s).map(&:to_sym)
+      end
     end
 
     delegate(
