@@ -3,7 +3,14 @@ require 'ruby_terraform'
 module Arenas
   class Space < ::Spaces::Space
 
+    class << self
+      def default_model_class
+        Arena
+      end
+    end
+
     def save(model)
+      super
       _save(model, content: model.stanzas_content, as: :tf)
     end
 
