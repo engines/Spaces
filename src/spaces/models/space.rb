@@ -13,7 +13,7 @@ module Spaces
 
     delegate([:identifier, :universe, :default_model_class] => :klass)
 
-    def identifiers; Pathname.glob("#{path}/*").map { |p| p.basename } ;end
+    def identifiers; Pathname.glob("#{path}/*").map { |p| "#{p.basename}" } ;end
     def descriptors; all.map(&:descriptor) ;end
 
     def all(klass = default_model_class)
