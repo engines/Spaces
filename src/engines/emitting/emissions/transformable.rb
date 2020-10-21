@@ -1,9 +1,14 @@
 module Emissions
   class Transformable < ::Spaces::Model
 
-    delegate(mandatory_keys: :composition)
+    delegate(
+      identifier: :struct,
+      mandatory_keys: :composition
+    )
 
     def complete?; true ;end
+
+    def descriptor_class; ::Spaces::Descriptor ;end
 
     def arena_stanzas; stanzas_for(:arena) ;end
     def packing_stanzas; stanzas_for(:packing) ;end

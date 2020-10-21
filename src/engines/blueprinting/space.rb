@@ -15,7 +15,7 @@ module Blueprinting
     end
 
     def import_by_json(descriptor)
-      by_json(descriptor).tap do |m|
+      by_json(descriptor.identifier).tap do |m|
         m.struct.descriptor = descriptor.struct
         save(m)
         import_anchors_for(m)
@@ -32,16 +32,12 @@ module Blueprinting
       model.descriptors_for(division_identifier).reject { |d| imported?(d) }
     end
 
-    def ensure_space_for(descriptor)
-      Pathname.new(path_for(descriptor)).mkpath
-    end
-
     def imported?(descriptor)
       Pathname.new(path_for(descriptor)).exist?
     end
 
-    def delete(descriptor)
-      Pathname.new(path_for(descriptor)).rmtree
+    def delete(identifier)
+      Pathname.new(path_for(identifier)).rmtree
     end
 
     def create(descriptor)

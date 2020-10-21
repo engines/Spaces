@@ -4,7 +4,7 @@ module Emissions
     delegate(resolutions: :universe)
 
     def anchor_resolutions_for(resolution)
-      unique_anchor_resolutions_for(resolution).map { |d| resolutions.by(d) }
+      unique_anchor_resolutions_for(resolution).map { |d| resolutions.by(d.identifier) }
     end
 
     def unique_anchor_resolutions_for(resolution)

@@ -15,7 +15,7 @@ module Arenas
     )
 
     def emit
-      super.tap { |m| m.descriptor = struct.descriptor }
+      super.tap { |m| m.identifier = struct.identifier }
     end
 
     def stanzas
@@ -49,9 +49,9 @@ module Arenas
         end.compact
     end
 
-    def initialize(struct: nil, descriptor: nil)
+    def initialize(struct: nil, identifier: nil)
       self.struct = duplicate(struct) || OpenStruct.new
-      self.struct.descriptor = descriptor&.emit if descriptor
+      self.struct.identifier = identifier if identifier
     end
 
   end

@@ -7,7 +7,7 @@ module Provisioning
     delegate([:divisions, :binding_descriptors] => :resolution)
 
     def emit
-      super.tap { |m| m.descriptor = struct.descriptor }
+      super.tap { |m| m.identifier = struct.identifier }
     end
 
     def stanzas
@@ -20,7 +20,7 @@ module Provisioning
       self.resolution = resolution
       self.arena = arena
       self.struct = OpenStruct.new
-      self.struct.descriptor = resolution.descriptor.emit
+      self.struct.identifier = resolution.identifier
     end
 
   end

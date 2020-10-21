@@ -1,11 +1,15 @@
 module Blueprinting
   class Blueprint < Emissions::Emission
 
+    def descriptor
+      @descriptor ||= descriptor_class.new(struct.descriptor)
+    end
+
     def emit; duplicate(struct) ;end
 
-    def initialize(struct: nil, descriptor: nil)
+    def initialize(struct: nil, identifier: nil)
       self.struct = duplicate(struct) || OpenStruct.new
-      self.struct.descriptor = descriptor&.emit if descriptor
+      self.struct.identifier = identifier if identifier
     end
 
   end

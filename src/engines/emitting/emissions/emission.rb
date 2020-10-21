@@ -4,14 +4,15 @@ module Emissions
   class Emission < Transformable
 
     class << self
+      def composition; @composition ||= composition_class.new ;end
       def composition_class; Composition ;end
     end
 
     relation_accessor :predecessor
 
     delegate(
-      blueprints: :universe,
-      identifier: :descriptor
+      [:universe, :composition] => :klass,
+      blueprints: :universe
     )
 
     alias_method :emission, :itself
@@ -87,6 +88,7 @@ module Emissions
     def interpolating_class; Interpolating::FileText ;end
 
     def method_missing(m, *args, &block)
+      pp m
       if division_keys.include?(m)
         division_map[m.to_sym] || struct[m]
       else

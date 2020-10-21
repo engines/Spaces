@@ -65,6 +65,7 @@ module Packing
 
     def initialize(resolution)
       self.struct = struct_for(resolution.emit.images)
+      self.struct.identifier = resolution.identifier
       self.resolution = resolution
     end
 
