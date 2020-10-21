@@ -16,6 +16,10 @@ module Resolving
       super.tap { |m| m.identifier = struct.identifier }
     end
 
+    def qualified_domain_name
+      "#{identifier}.#{domain.name}"
+    end
+
     def auxiliary_texts
       [files_for(:injections)].flatten
     end

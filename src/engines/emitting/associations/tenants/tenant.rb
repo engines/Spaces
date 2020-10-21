@@ -1,8 +1,10 @@
 module Associations
-  class Tenant < ::Emissions::Division
+  class Tenant < ::Emissions::Association
 
-    def default_struct
-      OpenStruct.new(identifier: 'engines')
+    class << self
+      def default_struct
+        OpenStruct.new(identifier: 'engines')
+      end
     end
 
   end
