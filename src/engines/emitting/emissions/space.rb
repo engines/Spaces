@@ -1,5 +1,5 @@
-module Spaces
-  class TurtleSpace < Space
+module Emissions
+  class Space < ::Spaces::Space
 
     delegate(resolutions: :universe)
 
