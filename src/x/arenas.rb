@@ -1,6 +1,4 @@
-def arena; @arena ||= Arenas::Arena.new(descriptor: arena_descriptor) ;end
-
-def arena_descriptor; @arena_descriptor = Spaces::Descriptor.new(identifier: 'development') ;end
+def arena; @arena ||= Arenas::Arena.new(identifier: 'development') ;end
 
 def save_arena; universe.arenas.save(arena) ;end
 

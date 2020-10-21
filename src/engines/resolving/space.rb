@@ -1,5 +1,5 @@
 module Resolving
-  class Space < ::Spaces::TurtleSpace
+  class Space < ::Emissions::Space
 
     class << self
       def default_model_class
@@ -14,13 +14,13 @@ module Resolving
       super
     end
 
-    def by(descriptor, klass = default_model_class)
-      by_yaml(descriptor, klass).tap do |m|
-        m.blueprint = blueprints.by(descriptor)
+    def by(identifier, klass = default_model_class)
+      by_yaml(identifier, klass).tap do |m|
+        m.blueprint = blueprints.by(identifier)
       end
     rescue Errno::ENOENT => e
-      warn(error: e, descriptor: descriptor, klass: klass)
-      klass.new(blueprint: blueprints.by(descriptor)).tap do |m|
+      warn(error: e, identifier: identifier, klass: klass)
+      klass.new(blueprint: blueprints.by(identifier)).tap do |m|
         save(m)
       end
     end

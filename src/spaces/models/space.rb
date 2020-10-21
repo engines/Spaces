@@ -13,21 +13,20 @@ module Spaces
 
     delegate([:identifier, :universe, :default_model_class] => :klass)
 
-    def identifiers; Pathname.glob("#{path}/*").map { |p| p.basename } ;end
-    def descriptors; all.map(&:descriptor) ;end
+    def identifiers; Pathname.glob("#{path}/*").map { |p| "#{p.basename}" } ;end
 
     def all(klass = default_model_class)
-      identifiers.map { |i| by(Descriptor.new(identifier: i), klass) }
+      identifiers.map { |i| by(i, klass) }
     end
 
-    def by_yaml(descriptor, klass = default_model_class)
-      klass.new(descriptor: descriptor, struct: klass.from_yaml(_by(descriptor, klass, as: :yaml)))
+    def by_yaml(identifier, klass = default_model_class)
+      klass.new(identifier: identifier, struct: klass.from_yaml(_by(identifier, klass, as: :yaml)))
     end
 
     alias_method :by, :by_yaml
 
-    def by_json(descriptor, klass = default_model_class)
-      klass.new(descriptor: descriptor, struct: open_struct_from_json(_by(descriptor, klass, as: :json)))
+    def by_json(identifier, klass = default_model_class)
+      klass.new(identifier: identifier, struct: open_struct_from_json(_by(identifier, klass, as: :json)))
     end
 
     def save_text(model)
@@ -49,8 +48,8 @@ module Spaces
       Pathname.new("#{path}/#{model.identifier}").rmtree
     end
 
-    def reading_name_for(descriptor, klass = default_model_class)
-      "#{path}/#{descriptor.identifier}/#{klass.qualifier}"
+    def reading_name_for(identifier, klass = default_model_class)
+      "#{path}/#{identifier}/#{klass.qualifier}"
     end
 
     def writing_name_for(model)
@@ -58,8 +57,8 @@ module Spaces
       "#{path_for(model)}/#{model.file_name}"
     end
 
-    def file_names_for(directory, descriptor)
-      Pathname.glob("#{file_path_for(directory, descriptor)}/**/*").reject { |p| p.directory? }.map(&:to_s)
+    def file_names_for(directory, identifier)
+      Pathname.glob("#{file_path_for(directory, identifier)}/**/*").reject { |p| p.directory? }.map(&:to_s)
     end
 
     def file_path_for(directory, context_identifier)
@@ -85,8 +84,8 @@ module Spaces
 
     def encloses?(file_name); Pathname.new(file_name).exist? ;end
 
-    def _by(descriptor, klass = default_model_class, as:)
-      Pathname.new("#{reading_name_for(descriptor, klass)}.#{as}").read
+    def _by(identifier, klass = default_model_class, as:)
+      Pathname.new("#{reading_name_for(identifier, klass)}.#{as}").read
     end
 
     def _save(model, content:, as: nil)

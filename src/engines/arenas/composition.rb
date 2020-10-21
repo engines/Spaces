@@ -1,5 +1,5 @@
 module Arenas
-  class Composition < ::Spaces::Composition
+  class Composition < ::Emissions::Composition
 
     class << self
       def associative_classes

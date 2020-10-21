@@ -13,7 +13,7 @@ module Resolving
     alias_accessor :blueprint, :predecessor
 
     def emit
-      super.tap { |m| m.descriptor = struct.descriptor }
+      super.tap { |m| m.identifier = struct.identifier }
     end
 
     def auxiliary_texts
@@ -41,10 +41,10 @@ module Resolving
       has?(:bindings) ? bindings.all.map(&:descriptor) : []
     end
 
-    def initialize(struct: nil, blueprint: nil, descriptor: nil)
+    def initialize(struct: nil, blueprint: nil, identifier: nil)
       self.blueprint = blueprint
       self.struct = duplicate(struct || blueprint&.struct)
-      self.struct.descriptor = self.struct.descriptor&.merge(descriptor&.emit) || descriptor&.emit
+      self.struct.identifier = identifier if identifier
     end
 
   end

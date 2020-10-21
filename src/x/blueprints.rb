@@ -3,7 +3,7 @@ def import; universe.blueprints.import(descriptor); end
 def blueprint
   @blueprint ||=
   begin
-    universe.blueprints.by(descriptor)
+    universe.blueprints.by(descriptor.identifier)
   rescue Errno::ENOENT
     import
   end
