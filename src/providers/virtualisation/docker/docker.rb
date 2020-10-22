@@ -3,10 +3,10 @@ module Providers
 
     def arena_stanzas
       %Q(
-        provider "#{identifier}" {
+        provider "#{type}" {
         }
       )
     end
-    
+
   end
 end
