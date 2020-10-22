@@ -88,7 +88,6 @@ module Emissions
     def interpolating_class; Interpolating::FileText ;end
 
     def method_missing(m, *args, &block)
-      pp m
       if division_keys.include?(m)
         division_map[m.to_sym] || struct[m]
       else
