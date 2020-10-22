@@ -26,8 +26,6 @@ module Divisions
 
     def struct_variables; struct.variables || OpenStruct.new ;end
 
-    def random(length); SecureRandom.hex(length.to_i) ;end
-
     def method_missing(m, *args, &block)
       override_keys&.include?(m) ? variables[m] : super
     end
