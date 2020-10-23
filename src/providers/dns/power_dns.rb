@@ -4,8 +4,8 @@ module Providers
     def arena_stanzas
       %Q(
         provider "powerdns" {
-          api_key    = #{api_key}
-          server_url = #{server_url}
+          api_key    = "#{api_key}"
+          server_url = "#{server_url}"
         }
       )
     end
