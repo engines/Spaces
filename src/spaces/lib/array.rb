@@ -12,7 +12,7 @@ class Array
     map do |i|
       i.to_struct
     rescue NoMethodError
-      OpenStruct.new(value: i)
+      i
     end
   end
 
