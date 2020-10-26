@@ -30,8 +30,8 @@ module Spaces
     end
 
     def save_text(model)
-	  File.umask(model.permission) if model.respond_to?(:permission)
-      _save(model, content: model.content)     
+      _save(model, content: model.content)
+      Pathname.new(writing_name_for(model)).chmod(model.permission) if model.respond_to?(:permission)
     end
 
     def save_yaml(model)
