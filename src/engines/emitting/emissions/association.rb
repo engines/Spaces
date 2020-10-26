@@ -1,4 +1,6 @@
 module Emissions
+   require_relative 'association'
+   require_relative 'division'
   class Association < ::Emissions::Division
 
     class << self
