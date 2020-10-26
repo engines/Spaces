@@ -1,9 +1,5 @@
 module Divisions
-  class Containers < ::Emissions::Divisible
-    
-    def subdivision_for(struct)
-      subdivision_class.prototype(struct: struct, division: self)
-    end
+  class Containers < ::Emissions::SubclassDivisible
 
     def provisioning_stanzas
       [super, dns.provisioning_stanzas]
