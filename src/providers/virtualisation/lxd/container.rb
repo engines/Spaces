@@ -8,7 +8,7 @@ module Providers
           %Q(
             resource "lxd_container" "#{identifier}-#{i}" {
               name      = "#{identifier}-#{i}"
-              image     = "#{image}"
+              image     = "#{image_name}"
               ephemeral = false
 
               device {
