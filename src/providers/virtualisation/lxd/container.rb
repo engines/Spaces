@@ -2,31 +2,34 @@ module Providers
   class Lxd < ::Divisions::Provider
     class Container < ::Divisions::Container
 
-
       def provisioning_stanzas
         scale do |i|
-          %Q(
-            resource "lxd_container" "#{identifier}-#{i}" {
-              name      = "#{identifier}-#{i}"
-              image     = "#{image_name}"
-              ephemeral = false
+          container_stanza(i)
+        end
+      end
 
-              device {
-                name  = "root"
-                type  = "disk"
+      def container_stanza(i)
+        %Q(
+          resource "lxd_container" "#{identifier}-#{i}" {
+            name      = "#{identifier}-#{i}"
+            image     = "#{image_name}"
+            ephemeral = false
 
-                properties  = {
-                  "path" = "/"
-                  "pool" = "default"
-                }
-              }
+            device {
+              name  = "root"
+              type  = "disk"
 
-              config = {
-                "boot.autostart" = true
+              properties  = {
+                "path" = "/"
+                "pool" = "default"
               }
             }
-          )
-        end
+
+            config = {
+              "boot.autostart" = true
+            }
+          }
+        )
       end
 
     end
