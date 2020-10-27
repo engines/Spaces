@@ -86,14 +86,23 @@ universe.resolutions.save(resolution)
 ## Example
 ```
 require './src/x/mariadb'
+
 import
+
 r = universe.resolutions.by('mariadb')
+
 save_pack
+
 commit_pack
+
 save_arena
+
 save_provisions
+
 universe.arenas.init(arena)
+
 universe.arenas.plan(arena)
+
 universe.arenas.apply(arena)
 
 
