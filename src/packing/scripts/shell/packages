@@ -2,7 +2,11 @@
 
 # taken from https://github.com/jakobadam/packer-qemu-templates
 
+#read packages 
+blueprint_packages=`cat /tmp/build_stuff/os_package_list'
+
 install_packages="
+$blueprint_packages
 apt-transport-https
 locales-all
 openssh-server
