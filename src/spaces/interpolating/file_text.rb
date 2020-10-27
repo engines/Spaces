@@ -1,4 +1,5 @@
 module Interpolating
+   require_relative 'text'
   class FileText < Text
 
     attr_accessor :origin_file_name,

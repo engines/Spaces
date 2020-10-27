@@ -30,4 +30,5 @@ class String
     empty? || BLANK_RE.match?(self)
   end
 
+  def complete?; true ;end
 end
