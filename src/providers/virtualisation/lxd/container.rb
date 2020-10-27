@@ -25,11 +25,17 @@ module Providers
               }
             }
 
+              #{device_stanzas}
+
             config = {
               "boot.autostart" = true
             }
           }
         )
+      end
+
+      def device_stanzas
+        emission.volumes.all.map(&:device_stanzas).join("\n") if emission.has?(:volumes)
       end
 
     end
