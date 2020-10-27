@@ -12,7 +12,7 @@ module Interpolating
     end
 
     def permission
-       @permission || = File.stat(origin_file_name).mode
+       @permission ||= File.stat(origin_file_name).mode
     end
 
     def emission_path; origin_file_name ;end
