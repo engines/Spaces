@@ -1,3 +1,5 @@
+require_relative 'division'
+
 module Emissions
   class Divisible < Division
 

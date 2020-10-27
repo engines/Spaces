@@ -7,6 +7,10 @@ module Emissions
       all_complete?(resolved_texts.values)
     end
 
+    def resolved
+      @resolved ||= OpenStruct.new(resolved_texts)
+    end
+
     def resolved_texts
       @resolved_texts ||= texts.transform_values(&:resolved)
     end
