@@ -14,6 +14,10 @@ module Divisions
       @variables ||= OpenStruct.new(resolved_texts)
     end
 
+    def texts
+      overrides.to_h.transform_values { |v| text_from(v) }
+    end
+
     def overrides
       default_variables.merge(struct_variables)
     end

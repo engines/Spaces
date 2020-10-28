@@ -12,6 +12,10 @@ module Interpolating
       @origin ||= Pathname.new(origin_file_name).read
     end
 
+    def permission
+       @permission ||= File.stat(origin_file_name).mode
+    end
+
     def emission_path; origin_file_name ;end
 
     def file_name; origin_file_name.split('/').last ;end
