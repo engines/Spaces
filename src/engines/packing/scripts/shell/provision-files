@@ -9,3 +9,6 @@
 
 chown -R root:root /tmp/files
 tar -C /tmp/files -cf - . | tar -C / -xf -
+
+#need to think about ownership of injected files
+tar -C /tmp/injections -cf - . | tar -C / -xf -

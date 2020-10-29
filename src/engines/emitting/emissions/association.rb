@@ -1,7 +1,7 @@
+require_relative 'division'
+
 module Emissions
-   require_relative 'association'
-   require_relative 'division'
-  class Association < ::Emissions::Division
+  class Association < Division
 
     class << self
       def prototype(emission:, label:)

@@ -1,9 +1,7 @@
-module Spaces
 require_relative 'model'
-#require_relative '../interpolating/script.rb'
-#require_relative '../interpolating/text.rb'
-#require_relative '../../engines/emitting/emissions/division.rb'
-  class Descriptor < ::Spaces::Model
+
+module Spaces
+  class Descriptor < Model
 
     def identifier; struct.identifier ||= root_identifier ;end
     def root_identifier; repository.split('/').last.split('.').first if repository ;end

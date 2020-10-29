@@ -1,5 +1,9 @@
+require_relative 'subdivision'
+
 module Emissions
   class DescriptiveSubdivision < Subdivision
+
+    delegate(universe: :emission)
 
     def resolution
       @resolution ||= universe.resolutions.by(identifier)
