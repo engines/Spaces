@@ -23,9 +23,10 @@ module Divisions
     end
 
     def default_variables
-      @default_variables ||= resolution.binding_anchor&.variables
-    rescue NoMethodError
-      OpenStruct.new
+      @default_variables ||=
+      if resolution.has?(:binding_anchor)
+        resolution.binding_anchor&.variables
+      end || OpenStruct.new
     end
 
     def struct_variables; struct.variables || OpenStruct.new ;end
