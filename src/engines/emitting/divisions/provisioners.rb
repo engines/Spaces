@@ -1,14 +1,16 @@
 module Divisions
   class Provisioners < ::Emissions::Division
 
-    delegate(script_file_names: :emission)
+    delegate([:os_packages, :script_file_names] => :emission)
+
+    alias_method :pack, :emission
 
     def emit
       packing_stanzas.map(&:to_h)
     end
 
     def packing_stanzas
-      [injection_stanza, scripts_stanza].compact.flatten
+      [injection_stanza, os_packages.packing_stanzas, scripts_stanza].compact.flatten
     end
 
     def injection_stanza
@@ -17,6 +19,12 @@ module Divisions
         source: 'injections',
         destination: 'tmp/'
       }
+    end
+
+    def os_packages_stanzas
+      if pack.has?(:os_packages)
+        pack.os_packages.packing_stanzas
+      end
     end
 
     def scripts_stanza

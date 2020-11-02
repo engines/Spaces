@@ -1,8 +1,16 @@
+require_relative 'subdivision'
+
 module Emissions
   class DescriptiveSubdivision < Subdivision
 
+    delegate(universe: :emission)
+
     def resolution
       @resolution ||= universe.resolutions.by(identifier)
+    end
+
+    def blueprint
+      @blueprint ||= universe.blueprints.by(descriptor)
     end
 
     def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end

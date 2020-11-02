@@ -13,7 +13,7 @@ src=/etc/apt/sources.list.d/$suite.list
 
 heading "Setting up sources.list for: $suite"
 
-uri=http://auto.mirror.devuan.org/merged
+uri=http://deb.devuan.org/merged
 component=main
 apt_conf=/etc/apt/apt.conf.d/01-minimal-install
 

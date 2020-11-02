@@ -7,20 +7,18 @@ module Blueprinting
       end
     end
 
-    def import(descriptor)
-      super
-      import_by_json(descriptor)
-    rescue Errno::ENOENT => e
-      warn(error: e, descriptor: descriptor, verbosity: [:error])
-    end
+    alias_method :by, :by_json
 
-    def import_by_json(descriptor)
-      by_json(descriptor.identifier).tap do |m|
-        m.struct.descriptor = descriptor.struct
-        save(m)
-        import_anchors_for(m)
+    def import(descriptor, force: false)
+      delete(descriptor) if force && imported?(descriptor)
+
+      if imported?(descriptor)
+        by(descriptor.identifier)
+      else
+        super(descriptor)
+        by(descriptor.identifier).tap { |m| import_anchors_for(m) }
       end
-    rescue JSON::ParserError => e
+    rescue Errno::ENOENT => e
       warn(error: e, descriptor: descriptor, verbosity: [:error])
     end
 
