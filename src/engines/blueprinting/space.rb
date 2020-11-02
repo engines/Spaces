@@ -9,12 +9,14 @@ module Blueprinting
 
     alias_method :by, :by_json
 
-    def import(descriptor)
-      unless imported?(descriptor)
-        super
-        by(descriptor.identifier).tap { |m| import_anchors_for(m) }
-      else
+    def import(descriptor, force: false)
+      delete(descriptor) if force && imported?(descriptor)
+
+      if imported?(descriptor)
         by(descriptor.identifier)
+      else
+        super(descriptor)
+        by(descriptor.identifier).tap { |m| import_anchors_for(m) }
       end
     rescue Errno::ENOENT => e
       warn(error: e, descriptor: descriptor, verbosity: [:error])
