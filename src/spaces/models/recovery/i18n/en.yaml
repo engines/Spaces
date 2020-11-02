@@ -8,7 +8,7 @@ en:
       spaces::models::thing/open_struct_from_json: |
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
-      engines::blueprinting::space/import_by_json: |
+      engines::blueprinting::space/import_with_turtles: |
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
 
