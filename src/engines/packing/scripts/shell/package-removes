@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+# taken from https://github.com/jakobadam/packer-qemu-templates
+
+
+# This little gem is because udev isn't running and start-stop-daemon shits
+# itself trying to stop it and the removal of the entire package fails.
+sed -i '/^kill_udevd.*{/,/^}/ckill_udevd() {\n  true\n}' /var/lib/dpkg/info/eudev.prerm
+
+
+# If this isn't included build will hang forever if dpkg asks any questions.
+export DEBIAN_FRONTEND=noninteractive
+
+[ -n "$BLUEPRINT_PACKAGE_REMOVES" ] && apt-get purge -y --autoremove $BLUEPRINT_PACKAGE_REMOVES
