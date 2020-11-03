@@ -2,7 +2,7 @@ module Recovery
   module Warning
     extend Warning
 
-    def warn(args)
+    def warn(args={})
       trace_class.new(args).tap do |t|
         unless t.verbosity&.include?(:silence)
           spout "\n[WARNING]#{'-' * 88}<<<<"
