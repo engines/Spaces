@@ -11,6 +11,10 @@ module Divisions
       all.map(&:resolution)
     end
 
+    def embeds
+      all.select(&:embed?)
+    end
+
     def method_missing(m, *args, &block); named(m) || super ;end
     def respond_to_missing?(m, *); named(m) || super ;end
 

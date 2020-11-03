@@ -4,6 +4,8 @@ module Divisions
   class Binding < ::Emissions::DescriptiveSubdivision
     include Emissions::Resolvable
 
+    def embed?; struct.type == 'embed' ;end
+
     def override_keys; overrides.to_h.keys ;end
 
     def resolved
