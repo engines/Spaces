@@ -16,6 +16,9 @@ module Resolving
       super.tap { |m| m.identifier = struct.identifier }
     end
 
+    def embeds
+      has?(:bindings) ? bindings.embeds.map(&:resolution) : []
+    end
     def qualified_domain_name
       "#{identifier}.#{domain.name}"
     end
