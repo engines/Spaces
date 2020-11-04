@@ -37,11 +37,11 @@ end
 # Import
 
 post '/import' do
-  s = params[:space]
-  d = descriptor_for(params[:descriptor])
-  o = @universe.send(s).import(d)
-  raise o.error if o.is_a? Recovery::Trace
-  o.to_json
+  space = params[:space]
+  descriptor = descriptor_for(params[:descriptor])
+  object = @universe.send(object).import(descriptor)
+  raise object.error if object.is_a? Recovery::Trace
+  object.to_json
 end
 
 # Arenas
@@ -147,13 +147,13 @@ get '/resolutions/:identifier/validity' do
 put '/resolutions/:identifier' do
   struct = JSON.parse(request.body.read).to_struct
   resolution = Resolving::Resolution.new(struct: struct)
-  @universe.resolutions.save(r)
+  @universe.resolutions.save(resolution)
   resolution.to_json
 end
 
 delete '/resolutions/:identifier' do
   resolution = @universe.resolutions.by(params[:identifier])
-  @universe.resolutions.delete(r)
+  @universe.resolutions.delete(resolution)
   nil.to_json
 end
 
@@ -165,7 +165,7 @@ end
 
 post '/packs' do
   pack = Packing::Pack.new(struct: params[:pack].to_struct)
-  @universe.packs.save(pack)
+  @universe.packing.save(pack)
   pack.to_json
 end
 
@@ -176,6 +176,28 @@ end
 delete '/packs/:identifier' do
   pack = @universe.packing.by(params[:identifier])
   @universe.packing.delete(pack)
+  nil.to_json
+end
+
+# Provisions
+
+get '/provisions' do
+  @universe.provisioning.identifiers.to_json
+end
+
+post '/provisions' do
+  provision = Provisioning::Provision.new(struct: params[:provision].to_struct)
+  @universe.provisioning.save(provision)
+  provision.to_json
+end
+
+get '/provisions/:identifier' do
+  @universe.provisioning.by(params[:identifier]).to_json
+end
+
+delete '/provisions/:identifier' do
+  provision = @universe.provisioning.by(params[:identifier])
+  @universe.provisioning.delete(pack)
   nil.to_json
 end
 
