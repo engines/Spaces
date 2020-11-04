@@ -16,6 +16,10 @@ module Resolving
       super.tap { |m| m.identifier = struct.identifier }
     end
 
+    def bindings
+      @bindings ||= Divisions::Bindings.new(emission: self, label: :bindings)
+    end
+
     def reduced
       embeds.reduce(itself) do |r, e|
         r.tap { |r| r.embed(e) }
@@ -23,7 +27,7 @@ module Resolving
     end
 
     def embeds
-      has?(:bindings) ? bindings.embeds.map(&:resolution) : []
+      struct.bindings ? bindings.embeds.map(&:resolution) : []
     end
 
     def embed(other)
@@ -53,6 +57,10 @@ module Resolving
           m.tap { m[k] = division_for(k) }
         end.compact
       )
+    end
+
+    def keys
+      [super, embeds.map(&:keys)].flatten.uniq
     end
 
     def binding_descriptors

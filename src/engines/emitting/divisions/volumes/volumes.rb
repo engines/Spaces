@@ -5,7 +5,7 @@ module Divisions
       @all ||=
       if emission.has?(:containers)
         emission.containers.all.map do |c|
-          struct&.map { |s| subdivision_for(s, c.type) }&.compact
+          struct&.map { |s| subdivision_for(s, c.type) }&.compact || []
         end.flatten
       else
         []

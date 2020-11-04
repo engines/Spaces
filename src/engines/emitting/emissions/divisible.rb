@@ -20,7 +20,7 @@ module Emissions
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
     def all
-      @all ||= struct&.map { |s| subdivision_for(s) }&.compact
+      @all ||= struct&.map { |s| subdivision_for(s) }&.compact || []
     end
 
     def subdivision_for(struct)
