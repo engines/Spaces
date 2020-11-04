@@ -3,11 +3,12 @@ module Resolving
 
     class << self
       def composition_class; Composition ;end
+      def bindings_class; Divisions::Bindings ;end
     end
 
     delegate(
-      resolution: :itself,
-      resolutions: :universe
+      resolutions: :universe,
+      bindings_class: :klass
     )
 
     alias_accessor :blueprint, :predecessor
@@ -17,21 +18,11 @@ module Resolving
     end
 
     def bindings
-      @bindings ||= Divisions::Bindings.new(emission: self, label: :bindings)
+      @bindings ||= bindings_class.new(emission: self, label: :bindings)
     end
 
-    def reduced
-      embeds.reduce(itself) do |r, e|
-        r.tap { |r| r.embed(e) }
-      end
-    end
-
-    def embeds
-      struct.bindings ? bindings.embeds.map(&:resolution) : []
-    end
-
-    def embed(other)
-      itself
+    def division_for(key)
+      composition.divisions[key]&.prototype(emission: self, label: key)
     end
 
     def qualified_domain_name
@@ -61,6 +52,10 @@ module Resolving
 
     def keys
       [super, embeds.map(&:keys)].flatten.uniq
+    end
+
+    def embeds
+      struct.bindings ? bindings.embeds.map(&:resolution) : []
     end
 
     def binding_descriptors
