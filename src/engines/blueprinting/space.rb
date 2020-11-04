@@ -8,6 +8,7 @@ module Blueprinting
     end
 
     alias_method :by, :by_json
+    alias_method :save, :save_json
 
     def import(descriptor, force: false)
       delete(descriptor) if force && imported?(descriptor)
