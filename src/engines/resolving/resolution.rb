@@ -64,7 +64,7 @@ module Resolving
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
       self.blueprint = blueprint
-      self.struct = duplicate(struct || blueprint&.struct)
+      self.struct = duplicate(struct || blueprint&.struct) || OpenStruct.new
       self.struct.identifier = identifier if identifier
     end
 
