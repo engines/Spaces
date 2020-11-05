@@ -2,7 +2,6 @@ module Divisions
   class Volumes < ::Emissions::SubclassDivisible
 
     def embed(other)
-      pp [struct, other.struct].flatten.uniq
       tap do
         self.struct = [struct, other.struct].flatten.uniq
       end
