@@ -7,6 +7,8 @@ module Emissions
       def subdivision_class
         Module.const_get(name.singularize)
       end
+
+      def default_struct; [] ;end
     end
 
     delegate(subdivision_class: :klass)
