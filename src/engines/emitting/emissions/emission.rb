@@ -6,12 +6,13 @@ module Emissions
     class << self
       def composition; @composition ||= composition_class.new ;end
       def composition_class; Composition ;end
+      def interpolating_class; Interpolating::FileText ;end
     end
 
     relation_accessor :predecessor
 
     delegate(
-      [:universe, :composition] => :klass,
+      [:universe, :composition, :interpolating_class] => :klass,
       blueprints: :universe
     )
 
@@ -85,7 +86,7 @@ module Emissions
       blueprints.file_names_for(directory, context_identifier)
     end
 
-    def interpolating_class; Interpolating::FileText ;end
+    def embeds; [] ;end
 
     def method_missing(m, *args, &block)
       if division_keys.include?(m)

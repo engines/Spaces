@@ -1,6 +1,12 @@
 module Divisions
   class OsPackages < ::Emissions::Division
 
+    def embed(other)
+      tap do
+        struct.adds = [struct.adds, other.struct.adds].flatten.uniq
+      end
+    end
+
     def packing_stanzas
       keys.map { |k| packing_stanza_for(k) }
     end

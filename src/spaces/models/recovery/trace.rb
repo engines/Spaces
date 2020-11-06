@@ -1,13 +1,13 @@
 I18n.load_path << Pathname.glob("#{__dir__}/i18n/*.yaml").map(&:to_s)
 
 module Recovery
-  class Trace < ::Spaces::Thing
+  class Trace < Error
 
     attr_accessor :error,
       :witnesses,
       :verbosity
 
-    def t(id = identifier); super(id, **witnesses) ;end
+    def t(id = identifier); I18n.t(id, **witnesses) ;end
 
     def spout_trace
       spout "\n#{array.join("\n")}" unless array.empty? if verbosity&.include?(:trace)
