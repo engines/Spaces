@@ -14,6 +14,14 @@ module Arenas
       _save(model, content: model.stanzas_content, as: :tf)
     end
 
+    def save_provisions(provisions)
+      _save(provisions, content: provisions.stanzas_content, as: :tf)
+    end
+
+    def path_for(model)
+      [path, model.arena.context_identifier].compact.join('/')
+    end
+
     def init(model); execute(:init, model) ;end
     def plan(model); execute(:plan, model) ;end
     def show(model); execute(:show, model) ;end

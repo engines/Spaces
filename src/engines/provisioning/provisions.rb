@@ -6,7 +6,7 @@ module Provisioning
 
     delegate(
       [:arenas, :resolutions] => :universe,
-      [:divisions, :binding_descriptors] => :resolution
+      [:has?, :divisions, :binding_descriptors] => :resolution
     )
 
     def identifier; "#{arena.identifier}/#{resolution.identifier}" ;end
@@ -18,6 +18,8 @@ module Provisioning
         m.resolution_identifier = resolution.identifier
       end
     end
+
+    def file_name; resolution.identifier ;end
 
     def stanzas
       divisions.map(&:provisioning_stanzas).flatten.compact
