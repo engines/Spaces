@@ -42,7 +42,7 @@ module Spaces
 
     def context_identifier; identifier ;end
     def to_yaml; YAML.dump(struct) ;end
-    def to_json; struct&.to_h_deep&.to_json ;end
+    def to_json(*args); struct&.to_h_deep&.to_json(*args) ;end
     def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
 
     def to_s; identifier ;end
