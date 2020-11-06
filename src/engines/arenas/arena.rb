@@ -3,6 +3,7 @@ module Arenas
 
     class << self
       def composition_class; Composition ;end
+      def provider_class; ::Divisions::Provider ;end
 
       def dns_class
         composition.divisions[:dns]
@@ -40,7 +41,7 @@ module Arenas
       end
     end
 
-    def provider_class; ::Divisions::Provider ;end
+    def arena; itself ;end
 
     def division_map
       @division_map ||=
