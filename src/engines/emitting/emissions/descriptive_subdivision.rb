@@ -10,7 +10,7 @@ module Emissions
     end
 
     def blueprint
-      @blueprint ||= universe.blueprints.by(descriptor)
+      @blueprint ||= universe.blueprints.import(descriptor)
     end
 
     def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end

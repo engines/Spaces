@@ -7,7 +7,7 @@ module Emissions
 
     class << self
       def prototype(emission:, label:)
-        new(emission: emission, label: label)
+        new(emission: emission, label: label).embedded
       end
 
       def default_struct; OpenStruct.new ;end
@@ -19,6 +19,16 @@ module Emissions
       default_struct: :klass,
       context_identifier: :emission
     )
+
+    def embedded
+      emission.embeds.reduce(itself) do |r, e|
+        r.tap do |r|
+          r.embed(e.send(qualifier)) if e.has?(qualifier)
+        end
+      end
+    end
+
+    def embed(other); itself; end
 
     def scale &block
       Array.new(emission.count) do |i|

@@ -7,6 +7,8 @@ module Emissions
       def subdivision_class
         Module.const_get(name.singularize)
       end
+
+      def default_struct; [] ;end
     end
 
     delegate(subdivision_class: :klass)
@@ -20,7 +22,7 @@ module Emissions
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
     def all
-      @all ||= struct&.map { |s| subdivision_for(s) }&.compact
+      @all ||= struct&.map { |s| subdivision_for(s) }&.compact || []
     end
 
     def subdivision_for(struct)
