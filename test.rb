@@ -182,9 +182,9 @@ end
 test_group 'Import blueprints' do
 
   [
-    # 'https://github.com/MarkRatjens/test_container.git',
-    # 'https://github.com/MarkRatjens/phppgadmin.git',
     'https://github.com/MarkRatjens/poc.git',
+    # 'https://github.com/MarkRatjens/test_container.git',
+    'https://github.com/MarkRatjens/phppgadmin.git',
   ].each do |repository_url|
 
     descriptor = Spaces::Descriptor.new(
@@ -194,6 +194,7 @@ test_group 'Import blueprints' do
     identifier = descriptor.identifier
 
     test "import #{identifier}" do
+      p Dir.entries('/opt/spaces/Universe/BlueprintingSpace')
       p universe.blueprints.import(descriptor)
     end
 
@@ -251,6 +252,13 @@ test_group 'CRUD packs' do
     identifiers.map(&:to_s).include?(identifier)
   end
 
+  test "build #{identifier}" do
+    p pack = universe.packing.by(identifier)
+    p universe.packing.commit(pack)
+    build = YAML.load_file("/opt/spaces/Universe/PackingSpace/#{identifier}/commit/output.yaml")
+    p build.stdout
+  end
+
   test 'delete' do
     p pack = universe.packing.by(identifier)
     p universe.packing.delete(pack)
@@ -258,6 +266,44 @@ test_group 'CRUD packs' do
 
   test 'index after delete' do
     p identifiers = universe.packing.identifiers
+    raise "#{identifier} not deleted" if
+    identifiers.map(&:to_s).include?(identifier)
+  end
+
+end
+
+test_group 'CRUD arena provisions' do
+
+  resolution_identifier = 'poc'
+  arena_identifier = 'test'
+
+  identifier = "#{arena_identifier}/#{resolution_identifier}"
+  arena = Arenas::Arena.new(identifier: arena_identifier)
+  universe.arenas.save(arena)
+  resolution = universe.resolutions.by(resolution_identifier)
+
+  test "create #{identifier} provisions" do
+    p provisions = Provisioning::Provisions.new(resolution: resolution, arena: arena)
+    p universe.provisioning.save(provisions)
+  end
+
+  test "show #{identifier} provisions" do
+    p universe.provisioning.by(identifier)
+  end
+
+  test "index includes #{identifier}" do
+    p identifiers = universe.provisioning.identifiers
+    raise "#{identifier} not created" unless
+    identifiers.map(&:to_s).include?(identifier)
+  end
+
+  test 'delete' do
+    p provisions = universe.provisioning.by(identifier)
+    p universe.provisioning.delete(provisions)
+  end
+
+  test 'index after delete' do
+    p identifiers = universe.provisioning.identifiers
     raise "#{identifier} not deleted" if
     identifiers.map(&:to_s).include?(identifier)
   end

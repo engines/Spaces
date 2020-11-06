@@ -39,7 +39,7 @@ end
 post '/import' do
   space = params[:space]
   descriptor = descriptor_for(params[:descriptor])
-  object = @universe.send(object).import(descriptor)
+  object = @universe.send(space).import(descriptor)
   raise object.error if object.is_a? Recovery::Trace
   object.to_json
 end
@@ -50,6 +50,13 @@ get '/arenas' do
   @universe.arenas.identifiers.to_json
 end
 
+get '/arenas/:identifier/provisions' do
+  provision_identifiers = @universe.provisioning.identifiers(params[:identifier])
+  provision_identifiers.map do |identifier|
+    @universe.provisioning.by(identifier)
+  end.to_json
+end
+
 post '/arenas' do
   arena = Arenas::Arena.new(struct: params[:arena].to_struct)
   @universe.arenas.save(arena)
@@ -58,12 +65,6 @@ end
 
 get '/arenas/:identifier' do
   @universe.arenas.by(params[:identifier]).to_json
-end
-
-delete '/arenas/:identifier' do
-  arena = @universe.arenas.by(params[:identifier])
-  @universe.arenas.delete(arena)
-  nil.to_json
 end
 
 post '/arenas/:identifier/:action' do
@@ -173,6 +174,26 @@ get '/packs/:identifier' do
   @universe.packing.by(params[:identifier]).to_json
 end
 
+post '/packs/:identifier/build' do
+  pack = @universe.packing.by(params[:identifier])
+  @universe.packing.commit(pack).to_json
+  build = YAML.load_file("/opt/spaces/Universe/PackingSpace/#{params[:identifier]}/commit/output.yaml")
+  {
+    log: build.stdout
+  }.to_json
+end
+
+get '/packs/:identifier/build' do
+  build = YAML.load_file("/opt/spaces/Universe/PackingSpace/#{params[:identifier]}/commit/output.yaml")
+  {
+    log: build.stdout
+  }.to_json
+rescue Errno::ENOENT
+  {
+    log: "\e[1;31mUnbuilt\e[0m"
+  }.to_json
+end
+
 delete '/packs/:identifier' do
   pack = @universe.packing.by(params[:identifier])
   @universe.packing.delete(pack)
@@ -186,18 +207,23 @@ get '/provisions' do
 end
 
 post '/provisions' do
-  provision = Provisioning::Provision.new(struct: params[:provision].to_struct)
+  provision = Provisioning::Provisions.new(
+    struct: params[:provisions].to_struct)
   @universe.provisioning.save(provision)
   provision.to_json
 end
 
-get '/provisions/:identifier' do
-  @universe.provisioning.by(params[:identifier]).to_json
+get '/provisions/:arena_identifier/:resolution_identifier' do
+  @universe.provisioning.by(
+    "#{params[:arena_identifier]}/#{params[:resolution_identifier]}"
+  ).to_json
 end
 
-delete '/provisions/:identifier' do
-  provision = @universe.provisioning.by(params[:identifier])
-  @universe.provisioning.delete(pack)
+delete '/provisions/:arena_identifier/:resolution_identifier' do
+  provision = @universe.provisioning.by(
+    "#{params[:arena_identifier]}/#{params[:resolution_identifier]}"
+  )
+  @universe.provisioning.delete(provision)
   nil.to_json
 end
 
