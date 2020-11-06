@@ -7,15 +7,20 @@ module Provisioning
       end
     end
 
-    delegate(
-      arenas: :universe,
-      path: :arenas
-    )
+    # delegate(
+    #   arenas: :universe,
+    #   path: :arenas
+    # )
+
+    def identifiers(arena_identifier = '*')
+      Pathname.glob("#{path}/#{arena_identifier}/*").map { |p| p.to_s.split('/').last(2).join('/') }
+    end
 
     def save(model)
       anchor_provisionings_for(model).each { |p| save(p) }
 
       _save(model, content: model.stanzas_content, as: :tf) unless model.has?(:containers)
+      super
     end
 
     def anchor_provisionings_for(model)
@@ -24,9 +29,6 @@ module Provisioning
       end
     end
 
-    def path_for(model)
-      [path, model.arena.identifier, model.subpath].compact.join('/')
-    end
 
   end
 end
