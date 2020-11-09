@@ -10,13 +10,14 @@ module Emissions
         new(emission: emission, label: label).embedded
       end
 
+      def packing_script_file_names; [] ;end
       def default_struct; OpenStruct.new ;end
     end
 
     relation_accessor :emission
 
     delegate(
-      default_struct: :klass,
+      [:packing_script_file_names, :default_struct] => :klass,
       context_identifier: :emission
     )
 

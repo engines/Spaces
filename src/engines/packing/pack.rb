@@ -19,7 +19,7 @@ module Packing
 
     delegate(
       [:identifier, :has?, :images, :os_packages, :binding_descriptors] => :resolution,
-      [:script_file_names, :post_processor_stanzas] => :images
+      post_processor_stanzas: :images
     )
 
     alias_accessor :resolution, :predecessor
@@ -37,16 +37,19 @@ module Packing
       )
     end
 
-      [nominated_scripts, injections].flatten
     def auxiliary_files
+      [division_scripts, blueprint_scripts, injections].flatten
     end
 
-    def nominated_scripts
+    def division_scripts
       script_file_names.map do |t|
         interpolating_class.new(origin: "#{Pathname.new(__FILE__).dirname}/#{t}", directory: :scripts, division: self)
       end
     end
 
+    def script_file_names; resolution.packing_script_file_names ;end
+
+    def blueprint_scripts; resolution.files_for(:scripts) ;end
     def injections; resolution.files_for(:injections) ;end
 
     def files_for(directory)

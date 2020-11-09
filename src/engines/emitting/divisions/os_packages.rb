@@ -1,6 +1,12 @@
 module Divisions
   class OsPackages < ::Emissions::Division
 
+    class << self
+      def packing_script_file_names
+        ['scripts/shell/package-adds', 'scripts/shell/package-removes']
+      end
+    end
+
     def embed(other)
       tap do
         struct.adds = [struct.adds, other.struct.adds].flatten.uniq

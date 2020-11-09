@@ -35,7 +35,7 @@ module Divisions
       'latest'
     end
 
-    def script_file_names
+    def packing_script_file_names
       if struct.scripts
         scripts.to_h.reduce([]) do |m, v|
           m << v.last.map { |l| "scripts/#{v.first}/#{l}" }
