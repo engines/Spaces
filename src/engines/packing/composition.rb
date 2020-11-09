@@ -4,7 +4,7 @@ module Packing
     class << self
       def division_classes
         [
-          Divisions::Provisioners,
+          Divisions::Packers,
           Divisions::PostProcessors
         ]
       end

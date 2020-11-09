@@ -1,9 +1,9 @@
 module Divisions
-  class Provisioners < ::Emissions::Division
-
-    delegate([:os_packages, :script_file_names] => :emission)
+  class Packers < ::Emissions::Division
 
     alias_method :pack, :emission
+
+    delegate([:os_packages, :script_file_names] => :pack)
 
     def emit
       packing_stanzas.map(&:to_h)
