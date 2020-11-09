@@ -19,7 +19,9 @@ module Associations
       end
     end
 
-    delegate(identifier: :emission)
+    alias_method :arena, :emission
+
+    delegate(identifier: :arena)
 
   end
 end
