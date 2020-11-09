@@ -29,10 +29,6 @@ module Resolving
       "#{identifier}.#{domain.name}"
     end
 
-    def auxiliary_texts
-      [files_for(:injections)].flatten
-    end
-
     def files_for(directory)
       [
         resolutions.unresolved_names_for(directory),
@@ -40,6 +36,10 @@ module Resolving
       ].flatten.compact.map do |t|
         interpolating_class.new(origin: t, directory: directory, division: self)
       end
+    end
+
+    def packing_script_file_names
+      divisions.map(&:packing_script_file_names).flatten
     end
 
     def division_map

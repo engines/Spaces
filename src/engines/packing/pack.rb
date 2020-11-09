@@ -37,8 +37,8 @@ module Packing
       )
     end
 
-    def auxiliary_texts
       [nominated_scripts, injections].flatten
+    def auxiliary_files
     end
 
     def nominated_scripts
