@@ -11,6 +11,7 @@ module Packing
 
       def naming_map
         {
+          packers: 'provisioners',
           post_processors: 'post-processors'
         }
       end
