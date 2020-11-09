@@ -66,7 +66,7 @@ module Spaces
     end
 
     def path_for(model)
-      [path, model.context_identifier].compact.join('/')
+      [path, model.context_identifier, model.subpath].compact.join('/')
     end
 
     def path; "#{universe.path}/#{identifier}" ;end
