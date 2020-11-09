@@ -10,7 +10,7 @@ module Divisions
     end
 
     def packing_stanzas
-      [injection_stanza, os_packages.packing_stanzas, scripts_stanza].compact.flatten
+      [injection_stanza, scripts_stanza, os_packages.packing_stanzas].compact.flatten
     end
 
     def injection_stanza
