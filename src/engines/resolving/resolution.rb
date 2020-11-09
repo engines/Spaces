@@ -29,6 +29,10 @@ module Resolving
       "#{identifier}.#{domain.name}"
     end
 
+    def auxiliary_texts
+      [files_for(:injections)].flatten
+    end
+
     def files_for(directory)
       [
         resolutions.unresolved_names_for(directory),
