@@ -12,7 +12,7 @@ module Emissions
     relation_accessor :predecessor
 
     delegate(
-      [:universe, :composition, :interpolating_class] => :klass,
+      [:composition, :interpolating_class] => :klass,
       blueprints: :universe
     )
 
