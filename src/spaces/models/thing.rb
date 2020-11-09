@@ -15,8 +15,6 @@ module Spaces
       def qualifier; name.split('::').last.snakize ;end
       def from_yaml(y); YAML::load(y) ;end
 
-      def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
-
       def relation_accessor(*args); attr_accessor(*args) ;end
 
       def alias_accessor(to, from)
