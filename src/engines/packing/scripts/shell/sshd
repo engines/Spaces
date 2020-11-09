@@ -1,4 +1,0 @@
-#!/bin/sh -e
-
-# Allow root to login over ssh.
-adduser root ssh

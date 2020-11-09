@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-# Tell init to reread it's config file. This must be done as a new inttab has
-# been installed in the files stanza
-telinit q
