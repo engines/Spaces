@@ -29,9 +29,19 @@ module Resolving
       "#{identifier}.#{domain.name}"
     end
 
-    def auxiliary_texts
+    def auxiliary_files
       [files_for(:injections)].flatten
     end
+
+
+    def division_scripts_for(file_names)
+      file_names.map do |t|
+        interpolating_class.new(origin: "#{Pathname.new(__FILE__).dirname}/#{t}", directory: :scripts, division: self)
+      end
+    end
+
+    def blueprint_scripts; resolution.files_for(:scripts) ;end
+    def injections; resolution.files_for(:injections) ;end
 
     def files_for(directory)
       [

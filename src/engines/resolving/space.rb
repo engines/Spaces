@@ -26,7 +26,7 @@ module Resolving
     end
 
     def save(model)
-      model.auxiliary_texts.map do |t|
+      model.auxiliary_files.map do |t|
         save_text(t)
         "#{t.emission_path}"
       end

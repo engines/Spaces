@@ -18,7 +18,11 @@ module Packing
     end
 
     delegate(
-      [:identifier, :has?, :images, :os_packages, :binding_descriptors] => :resolution,
+      [
+        :identifier, :has?,
+        :images, :os_packages, :binding_descriptors,
+        :division_scripts_for, :packing_script_file_names, :blueprint_scripts, :injections
+      ] => :resolution,
       post_processor_stanzas: :images
     )
 
@@ -41,30 +45,7 @@ module Packing
       [division_scripts, blueprint_scripts, injections].flatten
     end
 
-    def division_scripts
-      script_file_names.map do |t|
-        interpolating_class.new(origin: "#{Pathname.new(__FILE__).dirname}/#{t}", directory: :scripts, division: self)
-      end
-    end
-
-    def script_file_names; resolution.packing_script_file_names ;end
-
-    def blueprint_scripts; resolution.files_for(:scripts) ;end
-    def injections; resolution.files_for(:injections) ;end
-
-    def files_for(directory)
-      file_names_for(directory).map do |t|
-        interpolating_class.new(origin: t, directory: directory, division: self)
-      end
-    end
-
-    def file_names_for(directory)
-      Pathname.glob(directory_for(directory)).reject { |p| p.directory? }.map(&:to_s)
-    end
-
-    def directory_for(directory)
-      Pathname.new(Pathname.new(__FILE__).dirname).join("#{directory}/**/*")
-    end
+    def division_scripts; division_scripts_for(packing_script_file_names) ;end
 
     def initialize(resolution)
       self.struct = struct_for(resolution.emit.images)
