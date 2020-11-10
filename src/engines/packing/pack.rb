@@ -21,7 +21,7 @@ module Packing
       [
         :identifier, :has?,
         :images, :os_packages, :binding_descriptors,
-        :division_scripts_for, :packing_script_file_names, :blueprint_scripts, :injections
+        :division_scripts_for, :packing_script_file_names, :blueprint_scripts, :overlays
       ] => :resolution,
       post_processor_stanzas: :images
     )
@@ -42,7 +42,7 @@ module Packing
     end
 
     def auxiliary_files
-      [division_scripts, blueprint_scripts, injections].flatten
+      [division_scripts, blueprint_scripts, overlays].flatten
     end
 
     def division_scripts; division_scripts_for(packing_script_file_names) ;end

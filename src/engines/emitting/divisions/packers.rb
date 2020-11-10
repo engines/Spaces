@@ -10,13 +10,13 @@ module Divisions
     end
 
     def packing_stanzas
-      [injection_stanza, scripts_stanza, os_packages.packing_stanzas].compact.flatten
+      [overlay_stanza, scripts_stanza, os_packages.packing_stanzas].compact.flatten
     end
 
-    def injection_stanza
+    def overlay_stanza
       {
         type: 'file',
-        source: 'injections',
+        source: 'overlays',
         destination: 'tmp/'
       }
     end

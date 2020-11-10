@@ -30,7 +30,7 @@ module Resolving
     end
 
     def auxiliary_files
-      [files_for(:injections)].flatten
+      [files_for(:overlays)].flatten
     end
 
 
@@ -41,7 +41,7 @@ module Resolving
     end
 
     def blueprint_scripts; resolution.files_for(:scripts) ;end
-    def injections; resolution.files_for(:injections) ;end
+    def overlays; resolution.files_for(:overlays) ;end
 
     def files_for(directory)
       [
