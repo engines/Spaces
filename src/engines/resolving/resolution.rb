@@ -31,7 +31,9 @@ module Resolving
     end
 
     def auxiliary_files
-      auxiliary_directories.map { |af| content_in(af) }.flatten
+      [itself, embeds].flatten.reverse.map do |r|
+        r.auxiliary_directories.map { |af| content_in(af) }.flatten
+      end.flatten
     end
 
     def content_in(directory)
