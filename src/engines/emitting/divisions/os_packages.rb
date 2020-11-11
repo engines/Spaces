@@ -22,7 +22,7 @@ module Divisions
 
     def packing_script_file_name_map
       keys.inject({}) do |m, k|
-        m.tap { m[k] = "packing/scripts/system/package-#{k}" }
+        m.tap { m[k] = "packing/scripts/packages-#{k}" }
       end
     end
 
