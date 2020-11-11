@@ -8,6 +8,7 @@ module Resolving
 
     delegate(
       resolutions: :universe,
+      blueprints: :resolutions,
       bindings_class: :klass
     )
 
@@ -30,23 +31,13 @@ module Resolving
     end
 
     def auxiliary_files
-      [files_for(:overlays)].flatten
+      auxiliary_directories.map { |af| content_in(af) }.flatten
     end
 
-
-    def division_scripts_for(file_names)
-      file_names.map do |t|
-        interpolating_class.new(origin: "#{Pathname.new(__FILE__).dirname}/#{t}", directory: :scripts, division: self)
-      end
-    end
-
-    def blueprint_scripts; resolution.files_for(:scripts) ;end
-    def overlays; resolution.files_for(:overlays) ;end
-
-    def files_for(directory)
+    def content_in(directory)
       [
         resolutions.unresolved_names_for(directory),
-        blueprint_file_names_for(directory)
+        blueprints.file_names_for(directory, context_identifier)
       ].flatten.compact.map do |t|
         interpolating_class.new(origin: t, directory: directory, division: self)
       end
