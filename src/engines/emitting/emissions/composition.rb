@@ -2,6 +2,8 @@ module Emissions
   class Composition < ::Spaces::Thing
 
     class << self
+      def auxiliary_directories; [:packing] ;end
+
       def naming_map
         {
           anchor: :binding_anchor,
@@ -59,7 +61,7 @@ module Emissions
       end
     end
 
-    delegate([:divisions, :associative_divisions, :naming_map, :mandatory_keys] => :klass)
+    delegate([:auxiliary_directories, :divisions, :associative_divisions, :naming_map, :mandatory_keys] => :klass)
 
     def keys
       divisions.keys

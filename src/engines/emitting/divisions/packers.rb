@@ -1,22 +1,22 @@
 module Divisions
-  class Provisioners < ::Emissions::Division
-
-    delegate([:os_packages, :script_file_names] => :emission)
+  class Packers < ::Emissions::Division
 
     alias_method :pack, :emission
+
+    delegate([:os_packages, :script_file_names] => :pack)
 
     def emit
       packing_stanzas.map(&:to_h)
     end
 
     def packing_stanzas
-      [injection_stanza, os_packages.packing_stanzas, scripts_stanza].compact.flatten
+      [overlay_stanza, scripts_stanza, os_packages.packing_stanzas].compact.flatten
     end
 
-    def injection_stanza
+    def overlay_stanza
       {
         type: 'file',
-        source: 'injections',
+        source: 'overlays',
         destination: 'tmp/'
       }
     end

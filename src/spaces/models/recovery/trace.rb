@@ -7,6 +7,15 @@ module Recovery
       :witnesses,
       :verbosity
 
+    def warning
+      spout "\n[WARNING]#{'-' * 88}<<<<"
+      spout t.t
+      spout_trace
+      spout_error
+      spout_witnesses
+      spout "\n"
+    end
+
     def t(id = identifier); I18n.t(id, **witnesses) ;end
 
     def spout_trace
@@ -47,6 +56,8 @@ module Recovery
         'method_missing',
       ].map { |s| line.include?(s) }.include?(true)
     end
+
+    def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
 
     def initialize(args)
       p = args.partition { |k, v| k == :error }.map(&:to_h)
