@@ -10,13 +10,13 @@ module Divisions
     end
 
     def packing_stanzas
-      [overlay_stanza, scripts_stanza, os_packages.packing_stanzas].compact.flatten
+      [auxiliary_files_stanza].compact.flatten
     end
 
-    def overlay_stanza
+    def auxiliary_files_stanza
       {
         type: 'file',
-        source: 'overlays',
+        source: pack.resolution.resolutions.file_path_for(:packing, context_identifier),
         destination: 'tmp/'
       }
     end
