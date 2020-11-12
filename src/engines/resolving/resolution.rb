@@ -8,6 +8,7 @@ module Resolving
 
     delegate(
       resolutions: :universe,
+      blueprints: :resolutions,
       bindings_class: :klass
     )
 
@@ -29,17 +30,23 @@ module Resolving
       "#{identifier}.#{domain.name}"
     end
 
-    def auxiliary_texts
-      [files_for(:injections)].flatten
+    def auxiliary_files
+      [itself, embeds].flatten.reverse.map do |r|
+        r.auxiliary_directories.map { |af| content_in(af) }.flatten
+      end.flatten
     end
 
-    def files_for(directory)
+    def content_in(directory)
       [
         resolutions.unresolved_names_for(directory),
-        blueprint_file_names_for(directory)
+        blueprints.file_names_for(directory, context_identifier)
       ].flatten.compact.map do |t|
         interpolating_class.new(origin: t, directory: directory, division: self)
       end
+    end
+
+    def packing_script_file_names
+      divisions.map(&:packing_script_file_names).flatten
     end
 
     def division_map

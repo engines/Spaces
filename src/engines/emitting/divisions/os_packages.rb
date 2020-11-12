@@ -3,20 +3,27 @@ module Divisions
 
     def embed(other)
       tap do
-        struct.adds = [struct.adds, other.struct.adds].flatten.uniq
+        keys.each do |k|
+          struct[k] = [struct[k], other.struct[k]].flatten.uniq
+        end
       end
     end
 
     def packing_stanzas
-      keys.map { |k| packing_stanza_for(k) }
-    end
-
-    def packing_stanza_for(key)
       {
         type: 'shell',
-        environment_vars: "BLUEPRINT_PACKAGE_#{key.upcase}='#{send(key)&.join(',')}'",
-        scripts: "scripts/shell/package-#{key}"
+        scripts: packing_script_file_names
       }
+    end
+
+    def packing_script_file_names
+      packing_script_file_name_map.values
+    end
+
+    def packing_script_file_name_map
+      keys.inject({}) do |m, k|
+        m.tap { m[k] = "packing/scripts/packages-#{k}" }
+      end
     end
 
   end

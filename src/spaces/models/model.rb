@@ -7,7 +7,10 @@ module Spaces
       def universe; @universe ||= Universe.new ;end
     end
 
+    delegate(universe: :klass)
+
     def file_name; klass.qualifier ;end
+    def subpath; end
     def uniqueness; [klass.name, identifier] ;end
 
     def namespaced_name(namespace, symbol)

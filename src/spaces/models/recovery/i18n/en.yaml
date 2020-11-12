@@ -15,7 +15,7 @@ en:
         Assuming this is correct; returning an empty Array
 
     engines::packing::pack/auxiliary_texts:
-      engines::packing::pack/nominated_scripts: |
+      engines::packing::pack/division_scripts: |
         There are no images given in the blueprint for '%{identifier}'.
         So there's nothing to pack.
 

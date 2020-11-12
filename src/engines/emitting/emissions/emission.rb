@@ -12,8 +12,8 @@ module Emissions
     relation_accessor :predecessor
 
     delegate(
-      [:universe, :composition, :interpolating_class] => :klass,
-      blueprints: :universe
+      [:composition, :interpolating_class] => :klass,
+      auxiliary_directories: :composition
     )
 
     alias_method :emission, :itself
@@ -80,10 +80,6 @@ module Emissions
 
     def descriptors_structs_for(division_identifier)
       (struct[division_identifier] || []).map { |d| d[:descriptor] }.compact
-    end
-
-    def blueprint_file_names_for(directory)
-      blueprints.file_names_for(directory, context_identifier)
     end
 
     def embeds; [] ;end

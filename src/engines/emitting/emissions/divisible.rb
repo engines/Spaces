@@ -36,6 +36,10 @@ module Emissions
 
     def emit; all&.map(&:emit) || super ;end
 
+    def packing_script_file_names
+      all.map(&:packing_script_file_names).flatten.uniq
+    end
+
     def initialize(struct: nil, emission: nil, label: nil)
       check_subdivision_class
       super
