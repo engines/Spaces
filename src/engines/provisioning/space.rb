@@ -1,5 +1,5 @@
 module Provisioning
-  class Space < ::Emissions::Space
+  class Space < ::Spaces::Space
 
     class << self
       def default_model_class
@@ -7,7 +7,7 @@ module Provisioning
       end
     end
 
-    delegate(arenas: :universe)
+    delegate([:arenas, :resolutions] => :universe)
 
     def identifiers(arena_identifier = '*')
       Pathname.glob("#{path}/#{arena_identifier}/*").map { |p| p.to_s.split('/').last(2).join('/') }
@@ -27,6 +27,14 @@ module Provisioning
       anchor_resolutions_for(model.resolution).map do |r|
         default_model_class.new(resolution: r, arena: model.arena)
       end
+    end
+
+    def anchor_resolutions_for(resolution)
+      unique_anchor_resolutions_for(resolution).map { |d| resolutions.by(d.identifier) }
+    end
+
+    def unique_anchor_resolutions_for(resolution)
+      resolution.binding_descriptors&.uniq(&:uniqueness) || []
     end
 
   end
