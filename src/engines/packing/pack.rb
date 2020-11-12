@@ -18,7 +18,7 @@ module Packing
     end
 
     delegate(
-      [:identifier, :has?, :images, :os_packages, :binding_descriptors, :auxiliary_files] => :resolution,
+      [:identifier, :has?, :images, :os_packages, :binding_descriptors, :auxiliary_content] => :resolution,
       post_processor_stanzas: :images
     )
 

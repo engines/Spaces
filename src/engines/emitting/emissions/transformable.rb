@@ -1,9 +1,14 @@
 module Emissions
   class Transformable < ::Spaces::Model
 
+    class << self
+      def auxiliary_directories; [:packing] ;end
+    end
+
     delegate(
       identifier: :struct,
-      mandatory_keys: :composition
+      mandatory_keys: :composition,
+      auxiliary_directories: :klass
     )
 
     def complete?; true ;end

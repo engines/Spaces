@@ -11,10 +11,7 @@ module Emissions
 
     relation_accessor :predecessor
 
-    delegate(
-      [:composition, :interpolating_class] => :klass,
-      auxiliary_directories: :composition
-    )
+    delegate([:composition, :interpolating_class] => :klass)
 
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
