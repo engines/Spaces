@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+# If this isn't included build will hang forever if dpkg asks any questions.
+export DEBIAN_FRONTEND=noninteractive
+if test -f /tmp/packing/vars/remove_package_list
+ then
+ 	
+   if test -f /tmp/packing/vars/buildtime_package_list
+   	 then
+     ENGINES_PACKAGES="$ENGINES_PACKAGES `cat /tmp/packing/vars/buildtime_package_list`"
+   fi
+   ENGINES_PACKAGES=`cat /tmp/packing/vars/remove_package_list`
+   apt-get remove -y  $ENGINES_PACKAGES 
+fi
+

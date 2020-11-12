@@ -30,9 +30,17 @@ module Resolving
       "#{identifier}.#{domain.name}"
     end
 
-    def auxiliary_files
+    def auxiliary_content
+      [auxiliary_content_from_divisions, auxiliary_content_from_blueprints].flatten
+    end
+
+    def auxiliary_content_from_divisions
+      divisions.map { |d| d.auxiliary_content }.flatten.compact
+    end
+
+    def auxiliary_content_from_blueprints
       [itself, embeds].flatten.reverse.map do |r|
-        r.auxiliary_directories.map { |af| content_in(af) }.flatten
+        r.auxiliary_directories.map { |d| content_in(d) }.flatten
       end.flatten
     end
 
@@ -41,7 +49,7 @@ module Resolving
         resolutions.unresolved_names_for(directory),
         blueprints.file_names_for(directory, context_identifier)
       ].flatten.compact.map do |t|
-        interpolating_class.new(origin: t, directory: directory, division: self)
+        interpolating_class.new(origin: t, directory: directory, division: self) #TODO: self here is an emission, not a division!
       end
     end
 

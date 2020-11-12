@@ -18,8 +18,16 @@ module Emissions
 
     delegate(
       [:packing_script_file_names, :default_struct] => :klass,
-      context_identifier: :emission
+      [:context_identifier, :interpolating_class] => :emission
     )
+
+    def auxiliary_content
+      auxiliary_directories.map do |d|
+        auxiliary_paths_for(d).map do |p|
+          interpolating_class.new(origin: p, directory: d, division: self)
+        end
+      end.flatten
+    end
 
     def embedded
       emission.embeds.reduce(itself) do |r, e|
@@ -35,6 +43,10 @@ module Emissions
       Array.new(emission.count) do |i|
         block.call(i)
       end
+    end
+
+    def auxiliary_paths_for(symbol)
+      Pathname.glob("#{__dir__.split('emissions').first}divisions/#{qualifier}/#{symbol}/**/*").reject { |p| p.directory? }
     end
 
     def initialize(emission:, struct: nil, label: nil)
