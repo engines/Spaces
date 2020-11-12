@@ -71,14 +71,6 @@ module Spaces
 
     def path; "#{universe.path}/#{identifier}" ;end
 
-    def unresolved_names_for(directory)
-      Pathname.glob(unresolved_directory_for(directory)).reject { |p| p.directory? }.map(&:to_s)
-    end
-
-    def unresolved_directory_for(directory)
-      Pathname.new(Pathname.new(__FILE__).dirname).join("../../unresolved/#{directory}/**/*")
-    end
-
     def ensure_space; Pathname.new(path).mkpath ;end
     def ensure_space_for(model); Pathname.new(path_for(model)).mkpath ;end
 

@@ -45,10 +45,7 @@ module Resolving
     end
 
     def content_in(directory)
-      [
-        resolutions.unresolved_names_for(directory),
-        blueprints.file_names_for(directory, context_identifier)
-      ].flatten.compact.map do |t|
+      blueprints.file_names_for(directory, context_identifier).map do |t|
         interpolating_class.new(origin: t, directory: directory, division: self) #TODO: self here is an emission, not a division!
       end
     end
