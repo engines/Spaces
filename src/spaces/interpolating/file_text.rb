@@ -28,7 +28,7 @@ module Interpolating
 
     def initialize(origin:, directory:, division:)
       self.division = division
-      self.origin_file_name = origin
+      self.origin_file_name = origin.to_s
       self.directory = directory
     end
 
