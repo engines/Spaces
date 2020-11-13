@@ -79,6 +79,7 @@ module Emissions
       (struct[division_identifier] || []).map { |d| d[:descriptor] }.compact
     end
 
+    def maybe_with_embeds_in(division); division ;end
     def embeds; [] ;end
 
     def method_missing(m, *args, &block)

@@ -7,7 +7,7 @@ module Emissions
 
     class << self
       def prototype(emission:, label:)
-        new(emission: emission, label: label).embedded
+        emission.maybe_with_embeds_in(new(emission: emission, label: label))
       end
 
       def packing_script_file_names; [] ;end
@@ -29,7 +29,7 @@ module Emissions
       end.flatten
     end
 
-    def embedded
+    def with_embeds
       emission.embeds.reduce(itself) do |r, e|
         r.tap do |r|
           r.embed(e.send(qualifier)) if e.has?(qualifier)

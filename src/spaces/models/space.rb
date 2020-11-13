@@ -58,7 +58,7 @@ module Spaces
     end
 
     def file_names_for(directory, identifier)
-      Pathname.glob("#{file_path_for(directory, identifier)}/**/*").reject { |p| p.directory? }.map(&:to_s)
+      Pathname.glob("#{file_path_for(directory, identifier)}/**/*").reject { |p| p.directory? }
     end
 
     def file_path_for(directory, context_identifier)
