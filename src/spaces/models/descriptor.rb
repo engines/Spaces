@@ -3,6 +3,8 @@ require_relative 'model'
 module Spaces
   class Descriptor < Model
 
+    delegate(identifier: :struct)
+
     def root_identifier; repository.split('/').last.split('.').first if repository ;end
 
     def branch; struct.branch ||= 'main' ;end
