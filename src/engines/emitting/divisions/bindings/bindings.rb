@@ -12,7 +12,7 @@ module Divisions
     end
 
     def embeds
-      all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten
+      all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten.uniq
     end
 
     def embeds_under(embed)
