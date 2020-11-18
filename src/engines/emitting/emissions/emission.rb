@@ -11,10 +11,7 @@ module Emissions
 
     relation_accessor :predecessor
 
-    delegate(
-      [:composition, :interpolating_class] => :klass,
-      auxiliary_directories: :composition
-    )
+    delegate([:composition, :interpolating_class] => :klass)
 
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
@@ -82,6 +79,7 @@ module Emissions
       (struct[division_identifier] || []).map { |d| d[:descriptor] }.compact
     end
 
+    def maybe_with_embeds_in(division); division ;end
     def embeds; [] ;end
 
     def method_missing(m, *args, &block)

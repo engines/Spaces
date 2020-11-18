@@ -7,7 +7,7 @@ module Emissions
 
     class << self
       def prototype(emission:, label:)
-        new(emission: emission, label: label).embedded
+        emission.maybe_with_embeds_in(new(emission: emission, label: label))
       end
 
       def packing_script_file_names; [] ;end
@@ -18,10 +18,18 @@ module Emissions
 
     delegate(
       [:packing_script_file_names, :default_struct] => :klass,
-      context_identifier: :emission
+      [:context_identifier, :interpolating_class] => :emission
     )
 
-    def embedded
+    def auxiliary_content
+      auxiliary_directories.map do |d|
+        auxiliary_paths_for(d).map do |p|
+          interpolating_class.new(origin: p, directory: d, division: self)
+        end
+      end.flatten
+    end
+
+    def with_embeds
       emission.embeds.reduce(itself) do |r, e|
         r.tap do |r|
           r.embed(e.send(qualifier)) if e.has?(qualifier)
@@ -35,6 +43,10 @@ module Emissions
       Array.new(emission.count) do |i|
         block.call(i)
       end
+    end
+
+    def auxiliary_paths_for(symbol)
+      Pathname.glob("#{__dir__.split('emissions').first}divisions/#{qualifier}/#{symbol}/**/*").reject { |p| p.directory? }
     end
 
     def initialize(emission:, struct: nil, label: nil)
