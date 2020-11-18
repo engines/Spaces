@@ -1,5 +1,5 @@
 module Resolving
-  class Space < ::Emissions::Space
+  class Space < ::Spaces::Space
 
     class << self
       def default_model_class
@@ -8,11 +8,6 @@ module Resolving
     end
 
     delegate(blueprints: :universe)
-
-    def save(model)
-      anchor_resolutions_for(model.resolution)
-      super
-    end
 
     def by(identifier, klass = default_model_class)
       by_yaml(identifier, klass).tap do |m|
@@ -26,7 +21,7 @@ module Resolving
     end
 
     def save(model)
-      model.auxiliary_files.map do |t|
+      model.auxiliary_content.map do |t|
         save_text(t)
         "#{t.emission_path}"
       end
