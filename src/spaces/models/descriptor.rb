@@ -3,7 +3,6 @@ require_relative 'model'
 module Spaces
   class Descriptor < Model
 
-    def identifier; struct.identifier ||= root_identifier ;end
     def root_identifier; repository.split('/').last.split('.').first if repository ;end
 
     def branch; struct.branch ||= 'main' ;end
@@ -17,6 +16,7 @@ module Spaces
 
     def initialize(args)
       self.struct = args[:struct] || OpenStruct.new(args)
+      self.struct.identifier ||= root_identifier
     end
 
     def to_s
