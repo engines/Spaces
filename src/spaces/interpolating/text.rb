@@ -27,7 +27,7 @@ module Interpolating
     end
 
     def complete?
-      !resolved.include?(interpolation_marker)
+      !resolved.to_s.include?(interpolation_marker)
     end
 
     def immutables; splits(:even?) ;end

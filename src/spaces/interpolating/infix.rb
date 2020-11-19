@@ -4,14 +4,14 @@ module Interpolating
     relation_accessor :text
     attr_accessor :value
 
-    delegate([:division, :emission] => :text)
+    delegate([:division, :emission, :interpolation_marker] => :text)
 
     def resolved
       vs = ([:unqualified] + value.split('.')).last(2)
       collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
       warn(error: e, text: text, value: value)
-      "--->#{value}<---"
+      "#{interpolation_marker}#{value}#{interpolation_marker}"
     end
 
     def collaborate_with(name)
