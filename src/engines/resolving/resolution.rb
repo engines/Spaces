@@ -18,6 +18,10 @@ module Resolving
       super.tap { |m| m.identifier = struct.identifier }
     end
 
+    def complete?
+      all_complete?(divisions) && mandatory_divisions_present?
+    end
+
     def bindings
       @bindings ||= bindings_class.new(emission: self, label: :bindings)
     end
