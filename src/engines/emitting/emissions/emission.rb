@@ -18,10 +18,6 @@ module Emissions
 
     def emit; OpenStruct.new(to_h) ;end
 
-    def complete?
-      all_complete?(divisions) && mandatory_divisions_present?
-    end
-
     def incomplete_divisions
       divisions.reject(&:complete?)
     end

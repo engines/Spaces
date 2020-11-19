@@ -4,7 +4,7 @@ module Emissions
     def emit; resolved ;end
 
     def complete?
-      all_complete?(resolved_texts.values)
+      texts.values.map(&:complete?).all_true?
     end
 
     def resolved
@@ -16,7 +16,7 @@ module Emissions
     end
 
     def texts
-      struct.to_h.transform_values { |v| text_from(v) }
+      @texts ||= struct.to_h.transform_values { |v| text_from(v) }
     end
 
     def random(length); SecureRandom.hex(length.to_i) ;end
