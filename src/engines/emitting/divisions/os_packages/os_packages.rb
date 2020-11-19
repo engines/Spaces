@@ -2,9 +2,6 @@ module Divisions
   class OsPackages < ::Emissions::Division
 
     def embed(other)
-      pp '_' * 88
-      pp context_identifier
-      pp other.context_identifier
       tap do
         keys_including(other).each do |k|
           struct[k] = [struct[k], other.struct[k]].flatten.compact.uniq

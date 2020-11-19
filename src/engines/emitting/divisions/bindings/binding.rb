@@ -9,11 +9,11 @@ module Divisions
     def override_keys; overrides.to_h.keys ;end
 
     def resolved
-      @resolved ||= duplicate(struct).tap { |s| s.variables = variables }
+      @resolved ||= duplicate(struct).tap { |s| s.configuration = configuration }
     end
 
-    def variables
-      @variables ||= OpenStruct.new(resolved_texts)
+    def configuration
+      @configuration ||= OpenStruct.new(resolved_texts)
     end
 
     def texts
@@ -21,20 +21,20 @@ module Divisions
     end
 
     def overrides
-      default_variables.merge(struct_variables)
+      default_configuration.merge(struct_configuration)
     end
 
-    def default_variables
-      @default_variables ||=
+    def default_configuration
+      @default_configuration ||=
       if resolution.has?(:binding_anchor)
-        resolution.binding_anchor&.variables
+        resolution.binding_anchor&.struct
       end || OpenStruct.new
     end
 
-    def struct_variables; struct.variables || OpenStruct.new ;end
+    def struct_configuration; struct.configuration || OpenStruct.new ;end
 
     def method_missing(m, *args, &block)
-      override_keys&.include?(m) ? variables[m] : super
+      override_keys&.include?(m) ? configuration[m] : super
     end
 
     def respond_to_missing?(m, *)
