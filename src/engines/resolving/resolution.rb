@@ -46,7 +46,7 @@ module Resolving
 
     def content_in(directory)
       blueprints.file_names_for(directory, context_identifier).map do |t|
-        interpolating_class.new(origin: t, directory: directory, division: self) #TODO: self here is an emission, not a division!
+        interpolating_class.new(origin: t, directory: directory, transformable: self)
       end
     end
 

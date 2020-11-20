@@ -5,13 +5,13 @@ module Interpolating
       def interpolation_marker; '^^' ;end
     end
 
-    relation_accessor :division
+    relation_accessor :transformable
 
     attr_accessor :origin
 
     delegate(
-      emission: :division,
-      interpolation_marker: :klass
+      interpolation_marker: :klass,
+      context_identifier: :transformable
     )
 
     def resolved; @resolved ||= contains_interpolation? ? with_resolved_infixes : origin ;end
@@ -38,8 +38,8 @@ module Interpolating
     def infix_class; Infix ;end
     def to_s; origin ;end
 
-    def initialize(origin:, division:)
-      self.division = division
+    def initialize(origin:, transformable:)
+      self.transformable = transformable
       self.origin = origin
     end
 

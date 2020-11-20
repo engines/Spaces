@@ -26,7 +26,7 @@ module Emissions
     def auxiliary_content
       auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|
-          interpolating_class.new(origin: p, directory: d, division: self)
+          interpolating_class.new(origin: p, directory: d, transformable: self)
         end
       end.flatten
     end
