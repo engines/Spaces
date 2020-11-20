@@ -40,7 +40,6 @@ module Emissions
       has?(:scaling) ? scaling.count : 1
     end
 
-    def context_identifier; identifier ;end
 
     def division_map
       @division_map ||= keys.inject({}) do |m, k|
