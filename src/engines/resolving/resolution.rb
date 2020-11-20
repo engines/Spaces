@@ -30,10 +30,6 @@ module Resolving
       composition.divisions[key]&.prototype(emission: self, label: key)
     end
 
-    def qualified_domain_name
-      "#{identifier}.#{domain.name}"
-    end
-
     def auxiliary_content
       [auxiliary_content_from_divisions, auxiliary_content_from_blueprints].flatten
     end
