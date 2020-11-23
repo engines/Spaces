@@ -30,10 +30,6 @@ module Resolving
       composition.divisions[key]&.prototype(emission: self, label: key)
     end
 
-    def qualified_domain_name
-      "#{identifier}.#{domain.name}"
-    end
-
     def auxiliary_content
       [auxiliary_content_from_divisions, auxiliary_content_from_blueprints].flatten
     end
@@ -50,7 +46,7 @@ module Resolving
 
     def content_in(directory)
       blueprints.file_names_for(directory, context_identifier).map do |t|
-        interpolating_class.new(origin: t, directory: directory, division: self) #TODO: self here is an emission, not a division!
+        interpolating_class.new(origin: t, directory: directory, transformable: self)
       end
     end
 

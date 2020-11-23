@@ -18,13 +18,15 @@ module Emissions
 
     delegate(
       [:packing_script_file_names, :default_struct] => :klass,
-      [:context_identifier, :interpolating_class] => :emission
+      interpolating_class: :emission
     )
+
+    def context_identifier; emission.context_identifier ;end
 
     def auxiliary_content
       auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|
-          interpolating_class.new(origin: p, directory: d, division: self)
+          interpolating_class.new(origin: p, directory: d, transformable: self)
         end
       end.flatten
     end

@@ -12,7 +12,15 @@ module Divisions
     end
 
     def embeds
-      all.select(&:embed?)
+      all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten.uniq
+    end
+
+    def embeds_under(embed)
+      if (b = embed.blueprint).has?(:bindings)
+        b.bindings.embeds
+      else
+        []
+      end
     end
 
     def method_missing(m, *args, &block); named(m) || super ;end

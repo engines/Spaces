@@ -7,5 +7,9 @@ module Associations
       end
     end
 
+    def name; identifier ;end
+    def qualified_name; "#{context_identifier}.#{identifier}" ;end
+    
+    alias_method :fqdn, :qualified_name
   end
 end
