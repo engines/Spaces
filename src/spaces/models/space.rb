@@ -84,6 +84,7 @@ module Spaces
       model.tap do |m|
         Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
       end
+      model.identifier
     end
 
   end
