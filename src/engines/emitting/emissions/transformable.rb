@@ -6,12 +6,13 @@ module Emissions
     end
 
     delegate(
-      identifier: :struct,
       mandatory_keys: :composition,
       auxiliary_directories: :klass
     )
 
     def complete?; true ;end
+
+    def identifier; struct[:identifier] ;end
 
     def descriptor_class; ::Spaces::Descriptor ;end
 
