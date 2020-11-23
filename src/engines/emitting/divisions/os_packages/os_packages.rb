@@ -1,6 +1,8 @@
 module Divisions
   class OsPackages < ::Emissions::Division
 
+    delegate(resolutions: :universe)
+
     def embed(other)
       tap do
         keys_including(other).each do |k|
@@ -14,20 +16,19 @@ module Divisions
     end
 
     def packing_stanzas
+       keys.map { |k| packing_stanza_for(k) }
+    end
+
+    def packing_stanza_for(key)
       {
         type: 'shell',
-        scripts: packing_script_file_names
+        environment_vars: "BLUEPRINT_PACKAGE_#{key.upcase}=#{send(key)&.join(' ')}",
+        scripts: ["#{packing_script_path}/#{key}"]
       }
     end
 
-    def packing_script_file_names
-      packing_script_file_name_map.values
-    end
-
-    def packing_script_file_name_map
-      keys.inject({}) do |m, k|
-        m.tap { m[k] = "packing/scripts/packages-#{k}" }
-      end
+    def packing_script_path
+      resolutions.file_path_for("packing/scripts/#{qualifier}", context_identifier)
     end
 
   end
