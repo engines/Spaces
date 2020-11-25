@@ -9,18 +9,17 @@ module Interpolating
       emission: :transformable
     )
 
-    def resolved
-      amc = acceptable_method_chain_in_value
+    def complete?; has_resolution? || unresolvable? ;end
+    def has_resolution?; !resolved.to_s.include?(interpolation_marker) ;end
+    def unresolvable?; resolved == value ;end
 
-      collaborate_with(amc.first).send(*amc.last.split(/[()]+/))
-    rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
-      warn(error: e, text: text, value: value)
-      "#{interpolation_marker}#{value}#{interpolation_marker}"
-    end
+    def resolved; @resolved ||= _resolved ;end
 
     def acceptable_method_chain_in_value
-      ([:unqualified] + value.split('.')).last(2)
+      @amc ||= ([:unqualified] + value.split('.')).last(2)
     end
+
+    alias_method :amc, :acceptable_method_chain_in_value
 
     def collaborate_with(name)
       unless name == :unqualified
@@ -37,6 +36,19 @@ module Interpolating
     end
 
     def to_s; resolved ;end
+
+    protected
+
+    def _resolved
+      collaborate_with(amc.first).send(*amc.last.split(/[()]+/))
+    rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
+      warn(error: e, text: text, value: value)
+      if value.include?(interpolation_marker)
+        value
+      else
+        "#{interpolation_marker}#{value}#{interpolation_marker}"
+      end
+    end
 
   end
 end

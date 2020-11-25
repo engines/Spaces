@@ -19,9 +19,10 @@ module Interpolating
     alias_method :content, :resolved
 
     def with_resolved_infixes; immutables.zip(infixes_resolved).flatten.join ;end
+    def infixes_resolved; infixes.map { |i| resolved_for(i) } ;end
 
-    def infixes_resolved
-      infixes.map(&:resolved)
+    def resolved_for(infix)
+      infix.complete? ? infix.resolved : resolved_for(infix_for(infix.resolved))
     end
 
     def contains_interpolation?
