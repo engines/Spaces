@@ -31,9 +31,11 @@ module Interpolating
     end
 
     def immutables; splits(:even?) ;end
-    def infixes; splits(:odd?).map { |s| infix_class.new(value: s, text: self) } ;end
+    def infixes; splits(:odd?).map { |s| infix_for(s) } ;end
 
     def splits(method); origin.split(interpolation_marker).select.with_index { |_, i| i.send(method) } ;end
+
+    def infix_for(string); infix_class.new(value: string, text: self) ;end
 
     def infix_class; Infix ;end
     def to_s; origin ;end
