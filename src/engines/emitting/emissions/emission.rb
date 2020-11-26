@@ -40,7 +40,6 @@ module Emissions
       has?(:scaling) ? scaling.count : 1
     end
 
-
     def division_map
       @division_map ||= keys.inject({}) do |m, k|
         m.tap do
@@ -78,15 +77,13 @@ module Emissions
     def embeds; [] ;end
 
     def method_missing(m, *args, &block)
-      if division_keys.include?(m)
-        division_map[m.to_sym] || struct[m]
-      else
-        super
-      end
+      return division_map[m.to_sym] || struct[m] if division_keys.include?(m)
+      return emission.bindings.named(m) if (struct[:bindings] && emission.bindings.named(m))
+      super
     end
 
     def respond_to_missing?(m, *)
-      division_keys.include?(m) || super
+      division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
     end
 
   end
