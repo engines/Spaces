@@ -73,10 +73,26 @@ module Resolving
     end
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
-      self.blueprint = blueprint
-      self.struct = duplicate(struct) || blueprint&.struct || OpenStruct.new
+      unless blueprint
+        super(struct: struct)
+      else
+        self.blueprint = blueprint
+        self.struct = blueprint.struct
+        self.refresh!
+      end
+
       self.struct.identifier = identifier if identifier
     end
+
+    protected
+
+    def refresh!
+      self.emit!
+      self.reset_bindings!
+    end
+
+    def emit!; self.struct = emit ;end
+    def reset_bindings!; @bindings = nil ;end
 
   end
 end

@@ -40,7 +40,7 @@ module Packing
     def script_file_names; resolution.packing_script_file_names ;end
 
     def initialize(resolution)
-      self.struct = struct_for(resolution.emit.images)
+      self.struct = struct_for(resolution.images)
       self.struct.identifier = resolution.identifier
       self.resolution = resolution
     end

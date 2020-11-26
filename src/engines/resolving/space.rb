@@ -21,8 +21,9 @@ module Resolving
     end
 
     def save(model)
-      model.auxiliary_content.each { |t| save_text(t) }
-      super
+      super.tap do
+        model.auxiliary_content.each { |t| save_text(t) }
+      end
     end
 
   end

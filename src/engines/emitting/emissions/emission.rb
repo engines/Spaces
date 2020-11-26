@@ -79,7 +79,7 @@ module Emissions
 
     def method_missing(m, *args, &block)
       return division_map[m.to_sym] || struct[m] if division_keys.include?(m)
-      return emission.bindings.named(m) if (struct[:bindings] && emission.bindings.named(m))
+      return bindings.named(m) if (struct[:bindings] && bindings.named(m))
       super
     end
 
