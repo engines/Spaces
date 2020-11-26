@@ -22,10 +22,8 @@ module Emissions
     def random(length); SecureRandom.hex(length.to_i) ;end
 
     def text_from(value)
-      interpolating_class.new(origin: value, transformable: self)
+      Interpolating::Text.new(origin: value, transformable: self)
     end
-
-    def interpolating_class; Interpolating::Text ;end
 
   end
 end

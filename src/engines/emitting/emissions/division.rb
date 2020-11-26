@@ -17,8 +17,7 @@ module Emissions
     relation_accessor :emission
 
     delegate(
-      [:packing_script_file_names, :default_struct] => :klass,
-      interpolating_class: :emission
+      [:packing_script_file_names, :default_struct] => :klass
     )
 
     def context_identifier; emission.context_identifier ;end
@@ -26,7 +25,7 @@ module Emissions
     def auxiliary_content
       auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|
-          interpolating_class.new(origin: p, directory: d, transformable: self)
+          Interpolating::FileText.new(origin: p, directory: d, transformable: self)
         end
       end.flatten
     end

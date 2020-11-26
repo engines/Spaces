@@ -9,8 +9,8 @@ module Interpolating
       emission: :transformable
     )
 
-    def complete?; has_resolution? || unresolvable? ;end
-    def has_resolution?; !resolved.to_s.include?(interpolation_marker) ;end
+    def complete?; !more_to_resolve? && unresolvable? ;end
+    def more_to_resolve?; resolved.to_s.include?(interpolation_marker) ;end
     def unresolvable?; resolved == value ;end
 
     def resolved; @resolved ||= _resolved ;end
@@ -43,11 +43,7 @@ module Interpolating
       collaborate_with(amc.first).send(*amc.last.split(/[()]+/))
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
       warn(error: e, text: text, value: value)
-      if value.include?(interpolation_marker)
-        value
-      else
-        "#{interpolation_marker}#{value}#{interpolation_marker}"
-      end
+      value
     end
 
   end

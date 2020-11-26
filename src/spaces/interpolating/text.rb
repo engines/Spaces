@@ -2,6 +2,9 @@ module Interpolating
   class Text < ::Spaces::Model
 
     class << self
+      def infix_class; Infix ;end
+      def text_class; Text ;end
+
       def interpolation_marker; '^^' ;end
     end
 
@@ -10,7 +13,7 @@ module Interpolating
     attr_accessor :origin
 
     delegate(
-      interpolation_marker: :klass,
+      [:infix_class, :text_class, :interpolation_marker] => :klass,
       context_identifier: :transformable
     )
 
@@ -22,7 +25,7 @@ module Interpolating
     def infixes_resolved; infixes.map { |i| resolved_for(i) } ;end
 
     def resolved_for(infix)
-      infix.complete? ? infix.resolved : resolved_for(infix_for(infix.resolved))
+      infix.complete? ? infix.resolved : text_class.new(origin: infix.resolved, transformable: transformable)
     end
 
     def contains_interpolation?
@@ -42,7 +45,6 @@ module Interpolating
 
     def infix_for(string); infix_class.new(value: string, text: self) ;end
 
-    def infix_class; Infix ;end
     def to_s; origin ;end
 
     def initialize(origin:, transformable:)

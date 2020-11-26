@@ -6,12 +6,11 @@ module Emissions
     class << self
       def composition; @composition ||= composition_class.new ;end
       def composition_class; Composition ;end
-      def interpolating_class; Interpolating::FileText ;end
     end
 
     relation_accessor :predecessor
 
-    delegate([:composition, :interpolating_class] => :klass)
+    delegate(composition: :klass)
 
     alias_method :emission, :itself
     alias_method :has?, :respond_to?

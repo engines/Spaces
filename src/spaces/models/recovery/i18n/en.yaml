@@ -71,4 +71,4 @@ en:
 
     spaces::interpolating::infix/resolved:
       spaces::interpolating::infix/_resolved:
-        Unable to resolve text infix for %{value} in %{text}.
+        Unable to resolve text infix for ^^%{value}^^ in %{text}.

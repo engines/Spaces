@@ -14,10 +14,6 @@ module Resolving
 
     alias_accessor :blueprint, :predecessor
 
-    def emit
-      super.tap { |m| m.identifier = struct.identifier }
-    end
-
     def complete?
       all_complete?(divisions) && mandatory_divisions_present?
     end
@@ -46,7 +42,7 @@ module Resolving
 
     def content_in(directory)
       blueprints.file_names_for(directory, context_identifier).map do |t|
-        interpolating_class.new(origin: t, directory: directory, transformable: self)
+        Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
       end
     end
 
