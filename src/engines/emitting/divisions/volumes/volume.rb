@@ -1,6 +1,6 @@
 module Divisions
   class Volume < ::Emissions::Subdivision
-    include Emissions::Resolvable
+    include Emissions::DivisionResolvable
 
     alias_method :identifier, :context_identifier
 

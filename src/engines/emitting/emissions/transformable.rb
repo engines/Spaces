@@ -22,6 +22,8 @@ module Emissions
 
     def stanzas_for(symbol); _stanzas_for(symbol) ;end
 
+    def random(length); SecureRandom.hex(length.to_i) ;end
+
     protected
 
     def all_complete?(array)

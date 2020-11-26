@@ -1,5 +1,5 @@
 module Emissions
-  module Resolvable
+  module DivisionResolvable
 
     def emit; resolved ;end
 
@@ -18,8 +18,6 @@ module Emissions
     def texts
       @texts ||= struct.to_h.transform_values { |v| text_from(v) }
     end
-
-    def random(length); SecureRandom.hex(length.to_i) ;end
 
     def text_from(value)
       Interpolating::Text.new(origin: value, transformable: self)

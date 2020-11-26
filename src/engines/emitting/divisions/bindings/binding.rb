@@ -2,7 +2,7 @@ require 'resolv'
 
 module Divisions
   class Binding < ::Emissions::DescriptiveSubdivision
-    include Emissions::Resolvable
+    include Emissions::DivisionResolvable
 
     def embed?; struct.type == 'embed' ;end
 
