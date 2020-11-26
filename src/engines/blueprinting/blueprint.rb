@@ -24,7 +24,7 @@ module Blueprinting
     end
 
     def initialize(struct: nil, identifier: nil)
-      self.struct = duplicate(struct) || OpenStruct.new
+      super(struct: struct)
       self.struct.identifier = identifier if identifier
     end
 

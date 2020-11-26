@@ -10,9 +10,9 @@ module Arenas
     end
 
     def save(model)
-      super
-      _save(model, content: model.stanzas_content, as: :tf)
-      model.identifier
+      super.tap do
+        _save(model, content: model.stanzas_content, as: :tf)
+      end
     end
 
     def save_provisions(provisions)

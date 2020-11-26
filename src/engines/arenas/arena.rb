@@ -15,10 +15,6 @@ module Arenas
       [:arenas, :resolutions] => :universe
     )
 
-    def emit
-      super.tap { |m| m.identifier = struct.identifier }
-    end
-
     def stanzas
       [divisions, providers].flatten.map(&:arena_stanzas).flatten.compact
     end
@@ -51,7 +47,7 @@ module Arenas
     end
 
     def initialize(struct: nil, identifier: nil)
-      self.struct = duplicate(struct) || OpenStruct.new
+      super(struct: struct)
       self.struct.identifier = identifier if identifier
     end
 
