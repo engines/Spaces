@@ -21,11 +21,7 @@ module Resolving
     end
 
     def save(model)
-      model.auxiliary_content.map do |t|
-        save_text(t)
-        "#{t.emission_path}"
-      end
-
+      model.auxiliary_content.each { |t| save_text(t) }
       super
     end
 

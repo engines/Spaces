@@ -15,7 +15,11 @@ module Emissions
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
 
-    def emit; OpenStruct.new(to_h) ;end
+    def emit
+      OpenStruct.new(to_h).tap do |s|
+        s.identifier = struct.identifier
+      end
+    end
 
     def incomplete_divisions
       divisions.reject(&:complete?)

@@ -36,12 +36,12 @@ module Resolving
 
     def auxiliary_content_from_blueprints
       [itself, embeds].flatten.reverse.map do |r|
-        r.auxiliary_directories.map { |d| content_in(d) }.flatten
+        auxiliary_directories.map { |d| content_into(d, source: r) }.flatten
       end.flatten
     end
 
-    def content_in(directory)
-      blueprints.file_names_for(directory, context_identifier).map do |t|
+    def content_into(directory, source:)
+      blueprints.file_names_for(directory, source.context_identifier).map do |t|
         Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
       end
     end
@@ -74,7 +74,7 @@ module Resolving
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
       self.blueprint = blueprint
-      self.struct = duplicate(struct || blueprint&.struct) || OpenStruct.new
+      self.struct = duplicate(struct) || blueprint&.struct || OpenStruct.new
       self.struct.identifier = identifier if identifier
     end
 
