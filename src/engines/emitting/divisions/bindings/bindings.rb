@@ -13,9 +13,7 @@ module Divisions
       all.detect { |b| b.identifier == name.to_s }
     end
 
-    def resolutions
-      all.map(&:resolution)
-    end
+    def embedded_blueprints; embeds.map(&:blueprint) ;end
 
     def embeds
       all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten.uniq

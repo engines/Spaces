@@ -65,7 +65,7 @@ module Resolving
     def maybe_with_embeds_in(division); division.with_embeds ;end
 
     def embeds
-      struct.bindings ? bindings.embeds.map(&:resolution) : []
+      struct.bindings ? bindings.embedded_blueprints : []
     end
 
     def binding_descriptors
