@@ -3,7 +3,6 @@ module Interpolating
 
     class << self
       def infix_class; Infix ;end
-      def text_class; Text ;end
 
       def interpolation_marker; '^^' ;end
     end
@@ -22,15 +21,7 @@ module Interpolating
     alias_method :content, :resolved
 
     def with_resolved_infixes; immutables.zip(infixes_resolved).flatten.join ;end
-    def infixes_resolved; infixes.map { |i| resolved_for(i) } ;end
-
-    def resolved_for(infix)
-      infix.complete? ? infix.resolved : resolve_again_for(infix)
-    end
-
-    def resolve_again_for(infix)
-      text_class.new(origin: infix.resolved, transformable: transformable).resolved
-    end
+    def infixes_resolved; infixes.map(&:resolved) ;end
 
     def contains_interpolation?
       origin.include?(interpolation_marker)

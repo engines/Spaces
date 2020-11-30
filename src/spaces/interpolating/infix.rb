@@ -9,11 +9,21 @@ module Interpolating
       emission: :transformable
     )
 
-    def complete?; !more_to_resolve? || unresolvable? ;end
-    def more_to_resolve?; resolved.to_s.include?(interpolation_marker) ;end
-    def unresolvable?; resolved == value ;end
+    def resolved
+      @resolved ||= complete? ? resolved_once : resolved_again
+    end
 
-    def resolved; @resolved ||= _resolved ;end
+    def resolved_once
+      @resolved_once ||= _resolved
+    end
+
+    def resolved_again
+      Text.new(origin: resolved_once, transformable: transformable).resolved
+    end
+
+    def complete?; !more_to_resolve? || unresolvable? ;end
+    def more_to_resolve?; resolved_once.to_s.include?(interpolation_marker) ;end
+    def unresolvable?; resolved_once == value ;end
 
     def acceptable_method_chain_in_value
       @amc ||= ([:unqualified] + value.split('.')).last(2)
