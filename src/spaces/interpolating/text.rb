@@ -25,7 +25,11 @@ module Interpolating
     def infixes_resolved; infixes.map { |i| resolved_for(i) } ;end
 
     def resolved_for(infix)
-      infix.complete? ? infix.resolved : text_class.new(origin: infix.resolved, transformable: transformable)
+      infix.complete? ? infix.resolved : resolve_again_for(infix)
+    end
+
+    def resolve_again_for(infix)
+      text_class.new(origin: infix.resolved, transformable: transformable).resolved
     end
 
     def contains_interpolation?

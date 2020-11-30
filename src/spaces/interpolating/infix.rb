@@ -9,7 +9,7 @@ module Interpolating
       emission: :transformable
     )
 
-    def complete?; !more_to_resolve? && unresolvable? ;end
+    def complete?; !more_to_resolve? || unresolvable? ;end
     def more_to_resolve?; resolved.to_s.include?(interpolation_marker) ;end
     def unresolvable?; resolved == value ;end
 
