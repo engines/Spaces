@@ -6,7 +6,7 @@ module Packing
     end
 
     delegate(
-      [:identifier, :has?, :images, :os_packages, :binding_descriptors, :auxiliary_content] => :resolution,
+      [:identifier, :has?, :images, :system_packages, :packing, :binding_descriptors, :auxiliary_content] => :resolution,
       post_processor_stanzas: :images
     )
 
@@ -17,13 +17,7 @@ module Packing
     def export; struct_for(images.all.map(&:export)) ;end
     def emit; super.merge(struct_for(images.all.map(&:commit))) ;end
 
-    def struct_for(images)
-      OpenStruct.new(
-        builders: images&.tap do |i|
-          i.each { |s| s.delete_field(:scripts) if s.dig(:scripts) }
-        end
-      )
-    end
+    def struct_for(images); OpenStruct.new(builders: images) ;end
 
     def script_file_names; resolution.packing_script_file_names ;end
 
