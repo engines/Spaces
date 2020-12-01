@@ -11,4 +11,4 @@
 # If this isn't included build will hang forever if dpkg asks any questions.
 export DEBIAN_FRONTEND=noninteractive
 
-[ -n "$BLUEPRINT_PACKAGE_ADDS" ] && apt-get -o Dpkg::Options::=--force-confnew  install -y --no-install-recommends $BLUEPRINT_PACKAGE_ADDS
+[ -n "$SYSTEM_PACKAGE_ADDS" ] && apt-get -o Dpkg::Options::=--force-confnew  install -y --no-install-recommends $SYSTEM_PACKAGE_ADDS

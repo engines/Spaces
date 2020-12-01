@@ -12,16 +12,17 @@ module Emissions
 
       def division_classes
         [
+          Divisions::Providers,
           Divisions::Bindings,
           Divisions::Anchor,
           Divisions::Configuration,
           Divisions::Scaling,
-          Divisions::OsPackages,
+          Divisions::SystemPackages,
           Divisions::Nodules,
-          Divisions::Providers,
-          Divisions::Packages,
+          Divisions::OtherPackages,
           Divisions::Repositories,
           Divisions::Images,
+          Divisions::Packing,
           Divisions::Containers,
           Divisions::Volumes
         ]
