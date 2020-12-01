@@ -9,9 +9,5 @@ module Divisions
       }
     end
 
-    def packing_script_path
-      resolutions.file_path_for("packing/scripts/#{qualifier}", context_identifier)
-    end
-
   end
 end
