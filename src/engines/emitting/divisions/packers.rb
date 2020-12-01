@@ -5,7 +5,7 @@ module Divisions
 
     delegate(
       resolutions: :universe,
-      [:resolution, :os_packages] => :pack,
+      [:resolution, :system_packages, :packing] => :pack,
     )
 
     def emit
@@ -13,7 +13,7 @@ module Divisions
     end
 
     def packing_stanzas
-      [auxiliary_files_stanza, os_packages.packing_stanzas].compact.flatten
+      [auxiliary_files_stanza, system_packages.packing_stanzas, packing.packing_stanzas].compact.flatten
     end
 
     def auxiliary_files_stanza
@@ -24,9 +24,9 @@ module Divisions
       }
     end
 
-    def os_packages_stanzas
-      if pack.has?(:os_packages)
-        pack.os_packages.packing_stanzas
+    def system_packages_stanzas
+      if pack.has?(:system_packages)
+        pack.system_packages.packing_stanzas
       end
     end
 
