@@ -17,10 +17,10 @@ module Divisions
       end
     end
 
-    def packing_stanza_for(key)
+    def packing_stanza_for(precedence)
       {
         type: 'shell',
-        scripts: ["#{packing_script_path}/#{key}"]
+        scripts: send(precedence).map { |s| "#{packing_script_path}/#{precedence}/#{s}" }
       }
     end
 
