@@ -6,7 +6,7 @@ module Emissions
     def embed(other)
       tap do
         keys_including(other).each do |k|
-          struct[k] = [struct[k], other.struct[k]].flatten.compact.uniq
+          struct[k] = [other.struct[k], struct[k]].flatten.compact.uniq
         end
       end
     end
