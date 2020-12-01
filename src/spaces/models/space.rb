@@ -35,13 +35,13 @@ module Spaces
     end
 
     def save_yaml(model)
-      _save(model, content: model.emit.to_yaml, as: :yaml)
+      _save(model, content: model.to_yaml, as: :yaml)
     end
 
     alias_method :save, :save_yaml
 
     def save_json(model)
-      _save(model, content: model.emit.to_h_deep.to_json, as: :json)
+      _save(model, content: model.to_h_deep.to_json, as: :json)
     end
 
     def delete(model)
@@ -84,6 +84,7 @@ module Spaces
       model.tap do |m|
         Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
       end
+      model.identifier
     end
 
   end

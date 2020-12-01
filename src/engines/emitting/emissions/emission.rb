@@ -6,17 +6,18 @@ module Emissions
     class << self
       def composition; @composition ||= composition_class.new ;end
       def composition_class; Composition ;end
-      def interpolating_class; Interpolating::FileText ;end
     end
 
     relation_accessor :predecessor
 
-    delegate([:composition, :interpolating_class] => :klass)
+    delegate(composition: :klass)
 
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
 
-    def emit; OpenStruct.new(to_h) ;end
+    def emit
+      OpenStruct.new(to_h).tap { |e| e.identifier = struct.identifier }
+    end
 
     def incomplete_divisions
       divisions.reject(&:complete?)
@@ -39,7 +40,6 @@ module Emissions
     def count
       has?(:scaling) ? scaling.count : 1
     end
-
 
     def division_map
       @division_map ||= keys.inject({}) do |m, k|
@@ -78,15 +78,13 @@ module Emissions
     def embeds; [] ;end
 
     def method_missing(m, *args, &block)
-      if division_keys.include?(m)
-        division_map[m.to_sym] || struct[m]
-      else
-        super
-      end
+      return division_map[m.to_sym] || struct[m] if division_keys.include?(m)
+      return bindings.named(m) if (struct[:bindings] && bindings.named(m))
+      super
     end
 
     def respond_to_missing?(m, *)
-      division_keys.include?(m) || super
+      division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
     end
 
   end

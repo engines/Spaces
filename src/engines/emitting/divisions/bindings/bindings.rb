@@ -3,13 +3,17 @@ module Divisions
 
     def complete?; all_complete?(all) ;end
 
+    def embed(other)
+      tap do
+        self.struct = [struct, other.struct].flatten.uniq(&:descriptor)
+      end
+    end
+
     def named(name)
       all.detect { |b| b.identifier == name.to_s }
     end
 
-    def resolutions
-      all.map(&:resolution)
-    end
+    def embedded_blueprints; embeds.map(&:blueprint) ;end
 
     def embeds
       all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten.uniq

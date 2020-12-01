@@ -46,7 +46,7 @@ module Spaces
     def to_s; identifier ;end
 
     def initialize(struct: nil)
-      self.struct = struct
+      self.struct = duplicate(struct) || OpenStruct.new
     end
 
     def method_missing(m, *args, &block)

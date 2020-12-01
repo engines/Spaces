@@ -14,10 +14,6 @@ module Resolving
 
     alias_accessor :blueprint, :predecessor
 
-    def emit
-      super.tap { |m| m.identifier = struct.identifier }
-    end
-
     def complete?
       all_complete?(divisions) && mandatory_divisions_present?
     end
@@ -40,13 +36,13 @@ module Resolving
 
     def auxiliary_content_from_blueprints
       [itself, embeds].flatten.reverse.map do |r|
-        r.auxiliary_directories.map { |d| content_in(d) }.flatten
+        auxiliary_directories.map { |d| content_into(d, source: r) }.flatten
       end.flatten
     end
 
-    def content_in(directory)
-      blueprints.file_names_for(directory, context_identifier).map do |t|
-        interpolating_class.new(origin: t, directory: directory, transformable: self)
+    def content_into(directory, source:)
+      blueprints.file_names_for(directory, source.context_identifier).map do |t|
+        Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
       end
     end
 
@@ -69,7 +65,7 @@ module Resolving
     def maybe_with_embeds_in(division); division.with_embeds ;end
 
     def embeds
-      struct.bindings ? bindings.embeds.map(&:resolution) : []
+      struct.bindings ? bindings.embedded_blueprints : []
     end
 
     def binding_descriptors
@@ -77,10 +73,26 @@ module Resolving
     end
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
-      self.blueprint = blueprint
-      self.struct = duplicate(struct || blueprint&.struct) || OpenStruct.new
+      unless blueprint
+        super(struct: struct)
+      else
+        self.blueprint = blueprint
+        self.struct = blueprint.struct
+        self.refresh!
+      end
+
       self.struct.identifier = identifier if identifier
     end
+
+    protected
+
+    def refresh!
+      self.emit!
+      self.reset_bindings!
+    end
+
+    def emit!; self.struct = emit ;end
+    def reset_bindings!; @bindings = nil ;end
 
   end
 end

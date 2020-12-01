@@ -3,7 +3,7 @@ module Divisions
 
     def embed(other)
       tap do
-        self.struct = [struct, other.struct].flatten.uniq
+        self.struct = [struct, other.struct].flatten.uniq(&:source)
       end
     end
 

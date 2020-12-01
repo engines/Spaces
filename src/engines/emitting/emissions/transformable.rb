@@ -6,12 +6,13 @@ module Emissions
     end
 
     delegate(
-      identifier: :struct,
       mandatory_keys: :composition,
       auxiliary_directories: :klass
     )
 
     def complete?; true ;end
+
+    def identifier; struct[:identifier] ;end
 
     def descriptor_class; ::Spaces::Descriptor ;end
 
@@ -20,6 +21,8 @@ module Emissions
     def provisioning_stanzas; stanzas_for(:provisioning) ;end
 
     def stanzas_for(symbol); _stanzas_for(symbol) ;end
+
+    def random(length); SecureRandom.hex(length.to_i) ;end
 
     protected
 
