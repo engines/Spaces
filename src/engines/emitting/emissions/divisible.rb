@@ -18,7 +18,6 @@ module Emissions
     end
 
     def arena_stanzas; all.map(&:arena_stanzas) ;end
-    def packing_stanzas; all.map(&:packing_stanzas) ;end
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
     def all
@@ -35,10 +34,6 @@ module Emissions
     end
 
     def emit; all&.map(&:emit) || super ;end
-
-    def packing_script_file_names
-      all.map(&:packing_script_file_names).flatten.uniq
-    end
 
     def initialize(struct: nil, emission: nil, label: nil)
       check_subdivision_class

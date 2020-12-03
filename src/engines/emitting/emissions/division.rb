@@ -10,14 +10,13 @@ module Emissions
         emission.maybe_with_embeds_in(new(emission: emission, label: label))
       end
 
-      def packing_script_file_names; [] ;end
       def default_struct; OpenStruct.new ;end
     end
 
     relation_accessor :emission
 
     delegate(
-      [:packing_script_file_names, :default_struct] => :klass
+      default_struct: :klass
     )
 
     def context_identifier; emission.context_identifier ;end

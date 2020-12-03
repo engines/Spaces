@@ -35,16 +35,6 @@ module Divisions
       'latest'
     end
 
-    def packing_script_file_names
-      if struct.scripts
-        scripts.to_h.reduce([]) do |m, v|
-          m << v.last.map { |l| "scripts/#{v.first}/#{l}" }
-        end.flatten
-      else
-        []
-      end
-    end
-
     def post_processor_stanzas; end
 
     def initialize(struct:, division:)

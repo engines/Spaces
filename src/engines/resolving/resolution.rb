@@ -46,9 +46,6 @@ module Resolving
       end
     end
 
-    def packing_script_file_names
-      divisions.map(&:packing_script_file_names).flatten
-    end
 
     def division_map
       @resolution_division_map ||= super.merge(
