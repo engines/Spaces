@@ -1,9 +1,7 @@
 module Divisions
-  class Packing < ::Emissions::KeyedDivision
+  class Packing < ::Emissions::PackingDivision
 
     class << self
-      def precedence; [:first, :early, :middle, :late, :last] ;end
-
       def script_choices(precedence)
         Pathname.glob("#{__dir__}/scripts/#{precedence}/*")
       end
