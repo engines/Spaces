@@ -4,8 +4,8 @@ module Divisions
     class << self
       def safety_overrides; {} ;end
 
-      def constant_for(struct:)
-        Module.const_get("/providers/#{struct.type}/image".camelize)
+      def constant_for(type)
+        Module.const_get("/providers/#{type}/image".camelize)
       end
     end
 
