@@ -10,9 +10,7 @@ module Spaces
     def branch; struct.branch ||= 'main' ;end
     def protocol; struct.protocol ||= extension ;end
     def git?; protocol == 'git' ;end
-    def extraction; struct.extraction ||= extension ;end
 
-    def extracted_path; struct.extracted_path ||= identifier ;end
     def basename; Pathname.new(repository).basename ;end
     def extension; repository&.split('.')&.last ;end
 

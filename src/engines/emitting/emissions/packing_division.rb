@@ -1,5 +1,7 @@
+require_relative 'divisible'
+
 module Emissions
-  class PackingDivision < Division
+  class PackingDivision < Divisible
 
     class << self
       def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end

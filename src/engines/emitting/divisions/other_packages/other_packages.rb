@@ -1,5 +1,5 @@
 module Divisions
-  class OtherPackages < ::Emissions::Divisible
+  class OtherPackages < ::Emissions::PackingDivision
 
   end
 end
