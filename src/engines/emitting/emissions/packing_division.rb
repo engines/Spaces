@@ -24,8 +24,12 @@ module Emissions
       by_precedence([other.keys, keys].flatten.uniq)
     end
 
-    def packing_script_path
-      resolutions.file_path_for("packing/scripts/#{qualifier}", context_identifier)
+    def packing_source_path
+      resolutions.file_path_for(:packing, context_identifier)
+    end
+
+    def temporary_packing_path
+      "tmp/scripts/#{qualifier}"
     end
 
     def keys; by_precedence(super) ;end

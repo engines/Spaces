@@ -5,7 +5,7 @@ module Divisions
       {
         type: 'shell',
         environment_vars: "SYSTEM_PACKAGE_#{key.upcase}=#{send(key)&.join(' ')}",
-        scripts: ["#{packing_script_path}/#{key}"]
+        scripts: ["#{temporary_packing_path}/#{key}"]
       }
     end
 

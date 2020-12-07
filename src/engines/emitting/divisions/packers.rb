@@ -32,7 +32,7 @@ module Divisions
     def auxiliary_files_stanza
       {
         type: 'file',
-        source: resolutions.file_path_for(:packing, context_identifier),
+        source: packing_source_path,
         destination: 'tmp/'
       }
     end
