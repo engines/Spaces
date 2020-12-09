@@ -19,6 +19,10 @@ module Emissions
       default_struct: :klass
     )
 
+    def packing_division?
+      klass.ancestors.include?(::Packing::Division)
+    end
+
     def context_identifier; emission.context_identifier ;end
 
     def auxiliary_content
@@ -46,7 +50,11 @@ module Emissions
     end
 
     def auxiliary_paths_for(symbol)
-      Pathname.glob("#{__dir__.split('emissions').first}divisions/#{qualifier}/#{symbol}/**/*").reject { |p| p.directory? }
+      Pathname.glob("#{auxiliary_path}/#{symbol}/**/*").reject { |p| p.directory? }
+    end
+
+    def auxiliary_path
+      Pathname.new("#{__dir__.split('emissions').first}blueprinting/divisions/#{qualifier}")
     end
 
     def initialize(emission:, struct: nil, label: nil)

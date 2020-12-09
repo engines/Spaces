@@ -1,5 +1,8 @@
+require_relative 'division'
+
 module Divisions
-  class Packers < ::Emissions::PackingDivision
+  class Packers < ::Emissions::Division
+    include ::Packing::Division
 
     alias_method :pack, :emission
 

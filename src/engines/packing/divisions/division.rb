@@ -1,20 +1,13 @@
-require_relative 'divisible'
+module Packing
+  module Division
 
-module Emissions
-  class PackingDivision < Divisible
+    def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
 
-    class << self
-      def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
-
-      def precedence_midpoint; precedence.count / 2 ;end
-    end
-
-    delegate(
-      [:precedence, :precedence_midpoint] => :klass,
-      resolutions: :universe
-    )
+    def precedence_midpoint; precedence.count / 2 ;end
 
     def embed(other)
+      return other if struct.empty?
+
       tap do
         keys_including(other).each do |k|
           struct[k] = [other.struct[k], struct[k]].flatten.compact.uniq
