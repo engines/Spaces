@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+wget $repository -o /tmp/package
+cd /tmp
+$extraction /tmp/package
+
+mv /tmp/$extracted_path $destination

@@ -17,7 +17,7 @@ module Packing
     def export; struct_for(images.all.map(&:export)) ;end
     def emit; super.merge(struct_for(images.all.map(&:commit))) ;end
 
-    def packers; division_map['provisioners'] ;end
+    def packers; provisioners ;end
 
     def struct_for(images); OpenStruct.new(builders: images) ;end
 

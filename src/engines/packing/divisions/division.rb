@@ -1,18 +1,13 @@
-module Emissions
-  class PackingDivision < Division
+module Packing
+  module Division
 
-    class << self
-      def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
+    def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
 
-      def precedence_midpoint; precedence.count / 2 ;end
-    end
-
-    delegate(
-      [:precedence, :precedence_midpoint] => :klass,
-      resolutions: :universe
-    )
+    def precedence_midpoint; precedence.count / 2 ;end
 
     def embed(other)
+      return other if struct.empty?
+
       tap do
         keys_including(other).each do |k|
           struct[k] = [other.struct[k], struct[k]].flatten.compact.uniq
