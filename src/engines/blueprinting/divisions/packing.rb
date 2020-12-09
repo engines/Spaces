@@ -1,5 +1,5 @@
 module Divisions
-  class Packing < ::Emissions::PackingDivision
+  class Packing < ::Emissions::Division
 
     class << self
       def script_choices(precedence)

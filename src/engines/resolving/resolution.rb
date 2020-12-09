@@ -46,9 +46,7 @@ module Resolving
       end
     end
 
-    def packing_divisions
-      divisions.select { |d| d.class.ancestors.include?(::Emissions::PackingDivision) }
-    end
+    def packing_divisions; divisions.select { |d| d.packing_division? } ;end
 
     def division_map
       @resolution_division_map ||= super.merge(

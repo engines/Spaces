@@ -1,5 +1,6 @@
 module Divisions
-  class Nodules < ::Emissions::PackingDivision
+  class Nodules < ::Emissions::Division
+    include ::Packing::Division
 
     class << self
       def subdivision_class; NoduleArray ;end
