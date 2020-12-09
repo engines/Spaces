@@ -4,12 +4,12 @@ module Emissions
   class Subdivision < Division
 
     class << self
-      def prototype(struct:, division:)
-        constant_for(struct: struct).new(struct: struct, division: division)
+      def prototype(type: nil, struct:, division:)
+        constant_for(type || struct.type).new(struct: struct, division: division)
       end
 
-      def constant_for(struct:)
-        Module.const_get("/providers/#{struct.type}".camelize)
+      def constant_for(type)
+        Module.const_get("/providers/#{type}".camelize)
       end
     end
 

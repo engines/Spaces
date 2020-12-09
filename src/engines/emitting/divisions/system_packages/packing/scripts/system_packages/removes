@@ -3,4 +3,4 @@
 # If this isn't included build will hang forever if dpkg asks any questions.
 export DEBIAN_FRONTEND=noninteractive
 
-[ -n "$BLUEPRINT_PACKAGE_REMOVES" ] && apt-get purge -y --autoremove $BLUEPRINT_PACKAGE_REMOVES
+[ -n "$SYSTEM_PACKAGE_REMOVES" ] && apt-get purge -y --autoremove $SYSTEM_PACKAGE_REMOVES

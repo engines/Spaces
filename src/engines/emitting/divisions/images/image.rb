@@ -4,8 +4,8 @@ module Divisions
     class << self
       def safety_overrides; {} ;end
 
-      def constant_for(struct:)
-        Module.const_get("/providers/#{struct.type}/image".camelize)
+      def constant_for(type)
+        Module.const_get("/providers/#{type}/image".camelize)
       end
     end
 
@@ -33,16 +33,6 @@ module Divisions
 
     def default_tag
       'latest'
-    end
-
-    def packing_script_file_names
-      if struct.scripts
-        scripts.to_h.reduce([]) do |m, v|
-          m << v.last.map { |l| "scripts/#{v.first}/#{l}" }
-        end.flatten
-      else
-        []
-      end
     end
 
     def post_processor_stanzas; end

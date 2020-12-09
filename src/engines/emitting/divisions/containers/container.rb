@@ -2,8 +2,8 @@ module Divisions
   class Container < ::Emissions::Subdivision
 
     class << self
-      def constant_for(struct:)
-        Module.const_get("/providers/#{struct.type}/container".camelize)
+      def constant_for(type)
+        Module.const_get("/providers/#{type}/container".camelize)
       end
     end
 

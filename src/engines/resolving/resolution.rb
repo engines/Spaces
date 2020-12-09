@@ -46,8 +46,8 @@ module Resolving
       end
     end
 
-    def packing_script_file_names
-      divisions.map(&:packing_script_file_names).flatten
+    def packing_divisions
+      divisions.select { |d| d.class.ancestors.include?(::Emissions::PackingDivision) }
     end
 
     def division_map

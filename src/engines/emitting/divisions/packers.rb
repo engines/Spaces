@@ -1,11 +1,12 @@
 module Divisions
-  class Packers < ::Emissions::Division
+  class Packers < ::Emissions::PackingDivision
 
     alias_method :pack, :emission
 
     delegate(
       resolutions: :universe,
-      [:resolution, :os_packages] => :pack,
+      resolution: :pack,
+      packing_divisions: :resolution
     )
 
     def emit
@@ -13,37 +14,27 @@ module Divisions
     end
 
     def packing_stanzas
-      [auxiliary_files_stanza, os_packages.packing_stanzas].compact.flatten
+      [auxiliary_files_stanza, precedential_stanzas]
+        .compact.flatten
     end
+
+    def precedential_stanzas
+      complete_precedence.map { |p| all_stanzas_for(p) }
+    end
+
+    def all_stanzas_for(precedence)
+      packing_divisions.map { |d| d.packing_stanza_for(precedence) if d.respond_to?(precedence) }
+        .compact.flatten
+    end
+
+    def complete_precedence; by_precedence(packing_divisions.map(&:keys).flatten.uniq) ;end
 
     def auxiliary_files_stanza
       {
         type: 'file',
-        source: resolutions.file_path_for(:packing, context_identifier),
+        source: packing_source_path,
         destination: 'tmp/'
       }
-    end
-
-    def os_packages_stanzas
-      if pack.has?(:os_packages)
-        pack.os_packages.packing_stanzas
-      end
-    end
-
-    def scripts_stanza
-      if script_file_names.any?
-        [
-          {
-            type: 'file',
-            source: 'scripts/',
-            destination: 'tmp'
-          },
-          {
-            type: 'shell',
-            scripts: script_file_names
-          }
-        ]
-      end
     end
 
   end
