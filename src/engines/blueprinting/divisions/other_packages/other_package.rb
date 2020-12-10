@@ -2,7 +2,7 @@ module Divisions
   class OtherPackage < ::Emissions::Subdivision
 
     delegate(
-      [:branch, :repository, :extension, :destination_path, :git?] => :descriptor
+      [:branch, :repository, :extension, :git?] => :descriptor
     )
 
     def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end
@@ -21,7 +21,7 @@ module Divisions
 
     def environment_vars
       [:repository, :extraction, :extracted_path, :destination].map do |v|
-        "#{v}=#{send(v)}"
+        "#{v}=#{send(v) if respond_to?(v)}"
       end
     end
 
