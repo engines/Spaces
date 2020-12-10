@@ -35,13 +35,13 @@ module Spaces
     end
 
     def save_yaml(model)
-      _save(model, content: model.emit.to_yaml, as: :yaml)
+      _save(model, content: model.to_yaml, as: :yaml)
     end
 
     alias_method :save, :save_yaml
 
     def save_json(model)
-      _save(model, content: model.emit.to_h_deep.to_json, as: :json)
+      _save(model, content: model.to_h_deep.to_json, as: :json)
     end
 
     def delete(model)
@@ -58,7 +58,7 @@ module Spaces
     end
 
     def file_names_for(directory, identifier)
-      Pathname.glob("#{file_path_for(directory, identifier)}/**/*").reject { |p| p.directory? }.map(&:to_s)
+      Pathname.glob("#{file_path_for(directory, identifier)}/**/*").reject { |p| p.directory? }
     end
 
     def file_path_for(directory, context_identifier)
@@ -70,14 +70,6 @@ module Spaces
     end
 
     def path; "#{universe.path}/#{identifier}" ;end
-
-    def unresolved_names_for(directory)
-      Pathname.glob(unresolved_directory_for(directory)).reject { |p| p.directory? }.map(&:to_s)
-    end
-
-    def unresolved_directory_for(directory)
-      Pathname.new(Pathname.new(__FILE__).dirname).join("../../unresolved/#{directory}/**/*")
-    end
 
     def ensure_space; Pathname.new(path).mkpath ;end
     def ensure_space_for(model); Pathname.new(path_for(model)).mkpath ;end
@@ -92,6 +84,7 @@ module Spaces
       model.tap do |m|
         Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
       end
+      model.identifier
     end
 
   end

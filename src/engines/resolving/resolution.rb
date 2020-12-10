@@ -14,8 +14,8 @@ module Resolving
 
     alias_accessor :blueprint, :predecessor
 
-    def emit
-      super.tap { |m| m.identifier = struct.identifier }
+    def complete?
+      all_complete?(divisions) && mandatory_divisions_present?
     end
 
     def bindings
@@ -26,28 +26,27 @@ module Resolving
       composition.divisions[key]&.prototype(emission: self, label: key)
     end
 
-    def qualified_domain_name
-      "#{identifier}.#{domain.name}"
+    def auxiliary_content
+      [auxiliary_content_from_divisions, auxiliary_content_from_blueprints].flatten
     end
 
-    def auxiliary_files
+    def auxiliary_content_from_divisions
+      divisions.map { |d| d.auxiliary_content }.flatten.compact
+    end
+
+    def auxiliary_content_from_blueprints
       [itself, embeds].flatten.reverse.map do |r|
-        r.auxiliary_directories.map { |af| content_in(af) }.flatten
+        auxiliary_directories.map { |d| content_into(d, source: r) }.flatten
       end.flatten
     end
 
-    def content_in(directory)
-      [
-        resolutions.unresolved_names_for(directory),
-        blueprints.file_names_for(directory, context_identifier)
-      ].flatten.compact.map do |t|
-        interpolating_class.new(origin: t, directory: directory, division: self)
+    def content_into(directory, source:)
+      blueprints.file_names_for(directory, source.context_identifier).map do |t|
+        Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
       end
     end
 
-    def packing_script_file_names
-      divisions.map(&:packing_script_file_names).flatten
-    end
+    def packing_divisions; divisions.select { |d| d.packing_division? } ;end
 
     def division_map
       @resolution_division_map ||= super.merge(
@@ -61,8 +60,10 @@ module Resolving
       [super, embeds.map(&:keys)].flatten.uniq
     end
 
+    def maybe_with_embeds_in(division); division.with_embeds ;end
+
     def embeds
-      struct.bindings ? bindings.embeds.map(&:resolution) : []
+      struct.bindings ? bindings.embedded_blueprints : []
     end
 
     def binding_descriptors
@@ -70,10 +71,26 @@ module Resolving
     end
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
-      self.blueprint = blueprint
-      self.struct = duplicate(struct || blueprint&.struct) || OpenStruct.new
+      unless blueprint
+        super(struct: struct)
+      else
+        self.blueprint = blueprint
+        self.struct = blueprint.struct
+        self.refresh!
+      end
+
       self.struct.identifier = identifier if identifier
     end
+
+    protected
+
+    def refresh!
+      self.emit!
+      self.reset_bindings!
+    end
+
+    def emit!; self.struct = emit ;end
+    def reset_bindings!; @bindings = nil ;end
 
   end
 end

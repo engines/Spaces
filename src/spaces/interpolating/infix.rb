@@ -4,24 +4,39 @@ module Interpolating
     relation_accessor :text
     attr_accessor :value
 
-    delegate([:division, :emission] => :text)
+    delegate(
+      [:transformable, :interpolation_marker] => :text,
+      emission: :transformable
+    )
 
     def resolved
-      vs = ([:unqualified] + value.split('.')).last(2)
-      collaborate_with(vs.first).send(*vs.last.split(/[()]+/))
-    rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
-      warn(error: e, text: text, value: value)
-      "--->#{value}<---"
+      @resolved ||= complete? ? resolved_once : resolved_again
     end
+
+    def resolved_once
+      @resolved_once ||= _resolved
+    end
+
+    def resolved_again
+      Text.new(origin: resolved_once, transformable: transformable).resolved
+    end
+
+    def complete?; !more_to_resolve? || unresolvable? ;end
+    def more_to_resolve?; resolved_once.to_s.include?(interpolation_marker) ;end
+    def unresolvable?; resolved_once == value ;end
+
+    def acceptable_method_chain_in_value
+      @amc ||= ([:unqualified] + value.split('.')).last(2)
+    end
+
+    alias_method :amc, :acceptable_method_chain_in_value
 
     def collaborate_with(name)
       unless name == :unqualified
         emission.respond_to?(:bindings) && emission.bindings.named(name) ||
-        division.respond_to?(:bindings) && division.bindings.named(name) ||
-        emission.respond_to?(name) && emission.send(name) ||
-        division.respond_to?(name) && division.send(name)
+        emission.respond_to?(name) && emission.send(name)
       else
-        division
+        transformable
       end
     end
 
@@ -31,6 +46,15 @@ module Interpolating
     end
 
     def to_s; resolved ;end
+
+    protected
+
+    def _resolved
+      collaborate_with(amc.first).send(*amc.last.split(/[()]+/))
+    rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
+      warn(error: e, text: text, value: value)
+      value
+    end
 
   end
 end
