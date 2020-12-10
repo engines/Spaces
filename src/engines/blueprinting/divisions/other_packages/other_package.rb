@@ -21,7 +21,7 @@ module Divisions
 
     def environment_vars
       [:repository, :extraction, :extracted_path, :destination].map do |v|
-        "#{v}=#{send(v)}"
+        "#{v}=#{send(v) if respond_to?(v)}"
       end
     end
 
