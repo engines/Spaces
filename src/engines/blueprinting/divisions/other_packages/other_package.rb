@@ -2,7 +2,7 @@ module Divisions
   class OtherPackage < ::Emissions::Subdivision
 
     delegate(
-      [:branch, :repository, :extension, :destination_path, :git?] => :descriptor
+      [:branch, :repository, :extension, :git?] => :descriptor
     )
 
     def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end
