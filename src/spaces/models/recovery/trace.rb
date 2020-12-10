@@ -1,3 +1,5 @@
+require_relative 'error'
+
 I18n.load_path << Pathname.glob("#{__dir__}/i18n/*.yaml").map(&:to_s)
 
 module Recovery
