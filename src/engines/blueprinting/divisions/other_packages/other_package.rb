@@ -1,5 +1,6 @@
 module Divisions
   class OtherPackage < ::Emissions::Subdivision
+    include ::Packing::Division    
 
     delegate(
       [:branch, :repository, :extension, :git?] => :descriptor
