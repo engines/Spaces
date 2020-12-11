@@ -35,8 +35,8 @@ module Divisions
     def auxiliary_files_stanza
       {
         type: 'file',
-        source: packing_source_path,
-        destination: 'tmp/'
+        source: "#{packing_source_path}/",
+        destination: 'tmp'
       }
     end
 

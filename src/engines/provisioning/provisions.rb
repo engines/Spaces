@@ -6,7 +6,7 @@ module Provisioning
 
     delegate(
       [:arenas, :resolutions] => :universe,
-      [:has?, :divisions, :binding_descriptors] => :resolution
+      [:has?, :divisions, :connecting_descriptors] => :resolution
     )
 
     def identifier; "#{arena.identifier}/#{resolution.identifier}" ;end

@@ -6,7 +6,7 @@ module Packing
     end
 
     delegate(
-      [:identifier, :has?, :images, :binding_descriptors, :auxiliary_content] => :resolution,
+      [:identifier, :has?, :images, :connecting_descriptors, :auxiliary_content] => :resolution,
       post_processor_stanzas: :images
     )
 
@@ -15,7 +15,7 @@ module Packing
     alias_method :keys, :composition_keys
 
     def export; struct_for(images.all.map(&:export)) ;end
-    def emit; super.merge(struct_for(images.all.map(&:commit))) ;end
+    def emit; OpenStruct.new(to_h).merge(struct_for(images.all.map(&:commit))) ;end
 
     def packers; provisioners ;end
 

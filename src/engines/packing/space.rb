@@ -18,23 +18,23 @@ module Packing
       end
     end
 
-    def encloses_commit?(identifier); encloses_good_result?(:commit, identifier) ;end
-    def encloses_export?(identifier); encloses_good_result?(:export, identifier) ;end
+    def encloses_commit?(descriptor); encloses_good_result?(:commit, descriptor) ;end
+    def encloses_export?(descriptor); encloses_good_result?(:export, descriptor) ;end
 
-    def encloses_good_result?(command, identifier)
-      encloses_result?(command, identifier) && with_good_artifacts?(command, identifier)
+    def encloses_good_result?(command, descriptor)
+      encloses_result?(command, descriptor) && with_good_artifacts?(command, descriptor)
     end
 
-    def encloses_result?(command, identifier)
-      Pathname.new("#{path_for(identifier)}/#{command}").exist?
+    def encloses_result?(command, descriptor)
+      Pathname.new("#{path_for(descriptor)}/#{command}").exist?
     end
 
-    def with_good_artifacts?(command, identifier)
-      artifacts_by(command, identifier)&.any?(&:id)
+    def with_good_artifacts?(command, descriptor)
+      artifacts_by(command, descriptor)&.any?(&:id)
     end
 
-    def artifacts_by(command, identifier)
-      Dir.chdir(path_for(identifier))
+    def artifacts_by(command, descriptor)
+      Dir.chdir(path_for(descriptor))
       YAML::load(Pathname.new("#{command}/artifacts.yaml").read)
     rescue Errno::ENOENT => e
       nil
@@ -60,11 +60,11 @@ module Packing
     def validate(model) ;end
 
     def unexecuted_anchors_for(command, model)
-      unique_anchors_for(model).reject { |d| encloses_good_result?(command, d.identifier) }
+      unique_anchors_for(model).reject { |d| encloses_good_result?(command, d) }
     end
 
     def unique_anchors_for(model)
-      model.binding_descriptors&.uniq(&:uniqueness) || []
+      model.connecting_descriptors&.uniq(&:uniqueness) || []
     end
 
     protected
@@ -86,7 +86,7 @@ module Packing
 
     def execute_on_anchors_for(command, model)
       model.tap do |m|
-        unexecuted_anchors_for(command, m).each { |d| execute(command, by(d)) }
+        unexecuted_anchors_for(command, m).each { |d| execute(command, by(d.identifier)) }
       end
     end
 

@@ -66,8 +66,8 @@ module Resolving
       struct.bindings ? bindings.embedded_blueprints : []
     end
 
-    def binding_descriptors
-      has?(:bindings) ? bindings.all.map(&:descriptor) : []
+    def connecting_descriptors
+      has?(:bindings) ? bindings.connects.map(&:descriptor) : []
     end
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
