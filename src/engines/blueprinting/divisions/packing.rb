@@ -19,8 +19,12 @@ module Divisions
     def packing_stanza_for(precedence)
       {
         type: 'shell',
-        scripts: send(precedence).map { |s| "#{temporary_packing_path}/#{precedence}/#{s}" }
+        inline: send(precedence).map { |s| "#{temporary_script_path}/#{precedence}/#{s}" }
       }
+    end
+
+    def temporary_script_path
+      'tmp/scripts'
     end
 
   end

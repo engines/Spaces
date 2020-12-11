@@ -64,7 +64,7 @@ module Packing
     end
 
     def unique_anchors_for(model)
-      model.binding_descriptors&.uniq(&:uniqueness) || []
+      model.connecting_descriptors&.uniq(&:uniqueness) || []
     end
 
     protected
