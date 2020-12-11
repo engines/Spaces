@@ -16,7 +16,8 @@ module Emissions
     relation_accessor :emission
 
     delegate(
-      default_struct: :klass
+      default_struct: :klass,
+      resolutions: :universe
     )
 
     def packing_division?

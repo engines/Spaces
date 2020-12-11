@@ -15,6 +15,10 @@ module Divisions
 
     def embedded_blueprints; embeds.map(&:blueprint) ;end
 
+    def connects
+      all.reject(&:embed?)
+    end
+
     def embeds
       all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten.uniq
     end

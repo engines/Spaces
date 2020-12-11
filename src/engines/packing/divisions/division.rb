@@ -23,7 +23,7 @@ module Packing
       resolutions.file_path_for(:packing, context_identifier)
     end
 
-    def temporary_packing_path
+    def temporary_script_path
       "tmp/scripts/#{qualifier}"
     end
 

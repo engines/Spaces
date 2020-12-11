@@ -34,7 +34,7 @@ en:
         There are no images given in the blueprint for '%{identifier}'.
         So there's no worthwhile pack to %{command}.
       engines::packing::space/by: |
-        A pack for %{descriptor} is yet to be saved.
+        A pack for %{identifier} is yet to be saved.
         Saving now.
 
     engines::provisioning::space/apply:

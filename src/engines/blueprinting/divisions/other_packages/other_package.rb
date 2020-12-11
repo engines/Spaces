@@ -1,5 +1,6 @@
 module Divisions
   class OtherPackage < ::Emissions::Subdivision
+    include ::Packing::Division
 
     delegate(
       [:branch, :repository, :extension, :git?] => :descriptor
@@ -14,8 +15,8 @@ module Divisions
     def packing_stanza
       {
         type: 'shell',
-        environment_vars: "#{environment_vars.join(',')}",
-        scripts: ["#{division.temporary_packing_path}/add"]
+        environment_vars: environment_vars,
+        inline: ["#{division.temporary_script_path}/add"]
       }
     end
 

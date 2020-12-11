@@ -34,7 +34,7 @@ module Provisioning
     end
 
     def unique_anchor_resolutions_for(resolution)
-      resolution.binding_descriptors&.uniq(&:uniqueness) || []
+      resolution.connecting_descriptors&.uniq(&:uniqueness) || []
     end
 
   end
