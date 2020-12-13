@@ -99,12 +99,18 @@ universe.arenas.apply(arena)
 
 # Containers
 
-# Web client
+# GUI API
 
-To run the GUI:
-1. `bundle`
-2. `npm i`
-3. `thin start`
+Run `bundle` before starting API or running tests.
+
+## Run API
+
+To run the API: `ruby api.rb`
+
+## Test API
+
+To run tests: `ruby test.rb`
+
 
 # Terms
 
