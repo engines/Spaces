@@ -7,8 +7,6 @@ module Interpolating
       :directory,
       :origin
 
-    delegate(context_identifier: :division)
-
     def origin
       @origin ||= Pathname.new(origin_file_name).read
     end
@@ -26,9 +24,9 @@ module Interpolating
     def break_point; origin_file_name.index("#{directory}") ;end
     def to_s; origin_file_name ;end
 
-    def initialize(origin:, directory:, division:)
-      self.division = division
-      self.origin_file_name = origin
+    def initialize(origin:, directory:, transformable:)
+      self.transformable = transformable
+      self.origin_file_name = origin.to_s
       self.directory = directory
     end
 

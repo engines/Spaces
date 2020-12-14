@@ -1,13 +1,24 @@
+require_relative 'error'
+
 I18n.load_path << Pathname.glob("#{__dir__}/i18n/*.yaml").map(&:to_s)
 
 module Recovery
-  class Trace < ::Spaces::Thing
+  class Trace < Error
 
     attr_accessor :error,
       :witnesses,
       :verbosity
 
-    def t(id = identifier); super(id, **witnesses) ;end
+    def warning
+      spout "\n[WARNING]#{'-' * 88}<<<<"
+      spout t.t
+      spout_trace
+      spout_error
+      spout_witnesses
+      spout "\n"
+    end
+
+    def t(id = identifier); I18n.t(id, **witnesses) ;end
 
     def spout_trace
       spout "\n#{array.join("\n")}" unless array.empty? if verbosity&.include?(:trace)
@@ -47,6 +58,8 @@ module Recovery
         'method_missing',
       ].map { |s| line.include?(s) }.include?(true)
     end
+
+    def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
 
     def initialize(args)
       p = args.partition { |k, v| k == :error }.map(&:to_h)

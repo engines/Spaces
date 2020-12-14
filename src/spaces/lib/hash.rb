@@ -1,5 +1,14 @@
 class Hash
 
+  def except(*keys)
+    duplicate(self).except!(*keys)
+  end
+
+  def except!(*keys)
+    keys.each { |key| delete(key) }
+    self
+  end
+
   def reverse_merge(other = {})
     other.merge(self)
   end

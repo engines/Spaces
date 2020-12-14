@@ -10,8 +10,17 @@ module Arenas
     end
 
     def save(model)
-      super
-      _save(model, content: model.stanzas_content, as: :tf)
+      super.tap do
+        _save(model, content: model.stanzas_content, as: :tf)
+      end
+    end
+
+    def save_provisions(provisions)
+      _save(provisions, content: provisions.stanzas_content, as: :tf)
+    end
+
+    def path_for(model)
+      [path, model.arena.context_identifier].compact.join('/')
     end
 
     def init(model); execute(:init, model) ;end

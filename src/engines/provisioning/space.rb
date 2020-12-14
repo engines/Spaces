@@ -1,5 +1,5 @@
 module Provisioning
-  class Space < ::Emissions::Space
+  class Space < ::Spaces::Space
 
     class << self
       def default_model_class
@@ -7,15 +7,20 @@ module Provisioning
       end
     end
 
-    delegate(
-      arenas: :universe,
-      path: :arenas
-    )
+    delegate([:arenas, :resolutions] => :universe)
+
+    def identifiers(arena_identifier = '*')
+      Pathname.glob("#{path}/#{arena_identifier}/*").map { |p| p.to_s.split('/').last(2).join('/') }
+    end
+
+    def reading_name_for(identifier, _)
+      "#{path}/#{identifier}/#{identifier.split('/').last}"
+    end
 
     def save(model)
       anchor_provisionings_for(model).each { |p| save(p) }
-
-      _save(model, content: model.stanzas_content, as: :tf) unless model.has?(:containers)
+      arenas.save_provisions(model) if model.has?(:containers)
+      super
     end
 
     def anchor_provisionings_for(model)
@@ -24,8 +29,12 @@ module Provisioning
       end
     end
 
-    def path_for(model)
-      [path, model.arena.identifier, model.subpath].compact.join('/')
+    def anchor_resolutions_for(resolution)
+      unique_anchor_resolutions_for(resolution).map { |d| resolutions.by(d.identifier) }
+    end
+
+    def unique_anchor_resolutions_for(resolution)
+      resolution.connecting_descriptors&.uniq(&:uniqueness) || []
     end
 
   end

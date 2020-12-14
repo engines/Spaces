@@ -15,7 +15,7 @@ en:
         Assuming this is correct; returning an empty Array
 
     engines::packing::pack/auxiliary_texts:
-      engines::packing::pack/nominated_scripts: |
+      engines::packing::pack/division_scripts: |
         There are no images given in the blueprint for '%{identifier}'.
         So there's nothing to pack.
 
@@ -34,7 +34,7 @@ en:
         There are no images given in the blueprint for '%{identifier}'.
         So there's no worthwhile pack to %{command}.
       engines::packing::space/by: |
-        A pack for %{descriptor} is yet to be saved.
+        A pack for %{identifier} is yet to be saved.
         Saving now.
 
     engines::provisioning::space/apply:
@@ -69,6 +69,6 @@ en:
       spaces::models::space/initialize:
         An instance of %{klass} for %{identifier} does not yet exist in its space.
 
-    spaces::interpolating::text/map:
-      spaces::interpolating::infix/resolved:
-        Unable to resolve text infix for %{value} in %{text}.
+    spaces::interpolating::infix/resolved_once:
+      spaces::interpolating::infix/_resolved:
+        Unable to resolve replacement for ^^%{value}^^ in %{text}.

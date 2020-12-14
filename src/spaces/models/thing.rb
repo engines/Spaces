@@ -15,8 +15,6 @@ module Spaces
       def qualifier; name.split('::').last.snakize ;end
       def from_yaml(y); YAML::load(y) ;end
 
-      def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
-
       def relation_accessor(*args); attr_accessor(*args) ;end
 
       def alias_accessor(to, from)
@@ -42,13 +40,13 @@ module Spaces
 
     def context_identifier; identifier ;end
     def to_yaml; YAML.dump(struct) ;end
-    def to_json; struct&.to_h_deep&.to_json ;end
+    def to_json(*args); struct&.to_h_deep&.to_json(*args) ;end
     def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
 
     def to_s; identifier ;end
 
     def initialize(struct: nil)
-      self.struct = struct
+      self.struct = duplicate(struct) || OpenStruct.new
     end
 
     def method_missing(m, *args, &block)
