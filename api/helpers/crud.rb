@@ -14,6 +14,7 @@ def member_key_for(space)
     arenas: :arena,
     domains: :domain,
     blueprints: :blueprint,
+    provisioning: :provisions,
     resolutions: :resolution,
     packing: :pack,
   }[space.to_sym]
