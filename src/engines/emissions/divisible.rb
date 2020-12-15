@@ -20,6 +20,12 @@ module Emissions
     def arena_stanzas; all.map(&:arena_stanzas) ;end
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
+    def embed(other)
+      tap do
+        self.struct = [struct, other.struct].flatten.uniq
+      end
+    end
+
     def all
       @all ||= struct&.map { |s| subdivision_for(s) }&.compact || []
     end

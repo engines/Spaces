@@ -6,8 +6,6 @@ module Packing
     def precedence_midpoint; precedence.count / 2 ;end
 
     def embed(other)
-      return other if struct.empty?
-
       tap do
         keys_including(other).each do |k|
           struct[k] = [other.struct[k], struct[k]].flatten.compact.uniq
