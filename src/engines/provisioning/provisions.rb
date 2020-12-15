@@ -28,10 +28,10 @@ module Provisioning
 
     def initialize(struct: nil, arena: nil, resolution: nil, identifier: nil)
       super(struct: struct)
-      self.struct.identifier = identifier
+      self.struct.identifier ||= identifier
       self.arena = arena || arenas.by(arena_identifier)
       self.resolution = resolution || resolutions.by(resolution_identifier)
-      self.struct.identifier ||= self.identifier
+      self.struct.identifier ||= "#{arena.identifier}/#{resolution.identifier}"
     end
 
   end
