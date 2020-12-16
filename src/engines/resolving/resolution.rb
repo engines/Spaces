@@ -46,7 +46,9 @@ module Resolving
       end
     end
 
-    def packing_divisions; divisions.select { |d| d.packing_division? } ;end
+    def packing_divisions
+      divisions.select { |d| d.packing_division? }.sort_by(&:composition_rank)
+    end
 
     def division_map
       @resolution_division_map ||= super.merge(

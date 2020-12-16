@@ -17,12 +17,16 @@ module Emissions
 
     delegate(
       default_struct: :klass,
+      composition: :emission,
+      ranking: :composition,
       resolutions: :universe
     )
 
     def packing_division?
       klass.ancestors.include?(::Packing::Division)
     end
+
+    def composition_rank; ranking.index(klass) ;end
 
     def context_identifier; emission.context_identifier ;end
 
