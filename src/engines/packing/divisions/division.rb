@@ -21,6 +21,10 @@ module Packing
       resolutions.file_path_for(:packing, context_identifier)
     end
 
+    def copy_source_path_for(precedence)
+      [resolutions.file_path_for(:packing, context_identifier), precedence].join('/')
+    end
+
     def temporary_script_path
       "tmp/scripts/#{qualifier}"
     end
