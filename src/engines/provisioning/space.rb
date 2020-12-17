@@ -13,6 +13,15 @@ module Provisioning
       Pathname.glob("#{path}/#{arena_identifier}/*").map { |p| p.to_s.split('/').last(2).join('/') }
     end
 
+    def by(identifier, klass = default_model_class)
+      super
+    rescue Errno::ENOENT => e
+      warn(error: e, identifier: identifier, klass: klass)
+      klass.new(identifier: identifier).tap do |m|
+        save(m)
+      end
+    end
+
     def reading_name_for(identifier, _)
       "#{path}/#{identifier}/#{identifier.split('/').last}"
     end
