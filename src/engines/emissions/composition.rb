@@ -18,9 +18,10 @@ module Emissions
           Divisions::Configuration,
           Divisions::Scaling,
           Divisions::SystemPackages,
-          Divisions::Nodules,
           Divisions::OtherPackages,
+          Divisions::Nodules,
           Divisions::Repositories,
+          Divisions::Permissions,
           Divisions::Images,
           Divisions::Packing,
           Divisions::Containers,
@@ -29,6 +30,8 @@ module Emissions
       end
 
       def associative_classes; [] ;end
+
+      def ranking; [division_classes, associative_classes].flatten.compact ;end
 
       def divisions
         associative_divisions.merge(map_for(division_classes))
@@ -61,7 +64,7 @@ module Emissions
       end
     end
 
-    delegate([:divisions, :associative_divisions, :naming_map, :mandatory_keys] => :klass)
+    delegate([:divisions, :associative_divisions, :ranking, :naming_map, :mandatory_keys] => :klass)
 
     def keys
       divisions.keys

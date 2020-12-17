@@ -9,8 +9,8 @@ en:
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
 
-    engines::emitting::emissions::transformable/stanzas_for:
-      engines::emitting::emissions::transformable/_stanzas_for:
+    engines::emissions::transformable/stanzas_for:
+      engines::emissions::transformable/_stanzas_for:
         Method '%{method}' is not defined in '%{klass}'.
         Assuming this is correct; returning an empty Array
 
@@ -23,6 +23,11 @@ en:
       engines::packing::space/save: |
         There are no images given in the blueprint for '%{identifier}'.
         So there's no worthwhile pack to save.
+
+    engines::packing::space/rescue_in_by:
+      engines::resolving::space/by: |
+        There is no resolution saved yet for the pack for '%{identifier}'.
+        Saving now.
 
     engines::packing::space/block_in_execute_on_anchors_for:
       engines::packing::space/by: |
@@ -45,23 +50,23 @@ en:
       provisioning::space/execute:
         Provisioning failed while attempting to execute %{command} for %{identifier}.
 
-    engines::emitting::emissions::descriptive_subdivision/resolution:
+    engines::emissions::descriptive_subdivision/resolution:
       engines::resolving::space/by: |
         A resolution for %{identifier} is yet to be saved.
         Saving now.
 
-    engines::emitting::emissions::divisible/new:
-      engines::emitting::emissions::divisible/initialize: |
+    engines::emissions::divisible/new:
+      engines::emissions::divisible/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.
         Ignoring %{content}
 
-    engines::emitting::emissions::divisible/check_subdivision_class:
-      engines::emitting::emissions::divisible/subdivision_class: |
+    engines::emissions::divisible/check_subdivision_class:
+      engines::emissions::divisible/subdivision_class: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
-    engines::emitting::emissions::divisible/subdivision_class:
-      engines::emitting::emissions::divisible/const_get: |
+    engines::emissions::divisible/subdivision_class:
+      engines::emissions::divisible/const_get: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 

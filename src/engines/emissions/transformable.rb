@@ -34,7 +34,7 @@ module Emissions
     def _stanzas_for(symbol)
       raise TransformableWithoutStanzaError
     rescue TransformableWithoutStanzaError => e
-      warn(error: e, method: "#{symbol}_stanzas", klass: klass, verbosity: [:silencex])
+      warn(error: e, method: "#{symbol}_stanzas", klass: klass, verbosity: [:silence])
       []
     end
 

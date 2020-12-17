@@ -1,5 +1,5 @@
 module Divisions
-  class OtherPackages < ::Emissions::Divisible
+  class Permissions < ::Emissions::Divisible
 
     alias_method :divisible_embed, :embed
 
@@ -8,10 +8,10 @@ module Divisions
     def embed(other); divisible_embed(other) ;end
 
     def packing_stanza_for(key)
-      all.map(&:packing_stanza) if key == :adds
+      all.map(&:packing_stanza) if key == :late
     end
 
-    def keys; [:adds] ;end
+    def keys; [:late] ;end
 
   end
 end
