@@ -7,6 +7,9 @@ gem 'i18n'
 gem 'ruby-terraform'
 gem 'packer-client'
 
+gem 'addressable'
+
+
 # Gems to support GUI web app.
 gem 'sinatra'
 gem 'sinatra-contrib'

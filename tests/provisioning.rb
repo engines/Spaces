@@ -26,8 +26,7 @@ module Tests
 
       test "index includes #{identifier}" do
         output identifiers = universe.provisioning.identifiers
-        raise "#{identifier} not created" unless
-        identifiers.include?(identifier)
+        raise "#{identifier} not created" unless identifiers.include?(identifier)
       end
 
       test "index resolution_provisions for #{resolution_identifier} resolution includes #{identifier}" do

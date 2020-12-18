@@ -2,7 +2,9 @@ module Emissions
   class Transformable < ::Spaces::Model
 
     class << self
-      def auxiliary_directories; [:packing] ;end
+      def auxiliary_directories
+        [PN("packing")]
+      end
     end
 
     delegate(
@@ -32,9 +34,10 @@ module Emissions
     private
 
     def _stanzas_for(symbol)
-      raise TransformableWithoutStanzaError
+      raise TransformableWithoutStanzaError, "Raised an error for no apparent reason."
     rescue TransformableWithoutStanzaError => e
-      warn(error: e, method: "#{symbol}_stanzas", klass: klass, verbosity: [:silence])
+      just_print_the_error(__FILE__, __LINE__, e)
+      # warn(error: e, method: "#{symbol}_stanzas", klass: klass, verbosity: [:silence])
       []
     end
 

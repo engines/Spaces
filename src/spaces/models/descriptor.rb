@@ -1,3 +1,5 @@
+require 'addressable/uri'
+
 require_relative 'model'
 
 module Spaces
@@ -5,23 +7,45 @@ module Spaces
 
     delegate(identifier: :struct)
 
-    def root_identifier; repository.split('/').last.split('.').first if repository ;end
+    def root_identifier
+      basename.to_s
+    end
 
-    def branch; struct.branch ||= 'main' ;end
-    def protocol; struct.protocol ||= extension ;end
-    def git?; protocol == 'git' ;end
+    def branch
+      struct.branch ||= 'main'
+    end
 
-    def basename; Pathname.new(repository).basename ;end
-    def extension; repository&.split('.')&.last ;end
+    def protocol
+      struct.protocol ||= extension
+    end
+
+    def git?
+      protocol == 'git'
+    end
+
+    def basename
+      add_ext(rpath.basename, "")
+    end
+
+    def extension
+      rpath.extname
+    end
 
     def initialize(args)
+      @repository = Addressable::URI.parse(args[:repository])
+
       self.struct = args[:struct] || OpenStruct.new(args)
       self.struct.identifier ||= root_identifier
     end
 
     def to_s
-      [repository, branch, identifier].compact.join(' ')
+      [@repository.to_s, branch, identifier].compact.join(' ')
     end
 
+    private
+
+    def rpath
+      @rpath ||= PN((@repository) ? @repository.path : "")
+    end
   end
 end

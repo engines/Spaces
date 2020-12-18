@@ -58,7 +58,7 @@ module Divisions
     end
 
     def overlay_exists_for?(precedence)
-      Pathname.new(copy_source_path_for(precedence)).exist?
+      copy_source_path_for(precedence).exist?
     end
 
   end
