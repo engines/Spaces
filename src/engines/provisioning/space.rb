@@ -9,8 +9,8 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
-    def identifiers(arena_identifier = '*')
-      Pathname.glob("#{path}/#{arena_identifier}/*").map { |p| p.to_s.split('/').last(2).join('/') }
+    def identifiers(arena_identifier: '*', resolution_identifier: '*')
+      Pathname.glob("#{path}/#{arena_identifier}/#{resolution_identifier}").map { |p| p.to_s.split('/').last(2).join('/') }
     end
 
     def by(identifier, klass = default_model_class)

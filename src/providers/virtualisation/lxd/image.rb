@@ -2,6 +2,10 @@ module Providers
   class Lxd < ::Divisions::Provider
     class Image < ::Divisions::Image
 
+      def default_name
+        "#{tenant.identifier}-#{context_identifier}"
+      end
+
       def default_resolution
         @default_resolution ||= {
           name: default_name,
@@ -15,7 +19,6 @@ module Providers
           }
         }
       end
-
     end
   end
 end
