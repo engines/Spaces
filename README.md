@@ -81,6 +81,7 @@ Save `Resolving::Resolution` to resolution space with:
 
 ```
 universe.resolutions.save(resolution)
+```
 
 ## Example
 ```
