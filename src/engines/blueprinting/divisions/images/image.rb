@@ -28,7 +28,7 @@ module Divisions
     end
 
     def default_name
-      "#{tenant.identifier}/#{context_identifier}"
+      "#{tenant.identifier}-#{context_identifier}"
     end
 
     def default_tag
