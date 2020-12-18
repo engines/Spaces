@@ -27,7 +27,6 @@ put '/:space/*' do
   space = universe.send(params[:space])
   struct = JSON.parse(request.body.read).to_struct
   klass = member_class_for(params[:space])
-  debugger
   object = klass.new(struct: struct)
   space.save(object)
   object.to_json
