@@ -26,7 +26,7 @@ module Packing
     end
 
     def temporary_script_path
-      "tmp/packing/scripts/#{qualifier}"
+      "/tmp/packing/scripts/#{qualifier}"
     end
 
     def keys; by_precedence(super) ;end
