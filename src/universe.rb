@@ -18,7 +18,10 @@ class Universe < ::Spaces::Space
     end
   end
 
-  def path; "/opt/spaces/#{identifier}" ;end
+  def path
+    Fs.workspace.join(identifier)
+  end
+
   def host; 'spaces.internal' ;end
 
   def method_missing(m, *args, &block)
