@@ -6,8 +6,6 @@ module Packing
     def precedence_midpoint; precedence.count / 2 ;end
 
     def embed(other)
-      return other if struct.empty?
-
       tap do
         keys_including(other).each do |k|
           struct[k] = [other.struct[k], struct[k]].flatten.compact.uniq
@@ -21,6 +19,10 @@ module Packing
 
     def packing_source_path
       resolutions.file_path_for(:packing, context_identifier)
+    end
+
+    def copy_source_path_for(precedence)
+      [resolutions.file_path_for(:packing, context_identifier), precedence].join('/')
     end
 
     def temporary_script_path

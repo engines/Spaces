@@ -1,12 +1,6 @@
 module Divisions
   class Volumes < ::Emissions::SubclassDivisible
 
-    def embed(other)
-      tap do
-        self.struct = [struct, other.struct].flatten.uniq(&:source)
-      end
-    end
-
     def all
       @all ||=
       if emission.has?(:containers)

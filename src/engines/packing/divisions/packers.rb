@@ -26,6 +26,13 @@ module Divisions
     end
 
     def all_stanzas_for(precedence)
+      [
+        (file_copy_stanza_for(precedence) if overlay_exists_for?(precedence)),
+        division_stanzas_for(precedence)
+      ].flatten.compact
+    end
+
+    def division_stanzas_for(precedence)
       packing_divisions.map { |d| d.packing_stanza_for(precedence) if d.respond_to?(precedence) }
         .compact.flatten
     end
@@ -38,6 +45,20 @@ module Divisions
         source: "#{packing_source_path}/",
         destination: 'tmp'
       }
+    end
+
+    def file_copy_stanza_for(precedence)
+      {
+        type: 'shell',
+        inline: [
+          "chown -R root:root /tmp/#{precedence}/",
+          "tar -C /tmp/#{precedence}/   -cf - . | tar -C / -xf -"
+        ]
+      }
+    end
+
+    def overlay_exists_for?(precedence)
+      Pathname.new(copy_source_path_for(precedence)).exist?
     end
 
   end
