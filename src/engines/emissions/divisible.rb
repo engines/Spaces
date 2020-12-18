@@ -20,7 +20,7 @@ module Emissions
     def arena_stanzas; all.map(&:arena_stanzas) ;end
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
-    def embed(other)
+    def embed!(other)
       tap { self.struct = struct_with(other) }
     end
 
