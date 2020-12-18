@@ -41,12 +41,12 @@ module Emissions
     def with_embeds
       emission.embeds.reduce(itself) do |r, e|
         r.tap do |r|
-          r.embed(e.send(qualifier)) if e.has?(qualifier)
+          r.embed!(e.send(qualifier)) if e.has?(qualifier)
         end
       end
     end
 
-    def embed(other); itself; end
+    def embed!(other); itself; end
 
     def scale &block
       Array.new(emission.count) do |i|
