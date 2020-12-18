@@ -1,9 +1,14 @@
 module Providers
   class Docker < ::Divisions::Provider
     class Image < ::Divisions::Image
-
       class << self
-        def safety_overrides; { privileged: false } ;end
+        def safety_overrides
+          { privileged: false }
+        end
+      end
+
+      def default_name
+        "#{tenant.identifier}/#{context_identifier}"
       end
 
       def export
@@ -21,7 +26,6 @@ module Providers
           tags: 'latest'
         }
       end
-
     end
   end
 end

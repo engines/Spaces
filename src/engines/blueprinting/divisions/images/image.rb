@@ -27,10 +27,6 @@ module Divisions
       "spaces/#{default_name}:#{default_tag}"
     end
 
-    def default_name
-      "#{tenant.identifier}-#{context_identifier}"
-    end
-
     def default_tag
       'latest'
     end
