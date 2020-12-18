@@ -51,8 +51,8 @@ module Divisions
       {
         type: 'shell',
         inline: [
-          "chown -R root:root /tmp/#{precedence}/",
-          "tar -C /tmp/#{precedence}/   -cf - . | tar -C / -xf -"
+          "chown -R root:root /tmp/packing/#{precedence}/",
+          "tar -C /tmp/packing/#{precedence}/   -cf - . | tar -C / -xf -"
         ]
       }
     end
