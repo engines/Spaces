@@ -13,7 +13,10 @@ module Tests
       resolution = universe.resolutions.by(resolution_identifier)
 
       test "create #{identifier} provisions" do
-        output provisions = Provisioning::Provisions.new(resolution: resolution, arena: arena)
+        output provisions = Provisioning::Provisions.new(
+          resolution: resolution,
+          arena: arena
+        )
         output universe.provisioning.save(provisions)
       end
 
@@ -24,7 +27,19 @@ module Tests
       test "index includes #{identifier}" do
         output identifiers = universe.provisioning.identifiers
         raise "#{identifier} not created" unless
-        identifiers.map(&:to_s).include?(identifier)
+        identifiers.include?(identifier)
+      end
+
+      test "index resolution_provisions for #{resolution_identifier} resolution includes #{identifier}" do
+        output identifiers = universe.provisioning.identifiers(resolution_identifier: resolution_identifier)
+        raise "#{identifier} not shown in #{resolution_identifier}" unless
+        identifiers.include?(identifier)
+      end
+
+      test "index arena_provisions for #{arena_identifier} arena includes #{identifier}" do
+        output identifiers = universe.provisioning.identifiers(arena_identifier: arena_identifier)
+        raise "#{identifier} not shown in #{arena_identifier}" unless
+        identifiers.include?(identifier)
       end
 
       test 'delete' do
@@ -35,7 +50,7 @@ module Tests
       test 'index after delete' do
         output identifiers = universe.provisioning.identifiers
         raise "#{identifier} not deleted" if
-        identifiers.map(&:to_s).include?(identifier)
+        identifiers.include?(identifier)
       end
 
     end
