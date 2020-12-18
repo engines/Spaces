@@ -24,7 +24,7 @@ module Divisions
     end
 
     def temporary_script_path
-      'tmp/scripts'
+      'tmp/packing/scripts'
     end
 
   end
