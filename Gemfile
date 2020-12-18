@@ -11,7 +11,11 @@ gem 'packer-client'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'thin'
+
 group :development do
   gem 'byebug'
   gem 'uglifier'
+
+  gem 'pry'
+  gem 'ripper-tags'
 end
