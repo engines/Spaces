@@ -1,5 +1,4 @@
 require 'byebug'
-require 'fileutils'
 
 require './api/universe'
 require './tests/arenas'
@@ -14,15 +13,15 @@ require './tests/test'
 extend Tests
 
 # Clear all Spaces data
-FileUtils.rm_rf(Dir.glob('/opt/spaces/Universe/*'))
+Pathname.new("/opt/spaces/Universe").children.each(&:rmtree)
 
 # Create counters
 init
 
 # Perform tests
-tenants
+# tenants
 arenas
-domains
+# domains
 blueprints
 resolutions
 packing

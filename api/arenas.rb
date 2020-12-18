@@ -2,10 +2,9 @@ require './api/helpers/topology'
 
 # Show provisioning for an arena.
 get '/arenas/:identifier/provisioning' do
-  provisions_identifiers = universe.provisioning.identifiers(params[:identifier])
-  provisions_identifiers.map do |identifier|
-    universe.provisioning.by(identifier)
-  end.to_json
+  universe.provisioning.identifiers(
+    arena_identifier: params[:identifier]
+  ).to_json
 end
 
 # Perform an action (:init, :plan or :apply) on an arena.
