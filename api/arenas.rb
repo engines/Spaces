@@ -1,5 +1,3 @@
-require './api/helpers/topology'
-
 # Show provisioning for an arena.
 get '/arenas/:identifier/provisioning' do
   universe.provisioning.provisioning_for(
