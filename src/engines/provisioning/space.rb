@@ -10,7 +10,19 @@ module Provisioning
     delegate([:arenas, :resolutions] => :universe)
 
     def identifiers(arena_identifier: '*', resolution_identifier: '*')
-      Pathname.glob("#{path}/#{arena_identifier}/#{resolution_identifier}").map { |p| p.to_s.split('/').last(2).join('/') }
+      Pathname.glob(
+        "#{path}/#{arena_identifier}/#{resolution_identifier}"
+      ).map { |p| p.to_s.split('/').last(2).join('/') }
+    end
+
+    def provisioning_for(space_identifiers)
+      identifiers(space_identifiers).map do |provisions|
+        (arena_identifier, resolution_identifier) = provisions.split('/')
+        {
+          arena_identifier: arena_identifier,
+          resolution_identifier: resolution_identifier,
+        }
+      end
     end
 
     def by(identifier, klass = default_model_class)

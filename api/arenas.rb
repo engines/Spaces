@@ -2,7 +2,7 @@ require './api/helpers/topology'
 
 # Show provisioning for an arena.
 get '/arenas/:identifier/provisioning' do
-  universe.provisioning.identifiers(
+  universe.provisioning.provisioning_for(
     arena_identifier: params[:identifier]
   ).to_json
 end

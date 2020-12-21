@@ -1,6 +1,6 @@
 # Show provisioning for a resolution.
 get '/resolutions/:identifier/provisioning' do
-  universe.provisioning.identifiers(
+  universe.provisioning.provisioning_for(
     resolution_identifier: params[:identifier]
   ).to_json
 end
