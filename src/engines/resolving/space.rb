@@ -24,7 +24,9 @@ module Resolving
 
     def save(model)
       super.tap do
-        model.auxiliary_content.each { |t| save_text(t) }
+        model.auxiliary_content.each do |f|
+          save_text(model, f.content) 
+        end
       end
     end
 
