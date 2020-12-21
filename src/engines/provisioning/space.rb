@@ -12,6 +12,7 @@ module Provisioning
     def identifiers(arena_identifier: '*', resolution_identifier: '*')
       path.glob("#{arena_identifier}/#{resolution_identifier}").map do |p|
         p.relative_path_from(path)
+      end
     end
 
     def provisioning_for(space_identifiers)
