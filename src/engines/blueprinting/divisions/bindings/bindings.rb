@@ -17,9 +17,21 @@ module Divisions
       all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten.uniq
     end
 
-    def embeds_under(embed)
-      if (b = embed.blueprint).has?(:bindings)
+    def embeds_under(binding)
+      if (b = binding.blueprint).has?(:bindings)
         b.bindings.embeds
+      else
+        []
+      end
+    end
+
+    def turtles
+      all.select.map { |t| [t, turtles_under(t)] }.flatten.uniq
+    end
+
+    def turtles_under(binding)
+      if (b = binding.blueprint).has?(:bindings)
+        b.bindings.turtles
       else
         []
       end
