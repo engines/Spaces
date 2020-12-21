@@ -1,11 +1,18 @@
 # Create provisions
-post '/provisioning/:arena_identifier/:resolution_identifier' do
-  arena = universe.arenas.by(params[:arena_identifier])
-  resolution = universe.resolutions.by(params[:resolution_identifier])
-  universe.provisioning.save(
-    Provisioning::Provisions.new(
-      arena: arena,
-      resolution: resolution,
-    )
+post '/provisioning' do
+  provisions = params[:provisions]
+  arena_identifier = provisions[:arena_identifier]
+  resolution_identifier = provisions[:resolution_identifier]
+  arena = universe.arenas.by(arena_identifier)
+  resolution = universe.resolutions.by(resolution_identifier)
+  provisions = Provisioning::Provisions.new(
+    arena: arena,
+    resolution: resolution,
   )
+  universe.provisioning.save(provisions)
+  {
+    identifier: provisions.identifier,
+    arena_identifier: provisions.arena_identifier,
+    resolution_identifier: provisions.resolution_identifier,
+  }.to_json
 end
