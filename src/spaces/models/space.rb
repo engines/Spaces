@@ -29,8 +29,8 @@ module Spaces
       klass.new(identifier: identifier, struct: open_struct_from_json(_by(identifier, klass, as: :json)))
     end
 
-    def save_text(model)
-      _save(model, content: model.content)
+    def save_text(model, content)
+      _save(model, content: content)
       writing_name_for(model).chmod(model.permission) if model.respond_to?(:permission)
     end
 
