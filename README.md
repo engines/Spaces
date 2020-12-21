@@ -5,11 +5,10 @@ Spaces
 
 You'll need to create a directory for Spaces to write all its data at:
 
-* `\opt\spaces\Universe`
+* `$ENGINES_WORKSPACE/spaces`
 
-Ideally, Spaces should create this directory on first access, but I ran into permission problems and moved on.
-
-James: perhaps you could advise how I programmatically create a new directory under /opt?
+If the `ENGINES_WORKSPACE` isn't set it'll default to `$TMP` and finally `/tmp`. We
+recommended you set `ENGINES_WORKSPACE`.
 
 # The Universe
 

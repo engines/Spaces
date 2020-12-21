@@ -10,9 +10,8 @@ module Provisioning
     delegate([:arenas, :resolutions] => :universe)
 
     def identifiers(arena_identifier: '*', resolution_identifier: '*')
-      Pathname.glob(
-        "#{path}/#{arena_identifier}/#{resolution_identifier}"
-      ).map { |p| p.to_s.split('/').last(2).join('/') }
+      path.glob("#{arena_identifier}/#{resolution_identifier}").map do |p|
+        p.relative_path_from(path)
     end
 
     def provisioning_for(space_identifiers)
@@ -28,15 +27,17 @@ module Provisioning
     def by(identifier, klass = default_model_class)
       super
     rescue Errno::ENOENT => e
-      warn(error: e, identifier: identifier, klass: klass)
+      # warn(error: e, identifier: identifier, klass: klass)
+      just_print_the_error(__FILE__, __LINE__, e)
       klass.new(identifier: identifier).tap do |m|
         save(m)
       end
     end
 
-    def reading_name_for(identifier, _)
-      "#{path}/#{identifier}/#{identifier.split('/').last}"
+    def reading_name_for(identifier, _, ext = nil)
+      add_ext(path.join(identifier, PN(identifier).basename), ext)
     end
+
 
     def save(model)
       anchor_provisionings_for(model).each { |p| save(p) }
