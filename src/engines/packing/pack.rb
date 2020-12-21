@@ -24,7 +24,7 @@ module Packing
     def script_file_names; resolution.packing_script_file_names ;end
 
     def initialize(resolution)
-      self.struct = struct_for(resolution.images)
+      self.struct = (resolution.has?(:images) ? struct_for(resolution.images) : OpenStruct.new)
       self.resolution = resolution
     end
 
