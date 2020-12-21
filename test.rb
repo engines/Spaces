@@ -1,4 +1,5 @@
 require 'pathname'
+require 'addressable'
 
 $:.unshift(Pathname.new(__FILE__).parent.join('src').expand_path)
 
