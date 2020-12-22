@@ -16,5 +16,7 @@ module Divisions
       subdivision_for(duplicate(struct).tap { |s| s.type = "#{container_type}/volume" })
     end
 
+    def struct_with(other); super.uniq(&:source) ;end
+
   end
 end

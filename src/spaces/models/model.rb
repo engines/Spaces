@@ -9,8 +9,9 @@ module Spaces
 
     delegate(universe: :klass)
 
+    # TODO: work out what to do here.
     def file_name; klass.qualifier ;end
-    def subpath; end
+    def subpath; PN(""); end
     def uniqueness; [klass.name, identifier] ;end
 
     def namespaced_name(namespace, symbol)

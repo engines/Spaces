@@ -3,7 +3,7 @@ module Divisions
 
     class << self
       def constant_for(type)
-        Module.const_get("/providers/#{type}/container".camelize)
+        Module.const_get("::Providers::#{type.to_s.camelize}::Container")
       end
     end
 

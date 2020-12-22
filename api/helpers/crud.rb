@@ -1,7 +1,7 @@
 def member_class_for(space)
   {
     arenas: Arenas::Arena,
-    domains: Associations::Domain,
+    # domains: Associations::Domain,
     blueprints: Blueprinting::Blueprint,
     provisioning: Provisioning::Provisions,
     resolutions: Resolving::Resolution,
@@ -12,7 +12,7 @@ end
 def member_key_for(space)
   {
     arenas: :arena,
-    domains: :domain,
+    # domains: :domain,
     blueprints: :blueprint,
     provisioning: :provisions,
     resolutions: :resolution,

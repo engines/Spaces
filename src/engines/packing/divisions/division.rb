@@ -5,13 +5,14 @@ module Packing
 
     def precedence_midpoint; precedence.count / 2 ;end
 
-    def embed(other)
+    def embed!(other)
       tap do
         keys_including(other).each do |k|
           struct[k] = [other.struct[k], struct[k]].flatten.compact.uniq
         end
       end
     end
+
 
     def keys_including(other)
       by_precedence([other.keys, keys].flatten.uniq)
@@ -22,11 +23,11 @@ module Packing
     end
 
     def copy_source_path_for(precedence)
-      [resolutions.file_path_for(:packing, context_identifier), precedence].join('/')
+      packing_source_path.join(sym_to_pathname(precedence))
     end
 
     def temporary_script_path
-      "/tmp/packing/scripts/#{qualifier}"
+      PN("tmp").join("packing","scripts", qualifier)
     end
 
     def keys; by_precedence(super) ;end

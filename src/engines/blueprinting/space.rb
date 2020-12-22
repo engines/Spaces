@@ -20,7 +20,8 @@ module Blueprinting
         by(descriptor.identifier).tap { |m| import_anchors_for(m) }
       end
     rescue Errno::ENOENT => e
-      warn(error: e, descriptor: descriptor, verbosity: [:error])
+      # warn(error: e, descriptor: descriptor, verbosity: [:error])
+      just_print_the_error(__FILE__, __LINE__, e)
     end
 
     def import_anchors_for(model)
@@ -32,11 +33,11 @@ module Blueprinting
     end
 
     def imported?(descriptor)
-      Pathname.new(path_for(descriptor)).exist?
+      path_for(descriptor).exist?
     end
 
     def delete(identifier)
-      Pathname.new(path_for(identifier)).rmtree
+      path_for(identifier).rmtree
     end
 
     def create(descriptor)

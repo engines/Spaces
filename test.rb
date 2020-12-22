@@ -1,5 +1,10 @@
+require 'pathname'
+
+$:.unshift(Pathname.new(__FILE__).parent.join('src').expand_path)
+
 require 'byebug'
-require 'fileutils'
+
+require 'requires'
 
 require './api/universe'
 require './tests/arenas'
@@ -14,15 +19,17 @@ require './tests/test'
 extend Tests
 
 # Clear all Spaces data
-FileUtils.rm_rf(Dir.glob('/opt/spaces/Universe/*'))
+Fs.workspace.exist? && Fs.workspace.rmtree
 
 # Create counters
 init
 
+# These don't currently work
+# tenants
+# domains
+
 # Perform tests
-tenants
 arenas
-domains
 blueprints
 resolutions
 packing
