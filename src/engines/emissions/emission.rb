@@ -15,6 +15,10 @@ module Emissions
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
 
+    def turtle_descriptors
+      bindings.turtles.map(&:descriptor).uniq(&:identifier) if has?(:bindings)
+    end
+
     def emit
       OpenStruct.new(to_h).tap { |e| e.identifier = struct.identifier }
     end
