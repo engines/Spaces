@@ -5,7 +5,7 @@ module Divisions
       def safety_overrides; {} ;end
 
       def constant_for(type)
-        Module.const_get("/providers/#{type}/image".camelize)
+        Module.const_get("::Providers::#{type.to_s.camelize}::Image")
       end
     end
 

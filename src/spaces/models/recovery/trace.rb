@@ -1,16 +1,36 @@
+require 'pp'
+
 require_relative 'error'
 
-I18n.load_path << Pathname.glob("#{__dir__}/i18n/*.yaml").map(&:to_s)
+I18n.load_path << Pathname(__dir__).join("i18n").glob("*.yaml")
+
+# FIXME: FIXME: FIXME: FIXME: FIXME: FIXME: FIXME:
+# FIXME: Wait until this blows up and then work out what to do.
+# FIXME: FIXME: FIXME: FIXME: FIXME: FIXME: FIXME:
 
 module Recovery
   class Trace < Error
+
+    include Fs
 
     attr_accessor :error,
       :witnesses,
       :verbosity
 
+    def self.just_print_the_error(file, line, e, where = STDOUT)
+      n = e.message.length
+      banner = "=" * (n + 10)
+      where.puts banner
+      where.puts "===> Exception: #{file} -> #{line} <==="
+      where.puts "===> #{e.message} <==="
+      where.puts banner
+      where.puts
+    end
+
+
+
     def warning
-      spout "\n[WARNING]#{'-' * 88}<<<<"
+      spout "\n[TRACE]#{'-' * 88}<<<<"
       spout t.t
       spout_trace
       spout_error
@@ -18,22 +38,24 @@ module Recovery
       spout "\n"
     end
 
+
+
     def t(id = identifier); I18n.t(id, **witnesses) ;end
 
     def spout_trace
-      spout "\n#{array.join("\n")}" unless array.empty? if verbosity&.include?(:trace)
+      spout "\n#{array.join("\n")}" if !array.empty? && verbosity&.include?(:trace)
 
       spout error.backtrace if verbosity&.include?(:full_trace)
     end
 
     def spout_error
-      spout "\n#{error}" if error if verbosity&.include?(:error)
+      spout "\n#{error}" if error # && verbosity&.include?(:error)
     end
 
     def spout_witnesses
-      if verbosity&.include?(:witnesses) && tw = witnesses
+      if verbosity&.include?(:witnesses)
         spout "\nWitnesses#{'-' * 11}<<<<"
-        spout tw.map { |w| "#{w.first}: #{w.last}" }
+        spout(witnesses.map { |w| "#{w.first}: #{w.last}" })
       end
     end
 
@@ -59,7 +81,9 @@ module Recovery
       ].map { |s| line.include?(s) }.include?(true)
     end
 
-    def spout(stuff = '-' * 88); STDOUT.puts stuff ;end
+    def spout(stuff = '-' * 88)
+      STDOUT.puts ppp(stuff)
+    end
 
     def initialize(args)
       p = args.partition { |k, v| k == :error }.map(&:to_h)
@@ -67,6 +91,23 @@ module Recovery
       q = p.last.partition { |k, v| k == :verbosity }.map(&:to_h)
       self.verbosity = q.first[:verbosity]
       self.witnesses = q.last
+    end
+
+    private
+
+    def ppp(v, ws=true, &blk)
+      s = StringIO.new.tap do |io|
+        ws && io.puts
+        PP.pp(v, io)
+        ws && io.puts
+      end.string
+      puts((blk) ? blk.call(s) : s)
+    end
+
+    def get_error_location
+      caller.reject do |sf|
+        PN(sf.split(":").first).dirname == PN(__dir__)
+      end
     end
 
   end

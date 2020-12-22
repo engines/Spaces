@@ -14,7 +14,9 @@ module Resolving
         m.blueprint = blueprints.by(identifier)
       end
     rescue Errno::ENOENT => e
-      warn(error: e, identifier: identifier, klass: klass)
+      just_print_the_error(__FILE__, __LINE__, e)
+      # warn(error: e, identifier: identifier, klass: klass)
+
       klass.new(blueprint: blueprints.by(identifier)).tap do |m|
         save(m)
       end
