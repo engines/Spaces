@@ -31,7 +31,7 @@ module Divisions
     end
 
     def temporary_script_path
-      PN("tmp").join("scripts")
+      PN("tmp").join("packing","scripts")
     end
 
     def basename_as_sym(p)
