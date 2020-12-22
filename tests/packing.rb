@@ -21,7 +21,7 @@ module Tests
       test "build #{identifier}" do
         output pack = universe.packing.by(identifier)
         output universe.packing.commit(pack)
-        build = YAML.load_file("/opt/spaces/Universe/PackingSpace/#{identifier}/commit/output.yaml")
+        build = YAML.load_file(Fs.workspace.join("Universe", "PackingSpace", identifier, "commit", "output.yaml"))
         output build.stdout
       end
 

@@ -20,7 +20,7 @@ module Arenas
     end
 
     def path_for(model)
-      [path, model.arena.context_identifier].compact.join('/')
+      path.join(model.arena.context_identifier)
     end
 
     def init(model); execute(:init, model) ;end
@@ -31,10 +31,12 @@ module Arenas
     protected
 
     def execute(command, model)
-      Dir.chdir(path_for(model))
-      bridge.send(command, options[command] || {})
+      Dir.chdir(path_for(model)) do
+        bridge.send(command, options[command] || {})
+      end
     rescue RubyTerraform::Errors::ExecutionError => e
-      warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
+      # warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
+      just_print_the_error(__FILE__, __LINE__, e)
     end
 
     def bridge; RubyTerraform ;end
