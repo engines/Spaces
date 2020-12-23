@@ -8,6 +8,11 @@ module Divisions
 
     def override_keys; overrides.to_h.keys ;end
 
+    def emit
+      super
+      emit_with_descriptor
+    end
+
     def resolved
       @resolved ||= duplicate(struct).tap { |s| s.configuration = configuration }
     end

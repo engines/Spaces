@@ -12,6 +12,12 @@ module Emissions
       auxiliary_directories: :klass
     )
 
+    def emit
+      super.tap { |s| s[:descriptor] = descriptor.struct if descriptor }
+    end
+
+    alias_method :emit_with_descriptor, :emit
+
     def complete?; true ;end
 
     def identifier; struct[:identifier] ;end
