@@ -6,6 +6,7 @@ require 'pathname'
 require 'i18n'
 
 require 'file'
+require 'engines-logger'
 
 
 # FIXME: This doesn't do what I think it should.
