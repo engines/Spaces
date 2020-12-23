@@ -9,8 +9,7 @@ module Divisions
     def override_keys; overrides.to_h.keys ;end
 
     def emit
-      super
-      emit_with_descriptor
+      super.tap { |s| s[:descriptor] = descriptor.struct }
     end
 
     def resolved

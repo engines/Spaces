@@ -6,6 +6,10 @@ module Divisions
       [:branch, :repository, :extension, :git?] => :descriptor
     )
 
+    def emit
+      super.tap { |s| s[:descriptor] = descriptor.struct }
+    end
+
     def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end
     def identifier; struct.identifier || descriptor.identifier ;end
 
