@@ -3,6 +3,8 @@ require_relative 'transformable'
 module Emissions
   class Division < Transformable
 
+    include Engines::Logger
+
     attr_accessor :label
 
     class << self
@@ -31,8 +33,11 @@ module Emissions
     def context_identifier; emission.context_identifier ;end
 
     def auxiliary_content
+      logger.debug "auxiliary_directories: #{auxiliary_directories.inspect}"
+
       auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|
+          logger.debug "auxiliary_paths_for(#{d}): #{p.inspect}"
           Interpolating::FileText.new(origin: p, directory: d, transformable: self)
         end
       end.flatten
