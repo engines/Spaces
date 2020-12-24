@@ -3,6 +3,8 @@ require_relative 'model'
 module Spaces
   class Space < Model
 
+    include Engines::Logger
+
     class << self
       def universe
         @@universe ||= Universe.new
@@ -29,8 +31,11 @@ module Spaces
       klass.new(identifier: identifier, struct: open_struct_from_json(_by(identifier, klass, as: :json)))
     end
 
-    def save_text(model, content)
-      _save(model, content: content)
+    def save_text(model)
+      _save(model, content: model.content)
+
+      # FIXME: This shouldn't be here and it shouldn't be done with chmod
+      #        See T3
       writing_name_for(model).chmod(model.permission) if model.respond_to?(:permission)
     end
 
@@ -55,13 +60,15 @@ module Spaces
     # FIXME: the permissions should be passed in
     def writing_name_for(model, ext = nil)
       ensure_space_for(model)
-      add_ext(path_for(model).join(model.file_name), ext)
+
+      add_ext(path_for(model).join(model.file_name), ext).tap do |path|
+        logger.debug("Saving model with perms [#{perms(model)}]: #{path}")
+      end
     end
 
     def file_names_for(directory, identifier)
       file_path_for(directory, identifier).glob("**/*").reject(&:directory?)
     end
-
 
     def file_path_for(symbol, context_identifier)
       path.join(sym_to_pathname(context_identifier), sym_to_pathname(symbol))
@@ -86,10 +93,17 @@ module Spaces
     end
 
     def _save(model, content:, as: nil)
+      # FIXME: this tap doesn't do anything
       model.tap do |m|
         writing_name_for(m, as).write(content)
       end
       model.identifier
+    end
+
+    private
+
+    def perms(model)
+      sprintf "%o", model.permission if model.respond_to?(:permission)
     end
 
   end
