@@ -33,9 +33,6 @@ module Spaces
 
     def save_text(model)
       _save(model, content: model.content)
-
-      # FIXME: This shouldn't be here and it shouldn't be done with chmod
-      #        See T3
       writing_name_for(model).chmod(model.permission) if model.respond_to?(:permission)
     end
 

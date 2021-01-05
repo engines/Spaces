@@ -15,10 +15,6 @@ module Recovery
       end
     end
 
-    def just_print_the_error(f, l, e, w=STDOUT)
-      Trace.just_print_the_error(f, l, e, w)
-    end
-
     def trace_class; Trace ;end
 
   end

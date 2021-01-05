@@ -35,8 +35,7 @@ module Arenas
         bridge.send(command, options[command] || {})
       end
     rescue RubyTerraform::Errors::ExecutionError => e
-      # warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
     end
 
     def bridge; RubyTerraform ;end
