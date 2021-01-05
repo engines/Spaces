@@ -9,8 +9,7 @@ gem 'packer-client'
 
 gem 'addressable'
 
-gem "engines-logger",     "0.2.0",    :git => "git@github.com:engines/logger"
-
+gem 'engines-logger', '0.2.0', :git => 'git@github.com:engines/logger'
 
 # Gems to support GUI web app.
 gem 'sinatra'
