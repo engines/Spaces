@@ -1,5 +1,3 @@
-require 'requires'
-
 require_level 'engines/emissions'
 
 require_all 'engines/arenas'
