@@ -2,14 +2,6 @@
 
 module Fs
 
-  # Convert a symbol to a pathname
-  #
-  # @param symbol [Symbol] The symbol to represent as a Pathname
-  # @return [Pathname]
-  def sym_to_pathname(sym)
-    PN(sym.to_s)
-  end
-  module_function :sym_to_pathname
 
   # Add an extension to a path
   #

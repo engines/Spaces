@@ -68,7 +68,7 @@ module Spaces
     end
 
     def file_path_for(symbol, context_identifier)
-      path.join(sym_to_pathname(context_identifier), sym_to_pathname(symbol))
+      path.join("#{context_identifier}", "#{symbol}")
     end
 
     def path_for(model)

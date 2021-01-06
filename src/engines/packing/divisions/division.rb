@@ -22,7 +22,7 @@ module Packing
     end
 
     def copy_source_path_for(precedence)
-      packing_source_path.join(sym_to_pathname(precedence))
+      packing_source_path.join("#{precedence}")
     end
 
     def temporary_script_path

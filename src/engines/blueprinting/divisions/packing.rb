@@ -20,13 +20,13 @@ module Divisions
       {
         type: 'shell',
         inline: send(precedence).map do |s|
-          temporary_script_path.join(sym_to_pathname(precedence), s)
+          temporary_script_path.join("#{precedence}", s)
         end
       }
     end
 
     def temporary_script_path
-      Pathname("tmp").join('packing','scripts')
+      Pathname('tmp').join('packing','scripts')
     end
 
     def basename_as_sym(p)
