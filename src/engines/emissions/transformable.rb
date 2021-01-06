@@ -3,7 +3,7 @@ module Emissions
 
     class << self
       def auxiliary_directories
-        [PN("packing")]
+        [Pathname('packing')]
       end
     end
 

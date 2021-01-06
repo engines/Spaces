@@ -2,11 +2,6 @@
 
 module Fs
 
-  def PN(string)
-    Pathname(string)
-  end
-  module_function :PN
-
   # Convert a symbol to a pathname
   #
   # @param symbol [Symbol] The symbol to represent as a Pathname
@@ -32,7 +27,7 @@ module Fs
   #
   # @param [Pathname] the default workspace
   def default_workspace
-    PN(ENV["TMP"] || '/tmp').join("spaces")
+    Pathname(ENV["TMP"] || '/tmp').join("spaces")
   end
   module_function :default_workspace
 
@@ -40,7 +35,7 @@ module Fs
   #
   # @param [Pathname] the workspace directory
   def workspace
-    PN(ENV["ENGINES_WORKSPACE"] || default_workspace)
+    Pathname(ENV["ENGINES_WORKSPACE"] || default_workspace)
   end
   module_function :workspace
 end

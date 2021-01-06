@@ -26,7 +26,7 @@ module Packing
     end
 
     def temporary_script_path
-      PN("tmp").join("packing","scripts", qualifier)
+      Pathname('tmp').join('packing', 'scripts', qualifier)
     end
 
     def keys; by_precedence(super) ;end

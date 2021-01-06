@@ -26,7 +26,7 @@ module Provisioning
     end
 
     def reading_name_for(identifier, _, ext = nil)
-      add_ext(path.join(identifier, PN(identifier).basename), ext)
+      add_ext(path.join(identifier, Pathname(identifier).basename), ext)
     end
 
 

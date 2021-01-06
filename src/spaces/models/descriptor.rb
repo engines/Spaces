@@ -45,7 +45,7 @@ module Spaces
     private
 
     def rpath
-      @rpath ||= PN((@repository) ? @repository.path : "")
+      @rpath ||= Pathname((@repository) ? @repository.path : "")
     end
   end
 end

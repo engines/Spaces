@@ -64,7 +64,7 @@ module Emissions
     end
 
     def auxiliary_path
-      PN(__dir__).dirname.join("blueprinting", "divisions", qualifier)
+      Pathname(__dir__).dirname.join('blueprinting', 'divisions', qualifier)
     end
 
     def initialize(emission:, struct: nil, label: nil)
