@@ -35,7 +35,7 @@ module Packing
     end
 
     def artifacts_by(command, descriptor)
-      YAML::load(path_for(descriptor).join(command, "artifacts.yaml").read)
+      YAML::load(path_for(descriptor).join(command, 'artifacts.yaml').read)
     rescue Errno::ENOENT => e
       nil
     end
@@ -45,7 +45,7 @@ module Packing
       ensure_space_for(model)
 
       model.tap do |m|
-        path_for(model).join("commit.json").write(m.emit.to_h_deep.to_json)
+        path_for(model).join('commit.json').write(m.emit.to_h_deep.to_json)
       end
 
       model.identifier
@@ -67,20 +67,18 @@ module Packing
       raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:images)
       save(model)
 
-      cmd_path = sym_to_pathname(command)
-
       Dir.chdir(path_for(model).to_path) do
-        cmd_path.mkpath
+        Pathname.new("#{command}").mkpath
 
         bridge.build("#{command}.json").tap do |b|
-          cmd_path.join("output.yaml").write(b.to_yaml)
-          cmd_path.join("artifacts.yaml").write(b.artifacts.to_yaml)
+          Pathname.new("#{command}/output.yaml").write(b.to_yaml)
+          Pathname.new("#{command}/artifacts.yaml").write(b.artifacts.to_yaml)
         end
       end
     rescue PackWithoutImagesError => e
       warn(error: e, command: command, identifier: model.identifier, klass: klass)
     ensure
-      execute_on_anchors_for(cmd_path, model)
+      execute_on_anchors_for(command, model)
     end
 
     def bridge
