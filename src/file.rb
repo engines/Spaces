@@ -15,19 +15,4 @@ module Fs
   end
   module_function :add_ext
 
-  # Return the default workspace
-  #
-  # @param [Pathname] the default workspace
-  def default_workspace
-    Pathname(ENV["TMP"] || '/tmp').join("spaces")
-  end
-  module_function :default_workspace
-
-  # Get the Engines workspace directory from the environment or use the default
-  #
-  # @param [Pathname] the workspace directory
-  def workspace
-    Pathname(ENV["ENGINES_WORKSPACE"] || default_workspace)
-  end
-  module_function :workspace
 end
