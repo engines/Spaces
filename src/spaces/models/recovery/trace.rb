@@ -59,8 +59,8 @@ module Recovery
       ].map { |s| line.include?(s) }.include?(true)
     end
 
-    def spout(stuff = '-' * 88)
-      STDOUT.puts stuff
+    def spout(stuff = '-' * 88, to: STDOUT)
+      to.puts stuff
     end
 
     def initialize(args)
