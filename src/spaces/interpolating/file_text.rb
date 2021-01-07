@@ -3,46 +3,17 @@ require_relative 'text'
 module Interpolating
   class FileText < Text
 
-    # @!attribute [r] origin_file_name
-    #   @return [Pathname] the origin file name
-    # @!attribute [r] directory
-    #   @return [Pathname] the directory
     attr_accessor :origin_file_name, :directory
 
-    # The contents of {origin_file_name}
-    #
-    # @return [String]
-    def origin
-      @origin ||= origin_file_name.read
-    end
+    def origin; @origin ||= origin_file_name.read ;end
 
-    # Returns the octal representation of {origin_path}
-    #
-    # @return [Integer]
-    def permission
-      @permission ||= origin_file_name.stat.mode
-    end
+    def permission; @permission ||= origin_file_name.stat.mode ;end
 
-    # The same as {origin_path}
-    #
-    # @return [Pathname] {origin_path}
-    def emission_path
-      origin_file_name
-    end
+    def emission_path; origin_file_name ;end
 
-    # The basename of {origin_path}
-    #
-    # @return [Pathname] basename of {origin_path}
-    def file_name
-      origin_file_name.basename
-    end
+    def file_name; origin_file_name.basename ;end
 
-    # The same as {origin_path}
-    #
-    # @return [Pathname] {origin_path}
-    def subpath
-      origin_path
-    end
+    def subpath; origin_path ;end
 
     # Return the basename of the relative path from {origin_file_name} to
     # {directory}. The is quite confusing as there is an added complication: {directory}

@@ -82,7 +82,7 @@ class String
   end
 
   def trace_method_name
-    split('`').last.split("'").first.gsub(" ", "_")
+    split('`').last.split("'").first.gsub(' ', '_')
   end
 
   def trace_path_nodes

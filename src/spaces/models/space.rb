@@ -15,7 +15,7 @@ module Spaces
 
     delegate([:identifier, :universe, :default_model_class] => :klass)
 
-    def identifiers; path.glob("*").map { |p| p.basename.to_s } ;end
+    def identifiers; path.glob('*').map { |p| p.basename.to_s } ;end
 
     def all(klass = default_model_class)
       identifiers.map { |i| by(i, klass) }
@@ -64,7 +64,7 @@ module Spaces
     end
 
     def file_names_for(directory, identifier)
-      file_path_for(directory, identifier).glob("**/*").reject(&:directory?)
+      file_path_for(directory, identifier).glob('**/*').reject(&:directory?)
     end
 
     def file_path_for(symbol, context_identifier)
