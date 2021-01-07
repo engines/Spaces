@@ -25,10 +25,9 @@ module Provisioning
       end
     end
 
-    def reading_name_for(identifier, _, ext = nil)
-      add_ext(path.join(identifier, Pathname(identifier).basename), ext)
+    def reading_name_for(identifier, _)
+      path.join(identifier, Pathname(identifier).basename)
     end
-
 
     def save(model)
       anchor_provisionings_for(model).each { |p| save(p) }

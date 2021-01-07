@@ -18,7 +18,6 @@ end
 
 include Requires
 
-require_relative 'file'
 require_level 'spaces'
 require_level 'engines'
 require_all   'providers'
