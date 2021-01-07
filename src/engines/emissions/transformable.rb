@@ -3,7 +3,7 @@ module Emissions
 
     class << self
       def auxiliary_directories
-        [:packing]
+        [:packing, :commissioning]
       end
     end
 
