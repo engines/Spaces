@@ -18,17 +18,11 @@ class String
 
   alias_method :underscore, :snakize
 
-  def singularize
-    chomp('s')
-  end
+  def singularize = chomp('s')
 
-  def pluralize
-    "#{itself}s"
-  end
+  def pluralize = "#{itself}s"
 
-  def blank?
-    empty? || BLANK_RE.match?(self)
-  end
+  def blank? = empty? || BLANK_RE.match?(self)
 
-  def complete?; true ;end
+  def complete? = true
 end

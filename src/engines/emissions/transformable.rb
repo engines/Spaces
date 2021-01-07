@@ -2,9 +2,7 @@ module Emissions
   class Transformable < ::Spaces::Model
 
     class << self
-      def auxiliary_directories
-        [:packing, :commissioning]
-      end
+      def auxiliary_directories = [:packing, :commissioning]
     end
 
     delegate(
@@ -12,24 +10,22 @@ module Emissions
       auxiliary_directories: :klass
     )
 
-    def complete?; true ;end
+    def complete? = true
 
-    def identifier; struct[:identifier] ;end
+    def identifier = struct[:identifier]
 
-    def descriptor_class; ::Spaces::Descriptor ;end
+    def descriptor_class = ::Spaces::Descriptor
 
-    def arena_stanzas; stanzas_for(:arena) ;end
-    def provisioning_stanzas; stanzas_for(:provisioning) ;end
+    def arena_stanzas = stanzas_for(:arena)
+    def provisioning_stanzas = stanzas_for(:provisioning)
 
-    def stanzas_for(symbol); _stanzas_for(symbol) ;end
+    def stanzas_for(symbol) = _stanzas_for(symbol)
 
-    def random(length); SecureRandom.hex(length.to_i) ;end
+    def random(length) = SecureRandom.hex(length.to_i)
 
     protected
 
-    def all_complete?(array)
-      array.map(&:complete?).all_true?
-    end
+    def all_complete?(array) = array.map(&:complete?).all_true?
 
     private
 

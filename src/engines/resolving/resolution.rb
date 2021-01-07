@@ -2,8 +2,8 @@ module Resolving
   class Resolution < ::Emissions::Emission
 
     class << self
-      def composition_class; Composition ;end
-      def bindings_class; Divisions::Bindings ;end
+      def composition_class = Composition
+      def bindings_class = Divisions::Bindings
     end
 
     delegate(
@@ -58,11 +58,9 @@ module Resolving
       )
     end
 
-    def keys
-      [super, embeds.map(&:keys)].flatten.uniq
-    end
+    def keys = [super, embeds.map(&:keys)].flatten.uniq
 
-    def maybe_with_embeds_in(division); division.with_embeds ;end
+    def maybe_with_embeds_in(division) = division.with_embeds
 
     def embeds
       struct.bindings ? bindings.embedded_blueprints : []
@@ -91,8 +89,8 @@ module Resolving
       self.reset_bindings!
     end
 
-    def emit!; self.struct = emit ;end
-    def reset_bindings!; @bindings = nil ;end
+    def emit! = self.struct = emit
+    def reset_bindings! = @bindings = nil
 
   end
 end

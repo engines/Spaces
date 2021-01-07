@@ -19,14 +19,12 @@ module Arenas
       _save(provisions, content: provisions.stanzas_content, as: :tf)
     end
 
-    def path_for(model)
-      path.join(model.arena.context_identifier)
-    end
+    def path_for(model) = path.join(model.arena.context_identifier)
 
-    def init(model); execute(:init, model) ;end
-    def plan(model); execute(:plan, model) ;end
-    def show(model); execute(:show, model) ;end
-    def apply(model); execute(:apply, model) ;end
+    def init(model) = execute(:init, model)
+    def plan(model) = execute(:plan, model)
+    def show(model) = execute(:show, model)
+    def apply(model) = execute(:apply, model)
 
     protected
 
@@ -38,7 +36,7 @@ module Arenas
       warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
     end
 
-    def bridge; RubyTerraform ;end
+    def bridge = RubyTerraform
 
     def options
       {

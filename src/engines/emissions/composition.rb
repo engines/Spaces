@@ -26,29 +26,21 @@ module Emissions
           Divisions::Packing,
           Divisions::Containers,
           Divisions::Volumes,
-          Divisions::About          
+          Divisions::About
         ]
       end
 
-      def associative_classes; [] ;end
+      def associative_classes = []
 
-      def ranking; [division_classes, associative_classes].flatten.compact ;end
+      def ranking = [division_classes, associative_classes].flatten.compact
 
-      def divisions
-        associative_divisions.merge(map_for(division_classes))
-      end
+      def divisions = associative_divisions.merge(map_for(division_classes))
 
-      def associative_divisions
-        map_for(associative_classes)
-      end
+      def associative_divisions = map_for(associative_classes)
 
-      def mandatory_keys
-        associative_divisions.keys
-      end
+      def mandatory_keys = associative_divisions.keys
 
-      def composition_class_for(key)
-         divisions[key]&.composition
-      end
+      def composition_class_for(key) = divisions[key]&.composition
 
       def map_for(classes)
         classes.inject({}) do |m, k|
@@ -56,20 +48,14 @@ module Emissions
         end
       end
 
-      def key_for(klass)
-        mapped_key_for(klass.qualifier.to_sym)
-      end
+      def key_for(klass) = mapped_key_for(klass.qualifier.to_sym)
 
-      def mapped_key_for(key)
-         naming_map[key] || key
-      end
+      def mapped_key_for(key) = naming_map[key] || key
     end
 
     delegate([:divisions, :associative_divisions, :ranking, :naming_map, :mandatory_keys] => :klass)
 
-    def keys
-      divisions.keys
-    end
+    def keys = divisions.keys
 
   end
 end

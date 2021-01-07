@@ -1,9 +1,9 @@
 module Packing
   module Division
 
-    def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
+    def precedence = [:first, :early, :adds, :middle, :late, :removes, :last]
 
-    def precedence_midpoint; precedence.count / 2 ;end
+    def precedence_midpoint = precedence.count / 2
 
     def embed!(other)
       tap do
@@ -29,7 +29,7 @@ module Packing
       Pathname('tmp').join('packing', 'scripts', qualifier)
     end
 
-    def keys; by_precedence(super) ;end
+    def keys = by_precedence(super)
 
     def by_precedence(keys)
       keys.sort_by { |k| precedence.index(k) || precedence_midpoint }

@@ -12,7 +12,7 @@ module Divisions
       }
     end
 
-    def recursion; '-R' if struct.recursion ;end
+    def recursion = ('-R' if struct.recursion)
 
   end
 end

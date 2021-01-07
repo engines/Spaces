@@ -4,27 +4,21 @@ module Emissions
   class Divisible < Division
 
     class << self
-      def subdivision_class
-        Module.const_get(name.singularize)
-      end
+      def subdivision_class = Module.const_get(name.singularize)
 
-      def default_struct; [] ;end
+      def default_struct = []
     end
 
     delegate(subdivision_class: :klass)
 
-    def related_divisions
-      @related_divisions ||= emission.divisions
-    end
+    def related_divisions = @related_divisions ||= emission.divisions
 
-    def arena_stanzas; all.map(&:arena_stanzas) ;end
-    def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
+    def arena_stanzas = all.map(&:arena_stanzas)
+    def provisioning_stanzas = all.map(&:provisioning_stanzas)
 
-    def embed!(other)
-      tap { self.struct = struct_with(other) }
-    end
+    def embed!(other) = tap { self.struct = struct_with(other) }
 
-    def struct_with(other); [struct, other.struct].flatten.uniq ;end
+    def struct_with(other) = [struct, other.struct].flatten.uniq
 
     def all
       @all ||= struct&.map { |s| subdivision_for(s) }&.compact || []
@@ -39,7 +33,7 @@ module Emissions
       nil
     end
 
-    def emit; all&.map(&:emit) || super ;end
+    def emit = all&.map(&:emit) || super
 
     def initialize(struct: nil, emission: nil, label: nil)
       check_subdivision_class

@@ -18,19 +18,15 @@ class Universe < ::Spaces::Space
     end
   end
 
-  def path; workspace.join(identifier) ;end
+  def path = workspace.join(identifier)
 
-  def workspace; Pathname(ENV['ENGINES_WORKSPACE'] || default_workspace) ;end
-  def default_workspace; Pathname(ENV['TMP'] || '/tmp').join('spaces') ;end
+  def workspace = Pathname(ENV['ENGINES_WORKSPACE'] || default_workspace)
+  def default_workspace = Pathname(ENV['TMP'] || '/tmp').join('spaces')
 
-  def host; 'spaces.internal' ;end
+  def host = 'spaces.internal'
 
-  def method_missing(m, *args, &block)
-    klass.space_map[m] || super
-  end
+  def method_missing(m, *args, &block) = klass.space_map[m] || super
 
-  def respond_to_missing?(m, *)
-    klass.space_map[m] || super
-  end
+  def respond_to_missing?(m, *) = klass.space_map[m] || super
 
 end

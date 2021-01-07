@@ -1,7 +1,7 @@
 module Emissions
   module DivisionResolvable
 
-    def emit; resolved ;end
+    def emit = resolved
 
     def complete?
       texts.values.map(&:complete?).all_true?

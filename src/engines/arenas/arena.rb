@@ -2,12 +2,10 @@ module Arenas
   class Arena < ::Emissions::Emission
 
     class << self
-      def composition_class; Composition ;end
-      def provider_class; ::Divisions::Provider ;end
+      def composition_class = Composition
+      def provider_class = ::Divisions::Provider
 
-      def dns_class
-        composition.divisions[:dns]
-      end
+      def dns_class = composition.divisions[:dns]
     end
 
     delegate(
@@ -37,7 +35,7 @@ module Arenas
       end
     end
 
-    def arena; itself ;end
+    def arena = itself
 
     def division_map
       @division_map ||=

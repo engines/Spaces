@@ -6,7 +6,7 @@ require_relative 'arenas'
 require_relative 'provisioning'
 
 
-def universe; @u ||= Universe.new ;end
+def universe = @u ||= Universe.new
 
 def clear
   @u,

@@ -3,7 +3,7 @@ module Divisions
     include ::Packing::Division
 
     class << self
-      def subdivision_class; NoduleArray ;end
+      def subdivision_class = NoduleArray
     end
 
     delegate(subdivision_class: :klass)
@@ -27,9 +27,7 @@ module Divisions
       all.detect { |a| a.identifier == m.to_s }
     end
 
-    def respond_to_missing?(m, *)
-      keys.include?(m)
-    end
+    def respond_to_missing?(m, *) = keys.include?(m)
 
   end
 end

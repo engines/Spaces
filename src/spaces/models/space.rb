@@ -6,20 +6,16 @@ module Spaces
     include Engines::Logger
 
     class << self
-      def universe
-        @@universe ||= Universe.new
-      end
+      def universe = @@universe ||= Universe.new
 
-      def default_model_class ;end
+      def default_model_class = nil
     end
 
     delegate([:identifier, :universe, :default_model_class] => :klass)
 
-    def identifiers; path.glob('*').map { |p| p.basename.to_s } ;end
+    def identifiers = path.glob('*').map { |p| p.basename.to_s }
 
-    def all(klass = default_model_class)
-      identifiers.map { |i| by(i, klass) }
-    end
+    def all(klass = default_model_class) = identifiers.map { |i| by(i, klass) }
 
     def by_yaml(identifier, klass = default_model_class)
       klass.new(identifier: identifier, struct: klass.from_yaml(_by(identifier, klass, as: :yaml)))
@@ -75,13 +71,13 @@ module Spaces
       path.join(model.context_identifier, model.subpath)
     end
 
-    def path; universe.path.join(identifier); end
+    def path = universe.path.join(identifier)
 
-    def ensure_space; path.mkpath ;end
+    def ensure_space = path.mkpath
 
-    def ensure_space_for(model); path_for(model).mkpath ;end
+    def ensure_space_for(model) = path_for(model).mkpath
 
-    def encloses?(file_name); file_name.exist? ;end
+    def encloses?(file_name) = file_name.exist?
 
     def _by(identifier, klass = default_model_class, as:)
       Pathname.new("#{reading_name_for(identifier, klass)}.#{as}").read

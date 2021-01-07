@@ -25,8 +25,8 @@ module Providers
         )
       end
 
-      def volume_name; "#{identifier}-#{source}-volume" ;end
-      def pool_name; "#{source}-pool" ;end
+      def volume_name = "#{identifier}-#{source}-volume"
+      def pool_name = "#{source}-pool"
 
     end
   end

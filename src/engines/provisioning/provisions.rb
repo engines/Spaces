@@ -9,8 +9,8 @@ module Provisioning
       [:has?, :divisions, :connecting_descriptors] => :resolution
     )
 
-    def arena_identifier; arena&.identifier || identifier.split('/').first ;end
-    def resolution_identifier; resolution&.identifier || identifier.split('/').last ;end
+    def arena_identifier = arena&.identifier || identifier.split('/').first
+    def resolution_identifier = resolution&.identifier || identifier.split('/').last
 
     def emit
       super.tap do |e|
@@ -20,7 +20,7 @@ module Provisioning
       end
     end
 
-    def file_name; resolution.identifier ;end
+    def file_name = resolution.identifier
 
     def stanzas
       divisions.map(&:provisioning_stanzas).flatten.compact

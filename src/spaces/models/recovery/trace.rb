@@ -18,7 +18,7 @@ module Recovery
       spout "\n"
     end
 
-    def t(id = identifier); I18n.t(id, **witnesses) ;end
+    def t(id = identifier) = I18n.t(id, **witnesses)
 
     def spout_trace
       spout "\n#{array.join("\n")}" if !array.empty? && verbosity&.include?(:trace)
@@ -37,11 +37,11 @@ module Recovery
       end
     end
 
-    def identifier; [:trace, zipped_nodes].join('.') ;end
+    def identifier = [:trace, zipped_nodes].join('.')
 
-    def zipped_nodes; path_nodes.zip(method_names).map{ |n| n.join('/') } ;end
-    def path_nodes; array.map(&:trace_path_nodes) ;end
-    def method_names; array.map(&:trace_method_name) ;end
+    def zipped_nodes = path_nodes.zip(method_names).map{ |n| n.join('/') }
+    def path_nodes = array.map(&:trace_path_nodes)
+    def method_names = array.map(&:trace_method_name)
 
     def array
       @array ||= (error&.backtrace || []).select do |s|
@@ -77,18 +77,12 @@ end
 
 class String
 
-  def shortened_trace_line
-    split(break_text).last
-  end
+  def shortened_trace_line = split(break_text).last
 
-  def trace_method_name
-    split('`').last.split("'").first.gsub(' ', '_')
-  end
+  def trace_method_name = split('`').last.split("'").first.gsub(' ', '_')
 
-  def trace_path_nodes
-    split('.').first.gsub('/', '::')
-  end
+  def trace_path_nodes = split('.').first.gsub('/', '::')
 
-  def break_text; '/src/' ;end # FIX: will fail if source code is not under src folder
+  def break_text = '/src/' # FIX: will fail if source code is not under src folder
 
 end

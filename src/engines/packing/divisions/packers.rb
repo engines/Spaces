@@ -12,9 +12,7 @@ module Divisions
       packing_divisions: :resolution
     )
 
-    def emit
-      packing_stanzas.map(&:to_h)
-    end
+    def emit = packing_stanzas.map(&:to_h)
 
     def packing_stanzas
       [auxiliary_files_stanza, precedential_stanzas]
@@ -37,7 +35,9 @@ module Divisions
         .compact.flatten
     end
 
-    def complete_precedence; by_precedence(packing_divisions.map(&:keys).flatten.uniq) ;end
+    def complete_precedence
+      by_precedence(packing_divisions.map(&:keys).flatten.uniq)
+    end
 
     def auxiliary_files_stanza
       {
@@ -57,9 +57,7 @@ module Divisions
       }
     end
 
-    def overlay_exists_for?(precedence)
-      copy_source_path_for(precedence).exist?
-    end
+    def overlay_exists_for?(precedence) = copy_source_path_for(precedence).exist?
 
   end
 end

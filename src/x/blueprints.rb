@@ -9,4 +9,4 @@ def blueprint
     end
 end
 
-def save_blueprint; universe.blueprints.save(blueprint) ;end
+def save_blueprint = universe.blueprints.save(blueprint)

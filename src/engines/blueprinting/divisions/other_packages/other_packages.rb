@@ -5,13 +5,11 @@ module Divisions
 
     include ::Packing::Division
 
-    def embed!(other); divisible_embed!(other) ;end
+    def embed!(other) = divisible_embed!(other)
 
-    def packing_stanza_for(key)
-      all.map(&:packing_stanza) if key == :adds
-    end
+    def packing_stanza_for(key) = (all.map(&:packing_stanza) if key == :adds)
 
-    def keys; [:adds] ;end
+    def keys = [:adds]
 
   end
 end

@@ -12,11 +12,11 @@ module Spaces
 
     attr_accessor :repository
 
-    def root_identifier; basename.split('.').first ;end
+    def root_identifier = basename.split('.').first
 
-    def branch; struct.branch ||= 'main' ;end
-    def protocol; struct.protocol ||= extname&.gsub('.', '') ;end
-    def git?; protocol == 'git' ;end
+    def branch = struct.branch ||= 'main'
+    def protocol = struct.protocol ||= extname&.gsub('.', '')
+    def git? = protocol == 'git'
 
     def initialize(args)
       self.repository = Addressable::URI.parse(args[:repository])
@@ -25,9 +25,7 @@ module Spaces
       self.struct.identifier ||= root_identifier
     end
 
-    def to_s
-      [repository, branch, identifier].compact.join(' ')
-    end
+    def to_s = [repository, branch, identifier].compact.join(' ')
 
   end
 end

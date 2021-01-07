@@ -10,7 +10,7 @@ class OpenStruct
     other ? OpenStruct.new(self.to_h.reverse_merge(other.to_h)) : self
   end
 
-  def keys; to_h.keys ;end
+  def keys = to_h.keys
 
   def to_h_deep
     to_h.transform_values do |v|
@@ -20,6 +20,6 @@ class OpenStruct
     end
   end
 
-  def emit; duplicate(self) ;end
+  def emit = duplicate(self)
 
 end

@@ -10,11 +10,11 @@ module Divisions
       super.tap { |s| s[:descriptor] = descriptor.struct }
     end
 
-    def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end
-    def identifier; struct.identifier || descriptor.identifier ;end
+    def descriptor = @descriptor ||= descriptor_class.new(struct.descriptor)
+    def identifier = struct.identifier || descriptor.identifier
 
-    def extraction; struct.extraction ||= protocol ;end
-    def extracted_path; struct.extracted_path ||= identifier ;end
+    def extraction = struct.extraction ||= protocol
+    def extracted_path = struct.extracted_path ||= identifier
 
     def packing_stanza
       {

@@ -2,7 +2,7 @@ module Packing
   class Pack < ::Emissions::Emission
 
     class << self
-      def composition_class; Composition ;end
+      def composition_class = Composition
     end
 
     delegate(
@@ -14,14 +14,14 @@ module Packing
     alias_method :context_identifier, :identifier
     alias_method :keys, :composition_keys
 
-    def export; struct_for(images.all.map(&:export)) ;end
-    def emit; OpenStruct.new(to_h).merge(struct_for(images.all.map(&:commit))) ;end
+    def export = struct_for(images.all.map(&:export))
+    def emit = OpenStruct.new(to_h).merge(struct_for(images.all.map(&:commit)))
 
-    def packers; provisioners ;end
+    def packers = provisioners
 
-    def struct_for(images); OpenStruct.new(builders: images) ;end
+    def struct_for(images) = OpenStruct.new(builders: images)
 
-    def script_file_names; resolution.packing_script_file_names ;end
+    def script_file_names = resolution.packing_script_file_names
 
     def initialize(resolution)
       self.struct = (resolution.has?(:images) ? struct_for(resolution.images) : OpenStruct.new)
@@ -33,9 +33,7 @@ module Packing
       super
     end
 
-    def respond_to_missing?(m, *)
-      division_keys.include?(m.to_s) || super
-    end
+    def respond_to_missing?(m, *) = division_keys.include?(m.to_s) || super
 
   end
 end

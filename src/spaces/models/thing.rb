@@ -10,15 +10,15 @@ module Spaces
     delegate t: I18n
 
     class << self
-      def identifier; name.split('::').join ;end
+      def identifier = name.split('::').join
 
-      def namespace; name.split('::')[0..-2].join.snakize ;end
+      def namespace = name.split('::')[0..-2].join.snakize
 
-      def qualifier; name.split('::').last.snakize ;end
+      def qualifier = name.split('::').last.snakize
 
-      def from_yaml(y); YAML::load(y) ;end
+      def from_yaml(y) = YAML::load(y)
 
-      def relation_accessor(*args); attr_accessor(*args) ;end
+      def relation_accessor(*args) = attr_accessor(*args)
 
       def alias_accessor(to, from)
         alias_method to, from
@@ -37,21 +37,21 @@ module Spaces
       to_h: :struct
     )
 
-    def klass; @klass ||= self.class ;end
+    def klass = @klass ||= self.class
 
-    def keys; struct&.to_h&.keys ;end
+    def keys = struct&.to_h&.keys
 
-    def emit; duplicate(struct) ;end
+    def emit = duplicate(struct)
 
-    def context_identifier; identifier ;end
+    def context_identifier = identifier
 
-    def to_yaml; YAML.dump(struct) ;end
+    def to_yaml = YAML.dump(struct)
 
-    def to_json(*args); struct&.to_h_deep&.to_json(*args) ;end
+    def to_json(*args) = struct&.to_h_deep&.to_json(*args)
 
-    def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
+    def open_struct_from_json(j) = JSON.parse(j, object_class: OpenStruct)
 
-    def to_s; identifier ;end
+    def to_s = identifier
 
     def initialize(struct: nil)
       self.struct = duplicate(struct) || OpenStruct.new

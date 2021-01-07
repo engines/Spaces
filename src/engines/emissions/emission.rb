@@ -4,8 +4,8 @@ module Emissions
   class Emission < Transformable
 
     class << self
-      def composition; @composition ||= composition_class.new ;end
-      def composition_class; Composition ;end
+      def composition = @composition ||= composition_class.new
+      def composition_class = Composition
     end
 
     relation_accessor :predecessor
@@ -23,27 +23,19 @@ module Emissions
       OpenStruct.new(to_h).tap { |e| e.identifier = struct.identifier }
     end
 
-    def incomplete_divisions
-      divisions.reject(&:complete?)
-    end
+    def incomplete_divisions = divisions.reject(&:complete?)
 
     def mandatory_divisions_present?
       division_keys & mandatory_keys == mandatory_keys
     end
 
-    def stanzas_content
-      stanzas.join("\n")
-    end
+    def stanzas_content = stanzas.join("\n")
 
-    def stanzas
-      divisions.map(&:stanzas)
-    end
+    def stanzas = divisions.map(&:stanzas)
 
-    def divisions; division_map.values ;end
+    def divisions = division_map.values
 
-    def count
-      has?(:scaling) ? scaling.count : 1
-    end
+    def count = has?(:scaling) ? scaling.count : 1
 
     def division_map
       @division_map ||= keys.inject({}) do |m, k|
@@ -59,16 +51,14 @@ module Emissions
       end.compact
     end
 
-    def composition_keys; composition.keys ;end
-    def division_keys; division_map.keys ;end
+    def composition_keys = composition.keys
+    def division_keys = division_map.keys
 
     def division_for(key)
       composition.divisions[key]&.prototype(emission: self, label: key)
     end
 
-    def emit_for(key)
-      division_map[key]&.emit || struct[key]
-    end
+    def emit_for(key) = division_map[key]&.emit || struct[key]
 
     def descriptors_for(division_identifier)
       descriptors_structs_for(division_identifier).map { |d| descriptor_class.new(d) }.uniq(&:uniqueness)
@@ -78,8 +68,8 @@ module Emissions
       (struct[division_identifier] || []).map { |d| d[:descriptor] }.compact
     end
 
-    def maybe_with_embeds_in(division); division ;end
-    def embeds; [] ;end
+    def maybe_with_embeds_in(division) = division
+    def embeds = []
 
     def method_missing(m, *args, &block)
       return division_map[m.to_sym] || struct[m] if division_keys.include?(m)

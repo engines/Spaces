@@ -4,9 +4,9 @@ module Divisions
   class Binding < ::Emissions::DescriptiveSubdivision
     include Emissions::DivisionResolvable
 
-    def embed?; struct.type == 'embed' ;end
+    def embed? = struct.type == 'embed'
 
-    def override_keys; overrides.to_h.keys ;end
+    def override_keys = overrides.to_h.keys
 
     def emit
       super.tap { |s| s[:descriptor] = descriptor.struct }
@@ -35,7 +35,7 @@ module Divisions
       end || OpenStruct.new
     end
 
-    def struct_configuration; struct.configuration || OpenStruct.new ;end
+    def struct_configuration = struct.configuration || OpenStruct.new
 
     def method_missing(m, *args, &block)
       override_keys&.include?(m) ? configuration[m] : super

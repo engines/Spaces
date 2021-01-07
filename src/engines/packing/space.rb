@@ -4,7 +4,7 @@ module Packing
   class Space < ::Spaces::Space
 
     class << self
-      def default_model_class; Pack ;end
+      def default_model_class = Pack
     end
 
     delegate(resolutions: :universe)
@@ -19,8 +19,8 @@ module Packing
       end
     end
 
-    def encloses_commit?(descriptor); encloses_good_result?(:commit, descriptor) ;end
-    def encloses_export?(descriptor); encloses_good_result?(:export, descriptor) ;end
+    def encloses_commit?(descriptor) = encloses_good_result?(:commit, descriptor)
+    def encloses_export?(descriptor) = encloses_good_result?(:export, descriptor)
 
     def encloses_good_result?(command, descriptor)
       encloses_result?(command, descriptor) && with_good_artifacts?(command, descriptor)
@@ -53,13 +53,13 @@ module Packing
       warn(error: e, identifier: model.identifier, klass: klass)
     end
 
-    def export(model); execute(:export, model) ;end
-    def commit(model); execute(:commit, model) ;end
+    def export(model) = execute(:export, model)
+    def commit(model) = execute(:commit, model)
 
-    def push(model) ;end
-    def fix(model) ;end
-    # def inspect(model) ;end
-    def validate(model) ;end
+    def push(model) = nil
+    def fix(model) = nil
+    # def inspect(model) = nil
+    def validate(model) = nil
 
     protected
 
@@ -81,9 +81,7 @@ module Packing
       execute_on_anchors_for(command, model)
     end
 
-    def bridge
-      @bridge ||= Packer::Client.new
-    end
+    def bridge = @bridge ||= Packer::Client.new
 
     private
 

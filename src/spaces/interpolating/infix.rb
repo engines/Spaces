@@ -21,9 +21,9 @@ module Interpolating
       Text.new(origin: resolved_once, transformable: transformable).resolved
     end
 
-    def complete?; !more_to_resolve? || unresolvable? ;end
-    def more_to_resolve?; resolved_once.to_s.include?(interpolation_marker) ;end
-    def unresolvable?; resolved_once == value ;end
+    def complete? = !more_to_resolve? || unresolvable?
+    def more_to_resolve? = resolved_once.to_s.include?(interpolation_marker)
+    def unresolvable? = resolved_once == value
 
     def acceptable_method_chain_in_value
       @amc ||= ([:unqualified] + value.split('.')).last(2)
@@ -45,7 +45,7 @@ module Interpolating
       self.text = text
     end
 
-    def to_s; resolved ;end
+    def to_s = resolved
 
     protected
 

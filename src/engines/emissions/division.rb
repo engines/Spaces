@@ -12,7 +12,7 @@ module Emissions
         emission.maybe_with_embeds_in(new(emission: emission, label: label))
       end
 
-      def default_struct; OpenStruct.new ;end
+      def default_struct = OpenStruct.new
     end
 
     relation_accessor :emission
@@ -24,13 +24,11 @@ module Emissions
       resolutions: :universe
     )
 
-    def packing_division?
-      klass.ancestors.include?(::Packing::Division)
-    end
+    def packing_division? = klass.ancestors.include?(::Packing::Division)
 
-    def composition_rank; ranking.index(klass) ;end
+    def composition_rank = ranking.index(klass)
 
-    def context_identifier; emission.context_identifier ;end
+    def context_identifier = emission.context_identifier
 
     def auxiliary_content
       logger.debug "auxiliary_directories: #{auxiliary_directories.inspect}"
@@ -51,7 +49,7 @@ module Emissions
       end
     end
 
-    def embed!(other); itself; end
+    def embed!(other) = itself
 
     def scale &block
       Array.new(emission.count) do |i|
@@ -73,7 +71,7 @@ module Emissions
       self.struct = struct || emission.struct[label] || default_struct
     end
 
-    def to_s; struct ;end
+    def to_s = struct
 
   end
 end

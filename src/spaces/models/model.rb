@@ -4,19 +4,19 @@ module Spaces
   class Model < Thing
 
     class << self
-      def universe; @universe ||= Universe.new ;end
+      def universe = @universe ||= Universe.new
     end
 
     delegate(universe: :klass)
 
-    # TODO: work out what to do here.
-    def file_name; klass.qualifier ;end
-    def subpath; Pathname(''); end
-    def uniqueness; [klass.name, identifier] ;end
+    def file_name = klass.qualifier
+    def uniqueness = [klass.name, identifier]
 
     def namespaced_name(namespace, symbol)
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
     end
+
+    def subpath = ''
 
   end
 end

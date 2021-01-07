@@ -16,7 +16,7 @@ module Packing
         }
       end
 
-      def divisions; @divisions ||= map_for(division_classes) ;end
+      def divisions = @divisions ||= map_for(division_classes)
     end
 
   end
