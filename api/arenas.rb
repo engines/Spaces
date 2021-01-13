@@ -5,11 +5,3 @@ post '/arenas/:identifier/:action' do
   raise result.error if result.is_a? Recovery::Trace
   "Successfully performed '#{params[:action]}'.".to_json
 end
-
-# Data for arena topology graphs
-get '/arenas/:identifier/topology/mesh' do
-  resolution_mesh_for(params[:identifier]).to_json
-end
-get '/arenas/:identifier/topology/tree' do
-  resolution_tree_for(params[:identifier]).to_json
-end
