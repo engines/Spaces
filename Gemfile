@@ -16,6 +16,9 @@ gem "engines-logger",     "0.2.0",    :git => "git@github.com:engines/logger"
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'thin'
+gem 'letter_avatar'
+gem 'fastimage'
+gem 'mini_magick'
 
 group :development do
   gem 'byebug'

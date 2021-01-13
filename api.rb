@@ -1,5 +1,10 @@
 require 'sinatra'
 require 'byebug'
+require 'mini_magick'
+require 'letter_avatar'
+require 'fastimage'
+require 'pathname'
+
 
 require './api/universe'
 require './api/arenas'
