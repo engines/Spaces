@@ -1,10 +1,3 @@
-# Show provisioning for an arena.
-get '/arenas/:identifier/provisioning' do
-  universe.provisioning.provisioning_for(
-    arena_identifier: params[:identifier]
-  ).to_json
-end
-
 # Perform an action (:init, :plan or :apply) on an arena.
 post '/arenas/:identifier/:action' do
   arena = universe.arenas.by(params[:identifier])

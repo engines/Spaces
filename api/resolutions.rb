@@ -1,10 +1,3 @@
-# Show provisioning for a resolution.
-get '/resolutions/:identifier/provisioning' do
-  universe.provisioning.provisioning_for(
-    resolution_identifier: params[:identifier]
-  ).to_json
-end
-
 # Show validity for a resolution
 get '/resolutions/:identifier/validity' do
   resolution = universe.resolutions.by(params[:identifier])
