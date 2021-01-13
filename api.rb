@@ -1,8 +1,15 @@
 require 'sinatra'
 require 'byebug'
+require 'mini_magick'
+require 'letter_avatar'
+require 'fastimage'
+require 'pathname'
+
+$:.unshift(Pathname.new(__FILE__).parent.join('src').expand_path)
 
 require './api/universe'
 require './api/arenas'
+require './api/blueprints'
 require './api/metrics'
 require './api/packing'
 require './api/provisioning'
@@ -13,8 +20,8 @@ require './api/crud'
 
 set show_exceptions: false
 
-before do
-  content_type 'application/json'
+after do
+  content_type 'application/json' unless content_type
 end
 
 error do |e|

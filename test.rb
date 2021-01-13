@@ -1,4 +1,11 @@
+require 'pathname'
+require 'addressable'
+
+$:.unshift(Pathname.new(__FILE__).parent.join('src').expand_path)
+
 require 'byebug'
+
+require 'requires'
 
 require './api/universe'
 require './tests/arenas'
@@ -13,15 +20,17 @@ require './tests/test'
 extend Tests
 
 # Clear all Spaces data
-Pathname.new("/opt/spaces/Universe").children.each(&:rmtree)
+Fs.workspace.exist? && Fs.workspace.rmtree
 
 # Create counters
 init
 
-# Perform tests
+# These don't currently work
 # tenants
-arenas
 # domains
+
+# Perform tests
+arenas
 blueprints
 resolutions
 packing
