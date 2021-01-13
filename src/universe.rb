@@ -18,9 +18,10 @@ class Universe < ::Spaces::Space
     end
   end
 
-  def path
-    Fs.workspace.join(identifier)
-  end
+  def path; workspace.join(identifier) ;end
+
+  def workspace; Pathname(ENV['ENGINES_WORKSPACE'] || default_workspace) ;end
+  def default_workspace; Pathname(ENV['TMP'] || '/tmp').join('spaces') ;end
 
   def host; 'spaces.internal' ;end
 

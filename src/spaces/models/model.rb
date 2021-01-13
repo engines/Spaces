@@ -11,7 +11,7 @@ module Spaces
 
     # TODO: work out what to do here.
     def file_name; klass.qualifier ;end
-    def subpath; PN(""); end
+    def subpath; Pathname(''); end
     def uniqueness; [klass.name, identifier] ;end
 
     def namespaced_name(namespace, symbol)

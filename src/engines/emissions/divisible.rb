@@ -35,8 +35,7 @@ module Emissions
     rescue NameError => _
       struct
     rescue ArgumentError => e
-      # warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
       nil
     end
 
@@ -50,8 +49,7 @@ module Emissions
     def check_subdivision_class
       subdivision_class
     rescue NameError => e
-      # warn(error: e, klass: klass.name.singularize, verbosity: [:silence])
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, klass: klass.name.singularize, verbosity: [:silence])
     end
 
   end

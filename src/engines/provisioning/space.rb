@@ -18,17 +18,16 @@ module Provisioning
     def by(identifier, klass = default_model_class)
       super
     rescue Errno::ENOENT => e
-      # warn(error: e, identifier: identifier, klass: klass)
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, identifier: identifier, klass: klass)
+
       klass.new(identifier: identifier).tap do |m|
         save(m)
       end
     end
 
-    def reading_name_for(identifier, _, ext = nil)
-      add_ext(path.join(identifier, PN(identifier).basename), ext)
+    def reading_name_for(identifier, _)
+      path.join(identifier, Pathname(identifier).basename)
     end
-
 
     def save(model)
       anchor_provisionings_for(model).each { |p| save(p) }

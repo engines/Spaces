@@ -20,8 +20,7 @@ module Blueprinting
         by(descriptor.identifier).tap { |m| import_anchors_for(m) }
       end
     rescue Errno::ENOENT => e
-      # warn(error: e, descriptor: descriptor, verbosity: [:error])
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, descriptor: descriptor, verbosity: [:error])
     end
 
     def import_anchors_for(model)

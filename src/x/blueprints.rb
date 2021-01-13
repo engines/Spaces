@@ -5,7 +5,6 @@ def blueprint
     begin
       universe.blueprints.by(descriptor.identifier)
     rescue Errno::ENOENT => e
-      just_print_the_error(__FILE__, __LINE__, e)
       import
     end
 end

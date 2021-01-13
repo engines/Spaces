@@ -15,7 +15,7 @@ module Spaces
 
     delegate([:identifier, :universe, :default_model_class] => :klass)
 
-    def identifiers; path.glob("*").map { |p| p.basename.to_s } ;end
+    def identifiers; path.glob('*').map { |p| p.basename.to_s } ;end
 
     def all(klass = default_model_class)
       identifiers.map { |i| by(i, klass) }
@@ -33,10 +33,7 @@ module Spaces
 
     def save_text(model)
       _save(model, content: model.content)
-
-      # FIXME: This shouldn't be here and it shouldn't be done with chmod
-      #        See T3
-      writing_name_for(model).chmod(model.permission) if model.respond_to?(:permission)
+      Pathname.new(writing_name_for(model)).chmod(model.permission) if model.respond_to?(:permission)
     end
 
     def save_yaml(model)
@@ -53,25 +50,25 @@ module Spaces
       path.join(model.identifier).rmtree
     end
 
-    def reading_name_for(identifier, klass = default_model_class, ext = nil)
-      add_ext(path.join(identifier, klass.qualifier), ext)
+    def reading_name_for(identifier, klass = default_model_class)
+      path.join(identifier, klass.qualifier)
     end
 
     # FIXME: the permissions should be passed in
-    def writing_name_for(model, ext = nil)
+    def writing_name_for(model)
       ensure_space_for(model)
 
-      add_ext(path_for(model).join(model.file_name), ext).tap do |path|
-        logger.debug("Saving model with perms [#{perms(model)}]: #{path}")
+      "#{path_for(model)}/#{model.file_name}".tap do |p|
+        logger.debug("Saving model with perms [#{permission(model)}]: #{p}")
       end
     end
 
     def file_names_for(directory, identifier)
-      file_path_for(directory, identifier).glob("**/*").reject(&:directory?)
+      file_path_for(directory, identifier).glob('**/*').reject(&:directory?)
     end
 
     def file_path_for(symbol, context_identifier)
-      path.join(sym_to_pathname(context_identifier), sym_to_pathname(symbol))
+      path.join("#{context_identifier}", "#{symbol}")
     end
 
     def path_for(model)
@@ -80,29 +77,26 @@ module Spaces
 
     def path; universe.path.join(identifier); end
 
-    def ensure_space
-      path.mkpath
-    end
+    def ensure_space; path.mkpath ;end
 
     def ensure_space_for(model); path_for(model).mkpath ;end
 
     def encloses?(file_name); file_name.exist? ;end
 
     def _by(identifier, klass = default_model_class, as:)
-      reading_name_for(identifier, klass, as).read
+      Pathname.new("#{reading_name_for(identifier, klass)}.#{as}").read
     end
 
     def _save(model, content:, as: nil)
-      # FIXME: this tap doesn't do anything
       model.tap do |m|
-        writing_name_for(m, as).write(content)
+        Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
       end
       model.identifier
     end
 
     private
 
-    def perms(model)
+    def permission(model)
       sprintf "%o", model.permission if model.respond_to?(:permission)
     end
 

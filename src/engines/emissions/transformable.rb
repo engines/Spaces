@@ -3,7 +3,7 @@ module Emissions
 
     class << self
       def auxiliary_directories
-        [PN("packing")]
+        [Pathname('packing')]
       end
     end
 
@@ -34,10 +34,9 @@ module Emissions
     private
 
     def _stanzas_for(symbol)
-      raise TransformableWithoutStanzaError, "Raised an error for no apparent reason."
+      raise TransformableWithoutStanzaError
     rescue TransformableWithoutStanzaError => e
-      just_print_the_error(__FILE__, __LINE__, e)
-      # warn(error: e, method: "#{symbol}_stanzas", klass: klass, verbosity: [:silence])
+      warn(error: e, method: "#{symbol}_stanzas", klass: klass, verbosity: [:silence])
       []
     end
 
