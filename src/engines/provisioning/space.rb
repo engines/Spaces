@@ -15,16 +15,6 @@ module Provisioning
       end
     end
 
-    def provisioning_for(space_identifiers)
-      identifiers(space_identifiers).map do |provisions|
-        (arena_identifier, resolution_identifier) = provisions.split('/')
-        {
-          arena_identifier: arena_identifier,
-          resolution_identifier: resolution_identifier,
-        }
-      end
-    end
-
     def by(identifier, klass = default_model_class)
       super
     rescue Errno::ENOENT => e
