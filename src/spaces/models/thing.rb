@@ -4,6 +4,9 @@ module Spaces
 
     require_level 'spaces/models/recovery'
 
+    include Fs
+    extend Fs
+
     include ::Recovery::Warning
     extend ::Recovery::Warning
 
@@ -11,8 +14,11 @@ module Spaces
 
     class << self
       def identifier; name.split('::').join ;end
+
       def namespace; name.split('::')[0..-2].join.snakize ;end
+
       def qualifier; name.split('::').last.snakize ;end
+
       def from_yaml(y); YAML::load(y) ;end
 
       def relation_accessor(*args); attr_accessor(*args) ;end
@@ -35,12 +41,17 @@ module Spaces
     )
 
     def klass; @klass ||= self.class ;end
+
     def keys; struct&.to_h&.keys ;end
+
     def emit; duplicate(struct) ;end
 
     def context_identifier; identifier ;end
+
     def to_yaml; YAML.dump(struct) ;end
+
     def to_json(*args); struct&.to_h_deep&.to_json(*args) ;end
+
     def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
 
     def to_s; identifier ;end

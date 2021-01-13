@@ -26,20 +26,17 @@ module Tests
 
       test "index includes #{identifier}" do
         output identifiers = universe.provisioning.identifiers
-        raise "#{identifier} not created" unless
-        identifiers.include?(identifier)
+        raise "#{identifier} not created" unless identifiers.map(&:to_s).include?(identifier)
       end
 
       test "index resolution_provisions for #{resolution_identifier} resolution includes #{identifier}" do
         output identifiers = universe.provisioning.identifiers(resolution_identifier: resolution_identifier)
-        raise "#{identifier} not shown in #{resolution_identifier}" unless
-        identifiers.include?(identifier)
+        raise "#{identifier} not shown in #{resolution_identifier}" unless identifiers.map(&:to_s).include?(identifier)
       end
 
       test "index arena_provisions for #{arena_identifier} arena includes #{identifier}" do
         output identifiers = universe.provisioning.identifiers(arena_identifier: arena_identifier)
-        raise "#{identifier} not shown in #{arena_identifier}" unless
-        identifiers.include?(identifier)
+        raise "#{identifier} not shown in #{arena_identifier}" unless identifiers.map(&:to_s).include?(identifier)
       end
 
       test 'delete' do

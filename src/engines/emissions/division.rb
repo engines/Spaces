@@ -3,6 +3,8 @@ require_relative 'transformable'
 module Emissions
   class Division < Transformable
 
+    include Engines::Logger
+
     attr_accessor :label
 
     class << self
@@ -31,18 +33,25 @@ module Emissions
     def context_identifier; emission.context_identifier ;end
 
     def auxiliary_content
+      logger.debug "auxiliary_directories: #{auxiliary_directories.inspect}"
+
       auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|
+          logger.debug "auxiliary_paths_for(#{d}): #{p.inspect}"
           Interpolating::FileText.new(origin: p, directory: d, transformable: self)
         end
       end.flatten
     end
 
     def with_embeds
-      emission.embeds.reduce(itself) do |r, e|
-        r.tap do |r|
-          r.embed!(e.send(qualifier)) if e.has?(qualifier)
+      begin
+        emission.embeds.reduce(itself) do |r, e|
+          r.tap do |rp|
+            rp.embed!(e.send(qualifier)) if e.has?(qualifier)
+          end
         end
+      rescue TypeError => e
+        just_print_the_error(__FILE__, __LINE__, e)
       end
     end
 
@@ -55,11 +64,11 @@ module Emissions
     end
 
     def auxiliary_paths_for(symbol)
-      Pathname.glob("#{auxiliary_path}/#{symbol}/**/*").reject { |p| p.directory? }
+      auxiliary_path.join(symbol).glob("**/*").reject(&:directory?)
     end
 
     def auxiliary_path
-      Pathname.new("#{__dir__.split('emissions').first}blueprinting/divisions/#{qualifier}")
+      PN(__dir__).dirname.join("blueprinting", "divisions", qualifier)
     end
 
     def initialize(emission:, struct: nil, label: nil)

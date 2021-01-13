@@ -45,13 +45,11 @@ module Tests
     group 'Import blueprints' do
 
       [
-        # 'https://github.com/MarkRatjens/phppgadmin.git',
-        'https://github.com/MarkRatjens/phpmyadmin.git',
+        'https://github.com/MarkRatjens/phpmyadmin/'
+        # 'file:///var/tmp/git/phpmyadmin'
       ].each do |repository_url|
 
-        descriptor = Spaces::Descriptor.new(
-          repository: repository_url,
-        )
+        descriptor = Spaces::Descriptor.new(repository: repository_url)
 
         identifier = descriptor.identifier
 

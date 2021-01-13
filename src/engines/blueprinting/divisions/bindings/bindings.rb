@@ -14,12 +14,20 @@ module Divisions
     end
 
     def embeds
-      all.select(&:embed?).map { |e| [e, embeds_under(e)] }.flatten.uniq
+      filtered(:embeds) { all.select(&:embed?) }
     end
 
-    def embeds_under(embed)
-      if (b = embed.blueprint).has?(:bindings)
-        b.bindings.embeds
+    def turtles
+      filtered(:turtles) { all }
+    end
+
+    def filtered(method, &block)
+      (yield || []).map { |b| [b, under(b, method)] }.flatten.uniq(&:identifier)
+    end
+
+    def under(binding, method)
+      if (b = binding.blueprint).has?(:bindings)
+        b.bindings.send(method)
       else
         []
       end

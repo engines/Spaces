@@ -2,7 +2,8 @@ require './api/helpers/crud'
 
 # Index a space
 get '/:space' do
-  universe.send(params[:space]).identifiers.to_json
+  query = request.env['rack.request.query_hash'].transform_keys!(&:to_sym)
+  universe.send(params[:space]).identifiers(**query).to_json
 end
 
 # Show a member from a space
