@@ -18,8 +18,8 @@ require './api/crud'
 
 set show_exceptions: false
 
-before do
-  content_type 'application/json'
+after do
+  content_type 'application/json' unless content_type
 end
 
 error do |e|
