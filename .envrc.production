@@ -1,0 +1,17 @@
+# This can take the following values: stderr, stdout, file, rollingfile or syslog
+export ENGINES_LOG_APPENDER=stdout
+
+# This is ignored unless ENGINES_LOG_APPENDER is set to file or rollingfile
+# export ENGINES_LOG_APPENDER_FILENAME=engines.log
+
+# See https://rubydoc.info/gems/logging/Logging/Layouts/Pattern for options
+export ENGINES_LOG_PATTERN="%d [%2p] %7l - %12c - %m\\n"
+
+# See the documentation for strftime for details
+export ENGINES_LOG_DATE_PATTERN="%Y/%m/%d %H:%M:%S.%3N"
+
+# The log levels supported are: debug, info, warn, error, fatal
+export ENGINES_LOG_LEVEL=info
+
+# This is required for F (file name), L (line numbers) & M (method name)
+export ENGINES_LOG_TRACE=false

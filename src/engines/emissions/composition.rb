@@ -25,7 +25,8 @@ module Emissions
           Divisions::Images,
           Divisions::Packing,
           Divisions::Containers,
-          Divisions::Volumes
+          Divisions::Volumes,
+          Divisions::About          
         ]
       end
 
