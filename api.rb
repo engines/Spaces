@@ -8,6 +8,7 @@ require 'pathname'
 
 require './api/universe'
 require './api/arenas'
+require './api/blueprints'
 require './api/metrics'
 require './api/packing'
 require './api/provisioning'
