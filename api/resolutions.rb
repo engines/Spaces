@@ -11,12 +11,16 @@ end
 LetterAvatar.setup do |config|
   config.colors_palette = :iwanthue
   config.pointsize = 400
+  config.cache_base_path = universe.workspace.join('DefaultIconsCache')
 end
 
 # Send icon. Generate one if missing.
 get '/resolutions/:identifier/icon' do
-  blueprint_icon_path = Fs.workspace.join('Universe', 'BlueprintingSpace', params[:identifier], 'icon')
-  if blueprint_icon_path.exist?
+  resolution_icon_path = universe.resolutions.path.join(params[:identifier], 'icon.png')
+  blueprint_icon_path = universe.blueprints.path.join(params[:identifier], 'icon')
+  if resolution_icon_path.exist?
+    icon_path = resolution_icon_path
+  elsif blueprint_icon_path.exist?
     image = MiniMagick::Image.open(blueprint_icon_path)
     image.format 'png'
     image.combine_options do |options|
@@ -27,11 +31,11 @@ get '/resolutions/:identifier/icon' do
       options.bordercolor '#999'
       options.border 2
     end
-    resolution_icon_path = Fs.workspace.join('Universe', 'ResolvingSpace', params[:identifier], 'icon.png')
     image.write resolution_icon_path
+    icon_path = resolution_icon_path
   else
-    resolution_icon_path = LetterAvatar.generate(params[:identifier], 50)
+    icon_path = LetterAvatar.generate(params[:identifier], 50)
   end
   content_type 'image/png'
-  send_file(resolution_icon_path)
+  send_file(icon_path)
 end
