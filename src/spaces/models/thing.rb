@@ -4,9 +4,6 @@ module Spaces
 
     require_level 'spaces/models/recovery'
 
-    include Fs
-    extend Fs
-
     include ::Recovery::Warning
     extend ::Recovery::Warning
 

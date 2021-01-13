@@ -44,14 +44,10 @@ module Emissions
     end
 
     def with_embeds
-      begin
-        emission.embeds.reduce(itself) do |r, e|
-          r.tap do |rp|
-            rp.embed!(e.send(qualifier)) if e.has?(qualifier)
-          end
+      emission.embeds.reduce(itself) do |r, b|
+        r.tap do |rp|
+          rp.embed!(b.send(qualifier)) if b.has?(qualifier)
         end
-      rescue TypeError => e
-        just_print_the_error(__FILE__, __LINE__, e)
       end
     end
 
@@ -68,7 +64,7 @@ module Emissions
     end
 
     def auxiliary_path
-      PN(__dir__).dirname.join("blueprinting", "divisions", qualifier)
+      Pathname(__dir__).dirname.join('blueprinting', 'divisions', qualifier)
     end
 
     def initialize(emission:, struct: nil, label: nil)

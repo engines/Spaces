@@ -20,7 +20,7 @@ require './tests/test'
 extend Tests
 
 # Clear all Spaces data
-Fs.workspace.exist? && Fs.workspace.rmtree
+universe.workspace.exist? && universe.workspace.rmtree
 
 # Create counters
 init

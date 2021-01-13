@@ -13,7 +13,6 @@ module Packing
       end
     end
 
-
     def keys_including(other)
       by_precedence([other.keys, keys].flatten.uniq)
     end
@@ -23,11 +22,11 @@ module Packing
     end
 
     def copy_source_path_for(precedence)
-      packing_source_path.join(sym_to_pathname(precedence))
+      packing_source_path.join("#{precedence}")
     end
 
     def temporary_script_path
-      PN("tmp").join("packing","scripts", qualifier)
+      Pathname('tmp').join('packing', 'scripts', qualifier)
     end
 
     def keys; by_precedence(super) ;end
