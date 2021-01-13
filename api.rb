@@ -5,6 +5,7 @@ require 'letter_avatar'
 require 'fastimage'
 require 'pathname'
 
+$:.unshift(Pathname.new(__FILE__).parent.join('src').expand_path)
 
 require './api/universe'
 require './api/arenas'
