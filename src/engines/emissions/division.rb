@@ -60,7 +60,7 @@ module Emissions
     end
 
     def auxiliary_paths_for(symbol)
-      auxiliary_path.join(symbol).glob("**/*").reject(&:directory?)
+      auxiliary_path.join("#{symbol}").glob("**/*").reject(&:directory?)
     end
 
     def auxiliary_path
