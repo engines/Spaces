@@ -46,8 +46,12 @@ module Spaces
       _save(model, content: model.emit.to_h_deep.to_json, as: :json)
     end
 
+    def exist?(model)
+      path_for(model).exist?
+    end
+
     def delete(model)
-      path.join(model.identifier).rmtree
+      path_for(model).rmtree
     end
 
     def reading_name_for(identifier, klass = default_model_class)

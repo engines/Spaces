@@ -1,5 +1,3 @@
-def import; universe.blueprints.import(descriptor); end
-
 def blueprint
   @blueprint ||=
     begin

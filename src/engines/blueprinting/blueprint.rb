@@ -3,12 +3,6 @@ module Blueprinting
 
     delegate(blueprints: :universe)
 
-    def descriptor
-      @descriptor ||= descriptor_class.new(struct.descriptor)
-    end
-
-    def emit; duplicate(struct) ;end
-
     def auxiliary_script_file_names
       [itself, embeds].flatten.reverse.map do |b|
         b.auxiliary_directories.map { |d| blueprints.file_names_for(d.join('scripts'), b.context_identifier) }
