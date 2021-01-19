@@ -26,10 +26,10 @@ module Blueprinting
       publication.auxiliary_directories.each { |d| copy_auxiliaries(publication, d) }
     end
 
-    def copy_auxiliaries(publication, directory)
-      "#{directory}".tap do |d|
-        publications.path_for(publication).join(d).tap do |p|
-          FileUtils.cp_r(p, path_for(publication).join(d)) if p.exist?
+    def copy_auxiliaries(publication, segment)
+      "#{segment}".tap do |s|
+        publications.path_for(publication).join(s).tap do |p|
+          FileUtils.cp_r(p, path_for(publication).join(s)) if p.exist?
         end
       end
     end
