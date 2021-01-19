@@ -6,6 +6,7 @@ class Universe < ::Spaces::Space
     def space_map
       @@space_map ||=
       {
+        publications: Publishing::Space.new,
         blueprints: Blueprinting::Space.new,
         resolutions: Resolving::Space.new,
         packs: Packing::Space.new,
