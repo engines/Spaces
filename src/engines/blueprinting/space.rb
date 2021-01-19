@@ -1,9 +1,36 @@
 module Blueprinting
-  class Space < Git::Space
+  class Space < ::Spaces::Space
 
     class << self
       def default_model_class
         Blueprint
+      end
+    end
+
+    delegate(publications: :universe)
+
+    alias_method :imported?, :exist?
+
+    def import(publication, force: false)
+      delete(publication) if force && imported?(publication)
+
+      unless imported?(publication)
+        save(publication)
+        copy_auxiliaries_for(publication)
+      end
+    end
+
+    protected
+
+    def copy_auxiliaries_for(publication)
+      publication.auxiliary_directories.each { |d| copy_auxiliaries(publication, d) }
+    end
+
+    def copy_auxiliaries(publication, directory)
+      "#{directory}".tap do |d|
+        publications.path_for(publication).join(d).tap do |p|
+          FileUtils.cp_r(p, path_for(publication).join(d)) if p.exist?
+        end
       end
     end
 

@@ -4,11 +4,11 @@ module Emissions
   class DescriptiveSubdivision < Subdivision
 
     def resolution
-      @resolution ||= universe.resolutions.by(identifier)
+      @resolution ||= universe.resolutions.by(descriptor.identifier)
     end
 
     def blueprint
-      @blueprint ||= universe.blueprints.import(descriptor)
+      @blueprint ||= universe.blueprints.by(descriptor.identifier)
     end
 
     def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end

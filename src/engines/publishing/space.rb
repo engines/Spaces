@@ -7,8 +7,11 @@ module Publishing
       end
     end
 
+    delegate(blueprints: :universe)
+
     alias_method :by, :by_json
     alias_method :save, :save_json
+    alias_method :imported?, :exist?
 
     def import(descriptor, force: false)
       delete(descriptor) if force && imported?(descriptor)
@@ -17,7 +20,11 @@ module Publishing
         by(descriptor.identifier)
       else
         super(descriptor)
-        by(descriptor.identifier).tap { |m| import_anchors_for(m) }
+        by(descriptor.identifier).tap do |m|
+          save(descriptor)
+          blueprints.import(m, force: force)
+          import_anchors_for(m)
+        end
       end
     rescue Errno::ENOENT => e
       warn(error: e, descriptor: descriptor, verbosity: [:error])
@@ -31,12 +38,5 @@ module Publishing
       model.descriptors_for(division_identifier).reject { |d| imported?(d) }
     end
 
-    def imported?(descriptor)
-      path_for(descriptor).exist?
-    end
-
-    def delete(descriptor)
-      path_for(descriptor).rmtree
-    end
   end
 end
