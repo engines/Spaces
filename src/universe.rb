@@ -8,7 +8,7 @@ class Universe < ::Spaces::Space
       {
         blueprints: Blueprinting::Space.new,
         resolutions: Resolving::Space.new,
-        packing: Packing::Space.new,
+        packs: Packing::Space.new,
         provisioning: Provisioning::Space.new,
         arenas: Arenas::Space.new,
 
