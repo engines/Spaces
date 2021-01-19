@@ -19,10 +19,10 @@ module Spaces
     def git?; protocol == 'git' ;end
 
     def initialize(args)
-      self.repository = Addressable::URI.parse(args[:repository])
+      self.repository = Addressable::URI.parse(args[:repository] || args[:struct]&.repository)
 
       self.struct = args[:struct] || OpenStruct.new(args)
-      self.struct.identifier ||= root_identifier
+      self.struct.identifier ||= args[:identifier] || root_identifier
     end
 
     def to_s
