@@ -21,8 +21,7 @@ module Publishing
       else
         super(descriptor)
         by(descriptor.identifier).tap do |m|
-          save(descriptor)
-          blueprints.import(m, force: force)
+          blueprints.import(m, descriptor, force: force)
           import_anchors_for(m)
         end
       end
