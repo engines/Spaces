@@ -98,7 +98,7 @@ module Packing
     end
 
     def unique_targets_for(model)
-      model.connecting_descriptors&.uniq(&:uniqueness) || []
+      model.targets&.uniq(&:uniqueness) || []
     end
 
   end

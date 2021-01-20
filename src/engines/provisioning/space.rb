@@ -46,7 +46,7 @@ module Provisioning
     end
 
     def unique_target_resolutions_for(resolution)
-      resolution.connecting_descriptors&.uniq(&:uniqueness) || []
+      resolution.targets&.uniq(&:uniqueness) || []
     end
 
   end
