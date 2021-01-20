@@ -30,23 +30,23 @@ module Provisioning
     end
 
     def save(model)
-      anchor_provisionings_for(model).each { |p| save(p) }
+      target_provisionings_for(model).each { |p| save(p) }
       arenas.save_provisions(model) if model.has?(:containers)
       super
     end
 
-    def anchor_provisionings_for(model)
-      anchor_resolutions_for(model.resolution).map do |r|
+    def target_provisionings_for(model)
+      target_resolutions_for(model.resolution).map do |r|
         default_model_class.new(resolution: r, arena: model.arena)
       end
     end
 
-    def anchor_resolutions_for(resolution)
-      unique_anchor_resolutions_for(resolution).map { |d| resolutions.by(d.identifier) }
+    def target_resolutions_for(resolution)
+      unique_target_resolutions_for(resolution).map { |d| resolutions.by(d.identifier) }
     end
 
-    def unique_anchor_resolutions_for(resolution)
-      resolution.connecting_descriptors&.uniq(&:uniqueness) || []
+    def unique_target_resolutions_for(resolution)
+      resolution.targets&.uniq(&:uniqueness) || []
     end
 
   end
