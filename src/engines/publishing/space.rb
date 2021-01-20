@@ -22,14 +22,14 @@ module Publishing
         super(descriptor)
         by(descriptor.identifier).tap do |m|
           blueprints.import(m, descriptor, force: force)
-          import_anchors_for(m)
+          import_targets_for(m)
         end
       end
     rescue Errno::ENOENT => e
       warn(error: e, descriptor: descriptor, verbosity: [:error])
     end
 
-    def import_anchors_for(model)
+    def import_targets_for(model)
       unimported_blueprints_for(model, :bindings).each { |d| import(d) }
     end
 
