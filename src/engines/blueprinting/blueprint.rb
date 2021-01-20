@@ -3,7 +3,7 @@ module Blueprinting
 
     delegate(blueprints: :universe)
 
-    def descriptor; blueprints.by(identifier, Spaces::Descriptor) ;end
+    def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end
 
     def auxiliary_script_file_names
       [itself, embeds].flatten.reverse.map do |b|
