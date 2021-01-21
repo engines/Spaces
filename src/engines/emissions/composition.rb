@@ -5,7 +5,7 @@ module Emissions
 
       def naming_map
         {
-          anchor: :binding_anchor,
+          target: :binding_target,
           nodules: :modules
         }
       end
@@ -14,7 +14,7 @@ module Emissions
         [
           Divisions::Providers,
           Divisions::Bindings,
-          Divisions::Anchor,
+          Divisions::Target,
           Divisions::Configuration,
           Divisions::Scaling,
           Divisions::SystemPackages,

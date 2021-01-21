@@ -1,7 +1,7 @@
 require 'resolv'
 
 module Divisions
-  class Binding < ::Emissions::DescriptiveSubdivision
+  class Binding < ::Emissions::TargetingSubdivision
     include Emissions::DivisionResolvable
 
     def embed?; struct.type == 'embed' ;end
@@ -30,8 +30,8 @@ module Divisions
 
     def default_configuration
       @default_configuration ||=
-      if resolution.has?(:binding_anchor)
-        resolution.binding_anchor&.struct
+      if resolution.has?(:binding_target)
+        resolution.binding_target&.struct
       end || OpenStruct.new
     end
 

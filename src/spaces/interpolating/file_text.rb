@@ -3,7 +3,7 @@ require_relative 'text'
 module Interpolating
   class FileText < Text
 
-    attr_accessor :origin_file_name, :directory
+    attr_accessor :origin_file_name, :segment
 
     def origin; @origin ||= origin_file_name.read ;end
 
@@ -24,14 +24,14 @@ module Interpolating
     def initialize(origin:, directory:, transformable:)
       self.transformable = transformable
       self.origin_file_name = origin
-      self.directory = directory
+      self.segment = Pathname.new("#{directory}")
     end
 
     private
 
     def relative_path
-      origin_file_name.ascend.detect { |s| s.basename == directory } || (raise KeyError, "Cannot find path segment #{directory}")
+      origin_file_name.ascend.detect { |s| s.basename == segment }
     end
-    
+
   end
 end

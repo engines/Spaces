@@ -1,7 +1,9 @@
 require_relative 'thing'
+require_relative 'inflatable'
 
 module Spaces
   class Model < Thing
+    include Inflatable
 
     class << self
       def universe; @universe ||= Universe.new ;end

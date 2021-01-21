@@ -2,8 +2,8 @@ require './api/helpers/packing'
 
 # Create commit
 post '/packing/:identifier/commit' do
-  pack = universe.packing.by(params[:identifier])
-  universe.packing.commit(pack)
+  pack = universe.packs.by(params[:identifier])
+  universe.packs.commit(pack)
   packing_commit_for(params[:identifier]).to_json
 end
 

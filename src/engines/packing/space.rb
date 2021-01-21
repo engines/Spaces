@@ -78,7 +78,7 @@ module Packing
     rescue PackWithoutImagesError => e
       warn(error: e, command: command, identifier: model.identifier, klass: klass)
     ensure
-      execute_on_anchors_for(command, model)
+      execute_on_targets_for(command, model)
     end
 
     def bridge
@@ -87,18 +87,18 @@ module Packing
 
     private
 
-    def execute_on_anchors_for(command, model)
+    def execute_on_targets_for(command, model)
       model.tap do
-        unexecuted_anchors_for(command, model).each { |d| execute(command, by(d.identifier)) }
+        unexecuted_targets_for(command, model).each { |d| execute(command, by(d.identifier)) }
       end
     end
 
-    def unexecuted_anchors_for(command, model)
-      unique_anchors_for(model).reject { |d| encloses_good_result?(command, d) }
+    def unexecuted_targets_for(command, model)
+      unique_targets_for(model).reject { |d| encloses_good_result?(command, d) }
     end
 
-    def unique_anchors_for(model)
-      model.connecting_descriptors&.uniq(&:uniqueness) || []
+    def unique_targets_for(model)
+      model.targets&.uniq(&:uniqueness) || []
     end
 
   end
