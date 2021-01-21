@@ -1,5 +1,5 @@
 module Emissions
-  module DivisionResolvable
+  module Resolvable
 
     def emit; resolved ;end
 

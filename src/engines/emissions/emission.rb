@@ -75,7 +75,7 @@ module Emissions
     end
 
     def descriptors_structs_for(division_identifier)
-      (struct[division_identifier] || []).map { |d| d[:descriptor] }.compact
+      (struct[division_identifier] || []).map { |d| d[:target] }.compact
     end
 
     def maybe_with_embeds_in(division); division ;end
