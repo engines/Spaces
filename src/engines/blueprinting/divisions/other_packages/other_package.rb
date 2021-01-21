@@ -3,7 +3,8 @@ module Divisions
     include ::Packing::Division
 
     delegate(
-      [:branch, :repository, :protocol, :git?] => :target
+      # [:branch, :repository, :protocol, :git?] => :target
+      repository: :target
     )
 
     def emit
@@ -11,10 +12,18 @@ module Divisions
     end
 
     def target; @target ||= descriptor_class.new(struct.target) ;end
-    def identifier; struct.identifier || target.identifier ;end
+    # def identifier; struct.identifier || target.identifier ;end
+    #
+    # def extraction; struct.extraction ||= protocol ;end
+    # def extracted_path; struct.extracted_path ||= identifier ;end
 
-    def extraction; struct.extraction ||= protocol ;end
-    def extracted_path; struct.extracted_path ||= identifier ;end
+    # def defaults
+    #   @defaults = {
+    #     identifier: target.identifier,
+    #     extraction: protocol,
+    #     extracted_path: identifier ;end
+    #   }
+    # end
 
     def packing_stanza
       {

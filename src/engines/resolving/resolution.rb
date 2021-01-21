@@ -62,8 +62,6 @@ module Resolving
       [super, embeds.map(&:keys)].flatten.uniq
     end
 
-    def maybe_with_embeds_in(division); division.with_embeds ;end
-
     def embeds
       struct.bindings ? bindings.embedded_blueprints : []
     end
