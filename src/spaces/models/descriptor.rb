@@ -21,13 +21,16 @@ module Spaces
       @defaults = {
         identifier: root_identifier,
         branch: 'main',
-        protocol: extname&.gsub('.', '')
+        protocol: default_protocol
       }
     end
 
     def root_identifier; basename&.split('.')&.first ;end
     def basename; repository&.basename ;end
-    def extname; repository&.extname ;end
+
+    def default_protocol
+      ((e = repository&.extname).blank?) ? 'git' : e.gsub('.', '')
+    end
 
     def initialize(args)
       self.repository = Addressable::URI.parse(args[:repository] || args[:struct]&.repository)
