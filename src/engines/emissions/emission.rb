@@ -16,7 +16,7 @@ module Emissions
     alias_method :has?, :respond_to?
 
     def turtle_descriptors
-      bindings.turtles.map(&:descriptor).uniq(&:identifier) if has?(:bindings)
+      bindings.turtles.map(&:target).uniq(&:identifier) if has?(:bindings)
     end
 
     def emit
