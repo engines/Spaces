@@ -9,7 +9,7 @@ module Emissions
 
     class << self
       def prototype(emission:, label:)
-        emission.maybe_with_embeds_in(new(emission: emission, label: label))
+        new(emission: emission, label: label)
       end
 
       def default_struct; OpenStruct.new ;end
