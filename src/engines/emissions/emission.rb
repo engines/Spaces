@@ -17,10 +17,6 @@ module Emissions
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
 
-    def turtle_descriptors
-      bindings.turtles.map(&:target).uniq(&:identifier) if has?(:bindings)
-    end
-
     def emit
       OpenStruct.new(to_h).tap { |e| e.identifier = struct.identifier }
     end
@@ -71,17 +67,6 @@ module Emissions
     def emit_for(key)
       division_map[key]&.emit || struct[key]
     end
-
-    def descriptors_for(division_identifier)
-      descriptors_structs_for(division_identifier).map { |d| descriptor_class.new(d) }.uniq(&:uniqueness)
-    end
-
-    def descriptors_structs_for(division_identifier)
-      (struct[division_identifier] || []).map { |d| d[:target] }.compact
-    end
-
-    def maybe_with_embeds_in(division); division ;end
-    def embeds; [] ;end
 
     def method_missing(m, *args, &block)
       return division_map[m.to_sym] || struct[m] if division_keys.include?(m)
