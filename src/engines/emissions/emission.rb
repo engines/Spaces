@@ -1,7 +1,9 @@
 require_relative 'transformable'
+require_relative 'embedding'
 
 module Emissions
   class Emission < Transformable
+    include Embedding
 
     class << self
       def composition; @composition ||= composition_class.new ;end
