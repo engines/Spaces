@@ -1,9 +1,10 @@
 require_relative 'transformable'
+require_relative 'embeddable'
 
 module Emissions
   class Division < Transformable
-
     include Engines::Logger
+    include Embeddable
 
     attr_accessor :label
 
@@ -42,16 +43,6 @@ module Emissions
         end
       end.flatten
     end
-
-    def with_embeds
-      emission.embeds.reduce(itself) do |r, b|
-        r.tap do |rp|
-          rp.embed!(b.send(qualifier)) if b.has?(qualifier)
-        end
-      end
-    end
-
-    def embed!(other); itself; end
 
     def scale &block
       Array.new(emission.count) do |i|

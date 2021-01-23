@@ -11,14 +11,6 @@ module Blueprinting
       end.flatten
     end
 
-    def embeds
-      embedded_descriptors.map { |d| blueprints.import(d) }
-    end
-
-    def embedded_descriptors
-      struct.bindings&.select { |b| b.type == 'embed' }&.map(&:target)&.map { |d| descriptor_class.new(d) } || []
-    end
-
     def initialize(struct: nil, identifier: nil)
       super(struct: struct)
       self.struct.identifier = identifier if identifier

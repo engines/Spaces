@@ -20,12 +20,6 @@ module Emissions
     def arena_stanzas; all.map(&:arena_stanzas) ;end
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
-    def embed!(other)
-      tap { self.struct = struct_with(other) }
-    end
-
-    def struct_with(other); [struct, other.struct].flatten.uniq ;end
-
     def all
       @all ||= struct&.map { |s| subdivision_for(s) }&.compact || []
     end
@@ -38,6 +32,8 @@ module Emissions
       warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
       nil
     end
+
+    def struct_with(other); [struct, other.struct].flatten.uniq ;end
 
     def emit; all&.map(&:emit) || super ;end
 

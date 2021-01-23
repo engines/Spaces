@@ -17,6 +17,11 @@ module Emissions
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
 
+    def turtles; turtle_targets.map(&:blueprint) ;end
+    def turtle_targets; targets(:turtle_targets) ;end
+
+    def targets(type); has?(:bindings) ? bindings.send(type) : [] ;end
+
     def emit
       OpenStruct.new(to_h).tap { |e| e.identifier = struct.identifier }
     end

@@ -22,10 +22,6 @@ module Resolving
       @bindings ||= bindings_class.new(emission: self, label: :bindings)
     end
 
-    def division_for(key)
-      composition.divisions[key]&.prototype(emission: self, label: key)
-    end
-
     def auxiliary_content
       [auxiliary_content_from_divisions, auxiliary_content_from_blueprints].flatten
     end
