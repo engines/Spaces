@@ -22,7 +22,7 @@ module Publishing
         super(descriptor)
         by(descriptor.identifier).tap do |m|
           blueprints.import(m, descriptor, force: force)
-          m.turtles
+          m.turtle_targets
         end
       end
     rescue Errno::ENOENT => e

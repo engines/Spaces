@@ -7,15 +7,15 @@ module Divisions
       all.detect { |b| b.identifier == name.to_s }
     end
 
-    def connects; turtles.reject(&:embed?) ;end
-    def embeds; turtles.select(&:embed?) ;end
+    def connect_targets; turtle_targets.reject(&:embed?) ;end
+    def embed_targets; turtle_targets.select(&:embed?) ;end
 
-    def turtles
-      all.map { |b| [b, turtles_under(b)] }.flatten.uniq(&:identifier)
+    def turtle_targets
+      all.map { |b| [b, turtle_targets_under(b)] }.flatten.uniq(&:identifier)
     end
 
-    def turtles_under(binding)
-      (b = binding.blueprint).has?(:bindings) ? b.bindings.turtles : []
+    def turtle_targets_under(binding)
+      (b = binding.blueprint).has?(:bindings) ? b.bindings.turtle_targets : []
     end
 
     def method_missing(m, *args, &block); named(m) || super ;end

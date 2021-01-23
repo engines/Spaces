@@ -9,7 +9,7 @@ module Emissions
       end
 
       def constant_for(type)
-        Module.const_get("::Providers::#{type.to_s.camelize}")
+        Module.const_get("::Providers::#{type.camelize}")
       end
     end
 
