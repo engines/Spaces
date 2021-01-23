@@ -16,7 +16,7 @@ module Blueprinting
     end
 
     def embedded_descriptors
-      struct.bindings&.select { |b| b.type == 'embed' }&.map(&:descriptor)&.map { |d| descriptor_class.new(d) } || []
+      struct.bindings&.select { |b| b.type == 'embed' }&.map(&:target)&.map { |d| descriptor_class.new(d) } || []
     end
 
     def initialize(struct: nil, identifier: nil)
