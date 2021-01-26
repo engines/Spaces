@@ -45,7 +45,7 @@ module Packing
       ensure_space_for(model)
 
       model.tap do |m|
-        path_for(model).join('commit.json').write(m.emit.to_h_deep.to_json)
+        path_for(model).join('commit.json').write(m.to_json)
       end
 
       model.identifier

@@ -12,9 +12,7 @@ module Divisions
       packing_divisions: :resolution
     )
 
-    def emit
-      packing_stanzas.map(&:to_h)
-    end
+    def to_h; packing_stanzas.map(&:to_h) ;end
 
     def packing_stanzas
       [auxiliary_files_stanza, precedential_stanzas]

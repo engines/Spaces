@@ -22,10 +22,6 @@ module Emissions
 
     def targets(type); has?(:bindings) ? bindings.send(type) : [] ;end
 
-    def emit
-      OpenStruct.new(to_h).tap { |e| e.identifier = struct.identifier }
-    end
-
     def incomplete_divisions
       divisions.reject(&:complete?)
     end
@@ -56,21 +52,11 @@ module Emissions
       end.compact
     end
 
-    def to_h
-      division_keys.inject({}) do |m, k|
-        m.tap { m[k] = emit_for(k) }
-      end.compact
-    end
-
     def composition_keys; composition.keys ;end
     def division_keys; division_map.keys ;end
 
     def division_for(key)
       composition.divisions[key]&.prototype(emission: self, label: key)
-    end
-
-    def emit_for(key)
-      division_map[key]&.emit || struct[key]
     end
 
     def method_missing(m, *args, &block)

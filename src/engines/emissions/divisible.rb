@@ -35,8 +35,6 @@ module Emissions
 
     def struct_with(other); [struct, other.struct].flatten.uniq ;end
 
-    def emit; all&.map(&:emit) || super ;end
-
     def initialize(struct: nil, emission: nil, label: nil)
       check_subdivision_class
       super

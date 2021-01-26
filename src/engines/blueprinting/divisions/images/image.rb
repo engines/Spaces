@@ -16,8 +16,8 @@ module Divisions
 
     def identifier; type ;end
 
-    def export; emit ;end
-    def commit; emit ;end
+    def export; struct ;end
+    def commit; struct ;end
 
     def complete?
       !(type && image).nil?

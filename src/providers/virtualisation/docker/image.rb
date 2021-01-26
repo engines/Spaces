@@ -12,11 +12,11 @@ module Providers
       end
 
       def export
-        emit.tap { |m| m[:export_path] = "#{identifier}.tar" }
+        duplicate(struct).tap { |m| m[:export_path] = "#{identifier}.tar" }
       end
 
       def commit
-        emit.tap { |m| m[:commit] = true }
+        duplicate(struct).tap { |m| m[:commit] = true }
       end
 
       def post_processor_stanzas

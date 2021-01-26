@@ -1,8 +1,6 @@
 module Emissions
   module Resolvable
 
-    def emit; resolved ;end
-
     def complete?
       texts.values.map(&:complete?).all_true?
     end
