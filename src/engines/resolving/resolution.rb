@@ -31,9 +31,7 @@ module Resolving
     end
 
     def auxiliary_content_from_blueprints
-      [itself, embeds].flatten.reverse.map do |r|
-        auxiliary_directories.map { |d| content_into(d, source: r) }.flatten
-      end.flatten
+      auxiliary_directories.map { |d| content_into(d, source: itself) }.flatten
     end
 
     def content_into(directory, source:)
@@ -52,20 +50,6 @@ module Resolving
           m.tap { m[k] = division_for(k) }
         end.compact
       )
-    end
-
-    def keys
-      [super, embeds.map(&:keys)].flatten.uniq
-    end
-
-    def maybe_with_embeds_in(division); division.with_embeds ;end
-
-    def embeds
-      struct.bindings ? bindings.embedded_blueprints : []
-    end
-
-    def targets
-      has?(:bindings) ? bindings.connects.map(&:target) : []
     end
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
