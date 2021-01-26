@@ -10,7 +10,9 @@ module Emissions
 
     def resolved
       empty.tap do |m|
-        m.struct = divisions.map(&:resolved).map(&:struct)
+        m.struct = OpenStruct.new(
+          division_map.transform_values { |v| v.resolved.struct }
+        )
       end
     end
 
