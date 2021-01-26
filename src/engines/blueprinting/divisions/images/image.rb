@@ -33,14 +33,14 @@ module Divisions
 
     def post_processor_stanzas; end
 
-    def initialize(struct:, division:)
-      self.division = division
-      self.struct = OpenStruct.new(default_resolution).merge(struct.merge(OpenStruct.new(safety_overrides)))
-    end
-
-    def default_resolution
-      @default_resolution ||= {}
-    end
+    # def initialize(struct:, division:)
+    #   self.division = division
+    #   self.struct = OpenStruct.new(default_resolution).merge(struct.merge(OpenStruct.new(safety_overrides)))
+    # end
+    #
+    # def default_resolution
+    #   @default_resolution ||= {}
+    # end
 
   end
 end
