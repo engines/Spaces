@@ -1,10 +1,12 @@
 require_relative 'transformable'
 require_relative 'embeddable'
+require_relative 'resolvable'
 
 module Emissions
   class Division < Transformable
     include Engines::Logger
     include Embeddable
+    include Resolvable
 
     attr_accessor :label
 
@@ -57,6 +59,8 @@ module Emissions
     def auxiliary_path
       Pathname(__dir__).dirname.join('blueprinting', 'divisions', qualifier)
     end
+
+    def empty; self.class.new(emission: emission, label: label) ;end
 
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission

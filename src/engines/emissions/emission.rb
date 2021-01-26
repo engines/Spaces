@@ -1,9 +1,11 @@
 require_relative 'transformable'
 require_relative 'embedding'
+require_relative 'resolving'
 
 module Emissions
   class Emission < Transformable
     include Embedding
+    include Resolving
 
     class << self
       def composition; @composition ||= composition_class.new ;end
@@ -58,6 +60,8 @@ module Emissions
     def division_for(key)
       composition.divisions[key]&.prototype(emission: self, label: key)
     end
+
+    def empty; klass.new(identifier: identifier) ;end
 
     def method_missing(m, *args, &block)
       return division_map[m.to_sym] || struct[m] if division_keys.include?(m)

@@ -2,12 +2,10 @@ module Emissions
   module Embedding
 
     def with_embeds
-      empty.tap do
-        |m| m.struct = OpenStruct.new(embedding_division_map.transform_values(&:struct))
+      empty.tap do |m|
+        m.struct = OpenStruct.new(embedding_division_map.transform_values(&:struct))
       end
     end
-
-    def empty; klass.new(identifier: identifier) ;end
 
     def embedding_division_map
       embedding_keys.inject({}) do |m, k|

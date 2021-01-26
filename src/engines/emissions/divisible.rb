@@ -33,6 +33,10 @@ module Emissions
       nil
     end
 
+    def resolved
+      empty.tap { |d| d.struct = all.map(&:resolved).map(&:struct) }
+    end
+
     def struct_with(other); [struct, other.struct].flatten.uniq ;end
 
     def initialize(struct: nil, emission: nil, label: nil)

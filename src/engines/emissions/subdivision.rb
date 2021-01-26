@@ -17,9 +17,11 @@ module Emissions
 
     delegate([:emission, :context_identifier] => :division)
 
-    def initialize(struct:, division:)
-      self.struct = struct
+    def empty; self.class.new(division: division) ;end
+
+    def initialize(division:, struct: nil)
       self.division = division
+      self.struct = struct
     end
 
   end

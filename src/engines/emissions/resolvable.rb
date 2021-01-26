@@ -6,11 +6,11 @@ module Emissions
     end
 
     def resolved
-      @resolved ||= OpenStruct.new(resolved_texts)
+      empty.tap { |d| d.struct = resolved_struct }
     end
 
-    def resolved_texts
-      @resolved_texts ||= texts.transform_values(&:resolved)
+    def resolved_struct
+      OpenStruct.new(texts.transform_values(&:resolved))
     end
 
     def texts

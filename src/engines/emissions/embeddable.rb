@@ -11,8 +11,6 @@ module Emissions
       empty.tap { |d| d.struct = struct_with(other) }
     end
 
-    def empty; self.class.new(emission: emission, label: label) ;end
-
     def struct_with(other); struct.reverse_merge(other.struct) ;end
 
   end
