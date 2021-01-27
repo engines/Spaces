@@ -1,9 +1,11 @@
 require_relative 'transformable'
+require_relative 'dividing'
 require_relative 'embedding'
 require_relative 'resolving'
 
 module Emissions
   class Emission < Transformable
+    include Dividing
     include Embedding
     include Resolving
 
@@ -24,14 +26,6 @@ module Emissions
 
     def targets(type); has?(:bindings) ? bindings.send(type) : [] ;end
 
-    def incomplete_divisions
-      divisions.reject(&:complete?)
-    end
-
-    def mandatory_divisions_present?
-      division_keys & mandatory_keys == mandatory_keys
-    end
-
     def stanzas_content
       stanzas.join("\n")
     end
@@ -40,26 +34,11 @@ module Emissions
       divisions.map(&:stanzas)
     end
 
-    def divisions; division_map.values ;end
-
     def count
       has?(:scaling) ? scaling.count : 1
     end
 
-    def division_map
-      @division_map ||= keys.inject({}) do |m, k|
-        m.tap do
-          m[k] = division_for(k)
-        end
-      end.compact
-    end
-
     def composition_keys; composition.keys ;end
-    def division_keys; division_map.keys ;end
-
-    def division_for(key)
-      composition.divisions[key]&.prototype(emission: self, label: key)
-    end
 
     def empty; klass.new(identifier: identifier) ;end
 
