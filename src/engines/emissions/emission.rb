@@ -1,11 +1,13 @@
 require_relative 'transformable'
 require_relative 'dividing'
+require_relative 'associating'
 require_relative 'embedding'
 require_relative 'resolving'
 
 module Emissions
   class Emission < Transformable
     include Dividing
+    include Associating
     include Embedding
     include Resolving
 
@@ -26,6 +28,10 @@ module Emissions
 
     def targets(type); has?(:bindings) ? bindings.send(type) : [] ;end
 
+    def count
+      has?(:scaling) ? scaling.count : 1
+    end
+
     def stanzas_content
       stanzas.join("\n")
     end
@@ -37,8 +43,6 @@ module Emissions
     def count
       has?(:scaling) ? scaling.count : 1
     end
-
-    def composition_keys; composition.keys ;end
 
     def empty; klass.new(identifier: identifier) ;end
 

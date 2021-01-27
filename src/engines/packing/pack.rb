@@ -12,6 +12,9 @@ module Packing
 
     alias_accessor :resolution, :predecessor
     alias_method :context_identifier, :identifier
+    
+    def composition_keys; composition.keys ;end
+
     alias_method :keys, :composition_keys
 
     def export; struct_for(images.all.map(&:export)) ;end

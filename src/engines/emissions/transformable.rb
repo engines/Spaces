@@ -8,7 +8,6 @@ module Emissions
     end
 
     delegate(
-      mandatory_keys: :composition,
       auxiliary_directories: :klass
     )
 

@@ -39,17 +39,5 @@ module Arenas
 
     def arena; itself ;end
 
-    def division_map
-      @division_map ||=
-        mandatory_keys.reduce({}) do |m, k|
-          m.tap { m[k] = division_for(k) }
-        end.compact
-    end
-
-    def initialize(struct: nil, identifier: nil)
-      super(struct: struct)
-      self.struct.identifier = identifier if identifier
-    end
-
   end
 end

@@ -14,7 +14,7 @@ module Resolving
     alias_accessor :blueprint, :predecessor
 
     def complete?
-      all_complete?(divisions) && mandatory_divisions_present?
+      all_complete?(divisions)
     end
 
     def bindings
@@ -41,14 +41,6 @@ module Resolving
 
     def packing_divisions
       divisions.select { |d| d.packing_division? }.sort_by(&:composition_rank)
-    end
-
-    def division_map
-      @resolution_division_map ||= super.merge(
-        mandatory_keys.reduce({}) do |m, k|
-          m.tap { m[k] = division_for(k) }
-        end.compact
-      )
     end
 
     def initialize(struct: nil, blueprint: nil, identifier: nil)
