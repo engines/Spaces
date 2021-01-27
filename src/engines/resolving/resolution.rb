@@ -2,7 +2,6 @@ module Resolving
   class Resolution < ::Emissions::Emission
 
     class << self
-      def composition_class; Composition ;end
       def bindings_class; Divisions::Bindings ;end
     end
 
