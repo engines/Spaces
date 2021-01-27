@@ -63,6 +63,11 @@ module Emissions
 
     def empty; klass.new(identifier: identifier) ;end
 
+    def initialize(struct: nil, identifier: nil)
+      super(struct: struct)
+      self.struct.identifier = identifier if identifier
+    end
+
     def method_missing(m, *args, &block)
       return division_map[m.to_sym] || struct[m] if division_keys.include?(m)
       return bindings.named(m) if (struct[:bindings] && bindings.named(m))

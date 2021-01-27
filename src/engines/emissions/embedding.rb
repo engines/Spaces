@@ -3,7 +3,9 @@ module Emissions
 
     def with_embeds
       empty.tap do |m|
-        m.struct = OpenStruct.new(embedding_division_map.transform_values(&:struct))
+        m.struct = m.struct.merge(
+          OpenStruct.new(embedding_division_map.transform_values(&:struct))
+        )
       end
     end
 
