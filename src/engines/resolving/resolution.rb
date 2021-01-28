@@ -2,6 +2,7 @@ module Resolving
   class Resolution < ::Emissions::Emission
 
     class << self
+      def composition_class; Composition ;end
       def bindings_class; Divisions::Bindings ;end
     end
 
@@ -10,6 +11,8 @@ module Resolving
       blueprints: :resolutions,
       bindings_class: :klass
     )
+
+    relation_accessor :arena
 
     alias_accessor :blueprint, :predecessor
 
