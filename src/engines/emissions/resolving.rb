@@ -4,6 +4,7 @@ module Emissions
     def resolved_in(arena)
       empty_resolution.tap do |m|
         m.struct = arena.struct.merge(struct)
+        m.struct.identifier = "#{arena.identifier}/#{identifier}"
       end.resolved
     end
 
@@ -15,7 +16,7 @@ module Emissions
       end
     end
 
-    def empty_resolution; resolution_class.new(identifier: identifier) ;end
+    def empty_resolution; resolution_class.new ;end
     def resolution_class; ::Resolving::Resolution ;end
 
   end

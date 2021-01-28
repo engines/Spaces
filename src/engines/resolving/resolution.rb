@@ -46,16 +46,5 @@ module Resolving
       divisions.select { |d| d.packing_division? }.sort_by(&:composition_rank)
     end
 
-    def initialize(struct: nil, blueprint: nil, identifier: nil)
-      unless blueprint
-        super(struct: struct)
-      else
-        self.blueprint = blueprint
-        self.struct = blueprint.struct
-      end
-
-      self.struct.identifier = identifier if identifier
-    end
-
   end
 end
