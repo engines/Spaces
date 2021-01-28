@@ -7,6 +7,13 @@ module Divisions
       all.detect { |b| b.identifier == name.to_s }
     end
 
+    def with_embeds(emissions)
+      empty.tap { |d| d.struct = super.all.map(&:inflated).map(&:struct) }
+    end
+
+    # def with_embeds(_)
+    # end
+
     def connect_targets; turtle_targets.reject(&:embed?) ;end
     def embed_targets; turtle_targets.select(&:embed?) ;end
 

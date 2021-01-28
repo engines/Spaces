@@ -60,7 +60,7 @@ module Emissions
       Pathname(__dir__).dirname.join('blueprinting', 'divisions', qualifier)
     end
 
-    def empty; self.class.new(emission: emission, label: label) ;end
+    def empty; self.class.new(emission: emission, struct: default_struct, label: label) ;end
 
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission
