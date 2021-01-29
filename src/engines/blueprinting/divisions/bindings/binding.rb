@@ -13,6 +13,12 @@ module Divisions
       target_configuration.merge(struct_configuration)
     end
 
+    def resolved
+      super.tap do |d|
+        d.struct.configuration = Emissions::ResolvableStruct.new(struct.configuration, self).resolved
+      end
+    end
+
     def target_configuration
       @target_configuration ||=
       if blueprint.has?(:binding_target)
