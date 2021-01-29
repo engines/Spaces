@@ -11,10 +11,7 @@ module Divisions
       empty.tap { |d| d.struct = super.all.map(&:inflated).map(&:struct) }
     end
 
-    # def with_embeds(_)
-    # end
-
-    def connect_targets; turtle_targets.reject(&:embed?) ;end
+    def connect_targets; all.reject(&:embed?) ;end
     def embed_targets; turtle_targets.select(&:embed?) ;end
 
     def turtle_targets

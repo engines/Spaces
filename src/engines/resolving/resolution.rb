@@ -46,5 +46,7 @@ module Resolving
       divisions.select { |d| d.packing_division? }.sort_by(&:composition_rank)
     end
 
+    def empty; super.tap { |m| m.arena = arena } ;end
+
   end
 end

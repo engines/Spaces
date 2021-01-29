@@ -1,6 +1,7 @@
 require_relative 'transformable'
 require_relative 'dividing'
 require_relative 'associating'
+require_relative 'targeting'
 require_relative 'embedding'
 require_relative 'resolving'
 
@@ -8,6 +9,7 @@ module Emissions
   class Emission < Transformable
     include Dividing
     include Associating
+    include Targeting
     include Embedding
     include Resolving
 
@@ -22,15 +24,6 @@ module Emissions
 
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
-
-    def turtles; turtle_targets.map(&:blueprint) ;end
-    def turtle_targets; targets(:turtle_targets) ;end
-
-    def targets(type); has?(:bindings) ? bindings.send(type) : [] ;end
-
-    def count
-      has?(:scaling) ? scaling.count : 1
-    end
 
     def stanzas_content
       stanzas.join("\n")
