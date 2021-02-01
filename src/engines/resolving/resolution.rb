@@ -20,26 +20,6 @@ module Resolving
       all_complete?(divisions)
     end
 
-    def bindings
-      @bindings ||= bindings_class.new(emission: self, label: :bindings)
-    end
-
-    def auxiliary_content
-      [auxiliary_content_from_divisions, auxiliary_content_from_blueprints].flatten
-    end
-
-    def auxiliary_content_from_divisions
-      divisions.map { |d| d.auxiliary_content }.flatten.compact
-    end
-
-    def auxiliary_content_from_blueprints
-      auxiliary_directories.map { |d| content_into(d, source: itself) }.flatten
-    end
-
-    def content_into(directory, source:)
-      blueprints.file_names_for(directory, source.context_identifier).map do |t|
-        Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
-      end
     end
 
     def packing_divisions

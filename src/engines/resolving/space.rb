@@ -24,7 +24,7 @@ module Resolving
     def save(model)
       ensure_connections_exist_for(model)
       super.tap do
-        model.auxiliary_content.each { |t| save_text(t) }
+        model.content.each { |t| save_text(t) }
       end
     end
 

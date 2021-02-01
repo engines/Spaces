@@ -1,4 +1,5 @@
 require_relative 'transformable'
+require_relative 'auxiliaries'
 require_relative 'dividing'
 require_relative 'associating'
 require_relative 'targeting'
@@ -7,6 +8,7 @@ require_relative 'resolving'
 
 module Emissions
   class Emission < Transformable
+    include Auxiliaries
     include Dividing
     include Associating
     include Targeting

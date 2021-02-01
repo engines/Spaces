@@ -35,7 +35,7 @@ module Emissions
 
     def context_identifier; emission.context_identifier ;end
 
-    def auxiliary_content
+    def content
       logger.debug "auxiliary_directories: #{auxiliary_directories.inspect}"
 
       auxiliary_directories.map do |d|
