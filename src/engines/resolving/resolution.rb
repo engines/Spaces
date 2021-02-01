@@ -3,13 +3,11 @@ module Resolving
 
     class << self
       def composition_class; Composition ;end
-      def bindings_class; Divisions::Bindings ;end
     end
 
     delegate(
       resolutions: :universe,
-      blueprints: :resolutions,
-      bindings_class: :klass
+      blueprints: :resolutions
     )
 
     relation_accessor :arena
@@ -20,6 +18,13 @@ module Resolving
       all_complete?(divisions)
     end
 
+    def blueprints_content
+      [
+        embeds.reverse.map(&:blueprints_content).flatten.compact.map do |c|
+          c.tap { c.writing_identifier = context_identifier }
+        end,
+        super
+      ].flatten.compact
     end
 
     def packing_divisions

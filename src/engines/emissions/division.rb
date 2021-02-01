@@ -22,7 +22,7 @@ module Emissions
 
     delegate(
       default_struct: :klass,
-      composition: :emission,
+      [:composition, :auxiliary_directories] => :emission,
       ranking: :composition,
       resolutions: :universe
     )

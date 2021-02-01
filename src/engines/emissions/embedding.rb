@@ -19,7 +19,7 @@ module Emissions
       @embedding_keys ||= [division_keys, embeds.map(&:division_keys)].flatten.uniq
     end
 
-    def embeds_including_self; [itself, embeds].flatten ;end
+    def embeds_including_self; [itself, embeds].flatten.reverse ;end
 
     def embeds; embed_targets.map(&:blueprint) ;end
     def embed_targets; targets(:embed_targets) ;end
