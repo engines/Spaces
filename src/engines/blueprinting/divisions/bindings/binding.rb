@@ -31,7 +31,7 @@ module Divisions
     def keys; struct_configuration.to_h.keys ;end
 
     def method_missing(m, *args, &block)
-      keys&.include?(m) ? configuration[m] : super
+      keys&.include?(m) ? struct.configuration[m] : super
     end
 
     def respond_to_missing?(m, *)
