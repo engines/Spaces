@@ -12,7 +12,8 @@ module Interpolating
     attr_accessor :origin
 
     delegate(
-      [:infix_class, :text_class, :interpolation_marker] => :klass
+      [:infix_class, :text_class, :interpolation_marker] => :klass,
+      context_identifier: :transformable
     )
 
     def resolved; @resolved ||= contains_interpolation? ? with_resolved_infixes : origin ;end

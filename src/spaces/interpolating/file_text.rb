@@ -3,11 +3,7 @@ require_relative 'text'
 module Interpolating
   class FileText < Text
 
-    attr_accessor :origin_file_name, :writing_identifier, :segment
-
-    def context_identifier
-      writing_identifier || transformable.context_identifier
-    end
+    attr_accessor :origin_file_name, :segment
 
     def origin; @origin ||= origin_file_name.read ;end
 
