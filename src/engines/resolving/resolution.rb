@@ -18,13 +18,12 @@ module Resolving
       all_complete?(divisions)
     end
 
-    def blueprints_content
-      [
-        embeds.reverse.map(&:blueprints_content).flatten.compact.map do |c|
-          c.tap { c.writing_identifier = context_identifier }
-        end,
-        super
-      ].flatten.compact
+    def embeds_including_blueprint; [blueprint, embeds].flatten.compact.reverse ;end
+
+    def content_into(directory, source:)
+      resolutions.file_names_for(directory, source.context_identifier).map do |t|
+        Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
+      end
     end
 
     def packing_divisions
