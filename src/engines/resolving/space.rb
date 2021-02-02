@@ -9,18 +9,6 @@ module Resolving
 
     delegate(blueprints: :universe)
 
-    def by(identifier, klass = default_model_class)
-      by_yaml(identifier, klass).tap do |m|
-        m.blueprint = blueprints.by(identifier)
-      end
-    rescue Errno::ENOENT => e
-      warn(error: e, identifier: identifier, klass: klass)
-
-      klass.new(blueprint: blueprints.by(identifier)).tap do |m|
-        save(m)
-      end
-    end
-
     def save(model)
       ensure_connections_exist_for(model)
       super.tap do
