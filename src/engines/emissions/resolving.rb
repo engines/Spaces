@@ -19,6 +19,10 @@ module Emissions
       end
     end
 
+    def connections_resolved
+      connections.map { |c| c.with_embeds.resolved_in(arena) }
+    end
+
     def empty_resolution; resolution_class.new ;end
     def resolution_class; ::Resolving::Resolution ;end
 

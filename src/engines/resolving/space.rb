@@ -32,11 +32,7 @@ module Resolving
     protected
 
     def ensure_connections_exist_for(model)
-      model.connections.map do |c|
-        c.with_embeds.resolved_in(model.arena)
-      end.reject do |r|
-        exist?(r)
-      end.each { |r| save(r) }
+      absent(model.connections_resolved).each { |r| save(r) }
     end
 
     def copy_auxiliaries_for(model)

@@ -46,13 +46,10 @@ module Spaces
       _save(model, content: model.to_json, as: :json)
     end
 
-    def exist?(model)
-      path_for(model).exist?
-    end
+    def exist?(model); path_for(model).exist? ;end
+    def absent(array); array.reject { |r| exist?(r) } ;end
 
-    def delete(model)
-      path_for(model).rmtree
-    end
+    def delete(model); path_for(model).rmtree ;end
 
     def reading_name_for(identifier, klass = default_model_class)
       path.join(identifier, klass.qualifier)
