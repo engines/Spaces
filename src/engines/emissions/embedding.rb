@@ -3,6 +3,7 @@ module Emissions
 
     def with_embeds
       empty.tap do |m|
+        m.predecessor = self
         m.struct = m.struct.merge(
           OpenStruct.new(embedding_division_map.transform_values(&:struct))
         )
