@@ -21,15 +21,6 @@ module Packing
 
     def packers; provisioners ;end
 
-    def struct_for(images); OpenStruct.new(builders: images) ;end
-
-    def script_file_names; resolution.packing_script_file_names ;end
-
-    def initialize(resolution)
-      self.struct = (resolution.has?(:images) ? struct_for(resolution.images) : OpenStruct.new)
-      self.resolution = resolution
-    end
-
     def method_missing(m, *args, &block)
       return division_map[m.to_s] if division_keys.include?(m.to_s)
       super

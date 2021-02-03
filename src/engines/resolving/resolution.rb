@@ -1,5 +1,6 @@
 module Resolving
   class Resolution < ::Emissions::Emission
+    include Emissions::Packing
 
     class << self
       def composition_class; Composition ;end
@@ -24,10 +25,6 @@ module Resolving
       resolutions.file_names_for(directory, source.context_identifier).map do |t|
         Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
       end
-    end
-
-    def packing_divisions
-      divisions.select { |d| d.packing_division? }.sort_by(&:composition_rank)
     end
 
     def empty; super.tap { |m| m.arena = arena } ;end
