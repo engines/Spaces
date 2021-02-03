@@ -59,5 +59,7 @@ module Emissions
 
     delegate([:divisions, :associations, :ranking, :naming_map] => :klass)
 
+    def keys; @keys ||= divisions.keys ;end
+
   end
 end
