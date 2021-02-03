@@ -5,6 +5,7 @@ require_relative 'associating'
 require_relative 'targeting'
 require_relative 'embedding'
 require_relative 'resolving'
+require_relative 'hashing'
 
 module Emissions
   class Emission < Transformable
@@ -14,6 +15,7 @@ module Emissions
     include Targeting
     include Embedding
     include Resolving
+    include Hashing
 
     class << self
       def composition; @composition ||= composition_class.new ;end
