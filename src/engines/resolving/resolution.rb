@@ -1,6 +1,8 @@
+require_relative 'packing'
+
 module Resolving
   class Resolution < ::Emissions::Emission
-    include Emissions::Packing
+    include Resolving::Packing
 
     class << self
       def composition_class; Composition ;end

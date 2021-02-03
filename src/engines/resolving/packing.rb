@@ -1,4 +1,4 @@
-module Emissions
+module Resolving
   module Packing
 
     def packed
