@@ -6,7 +6,7 @@ module Packing
     end
 
     delegate(
-      [:identifier, :has?, :images, :targets, :content] => :resolution,
+      images: :resolution,
       post_processor_stanzas: :images
     )
 
