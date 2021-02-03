@@ -42,13 +42,10 @@ module Packing
 
     def save(model)
       raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:images)
-      ensure_space_for(model)
 
-      model.tap do |m|
-        path_for(model).join('commit.json').write(m.to_json)
+      super.tap do
+        path_for(model).join('commit.json').write(model.struct.to_h_deep.to_json)
       end
-
-      model.identifier
     rescue PackWithoutImagesError => e
       warn(error: e, identifier: model.identifier, klass: klass)
     end
