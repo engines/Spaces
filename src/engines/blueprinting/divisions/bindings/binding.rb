@@ -6,7 +6,7 @@ module Divisions
     def embed?; struct.type == 'embed' ;end
 
     def inflated
-      duplicate(itself).tap { |i| i.struct.configuration = inflated_configuration }
+      duplicate(self).tap { |i| i.struct.configuration = inflated_configuration }
     end
 
     def inflated_configuration

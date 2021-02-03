@@ -17,8 +17,19 @@ module Spaces
     def protocol; struct.protocol || defaults[:protocol] ;end
     def git?; protocol == 'git' ;end
 
+    def initialize(args)
+      self.repository = Addressable::URI.parse(args[:repository] || args[:struct]&.repository)
+      self.struct = args[:struct] || OpenStruct.new(args)
+    end
+
+    def to_s
+      [repository, branch, identifier].compact.join(' ')
+    end
+
+    protected
+
     def defaults
-      @defaults = {
+      @defaults ||= {
         identifier: root_identifier,
         branch: 'main',
         protocol: default_protocol
@@ -30,15 +41,6 @@ module Spaces
 
     def default_protocol
       ((e = repository&.extname).blank?) ? 'git' : e.gsub('.', '')
-    end
-
-    def initialize(args)
-      self.repository = Addressable::URI.parse(args[:repository] || args[:struct]&.repository)
-      self.struct = args[:struct] || OpenStruct.new(args)
-    end
-
-    def to_s
-      [repository, branch, identifier].compact.join(' ')
     end
 
   end
