@@ -44,7 +44,7 @@ module Packing
       raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:images)
 
       super.tap do
-        path_for(model).join('commit.json').write(model.struct.to_h_deep.to_json)
+        path_for(model).join('commit.json').write(model.to_h.to_json)
       end
     rescue PackWithoutImagesError => e
       warn(error: e, identifier: model.identifier, klass: klass)
