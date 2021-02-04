@@ -9,6 +9,12 @@ module Resolving
 
     delegate([:blueprints, :arenas] => :universe)
 
+    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
+      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
+        "#{p.relative_path_from(path)}"
+      end
+    end
+
     def by(identifier)
       super.tap do |m|
         m.arena = arenas.by(m.arena_identifier)

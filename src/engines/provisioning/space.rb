@@ -9,12 +9,6 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
-    def identifiers(arena_identifier: '*', resolution_identifier: '*')
-      path.glob("#{arena_identifier}/#{resolution_identifier}").map do |p|
-        p.relative_path_from(path)
-      end
-    end
-
     def save(model)
       ensure_connections_exist_for(model)
       if model.resolution.has?(:containers)
