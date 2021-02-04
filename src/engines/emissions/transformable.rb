@@ -5,6 +5,8 @@ module Emissions
 
     def identifier; struct[:identifier] ;end
 
+    def blueprint_identifier; identifier.split('/').last ;end
+
     def descriptor_class; ::Spaces::Descriptor ;end
 
     def arena_stanzas; stanzas_for(:arena) ;end

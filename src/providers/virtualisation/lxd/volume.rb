@@ -17,7 +17,7 @@ module Providers
             name = "#{volume_name}"
             type = "disk"
             properties = {
-              path = "#{destination}"
+              path = "#{destination}/#{identifier}"
               source = "#{volume_name}"
               pool = "#{pool_name}"
             }
@@ -25,7 +25,7 @@ module Providers
         )
       end
 
-      def volume_name; "#{identifier}-#{source}-volume" ;end
+      def volume_name; "#{blueprint_identifier}-#{source}-volume" ;end
       def pool_name; "#{source}-pool" ;end
 
     end

@@ -22,7 +22,7 @@ module Emissions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_directories] => :emission,
+      [:composition, :auxiliary_directories, :blueprint_identifier] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
