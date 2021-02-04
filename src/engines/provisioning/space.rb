@@ -16,6 +16,7 @@ module Provisioning
     end
 
     def save(model)
+      ensure_connections_exist_for(model)
       if model.resolution.has?(:containers)
         Pathname.new("#{arenas.path}/#{model.identifier}.tf").write(model.stanzas_content)
       end
@@ -24,8 +25,8 @@ module Provisioning
 
     protected
 
-    def unique_target_resolutions_for(resolution)
-      resolution.targets&.uniq(&:uniqueness) || []
+    def ensure_connections_exist_for(model)
+      absent(model.connections_provisioned).each { |p| save(p) }
     end
 
   end
