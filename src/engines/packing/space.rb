@@ -57,7 +57,7 @@ module Packing
     protected
 
     def execute(command, model)
-      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:images)
+      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:builders)
       save(model)
 
       Dir.chdir(path_for(model).to_path) do
