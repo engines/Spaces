@@ -1,8 +1,10 @@
 require_relative 'packing'
+require_relative 'provisioning'
 
 module Resolving
   class Resolution < ::Emissions::Emission
     include Resolving::Packing
+    include Resolving::Provisioning
 
     class << self
       def composition_class; Composition ;end
@@ -14,6 +16,8 @@ module Resolving
     )
 
     relation_accessor :arena
+
+    def arena_identifier; identifier.split('/').first ;end
 
     alias_accessor :blueprint, :predecessor
 

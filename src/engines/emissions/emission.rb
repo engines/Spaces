@@ -29,14 +29,6 @@ module Emissions
     alias_method :emission, :itself
     alias_method :has?, :respond_to?
 
-    def stanzas_content
-      stanzas.join("\n")
-    end
-
-    def stanzas
-      divisions.map(&:stanzas)
-    end
-
     def count
       has?(:scaling) ? scaling.count : 1
     end

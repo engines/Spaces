@@ -7,7 +7,13 @@ module Resolving
       end
     end
 
-    delegate(blueprints: :universe)
+    delegate([:blueprints, :arenas] => :universe)
+
+    def by(identifier)
+      super.tap do |m|
+        m.arena = arenas.by(m.arena_identifier)
+      end
+    end
 
     def save(model)
       ensure_connections_exist_for(model)
