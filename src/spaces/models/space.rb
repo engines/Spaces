@@ -32,8 +32,9 @@ module Spaces
     end
 
     def save_text(model)
-      _save(model, content: model.content)
-      Pathname.new(writing_name_for(model)).chmod(model.permission) if model.respond_to?(:permission)
+      _save(model, content: model.content).tap do
+        set_permission_for(model) if model.respond_to?(:permission)
+      end
     end
 
     def save_yaml(model)
@@ -55,13 +56,9 @@ module Spaces
       path.join(identifier, klass.qualifier)
     end
 
-    # FIXME: the permissions should be passed in
     def writing_name_for(model)
       ensure_space_for(model)
-
-      "#{path_for(model)}/#{model.file_name}".tap do |p|
-        logger.debug("Saving model with perms [#{permission(model)}]: #{p}")
-      end
+      "#{path_for(model)}/#{model.file_name}"
     end
 
     def file_names_for(directory, identifier)
@@ -95,10 +92,14 @@ module Spaces
       model.identifier
     end
 
-    private
+    protected
 
-    def permission(model)
-      sprintf "%o", model.permission if model.respond_to?(:permission)
+    # FIXME: the permissions should be passed in
+    def set_permission_for(model)
+      writing_name_for(model).tap do |n|
+        Pathname.new(n).chmod(model.permission)
+        logger.debug("Saving #{n} with permissions [#{sprintf "%o", model.permission}]")
+      end
     end
 
   end
