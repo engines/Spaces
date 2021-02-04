@@ -5,8 +5,8 @@ module Providers
       def provisioning_stanzas
         scale do |i|
           %Q(
-            resource "docker_container" "#{blueprint_identifier}-#{i}" {
-              name  = "#{blueprint_identifier}-#{i}"
+            resource "docker_container" "#{blueprint_identifier}-#{i+1}" {
+              name  = "#{blueprint_identifier}-#{i+1}"
               image = "#{image}"
             }
           )
