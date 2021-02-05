@@ -9,6 +9,12 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
+    def by(identifier, klass = default_model_class)
+      super.tap do |m|
+        m.resolution = resolutions.by(identifier)
+      end
+    end
+
     def save(model)
       ensure_connections_exist_for(model)
       if model.resolution.has?(:containers)
