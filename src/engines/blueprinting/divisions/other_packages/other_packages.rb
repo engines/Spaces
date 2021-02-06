@@ -1,11 +1,11 @@
 module Divisions
   class OtherPackages < ::Emissions::Divisible
 
-    alias_method :divisible_embed!, :embed!
+    alias_method :divisible_embedded_with, :embedded_with
 
     include ::Packing::Division
 
-    def embed!(other); divisible_embed!(other) ;end
+    def embedded_with(other); divisible_embedded_with(other) ;end
 
     def packing_stanza_for(key)
       all.map(&:packing_stanza) if key == :adds

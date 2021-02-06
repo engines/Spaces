@@ -7,30 +7,19 @@ module Divisions
       all.detect { |b| b.identifier == name.to_s }
     end
 
-    def embedded_blueprints; embeds.map(&:blueprint) ;end
-
-    def connects
-      all.reject(&:embed?)
+    def with_embeds(emissions)
+      empty.tap { |d| d.struct = super.all.map(&:inflated).map(&:struct) }
     end
 
-    def embeds
-      filtered(:embeds) { all.select(&:embed?) }
+    def connect_targets; all.reject(&:embed?) ;end
+    def embed_targets; turtle_targets.select(&:embed?) ;end
+
+    def turtle_targets
+      all.map { |b| [b, turtle_targets_under(b)] }.flatten.uniq(&:identifier)
     end
 
-    def turtles
-      filtered(:turtles) { all }
-    end
-
-    def filtered(method, &block)
-      (yield || []).map { |b| [b, under(b, method)] }.flatten.uniq(&:identifier)
-    end
-
-    def under(binding, method)
-      if (b = binding.blueprint).has?(:bindings)
-        b.bindings.send(method)
-      else
-        []
-      end
+    def turtle_targets_under(binding)
+      (b = binding.blueprint).has?(:bindings) ? b.bindings.turtle_targets : []
     end
 
     def method_missing(m, *args, &block); named(m) || super ;end

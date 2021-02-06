@@ -1,15 +1,18 @@
 require_relative 'transformable'
+require_relative 'embeddable'
+require_relative 'resolvable'
 
 module Emissions
   class Division < Transformable
-
     include Engines::Logger
+    include Embeddable
+    include Resolvable
 
     attr_accessor :label
 
     class << self
       def prototype(emission:, label:)
-        emission.maybe_with_embeds_in(new(emission: emission, label: label))
+        new(emission: emission, label: label)
       end
 
       def default_struct; OpenStruct.new ;end
@@ -19,7 +22,7 @@ module Emissions
 
     delegate(
       default_struct: :klass,
-      composition: :emission,
+      [:composition, :auxiliary_directories, :blueprint_identifier] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
@@ -32,7 +35,7 @@ module Emissions
 
     def context_identifier; emission.context_identifier ;end
 
-    def auxiliary_content
+    def content
       logger.debug "auxiliary_directories: #{auxiliary_directories.inspect}"
 
       auxiliary_directories.map do |d|
@@ -42,16 +45,6 @@ module Emissions
         end
       end.flatten
     end
-
-    def with_embeds
-      emission.embeds.reduce(itself) do |r, b|
-        r.tap do |rp|
-          rp.embed!(b.send(qualifier)) if b.has?(qualifier)
-        end
-      end
-    end
-
-    def embed!(other); itself; end
 
     def scale &block
       Array.new(emission.count) do |i|
@@ -66,6 +59,8 @@ module Emissions
     def auxiliary_path
       Pathname(__dir__).dirname.join('blueprinting', 'divisions', qualifier)
     end
+
+    def empty; self.class.new(emission: emission, struct: default_struct, label: label) ;end
 
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission

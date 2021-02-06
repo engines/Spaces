@@ -1,26 +1,32 @@
 module Emissions
   module Resolvable
 
-    def emit; resolved ;end
-
-    def complete?
-      texts.values.map(&:complete?).all_true?
+    def resolved
+      empty.tap { |d| d.struct = ResolvableStruct.new(struct, self).resolved }
     end
+
+  end
+
+
+  class ResolvableStruct < OpenStruct
+
+    attr_accessor :transformable
 
     def resolved
-      @resolved ||= OpenStruct.new(resolved_texts)
-    end
-
-    def resolved_texts
-      @resolved_texts ||= texts.transform_values(&:resolved)
+      OpenStruct.new(texts.transform_values(&:resolved))
     end
 
     def texts
-      @texts ||= struct.to_h.transform_values { |v| text_from(v) }
+      to_h.transform_values { |v| text_from(v) }
     end
 
     def text_from(value)
-      Interpolating::Text.new(origin: value, transformable: self)
+      Interpolating::Text.new(origin: value, transformable: transformable)
+    end
+
+    def initialize(struct, transformable)
+      super(struct)
+      self.transformable = transformable
     end
 
   end

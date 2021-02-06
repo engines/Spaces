@@ -20,6 +20,4 @@ class OpenStruct
     end
   end
 
-  def emit; duplicate(self) ;end
-
 end
