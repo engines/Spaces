@@ -5,7 +5,7 @@ module Emissions
 
       def naming_map
         {
-          anchor: :binding_anchor,
+          target: :binding_target,
           nodules: :modules
         }
       end
@@ -14,7 +14,7 @@ module Emissions
         [
           Divisions::Providers,
           Divisions::Bindings,
-          Divisions::Anchor,
+          Divisions::Target,
           Divisions::Configuration,
           Divisions::Scaling,
           Divisions::SystemPackages,
@@ -26,7 +26,7 @@ module Emissions
           Divisions::Packing,
           Divisions::Containers,
           Divisions::Volumes,
-          Divisions::About          
+          Divisions::About
         ]
       end
 
@@ -35,19 +35,11 @@ module Emissions
       def ranking; [division_classes, associative_classes].flatten.compact ;end
 
       def divisions
-        associative_divisions.merge(map_for(division_classes))
+        map_for(division_classes)
       end
 
-      def associative_divisions
+      def associations
         map_for(associative_classes)
-      end
-
-      def mandatory_keys
-        associative_divisions.keys
-      end
-
-      def composition_class_for(key)
-         divisions[key]&.composition
       end
 
       def map_for(classes)
@@ -65,11 +57,9 @@ module Emissions
       end
     end
 
-    delegate([:divisions, :associative_divisions, :ranking, :naming_map, :mandatory_keys] => :klass)
+    delegate([:divisions, :associations, :ranking, :naming_map] => :klass)
 
-    def keys
-      divisions.keys
-    end
+    def keys; @keys ||= divisions.keys ;end
 
   end
 end

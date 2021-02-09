@@ -3,24 +3,20 @@ module Divisions
     include ::Packing::Division
 
     delegate(
-      [:branch, :repository, :extension, :git?] => :descriptor
+      [:branch, :repository, :protocol, :git?] => :target
     )
 
-    def emit
-      super.tap { |s| s[:descriptor] = descriptor.struct }
-    end
+    def target; @target ||= descriptor_class.new(struct.target) ;end
+    def identifier; struct.identifier || target.identifier ;end
 
-    def descriptor; @descriptor ||= descriptor_class.new(struct.descriptor) ;end
-    def identifier; struct.identifier || descriptor.identifier ;end
-
-    def extraction; struct.extraction ||= extension ;end
+    def extraction; struct.extraction ||= protocol ;end
     def extracted_path; struct.extracted_path ||= identifier ;end
 
     def packing_stanza
       {
         type: 'shell',
         environment_vars: environment_vars,
-        inline: [division.temporary_script_path.join("add")]
+        inline: [division.temporary_script_path.join('add')]
       }
     end
 

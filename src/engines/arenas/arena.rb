@@ -12,11 +12,22 @@ module Arenas
 
     delegate(
       [:dns_class, :provider_class] => :klass,
-      [:arenas, :resolutions] => :universe
+      arenas: :universe
     )
 
-    def stanzas
-      [divisions, providers].flatten.map(&:arena_stanzas).flatten.compact
+    def resolutions
+      @resolutions ||=
+      universe.resolutions.identifiers(arena_identifier: identifier).map do |i|
+        universe.resolutions.by(i)
+      end
+    end
+
+    def resolutions_with(division_identifier)
+      resolutions.select { |r| r.has?(division_identifier) }
+    end
+
+    def stanzas_content
+      [associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join
     end
 
     def providers
@@ -27,10 +38,6 @@ module Arenas
       resolutions_with(division_identifier).map { |r| r.send(division_identifier).all }.flatten.compact
     end
 
-    def resolutions_with(division_identifier)
-      resolutions.all.select { |r| r.has?(division_identifier) }
-    end
-
     def providers_implied_in_containers
       all(:containers).map do |c|
         provider_class.prototype(struct: c.struct, division: self)
@@ -38,18 +45,6 @@ module Arenas
     end
 
     def arena; itself ;end
-
-    def division_map
-      @division_map ||=
-        mandatory_keys.reduce({}) do |m, k|
-          m.tap { m[k] = division_for(k) }
-        end.compact
-    end
-
-    def initialize(struct: nil, identifier: nil)
-      super(struct: struct)
-      self.struct.identifier = identifier if identifier
-    end
 
   end
 end

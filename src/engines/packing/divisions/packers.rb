@@ -12,9 +12,7 @@ module Divisions
       packing_divisions: :resolution
     )
 
-    def emit
-      packing_stanzas.map(&:to_h)
-    end
+    def to_h; packing_stanzas.map(&:to_h) ;end
 
     def packing_stanzas
       [auxiliary_files_stanza, precedential_stanzas]
@@ -27,7 +25,7 @@ module Divisions
 
     def all_stanzas_for(precedence)
       [
-        (file_copy_stanza_for(precedence) if overlay_exists_for?(precedence)),
+        (file_copy_stanza_for(precedence) if copy_source_path_for(precedence).exist?),
         division_stanzas_for(precedence)
       ].flatten.compact
     end
@@ -55,10 +53,6 @@ module Divisions
           "tar -C /tmp/packing/#{precedence}/   -cf - . | tar -C / -xf -"
         ]
       }
-    end
-
-    def overlay_exists_for?(precedence)
-      copy_source_path_for(precedence).exist?
     end
 
   end

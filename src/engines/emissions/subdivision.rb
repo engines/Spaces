@@ -9,7 +9,7 @@ module Emissions
       end
 
       def constant_for(type)
-        Module.const_get("::Providers::#{type.to_s.camelize}")
+        Module.const_get("::Providers::#{type.camelize}")
       end
     end
 
@@ -17,9 +17,15 @@ module Emissions
 
     delegate([:emission, :context_identifier] => :division)
 
-    def initialize(struct:, division:)
-      self.struct = struct
+    def inflated
+      duplicate(self).tap { |s| s.struct = s.struct.merge(inflatables) }
+    end
+
+    def empty; self.class.new(division: division) ;end
+
+    def initialize(division:, struct: nil)
       self.division = division
+      self.struct = struct
     end
 
   end

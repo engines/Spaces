@@ -5,47 +5,43 @@ require_relative 'model'
 module Spaces
   class Descriptor < Model
 
-    delegate(identifier: :struct)
-
-    def root_identifier
-      basename.to_s
+    class << self
+      def inflatables; [:identifier, :repository, :branch, :protocol] ;end
     end
 
-    def branch
-      struct.branch ||= 'main'
-    end
+    attr_accessor :repository
 
-    def protocol
-      struct.protocol ||= extension
-    end
+    def identifier; struct.identifier || defaults[:identifier] ;end
 
-    def git?
-      protocol == 'git'
-    end
-
-    def basename
-      add_ext(rpath.basename, "")
-    end
-
-    def extension
-      rpath.extname
-    end
+    def branch; struct.branch || defaults[:branch] ;end
+    def protocol; struct.protocol || defaults[:protocol] ;end
+    def git?; protocol == 'git' ;end
 
     def initialize(args)
-      @repository = Addressable::URI.parse(args[:repository])
-
+      self.repository = Addressable::URI.parse(args[:repository] || args[:struct]&.repository)
       self.struct = args[:struct] || OpenStruct.new(args)
-      self.struct.identifier ||= root_identifier
     end
 
     def to_s
-      [@repository.to_s, branch, identifier].compact.join(' ')
+      [repository, branch, identifier].compact.join(' ')
     end
 
-    private
+    protected
 
-    def rpath
-      @rpath ||= PN((@repository) ? @repository.path : "")
+    def defaults
+      @defaults ||= {
+        identifier: root_identifier,
+        branch: 'main',
+        protocol: default_protocol
+      }
     end
+
+    def root_identifier; basename&.split('.')&.first ;end
+    def basename; repository&.basename ;end
+
+    def default_protocol
+      ((e = repository&.extname).blank?) ? 'git' : e.gsub('.', '')
+    end
+
   end
 end

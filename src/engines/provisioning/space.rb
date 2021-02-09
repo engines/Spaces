@@ -9,45 +9,24 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
-    def identifiers(arena_identifier: '*', resolution_identifier: '*')
-      path.glob("#{arena_identifier}/#{resolution_identifier}").map do |p|
-        p.relative_path_from(path)
-      end
-    end
-
     def by(identifier, klass = default_model_class)
-      super
-    rescue Errno::ENOENT => e
-      # warn(error: e, identifier: identifier, klass: klass)
-      just_print_the_error(__FILE__, __LINE__, e)
-      klass.new(identifier: identifier).tap do |m|
-        save(m)
+      super.tap do |m|
+        m.resolution = resolutions.by(identifier)
       end
     end
-
-    def reading_name_for(identifier, _, ext = nil)
-      add_ext(path.join(identifier, PN(identifier).basename), ext)
-    end
-
 
     def save(model)
-      anchor_provisionings_for(model).each { |p| save(p) }
-      arenas.save_provisions(model) if model.has?(:containers)
+      ensure_connections_exist_for(model)
+      if model.resolution.has?(:containers)
+        Pathname.new("#{arenas.path}/#{model.identifier}.tf").write(model.stanzas_content)
+      end
       super
     end
 
-    def anchor_provisionings_for(model)
-      anchor_resolutions_for(model.resolution).map do |r|
-        default_model_class.new(resolution: r, arena: model.arena)
-      end
-    end
+    protected
 
-    def anchor_resolutions_for(resolution)
-      unique_anchor_resolutions_for(resolution).map { |d| resolutions.by(d.identifier) }
-    end
-
-    def unique_anchor_resolutions_for(resolution)
-      resolution.connecting_descriptors&.uniq(&:uniqueness) || []
+    def ensure_connections_exist_for(model)
+      absent(model.connections_provisioned).each { |p| save(p) }
     end
 
   end

@@ -1,15 +1,18 @@
 require_relative 'transformable'
+require_relative 'embeddable'
+require_relative 'resolvable'
 
 module Emissions
   class Division < Transformable
-
     include Engines::Logger
+    include Embeddable
+    include Resolvable
 
     attr_accessor :label
 
     class << self
       def prototype(emission:, label:)
-        emission.maybe_with_embeds_in(new(emission: emission, label: label))
+        new(emission: emission, label: label)
       end
 
       def default_struct; OpenStruct.new ;end
@@ -19,7 +22,7 @@ module Emissions
 
     delegate(
       default_struct: :klass,
-      composition: :emission,
+      [:composition, :auxiliary_directories, :blueprint_identifier] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
@@ -32,7 +35,7 @@ module Emissions
 
     def context_identifier; emission.context_identifier ;end
 
-    def auxiliary_content
+    def content
       logger.debug "auxiliary_directories: #{auxiliary_directories.inspect}"
 
       auxiliary_directories.map do |d|
@@ -43,20 +46,6 @@ module Emissions
       end.flatten
     end
 
-    def with_embeds
-      begin
-        emission.embeds.reduce(itself) do |r, e|
-          r.tap do |rp|
-            rp.embed!(e.send(qualifier)) if e.has?(qualifier)
-          end
-        end
-      rescue TypeError => e
-        just_print_the_error(__FILE__, __LINE__, e)
-      end
-    end
-
-    def embed!(other); itself; end
-
     def scale &block
       Array.new(emission.count) do |i|
         block.call(i)
@@ -64,12 +53,14 @@ module Emissions
     end
 
     def auxiliary_paths_for(symbol)
-      auxiliary_path.join(symbol).glob("**/*").reject(&:directory?)
+      auxiliary_path.join("#{symbol}").glob("**/*").reject(&:directory?)
     end
 
     def auxiliary_path
-      PN(__dir__).dirname.join("blueprinting", "divisions", qualifier)
+      Pathname(__dir__).dirname.join('blueprinting', 'divisions', qualifier)
     end
+
+    def empty; self.class.new(emission: emission, struct: default_struct, label: label) ;end
 
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission

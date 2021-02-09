@@ -20,12 +20,6 @@ module Emissions
     def arena_stanzas; all.map(&:arena_stanzas) ;end
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
-    def embed!(other)
-      tap { self.struct = struct_with(other) }
-    end
-
-    def struct_with(other); [struct, other.struct].flatten.uniq ;end
-
     def all
       @all ||= struct&.map { |s| subdivision_for(s) }&.compact || []
     end
@@ -35,12 +29,15 @@ module Emissions
     rescue NameError => _
       struct
     rescue ArgumentError => e
-      # warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
       nil
     end
 
-    def emit; all&.map(&:emit) || super ;end
+    def resolved
+      empty.tap { |d| d.struct = all.map(&:resolved).map(&:struct) }
+    end
+
+    def struct_with(other); [struct, other.struct].flatten.uniq ;end
 
     def initialize(struct: nil, emission: nil, label: nil)
       check_subdivision_class
@@ -50,8 +47,7 @@ module Emissions
     def check_subdivision_class
       subdivision_class
     rescue NameError => e
-      # warn(error: e, klass: klass.name.singularize, verbosity: [:silence])
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, klass: klass.name.singularize, verbosity: [:silence])
     end
 
   end

@@ -1,5 +1,5 @@
 def packing_commit_for(_)
-  build = YAML.load_file(Fs.workspace.join("Universe", "PackingSpace", params[:identifier], "commit", "output.yaml"))
+  build = YAML.load_file(universe.workspace.join("Universe", "PackingSpace", params[:identifier], "commit", "output.yaml"))
   {
     built: true,
     messages: build.ui_messages.map do |ui_message|

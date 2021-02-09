@@ -15,10 +15,6 @@ module Arenas
       end
     end
 
-    def save_provisions(provisions)
-      _save(provisions, content: provisions.stanzas_content, as: :tf)
-    end
-
     def path_for(model)
       path.join(model.arena.context_identifier)
     end
@@ -35,8 +31,7 @@ module Arenas
         bridge.send(command, options[command] || {})
       end
     rescue RubyTerraform::Errors::ExecutionError => e
-      # warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
-      just_print_the_error(__FILE__, __LINE__, e)
+      warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
     end
 
     def bridge; RubyTerraform ;end
