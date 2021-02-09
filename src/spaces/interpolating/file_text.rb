@@ -9,8 +9,6 @@ module Interpolating
 
     def permission; @permission ||= origin_file_name.stat.mode ;end
 
-    def emission_path; origin_file_name ;end
-
     def file_name; origin_file_name.basename ;end
 
     def subpath; origin_path ;end

@@ -10,8 +10,8 @@ module Providers
 
       def container_stanza(i)
         %Q(
-          resource "lxd_container" "#{identifier}-#{i}" {
-            name      = "#{identifier}-#{i}"
+          resource "lxd_container" "#{blueprint_identifier}-#{i+1}" {
+            name      = "#{blueprint_identifier}-#{i+1}"
             image     = "#{image_name}"
             ephemeral = false
 

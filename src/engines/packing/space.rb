@@ -10,12 +10,8 @@ module Packing
     delegate(resolutions: :universe)
 
     def by(identifier, klass = default_model_class)
-      by_json(identifier, klass)
-    rescue Errno::ENOENT => e
-      warn(error: e, identifier: identifier, klass: klass)
-
-      klass.new(resolutions.by(identifier)).tap do |m|
-        save(m)
+      super.tap do |m|
+        m.resolution = resolutions.by(identifier)
       end
     end
 
@@ -41,14 +37,11 @@ module Packing
     end
 
     def save(model)
-      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:images)
-      ensure_space_for(model)
+      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:builders)
 
-      model.tap do |m|
-        path_for(model).join('commit.json').write(m.emit.to_h_deep.to_json)
+      super.tap do
+        path_for(model).join('commit.json').write(model.to_h.to_json)
       end
-
-      model.identifier
     rescue PackWithoutImagesError => e
       warn(error: e, identifier: model.identifier, klass: klass)
     end
@@ -64,7 +57,7 @@ module Packing
     protected
 
     def execute(command, model)
-      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:images)
+      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:builders)
       save(model)
 
       Dir.chdir(path_for(model).to_path) do

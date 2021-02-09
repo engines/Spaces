@@ -15,10 +15,6 @@ module Arenas
       end
     end
 
-    def save_provisions(provisions)
-      _save(provisions, content: provisions.stanzas_content, as: :tf)
-    end
-
     def path_for(model)
       path.join(model.arena.context_identifier)
     end

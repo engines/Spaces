@@ -5,10 +5,10 @@ module Packing
 
     def precedence_midpoint; precedence.count / 2 ;end
 
-    def embed!(other)
-      tap do
+    def embedded_with(other)
+      duplicate(itself).tap do |d|
         keys_including(other).each do |k|
-          struct[k] = [other.struct[k], struct[k]].flatten.compact.uniq
+          d.struct[k] = [other.struct[k], d.struct[k]].flatten.compact.uniq
         end
       end
     end

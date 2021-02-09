@@ -22,19 +22,11 @@ module Publishing
         super(descriptor)
         by(descriptor.identifier).tap do |m|
           blueprints.import(m, descriptor, force: force)
-          import_targets_for(m)
+          m.turtle_targets
         end
       end
     rescue Errno::ENOENT => e
       warn(error: e, descriptor: descriptor, verbosity: [:error])
-    end
-
-    def import_targets_for(model)
-      unimported_blueprints_for(model, :bindings).each { |d| import(d) }
-    end
-
-    def unimported_blueprints_for(model, division_identifier)
-      model.descriptors_for(division_identifier).reject { |d| imported?(d) }
     end
 
   end

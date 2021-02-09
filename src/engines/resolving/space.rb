@@ -7,23 +7,45 @@ module Resolving
       end
     end
 
-    delegate(blueprints: :universe)
+    delegate([:blueprints, :arenas] => :universe)
 
-    def by(identifier, klass = default_model_class)
-      by_yaml(identifier, klass).tap do |m|
-        m.blueprint = blueprints.by(identifier)
+    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
+      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
+        "#{p.relative_path_from(path)}"
       end
-    rescue Errno::ENOENT => e
-      warn(error: e, identifier: identifier, klass: klass)
+    end
 
-      klass.new(blueprint: blueprints.by(identifier)).tap do |m|
-        save(m)
+    def by(identifier)
+      super.tap do |m|
+        m.arena = arenas.by(m.arena_identifier)
       end
     end
 
     def save(model)
+      ensure_connections_exist_for(model)
       super.tap do
-        model.auxiliary_content.each { |t| save_text(t) }
+        copy_auxiliaries_for(model)
+        model.content.each { |t| save_text(t) }
+      end
+    end
+
+    protected
+
+    def ensure_connections_exist_for(model)
+      absent(model.connections_resolved).each { |r| save(r) }
+    end
+
+    def copy_auxiliaries_for(model)
+      model.embeds_including_blueprint.map do |b|
+        b.auxiliary_directories.each { |d| copy_auxiliaries(model, b, d) }
+      end
+    end
+
+    def copy_auxiliaries(model, blueprint, segment)
+      "#{segment}".tap do |s|
+        blueprints.path_for(blueprint).join(s).tap do |p|
+          FileUtils.cp_r(p, path_for(model)) if p.exist?
+        end
       end
     end
 

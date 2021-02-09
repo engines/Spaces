@@ -1,3 +1,3 @@
-def resolution; @resolution ||= universe.resolutions.by(descriptor.identifier) ;end
+def resolution; @resolution ||= blueprint.with_embeds.resolved_in(arena) ;end
 
 def save_resolution; universe.resolutions.save(resolution) ;end

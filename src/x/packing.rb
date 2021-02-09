@@ -1,4 +1,4 @@
-def pack; @pack ||= Packing::Pack.new(resolution) ;end
+def pack; @pack ||= resolution.packed ;end
 
 def commit_pack; universe.packs.commit(pack) ;end
 def export_pack; universe.packs.export(pack) ;end

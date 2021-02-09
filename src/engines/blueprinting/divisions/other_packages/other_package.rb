@@ -6,10 +6,6 @@ module Divisions
       [:branch, :repository, :protocol, :git?] => :target
     )
 
-    def emit
-      super.tap { |s| s[:target] = target.struct }
-    end
-
     def target; @target ||= descriptor_class.new(struct.target) ;end
     def identifier; struct.identifier || target.identifier ;end
 

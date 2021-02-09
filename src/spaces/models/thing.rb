@@ -33,23 +33,22 @@ module Spaces
     attr_accessor :struct, :klass
 
     delegate(
-      [:identifier, :namespace, :qualifier, :spout, :klasses] => :klass,
-      to_h: :struct
+      [:identifier, :namespace, :qualifier, :spout, :klasses] => :klass
     )
 
     def klass; @klass ||= self.class ;end
 
     def keys; struct&.to_h&.keys ;end
 
-    def emit; duplicate(struct) ;end
-
     def context_identifier; identifier ;end
 
     def to_yaml; YAML.dump(struct) ;end
 
-    def to_json(*args); struct&.to_h_deep&.to_json(*args) ;end
+    def to_json(*args); to_h.to_json(*args) ;end
 
     def open_struct_from_json(j); JSON.parse(j, object_class: OpenStruct) ;end
+
+    def to_h; struct.to_h_deep ;end
 
     def to_s; identifier ;end
 

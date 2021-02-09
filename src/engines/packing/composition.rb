@@ -4,6 +4,7 @@ module Packing
     class << self
       def division_classes
         [
+          Divisions::Images,
           Divisions::Packers,
           Divisions::PostProcessors
         ]
@@ -11,6 +12,7 @@ module Packing
 
       def naming_map
         {
+          images: 'builders',
           packers: 'provisioners',
           post_processors: 'post-processors'
         }

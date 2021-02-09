@@ -13,9 +13,9 @@ module Providers
     def provisioning_stanzas
       scale do |i|
         %Q(
-          resource "powerdns_record" "#{identifier}-#{i}" {
+          resource "powerdns_record" "#{blueprint_identifier}-#{i+1}" {
             zone    = "#{universe.host}"
-            name    = "#{identifier}-#{i}.#{universe.host}"
+            name    = "#{blueprint_identifier}-#{i+1}.#{universe.host}"
             type    = "AAAA"
             ttl     = #{ttl}
             records = ["<---ipv6_address???--->"]
