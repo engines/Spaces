@@ -25,7 +25,7 @@ module Providers
       end
 
       def default_name
-        "#{tenant.identifier}-#{context_identifier}"
+        "#{tenant.identifier}/#{context_identifier}"
       end
 
     end
