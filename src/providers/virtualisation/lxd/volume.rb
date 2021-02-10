@@ -17,7 +17,7 @@ module Providers
             name = "#{volume_name}"
             type = "disk"
             properties = {
-              path = "#{destination}/#{identifier}"
+              path = "#{destination}"
               source = "#{volume_name}"
               pool = "#{pool_name}"
             }
