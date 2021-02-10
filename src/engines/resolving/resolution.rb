@@ -20,6 +20,7 @@ module Resolving
     def arena_identifier; identifier.split('/').first ;end
 
     alias_accessor :blueprint, :predecessor
+    alias_accessor :binder, :predecessor
 
     def complete?
       all_complete?(divisions)

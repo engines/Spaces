@@ -8,8 +8,7 @@ module Divisions
 
     delegate(
       resolutions: :universe,
-      resolution: :pack,
-      packing_divisions: :resolution
+      resolution: :pack
     )
 
     def to_h; packing_stanzas.map(&:to_h) ;end
@@ -31,11 +30,23 @@ module Divisions
     end
 
     def division_stanzas_for(precedence)
-      packing_divisions.map { |d| d.packing_stanza_for(precedence) if d.respond_to?(precedence) }
+      packing_divisions.map { |d| d.packing_stanza_for(precedence) if d.uses?(precedence) }
         .compact.flatten
     end
 
-    def complete_precedence; by_precedence(packing_divisions.map(&:keys).flatten.uniq) ;end
+    def complete_precedence
+      by_precedence(packing_divisions.map(&:keys).flatten.uniq)
+    end
+
+    def packing_divisions
+      @packing_divisions ||= [resolution.packing_divisions, scripts_division].flatten
+    end
+
+    def scripts_division
+      @scripts_division ||= scripts_class.prototype(emission: pack, label: :scripts)
+    end
+
+    def scripts_class; ::Packing::Scripts ;end
 
     def auxiliary_files_stanza
       {

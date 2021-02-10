@@ -29,6 +29,8 @@ module Packing
       Pathname('tmp').join('packing', 'scripts', qualifier)
     end
 
+    def uses?(precedence); keys.include?(precedence.to_sym) ;end
+
     def keys; by_precedence(super) ;end
 
     def by_precedence(keys)
