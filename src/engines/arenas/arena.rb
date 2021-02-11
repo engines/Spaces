@@ -27,7 +27,7 @@ module Arenas
     end
 
     def stanzas_content
-      %( #{providers_required}
+      %( #{self.providers_required}
 	     #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
        )
     end
