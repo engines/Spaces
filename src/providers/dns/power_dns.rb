@@ -9,7 +9,7 @@ module Providers
       )
     end
 
-    def providers_require
+    def providers_required
 STDERR.puts("power")
       %(
           powerdns = {
