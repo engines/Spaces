@@ -29,7 +29,7 @@ module Arenas
     def stanzas_content
       %( 
 	   terraform {
-		(required_providers { 
+		required_providers { 
 	     #{[providers].flatten.map(&:providers_required).flatten.compact.join}
         }
 	   }
