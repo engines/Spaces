@@ -9,7 +9,7 @@ module Providers
       )
     end
 
-    def provider_require
+    def providers_required
       %(
           powerdns = {
           version = ">= 0"
