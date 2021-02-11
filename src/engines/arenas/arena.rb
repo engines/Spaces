@@ -41,8 +41,8 @@ module Arenas
 
     def providers_required
      %(required_providers { 
-	         #{[associations, providers].flatten.map(&:providers_require).flatten.compact.join}
-}
+	         #{[providers].flatten.map(&:providers_require).compact.join}
+      }
       )
     end
 
