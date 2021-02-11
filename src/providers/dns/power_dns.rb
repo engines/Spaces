@@ -10,17 +10,14 @@ pmodule Providers
     end
 
     def providers_require
+STDERR.puts("power")
       %(
           powerdns = {
           version = ">= 0"
           source = "pan-net/powerdns"
           }
        )
-STDERR.puts( %( powerdns = {
-          version = ">= 0"
-          source = "pan-net/powerdns"
-          })
-			)
+
     end
 
 
