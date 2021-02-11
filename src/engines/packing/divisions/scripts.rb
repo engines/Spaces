@@ -22,13 +22,10 @@ module Packing
       {
         type: 'shell',
         inline: scripts_for(precedence).map do |s|
-          temporary_path.join("#{precedence}", s)
+          temporary_script_path.join("#{precedence}", s)
         end
       }
     end
-
-    def temporary_path; Pathname('/tmp').join(path) ;end
-    def path; 'packing/scripts' ;end
 
   end
 end
