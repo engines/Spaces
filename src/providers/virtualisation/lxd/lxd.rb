@@ -14,7 +14,7 @@ module Providers
       )
     end
 
-    def providers_require; end
+    def providers_required; end
 
     def pool_stanzas
       %(
