@@ -27,12 +27,21 @@ module Arenas
     end
 
     def stanzas_content
-      [associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join
+      %( #{providers_required}
+	     #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
+       )
     end
 
     def providers
       [all(:providers), providers_implied_in_containers].flatten.uniq(&:uniqueness)
     end
+
+    def providers_required
+     %(required_providers { 
+	        #{[associations, providers].flatten.map(&:provider_require).flatten.compact.join} 
+      })
+    end
+
 
     def all(division_identifier)
       resolutions_with(division_identifier).map { |r| r.send(division_identifier).all }.flatten.compact
