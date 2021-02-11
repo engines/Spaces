@@ -38,7 +38,8 @@ module Arenas
 
     def providers_required
      %(required_providers { 
-	        #{all(:providers_required), providers_implied_in_containers].flatten.uniq(&:uniqueness)}
+	        #{[all(:providers_required), providers_implied_in_containers].flatten.uniq(&:uniqueness)}
+}
       )
     end
 
