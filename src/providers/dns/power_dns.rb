@@ -1,4 +1,4 @@
-module Providers
+pmodule Providers
   class PowerDns < ::Associations::Dns
     def arena_stanzas
       %(
@@ -16,6 +16,10 @@ module Providers
           source = "pan-net/powerdns"
           }
        )
+STDERR.puts(" powerdns = {
+          version = ">= 0"
+          source = "pan-net/powerdns"
+          }")
     end
 
 
