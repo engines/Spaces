@@ -31,6 +31,8 @@ module Arenas
 	   terraform {
 		required_providers { 
 	     #{providers.flatten.map(&:providers_required).flatten.compact.join}
+
+ thh
         }
 	   }
 	     #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
