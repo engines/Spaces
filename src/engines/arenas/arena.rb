@@ -38,7 +38,7 @@ module Arenas
 
     def providers_required
      %(required_providers { 
-	        #{[all(:providers_require), providers_implied_in_containers].flatten.uniq(&:uniqueness)}
+	         #{[associations, providers].flatten.map(&:providers_require).flatten.compact.join}
 }
       )
     end
