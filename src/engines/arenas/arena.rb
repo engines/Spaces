@@ -30,7 +30,7 @@ module Arenas
       %( 
 	   terraform {
 		(required_providers { 
-	     #{self.providers_required}
+	     #{[providers].flatten.map(&:providers_required).flatten.compact.join}
         }
 	   }
 	     #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
@@ -40,12 +40,6 @@ module Arenas
     def providers
       [all(:providers), providers_implied_in_containers].flatten.uniq(&:uniqueness)
     end
-
-    def providers_required
-	         [providers].flatten.map(&:providers_required).flatten.compact.join
-      )
-    end
-
 
     def all(division_identifier)
       resolutions_with(division_identifier).map { |r| r.send(division_identifier).all }.flatten.compact
