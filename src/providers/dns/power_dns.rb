@@ -18,14 +18,6 @@ module Providers
        )
     end
 
-    def provder_require
-      %(
-          powerdns = {
-          version = ">= 0"
-          source = "pan-net/powerdns"
-          }
-       )
-    end
 
     def provisioning_stanzas
       scale do |i|
