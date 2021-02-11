@@ -19,7 +19,8 @@ pmodule Providers
 STDERR.puts( %( powerdns = {
           version = ">= 0"
           source = "pan-net/powerdns"
-          }))
+          })
+			)
     end
 
 
