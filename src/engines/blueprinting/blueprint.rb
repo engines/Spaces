@@ -3,6 +3,8 @@ module Blueprinting
 
     delegate(blueprints: :universe)
 
+    alias_method :blueprint, :itself
+
     def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end
 
   end
