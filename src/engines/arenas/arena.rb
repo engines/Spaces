@@ -27,7 +27,10 @@ module Arenas
     end
 
     def stanzas_content
-      %( #{providers_required}
+      %( 
+	   terraform {
+	     #{providers_required}
+	   }
 	     #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
        )
     end
@@ -38,7 +41,7 @@ module Arenas
 
     def providers_required
      %(required_providers { 
-	         #{[providers].flatten.map(&:providers_require).flatten.compact.join}
+	         #{[associations, providers].flatten.map(&:providers_require).flatten.compact.join}
 }
       )
     end
