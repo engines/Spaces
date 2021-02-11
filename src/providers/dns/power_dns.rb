@@ -1,4 +1,4 @@
-pmodule Providers
+module Providers
   class PowerDns < ::Associations::Dns
     def arena_stanzas
       %(
