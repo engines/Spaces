@@ -1,3 +1,5 @@
+def descriptor; @descriptor ;end
+
 def import; universe.publications.import(descriptor, force: true); end
 
 def publication
