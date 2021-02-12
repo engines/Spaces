@@ -12,7 +12,7 @@ module Providers
     def providers_require
       %(
           powerdns = {
-          version = ">= 0"
+          version = "1.4.0"
           source = "pan-net/powerdns"
           }
        )
