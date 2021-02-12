@@ -16,7 +16,6 @@ module Emissions
     def related_divisions
       @related_divisions ||= emission.divisions
     end
-
     def arena_stanzas; all.map(&:arena_stanzas) ;end
     def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
 
