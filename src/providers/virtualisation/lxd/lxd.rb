@@ -1,12 +1,11 @@
 module Providers
   class Lxd < ::Divisions::Provider
-
     def arena_stanzas
       [provider_stanza, pool_stanzas].join("\n")
     end
 
     def provider_stanza
-      %Q(
+      %(
         provider "#{type}" {
           # This works using the local unix domain socket. You MUST be in the lxd group.
           generate_client_certificates = true
@@ -15,8 +14,17 @@ module Providers
       )
     end
 
+    def providers_require; 
+      %(
+          lxd = {
+          version =  "1.5.0"
+          source = "terraform-lxd/lxd"
+          }
+       )
+end
+
     def pool_stanzas
-      %Q(
+      %(
         resource "#{type}_storage_pool" "data-pool" {
           name = "data"
           driver = "dir"
@@ -34,6 +42,5 @@ module Providers
         }
       )
     end
-
   end
 end
