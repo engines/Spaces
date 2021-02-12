@@ -26,13 +26,19 @@ module Arenas
       resolutions.select { |r| r.has?(division_identifier) }
     end
 
-    def stanzas_content
+    def terraform_stanza
       %( 
 	   terraform {
 		required_providers { 
 	     #{[associations, providers].flatten.map(&:providers_require).flatten.compact.join}
         }
-       }	   
+       }
+      )
+    end
+
+    def stanzas_content
+      %( 
+       #{terraform_stanza}
 	   #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
        )
     end
