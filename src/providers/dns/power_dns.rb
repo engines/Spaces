@@ -1,7 +1,6 @@
 module Providers
   class PowerDns < ::Associations::Dns
     def arena_stanzas
-STDERR.puts("power arena_stanzas")
       %(
         provider "powerdns" {
           api_key    = "#{api_key}"
@@ -10,6 +9,16 @@ STDERR.puts("power arena_stanzas")
       )
     end
 
+    def providers_required
+STDERR.puts("power providers_required")
+      %(
+          powerdns = {
+          version = ">= 0"
+          source = "pan-net/powerdns"
+          }
+       )
+
+    end
 
 
     def provisioning_stanzas
