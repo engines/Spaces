@@ -9,10 +9,10 @@ module Providers
 
     def providers_require
       %(
-          powerdns = {
-          version = ">= 0"
-          source = "pan-net/docker"
-          }
+        docker = {
+      source = "kreuzwerker/docker"
+      version = "2.11.0"
+        }
        )
  end
   end

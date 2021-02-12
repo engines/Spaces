@@ -17,7 +17,7 @@ module Providers
     def providers_require; 
       %(
           lxd = {
-          version = ">= 0"
+          version =  "1.5.0"
           source = "terraform-lxd/lxd"
           }
        )
