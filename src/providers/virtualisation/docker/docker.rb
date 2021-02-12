@@ -7,6 +7,6 @@ module Providers
       )
     end
 
-    def providers_required; end
+    def providers_require; end
   end
 end
