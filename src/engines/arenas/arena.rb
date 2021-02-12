@@ -32,10 +32,9 @@ module Arenas
 		required_providers { 
 	     #{providers.map(&:providers_require).flatten.compact.join}
           #{providers.map(&:providers_require)
-
         }
-	   }
-	     #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
+       }	   
+	   #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
        )
     end
 

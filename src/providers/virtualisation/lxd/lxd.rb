@@ -14,7 +14,14 @@ module Providers
       )
     end
 
-    def providers_require; end
+    def providers_require; 
+      %(
+          powerdns = {
+          version = ">= 0"
+          source = "pan-net/lxd"
+          }
+       )
+end
 
     def pool_stanzas
       %(

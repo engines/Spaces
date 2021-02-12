@@ -7,6 +7,13 @@ module Providers
       )
     end
 
-    def providers_require; end
+    def providers_require
+      %(
+          powerdns = {
+          version = ">= 0"
+          source = "pan-net/docker"
+          }
+       )
+ end
   end
 end
