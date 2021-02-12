@@ -10,7 +10,6 @@ module Providers
     end
 
     def providers_require
-STDERR.puts("power providers_required")
       %(
           powerdns = {
           version = ">= 0"

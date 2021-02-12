@@ -16,9 +16,9 @@ module Providers
 
     def providers_require; 
       %(
-          powerdns = {
+          lxd = {
           version = ">= 0"
-          source = "pan-net/lxd"
+          source = "terraform-lxd/lxd"
           }
        )
 end
