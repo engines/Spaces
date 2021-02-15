@@ -10,11 +10,14 @@ module Git
     def import(descriptor)
       ensure_space
       begin
-        g = ::Git.clone(repository(descriptor), descriptor.identifier, path: path)
-        g.checkout(branch(descriptor)) if branch(descriptor)
+        git.clone(repository(descriptor), descriptor.identifier, branch: descriptor.branch, path: path, depth: 0)
       rescue ::Git::GitExecuteError => e
         warn(error: e, descriptor: descriptor, verbosity: [:error])
       end
+    end
+
+    def open_for(model)
+      git.open(path_for(model), log: Logger.new(STDOUT))
     end
 
     def repository(descriptor)
@@ -30,6 +33,8 @@ module Git
       # 'MarkRatjens'
       default_account
     end
+
+    def git; ::Git ;end
 
   end
 end
