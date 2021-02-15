@@ -45,7 +45,7 @@ module Tests
     group 'Import blueprints' do
 
       [
-        # 'https://github.com/MarkRatjens/phpmyadmin/'
+        # 'https://github.com/v2Blueprints/phpmyadmin/'
         'file:///var/tmp/git/phpmyadmin'
       ].each do |repository_url|
 
