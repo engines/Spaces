@@ -16,7 +16,7 @@ module Divisions
       {
         type: 'shell',
         environment_vars: environment_vars,
-        inline: [division.temporary_script_path.join('add')]
+        inline: ["#{division.temporary_script_path}/#{division.qualifier}/add"]
       }
     end
 
