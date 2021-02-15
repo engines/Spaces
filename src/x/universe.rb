@@ -6,7 +6,6 @@ require_relative 'packing'
 require_relative 'arenas'
 require_relative 'provisioning'
 
-
 def universe; @u ||= Universe.new ;end
 
 def clear

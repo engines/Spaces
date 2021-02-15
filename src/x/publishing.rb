@@ -1,4 +1,6 @@
-def import; universe.publications.import(descriptor); end
+def descriptor; @descriptor ;end
+
+def import; universe.publications.import(descriptor, force: true); end
 
 def publication
   @publication ||= universe.publications.by(descriptor.identifier)
