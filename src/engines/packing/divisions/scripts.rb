@@ -4,6 +4,8 @@ module Packing
   class Scripts < ::Emissions::Division
     include ::Packing::Division
 
+    alias_method :pack, :emission
+
     delegate(resolutions: :universe)
 
     def scripts_for(precedence)
