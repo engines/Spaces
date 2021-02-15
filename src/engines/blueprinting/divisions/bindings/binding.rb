@@ -10,7 +10,7 @@ module Divisions
     end
 
     def inflated_configuration
-      target_configuration.merge(struct_configuration)
+      unresolved_struct.merge(target_configuration).merge(struct_configuration)
     end
 
     def resolved
@@ -28,10 +28,22 @@ module Divisions
 
     def struct_configuration; struct.configuration || OpenStruct.new ;end
 
-    def keys; struct_configuration.to_h.keys ;end
+    def unresolved_struct
+      OpenStruct.new(
+        unresolved_variables.inject({}) do |m, k|
+          m.tap { m[k] = nil }
+        end
+      )
+    end
+
+    def unresolved_variables
+      emission.unresolved_infixes[root_identifier] || []
+    end
+
+    def keys; inflated_configuration.to_h.keys ;end
 
     def method_missing(m, *args, &block)
-      keys&.include?(m) ? struct.configuration[m] : super
+      keys&.include?(m) ? inflated_configuration[m] : super
     end
 
     def respond_to_missing?(m, *)
