@@ -3,8 +3,8 @@ module Providers
     def arena_stanzas
       %(
         provider "powerdns" {
-          api_key    = "#{api_key}"
-          server_url = "#{server_url}"
+          api_key    = "${var.pdns_api_key}"
+          server_url = "${var.pdns_server_url}"
         }
       )
     end
@@ -28,7 +28,7 @@ module Providers
             name    = "#{blueprint_identifier}-#{i + 1}.#{universe.host}"
             type    = "AAAA"
             ttl     = #{ttl}
-            records = ["<---ipv6_address???--->"]
+            records = ["${var.ip_address}]
           }
         )
       end
