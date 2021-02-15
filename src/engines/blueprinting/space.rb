@@ -16,7 +16,6 @@ module Blueprinting
 
       unless imported?(publication)
         save(publication)
-        save(descriptor)
         copy_auxiliaries_for(publication)
       end
     end
