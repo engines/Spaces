@@ -3,8 +3,8 @@ module Providers
     def arena_stanzas
       %(
         provider "powerdns" {
-          api_key    = "${var.pdns_api_key}"
-          server_url = "${var.pdns_server_url}"
+          api_key    = "#{api_key}"
+          server_url = "#{server_url}"
         }
       )
     end
@@ -39,11 +39,11 @@ module Providers
     end
 
     def server_url
-      'http://[fd61:d025:74d7:f46a::ffff]:8081/api/v1'
+      'http://192.168.20.46:8081/api/v1'
     end
 
     def api_key
-      '369db357c9599dbee19400aaf1d14f98a5e8bb902f3c69a271f0cbacecb1126f'
+      'FRsBS'
     end
   end
 end
