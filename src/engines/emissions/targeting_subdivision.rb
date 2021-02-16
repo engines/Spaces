@@ -17,7 +17,8 @@ module Emissions
     end
 
     def blueprint_target; @blueprint_target ||= descriptor_class.new(struct.target) ;end
-    def identifier; struct.identifier || blueprint_target.identifier ;end
+    def identifier; struct.identifier || root_identifier ;end
+    def root_identifier; blueprint_target.identifier ;end
 
     def resolution_in(arena)
       t = resolution_target_for(arena)
