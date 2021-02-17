@@ -5,6 +5,28 @@ module Emissions
       empty.tap { |d| d.struct = ResolvableStruct.new(struct, self).resolved }
     end
 
+    def inflated
+      empty.tap { |m| m.struct = inflated_struct }
+    end
+
+    def inflated_struct
+      unresolved_struct.merge(struct)
+    end
+
+    def unresolved_struct
+      OpenStruct.new(
+        unresolved_variables.inject({}) do |m, k|
+          m.tap { m[k] = nil }
+        end
+      )
+    end
+
+    def unresolved_variables
+      emission.unresolved_infixes[infix_qualifier] || []
+    end
+
+    def infix_qualifier; qualifier ;end
+
   end
 
 
