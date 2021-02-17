@@ -2,6 +2,7 @@ require_relative 'transformable'
 require_relative 'auxiliaries'
 require_relative 'dividing'
 require_relative 'associating'
+require_relative 'inflating'
 require_relative 'targeting'
 require_relative 'embedding'
 require_relative 'resolving'
@@ -12,6 +13,7 @@ module Emissions
     include Auxiliaries
     include Dividing
     include Associating
+    include Inflating
     include Targeting
     include Embedding
     include Resolving
