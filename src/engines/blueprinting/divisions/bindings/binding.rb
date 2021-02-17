@@ -6,7 +6,13 @@ module Divisions
     def embed?; struct.type == 'embed' ;end
 
     def inflated
-      duplicate(self).tap { |i| i.struct.configuration = inflated_configuration }
+      empty.tap do |m|
+        m.struct.tap do |s|
+          s.identifier = identifier
+          s.target = blueprint_target.inflated.struct
+          s.configuration = inflated_configuration
+        end
+      end
     end
 
     def inflated_configuration
@@ -19,6 +25,8 @@ module Divisions
       end
     end
 
+    def infix_qualifier; root_identifier ;end
+
     def target_configuration
       @target_configuration ||=
       if blueprint.has?(:binding_target)
@@ -27,18 +35,6 @@ module Divisions
     end
 
     def struct_configuration; struct.configuration || OpenStruct.new ;end
-
-    def unresolved_struct
-      OpenStruct.new(
-        unresolved_variables.inject({}) do |m, k|
-          m.tap { m[k] = nil }
-        end
-      )
-    end
-
-    def unresolved_variables
-      emission.unresolved_infixes[root_identifier] || []
-    end
 
     def keys; inflated_configuration.to_h.keys ;end
 
