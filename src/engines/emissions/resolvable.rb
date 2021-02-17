@@ -6,7 +6,7 @@ module Emissions
     end
 
     def inflated
-      empty.tap { |m| m.struct = inflated_struct }
+      empty.tap { |d| d.struct = inflated_struct }
     end
 
     def inflated_struct

@@ -62,9 +62,6 @@ module Emissions
 
     def empty; self.class.new(emission: emission, struct: default_struct, label: label) ;end
 
-    def inflated; self ;end
-    def deflated; self ;end
-
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission
       self.label = label
