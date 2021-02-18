@@ -12,7 +12,7 @@ module Emissions
         if blueprints.exist?(blueprint_target)
           blueprints.by(blueprint_target.identifier)
         else
-          publications.import(blueprint_target)
+          publications.by_import(blueprint_target)
         end
     end
 
