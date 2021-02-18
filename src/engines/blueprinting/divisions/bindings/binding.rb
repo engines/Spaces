@@ -36,10 +36,10 @@ module Divisions
 
     def struct_configuration; struct.configuration || OpenStruct.new ;end
 
-    def keys; inflated_configuration.to_h.keys ;end
+    def keys; struct_configuration.to_h.keys ;end
 
     def method_missing(m, *args, &block)
-      keys&.include?(m) ? inflated_configuration[m] : super
+      keys&.include?(m) ? struct_configuration[m] : super
     end
 
     def respond_to_missing?(m, *)
