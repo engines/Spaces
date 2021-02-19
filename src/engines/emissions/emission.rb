@@ -26,7 +26,10 @@ module Emissions
 
     relation_accessor :predecessor
 
-    delegate(composition: :klass)
+    delegate(
+      composition: :klass,
+      associations_and_divisions: :composition
+    )
 
     alias_method :emission, :itself
     alias_method :has?, :respond_to?

@@ -3,20 +3,23 @@ module Emissions
 
     def associated
       empty.tap do |m|
-        m.struct = OpenStruct.new(association_structs).merge(struct)
+        m.struct = OpenStruct.new(associating_division_structs) #.merge(struct)
+        m.struct.identifier = identifier
       end
     end
 
-    def association_structs
-      @association_structs ||= associating_map.keys.inject({}) do |m, k|
-        m.tap { m[k] = associating_map[k].struct }
-      end
+    def associations; association_map.values ;end
+
+    def associating_division_structs
+      associating_division_map.transform_values(&:struct)
     end
 
-    def associations; associating_map.values ;end
+    def associating_division_map
+      association_map.merge(division_map)
+    end
 
-    def associating_map
-      @associating_map ||= composition.associations.keys.inject({}) do |m, k|
+    def association_map
+      @association_map ||= composition.associations.keys.inject({}) do |m, k|
         m.tap { m[k] = association_for(k) }
       end
     end

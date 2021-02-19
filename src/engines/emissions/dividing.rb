@@ -16,7 +16,7 @@ module Emissions
     def division_keys; division_map.keys ;end
 
     def division_for(key)
-      composition.divisions[key]&.prototype(emission: self, label: key)
+      associations_and_divisions[key]&.prototype(emission: self, label: key)
     end
 
   end
