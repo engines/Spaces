@@ -12,8 +12,10 @@ module Arenas
 
     delegate(
       [:dns_class, :provider_class] => :klass,
-      arenas: :universe
+      [:arenas, :blueprints] => :universe
     )
+
+    def embedding_keys; @embedding_keys ||= division_keys ;end
 
     def resolutions
       @resolutions ||=
@@ -26,21 +28,22 @@ module Arenas
       resolutions.select { |r| r.has?(division_identifier) }
     end
 
-    def terraform_stanza
-      %( 
-	   terraform {
-		required_providers { 
-	     #{[associations, providers].flatten.map(&:providers_require).flatten.compact.join}
+    def stanzas_content
+      [required_stanza, providers_stanzas].join
+    end
+
+    def required_stanza
+      %(
+        terraform {
+          required_providers {
+            #{providers.flatten.map(&:required_stanza).flatten.compact.join}
+          }
         }
-       }
       )
     end
 
-    def stanzas_content
-      %( 
-       #{terraform_stanza}
-	   #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
-       )
+    def providers_stanzas
+      providers.map(&:arena_stanzas).flatten.compact.join
     end
 
     def providers

@@ -9,9 +9,6 @@ module Emissions
 
     def descriptor_class; ::Spaces::Descriptor ;end
     def arena_stanzas; stanzas_for(:arena) ;end
- 
-    def providers_require; stanzas_for(:arena) ;end
-
     def provisioning_stanzas; stanzas_for(:provisioning) ;end
 
     def stanzas_for(symbol); _stanzas_for(symbol) ;end

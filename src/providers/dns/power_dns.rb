@@ -9,14 +9,13 @@ module Providers
       )
     end
 
-    def providers_require
+    def required_stanza
       %(
           powerdns = {
           version = "1.4.0"
           source = "pan-net/powerdns"
           }
        )
-
     end
 
 

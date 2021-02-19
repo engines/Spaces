@@ -14,7 +14,7 @@ module Providers
       )
     end
 
-    def providers_require; 
+    def required_stanza; 
       %(
           lxd = {
           version =  "1.5.0"

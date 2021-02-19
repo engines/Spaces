@@ -7,7 +7,7 @@ module Providers
       )
     end
 
-    def providers_require
+    def required_stanza
       %(
         docker = {
       source = "kreuzwerker/docker"
