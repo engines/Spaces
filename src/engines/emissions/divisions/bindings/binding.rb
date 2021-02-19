@@ -1,7 +1,7 @@
 require 'resolv'
 
 module Divisions
-  class Binding < ::Emissions::TargetingSubdivision
+  class Binding < ::Divisions::TargetingSubdivision
 
     def embed?; struct.type == 'embed' ;end
 
@@ -21,7 +21,7 @@ module Divisions
 
     def resolved
       super.tap do |d|
-        d.struct.configuration = Emissions::ResolvableStruct.new(struct.configuration, self).resolved
+        d.struct.configuration = Divisions::ResolvableStruct.new(struct.configuration, self).resolved
       end
     end
 

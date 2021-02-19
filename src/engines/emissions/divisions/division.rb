@@ -1,8 +1,7 @@
-require_relative 'transformable'
 require_relative 'embeddable'
 require_relative 'resolvable'
 
-module Emissions
+module Divisions
   class Division < Transformable
     include Engines::Logger
     include Embeddable

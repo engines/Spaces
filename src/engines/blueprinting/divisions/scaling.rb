@@ -1,5 +1,5 @@
 module Divisions
-  class Scaling < ::Emissions::Division
+  class Scaling < ::Divisions::Division
 
     def count; struct.provisions.to_h.values.max.to_i ;end
 

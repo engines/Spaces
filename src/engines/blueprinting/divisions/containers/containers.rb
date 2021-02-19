@@ -1,5 +1,5 @@
 module Divisions
-  class Containers < ::Emissions::SubclassDivisible
+  class Containers < ::Divisions::SubclassDivisible
 
     def dns
       @dns ||= dns_class.prototype(emission: emission, label: :dns)

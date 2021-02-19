@@ -1,4 +1,4 @@
-module Emissions
+module Divisions
   module Dividing
 
     def incomplete_divisions

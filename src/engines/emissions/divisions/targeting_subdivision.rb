@@ -1,6 +1,6 @@
 require_relative 'subdivision'
 
-module Emissions
+module Divisions
   class TargetingSubdivision < Subdivision
 
     delegate(

@@ -1,5 +1,5 @@
 module Divisions
-  class Container < ::Emissions::Subdivision
+  class Container < ::Divisions::Subdivision
 
     class << self
       def constant_for(type)

@@ -1,5 +1,5 @@
 module Divisions
-  class Provider < ::Emissions::Subdivision
+  class Provider < ::Divisions::Subdivision
 
     class << self
       def identifier; qualifier ;end

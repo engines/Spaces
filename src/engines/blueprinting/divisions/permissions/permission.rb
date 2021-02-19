@@ -1,5 +1,5 @@
 module Divisions
-  class Permission < ::Emissions::Subdivision
+  class Permission < ::Divisions::Subdivision
     include ::Packing::Division
 
     def packing_stanza

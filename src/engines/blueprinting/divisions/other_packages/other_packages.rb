@@ -1,5 +1,5 @@
 module Divisions
-  class OtherPackages < ::Emissions::Divisible
+  class OtherPackages < ::Divisions::Divisible
 
     alias_method :divisible_embedded_with, :embedded_with
 

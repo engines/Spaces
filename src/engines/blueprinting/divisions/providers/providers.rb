@@ -1,5 +1,5 @@
 module Divisions
-  class Providers < ::Emissions::SubclassDivisible
+  class Providers < ::Divisions::SubclassDivisible
 
   end
 end
