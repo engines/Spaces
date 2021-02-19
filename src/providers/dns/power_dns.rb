@@ -1,5 +1,5 @@
 module Providers
-  class PowerDns < ::Associations::Dns
+  class PowerDns < ::Divisions::Dns
     def arena_stanzas
       %(
         provider "powerdns" {

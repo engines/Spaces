@@ -5,8 +5,13 @@ module Arenas
       def associative_classes
         [
           Associations::Tenant,
-          Associations::Domain,
-          Associations::Dns
+          Associations::Domain
+        ]
+      end
+
+      def division_classes
+        [
+          Divisions::Dns
         ]
       end
     end

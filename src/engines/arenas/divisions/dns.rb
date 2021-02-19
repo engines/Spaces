@@ -1,4 +1,4 @@
-module Associations
+module Divisions
   class Dns < ::Emissions::Division
 
     class << self

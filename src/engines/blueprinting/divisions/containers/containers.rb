@@ -5,7 +5,7 @@ module Divisions
       @dns ||= dns_class.prototype(emission: emission, label: :dns)
     end
 
-    def dns_class; ::Associations::Dns ;end
+    def dns_class; ::Divisions::Dns ;end
 
   end
 end
