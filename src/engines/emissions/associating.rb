@@ -3,7 +3,7 @@ module Emissions
 
     def associated
       empty.tap do |m|
-        m.struct = OpenStruct.new(associating_division_structs) #.merge(struct)
+        m.struct = OpenStruct.new(associating_division_structs)
         m.struct.identifier = identifier
       end
     end
