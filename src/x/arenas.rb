@@ -1,4 +1,4 @@
-def arena; @arena ||= Arenas::Arena.new(identifier: 'development').associated ;end
+def arena; @arena ||= universe.arenas.by('development') ;end
 
 def save_arena; universe.arenas.save(arena) ;end
 
