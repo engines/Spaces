@@ -1,6 +1,6 @@
 require_relative 'division'
 
-module Emissions
+module Divisions
   class Association < Division
 
     class << self

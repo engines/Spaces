@@ -2,7 +2,7 @@ require_relative 'embeddable'
 require_relative 'resolvable'
 
 module Divisions
-  class Division < Transformable
+  class Division < ::Transforming::Transformable
     include Engines::Logger
     include Embeddable
     include Resolvable

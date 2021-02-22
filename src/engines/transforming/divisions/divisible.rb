@@ -17,7 +17,7 @@ module Divisions
       @related_divisions ||= emission.divisions
     end
     def arena_stanzas; all.map(&:arena_stanzas) ;end
-    def provisioning_stanzas; all.map(&:provisioning_stanzas) ;end
+    def blueprint_stanzas; all.map(&:blueprint_stanzas) ;end
 
     def all
       @all ||= struct&.map { |s| subdivision_for(s) }&.compact || []
