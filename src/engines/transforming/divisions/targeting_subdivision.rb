@@ -26,7 +26,7 @@ module Divisions
     end
 
     def resolution_target_for(arena)
-      descriptor_class.new(identifier: "#{arena.identifier}/#{identifier}")
+      descriptor_class.new(identifier: "#{arena.identifier}/#{root_identifier}")
     end
 
   end
