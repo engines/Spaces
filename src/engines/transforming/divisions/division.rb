@@ -21,7 +21,7 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_directories, :blueprint_identifier] => :emission,
+      [:composition, :auxiliary_directories, :blueprint_identifier, :configuration] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
