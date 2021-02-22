@@ -2,7 +2,7 @@ module Providers
   class Lxd < ::Divisions::Provider
     class Volume < ::Divisions::Volume
 
-      def provisioning_stanzas
+      def blueprint_stanzas
         %Q(
           resource "lxd_volume" "#{volume_name}" {
             name = "#{volume_name}"

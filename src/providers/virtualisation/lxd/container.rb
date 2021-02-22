@@ -2,7 +2,7 @@ module Providers
   class Lxd < ::Divisions::Provider
     class Container < ::Divisions::Container
 
-      def provisioning_stanzas
+      def blueprint_stanzas
         scale do |i|
           container_stanza(i)
         end

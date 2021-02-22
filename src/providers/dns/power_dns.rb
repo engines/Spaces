@@ -19,7 +19,7 @@ module Providers
     end
 
 
-    def provisioning_stanzas
+    def blueprint_stanzas
       scale do |i|
         %(
           resource "powerdns_record" "#{blueprint_identifier}-#{i + 1}" {
