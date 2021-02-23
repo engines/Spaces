@@ -6,13 +6,7 @@ module Arenas
     def providers; provider_map.values ;end
 
     def provider_map
-      @provider_map ||= maybe(:bindings).reduce({}) do |m, b|
-        m.tap do
-          b.resolution_in(self)&.tap do |r|
-            m[b.identifier] = r if r.has?(:provider)
-          end
-        end
-      end
+      @provider_map ||= resolution_map.select { |_, v| v.has?(:provider) }
     end
 
     def maybe(method)
