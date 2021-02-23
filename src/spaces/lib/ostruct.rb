@@ -11,7 +11,7 @@ class OpenStruct
   end
 
   def without(name)
-    duplicate(self).tap { |s| s.delete_field(name) }
+    duplicate(self).tap { |s| s.delete_field(name) if s[name] }
   end
 
   def keys; to_h.keys ;end
