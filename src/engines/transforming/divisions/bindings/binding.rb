@@ -3,12 +3,14 @@ require 'resolv'
 module Divisions
   class Binding < ::Divisions::TargetingSubdivision
 
-    def embed?; struct.type == 'embed' ;end
+    def type; struct.type ;end
+    def embed?; type == 'embed' ;end
 
     def inflated
       empty.tap do |m|
         m.struct.tap do |s|
           s.identifier = identifier
+          s.type = type if type
           s.target = blueprint_target.inflated.struct
           s.configuration = inflated_configuration
         end
