@@ -31,7 +31,7 @@ module Providers
           name = "data"
           driver = "dir"
           config = {
-            source = "/var/lib/containers/#{emission.identifier}/data"
+            source = "/var/lib/containers/#{arena.identifier}/data"
           }
         }
 
@@ -39,7 +39,7 @@ module Providers
           name = "logs"
           driver = "dir"
           config = {
-            source = "/var/lib/containers/#{emission.identifier}/logs"
+            source = "/var/lib/containers/#{arena.identifier}/logs"
           }
         }
       )
