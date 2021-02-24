@@ -1,7 +1,7 @@
 module Providers
   class Lxd < ::Divisions::Provider
     def arena_stanzas
-      [provider_stanza, pool_stanzas].join("\n")
+      [provider_stanza, remote_stanza, pool_stanzas].join
     end
 
     def provider_stanza
@@ -13,11 +13,14 @@ module Providers
       )
     end
 
-    def required_stanza;
+    def remote_stanza
       %(
-        lxd = {
-          version = "#{configuration.version}"
-          source = "#{configuration.source}"
+        lxd_remote {
+          name     = "local-lxd-server"
+          scheme   = "https"
+          address  = "127.0.0.1"
+          password = "#{configuration.password}"
+          default  = true
         }
       )
     end
@@ -41,5 +44,15 @@ module Providers
         }
       )
     end
+
+    def required_stanza
+      %(
+        lxd = {
+          version = "#{configuration.version}"
+          source = "#{configuration.source}"
+        }
+      )
+    end
+
   end
 end
