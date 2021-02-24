@@ -1,5 +1,6 @@
 module Providers
-  class Lxd < ::Divisions::Provider
+  class Lxd < ::Providers::Provider
+
     def arena_stanzas
       [provider_stanza, remote_stanza, pool_stanzas].join
     end

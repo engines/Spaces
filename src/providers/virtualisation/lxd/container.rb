@@ -1,6 +1,6 @@
 module Providers
-  class Lxd < ::Divisions::Provider
-    class Container < ::Divisions::Container
+  class Lxd < ::Providers::Provider
+    class Container < ::Providers::Container
 
       def blueprint_stanzas
         scale do |i|

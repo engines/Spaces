@@ -1,6 +1,6 @@
 module Providers
-  class Lxd < ::Divisions::Provider
-    class Volume < ::Divisions::Volume
+  class Lxd < ::Providers::Provider
+    class Volume < ::Providers::Volume
 
       def blueprint_stanzas
         %Q(

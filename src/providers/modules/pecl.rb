@@ -1,5 +1,5 @@
 module Providers
-  class Pecl < ::Divisions::NoduleArray
+  class Pecl < ::Providers::Modules
 
     def inline
       struct.map { |s| "pecl install #{s}" }

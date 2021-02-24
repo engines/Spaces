@@ -1,6 +1,6 @@
 module Providers
-  class Docker < ::Divisions::Provider
-    class Container < ::Divisions::Container
+  class Docker < ::Providers::Provider
+    class Container < ::Providers::Container
 
       def blueprint_stanzas
         scale do |i|

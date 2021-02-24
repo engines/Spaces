@@ -1,5 +1,6 @@
 module Providers
-  class Docker < ::Divisions::Provider
+  class Docker < ::Providers::Provider
+
     def arena_stanzas
       %(
         provider "#{type}" {
@@ -10,10 +11,11 @@ module Providers
     def required_stanza
       %(
         docker = {
-      source = "kreuzwerker/docker"
-      version = "2.11.0"
+          source = "kreuzwerker/docker"
+          version = "2.11.0"
         }
-       )
- end
+      )
+    end
+
   end
 end
