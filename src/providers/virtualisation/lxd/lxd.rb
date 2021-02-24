@@ -7,21 +7,20 @@ module Providers
     def provider_stanza
       %(
         provider "#{type}" {
-          # This works using the local unix domain socket. You MUST be in the lxd group.
-          generate_client_certificates = true
-          accept_remote_certificate    = true
+          generate_client_certificates = "#{configuration.generate_client_certificates}"
+          accept_remote_certificate    = "#{configuration.accept_remote_certificate}"
         }
       )
     end
 
-    def required_stanza; 
+    def required_stanza;
       %(
-          lxd = {
-          version =  "1.5.0"
-          source = "terraform-lxd/lxd"
-          }
-       )
-end
+        lxd = {
+          version = "#{configuration.version}"
+          source = "#{configuration.source}"
+        }
+      )
+    end
 
     def pool_stanzas
       %(
