@@ -9,9 +9,5 @@ module Arenas
       @provider_map ||= resolution_map.select { |_, v| v.has?(:provider) }
     end
 
-    def maybe(method)
-      has?(method) ? send(method).all : []
-    end
-
   end
 end
