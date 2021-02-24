@@ -25,7 +25,7 @@ module Providers
         )
       end
 
-      def volume_name; "#{blueprint_identifier}-#{source}-volume" ;end
+      def volume_name; "#{blueprint_identifier}-#{source}" ;end
       def pool_name; "#{source}-pool" ;end
 
     end
