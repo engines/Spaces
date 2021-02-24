@@ -14,7 +14,7 @@ module Providers
         %(
           resource "lxd_container" "#{ci}" {
             name      = "#{ci}"
-            image     = "#{image_name}"
+            image     = "local-lxd-server:#{image_name}"
             ephemeral = false
             profiles = ["default"]
 
