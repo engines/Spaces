@@ -15,7 +15,7 @@ module Publishing
     alias_method :super_import, :import
 
     def import(descriptor, force: false)
-      by_import(descriptor, force: false).identifier
+      by_import(descriptor, force: force).identifier
     end
 
     def by_import(descriptor, force: false)
