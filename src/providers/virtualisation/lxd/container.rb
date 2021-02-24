@@ -45,8 +45,8 @@ module Providers
         emission.volumes.all.map(&:device_stanzas).join("\n") if emission.has?(:volumes)
       end
 
-      def container_identifier_for(subscript)
-        "#{blueprint_identifier}-#{subscript}"
+      def container_identifier_for(postfix)
+        "#{blueprint_identifier}-#{postfix}"
       end
 
     end
