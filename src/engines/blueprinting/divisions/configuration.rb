@@ -1,5 +1,5 @@
 module Divisions
-  class Configuration < ::Emissions::Division
+  class Configuration < ::Divisions::Division
 
   end
 end

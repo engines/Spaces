@@ -1,5 +1,5 @@
 module Divisions
-  class Repositories < ::Emissions::Divisible
+  class Repositories < ::Divisions::Divisible
 
     def subdivision_class
       Repository

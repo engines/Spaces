@@ -1,5 +1,5 @@
 module Divisions
-  class SystemPackages < ::Emissions::Division
+  class SystemPackages < ::Divisions::Division
     include ::Packing::Division
 
     def packing_stanza_for(key)

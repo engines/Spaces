@@ -12,7 +12,7 @@ module Emissions
 
       def division_classes
         [
-          Divisions::Providers,
+          Divisions::Provider,
           Divisions::Bindings,
           Divisions::Target,
           Divisions::Configuration,
@@ -58,7 +58,9 @@ module Emissions
 
     delegate([:divisions, :associations, :ranking, :naming_map] => :klass)
 
-    def keys; @keys ||= divisions.keys ;end
+    def keys; @keys ||= associations.keys + divisions.keys ;end
+
+    def associations_and_divisions; associations.merge(divisions) ;end
 
   end
 end

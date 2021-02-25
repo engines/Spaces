@@ -1,5 +1,5 @@
 module Providers
-  class Php < ::Divisions::NoduleArray
+  class Php < ::Providers::Modules
 
     def inline
       struct.map { |s| "phpenmod #{s}" }

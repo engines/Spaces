@@ -1,5 +1,5 @@
 module Divisions
-  class OtherPackage < ::Emissions::Subdivision
+  class OtherPackage < ::Divisions::Subdivision
     include ::Packing::Division
 
     delegate(

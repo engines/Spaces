@@ -1,4 +1,4 @@
-module Emissions
+module Divisions
   module Resolvable
 
     def resolved

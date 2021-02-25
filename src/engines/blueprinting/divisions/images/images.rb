@@ -1,5 +1,5 @@
 module Divisions
-  class Images < ::Emissions::SubclassDivisible
+  class Images < ::Divisions::SubclassDivisible
 
     def struct_with(other); super.uniq(&:image) ;end
 

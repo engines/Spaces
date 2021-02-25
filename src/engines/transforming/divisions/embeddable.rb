@@ -1,4 +1,4 @@
-module Emissions
+module Divisions
   module Embeddable
 
     def with_embeds(emissions)

@@ -1,60 +1,39 @@
+require_relative 'boostrapping'
+require_relative 'resolving'
+require_relative 'providing'
+
 module Arenas
   class Arena < ::Emissions::Emission
+    include ::Arenas::Bootstrapping
+    include ::Arenas::Resolving
+    include ::Arenas::Providing
 
     class << self
       def composition_class; Composition ;end
-      def provider_class; ::Divisions::Provider ;end
-
-      def dns_class
-        composition.divisions[:dns]
-      end
     end
 
     delegate(
-      [:dns_class, :provider_class] => :klass,
-      arenas: :universe
+      [:arenas, :blueprints] => :universe
     )
 
-    def resolutions
-      @resolutions ||=
-      universe.resolutions.identifiers(arena_identifier: identifier).map do |i|
-        universe.resolutions.by(i)
-      end
+    def embedding_keys; @embedding_keys ||= division_keys ;end
+
+    def stanzas_content
+      [required_stanza, provider_stanzas].join
     end
 
-    def resolutions_with(division_identifier)
-      resolutions.select { |r| r.has?(division_identifier) }
-    end
-
-    def terraform_stanza
-      %( 
-	   terraform {
-		required_providers { 
-	     #{[associations, providers].flatten.map(&:providers_require).flatten.compact.join}
+    def required_stanza
+      %(
+        terraform {
+          required_providers {
+            #{provider_divisions.flatten.map(&:required_stanza).flatten.compact.join}
+          }
         }
-       }
       )
     end
 
-    def stanzas_content
-      %( 
-       #{terraform_stanza}
-	   #{[associations, providers].flatten.map(&:arena_stanzas).flatten.compact.join}
-       )
-    end
-
-    def providers
-      [all(:providers), providers_implied_in_containers].flatten.uniq(&:uniqueness)
-    end
-
-    def all(division_identifier)
-      resolutions_with(division_identifier).map { |r| r.send(division_identifier).all }.flatten.compact
-    end
-
-    def providers_implied_in_containers
-      all(:containers).map do |c|
-        provider_class.prototype(struct: c.struct, division: self)
-      end
+    def provider_stanzas
+      provider_divisions.map(&:arena_stanzas).flatten.compact.join
     end
 
     def arena; itself ;end

@@ -1,7 +1,7 @@
 require_relative 'division'
 
 module Packing
-  class Scripts < ::Emissions::Division
+  class Scripts < ::Divisions::Division
     include ::Packing::Division
 
     alias_method :pack, :emission

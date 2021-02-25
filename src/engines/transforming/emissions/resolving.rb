@@ -5,7 +5,7 @@ module Emissions
       empty_resolution.tap do |m|
         m.predecessor = self
         m.arena = arena
-        m.struct = arena.struct.merge(struct)
+        m.struct = arena.struct.without(:bindings).merge(struct)
         m.struct.identifier = "#{arena.identifier}/#{identifier}"
       end.resolved
     end

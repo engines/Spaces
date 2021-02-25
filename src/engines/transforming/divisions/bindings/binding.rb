@@ -1,14 +1,16 @@
 require 'resolv'
 
 module Divisions
-  class Binding < ::Emissions::TargetingSubdivision
+  class Binding < ::Divisions::TargetingSubdivision
 
-    def embed?; struct.type == 'embed' ;end
+    def type; struct.type ;end
+    def embed?; type == 'embed' ;end
 
     def inflated
       empty.tap do |m|
         m.struct.tap do |s|
           s.identifier = identifier
+          s.type = type if type
           s.target = blueprint_target.inflated.struct
           s.configuration = inflated_configuration
         end
@@ -21,7 +23,7 @@ module Divisions
 
     def resolved
       super.tap do |d|
-        d.struct.configuration = Emissions::ResolvableStruct.new(struct.configuration, self).resolved
+        d.struct.configuration = Divisions::ResolvableStruct.new(struct.configuration, self).resolved
       end
     end
 
@@ -36,10 +38,10 @@ module Divisions
 
     def struct_configuration; struct.configuration || OpenStruct.new ;end
 
-    def keys; inflated_configuration.to_h.keys ;end
+    def keys; struct_configuration.to_h.keys ;end
 
     def method_missing(m, *args, &block)
-      keys&.include?(m) ? inflated_configuration[m] : super
+      keys&.include?(m) ? struct_configuration[m] : super
     end
 
     def respond_to_missing?(m, *)

@@ -1,5 +1,5 @@
 module Divisions
-  class Bindings < ::Emissions::Divisible
+  class Bindings < ::Divisions::Divisible
 
     def complete?; all_complete?(all) ;end
 

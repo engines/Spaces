@@ -1,6 +1,6 @@
 require_relative 'subdivision'
 
-module Emissions
+module Divisions
   class TargetingSubdivision < Subdivision
 
     delegate(
@@ -12,7 +12,7 @@ module Emissions
         if blueprints.exist?(blueprint_target)
           blueprints.by(blueprint_target.identifier)
         else
-          publications.import(blueprint_target)
+          publications.by_import(blueprint_target)
         end
     end
 
@@ -26,7 +26,7 @@ module Emissions
     end
 
     def resolution_target_for(arena)
-      descriptor_class.new(identifier: "#{arena.identifier}/#{identifier}")
+      descriptor_class.new(identifier: "#{arena.identifier}/#{root_identifier}")
     end
 
   end

@@ -12,16 +12,21 @@ module Publishing
     alias_method :by, :by_json
     alias_method :save, :save_json
     alias_method :imported?, :exist?
+    alias_method :super_import, :import
 
     def import(descriptor, force: false)
+      by_import(descriptor, force: force).identifier
+    end
+
+    def by_import(descriptor, force: false)
       delete(descriptor) if force && imported?(descriptor)
 
       if imported?(descriptor)
         by(descriptor.identifier)
       else
-        super(descriptor)
+        super_import(descriptor)
         by(descriptor.identifier).tap do |m|
-          blueprints.import(m, descriptor, force: force)
+          blueprints.by_import(m, descriptor, force: force)
           m.turtle_targets
         end
       end

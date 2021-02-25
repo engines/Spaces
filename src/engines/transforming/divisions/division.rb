@@ -1,9 +1,8 @@
-require_relative 'transformable'
 require_relative 'embeddable'
 require_relative 'resolvable'
 
-module Emissions
-  class Division < Transformable
+module Divisions
+  class Division < ::Transforming::Transformable
     include Engines::Logger
     include Embeddable
     include Resolvable
@@ -22,7 +21,7 @@ module Emissions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_directories, :blueprint_identifier] => :emission,
+      [:composition, :auxiliary_directories, :blueprint_identifier, :configuration] => :emission,
       ranking: :composition,
       resolutions: :universe
     )

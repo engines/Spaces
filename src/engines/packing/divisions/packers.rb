@@ -1,7 +1,7 @@
 require_relative 'division'
 
 module Divisions
-  class Packers < ::Emissions::Division
+  class Packers < ::Divisions::Division
     include ::Packing::Division
 
     alias_method :pack, :emission
@@ -61,7 +61,7 @@ module Divisions
         type: 'shell',
         inline: [
           "chown -R root:root /tmp/packing/#{precedence}/",
-          "tar -C /tmp/packing/#{precedence}/   -cf - . | tar -C / -xf -"
+          "tar -C /tmp/packing/#{precedence}/ -cf - . | tar -C / -xf -"
         ]
       }
     end
