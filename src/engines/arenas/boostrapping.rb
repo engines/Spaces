@@ -2,7 +2,8 @@ module Arenas
   module Bootstrapping
 
     def bootstrapped_with(blueprint_identifier)
-      duplicate(self).tap do |m|
+      empty.tap do |m|
+        m.struct = struct
         m.struct.tap do |s|
           s.bindings = bootstrap_merged_for(blueprint_identifier)
         end
