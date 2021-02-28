@@ -29,7 +29,7 @@ module Providers
             name    = "#{blueprint_identifier}-#{i + 1}.#{universe.host}"
             type    = "AAAA"
             ttl     = #{ttl}
-            records = [${var.ip_address}]
+            records = ["<---ipv6_address???--->"]
           }
         )
       end
@@ -40,11 +40,11 @@ module Providers
     end
 
     def server_url
-      'http://192.168.20.46:8081/api/v1'
+      'http://[fd61:d025:74d7:f46a::ffff]:8081/api/v1'
     end
 
     def api_key
-      'FRsBS'
+      '369db357c9599dbee19400aaf1d14f98a5e8bb902f3c69a271f0cbacecb1126f'
     end
   end
 end
