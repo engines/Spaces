@@ -1,4 +1,3 @@
-
 module Providers
   class PowerDns < ::Providers::Provider
     

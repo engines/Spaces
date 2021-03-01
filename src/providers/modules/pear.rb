@@ -1,5 +1,5 @@
 module Providers
-  class Pear < ::Divisions::NoduleArray
+  class Pear < ::Providers::Modules
 
     def inline
       struct.map { |s| "pear install #{s}" }
