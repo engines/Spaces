@@ -10,8 +10,7 @@ module Git
     def import(descriptor)
       ensure_space
       begin
-        g = ::Git.clone(descriptor.repository, descriptor.identifier, path: path)
-        g.checkout(descriptor.branch) if descriptor.branch
+        git.clone(repository(descriptor), descriptor.identifier, branch: descriptor.branch, path: path, depth: 0)
       rescue ::Git::GitExecuteError => e
         warn(error: e, descriptor: descriptor, verbosity: [:error])
       end
