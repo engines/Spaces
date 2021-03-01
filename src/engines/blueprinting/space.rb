@@ -15,8 +15,16 @@ module Blueprinting
       delete(publication) if force && imported?(publication)
 
       unless imported?(publication)
-        save(publication)
-        copy_auxiliaries_for(publication)
+        reset_by(publication.identifier)
+      end
+    end
+
+    def reset(identifier)
+      identifier.tap do |i|
+        publications.by(i).tap do |p|
+          save(p)
+          copy_auxiliaries_for(p)
+        end
       end
     end
 
