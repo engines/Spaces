@@ -1,5 +1,5 @@
 module Divisions
-  class PostProcessors < ::Emissions::Divisible
+  class PostProcessors < ::Divisions::Divisible
 
     delegate(images: :emission)
 
