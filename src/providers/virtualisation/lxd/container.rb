@@ -10,6 +10,8 @@ module Providers
             ephemeral = false
             profiles = ["default"]
 
+            #{dependency_stanza}
+
             device {
               name  = "root"
               type  = "disk"
@@ -33,11 +35,19 @@ module Providers
         )
       end
 
+      def dependency_stanza
+        %(depends_on [#{dependency_string}]) if connections.any?
+      end
+
       def device_stanzas
         emission.volumes.all.map(&:device_stanzas).join("\n") if emission.has?(:volumes)
       end
 
+      def dependency_string
+        connections.map { |c| "#{resource_name}.#{c.identifier}" }.join(', ')
       end
+
+      def resource_name; "#{type}_#{qualifier}" ;end
 
     end
   end
