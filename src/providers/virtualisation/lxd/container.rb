@@ -36,7 +36,7 @@ module Providers
       end
 
       def dependency_stanza
-        %(depends_on [#{dependency_string}]) if connections.any?
+        %(depends_on=[#{dependency_string}]) if connections.any?
       end
 
       def device_stanzas
