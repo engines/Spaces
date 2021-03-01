@@ -1,5 +1,5 @@
 module Divisions
-  class Target < ::Emissions::Division
+  class Target < ::Divisions::Division
 
     def resolved
       duplicate(itself)

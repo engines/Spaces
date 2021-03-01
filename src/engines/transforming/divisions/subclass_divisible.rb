@@ -1,6 +1,6 @@
 require_relative 'divisible'
 
-module Emissions
+module Divisions
   class SubclassDivisible < Divisible
 
     alias_method :generic_subdivision_for, :subdivision_for

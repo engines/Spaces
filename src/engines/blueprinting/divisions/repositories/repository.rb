@@ -1,5 +1,5 @@
 module Repositories
-  class Repository < ::Emissions::Subdivision
+  class Repository < ::Divisions::Subdivision
 
   end
 end

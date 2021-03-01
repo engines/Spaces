@@ -1,6 +1,6 @@
 require_relative 'division'
 
-module Emissions
+module Divisions
   class Subdivision < Division
 
     class << self
@@ -25,7 +25,7 @@ module Emissions
 
     def initialize(division:, struct: nil)
       self.division = division
-      self.struct = struct
+      self.struct = struct || OpenStruct.new
     end
 
   end

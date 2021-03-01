@@ -16,6 +16,10 @@ class Array
     end
   end
 
+  def all
+    self
+  end
+
   def all_true?
     !any?(false)
   end

@@ -5,7 +5,7 @@ module Emissions
       empty_resolution.tap do |m|
         m.predecessor = self
         m.arena = arena
-        m.struct = arena.struct.merge(struct)
+        m.struct = arena.struct.without(:bindings).merge(struct)
         m.struct.identifier = "#{arena.identifier}/#{identifier}"
       end.resolved
     end
@@ -21,6 +21,20 @@ module Emissions
 
     def connections_resolved
       connections.map { |c| c.with_embeds.resolved_in(arena) }
+    end
+
+    def unresolved_infixes
+      @unresolved_infixes ||= unresolved_infix_strings.inject({}) do |m, i|
+        m.tap do
+          i.split('.').tap do |s|
+            m[s.first] = [m[s.first], s[1]].flatten.compact.uniq
+          end
+        end
+      end
+    end
+
+    def unresolved_infix_strings
+      content.map(&:infixes).flatten.map(&:value).uniq
     end
 
     def empty_resolution; resolution_class.new ;end

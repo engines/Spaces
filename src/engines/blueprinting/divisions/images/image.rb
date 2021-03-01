@@ -1,5 +1,5 @@
 module Divisions
-  class Image < ::Emissions::Subdivision
+  class Image < ::Divisions::Subdivision
 
     class << self
       def constant_for(type)

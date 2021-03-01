@@ -1,6 +1,6 @@
 module Providers
-  class Lxd < ::Divisions::Provider
-    class Image < ::Divisions::Image
+  class Lxd < ::Providers::Provider
+    class Image < ::Providers::Image
 
       class << self
         def inflatables; [:name, :output_image, :publish_properties] ;end

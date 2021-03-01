@@ -1,8 +1,8 @@
 module Providers
-  class Docker < ::Divisions::Provider
-    class Container < ::Divisions::Container
+  class Docker < ::Providers::Provider
+    class Container < ::Providers::Container
 
-      def provisioning_stanzas
+      def blueprint_stanzas
         scale do |i|
           %Q(
             resource "docker_container" "#{blueprint_identifier}-#{i+1}" {

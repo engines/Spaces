@@ -1,5 +1,5 @@
-module Associations
-  class Dns < ::Emissions::Division
+module Divisions
+  class Provider < ::Divisions::Division
 
     class << self
       def prototype(emission:, label:)
@@ -11,12 +11,12 @@ module Associations
       end
 
       def struct_for(emission)
-        emission.struct.dns || default_struct
+        emission.struct.provider
       end
+    end
 
-      def default_struct
-        OpenStruct.new(type: :power_dns)
-      end
+    def type
+      struct.type || context_identifier
     end
 
   end

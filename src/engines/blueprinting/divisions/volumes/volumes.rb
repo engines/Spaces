@@ -1,5 +1,5 @@
 module Divisions
-  class Volumes < ::Emissions::SubclassDivisible
+  class Volumes < ::Divisions::SubclassDivisible
 
     def all
       @all ||=

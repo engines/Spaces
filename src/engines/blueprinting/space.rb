@@ -11,12 +11,11 @@ module Blueprinting
 
     alias_method :imported?, :exist?
 
-    def import(publication, descriptor, force: false)
+    def by_import(publication, descriptor, force: false)
       delete(publication) if force && imported?(publication)
 
       unless imported?(publication)
         save(publication)
-        save(descriptor)
         copy_auxiliaries_for(publication)
       end
     end
