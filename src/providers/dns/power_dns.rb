@@ -1,5 +1,6 @@
 module Providers
   class PowerDns < ::Providers::Provider
+    
     def arena_stanzas
       %(
         provider "powerdns" {
@@ -25,7 +26,7 @@ module Providers
           name    = "#{blueprint_identifier}.#{universe.host}"
           type    = "AAAA"
           ttl     = #{configuration.ttl}
-          records = ["<---ipv6_address???--->"]
+          records = [${var.ip_address}]
         }
       )
     end
