@@ -34,7 +34,7 @@ a common starting point is to start with a descriptor to locate a source bluepri
 ```
 require_relative 'src/spaces/models/descriptor'
 descriptor = Spaces::Descriptor.new(
-  repository: 'https://github.com/MarkRatjens/publify.git'
+  repository: 'https://github.com/v2Blueprints/publify.git'
 )
 ```
 
@@ -44,7 +44,7 @@ There are optional attributes you can declare for a blueprint:
 
 ```
 descriptor = Spaces::Descriptor.new(
-  repository: 'https://github.com/MarkRatjens/publify.git',
+  repository: 'https://github.com/v2Blueprints/publify.git',
   branch: 'current'
 )
 ```

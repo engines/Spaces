@@ -1,27 +1,30 @@
 module Providers
-  class Lxd < ::Divisions::Provider
+  class Lxd < ::Providers::Provider
+
     def arena_stanzas
-      [provider_stanza, pool_stanzas].join("\n")
+      [provider_stanza, remote_stanza, pool_stanzas].join
     end
 
     def provider_stanza
       %(
         provider "#{type}" {
-          # This works using the local unix domain socket. You MUST be in the lxd group.
-          generate_client_certificates = true
-          accept_remote_certificate    = true
+          generate_client_certificates = "#{configuration.generate_client_certificates}"
+          accept_remote_certificate    = "#{configuration.accept_remote_certificate}"
         }
       )
     end
 
-    def providers_require; 
+    def remote_stanza
       %(
-          lxd = {
-          version =  "1.5.0"
-          source = "terraform-lxd/lxd"
-          }
-       )
-end
+        lxd_remote {
+          name     = "local-lxd-server"
+          scheme   = "https"
+          address  = "127.0.0.1"
+          password = "#{configuration.password}"
+          default  = true
+        }
+      )
+    end
 
     def pool_stanzas
       %(
@@ -29,7 +32,7 @@ end
           name = "data"
           driver = "dir"
           config = {
-            source = "/var/lib/containers/#{emission.identifier}/data"
+            source = "/var/lib/containers/#{arena.identifier}/data"
           }
         }
 
@@ -37,10 +40,20 @@ end
           name = "logs"
           driver = "dir"
           config = {
-            source = "/var/lib/containers/#{emission.identifier}/logs"
+            source = "/var/lib/containers/#{arena.identifier}/logs"
           }
         }
       )
     end
+
+    def required_stanza
+      %(
+        lxd = {
+          version = "#{configuration.version}"
+          source = "#{configuration.source}"
+        }
+      )
+    end
+
   end
 end

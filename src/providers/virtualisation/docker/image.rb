@@ -1,6 +1,6 @@
 module Providers
-  class Docker < ::Divisions::Provider
-    class Image < ::Divisions::Image
+  class Docker < ::Providers::Provider
+    class Image < ::Providers::Image
 
       class << self
         def inflatables; [:name, :output_image, :privileged] ;end

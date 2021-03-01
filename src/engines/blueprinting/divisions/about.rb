@@ -1,5 +1,5 @@
 module Divisions
-  class About < ::Emissions::Division
+  class About < ::Divisions::Division
 
   end
 end

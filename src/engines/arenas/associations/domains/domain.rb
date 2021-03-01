@@ -1,5 +1,5 @@
 module Associations
-  class Domain < ::Emissions::Association
+  class Domain < ::Divisions::Association
 
     class << self
       def default_struct
@@ -9,7 +9,7 @@ module Associations
 
     def name; identifier ;end
     def qualified_name; "#{context_identifier}.#{identifier}" ;end
-    
+
     alias_method :fqdn, :qualified_name
   end
 end
