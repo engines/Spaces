@@ -3,14 +3,12 @@ module Providers
     class Container < ::Providers::Container
 
       def blueprint_stanzas
-        scale do |i|
-          %Q(
-            resource "docker_container" "#{blueprint_identifier}-#{i+1}" {
-              name  = "#{blueprint_identifier}-#{i+1}"
-              image = "#{image}"
-            }
-          )
-        end
+        %(
+          resource "docker_container" "#{blueprint_identifier}" {
+            name  = "#{blueprint_identifier}"
+            image = "#{image}"
+          }
+        )
       end
 
     end

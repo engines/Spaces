@@ -1,5 +1,6 @@
 require_level 'engines/transforming'
-require_all 'engines/transforming/divisions'
+require_level 'engines/transforming/divisions'
+require_level 'engines/transforming/divisions/bindings'
 require_all 'engines/transforming/emissions'
 
 require_all 'engines/arenas'

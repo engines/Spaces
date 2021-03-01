@@ -45,12 +45,6 @@ module Divisions
       end.flatten
     end
 
-    def scale &block
-      Array.new(emission.count) do |i|
-        block.call(i)
-      end
-    end
-
     def auxiliary_paths_for(symbol)
       auxiliary_path.join("#{symbol}").glob("**/*").reject(&:directory?)
     end
