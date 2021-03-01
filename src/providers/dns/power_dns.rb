@@ -7,6 +7,12 @@ module Providers
           api_key    = "#{configuration.api_key}"
           server_url = "#{protocol}://#{arena.identifier}.#{universe.host}:#{port}/#{endpoint}"
         }
+
+        resource "powerdns_zone" "#{arena.identifier}-zone" {
+          name        = "#{arena.identifier}"
+          kind        = "native"
+          nameservers = []
+        }
       )
     end
 
