@@ -15,7 +15,7 @@ module Divisions
       end
     end
 
-    alias_accessor :arena, :emission
+    delegate(arena: :emission)
 
     def type
       struct.type || context_identifier
