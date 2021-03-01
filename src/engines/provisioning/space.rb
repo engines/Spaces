@@ -26,7 +26,7 @@ module Provisioning
     protected
 
     def ensure_connections_exist_for(model)
-      absent(model.connections_provisioned).each { |p| save(p) }
+      model.connections_provisioned.each { |p| save(p) }
     end
 
   end
