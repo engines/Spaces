@@ -22,8 +22,8 @@ module Providers
     def blueprint_stanzas
       %(
         resource "powerdns_record" "#{blueprint_identifier}" {
-          zone    = "#{arena.identifier}.#{universe.host}"
-          name    = "#{blueprint_identifier}.#{arena.identifier}.#{universe.host}"
+          zone    = "#{universe.host}"
+          name    = "#{blueprint_identifier}.#{universe.host}"
           type    = "AAAA"
           ttl     = #{configuration.ttl}
           records = [${var.ip_address}]

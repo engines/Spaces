@@ -19,7 +19,7 @@ module Arenas
     def embedding_keys; @embedding_keys ||= division_keys ;end
 
     def stanzas_content
-      [required_stanza, provider_stanzas].join
+      [required_stanza, arena_stanzas].join
     end
 
     def required_stanza
@@ -32,8 +32,12 @@ module Arenas
       )
     end
 
-    def provider_stanzas
+    def arena_stanzas
       provider_divisions.map(&:arena_stanzas).flatten.compact.join
+    end
+
+    def blueprint_stanzas
+      provider_divisions.map(&:blueprint_stanzas).flatten.compact.join
     end
 
     def arena; itself ;end
