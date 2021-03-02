@@ -20,7 +20,7 @@ module Divisions
     def arena_stanzas; all.map(&:arena_stanzas) ;end
 
     def blueprint_stanzas_for(resolution)
-       all.map { |d| d.blueprint_stanzas_for(resolution).flatten.compact }
+       all.map { |d| d.blueprint_stanzas_for(resolution) }.flatten.compact
     end
 
     def all

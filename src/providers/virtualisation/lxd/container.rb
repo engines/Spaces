@@ -4,7 +4,7 @@ module Providers
 
       def blueprint_stanzas_for(_)
         %(
-          resource "#{resource_name}" "#{blueprint_identifier}" {
+          resource "#{resource_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
             image     = "local-lxd-server:#{image_name}"
             ephemeral = false
@@ -44,10 +44,10 @@ module Providers
       end
 
       def dependency_string
-        connections.map { |c| "#{resource_name}.#{c.identifier}" }.join(', ')
+        connections.map { |c| "#{resource_type}.#{c.identifier}" }.join(', ')
       end
 
-      def resource_name; "#{type}_#{qualifier}" ;end
+      def resource_type; "#{type}_#{qualifier}" ;end
 
     end
   end
