@@ -1,5 +1,5 @@
 module Providers
-  class Python < ::Divisions::NoduleArray
+  class Python < ::Providers::Modules
 
     def inline
       struct.map { |s| "python#{version} -m pip install --upgrade install #{s}" }

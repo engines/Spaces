@@ -30,13 +30,13 @@ module Spaces
       end
     end
 
-    attr_accessor :struct, :klass
+    attr_accessor :struct
 
     delegate(
       [:identifier, :namespace, :qualifier, :spout, :klasses] => :klass
     )
 
-    def klass; @klass ||= self.class ;end
+    def klass; self.class ;end
 
     def keys; struct&.to_h&.keys ;end
 

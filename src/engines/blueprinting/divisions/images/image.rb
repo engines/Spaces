@@ -1,5 +1,5 @@
 module Divisions
-  class Image < ::Emissions::Subdivision
+  class Image < ::Divisions::Subdivision
 
     class << self
       def constant_for(type)
@@ -25,7 +25,11 @@ module Divisions
 
     def post_processor_stanzas; end
 
+    def default_name; tenant_context_identifier ;end
+    def default_output_image; "spaces/#{tenant_context_identifier}:#{default_tag}" ;end
     def default_tag; 'latest' ;end
+
+    def tenant_context_identifier; "#{tenant.identifier}/#{context_identifier}" ;end
 
   end
 end

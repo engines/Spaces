@@ -1,19 +1,16 @@
 module Providers
-  class Lxd < ::Divisions::Provider
-    class Container < ::Divisions::Container
+  class Lxd < ::Providers::Provider
+    class Container < ::Providers::Container
 
-      def provisioning_stanzas
-        scale do |i|
-          container_stanza(i)
-        end
-      end
-
-      def container_stanza(i)
-        %Q(
-          resource "lxd_container" "#{blueprint_identifier}-#{i+1}" {
-            name      = "#{blueprint_identifier}-#{i+1}"
-            image     = "#{image_name}"
+      def blueprint_stanzas
+        %(
+          resource "#{resource_name}" "#{blueprint_identifier}" {
+            name      = "#{blueprint_identifier}"
+            image     = "local-lxd-server:#{image_name}"
             ephemeral = false
+            profiles = ["default"]
+
+            #{dependency_stanza}
 
             device {
               name  = "root"
@@ -25,7 +22,11 @@ module Providers
               }
             }
 
-              #{device_stanzas}
+            provisioner "local-exec" {
+              command = "lxc exec #{blueprint_identifier} /root/setup.sh"
+            }
+
+            #{device_stanzas}
 
             config = {
               "boot.autostart" = true
@@ -34,9 +35,19 @@ module Providers
         )
       end
 
+      def dependency_stanza
+        %(depends_on=[#{dependency_string}]) if connections.any?
+      end
+
       def device_stanzas
         emission.volumes.all.map(&:device_stanzas).join("\n") if emission.has?(:volumes)
       end
+
+      def dependency_string
+        connections.map { |c| "#{resource_name}.#{c.identifier}" }.join(', ')
+      end
+
+      def resource_name; "#{type}_#{qualifier}" ;end
 
     end
   end

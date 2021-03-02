@@ -1,5 +1,5 @@
 module Divisions
-  class Container < ::Emissions::Subdivision
+  class Container < ::Divisions::Subdivision
 
     class << self
       def constant_for(type)
@@ -7,7 +7,9 @@ module Divisions
       end
     end
 
-    delegate(identifier: :emission)
+    alias_accessor :resolution, :emission
+
+    delegate([:identifier, :connections] => :emission)
 
     def complete?
       !(type && image_name).nil?

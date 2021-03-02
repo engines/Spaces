@@ -1,6 +1,6 @@
 module Providers
-  class Docker < ::Divisions::Provider
-    class Image < ::Divisions::Image
+  class Docker < ::Providers::Provider
+    class Image < ::Providers::Image
 
       class << self
         def inflatables; [:name, :output_image, :privileged] ;end
@@ -29,13 +29,9 @@ module Providers
       def defaults
         @defaults ||= {
           name: default_name,
-          output_image: "spaces/#{default_name}:#{default_tag}",
+          output_image: default_output_image,
           privileged: false
         }
-      end
-
-      def default_name
-        "#{tenant.identifier}/#{context_identifier}"
       end
 
     end

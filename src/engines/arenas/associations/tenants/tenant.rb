@@ -1,5 +1,5 @@
 module Associations
-  class Tenant < ::Emissions::Association
+  class Tenant < ::Divisions::Association
 
     class << self
       def default_struct

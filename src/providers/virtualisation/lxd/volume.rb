@@ -1,8 +1,8 @@
 module Providers
-  class Lxd < ::Divisions::Provider
-    class Volume < ::Divisions::Volume
+  class Lxd < ::Providers::Provider
+    class Volume < ::Providers::Volume
 
-      def provisioning_stanzas
+      def blueprint_stanzas
         %Q(
           resource "lxd_volume" "#{volume_name}" {
             name = "#{volume_name}"
@@ -17,7 +17,7 @@ module Providers
             name = "#{volume_name}"
             type = "disk"
             properties = {
-              path = "#{destination}/#{identifier}"
+              path = "#{destination}"
               source = "#{volume_name}"
               pool = "#{pool_name}"
             }
@@ -25,7 +25,7 @@ module Providers
         )
       end
 
-      def volume_name; "#{blueprint_identifier}-#{source}-volume" ;end
+      def volume_name; "#{blueprint_identifier}-#{source}" ;end
       def pool_name; "#{source}-pool" ;end
 
     end

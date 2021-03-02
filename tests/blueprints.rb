@@ -54,7 +54,7 @@ module Tests
         identifier = descriptor.identifier
 
         test "import #{identifier}" do
-          output universe.blueprints.import(descriptor)
+          output universe.blueprints.by_import(descriptor)
         end
 
         test "index after import #{identifier}" do

@@ -1,6 +1,6 @@
 module Providers
-  class Lxd < ::Divisions::Provider
-    class Image < ::Divisions::Image
+  class Lxd < ::Providers::Provider
+    class Image < ::Providers::Image
 
       class << self
         def inflatables; [:name, :output_image, :publish_properties] ;end
@@ -13,7 +13,7 @@ module Providers
       def defaults
         @defaults ||= {
           name: default_name,
-          output_image: "spaces/#{default_name}:#{default_tag}",
+          output_image: default_output_image,
           publish_properties: {
             description: "Spaces #{tenant.identifier} #{context_identifier} image",
             aliases: tenant.identifier,
@@ -24,9 +24,7 @@ module Providers
         }
       end
 
-      def default_name
-        "#{tenant.identifier}-#{context_identifier}"
-      end
+      def default_name; super.gsub('/', '-') ;end
 
     end
   end

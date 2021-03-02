@@ -1,5 +1,5 @@
 module Divisions
-  class Permissions < ::Emissions::Divisible
+  class Permissions < ::Divisions::Divisible
 
     alias_method :divisible_embedded_with, :embedded_with
 

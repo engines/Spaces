@@ -1,5 +1,5 @@
 module Divisions
-  class Nodules < ::Emissions::Division
+  class Nodules < ::Divisions::Division
     include ::Packing::Division
 
     class << self

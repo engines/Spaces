@@ -1,5 +1,5 @@
 module Divisions
-  class NoduleArray < ::Emissions::Subdivision
+  class NoduleArray < ::Divisions::Subdivision
 
     def identifier; qualifier ;end
 
