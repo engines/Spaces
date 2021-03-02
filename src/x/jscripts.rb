@@ -48,6 +48,11 @@ universe.packs.save(pack)
 pack = universe.packs.by('development/mariadb')
 universe.packs.commit(pack)
 
+# save provisions for resolution
+resolution = universe.resolutions.by('development/mariadb')
+provisions = resolution.provisioned
+universe.provisioning.save(provisions)
+
 # import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
 universe.publications.import(descriptor, force: true)
