@@ -17,6 +17,10 @@ class Hash
     replace(reverse_merge(other_hash))
   end
 
+  def to_json
+    JSON.pretty_generate(self)
+  end
+
   def to_struct
     OpenStruct.new(values_to_struct)
   end
