@@ -20,7 +20,7 @@ module Divisions
     def arena_stanzas; all.map(&:arena_stanzas) ;end
 
     def blueprint_stanzas_for(resolution)
-       all.map { |d| d.blueprint_stanzas_for(resolution).flatten.compact }
+       all.map { |d| d.blueprint_stanzas_for(resolution) }.flatten.compact
     end
 
     def all
@@ -35,6 +35,8 @@ module Divisions
       warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
       nil
     end
+
+    def inflated_struct; all.map(&:inflated_struct) ;end
 
     def resolved
       empty.tap { |d| d.struct = all.map(&:resolved).map(&:struct) }

@@ -35,11 +35,8 @@ module Divisions
     def context_identifier; emission.context_identifier ;end
 
     def content
-      logger.debug "auxiliary_directories: #{auxiliary_directories.inspect}"
-
       auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|
-          logger.debug "auxiliary_paths_for(#{d}): #{p.inspect}"
           Interpolating::FileText.new(origin: p, directory: d, transformable: self)
         end
       end.flatten
@@ -50,7 +47,7 @@ module Divisions
     end
 
     def auxiliary_path
-      Pathname(__dir__).dirname.join('blueprinting', 'divisions', qualifier)
+      Pathname(__dir__.gsub('transform', 'blueprint')).join(qualifier)
     end
 
     def empty; self.class.new(emission: emission, struct: default_struct, label: label) ;end
