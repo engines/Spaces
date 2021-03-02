@@ -30,5 +30,9 @@ class String
     empty? || BLANK_RE.match?(self)
   end
 
+  def to_h
+    self
+  end
+
   def complete?; true ;end
 end

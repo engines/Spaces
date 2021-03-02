@@ -32,7 +32,7 @@ module Resolving
     protected
 
     def ensure_connections_exist_for(model)
-      absent(model.connections_resolved).each { |r| save(r) }
+      model.connections_resolved.each { |r| save(r) }
     end
 
     def copy_auxiliaries_for(model)

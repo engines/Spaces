@@ -8,8 +8,9 @@ module Transforming
     def blueprint_identifier; identifier.split('/').last ;end
 
     def descriptor_class; ::Spaces::Descriptor ;end
+    
     def arena_stanzas; ;end
-    def blueprint_stanzas; ;end
+    def blueprint_stanzas_for(_); ;end
 
     def random(length); SecureRandom.hex(length.to_i) ;end
 
