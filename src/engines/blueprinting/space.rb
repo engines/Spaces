@@ -15,7 +15,7 @@ module Blueprinting
       delete(publication) if force && imported?(publication)
 
       unless imported?(publication)
-        reset_by(publication.identifier)
+        reset(publication.identifier)
       end
     end
 

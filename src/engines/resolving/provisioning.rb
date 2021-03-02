@@ -11,7 +11,11 @@ module Resolving
     def stanzas_content; stanzas.join("\n") ;end
 
     def stanzas
-      divisions.map(&:blueprint_stanzas).flatten.compact
+      divisions_with_provider_divisions.map { |d| d.blueprint_stanzas_for(self) }.flatten.compact
+    end
+
+    def divisions_with_provider_divisions
+      [divisions, arena.provider_divisions].flatten.compact
     end
 
     def empty_provisions; provisions_class.new ;end

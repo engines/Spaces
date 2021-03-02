@@ -7,6 +7,12 @@ module Providers
           api_key    = "#{configuration.api_key}"
           server_url = "#{protocol}://#{arena.identifier}.#{universe.host}:#{port}/#{endpoint}"
         }
+
+        resource "powerdns_zone" "#{arena.identifier}-zone" {
+          name        = "#{arena.identifier}"
+          kind        = "native"
+          nameservers = []
+        }
       )
     end
 
@@ -19,11 +25,11 @@ module Providers
        )
     end
 
-    def blueprint_stanzas
+    def blueprint_stanzas_for(resolution)
       %(
-        resource "powerdns_record" "#{blueprint_identifier}" {
-          zone    = "#{arena.identifier}.#{universe.host}"
-          name    = "#{blueprint_identifier}.#{arena.identifier}.#{universe.host}"
+        resource "powerdns_record" "#{resolution.blueprint_identifier}" {
+          zone    = "#{universe.host}"
+          name    = "#{resolution.blueprint_identifier}.#{universe.host}"
           type    = "AAAA"
           ttl     = #{configuration.ttl}
           records = [${var.ip_address}]
