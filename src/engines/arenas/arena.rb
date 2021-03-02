@@ -36,10 +36,6 @@ module Arenas
       provider_divisions.map(&:arena_stanzas).flatten.compact.join
     end
 
-    def blueprint_stanzas
-      provider_divisions.map(&:blueprint_stanzas).flatten.compact.join
-    end
-
     def arena; itself ;end
 
   end

@@ -25,11 +25,11 @@ module Providers
        )
     end
 
-    def blueprint_stanzas
+    def blueprint_stanzas_for(resolution)
       %(
-        resource "powerdns_record" "#{blueprint_identifier}" {
+        resource "powerdns_record" "#{resolution.blueprint_identifier}" {
           zone    = "#{universe.host}"
-          name    = "#{blueprint_identifier}.#{universe.host}"
+          name    = "#{resolution.blueprint_identifier}.#{universe.host}"
           type    = "AAAA"
           ttl     = #{configuration.ttl}
           records = [${var.ip_address}]
