@@ -32,9 +32,15 @@ module Providers
           name    = "#{resolution.blueprint_identifier}.#{universe.host}"
           type    = "AAAA"
           ttl     = #{configuration.ttl}
-          records = [${var.ip_address}]
+          records = [#{records_for(resolution)}]
         }
       )
+    end
+
+    def records_for(resolution)
+      resolution.containers.all.map do |c|
+        "#{c.resource_type}.#{resolution.blueprint_identifier}.ip_address"
+      end.join(', ')
     end
 
     def protocol; configuration.struct.protocol || 'protocol' ;end
