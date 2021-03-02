@@ -36,6 +36,8 @@ module Divisions
       nil
     end
 
+    def inflated_struct; all.map(&:inflated_struct) ;end
+
     def resolved
       empty.tap { |d| d.struct = all.map(&:resolved).map(&:struct) }
     end
