@@ -19,10 +19,6 @@ module Emissions
       end
     end
 
-    def connections_resolved
-      connections.map { |c| c.with_embeds.resolved_in(arena) }
-    end
-
     def unresolved_infixes
       @unresolved_infixes ||= unresolved_infix_strings.inject({}) do |m, i|
         m.tap do

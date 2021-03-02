@@ -39,6 +39,7 @@ module Packing
     def save(model)
       raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:builders)
 
+      ensure_connections_exist_for(model)
       super.tap do
         path_for(model).join('commit.json').write(model.to_h.to_json)
       end
@@ -55,6 +56,10 @@ module Packing
     def validate(model) ;end
 
     protected
+
+    def ensure_connections_exist_for(model)
+      model.connections_packed.each { |p| save(p) }
+    end
 
     def execute(command, model)
       raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:builders)

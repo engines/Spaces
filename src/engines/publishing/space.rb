@@ -26,7 +26,7 @@ module Publishing
       else
         super_import(descriptor)
         by(descriptor.identifier).tap do |m|
-          blueprints.by_import(m, descriptor, force: force)
+          blueprints.by_import(m, force: force)
           m.turtle_targets
         end
       end

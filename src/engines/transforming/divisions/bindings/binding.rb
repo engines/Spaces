@@ -3,6 +3,8 @@ require 'resolv'
 module Divisions
   class Binding < ::Divisions::TargetingSubdivision
 
+    alias_accessor :arena, :emission
+
     def type; struct.type ;end
     def embed?; type == 'embed' ;end
 
