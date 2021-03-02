@@ -30,7 +30,26 @@ embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/phpmyadmin')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/mariadb')
+universe.publications.import(descriptor, force: true)
+
+# resolve a blueprint
+blueprint = universe.blueprints.by('mariadb')
+arena = universe.arenas.by('development')
+resolution = blueprint.with_embeds.resolved_in(arena)
+universe.resolutions.save(resolution)
+
+# save a pack for a resolution
+resolution = universe.resolutions.by('development/mariadb')
+pack = resolution.packed
+universe.packs.save(pack)
+
+# commit a pack
+pack = universe.packs.by('development/mariadb')
+universe.packs.commit(pack)
+
+# import a blueprint
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
 universe.publications.import(descriptor, force: true)
 
 # resolve a blueprint
