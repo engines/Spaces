@@ -30,7 +30,7 @@ embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/mariadb')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/mariadb')
 universe.publications.import(descriptor, force: true)
 
 # resolve a blueprint
@@ -54,7 +54,7 @@ provisions = resolution.provisioned
 universe.provisioning.save(provisions)
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/phpmyadmin')
 universe.publications.import(descriptor, force: true)
 
 # resolve a blueprint
