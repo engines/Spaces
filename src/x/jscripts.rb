@@ -10,7 +10,7 @@ arena = universe.arenas.by('development').associated
 universe.arenas.save(arena)
 
 # import an arena bootstrap
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/arena')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/arena')
 universe.publications.import(descriptor, force: true)
 
 # resolve the bootstrap
@@ -30,8 +30,7 @@ embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
 # import a blueprint
-<<<<<<< Upstream, based on branch 'jvodan' of https://github.com/jvodan/Spaces
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/mariadb')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/mariadb')
 universe.publications.import(descriptor, force: true)
 
 # resolve a blueprint
@@ -55,8 +54,6 @@ provisions = resolution.provisioned
 universe.provisioning.save(provisions)
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/phpmyadmin')
-=======
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/mariadb')
 universe.publications.import(descriptor, force: true)
 
