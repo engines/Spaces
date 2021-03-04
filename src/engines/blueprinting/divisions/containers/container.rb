@@ -9,7 +9,7 @@ module Divisions
 
     alias_accessor :resolution, :emission
 
-    delegate([:identifier, :connections] => :emission)
+    delegate([:identifier, :connections, :connect_targets] => :emission)
 
     def complete?
       !(type && image_name).nil?
