@@ -9,16 +9,21 @@ module Divisions
 
     def blueprint
       @blueprint ||=
-        if blueprints.exist?(blueprint_target)
-          blueprints.by(blueprint_target.identifier)
-        else
-          publications.by_import(blueprint_target)
-        end
+      if blueprints.exist?(descriptor)
+        blueprints.by(descriptor.identifier)
+      else
+        publications.by_import(descriptor)
+      end
     end
 
-    def blueprint_target; @blueprint_target ||= descriptor_class.new(struct.target) ;end
-    def identifier; struct.identifier || root_identifier ;end
-    def root_identifier; blueprint_target.identifier ;end
+    def identifier; struct.identifier || target_identifier ;end
+    def target_identifier; struct.target_identifier || descriptor&.identifier ;end
+
+    def descriptor
+      @descriptor ||= descriptor_class.new(
+        struct.target || {identifier: target_identifier}
+      )
+    end
 
     def resolution_in(arena)
       t = resolution_target_for(arena)
@@ -26,7 +31,7 @@ module Divisions
     end
 
     def resolution_target_for(arena)
-      descriptor_class.new(identifier: "#{arena.identifier}/#{root_identifier}")
+      descriptor_class.new(identifier: "#{arena.identifier}/#{target_identifier}")
     end
 
   end

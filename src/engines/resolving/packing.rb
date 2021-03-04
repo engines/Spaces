@@ -9,7 +9,7 @@ module Resolving
       end
     end
 
-    def builders_for(images); OpenStruct.new(builders: images.inflated_struct) ;end
+    def builders_for(images); OpenStruct.new(builders: images.inflated.struct) ;end
 
     def packing_divisions
       divisions.select { |d| d.packing_division? }.sort_by(&:composition_rank)

@@ -21,8 +21,8 @@ universe.resolutions.save(resolution)
 
 # bootstrap the arena
 arena = universe.arenas.by('development')
-boostrapped = arena.bootstrapped_with('arena')
-universe.arenas.save(boostrapped)
+bootstrapped = arena.bootstrapped_with('arena')
+universe.arenas.save(bootstrapped)
 
 # embed blueprints from bootstrap in arena
 arena = universe.arenas.by('development')
