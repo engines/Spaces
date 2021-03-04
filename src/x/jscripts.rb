@@ -74,7 +74,6 @@ universe.packs.commit(pack)
 
 # import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
->>>>>>> 0bebb1c improve and customise test scripts
 universe.publications.import(descriptor, force: true)
 
 # resolve a blueprint
