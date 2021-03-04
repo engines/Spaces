@@ -2,7 +2,7 @@ module Providers
   class Lxd < ::Providers::Provider
 
     def arena_stanzas
-      [provider_stanza, remote_stanza, pool_stanzas].join
+      [provider_stanza, pool_stanzas].join
     end
 
     def provider_stanza
@@ -10,6 +10,7 @@ module Providers
         provider "#{type}" {
           generate_client_certificates = "#{configuration.generate_client_certificates}"
           accept_remote_certificate    = "#{configuration.accept_remote_certificate}"
+		  #{remote_stanza}
         }
       )
     end
