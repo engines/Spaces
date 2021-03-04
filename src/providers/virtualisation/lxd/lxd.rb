@@ -30,7 +30,7 @@ module Providers
     def pool_stanzas
       %(
         resource "#{type}_storage_pool" "data-pool" {
-          name = "data"
+          name = "data-pool"
           driver = "dir"
           config = {
             source = "/var/lib/containers/#{arena.identifier}/data"
@@ -38,7 +38,7 @@ module Providers
         }
 
         resource "#{type}_storage_pool" "logs-pool" {
-          name = "logs"
+          name = "logs-pool"
           driver = "dir"
           config = {
             source = "/var/lib/containers/#{arena.identifier}/logs"
