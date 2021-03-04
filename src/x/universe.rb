@@ -1,6 +1,5 @@
 require_relative '../universe'
 
-
 def universe; @u ||= Universe.new ;end
 
 def clear
