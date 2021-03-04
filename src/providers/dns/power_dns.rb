@@ -14,7 +14,7 @@ module Providers
         resource "powerdns_zone" "#{arena.identifier}-zone" {
           name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
-          nameservers = []
+          nameservers = ["127.0.0.1."] #big kludge 
         }
       )
     end
@@ -42,7 +42,7 @@ module Providers
 
     def records_for(resolution)
       resolution.containers.all.map do |c|
-        "#{c.resource_type}.#{resolution.blueprint_identifier}.ip_address"
+        "#{c.resource_type}.#{resolution.blueprint_identifier}.ipv6_address"
       end.join(', ')
     end
 
