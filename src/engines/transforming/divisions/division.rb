@@ -34,6 +34,8 @@ module Divisions
 
     def context_identifier; emission.context_identifier ;end
 
+    def localised; self ;end
+
     def content
       auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|

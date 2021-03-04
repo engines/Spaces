@@ -22,7 +22,7 @@ module Blueprinting
     def reset(identifier)
       identifier.tap do |i|
         publications.by(i).tap do |p|
-          save(p)
+          save(p.localised)
           copy_auxiliaries_for(p)
         end
       end
