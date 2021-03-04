@@ -34,7 +34,7 @@ module Divisions
       end
     end
 
-    def infix_qualifier; root_identifier ;end
+    def infix_qualifier; target_identifier ;end
 
     def target_configuration
       @target_configuration ||=
