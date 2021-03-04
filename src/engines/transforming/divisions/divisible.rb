@@ -17,10 +17,12 @@ module Divisions
       @related_divisions ||= emission.divisions
     end
 
-    def arena_stanzas; all.map(&:arena_stanzas) ;end
+    def inflated
+      empty.tap { |d| d.struct = all.map(&:inflated).map(&:struct) }
+    end
 
-    def blueprint_stanzas_for(resolution)
-       all.map { |d| d.blueprint_stanzas_for(resolution) }.flatten.compact
+    def resolved
+      empty.tap { |d| d.struct = all.map(&:resolved).map(&:struct) }
     end
 
     def all
@@ -36,10 +38,10 @@ module Divisions
       nil
     end
 
-    def inflated_struct; all.map(&:inflated_struct) ;end
+    def arena_stanzas; all.map(&:arena_stanzas) ;end
 
-    def resolved
-      empty.tap { |d| d.struct = all.map(&:resolved).map(&:struct) }
+    def blueprint_stanzas_for(resolution)
+       all.map { |d| d.blueprint_stanzas_for(resolution) }.flatten.compact
     end
 
     def struct_with(other); [struct, other.struct].flatten.uniq ;end
