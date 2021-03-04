@@ -5,11 +5,14 @@ module Providers
       %(
         provider "powerdns" {
           api_key    = "#{configuration.api_key}"
-          server_url = "#{protocol}://#{arena.identifier}.#{universe.host}:#{port}/#{endpoint}"
+          
+          server_url = "#{protocol}://127.0.0.1:#{port}/#{endpoint}"
+#127.0.0.1 is a temp kludge  pdns.#{arena.identifier}.#{universe.host} is closer to the final thoudh pdns should be inferred 
+#or perhaps just use lxd_container.pdns.ip_address once again pdns should be inferred
         }
 
         resource "powerdns_zone" "#{arena.identifier}-zone" {
-          name        = "#{arena.identifier}"
+          name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
           nameservers = []
         }
@@ -29,7 +32,7 @@ module Providers
       %(
         resource "powerdns_record" "#{resolution.blueprint_identifier}" {
           zone    = "#{universe.host}"
-          name    = "#{resolution.blueprint_identifier}.#{universe.host}"
+          name    = "#{resolution.blueprint_identifier}.#{universe.host}."
           type    = "AAAA"
           ttl     = #{configuration.ttl}
           records = [#{records_for(resolution)}]
