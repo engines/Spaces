@@ -25,6 +25,10 @@ module Divisions
       )
     end
 
+    def resolution
+      @resolution ||= resolution_in(emission.arena)
+    end
+
     def resolution_in(arena)
       t = resolution_target_for(arena)
       resolutions.by(t.identifier) if resolutions.exist?(t)

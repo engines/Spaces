@@ -22,10 +22,8 @@ module Providers
               }
             }
 
-            provisioner "local-exec" {
-              command = "lxc exec #{blueprint_identifier} /root/setup.sh"
-            }
-
+            #{connect_services_stanzas}
+            #{setup_stanza}
             #{device_stanzas}
 
             config = {
@@ -37,6 +35,23 @@ module Providers
 
       def dependency_stanza
         %(depends_on=[#{dependency_string}]) if connections.any?
+      end
+
+      def connect_services_stanzas
+        connect_targets.map do |c|
+          r = c.resolution
+          if r.has?(:service_tasks)
+            r.service_tasks.connection_stanza_for(c)
+          end
+        end.compact.join
+      end
+
+      def setup_stanza
+        %(
+          provisioner "local-exec" {
+            command = "lxc exec #{blueprint_identifier} /root/setup.sh"
+          }
+        )
       end
 
       def device_stanzas
