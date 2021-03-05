@@ -10,7 +10,8 @@ module Providers
         provider "#{type}" {
           generate_client_certificates = "#{configuration.generate_client_certificates}"
           accept_remote_certificate    = "#{configuration.accept_remote_certificate}"
-		  #{remote_stanza}
+
+          #{remote_stanza}
         }
       )
     end
