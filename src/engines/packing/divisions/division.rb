@@ -17,12 +17,12 @@ module Packing
       by_precedence([other.keys, keys].flatten.uniq)
     end
 
-    def packing_source_path
-      resolutions.file_path_for(:packing, context_identifier)
+    def source_path_for(folder)
+      resolutions.file_path_for(folder, context_identifier)
     end
 
-    def copy_source_path_for(precedence)
-      packing_source_path.join("#{precedence}")
+    def copy_source_path_for(folder, precedence)
+      source_path_for(folder).join("#{precedence}")
     end
 
     def temporary_script_path; Pathname('/tmp').join(path) ;end
