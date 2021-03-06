@@ -48,6 +48,10 @@ module Divisions
 
     def keys; struct_configuration.to_h.keys ;end
 
+    def environment_variables
+      struct_configuration.to_h.map { |k, v| "--env=#{k}=#{v}" }.join(' ')
+    end
+
     def method_missing(m, *args, &block)
       keys&.include?(m) ? struct_configuration[m] : super
     end
