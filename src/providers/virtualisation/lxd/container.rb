@@ -50,7 +50,7 @@ module Providers
         commissioning_scripts.map do |s|
           %(
             provisioner "local-exec" {
-              command = "lxc exec #{blueprint_identifier} /root/setup.sh"
+              command = "lxc exec #{blueprint_identifier} #{s}"
             }
           )
         end.join
