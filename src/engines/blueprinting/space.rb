@@ -31,7 +31,7 @@ module Blueprinting
     protected
 
     def copy_auxiliaries_for(publication)
-      publication.auxiliary_directories.each { |d| copy_auxiliaries(publication, d) }
+      publication.auxiliary_folders.each { |d| copy_auxiliaries(publication, d) }
     end
 
     def copy_auxiliaries(publication, segment)

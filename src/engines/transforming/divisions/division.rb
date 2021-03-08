@@ -21,7 +21,7 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_directories, :blueprint_identifier, :configuration] => :emission,
+      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
@@ -37,7 +37,7 @@ module Divisions
     def localised; self ;end
 
     def content
-      auxiliary_directories.map do |d|
+      auxiliary_folders.map do |d|
         auxiliary_paths_for(d).map do |p|
           Interpolating::FileText.new(origin: p, directory: d, transformable: self)
         end

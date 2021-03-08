@@ -37,7 +37,7 @@ module Resolving
 
     def copy_auxiliaries_for(model)
       model.embeds_including_blueprint.map do |b|
-        b.auxiliary_directories.each { |d| copy_auxiliaries(model, b, d) }
+        b.auxiliary_folders.each { |d| copy_auxiliaries(model, b, d) }
       end
     end
 
