@@ -5,13 +5,16 @@ module Providers
       %(
         provider "powerdns" {
           api_key    = "#{configuration.api_key}"
-          server_url = "#{protocol}://#{arena.identifier}.#{universe.host}:#{port}/#{endpoint}"
+          
+          server_url = "#{protocol}://127.0.0.1:#{port}/#{endpoint}"
+#127.0.0.1 is a temp kludge  pdns.#{arena.identifier}.#{universe.host} is closer to the final thoudh pdns should be inferred 
+#or perhaps just use lxd_container.pdns.ip_address once again pdns should be inferred
         }
 
         resource "powerdns_zone" "#{arena.identifier}-zone" {
-          name        = "#{arena.identifier}"
+          name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
-          nameservers = []
+          nameservers = ["127.0.0.1."] #big kludge 
         }
       )
     end
@@ -29,7 +32,7 @@ module Providers
       %(
         resource "powerdns_record" "#{resolution.blueprint_identifier}" {
           zone    = "#{universe.host}"
-          name    = "#{resolution.blueprint_identifier}.#{universe.host}"
+          name    = "#{resolution.blueprint_identifier}.#{universe.host}."
           type    = "AAAA"
           ttl     = #{configuration.ttl}
           records = [#{records_for(resolution)}]
@@ -39,7 +42,7 @@ module Providers
 
     def records_for(resolution)
       resolution.containers.all.map do |c|
-        "#{c.resource_type}.#{resolution.blueprint_identifier}.ip_address"
+        "#{c.resource_type}.#{resolution.blueprint_identifier}.ipv6_address"
       end.join(', ')
     end
 
