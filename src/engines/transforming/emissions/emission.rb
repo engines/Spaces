@@ -32,7 +32,8 @@ module Emissions
     )
 
     alias_method :emission, :itself
-    alias_method :has?, :respond_to?
+
+    def has?(property); struct[property] ;end 
 
     def count
       has?(:scaling) ? scaling.count : 1
