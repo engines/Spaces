@@ -33,7 +33,11 @@ module Emissions
 
     alias_method :emission, :itself
 
-    def has?(property); struct[property] ;end 
+    def has?(property); struct[property] ;end
+
+    def bindings
+      has?(:bindings) ? division_map[:bindings] : division_for(:bindings)
+    end
 
     def count
       has?(:scaling) ? scaling.count : 1
