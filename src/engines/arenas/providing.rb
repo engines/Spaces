@@ -13,6 +13,8 @@ module Arenas
       @provider_map ||= resolution_map.select { |_, v| v.has?(:provider) }
     end
 
+    def container_type; containing&.container_type ;end
+
     def method_missing(m, *args, &block)
       provider_division_map["#{m}"] || super
     end
@@ -20,8 +22,6 @@ module Arenas
     def respond_to_missing?(m, *)
       provider_division_map.keys.include?("#{m}") || super
     end
-
-    def container_type; containing&.container_type ;end
 
   end
 end
