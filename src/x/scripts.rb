@@ -29,6 +29,11 @@ arena = universe.arenas.by('development')
 embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
+# save provisions for bootstrap
+resolution = universe.resolutions.by('development/arena')
+provisions = resolution.provisioned
+universe.provisioning.save(provisions)
+
 # import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/phpmyadmin')
 universe.publications.import(descriptor, force: true)
@@ -55,4 +60,7 @@ universe.provisioning.save(provisions)
 
 # apply arena provisions
 arena = universe.arenas.by('development')
+# ********************
+universe.arenas.init(arena)
+# ********************
 universe.arenas.apply(arena)

@@ -1,20 +1,20 @@
 module Providers
   class PowerDns < ::Providers::Provider
 
+    delegate(container_type: :arena)
+
     def arena_stanzas
       %(
         provider "powerdns" {
           api_key    = "#{configuration.api_key}"
-          
-          server_url = "#{protocol}://127.0.0.1:#{port}/#{endpoint}"
-#127.0.0.1 is a temp kludge  pdns.#{arena.identifier}.#{universe.host} is closer to the final thoudh pdns should be inferred 
-#or perhaps just use lxd_container.pdns.ip_address once again pdns should be inferred
+
+          server_url = "#{protocol}://#{blueprint_identifier}.#{universe.host}:#{port}/#{endpoint}"
         }
 
         resource "powerdns_zone" "#{arena.identifier}-zone" {
           name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
-          nameservers = ["127.0.0.1."] #big kludge 
+          nameservers = [#{record}]
         }
       )
     end
@@ -31,19 +31,17 @@ module Providers
     def blueprint_stanzas_for(resolution)
       %(
         resource "powerdns_record" "#{resolution.blueprint_identifier}" {
-          zone    = "#{universe.host}"
+          zone    = "#{universe.host}."
           name    = "#{resolution.blueprint_identifier}.#{universe.host}."
           type    = "AAAA"
           ttl     = #{configuration.ttl}
-          records = [#{records_for(resolution)}]
+          records = [#{record}]
         }
       )
     end
 
-    def records_for(resolution)
-      resolution.containers.all.map do |c|
-        "#{c.resource_type}.#{resolution.blueprint_identifier}.ipv6_address"
-      end.join(', ')
+    def record
+      "#{container_type}.#{blueprint_identifier}.ipv6_address"
     end
 
     def protocol; configuration.struct.protocol || 'protocol' ;end
