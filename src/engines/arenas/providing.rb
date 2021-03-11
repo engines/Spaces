@@ -21,5 +21,7 @@ module Arenas
       provider_division_map.keys.include?("#{m}") || super
     end
 
+    def container_type; containing&.container_type ;end
+
   end
 end
