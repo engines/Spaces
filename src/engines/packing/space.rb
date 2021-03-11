@@ -31,7 +31,7 @@ module Packing
     end
 
     def artifacts_by(command, descriptor)
-      YAML::load(path_for(descriptor).join(command, 'artifacts.yaml').read)
+      YAML::load(path_for(descriptor).join("#{command}", 'artifacts.yaml').read)
     rescue Errno::ENOENT => e
       nil
     end
