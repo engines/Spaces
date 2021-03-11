@@ -44,7 +44,7 @@ module Providers
       "#{container_type}.#{blueprint_identifier}.ipv6_address"
     end
 
-    def protocol; configuration.struct.protocol || 'protocol' ;end
+    def protocol; configuration.struct.protocol || 'http' ;end
     def port; configuration.struct.port || 8081 ;end
     def endpoint; configuration.struct.endpoint ;end
 
