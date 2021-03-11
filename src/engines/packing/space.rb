@@ -87,7 +87,7 @@ module Packing
 
     def execute_on_connections_for(command, model)
       model.tap do
-        unexecuted_connections_for(command, model).each { |t| execute(command, by(t.identifier)) }
+        unexecuted_connections_for(command, model).each { |t| execute(command, by(t.resolution.identifier)) }
       end
     end
 
