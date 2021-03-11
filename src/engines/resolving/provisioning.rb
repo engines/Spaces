@@ -15,7 +15,7 @@ module Resolving
     end
 
     def divisions_with_provider_divisions
-      [divisions, arena.provider_divisions].flatten.compact
+      [divisions, arena.provider_divisions].flatten.compact.uniq(&:class)
     end
 
     def empty_provisions; provisions_class.new ;end
