@@ -23,7 +23,7 @@ module Divisions
     end
 
     def turtle_targets_under(binding)
-      (b = binding.blueprint).has?(:bindings) ? b.bindings.turtle_targets : []
+      binding.blueprint.bindings.turtle_targets
     end
 
     def method_missing(m, *args, &block); named(m) || super ;end

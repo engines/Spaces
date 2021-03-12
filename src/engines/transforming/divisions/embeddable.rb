@@ -3,7 +3,7 @@ module Divisions
 
     def with_embeds(emissions)
       emissions.reduce(itself) do |m, b|
-        b.has?(qualifier) ? m.embedded_with(b.send(qualifier)) : m
+        b.respond_to?(qualifier) ? m.embedded_with(b.send(qualifier)) : m
       end
     end
 

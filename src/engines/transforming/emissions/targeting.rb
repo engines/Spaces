@@ -7,7 +7,7 @@ module Emissions
     def connections; connect_targets.map{ |t| t.resolution_in(arena) } ;end
     def connect_targets; targets(:connect_targets) ;end
 
-    def targets(type); has?(:bindings) ? bindings.send(type) : [] ;end
+    def targets(type); bindings.send(type) ;end
 
   end
 end

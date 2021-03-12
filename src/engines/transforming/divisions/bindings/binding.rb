@@ -38,10 +38,7 @@ module Divisions
     def infix_qualifier; target_identifier ;end
 
     def target_configuration
-      @target_configuration ||=
-      if blueprint.has?(:binding_target)
-        blueprint.binding_target&.struct
-      end || OpenStruct.new
+      @target_configuration ||= blueprint.binding_target.struct
     end
 
     def struct_configuration; struct.configuration || OpenStruct.new ;end

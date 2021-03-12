@@ -31,7 +31,7 @@ module Packing
     end
 
     def artifacts_by(command, descriptor)
-      YAML::load(path_for(descriptor).join(command, 'artifacts.yaml').read)
+      YAML::load(path_for(descriptor).join("#{command}", 'artifacts.yaml').read)
     rescue Errno::ENOENT => e
       nil
     end
@@ -87,7 +87,7 @@ module Packing
 
     def execute_on_connections_for(command, model)
       model.tap do
-        unexecuted_connections_for(command, model).each { |t| execute(command, by(t.identifier)) }
+        unexecuted_connections_for(command, model).each { |t| execute(command, by(t.resolution.identifier)) }
       end
     end
 
@@ -96,7 +96,7 @@ module Packing
     end
 
     def unique_connections_for(model)
-      model.targets(:connect_targets)&.uniq(&:uniqueness) || []
+      model.connect_targets.uniq(&:uniqueness) || []
     end
 
   end
