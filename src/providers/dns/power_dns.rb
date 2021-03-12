@@ -7,10 +7,8 @@ module Providers
       %(
         provider "powerdns" {
           api_key    = "#{configuration.api_key}"
-
-          server_url = "#{protocol}://#{blueprint_identifier}.#{universe.host}:#{port}/#{endpoint}"
+          server_url = "#{protocol}://#{ip_address}:#{port}/#{endpoint}"
         }
-
         resource "powerdns_zone" "#{arena.identifier}-zone" {
           name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
@@ -19,6 +17,10 @@ module Providers
       )
     end
 
+    def ip_address 
+		'#{' + "lxc_container.#{blueprint_identifier}.ipv4_address}"
+	end
+	
     def required_stanza
       %(
         powerdns = {
