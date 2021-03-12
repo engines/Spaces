@@ -11,11 +11,18 @@ module Resolving
     def stanzas_content; stanzas.join("\n") ;end
 
     def stanzas
-      divisions_with_provider_divisions.map { |d| d.blueprint_stanzas_for(self) }.flatten.compact
+      including_provider_divisions.map { |d| d.blueprint_stanzas_for(self) }.flatten.compact
     end
 
-    def divisions_with_provider_divisions
-      [divisions, arena.provider_divisions].flatten.compact.uniq(&:class)
+    def including_provider_divisions
+      [divisions, arena.provider_divisions].flatten.reject do |d|
+        correlating_provider_classes.include?(d.class)
+      end
+    end
+
+    def correlating_provider_classes
+      @correlating_provider_classes ||=
+        divisions.map(&:class).intersection(arena.provider_divisions.map(&:class))
     end
 
     def empty_provisions; provisions_class.new ;end
