@@ -1,6 +1,5 @@
 module Providers
   class PowerDns < ::Providers::Provider
-
     delegate(container_type: :arena)
 
     def arena_stanzas
@@ -17,10 +16,10 @@ module Providers
       )
     end
 
-    def ip_address 
-		'#{' + "lxc_container.#{blueprint_identifier}.ipv4_address}"
-	end
-	
+    def ip_address
+      '#{' + "lxc_container.#{blueprint_identifier}.ipv4_address}"
+    end
+
     def required_stanza
       %(
         powerdns = {
@@ -46,9 +45,16 @@ module Providers
       "#{container_type}.#{blueprint_identifier}.ipv6_address"
     end
 
-    def protocol; configuration.struct.protocol || 'http' ;end
-    def port; configuration.struct.port || 8081 ;end
-    def endpoint; configuration.struct.endpoint ;end
+    def protocol
+      configuration.struct.protocol || 'http'
+    end
 
+    def port
+      configuration.struct.port || 8081
+    end
+
+    def endpoint
+      configuration.struct.endpoint
+    end
   end
 end
