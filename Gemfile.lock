@@ -6,6 +6,19 @@ GIT
       dry-inflector (~> 0.1)
       logging (~> 2.3)
 
+PATH
+  remote: .
+  specs:
+    spaces (0.1.0)
+      addressable (~> 2.7)
+      duplicate (~> 1.1)
+      engines-logger (= 0.2.0)
+      git (~> 1.8)
+      i18n (~> 1.8)
+      packer-client (= 0.2.0)
+      ruby-terraform (= 0.64)
+      yajl-ruby (~> 1.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -79,21 +92,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  addressable
   byebug
-  duplicate
   engines-logger (= 0.2.0)!
-  git
-  i18n
-  packer-client
   pry
   ripper-tags
-  ruby-terraform
   sinatra
   sinatra-contrib
+  spaces!
   thin
   uglifier
-  yajl-ruby
   yard (~> 0.9)
 
 BUNDLED WITH
