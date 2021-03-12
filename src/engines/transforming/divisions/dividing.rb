@@ -5,6 +5,14 @@ module Divisions
       divisions.reject(&:complete?)
     end
 
+    def bindings; important_division(:bindings) ;end
+    def binding_target; important_division(:binding_target) ;end
+    def images; important_division(:images) ;end
+
+    def important_division(key)
+      has?(key) ? division_map[key] : division_for(key)
+    end
+
     def divisions; division_map.values ;end
 
     def division_map

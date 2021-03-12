@@ -4,7 +4,7 @@ module Resolving
     def packed
       empty_pack.tap do |m|
         m.predecessor = self
-        m.struct = (has?(:images) ? builders_for(images) : OpenStruct.new)
+        m.struct = builders_for(images)
         m.struct.identifier = identifier
       end
     end

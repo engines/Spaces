@@ -20,7 +20,7 @@ module Divisions
     end
 
     def matching_image
-      emission.images.all.detect { |i| i.type == type } if emission.has?(:images)
+      emission.images.all.detect { |i| i.type == type }
     end
 
   end
