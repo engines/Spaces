@@ -9,6 +9,12 @@ module Packing
 
     delegate(resolutions: :universe)
 
+    def identifiers(arena_identifier: '*', resolution_identifier: '*')
+      path.glob("#{arena_identifier}/#{resolution_identifier}").map do |p|
+        "#{p.relative_path_from(path)}"
+      end
+    end
+
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
