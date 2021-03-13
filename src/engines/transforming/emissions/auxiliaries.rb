@@ -1,7 +1,7 @@
 module Emissions
   module Auxiliaries
 
-    def auxiliary_directories
+    def auxiliary_folders
       [:packing, :commissioning, :service_tasks]
     end
 
@@ -14,7 +14,7 @@ module Emissions
     end
 
     def blueprints_content
-      auxiliary_directories.map { |d| content_into(d, source: itself) }.flatten
+      auxiliary_folders.map { |d| content_into(d, source: itself) }.flatten
     end
 
     def content_into(directory, source:)

@@ -1,19 +1,23 @@
 module Providers
   class PowerDns < ::Providers::Provider
+    delegate(container_type: :arena)
 
     def arena_stanzas
       %(
         provider "powerdns" {
           api_key    = "#{configuration.api_key}"
-          server_url = "#{protocol}://#{arena.identifier}.#{universe.host}:#{port}/#{endpoint}"
+          server_url = "#{protocol}://#{ip_address}:#{port}/#{endpoint}"
         }
-
         resource "powerdns_zone" "#{arena.identifier}-zone" {
-          name        = "#{arena.identifier}"
+          name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
-          nameservers = []
+          nameservers = [#{record}]
         }
       )
+    end
+
+    def ip_address
+      '#{' + "lxc_container.#{blueprint_identifier}.ipv4_address}"
     end
 
     def required_stanza
@@ -28,24 +32,29 @@ module Providers
     def blueprint_stanzas_for(resolution)
       %(
         resource "powerdns_record" "#{resolution.blueprint_identifier}" {
-          zone    = "#{universe.host}"
-          name    = "#{resolution.blueprint_identifier}.#{universe.host}"
+          zone    = "#{universe.host}."
+          name    = "#{resolution.blueprint_identifier}.#{universe.host}."
           type    = "AAAA"
           ttl     = #{configuration.ttl}
-          records = [#{records_for(resolution)}]
+          records = [#{record}]
         }
       )
     end
 
-    def records_for(resolution)
-      resolution.containers.all.map do |c|
-        "#{c.resource_type}.#{resolution.blueprint_identifier}.ip_address"
-      end.join(', ')
+    def record
+      "#{container_type}.#{blueprint_identifier}.ipv6_address"
     end
 
-    def protocol; configuration.struct.protocol || 'protocol' ;end
-    def port; configuration.struct.port || 8081 ;end
-    def endpoint; configuration.struct.endpoint ;end
+    def protocol
+      configuration.struct.protocol || 'http'
+    end
 
+    def port
+      configuration.struct.port || 8081
+    end
+
+    def endpoint
+      configuration.struct.endpoint
+    end
   end
 end

@@ -21,56 +21,42 @@ universe.resolutions.save(resolution)
 
 # bootstrap the arena
 arena = universe.arenas.by('development')
-boostrapped = arena.bootstrapped_with('arena')
-universe.arenas.save(boostrapped)
+bootstrapped = arena.bootstrapped_with('arena')
+universe.arenas.save(bootstrapped)
 
 # embed blueprints from bootstrap in arena
 arena = universe.arenas.by('development')
 embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
-# import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/mariadb')
-universe.publications.import(descriptor, force: true)
-
-# resolve a blueprint
-blueprint = universe.blueprints.by('mariadb')
-arena = universe.arenas.by('development')
-resolution = blueprint.with_embeds.resolved_in(arena)
-universe.resolutions.save(resolution)
-
-# save a pack for a resolution
-resolution = universe.resolutions.by('development/mariadb')
-pack = resolution.packed
-universe.packs.save(pack)
-
-# commit a pack
-pack = universe.packs.by('development/mariadb')
-universe.packs.commit(pack)
-
-# save provisions for resolution
-resolution = universe.resolutions.by('development/mariadb')
+# save provisions for bootstrap
+resolution = universe.resolutions.by('development/arena')
 provisions = resolution.provisioned
 universe.provisioning.save(provisions)
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/mariadb')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/powerdns')
 universe.publications.import(descriptor, force: true)
 
 # resolve a blueprint
-blueprint = universe.blueprints.by('mariadb')
+blueprint = universe.blueprints.by('powerdns')
 arena = universe.arenas.by('development')
 resolution = blueprint.with_embeds.resolved_in(arena)
 universe.resolutions.save(resolution)
 
 # save a pack for a resolution
-resolution = universe.resolutions.by('development/mariadb')
+resolution = universe.resolutions.by('development/powerdns')
 pack = resolution.packed
 universe.packs.save(pack)
 
 # commit a pack
-pack = universe.packs.by('development/mariadb')
+pack = universe.packs.by('development/powerdns')
 universe.packs.commit(pack)
+
+# save provisions for resolution
+resolution = universe.resolutions.by('development/powerdns')
+provisions = resolution.provisioned
+universe.provisioning.save(provisions)
 
 # import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
@@ -98,4 +84,7 @@ universe.provisioning.save(provisions)
 
 # apply arena provisions
 arena = universe.arenas.by('development')
+# ********************
+universe.arenas.init(arena)
+# ********************
 universe.arenas.apply(arena)

@@ -23,7 +23,7 @@ module Providers
             }
 
             #{connect_services_stanzas}
-            #{setup_stanza}
+            #{commissioning_stanzas}
             #{device_stanzas}
 
             config = {
@@ -46,16 +46,18 @@ module Providers
         end.compact.join
       end
 
-      def setup_stanza
-        %(
-          provisioner "local-exec" {
-            command = "lxc exec #{blueprint_identifier} /root/setup.sh"
-          }
-        )
+      def commissioning_stanzas
+        commissioning_scripts.map do |s|
+          %(
+            provisioner "local-exec" {
+              command = "lxc exec #{blueprint_identifier} #{s}"
+            }
+          )
+        end.join
       end
 
       def device_stanzas
-        emission.volumes.all.map(&:device_stanzas).join("\n") if emission.has?(:volumes)
+        emission.volumes.all.map(&:device_stanzas).join if emission.has?(:volumes)
       end
 
       def dependency_string
