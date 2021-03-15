@@ -10,7 +10,7 @@ arena = universe.arenas.by('development').associated
 universe.arenas.save(arena)
 
 # import an arena bootstrap
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/arena')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/arena')
 universe.publications.import(descriptor, force: true)
 
 # resolve the bootstrap
@@ -44,7 +44,7 @@ provisions = resolution.provisioned
 universe.provisioning.save(provisions)
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/MarkRatjens/phpmyadmin')
+descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
 universe.publications.import(descriptor, force: true)
 
 # resolve a blueprint
