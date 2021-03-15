@@ -29,6 +29,15 @@ arena = universe.arenas.by('development')
 embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
+# save a pack for bootstrap
+resolution = universe.resolutions.by('development/arena')
+pack = resolution.packed
+universe.packs.save(pack)
+
+# commit a pack
+pack = universe.packs.by('development/arena')
+universe.packs.commit(pack)
+
 # save provisions for bootstrap
 resolution = universe.resolutions.by('development/arena')
 provisions = resolution.provisioned
