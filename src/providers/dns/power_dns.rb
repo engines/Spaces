@@ -16,17 +16,13 @@ module Providers
       )
     end
 
-    def ip_address
-      '#{' + "lxc_container.#{blueprint_identifier}.ipv4_address}"
-    end
-
     def required_stanza
       %(
         powerdns = {
           version = "#{configuration.version}"
           source  = "#{configuration.source}"
         }
-       )
+      )
     end
 
     def blueprint_stanzas_for(resolution)
@@ -40,6 +36,10 @@ module Providers
         }
       )
     end
+
+    def ip_address
+  		'#{' + "lxc_container.#{blueprint_identifier}.ipv4_address}"
+  	end
 
     def record
       "#{container_type}.#{blueprint_identifier}.ipv6_address"
