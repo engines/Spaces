@@ -8,6 +8,7 @@ module Divisions
     def bindings; important_division(:bindings) ;end
     def binding_target; important_division(:binding_target) ;end
     def images; important_division(:images) ;end
+    def volumes; important_division(:volumes) ;end
 
     def important_division(key)
       has?(key) ? division_map[key] : division_for(key)
