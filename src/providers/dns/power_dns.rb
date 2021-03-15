@@ -1,6 +1,5 @@
 module Providers
   class PowerDns < ::Providers::Provider
-    delegate(container_type: :arena)
 
     def arena_stanzas
       %(
