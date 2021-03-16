@@ -17,7 +17,7 @@ module Divisions
       @related_divisions ||= emission.divisions
     end
 
-    def localised; all_as(:localised) ;end
+    def localized; all_as(:localized) ;end
     def inflated; all_as(:inflated) ;end
     def resolved; all_as(:resolved) ;end
 

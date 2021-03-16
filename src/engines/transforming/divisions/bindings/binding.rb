@@ -8,7 +8,7 @@ module Divisions
     def type; struct.type ;end
     def embed?; type == 'embed' ;end
 
-    def localised
+    def localized
       empty.tap do |m|
         m.struct = struct.without(:target).tap do |s|
           s.identifier ||= target_identifier
