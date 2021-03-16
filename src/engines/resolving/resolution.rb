@@ -12,10 +12,10 @@ module Resolving
 
     delegate(
       resolutions: :universe,
-      blueprints: :resolutions
+      [:arenas, :blueprints] => :resolutions
     )
-
-    relation_accessor :arena
+    
+    def arena; @arena ||= arenas.by(arena_identifier) ;end
 
     def arena_identifier; identifier.split('/').first ;end
 
@@ -25,7 +25,7 @@ module Resolving
     def complete?
       all_complete?(divisions)
     end
-    
+
     def connections_resolved
       connections.map { |c| c.with_embeds.resolved_in(arena) }
     end

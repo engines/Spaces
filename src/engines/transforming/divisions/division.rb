@@ -21,10 +21,13 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration] => :emission,
+      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :arena] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
+
+    def runtime_type; arena&.runtime_type ;end
+    def container_type; "#{runtime_type}_container" ;end
 
     def packing_division?
       klass.ancestors.include?(::Packing::Division)
@@ -34,7 +37,7 @@ module Divisions
 
     def context_identifier; emission.context_identifier ;end
 
-    def localised; self ;end
+    def localized; self ;end
 
     def content
       auxiliary_folders.map do |d|

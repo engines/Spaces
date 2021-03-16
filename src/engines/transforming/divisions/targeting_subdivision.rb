@@ -3,6 +3,12 @@ require_relative 'subdivision'
 module Divisions
   class TargetingSubdivision < Subdivision
 
+    class << self
+      def prototype(type:, struct:, division:)
+        new(struct: struct, division: division)
+      end
+    end
+
     delegate(
       [:blueprints, :publications, :resolutions] => :universe
     )
@@ -12,7 +18,7 @@ module Divisions
       if blueprints.exist?(descriptor)
         blueprints.by(descriptor.identifier)
       else
-        publications.by_import(descriptor)
+        blueprints.by_demand(descriptor)
       end
     end
 

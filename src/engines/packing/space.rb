@@ -9,6 +9,12 @@ module Packing
 
     delegate(resolutions: :universe)
 
+    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
+      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
+        "#{p.relative_path_from(path)}"
+      end
+    end
+
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
@@ -96,7 +102,7 @@ module Packing
     end
 
     def unique_connections_for(model)
-      model.connect_targets.uniq(&:uniqueness) || []
+      model.connect_targets.uniq(&:uniqueness)
     end
 
   end

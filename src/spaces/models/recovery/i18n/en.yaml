@@ -9,11 +9,6 @@ en:
         The blueprint for '%{descriptor}' is not well formed.
         Results are unpredictable.
 
-    engines::emissions::transformable/stanzas_for:
-      engines::emissions::transformable/_stanzas_for:
-        Method '%{method}' is not defined in '%{klass}'.
-        Assuming this is correct; returning an empty Array
-
     engines::packing::pack/auxiliary_texts:
       engines::packing::pack/division_scripts: |
         There are no images given in the blueprint for '%{identifier}'.
@@ -50,25 +45,25 @@ en:
       provisioning::space/execute:
         Provisioning failed while attempting to execute %{command} for %{identifier}.
 
-    engines::emissions::descriptive_subdivision/resolution:
-      engines::resolving::space/by: |
-        A resolution for %{identifier} is yet to be saved.
-        Saving now.
-
-    engines::emissions::divisible/new:
-      engines::emissions::divisible/initialize: |
+    engines::transforming::divisions::divisible/new:
+      engines::transforming::divisions::divisible/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.
         Ignoring %{content}
 
-    engines::emissions::divisible/check_subdivision_class:
-      engines::emissions::divisible/subdivision_class: |
+    engines::transforming::divisions::divisible/check_subdivision_class:
+      engines::transforming::divisions::divisible/subdivision_class: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 
-    engines::emissions::divisible/subdivision_class:
-      engines::emissions::divisible/const_get: |
+    engines::transforming::divisions::divisible/subdivision_for:
+      engines::transforming::divisions::subdivision/prototype: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
+
+    engines::transforming::divisions::targeting_subdivision/resolution:
+      engines::resolving::space/by: |
+        A resolution for %{identifier} is yet to be saved.
+        Saving now.
 
     spaces::models::space/open:
       spaces::models::space/initialize:

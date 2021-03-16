@@ -13,7 +13,13 @@ module Arenas
       @provider_map ||= resolution_map.select { |_, v| v.has?(:provider) }
     end
 
-    def container_type; containing&.container_type ;end
+    def runtime_type
+      runtime_binding&.runtime_type
+    end
+
+    def runtime_binding
+      bindings.runtime_binding
+    end
 
     def method_missing(m, *args, &block)
       provider_division_map["#{m}"] || super
