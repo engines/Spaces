@@ -29,13 +29,13 @@ arena = universe.arenas.by('development')
 embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
-# save a pack for bootstrap
-resolution = universe.resolutions.by('development/arena')
+# save bootstrap packs (only powerdns atm)
+resolution = universe.resolutions.by('development/powerdns')
 pack = resolution.packed
 universe.packs.save(pack)
 
-# commit a pack
-pack = universe.packs.by('development/arena')
+# commit bootstrap packs (only powerdns atm)
+pack = universe.packs.by('development/powerdns')
 universe.packs.commit(pack)
 
 # save provisions for bootstrap
