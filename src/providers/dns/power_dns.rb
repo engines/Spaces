@@ -35,25 +35,16 @@ module Providers
         }
       )
     end
-    
-    def ip_address
-      '#{' + "lxd_container.#{blueprint_identifier}.ipv4_address}"
-    end
+
+    def ip_address; '#{' + record ;end
 
     def record
-      "#{container_type}.#{blueprint_identifier}.ipv6_address"
+      "#{container_type}.#{blueprint_identifier}.ipv4_address"
     end
 
-    def protocol
-      configuration.struct.protocol || 'http'
-    end
+    def protocol; configuration.struct.protocol || 'http' ;end
+    def port; configuration.struct.port || 8081 ;end
+    def endpoint; configuration.struct.endpoint ;end
 
-    def port
-      configuration.struct.port || 8081
-    end
-
-    def endpoint
-      configuration.struct.endpoint
-    end
   end
 end
