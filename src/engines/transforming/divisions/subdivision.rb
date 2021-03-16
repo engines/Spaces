@@ -4,12 +4,16 @@ module Divisions
   class Subdivision < Division
 
     class << self
-      def prototype(type: nil, struct:, division:)
+      def prototype(type:, struct:, division:)
         constant_for(type || struct.type).new(struct: struct, division: division)
       end
 
       def constant_for(type)
-        Module.const_get("::Providers::#{type.camelize}")
+        if type
+          return Module.const_get("::Providers::#{type.camelize}")
+        else
+          return Module.const_get("::Divisions::#{qualifier.camelize}")
+        end
       end
     end
 

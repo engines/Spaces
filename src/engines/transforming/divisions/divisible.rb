@@ -32,13 +32,13 @@ module Divisions
     end
 
     def subdivision_for(struct)
-      subdivision_class.new(struct: struct, division: self)
-    rescue NameError => _
-      struct
+      subdivision_class.prototype(type: type, struct: struct, division: self)
     rescue ArgumentError => e
       warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
       nil
     end
+
+    def type; ;end
 
     def arena_stanzas; all.map(&:arena_stanzas) ;end
 
