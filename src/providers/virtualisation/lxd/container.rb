@@ -57,7 +57,7 @@ module Providers
       end
 
       def device_stanzas
-        emission.volumes.all.map(&:device_stanzas).join if emission.has?(:volumes)
+        emission.volumes.all.map(&:device_stanzas).join
       end
 
       def dependency_string

@@ -1,8 +1,6 @@
 module Providers
   class Lxd < ::Providers::Provider
 
-    def container_type; "#{type}_container" ;end
-
     def arena_stanzas
       [provider_stanza, pool_stanzas].join
     end

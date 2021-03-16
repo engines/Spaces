@@ -15,8 +15,6 @@ module Divisions
       end
     end
 
-    delegate(arena: :emission)
-
     def type
       struct.type || context_identifier
     end

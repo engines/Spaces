@@ -1,14 +1,14 @@
 module Emissions
-  module Localising
+  module Localizing
 
-    def localised
+    def localized
       empty.tap do |m|
         m.predecessor = self
 
         m.struct = OpenStruct.new.tap do |s|
           s.identifier = identifier
 
-          division_keys.each { |k| s[k] = send(k).localised.struct }
+          division_keys.each { |k| s[k] = send(k).localized.struct }
         end
       end
     end

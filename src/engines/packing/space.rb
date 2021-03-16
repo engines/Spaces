@@ -102,7 +102,7 @@ module Packing
     end
 
     def unique_connections_for(model)
-      model.connect_targets.uniq(&:uniqueness) || []
+      model.connect_targets.uniq(&:uniqueness)
     end
 
   end

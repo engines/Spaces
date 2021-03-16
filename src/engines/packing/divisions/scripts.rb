@@ -13,11 +13,11 @@ module Packing
     end
 
     def keys
-      keys ||= precedence & script_directories.map { |d| :"#{d.basename}" }
+      keys ||= precedence & folders.map { |d| :"#{d.basename}" }
     end
 
-    def script_directories
-      script_directories ||= resolutions.path_for(pack).join(path).children.select(&:directory?)
+    def folders
+      folders ||= resolutions.path_for(pack).join(path).children.select(&:directory?)
     end
 
     def packing_stanza_for(precedence)

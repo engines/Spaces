@@ -11,18 +11,22 @@ module Blueprinting
 
     alias_method :imported?, :exist?
 
-    def by_import(publication, force: false)
-      delete(publication) if force && imported?(publication)
+    def by_demand(descriptor)
+      publications.by_import(descriptor).localized
+    end
 
-      unless imported?(publication)
-        reset(publication.identifier)
+    def by_import(descriptor, force: false)
+      delete(descriptor) if force && imported?(descriptor)
+
+      unless imported?(descriptor)
+        synchronize_with_publication(descriptor.identifier)
       end
     end
 
-    def reset(identifier)
+    def synchronize_with_publication(identifier)
       identifier.tap do |i|
         publications.by(i).tap do |p|
-          save(p.localised)
+          save(p.localized)
           copy_auxiliaries_for(p)
         end
       end

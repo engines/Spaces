@@ -1,6 +1,6 @@
 require_relative 'auxiliaries'
 require_relative 'associating'
-require_relative 'localising'
+require_relative 'localizing'
 require_relative 'inflating'
 require_relative 'targeting'
 require_relative 'embedding'
@@ -12,7 +12,7 @@ module Emissions
     include ::Divisions::Dividing
     include Auxiliaries
     include Associating
-    include Localising
+    include Localizing
     include Inflating
     include Targeting
     include Embedding
@@ -25,6 +25,7 @@ module Emissions
     end
 
     relation_accessor :predecessor
+    relation_accessor :arena
 
     delegate(
       composition: :klass,
