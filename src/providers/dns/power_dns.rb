@@ -17,7 +17,7 @@ module Providers
     end
 
     def ip_address
-      '#{' + "lxc_container.#{blueprint_identifier}.ipv4_address}"
+      '#{' + "lxd_container.#{blueprint_identifier}.ipv4_address}"
     end
 
     def required_stanza
