@@ -8,6 +8,12 @@ module Divisions
     def type; struct.type ;end
     def embed?; type == 'embed' ;end
 
+    def runtime_binding?; identifier == 'containing' ;end
+
+    def runtime_type
+      blueprint.provider.type if runtime_binding?
+    end
+
     def localized
       empty.tap do |m|
         m.struct = struct.without(:target).tap do |s|

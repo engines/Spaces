@@ -25,6 +25,7 @@ module Emissions
     end
 
     relation_accessor :predecessor
+    relation_accessor :arena
 
     delegate(
       composition: :klass,

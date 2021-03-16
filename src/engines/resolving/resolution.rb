@@ -14,8 +14,6 @@ module Resolving
       resolutions: :universe,
       [:arenas, :blueprints] => :resolutions
     )
-
-    relation_accessor :arena
     
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 

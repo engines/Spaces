@@ -26,7 +26,8 @@ module Divisions
       resolutions: :universe
     )
 
-    def container_type; arena&.container_type ;end
+    def runtime_type; arena&.runtime_type ;end
+    def container_type; "#{runtime_type}_container" ;end
 
     def packing_division?
       klass.ancestors.include?(::Packing::Division)
