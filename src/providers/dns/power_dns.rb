@@ -5,12 +5,12 @@ module Providers
       %(
         provider "powerdns" {
           api_key    = "#{configuration.api_key}"
-          server_url = "#{protocol}://#{ip_address}:#{port}/#{endpoint}"
+          server_url = "#{protocol}://${#{ipv4_address}}:#{port}/#{endpoint}"
         }
         resource "powerdns_zone" "#{arena.identifier}-zone" {
           name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
-          nameservers = [#{record}]
+          nameservers = [#{ipv4_address}]
         }
       )
     end
@@ -31,16 +31,14 @@ module Providers
           name    = "#{resolution.blueprint_identifier}.#{universe.host}."
           type    = "AAAA"
           ttl     = #{configuration.ttl}
-          records = [#{record}]
+          records = [#{ipv6_address}]
         }
       )
     end
 
-    def ip_address; '#{' + record ;end
+    def ipv4_address; "#{container_type}.#{blueprint_identifier}.ipv4_address" ;end
 
-    def record
-      "#{container_type}.#{blueprint_identifier}.ipv4_address"
-    end
+    def ipv6_address; "#{container_type}.#{blueprint_identifier}.ipv6_address" ;end
 
     def protocol; configuration.struct.protocol || 'http' ;end
     def port; configuration.struct.port || 8081 ;end
