@@ -1,5 +1,5 @@
 module Divisions
-  class Containers < ::Divisions::SubclassDivisible
+  class Containers < ::Divisions::Divisible
 
   end
 end
