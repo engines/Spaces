@@ -21,13 +21,10 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :arena] => :emission,
+      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :runtime_type, :container_type, :arena] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
-
-    def runtime_type; arena&.runtime_type ;end
-    def container_type; "#{runtime_type}_container" ;end
 
     def packing_division?
       klass.ancestors.include?(::Packing::Division)

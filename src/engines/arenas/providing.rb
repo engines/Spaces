@@ -13,6 +13,10 @@ module Arenas
       @provider_map ||= resolution_map.select { |_, v| v.has?(:provider) }
     end
 
+    def container_type
+      "#{runtime_type}_container"
+    end
+
     def runtime_type
       runtime_binding&.runtime_type
     end
