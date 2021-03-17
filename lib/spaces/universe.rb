@@ -1,5 +1,3 @@
-require_relative 'requires'
-
 class Universe < ::Spaces::Space
 
   class << self
