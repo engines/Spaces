@@ -10,7 +10,7 @@ module Providers
         resource "powerdns_zone" "#{arena.identifier}-zone" {
           name        = "#{arena.identifier}.#{universe.host}."
           kind        = "native"
-          nameservers = [#{record}]
+          nameservers = [#{ipv4_address}]
         }
       )
     end
