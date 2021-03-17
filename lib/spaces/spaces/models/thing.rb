@@ -2,8 +2,6 @@ module Spaces
   class Thing
     extend Forwardable
 
-    require_level 'spaces/models/recovery'
-
     include ::Recovery::Warning
     extend ::Recovery::Warning
 
