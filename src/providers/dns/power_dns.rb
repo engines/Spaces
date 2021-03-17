@@ -36,7 +36,7 @@ module Providers
       )
     end
 
-    def ip_address; '#{' + record ;end
+    def ip_address; "${record} ;end
 
     def record
       "#{container_type}.#{blueprint_identifier}.ipv4_address"
