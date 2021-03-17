@@ -1,5 +1,13 @@
 # load the code!
-# require './src/x/universe'
+
+require 'pathname'
+
+$LOAD_PATH.unshift(Pathname.new(__dir__).parent.join('lib').expand_path)
+
+require 'spaces'
+
+
+universe = Universe.universe
 
 # save a basic arena
 arena = Arenas::Arena.new(identifier: 'development')

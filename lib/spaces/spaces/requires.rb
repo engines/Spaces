@@ -1,5 +1,6 @@
-require_all 'spaces/lib'
-require_level 'spaces/models'
-require_all 'spaces/git'
-require_all 'spaces/defaultables'
-require_all 'spaces/interpolating'
+require_all   'spaces/spaces/lib'
+
+require_level 'spaces/spaces/models'
+require_all   'spaces/spaces/git'
+require_all   'spaces/spaces/defaultables'
+require_all   'spaces/spaces/interpolating'
