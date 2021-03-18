@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler'
+require 'pathname'
+
+if ARGV.size != 1
+  puts "usage: #{Pathname($PROGRAM_NAME).basename} <script to run>"
+  exit 1
+end
+
+$LOAD_PATH.unshift(Pathname.new(__dir__).parent.join('lib').expand_path)
+
+include Bundler::SharedHelpers
+
+set_bundle_environment
+
+require 'spaces'
+
+Kernel.load ARGV[0]
