@@ -10,17 +10,13 @@ module Recovery
       :verbosity
 
     def translation(id = identifier)
-       @translation ||= I18n.t(id, **witnesses)
+      @translation ||= I18n.t(id, **witnesses)
     end
 
     def spout_translation(id = identifier)
-      unless (t = translation(id)).include?('translation missing')
-        spout "\n#{array.join("\n")}" if !array.empty? && verbosity&.include?(:trace)
-        spout error.backtrace if verbosity&.include?(:full_trace)
-      else
-        spout error
-        spout error.backtrace
-      end
+      t = translation(id)
+      spout t
+      spout error.backtrace if t.include?('translation missing')
     end
 
     def spout_trace
