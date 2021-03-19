@@ -11,10 +11,11 @@ module Resolving
     end
 
     delegate(
+      runtime_binding: :arena,
       resolutions: :universe,
       [:arenas, :blueprints] => :resolutions
     )
-    
+
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
     def arena_identifier; identifier.split('/').first ;end

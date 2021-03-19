@@ -14,6 +14,18 @@ module Divisions
         new(emission: emission, label: label)
       end
 
+      def constant_for(type)
+        if type
+          return Module.const_get("::Providers::#{type.to_s.camelize}")
+        else
+          return Module.const_get("::Divisions::#{qualifier.camelize}")
+        end
+      end
+
+      def type_for(emission)
+        "#{emission.runtime_type}/#{qualifier.singularize}" if emission.runtime_type
+      end
+
       def default_struct; OpenStruct.new ;end
     end
 

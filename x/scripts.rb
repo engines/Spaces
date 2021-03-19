@@ -1,4 +1,5 @@
 # load the code!
+# require './x/universe'
 
 require 'pathname'
 
