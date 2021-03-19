@@ -6,8 +6,6 @@ require 'pathname'
 require 'i18n'
 require 'engines-logger'
 
-require 'spaces/spaces/constantizing.rb'
-
 module Requires
 
   include Engines::Logger

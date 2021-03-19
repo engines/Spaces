@@ -53,7 +53,6 @@ module Recovery
     def ignorable?(line)
       [
         'spaces/models/space',
-        'spaces/constantizing',
         'method_missing',
       ].map { |s| line.include?(s) }.include?(true)
     end
