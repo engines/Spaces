@@ -11,7 +11,10 @@ module Divisions
       def default_struct; [] ;end
     end
 
-    delegate(subdivision_class: :klass)
+    delegate(
+      subdivision_class: :klass,
+      any?: :all
+    )
 
     def related_divisions
       @related_divisions ||= emission.divisions
