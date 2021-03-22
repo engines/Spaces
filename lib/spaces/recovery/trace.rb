@@ -9,16 +9,15 @@ module Recovery
       :witnesses,
       :verbosity
 
-    def warning
-      spout "\n[WARNING]#{'-' * 88}<<<<"
-      spout t.t
-      spout_trace
-      spout_error
-      spout_witnesses
-      spout "\n"
+    def translation(id = identifier)
+      @translation ||= I18n.t(id, **witnesses)
     end
 
-    def t(id = identifier); I18n.t(id, **witnesses) ;end
+    def spout_translation(id = identifier)
+      t = translation(id)
+      spout t
+      spout error.backtrace if t.include?('translation missing')
+    end
 
     def spout_trace
       spout "\n#{array.join("\n")}" if !array.empty? && verbosity&.include?(:trace)
@@ -54,7 +53,6 @@ module Recovery
     def ignorable?(line)
       [
         'spaces/models/space',
-        'spaces/constantizing',
         'method_missing',
       ].map { |s| line.include?(s) }.include?(true)
     end

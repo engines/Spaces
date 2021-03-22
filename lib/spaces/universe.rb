@@ -1,4 +1,4 @@
-class Universe < ::Spaces::Space
+class Universe < ::Spaces::Model
 
   class << self
     def space_map

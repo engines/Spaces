@@ -13,7 +13,8 @@ module Arenas
     end
 
     delegate(
-      [:arenas, :blueprints] => :universe
+      [:arenas, :blueprints] => :universe,
+      runtime_binding: :bindings
     )
 
     def embedding_keys; @embedding_keys ||= division_keys ;end

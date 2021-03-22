@@ -24,7 +24,6 @@ module Emissions
           Divisions::Repositories,
           Divisions::Permissions,
           Divisions::Images,
-          Divisions::Containers,
           Divisions::Volumes,
           Divisions::About
         ]

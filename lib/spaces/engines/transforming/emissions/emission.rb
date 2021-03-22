@@ -36,6 +36,14 @@ module Emissions
 
     def has?(property); struct[property] ;end
 
+    def runtime_type
+      arena&.runtime_type
+    end
+
+    def container_type
+      arena&.container_type
+    end
+
     def count
       has?(:scaling) ? scaling.count : 1
     end

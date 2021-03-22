@@ -8,13 +8,19 @@ module Resolving
       end
     end
 
-    def stanzas_content; stanzas.join("\n") ;end
-
-    def stanzas
-      including_provider_divisions.map { |d| d.blueprint_stanzas_for(self) }.flatten.compact
+    def provisioning_required?
+      !(bootstrap? || defines_runtime?)
     end
 
-    def including_provider_divisions
+    def bootstrap?
+      arena.embeds.map(&:identifier).include?(blueprint_identifier)
+    end
+
+    def defines_runtime?
+      blueprint_identifier == runtime_binding&.target_identifier
+    end
+
+    def divisions_including_provider_divisions
       [divisions, arena.provider_divisions].flatten.reject do |d|
         correlating_provider_classes.include?(d.class)
       end

@@ -1,5 +1,5 @@
 module Divisions
-  class Volumes < ::Divisions::SubclassDivisible
+  class Volumes < ::Divisions::Divisible
 
     def type
       "#{runtime_type}/#{qualifier.singularize}" if runtime_type
