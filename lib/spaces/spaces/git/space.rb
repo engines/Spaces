@@ -21,7 +21,7 @@ module Git
     end
 
     def repository(descriptor)
-      fork_account ? "#{descriptor.repository}".gsub(default_account, fork_account): descriptor.repository
+      forked_account ? "#{descriptor.repository}".gsub(default_account, fork_account): descriptor.repository
     end
 
     def branch(descriptor)
@@ -29,10 +29,7 @@ module Git
     end
 
     def default_account; 'v2Blueprints' ;end
-    def fork_account
-      # 'MarkRatjens'
-      default_account
-    end
+    def forked_account; ;end
 
     def git; ::Git ;end
 
