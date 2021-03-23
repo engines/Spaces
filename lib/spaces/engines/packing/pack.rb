@@ -17,10 +17,6 @@ module Packing
 
     def packers; provisioners ;end
 
-    def connections_packed
-      connections.map(&:packed)
-    end
-
     def method_missing(m, *args, &block)
       return division_map[m.to_s] if division_keys.include?(m.to_s)
       super
