@@ -49,10 +49,6 @@ resolution = universe.resolutions.by('development/powerdns')
 pack = resolution.packed
 universe.packs.save(pack)
 
-# commit a pack
-pack = universe.packs.by('development/powerdns')
-universe.packs.commit(pack)
-
 # save provisions for resolution
 resolution = universe.resolutions.by('development/powerdns')
 provisions = resolution.provisioned
@@ -73,18 +69,7 @@ resolution = universe.resolutions.by('development/phpmyadmin')
 pack = resolution.packed
 universe.packs.save(pack)
 
-# commit a pack
-pack = universe.packs.by('development/phpmyadmin')
-universe.packs.commit(pack)
-
 # save provisions for resolution
 resolution = universe.resolutions.by('development/phpmyadmin')
 provisions = resolution.provisioned
 universe.provisioning.save(provisions)
-
-# apply arena provisions
-arena = universe.arenas.by('development')
-# ********************
-universe.arenas.init(arena)
-# ********************
-universe.arenas.apply(arena)

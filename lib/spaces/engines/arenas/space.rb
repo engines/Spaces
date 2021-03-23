@@ -1,5 +1,3 @@
-require 'ruby_terraform'
-
 module Arenas
   class Space < ::Spaces::Space
 
@@ -11,41 +9,18 @@ module Arenas
 
     def save(model)
       super.tap do
-        _save(model, content: model.stanzas_content, as: :tf)
+        _save(model, content: model.stanzas_content, as: payload_extension)
       end
+    end
+
+    def payload_path_for(model)
+      path_for(model).join("*.#{payload_extension}")
     end
 
     def path_for(model)
       path.join(model.arena.context_identifier)
     end
 
-    def init(model); execute(:init, model) ;end
-    def plan(model); execute(:plan, model) ;end
-    def show(model); execute(:show, model) ;end
-    def apply(model); execute(:apply, model) ;end
-
-    protected
-
-    def execute(command, model)
-      Dir.chdir(path_for(model)) do
-        bridge.send(command, options[command] || {})
-      end
-    rescue RubyTerraform::Errors::ExecutionError => e
-      warn(error: e, command: command, identifier: model.identifier, verbosity: [:error])
-    end
-
-    def bridge; RubyTerraform ;end
-
-    def options
-      {
-        plan: {
-          input: false
-        },
-        apply: {
-          input: false,
-          auto_approve: true
-        }
-      }
-    end
+    def payload_extension; :tf ;end
   end
 end
