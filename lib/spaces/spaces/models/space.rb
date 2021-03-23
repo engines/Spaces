@@ -61,10 +61,6 @@ module Spaces
       "#{path_for(model)}/#{model.file_name}"
     end
 
-    def payload_path_for(model)
-      path_for(model).join('payload.*')
-    end
-
     def file_names_for(directory, identifier)
       file_path_for(directory, identifier).glob('**/*').reject(&:directory?)
     end
