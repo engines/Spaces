@@ -24,7 +24,7 @@ universe.publications.import(descriptor, force: true)
 
 # resolve the bootstrap
 arena = universe.arenas.by('development')
-bootstrap = universe.blueprints.by(descriptor.identifier)
+bootstrap = universe.blueprints.by('arena')
 resolution = bootstrap.with_embeds.resolved_in(arena)
 universe.resolutions.save(resolution)
 
