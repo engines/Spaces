@@ -16,11 +16,14 @@ module Divisions
     end
 
     def packing_divisions
-      @packing_divisions ||= [resolution.packing_divisions, scripts_division].flatten
+      @packing_divisions ||= [resolution.packing_divisions, scripts_division].flatten.compact
     end
 
     def scripts_division
-      @scripts_division ||= scripts_class.prototype(emission: pack, label: :scripts)
+      @scripts_division ||=
+        if source_path_for(:packing).join('scripts').exist?
+          scripts_class.prototype(emission: pack, label: :scripts)
+        end
     end
 
     def packing_payload; packing_payloads.map(&:to_h) ;end
