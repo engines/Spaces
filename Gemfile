@@ -1,13 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'yajl-ruby'
-gem 'git'
-gem 'duplicate'
-gem 'i18n'
-gem 'ruby-terraform'
-gem 'packer-client'
-
-gem 'addressable'
+gemspec
 
 gem 'engines-logger', '0.2.0', :git => 'git@github.com:engines/logger'
 

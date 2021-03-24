@@ -1,0 +1,70 @@
+en:
+  trace:
+
+    spaces::engines::blueprinting::space/import:
+      spaces::spaces::git::space/import: |
+        An attempt to import blueprint for '%{descriptor}' finds it already exists.
+        Moving on.
+      spaces::spaces::models::thing/open_struct_from_json: |
+        The blueprint for '%{descriptor}' is not well formed.
+        Results are unpredictable.
+
+    spaces::engines::packing::pack/auxiliary_texts:
+      spaces::engines::packing::pack/division_scripts: |
+        There are no images given in the blueprint for '%{identifier}'.
+        So there's nothing to pack.
+
+    spaces::engines::packing::space/block_in_by:
+      spaces::engines::packing::space/save: |
+        There are no images given in the blueprint for '%{identifier}'.
+        So there's no worthwhile pack to save.
+
+    spaces::engines::packing::space/rescue_in_by:
+      spaces::engines::resolving::space/by: |
+        There is no resolution saved yet for the pack for '%{identifier}'.
+        Saving now.
+
+    spaces::engines::packing::space/block_in_execute_on_targets_for:
+      spaces::engines::packing::space/by: |
+        A %{klass} for %{descriptor} is yet to be saved.
+        Saving now.
+
+    spaces::engines::packing::space/block_(2_levels)_in_execute_on_targets_for:
+      spaces::engines::packing::space/execute: |
+        There are no images given in the blueprint for '%{identifier}'.
+        So there's no worthwhile pack to %{command}.
+      engines::packing::space/by: |
+        A pack for %{identifier} is yet to be saved.
+        Saving now.
+
+    spaces::engines::arenas::space/chdir:
+      spaces::engines::arenas::space/block_in_execute:
+        Provisioning failed while attempting to execute %{command} for '%{identifier}'.
+
+    spaces::engines::transforming::divisions::divisible/new:
+      spaces::engines::transforming::divisions::divisible/initialize: |
+        Malformed %{klass} declaration in %{blueprint} blueprint.
+        Ignoring %{content}
+
+    spaces::engines::transforming::divisions::divisible/check_subdivision_class:
+      spaces::engines::transforming::divisions::divisible/subdivision_class: |
+        There is no source code for subdivision class %{klass}.
+        Substituting OpenStruct.
+
+    spaces::engines::transforming::divisions::divisible/subdivision_for:
+      spaces::engines::transforming::divisions::subdivision/prototype: |
+        There is no source code for subdivision class %{klass}.
+        Substituting OpenStruct.
+
+    spaces::engines::transforming::divisions::targeting_subdivision/resolution:
+      spaces::engines::resolving::space/by: |
+        A resolution for %{identifier} is yet to be saved.
+        Saving now.
+
+    spaces::spaces::models::space/open:
+      spaces::spaces::models::space/initialize:
+        An instance of %{klass} for %{identifier} does not yet exist in its space.
+
+    spaces::spaces::interpolating::infix/resolved_once:
+      spaces::spaces::interpolating::infix/_resolved:
+        Unable to resolve replacement for ^^%{value}^^ in %{text}.
