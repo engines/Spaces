@@ -9,8 +9,8 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
-    def identifiers(arena_identifier: '*', resolution_identifier: '*')
-      path.glob("#{arena_identifier}/#{resolution_identifier}").map do |p|
+    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
+      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
         "#{p.relative_path_from(path)}"
       end
     end
