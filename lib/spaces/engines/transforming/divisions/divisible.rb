@@ -17,14 +17,16 @@ module Divisions
       @related_divisions ||= emission.divisions
     end
 
-    def localized; all_as(:localized) ;end
-    def inflated; all_as(:inflated) ;end
-    def resolved; all_as(:resolved) ;end
+    def localized; with_all_as(:localized) ;end
+    def inflated; with_all_as(:inflated) ;end
+    def resolved; with_all_as(:resolved) ;end
 
-    def all_as(transformation)
-      empty.tap do |d|
-        d.struct = all.map { |i| i.send(transformation).struct }
-      end
+    def with_all_as(transformation)
+      empty.tap { |d| d.struct = transformed_to(transformation) }
+    end
+
+    def transformed_to(transformation)
+      all.map { |i| i.send(transformation).struct }
     end
 
     def all
