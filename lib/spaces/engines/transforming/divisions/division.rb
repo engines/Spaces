@@ -38,6 +38,8 @@ module Divisions
       resolutions: :universe
     )
 
+    def packing_payload; to_h ;end
+
     def packing_division?
       klass.ancestors.include?(::Packing::Division)
     end

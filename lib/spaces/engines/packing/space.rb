@@ -24,7 +24,7 @@ module Packing
 
       ensure_connections_exist_for(model)
       super.tap do
-        path_for(model).join("#{payload_name}.json").write(model.to_h.to_json)
+        path_for(model).join("#{payload_name}.json").write(model.payload.to_json)
       end
     rescue PackWithoutImagesError => e
       warn(error: e, identifier: model.identifier, klass: klass)

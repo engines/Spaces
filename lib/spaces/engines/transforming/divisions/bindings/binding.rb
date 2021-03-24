@@ -23,15 +23,15 @@ module Divisions
       end
     end
 
-    def inflated
+    def flattened
       empty.tap do |m|
         m.struct = struct.tap do |s|
-          s.configuration = inflated_configuration
+          s.configuration = flattened_configuration
         end
       end
     end
 
-    def inflated_configuration
+    def flattened_configuration
       unresolved_struct.merge(target_configuration).merge(struct_configuration)
     end
 

@@ -11,12 +11,8 @@ module Divisions
       all.detect { |b| b.identifier == name.to_s }
     end
 
-    def inflated
-      empty.tap { |d| d.struct = all.map(&:inflated).map(&:struct) }
-    end
-
-    def with_embeds(emissions)
-      empty.tap { |d| d.struct = super.inflated.struct }
+    def flattened
+      empty.tap { |d| d.struct = all.map(&:flattened).map(&:struct) }
     end
 
     def connect_targets; all.reject(&:embed?) ;end

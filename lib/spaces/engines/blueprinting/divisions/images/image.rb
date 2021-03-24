@@ -20,10 +20,7 @@ module Divisions
 
     def inflated_struct; inflated.struct ;end
 
-    def export; struct ;end
-    def commit; struct ;end
-
-    def post_processor_stanzas; end
+    def post_processor_payloads; end
 
     def default_name; tenant_context_identifier ;end
     def default_output_image; "spaces/#{tenant_context_identifier}:#{default_tag}" ;end

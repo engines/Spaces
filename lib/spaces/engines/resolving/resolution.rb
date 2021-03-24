@@ -1,8 +1,10 @@
+require_relative 'flattening'
 require_relative 'packing'
 require_relative 'provisioning'
 
 module Resolving
   class Resolution < ::Emissions::Emission
+    include Resolving::Flattening
     include Resolving::Packing
     include Resolving::Provisioning
 
