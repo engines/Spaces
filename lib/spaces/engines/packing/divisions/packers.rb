@@ -23,7 +23,7 @@ module Divisions
       @scripts_division ||= scripts_class.prototype(emission: pack, label: :scripts)
     end
 
-    def to_h; packing_stanzas.map(&:to_h) ;end
+    def packing_payload; packing_stanzas.map(&:to_h) ;end
 
     def packing_stanzas
       [auxiliary_files_stanzas, precedential_stanzas].flatten.compact
