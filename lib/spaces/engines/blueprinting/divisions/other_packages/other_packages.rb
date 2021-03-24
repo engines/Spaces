@@ -7,8 +7,8 @@ module Divisions
 
     def embedded_with(other); divisible_embedded_with(other) ;end
 
-    def packing_stanza_for(key)
-      all.map(&:packing_stanza) if key == :adds
+    def packing_payload_for(key)
+      all.map(&:packing_payload) if key == :adds
     end
 
     def keys; [:adds] ;end

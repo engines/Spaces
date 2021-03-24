@@ -21,7 +21,7 @@ module Packing
 
     delegate(
       [:arena, :connect_targets, :images] => :resolution,
-      post_processor_stanzas: :images
+      post_processor_payloads: :images
     )
 
     alias_accessor :resolution, :predecessor

@@ -17,7 +17,7 @@ module Provisioning
       connections.map(&:provisioned)
     end
 
-    def stanzas_content; stanzas.join("\n") ;end
+    def payload; stanzas.join("\n") ;end
 
     def stanzas
       divisions_including_resolution_divisions.map { |d| d.blueprint_stanzas_for(self) }.flatten.compact

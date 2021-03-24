@@ -2,7 +2,7 @@ module Divisions
   class SystemPackages < ::Divisions::Division
     include ::Packing::Division
 
-    def packing_stanza_for(key)
+    def packing_payload_for(key)
       {
         type: 'shell',
         environment_vars: "SYSTEM_PACKAGE_#{key.upcase}=#{send(key)&.join(' ')}",

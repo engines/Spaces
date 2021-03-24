@@ -20,7 +20,7 @@ module Packing
       folders ||= resolutions.path_for(pack).join(path).children.select(&:directory?)
     end
 
-    def packing_stanza_for(precedence)
+    def packing_payload_for(precedence)
       {
         type: 'shell',
         inline: scripts_for(precedence).map do |s|

@@ -16,7 +16,7 @@ module Divisions
       subdivision_class.prototype(type: key, struct: struct[key], division: self)
     end
 
-    def packing_stanza_for(key)
+    def packing_payload_for(key)
       {
         type: 'shell',
         inline: send(key).inline
