@@ -17,8 +17,8 @@ module Spaces
 
     def identifiers; path.glob('*').map { |p| p.basename.to_s } ;end
 
-    def all(klass = default_model_class)
-      identifiers.map { |i| by(i, klass) }
+    def all
+      identifiers.map { |i| by(i) }
     end
 
     def by_yaml(identifier, klass = default_model_class)
