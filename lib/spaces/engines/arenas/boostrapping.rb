@@ -1,6 +1,8 @@
 module Arenas
   module Bootstrapping
 
+    def bootstraps; resolutions.select(&:bootstrap?) ;end
+
     def bootstrapped_with(blueprint_identifier)
       empty.tap do |m|
         m.struct = struct

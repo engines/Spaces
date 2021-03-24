@@ -7,7 +7,7 @@ module Emissions
         m.arena = arena
         m.struct = arena.struct.without(:bindings).merge(struct)
         m.struct.identifier = "#{arena.identifier}/#{identifier}"
-      end.resolved
+      end.flattened.resolved
     end
 
     def resolved

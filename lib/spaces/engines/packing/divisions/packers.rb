@@ -16,20 +16,23 @@ module Divisions
     end
 
     def packing_divisions
-      @packing_divisions ||= [resolution.packing_divisions, scripts_division].flatten
+      @packing_divisions ||= [resolution.packing_divisions, scripts_division].flatten.compact
     end
 
     def scripts_division
-      @scripts_division ||= scripts_class.prototype(emission: pack, label: :scripts)
+      @scripts_division ||=
+        if source_path_for(:packing).join('scripts').exist?
+          scripts_class.prototype(emission: pack, label: :scripts)
+        end
     end
 
-    def to_h; packing_stanzas.map(&:to_h) ;end
+    def packing_payload; packing_payloads.map(&:to_h) ;end
 
-    def packing_stanzas
-      [auxiliary_files_stanzas, precedential_stanzas].flatten.compact
+    def packing_payloads
+      [auxiliary_files_payload, precedential_payload].flatten.compact
     end
 
-    def auxiliary_files_stanzas
+    def auxiliary_files_payload
       auxiliary_folders.map do |f|
         if source_path_for(f).exist?
           {
@@ -41,19 +44,19 @@ module Divisions
       end
     end
 
-    def precedential_stanzas
-      complete_precedence.map { |p| all_stanzas_for(p) }
+    def precedential_payload
+      complete_precedence.map { |p| payloads_for(p) }
     end
 
-    def all_stanzas_for(precedence)
-      [file_copy_stanza_for(precedence), division_stanzas_for(precedence)]
+    def payloads_for(precedence)
+      [file_copy_payload_for(precedence), division_payload_for(precedence)]
     end
 
-    def division_stanzas_for(precedence)
-      packing_divisions.map { |d| d.packing_stanza_for(precedence) if d.uses?(precedence) }
+    def division_payload_for(precedence)
+      packing_divisions.map { |d| d.packing_payload_for(precedence) if d.uses?(precedence) }
     end
 
-    def file_copy_stanza_for(precedence)
+    def file_copy_payload_for(precedence)
       auxiliary_folders.map do |f|
         if copy_source_path_for(f, precedence).exist?
           {

@@ -9,7 +9,7 @@ module Arenas
 
     def save(model)
       super.tap do
-        _save(model, content: model.stanzas_content, as: payload_extension)
+        _save(model, content: model.payload, as: payload_extension)
       end
     end
 

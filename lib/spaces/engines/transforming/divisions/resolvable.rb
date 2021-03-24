@@ -5,11 +5,11 @@ module Divisions
       empty.tap { |d| d.struct = ResolvableStruct.new(struct, self).resolved }
     end
 
-    def inflated
-      empty.tap { |d| d.struct = inflated_struct }
+    def flattened
+      empty.tap { |d| d.struct = flattened_struct }
     end
 
-    def inflated_struct
+    def flattened_struct
       unresolved_struct.merge(struct)
     end
 

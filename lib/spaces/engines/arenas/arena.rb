@@ -19,7 +19,7 @@ module Arenas
 
     def embedding_keys; @embedding_keys ||= division_keys ;end
 
-    def stanzas_content
+    def payload
       [required_stanza, arena_stanzas].join
     end
 
