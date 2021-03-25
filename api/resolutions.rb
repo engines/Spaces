@@ -1,41 +1,46 @@
+# Index resolutions
+get '/resolutions' do
+  universe.resolutions.identifiers(**query).to_json
+end
+
+# Show resolution
+get '/resolutions/:arena_identifier/:blueprint_identifier' do
+  universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}").to_json
+# TODO: This recue is a temporary workaround. Delete me.
+# rescue
+  # {}.to_json
+end
+
+# Create resolution
+post '/resolutions' do
+  arena = universe.arenas.by(params[:arena_identifier])
+  blueprint = universe.blueprints.by(params[:blueprint_identifier])
+  resolution = blueprint.with_embeds.resolved_in(arena)
+  universe.resolutions.save(resolution)
+  resolution.identifier.to_json
+end
+
+# Update resolution
+put '/resolutions/:arena_identifier/:blueprint_identifier' do
+  struct = JSON.parse(request.body.read).to_struct
+  resolution = Resolving::Resolution.new(struct: struct)
+  universe.resolutions.save(resolution)
+  resolution.identifier.to_json
+end
+
+# Delete resolution
+delete '/resolutions/:arena_identifier/:blueprint_identifier' do
+  resolution = universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
+  universe.resolutions.delete(resolution)
+  nil.to_json
+end
+
 # Show validity for a resolution
-get '/resolutions/:identifier/validity' do
-  resolution = universe.resolutions.by(params[:identifier])
+get '/resolutions/:arena_identifier/:blueprint_identifier/validity' do
+  resolution = universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
   {}.tap do |result|
     result[:errors] = {
       incomplete_divisions: resolution.incomplete_divisions,
     } if resolution.incomplete_divisions.any?
   end.to_json
-end
-
-LetterAvatar.setup do |config|
-  config.colors_palette = :iwanthue
-  config.pointsize = 400
-  config.cache_base_path = universe.workspace.join('DefaultIconsCache')
-end
-
-# Send icon. Generate one if missing.
-get '/resolutions/:identifier/icon' do
-  resolution_icon_path = universe.resolutions.path.join(params[:identifier], 'icon.png')
-  blueprint_icon_path = universe.blueprints.path.join(params[:identifier], 'icon')
-  if resolution_icon_path.exist?
-    icon_path = resolution_icon_path
-  elsif blueprint_icon_path.exist?
-    image = MiniMagick::Image.open(blueprint_icon_path)
-    image.format 'png'
-    image.combine_options do |options|
-      options.thumbnail '48x48>'
-      options.gravity 'center'
-      options.extent '50x50'
-      options.background 'white'
-      options.bordercolor '#999'
-      options.border 2
-    end
-    image.write resolution_icon_path
-    icon_path = resolution_icon_path
-  else
-    icon_path = LetterAvatar.generate(params[:identifier], 50)
-  end
-  content_type 'image/png'
-  send_file(icon_path)
 end

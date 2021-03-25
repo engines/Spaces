@@ -5,17 +5,15 @@ require 'letter_avatar'
 require 'fastimage'
 require 'pathname'
 
-$:.unshift(Pathname.new(__FILE__).parent.join('src').expand_path)
-
-require './api/universe'
+require './api/spaces'
 require './api/arenas'
 require './api/blueprints'
 require './api/metrics'
 require './api/packing'
 require './api/provisioning'
+require './api/publications'
 require './api/resolutions'
 require './api/system'
-require './api/import'
 require './api/crud'
 
 set show_exceptions: false
@@ -27,4 +25,8 @@ end
 error do |e|
   content_type :text
   e.full_message.tap { |message| logger.error(message) }
+end
+
+def query
+  request.env['rack.request.query_hash'].transform_keys!(&:to_sym)
 end
