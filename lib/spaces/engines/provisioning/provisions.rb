@@ -27,5 +27,9 @@ module Provisioning
       [divisions, resolution.divisions_including_provider_divisions].flatten
     end
 
+    def payload_path
+      universe.arenas.path.join("#{identifier}.#{universe.arenas.payload_extension}")
+    end
+
   end
 end
