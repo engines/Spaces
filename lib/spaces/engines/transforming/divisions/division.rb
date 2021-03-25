@@ -68,6 +68,9 @@ module Divisions
 
     def empty; self.class.new(emission: emission, struct: default_struct, label: label) ;end
 
+    def any?; !empty? ;end
+    def empty?; struct == OpenStruct.new ;end
+
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission
       self.label = label
