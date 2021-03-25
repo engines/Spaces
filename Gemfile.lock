@@ -30,15 +30,18 @@ GEM
     duplicate (1.1.1)
     eventmachine (1.2.7)
     execjs (2.7.0)
+    fastimage (2.2.0)
     git (1.8.1)
       rchardet (~> 1.8)
     i18n (1.8.7)
       concurrent-ruby (~> 1.0)
+    letter_avatar (0.3.8)
     little-plugger (1.1.4)
     logging (2.3.0)
       little-plugger (~> 1.1)
       multi_json (~> 1.14)
     method_source (1.0.0)
+    mini_magick (4.11.0)
     multi_json (1.15.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -79,6 +82,9 @@ PLATFORMS
 DEPENDENCIES
   byebug
   engines-logger (= 0.2.0)!
+  fastimage
+  letter_avatar
+  mini_magick
   pry
   ripper-tags
   sinatra
@@ -89,4 +95,4 @@ DEPENDENCIES
   yard (~> 0.9)
 
 BUNDLED WITH
-   2.2.4
+   2.2.5
