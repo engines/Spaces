@@ -1,20 +1,14 @@
 require 'pathname'
 require 'addressable'
-
-$:.unshift(Pathname.new(__FILE__).parent.join('src').expand_path)
-
 require 'byebug'
 
-require 'requires'
-
-require './api/universe'
+require './api/spaces'
 require './tests/arenas'
-require './tests/blueprints'
-require './tests/domains'
+require './tests/blueprinting'
 require './tests/packing'
 require './tests/provisioning'
-require './tests/resolutions'
-require './tests/tenants'
+require './tests/publishing'
+require './tests/resolving'
 require './tests/test'
 
 extend Tests
@@ -25,14 +19,11 @@ universe.workspace.exist? && universe.workspace.rmtree
 # Create counters
 init
 
-# These don't currently work
-# tenants
-# domains
-
 # Perform tests
 arenas
-blueprints
-resolutions
+blueprinting
+publishing
+resolving
 packing
 provisioning
 

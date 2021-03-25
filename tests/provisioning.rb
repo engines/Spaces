@@ -2,21 +2,15 @@ module Tests
 
   def provisioning
 
-    group 'CRUD arena provisions' do
+    group 'CRUD provisions' do
 
-      resolution_identifier = 'phpmyadmin'
-      arena_identifier = 'test'
-
-      identifier = "#{arena_identifier}/#{resolution_identifier}"
-      arena = Arenas::Arena.new(identifier: arena_identifier)
-      universe.arenas.save(arena)
-      resolution = universe.resolutions.by(resolution_identifier)
+      arena_identifier = 'development'
+      blueprint_identifier = 'phpmyadmin'
+      identifier = "#{arena_identifier}/#{blueprint_identifier}"
 
       test "create #{identifier} provisions" do
-        output provisions = Provisioning::Provisions.new(
-          resolution: resolution,
-          arena: arena
-        )
+        resolution = universe.resolutions.by(identifier)
+        provisions = resolution.provisioned
         output universe.provisioning.save(provisions)
       end
 
@@ -29,9 +23,9 @@ module Tests
         raise "#{identifier} not created" unless identifiers.map(&:to_s).include?(identifier)
       end
 
-      test "index resolution_provisions for #{resolution_identifier} resolution includes #{identifier}" do
-        output identifiers = universe.provisioning.identifiers(resolution_identifier: resolution_identifier)
-        raise "#{identifier} not shown in #{resolution_identifier}" unless identifiers.map(&:to_s).include?(identifier)
+      test "index resolution_provisions for #{identifier} resolution includes #{identifier}" do
+        output identifiers = universe.provisioning.identifiers
+        raise "#{identifier} not shown in #{identifier}" unless identifiers.map(&:to_s).include?(identifier)
       end
 
       test "index arena_provisions for #{arena_identifier} arena includes #{identifier}" do
@@ -48,6 +42,21 @@ module Tests
         output identifiers = universe.provisioning.identifiers
         raise "#{identifier} not deleted" if
         identifiers.include?(identifier)
+      end
+
+    end
+
+    group 'Create provisions for use in terraform test' do
+
+      arena_identifier = 'development'
+      identifier = 'phpmyadmin'
+
+      identifier = "#{arena_identifier}/#{identifier}"
+
+      test "Create #{identifier} provisions" do
+        resolution = universe.resolutions.by('development/phpmyadmin')
+        provisions = resolution.provisioned
+        universe.provisioning.save(provisions)
       end
 
     end
