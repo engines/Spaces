@@ -13,7 +13,7 @@ module Divisions
 
     delegate(
       subdivision_class: :klass,
-      [:any?, :empty?, :map] => :all
+      [:any?, :empty?, :map, :count] => :all
     )
 
     def related_divisions
