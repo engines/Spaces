@@ -12,16 +12,17 @@ module Arenas
       def composition_class; Composition ;end
     end
 
-    delegate(
-      [:arenas, :blueprints] => :universe,
-      runtime_binding: :bindings
-    )
+    delegate([:arenas, :blueprints] => :universe)
 
-    def embedding_keys; @embedding_keys ||= division_keys ;end
+    def runtime_binding
+      @runtime_binding ||= turtle_targets.detect(&:runtime_binding?)
+    end
 
     def payload
       [required_stanza, arena_stanzas].join
     end
+
+    def embedding_keys; @embedding_keys ||= division_keys ;end
 
     def required_stanza
       %(

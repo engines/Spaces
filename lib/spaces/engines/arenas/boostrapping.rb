@@ -17,10 +17,7 @@ module Arenas
     end
 
     def bootstrap_for(blueprint_identifier)
-      OpenStruct.new(
-        type: 'embed',
-        target_identifier: blueprint_identifier
-      )
+      OpenStruct.new(target_identifier: blueprint_identifier)
     end
 
   end

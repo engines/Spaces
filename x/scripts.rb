@@ -33,11 +33,6 @@ arena = universe.arenas.by('development')
 bootstrapped = arena.bootstrapped_with('arena')
 universe.arenas.save(bootstrapped)
 
-# embed blueprints from bootstrap in arena
-arena = universe.arenas.by('development')
-embedded = arena.with_embeds
-universe.arenas.save(embedded)
-
 # save bootstrap packs (only powerdns atm)
 resolution = universe.resolutions.by('development/powerdns')
 pack = resolution.packed

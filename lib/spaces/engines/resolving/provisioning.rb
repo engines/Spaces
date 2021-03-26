@@ -13,7 +13,7 @@ module Resolving
     end
 
     def bootstrap?
-      arena.embeds.map(&:identifier).include?(blueprint_identifier)
+      arena.bindings.map(&:identifier).include?(blueprint_identifier)
     end
 
     def defines_runtime?
