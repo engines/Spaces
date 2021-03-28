@@ -15,15 +15,16 @@ module Divisions
       empty.tap { |d| d.struct = all.map(&:flattened).map(&:struct) }
     end
 
-    def connect_targets; all.reject(&:embed?) ;end
-    def embed_targets; turtle_targets.select(&:embed?) ;end
-
-    def turtle_targets
-      all.map { |b| [b, turtle_targets_under(b)] }.flatten.uniq(&:identifier)
+    def connect_targets
+      all.reject(&:embed?)
     end
 
-    def turtle_targets_under(binding)
-      binding.blueprint.bindings.turtle_targets
+    def embed_targets
+      all.select(&:embed?).map(&:embed_targets).flatten
+    end
+
+    def turtle_targets
+      all.map(&:turtle_targets).flatten
     end
 
     def method_missing(m, *args, &block); named(m) || super ;end

@@ -29,6 +29,10 @@ module Resolving
       end
     end
 
+    def bindings_to(model)
+      all.map(&:bindings).map(&:all).flatten.select { |b| b.descriptor.identifier == model.blueprint_identifier }
+    end
+
     protected
 
     def ensure_connections_exist_for(model)

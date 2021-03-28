@@ -8,6 +8,8 @@ module Divisions
     def type; struct.type ;end
     def embed?; type == 'embed' ;end
 
+    def implies_packable?; !embed? ;end
+
     def runtime_binding?; identifier == 'containing' ;end
 
     def runtime_type
