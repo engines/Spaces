@@ -30,18 +30,9 @@ post '/arenas' do
   arena.identifier.to_json
 end
 
-# Perform an action (:init, :plan or :apply) on an arena.
-post '/arenas/:identifier/:action' do
+# Delete arena
+delete '/arenas/:identifier' do
   arena = universe.arenas.by(params[:identifier])
-  result = universe.arenas.send(params[:action], arena)
-  raise result.error if result.is_a? Recovery::Trace
-  "#{params[:identifier]} #{params[:action]}".to_json
-end
-
-# Perform an action (:init, :plan or :apply) on an arena.
-post '/arenas/:identifier/deploy' do
-  arena = universe.arenas.by(params[:identifier])
-  result = universe.arenas.send(params[:action], arena)
-  raise result.error if result.is_a? Recovery::Trace
-  "#{params[:identifier]} #{params[:action]}".to_json
+  universe.arenas.delete(arena)
+  nil.to_json
 end

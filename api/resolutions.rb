@@ -5,10 +5,8 @@ end
 
 # Show resolution
 get '/resolutions/:arena_identifier/:blueprint_identifier' do
+  descriptor = Spaces::Descriptor.new(identifier: "#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
   universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}").to_json
-# TODO: This recue is a temporary workaround. Delete me.
-# rescue
-  # {}.to_json
 end
 
 # Create resolution
@@ -43,4 +41,20 @@ get '/resolutions/:arena_identifier/:blueprint_identifier/validity' do
       incomplete_divisions: resolution.incomplete_divisions,
     } if resolution.incomplete_divisions.any?
   end.to_json
+end
+
+# Show packing and provisioning status for a resolution
+get '/resolutions/:arena_identifier/:blueprint_identifier/status' do
+  descriptor = Spaces::Descriptor.new(identifier: "#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
+  resolution = universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
+  {
+    pack: {
+      exist: universe.packs.exist?(descriptor),
+      allowed: resolution.packable?
+    },
+    provisions: {
+      exist: universe.provisioning.exist?(descriptor),
+      allowed: resolution.provisioning_allowed?
+    }
+  }.to_json
 end

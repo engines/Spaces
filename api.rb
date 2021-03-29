@@ -14,7 +14,6 @@ require './api/provisioning'
 require './api/publications'
 require './api/resolutions'
 require './api/system'
-require './api/crud'
 
 set show_exceptions: false
 
