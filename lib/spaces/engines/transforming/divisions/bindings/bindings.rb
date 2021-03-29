@@ -3,10 +3,6 @@ module Divisions
 
     def complete?; all_complete?(all) ;end
 
-    def runtime_binding
-      @runtime_binding ||= all.detect(&:runtime_binding?)
-    end
-
     def named(name)
       all.detect { |b| b.identifier == name.to_s }
     end

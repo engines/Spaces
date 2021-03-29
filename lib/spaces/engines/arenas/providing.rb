@@ -2,7 +2,7 @@ module Arenas
   module Providing
 
     def container_type
-      "#{runtime_type}_container"
+      [runtime_type, 'container'].compact.join('_')
     end
 
     def runtime_type

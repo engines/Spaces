@@ -1,23 +1,24 @@
 require_relative 'boostrapping'
-require_relative 'resolving'
 require_relative 'providing'
+require_relative 'resolving'
+require_relative 'provisioning'
 
 module Arenas
   class Arena < ::Emissions::Emission
     include ::Arenas::Bootstrapping
-    include ::Arenas::Resolving
     include ::Arenas::Providing
+    include ::Arenas::Resolving
+    include ::Arenas::Provisioning
 
     class << self
       def composition_class; Composition ;end
     end
 
-    delegate(
-      [:arenas, :blueprints] => :universe,
-      runtime_binding: :bindings
-    )
+    delegate([:arenas, :blueprints] => :universe)
 
-    def embedding_keys; @embedding_keys ||= division_keys ;end
+    def runtime_binding
+      @runtime_binding ||= turtle_targets.detect(&:runtime_binding?)
+    end
 
     def payload
       [required_stanza, arena_stanzas].join

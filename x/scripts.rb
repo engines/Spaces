@@ -22,31 +22,23 @@ universe.arenas.save(arena)
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/arena')
 universe.publications.import(descriptor, force: true)
 
-# resolve the bootstrap
-arena = universe.arenas.by('development')
-bootstrap = universe.blueprints.by('arena')
-resolution = bootstrap.with_embeds.resolved_in(arena)
-universe.resolutions.save(resolution)
-
 # bootstrap the arena
 arena = universe.arenas.by('development')
 bootstrapped = arena.bootstrapped_with('arena')
 universe.arenas.save(bootstrapped)
 
-# embed blueprints from bootstrap in arena
+# resolve the arena
 arena = universe.arenas.by('development')
-embedded = arena.with_embeds
-universe.arenas.save(embedded)
+universe.arenas.save_bootstrap_resolutions_for(arena)
 
 # save bootstrap packs (only powerdns atm)
 resolution = universe.resolutions.by('development/powerdns')
 pack = resolution.packed
 universe.packs.save(pack)
 
-# save provisions for bootstrap
-resolution = universe.resolutions.by('development/arena')
-provisions = resolution.provisioned
-universe.provisioning.save(provisions)
+# save provisions for the arena
+arena = universe.arenas.by('development')
+universe.arenas.save_bootstrap_provisionings_for(arena)
 
 # import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
