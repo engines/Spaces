@@ -24,8 +24,6 @@ module Arenas
       [required_stanza, arena_stanzas].join
     end
 
-    def embedding_keys; @embedding_keys ||= division_keys ;end
-
     def required_stanza
       %(
         terraform {
