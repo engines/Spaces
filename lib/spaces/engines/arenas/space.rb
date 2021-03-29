@@ -7,6 +7,16 @@ module Arenas
       end
     end
 
+    delegate([:resolutions, :provisioning] => :universe)
+
+    def save_bootstrap_resolutions_for(model)
+      model.resolutions.map { |r| resolutions.save(r) }
+    end
+
+    def save_bootstrap_provisionings_for(model)
+      model.provisioned.map { |p| provisioning.save(p) }
+    end
+
     def save(model)
       super.tap do
         _save(model, content: model.payload, as: payload_extension)
