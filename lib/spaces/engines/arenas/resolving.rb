@@ -12,7 +12,15 @@ module Arenas
     end
 
     def bootstrap_blueprints
-      connect_targets.map(&:blueprint).map(&:connect_targets).flatten.map(&:blueprint)
+      bootstrap_targets.flatten.map(&:blueprint)
+    end
+
+    def bootstrap_targets
+      bootstraps.map(&:connect_targets)
+    end
+
+    def bootstraps
+      connect_targets.map(&:blueprint)
     end
 
   end
