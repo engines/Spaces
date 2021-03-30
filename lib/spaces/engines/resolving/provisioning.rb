@@ -8,7 +8,7 @@ module Resolving
       end
     end
 
-    def resolving_allowed?
+    def resolvable?
       !bootstrap?
     end
 
