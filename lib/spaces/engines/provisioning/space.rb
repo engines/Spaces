@@ -23,7 +23,7 @@ module Provisioning
 
     def save(model)
       ensure_connections_exist_for(model)
-      if model.resolution.provisioning_allowed?
+      if model.resolution.provisionable?
         Pathname.new("#{arenas.path}/#{model.identifier}.tf").write(model.artifact)
       end
       super

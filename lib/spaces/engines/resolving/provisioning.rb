@@ -12,7 +12,7 @@ module Resolving
       !bootstrap?
     end
 
-    def provisioning_allowed?
+    def provisionable?
       !(bootstrap? || defines_runtime?)
     end
 
