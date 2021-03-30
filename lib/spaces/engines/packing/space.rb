@@ -24,17 +24,17 @@ module Packing
 
       ensure_connections_exist_for(model)
       super.tap do
-        path_for(model).join("#{payload_name}.json").write(model.payload.to_json)
+        path_for(model).join("#{artifact_name}.json").write(model.artifact.to_json)
       end
     rescue PackWithoutImagesError => e
       warn(error: e, identifier: model.identifier, klass: klass)
     end
 
-    def payload_path_for(model)
-      path_for(model).join("#{payload_name}.*")
+    def artifact_path_for(model)
+      path_for(model).join("#{artifact_name}.*")
     end
 
-    def payload_name; 'template' ;end
+    def artifact_name; 'template' ;end
 
     protected
 

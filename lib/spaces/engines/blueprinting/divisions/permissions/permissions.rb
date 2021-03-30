@@ -7,8 +7,8 @@ module Divisions
 
     def embedded_with(other); divisible_embedded_with(other) ;end
 
-    def packing_payload_for(key)
-      all.map(&:packing_payload) if key == :late
+    def packing_artifact_for(key)
+      all.map(&:packing_artifact) if key == :late
     end
 
     def keys; [:late] ;end

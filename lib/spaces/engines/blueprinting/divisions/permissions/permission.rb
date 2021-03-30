@@ -2,7 +2,7 @@ module Divisions
   class Permission < ::Divisions::Subdivision
     include ::Packing::Division
 
-    def packing_payload
+    def packing_artifact
       {
         type: 'shell',
         inline: [
