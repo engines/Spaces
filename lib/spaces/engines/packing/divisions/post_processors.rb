@@ -3,10 +3,10 @@ module Divisions
 
     delegate(images: :emission)
 
-    def to_h; payloads.map(&:to_h) ;end
+    def to_h; artifacts.map(&:to_h) ;end
 
-    def payloads
-      images.all.map {|i| i.post_processor_payloads }.compact
+    def artifacts
+      images.all.map {|i| i.post_processor_artifacts }.compact
     end
 
   end
