@@ -20,7 +20,7 @@ module Arenas
       @runtime_binding ||= turtle_targets.detect(&:runtime_binding?)
     end
 
-    def payload
+    def artifact
       [required_stanza, arena_stanzas].join
     end
 
