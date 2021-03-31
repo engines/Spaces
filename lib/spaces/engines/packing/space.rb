@@ -30,10 +30,6 @@ module Packing
       warn(error: e, identifier: model.identifier, klass: klass)
     end
 
-    def artifact_path_for(model)
-      path_for(model).join("#{artifact_name}.*")
-    end
-
     def artifact_name; 'template' ;end
 
     protected

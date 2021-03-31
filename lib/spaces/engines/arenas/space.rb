@@ -23,9 +23,6 @@ module Arenas
       end
     end
 
-    def artifact_path_for(model)
-      path_for(model).join("*.#{artifact_extension}")
-    end
 
     def path_for(model)
       path.join(model.arena.context_identifier)
