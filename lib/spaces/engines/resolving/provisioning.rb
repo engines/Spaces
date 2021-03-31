@@ -8,11 +8,11 @@ module Resolving
       end
     end
 
-    def resolving_allowed?
+    def resolvable?
       !bootstrap?
     end
 
-    def provisioning_allowed?
+    def provisionable?
       !(bootstrap? || defines_runtime?)
     end
 

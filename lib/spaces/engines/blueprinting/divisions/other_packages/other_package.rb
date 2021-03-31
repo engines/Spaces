@@ -12,7 +12,7 @@ module Divisions
     def extraction; struct.extraction ||= protocol ;end
     def extracted_path; struct.extracted_path ||= identifier ;end
 
-    def packing_payload
+    def packing_artifact
       {
         type: 'shell',
         environment_vars: environment_vars,

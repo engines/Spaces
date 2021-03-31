@@ -16,7 +16,7 @@ module Providers
         duplicate(struct).tap { |m| m[:commit] = true }
       end
 
-      def post_processor_payloads
+      def post_processor_artifacts
         {
           type: "#{type}-tag",
           repository: image,
