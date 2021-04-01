@@ -25,6 +25,7 @@ universe.publications.import(descriptor, force: true)
 # bootstrap the arena
 arena = universe.arenas.by('development')
 bootstrapped = arena.bootstrapped_with('arena')
+universe.arenas.save_initial(bootstrapped)
 universe.arenas.save(bootstrapped)
 
 # resolve the arena
