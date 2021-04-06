@@ -1,6 +1,9 @@
 class String
   BLANK_RE = /\A[[:space:]]*\z/
 
+  alias_method :identifier, :itself
+  alias_method :context_identifier, :identifier
+
   def camelize
     s = sub(/^[a-z\d]*/) { |match| match.capitalize }
     s.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{$2.capitalize}" }
