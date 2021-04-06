@@ -11,11 +11,11 @@ module Spaces
 
     attr_accessor :uri
 
-    def identifier; struct.identifier || defaults[:identifier] ;end
+    def identifier; struct.identifier || derived_features[:identifier] ;end
 
     def repository; uri.to_s ;end
-    def branch; struct.branch || defaults[:branch] ;end
-    def protocol; struct.protocol || defaults[:protocol] ;end
+    def branch; struct.branch || derived_features[:branch] ;end
+    def protocol; struct.protocol || derived_features[:protocol] ;end
     def git?; protocol == 'git' ;end
 
     def initialize(args)
@@ -29,8 +29,8 @@ module Spaces
 
     protected
 
-    def defaults
-      @defaults ||= {
+    def derived_features
+      @derived_features ||= {
         identifier: root_identifier,
         branch: 'main',
         protocol: default_protocol

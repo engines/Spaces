@@ -16,5 +16,9 @@ module Spaces
       end
     end
 
+    protected
+
+    def derived_features; {} ;end
+
   end
 end

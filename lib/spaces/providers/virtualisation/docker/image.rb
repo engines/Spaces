@@ -6,7 +6,7 @@ module Providers
         def features; [:name, :output_image, :privileged] ;end
       end
 
-      def privileged; struct.privileged || defaults[:privileged] ;end
+      def privileged; struct.privileged || derived_features[:privileged] ;end
 
       def export
         duplicate(struct).tap { |m| m[:export_path] = "#{identifier}.tar" }
@@ -26,8 +26,8 @@ module Providers
 
       protected
 
-      def defaults
-        @defaults ||= {
+      def derived_features
+        @derived_features ||= {
           name: default_name,
           output_image: default_output_image,
           privileged: false

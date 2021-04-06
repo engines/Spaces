@@ -15,8 +15,8 @@ module Divisions
       !(type && image).nil?
     end
 
-    def name; struct.name || defaults[:name] ;end
-    def output_image; struct.output_image || defaults[:output_image] ;end
+    def name; struct.name || derived_features[:name] ;end
+    def output_image; struct.output_image || derived_features[:output_image] ;end
 
     def inflated_struct; inflated.struct ;end
 
