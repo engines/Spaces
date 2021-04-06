@@ -6,6 +6,9 @@ module Providers
         def features; [:name, :output_image, :publish_properties] ;end
       end
 
+      def inflated; self ;end
+      def deflated; self ;end
+
       def publish_properties; struct.publish_properties || derived_features[:publish_properties] ;end
 
       protected
