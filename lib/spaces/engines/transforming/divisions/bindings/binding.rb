@@ -3,9 +3,14 @@ require 'resolv'
 module Divisions
   class Binding < ::Divisions::TargetingSubdivision
 
+    class << self
+      def features; [:identifier, :target_identifier, :type] ;end
+    end
+
     alias_accessor :arena, :emission
 
-    def type; struct.type ;end
+    def type; struct.type || derived_features[:type] ;end
+
     def embed?; type == 'embed' ;end
 
     def implies_packable?; !embed? ;end
@@ -63,6 +68,14 @@ module Divisions
 
     def respond_to_missing?(m, *)
       keys&.include?(m) || super
+    end
+
+    protected
+
+    def derived_features
+      @derived_features ||= {
+        type: 'connect'
+      }
     end
 
   end
