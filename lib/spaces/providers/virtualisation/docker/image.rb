@@ -3,7 +3,7 @@ module Providers
     class Image < ::Providers::Image
 
       class << self
-        def inflatables; [:name, :output_image, :privileged] ;end
+        def features; [:name, :output_image, :privileged] ;end
       end
 
       def privileged; struct.privileged || defaults[:privileged] ;end

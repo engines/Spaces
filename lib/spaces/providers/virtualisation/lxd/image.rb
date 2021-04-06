@@ -3,7 +3,7 @@ module Providers
     class Image < ::Providers::Image
 
       class << self
-        def inflatables; [:name, :output_image, :publish_properties] ;end
+        def features; [:name, :output_image, :publish_properties] ;end
       end
 
       def publish_properties; struct.publish_properties || defaults[:publish_properties] ;end

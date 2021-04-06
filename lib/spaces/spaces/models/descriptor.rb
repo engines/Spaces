@@ -6,7 +6,7 @@ module Spaces
   class Descriptor < Model
 
     class << self
-      def inflatables; [:identifier, :repository, :branch, :protocol] ;end
+      def features; [:identifier, :repository, :branch, :protocol] ;end
     end
 
     attr_accessor :uri
