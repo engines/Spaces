@@ -22,6 +22,7 @@ module Divisions
 
     def localized; with_all_as(:localized) ;end
     def inflated; with_all_as(:inflated) ;end
+    def deflated; with_all_as(:deflated) ;end
     def resolved; with_all_as(:resolved) ;end
 
     def with_all_as(transformation)
