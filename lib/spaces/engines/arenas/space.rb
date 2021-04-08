@@ -19,7 +19,7 @@ module Arenas
 
     def save(model)
       super.tap do
-        _save(model, content: model.artifact, as: artifact_extension)
+        artifact_file_name_for(model).write(model.artifact)
       end
     end
 
@@ -27,21 +27,19 @@ module Arenas
       initial_file_name_for(model).write(model.initial_artifact)
     end
 
-    def initial_file_name_for(model)
-      path_for(model).join("#{initial_subspace_name}/#{initial_subspace_name}.#{artifact_extension}")
+    def artifact_file_name_for(model)
+      path_for(model).join("_arena.#{artifact_extension}")
     end
 
-    def initial_subspace_name; 'initial' ;end
+    def initial_file_name_for(model)
+      path_for(model).join("_initial.#{artifact_extension}")
+    end
 
     def path_for(model)
       path.join(model.arena.context_identifier)
     end
 
     def artifact_extension; :tf ;end
-
-    def ensure_space_for(identifiable)
-      writing_path_for(identifiable).join(initial_subspace_name).mkpath
-    end
 
   end
 end
