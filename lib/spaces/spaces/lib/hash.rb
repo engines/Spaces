@@ -17,7 +17,7 @@ class Hash
     replace(reverse_merge(other_hash))
   end
 
-  def to_json
+  def to_json(*args)
     JSON.pretty_generate(self)
   end
 
