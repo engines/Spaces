@@ -2,12 +2,14 @@ require_relative 'model'
 require_relative 'paths'
 require_relative 'reading'
 require_relative 'writing'
+require_relative 'topology'
 
 module Spaces
   class Space < Model
     include ::Spaces::Paths
     include ::Spaces::Reading
     include ::Spaces::Writing
+    include ::Spaces::Topology
 
     class << self
       def universe

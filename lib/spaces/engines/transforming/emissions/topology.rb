@@ -9,5 +9,9 @@ module Emissions
       embed_targets.map { |t| t.send(emission) }
     end
 
+    def graph(type: :connections, direction: :down, emission: qualifier)
+      [self, send("#{type}_#{direction}", emission: emission)]
+    end
+
   end
 end
