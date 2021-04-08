@@ -6,7 +6,7 @@ module Providers
         %(
           resource "#{container_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
-            image     = "local-lxd-server:#{image_name}"
+            image     = "lxd-server:#{image_name}"
             ephemeral = false
             profiles = ["default"]
 
