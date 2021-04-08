@@ -30,10 +30,10 @@ module Resolving
     end
 
     def connections_resolved
-      connections.map { |c| c.with_embeds.resolved_in(arena) }
+      connections_down.map { |c| c.with_embeds.resolved_in(arena) }
     end
 
-    def connections; connect_targets.map(&:blueprint) ;end
+    def connections_down; connect_targets.map(&:blueprint) ;end
 
     def embeds_including_blueprint; [blueprint, embeds].flatten.compact.reverse ;end
 

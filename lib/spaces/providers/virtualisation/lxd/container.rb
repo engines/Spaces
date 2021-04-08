@@ -34,7 +34,7 @@ module Providers
       end
 
       def dependency_stanza
-        %(depends_on=[#{dependency_string}]) if connections.any?
+        %(depends_on=[#{dependency_string}]) if connections_down.any?
       end
 
       def connect_services_stanzas
@@ -61,7 +61,7 @@ module Providers
       end
 
       def dependency_string
-        connections.map { |c| "#{container_type}.#{c.blueprint_identifier}" }.join(', ')
+        connections_down.map { |c| "#{container_type}.#{c.blueprint_identifier}" }.join(', ')
       end
 
     end

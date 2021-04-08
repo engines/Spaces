@@ -35,7 +35,7 @@ module Packing
     protected
 
     def ensure_connections_exist_for(model)
-      model.connections.map(&:packed).each { |p| save(p) }
+      model.connections_down.map(&:packed).each { |p| save(p) }
     end
 
   end
