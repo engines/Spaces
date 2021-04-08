@@ -25,6 +25,7 @@ universe.publications.import(descriptor, force: true)
 # bootstrap the arena
 arena = universe.arenas.by('development')
 bootstrapped = arena.bootstrapped_with('arena')
+universe.arenas.save_initial(bootstrapped)
 universe.arenas.save(bootstrapped)
 
 # resolve the arena
@@ -44,11 +45,20 @@ universe.arenas.save_bootstrap_provisionings_for(arena)
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
 universe.publications.import(descriptor, force: true)
 
+# synchronize a blueprint
+universe.blueprints.synchronize_with_publication('phpmyadmin')
+
+# synchronize a publication
+universe.publications.synchronize_with_blueprint('phpmyadmin')
+
 # resolve a blueprint
 blueprint = universe.blueprints.by('phpmyadmin')
 arena = universe.arenas.by('development')
 resolution = blueprint.with_embeds.resolved_in(arena)
 universe.resolutions.save(resolution)
+
+# get the topology for a resolution
+universe.resolutions.graph('development/phpmyadmin').to_json
 
 # save a pack for a resolution
 resolution = universe.resolutions.by('development/phpmyadmin')

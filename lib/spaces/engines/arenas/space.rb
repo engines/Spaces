@@ -19,12 +19,20 @@ module Arenas
 
     def save(model)
       super.tap do
-        _save(model, content: model.artifact, as: artifact_extension)
+        artifact_file_name_for(model).write(model.artifact)
       end
     end
 
-    def artifact_path_for(model)
-      path_for(model).join("*.#{artifact_extension}")
+    def save_initial(model)
+      initial_file_name_for(model).write(model.initial_artifact)
+    end
+
+    def artifact_file_name_for(model)
+      path_for(model).join("_arena.#{artifact_extension}")
+    end
+
+    def initial_file_name_for(model)
+      path_for(model).join("_initial.#{artifact_extension}")
     end
 
     def path_for(model)
@@ -32,5 +40,6 @@ module Arenas
     end
 
     def artifact_extension; :tf ;end
+
   end
 end

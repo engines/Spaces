@@ -7,6 +7,7 @@ module Providers
           resource "lxd_volume" "#{volume_name}" {
             name = "#{volume_name}"
             pool = "#{pool_name}"
+            remote = "lxd-server"
           }
         )
       end

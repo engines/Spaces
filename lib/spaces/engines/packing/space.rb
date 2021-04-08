@@ -30,16 +30,12 @@ module Packing
       warn(error: e, identifier: model.identifier, klass: klass)
     end
 
-    def artifact_path_for(model)
-      path_for(model).join("#{artifact_name}.*")
-    end
-
     def artifact_name; 'template' ;end
 
     protected
 
     def ensure_connections_exist_for(model)
-      model.connections.map(&:packed).each { |p| save(p) }
+      model.connections_down.map(&:packed).each { |p| save(p) }
     end
 
   end
