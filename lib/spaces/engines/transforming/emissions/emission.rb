@@ -1,6 +1,6 @@
 require_relative 'content'
 require_relative 'associating'
-require_relative 'localizing'
+require_relative 'publishing'
 require_relative 'inflating'
 require_relative 'targeting'
 require_relative 'embedding'
@@ -12,7 +12,7 @@ module Emissions
     include ::Divisions::Dividing
     include Content
     include Associating
-    include Localizing
+    include Publishing
     include Inflating
     include Targeting
     include Embedding

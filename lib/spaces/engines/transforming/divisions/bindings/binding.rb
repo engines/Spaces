@@ -13,6 +13,8 @@ module Divisions
       def features; [:type, :identifier, :target_identifier, :configuration] ;end
     end
 
+    delegate(publications: :universe)
+
     alias_accessor :arena, :emission
 
     def type; struct.type || derived_features[:type] ;end

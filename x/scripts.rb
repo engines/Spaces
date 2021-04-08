@@ -45,6 +45,12 @@ universe.arenas.save_bootstrap_provisionings_for(arena)
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
 universe.publications.import(descriptor, force: true)
 
+# synchronize a blueprint
+universe.blueprints.synchronize_with_publication('phpmyadmin')
+
+# synchronize a publication
+universe.publications.synchronize_with_blueprint('phpmyadmin')
+
 # resolve a blueprint
 blueprint = universe.blueprints.by('phpmyadmin')
 arena = universe.arenas.by('development')
