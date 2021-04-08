@@ -57,6 +57,9 @@ arena = universe.arenas.by('development')
 resolution = blueprint.with_embeds.resolved_in(arena)
 universe.resolutions.save(resolution)
 
+# get the topology for a resolution
+universe.resolutions.graph('development/phpmyadmin').to_json
+
 # save a pack for a resolution
 resolution = universe.resolutions.by('development/phpmyadmin')
 pack = resolution.packed

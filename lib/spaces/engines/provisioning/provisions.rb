@@ -14,7 +14,7 @@ module Provisioning
     def keys; composition.keys ;end
 
     def connections_provisioned
-      connections.map(&:provisioned)
+      connections_down.map(&:provisioned)
     end
 
     def artifact; stanzas.join("\n") ;end
