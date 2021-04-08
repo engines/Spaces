@@ -1,5 +1,5 @@
 module Emissions
-  module Auxiliaries
+  module Content
 
     def auxiliary_folders
       [:packing, :commissioning, :service_tasks]

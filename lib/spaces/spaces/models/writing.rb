@@ -2,7 +2,6 @@ module Spaces
   module Writing
     include Engines::Logger
 
-
     def save_yaml(model)
       _save(model, content: model.to_yaml, as: :yaml)
     end
