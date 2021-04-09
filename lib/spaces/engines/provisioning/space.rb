@@ -34,7 +34,7 @@ module Provisioning
     end
 
     def arena_path(model)
-      Pathname.new("#{arenas.path}/#{model.identifier}.tf")
+      Pathname.new("#{arenas.path}/#{model.identifier}.#{arenas.artifact_extension}")
     end
 
     protected
