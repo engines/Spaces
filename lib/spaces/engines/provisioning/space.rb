@@ -24,9 +24,17 @@ module Provisioning
     def save(model)
       ensure_connections_exist_for(model)
       if model.resolution.provisionable?
-        Pathname.new("#{arenas.path}/#{model.identifier}.tf").write(model.artifact)
+        arena_path(model).write(model.artifact)
       end
       super
+    end
+
+    def delete(model)
+      super.tap { arena_path(model).delete }
+    end
+
+    def arena_path(model)
+      Pathname.new("#{arenas.path}/#{model.identifier}.#{arenas.artifact_extension}")
     end
 
     protected
