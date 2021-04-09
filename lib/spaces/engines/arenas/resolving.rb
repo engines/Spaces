@@ -11,6 +11,8 @@ module Arenas
       end.compact
     end
 
+    def clear_resolution_map; @resolution_map = nil ;end
+
     def bootstrap_blueprints
       bootstrap_targets.flatten.map(&:blueprint)
     end

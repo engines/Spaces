@@ -7,7 +7,9 @@ module Arenas
       end
     end
 
-    delegate([:resolutions, :provisioning] => :universe)
+    delegate([:resolutions, :packs, :provisioning] => :universe)
+
+    def dependent_spaces; [resolutions, packs, provisioning] ;end
 
     def save_bootstrap_resolutions_for(model)
       model.resolutions.map { |r| resolutions.save(r) }
@@ -25,6 +27,13 @@ module Arenas
 
     def save_initial(model)
       initial_file_name_for(model).write(model.initial_artifact)
+    end
+
+    def delete(model)
+      super.tap do
+        dependent_spaces.each { |s| s.path.join(model.identifier).rmtree }
+        model.clear_resolution_map
+      end
     end
 
     def artifact_file_name_for(model)
