@@ -10,6 +10,12 @@ require 'spaces'
 
 universe = Universe.universe
 
+# delete an arena
+if universe.arenas.exist?('development')
+  arena = universe.arenas.by('development')
+  universe.arenas.delete(arena)
+end
+
 # save a basic arena
 arena = Arenas::Arena.new(identifier: 'development')
 universe.arenas.save(arena)

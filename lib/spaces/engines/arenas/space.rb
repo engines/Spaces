@@ -45,7 +45,7 @@ module Arenas
     end
 
     def path_for(model)
-      path.join(model.arena.context_identifier)
+      model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
 
     def artifact_extension; :tf ;end
