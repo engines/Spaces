@@ -26,13 +26,13 @@ module Divisions
         end
     end
 
-    def packing_payload; packing_payloads.map(&:to_h) ;end
+    def packing_artifact; packing_artifacts.map(&:to_h) ;end
 
-    def packing_payloads
-      [auxiliary_files_payload, precedential_payload].flatten.compact
+    def packing_artifacts
+      [auxiliary_files_artifact, precedential_artifact].flatten.compact
     end
 
-    def auxiliary_files_payload
+    def auxiliary_files_artifact
       auxiliary_folders.map do |f|
         if source_path_for(f).exist?
           {
@@ -44,19 +44,19 @@ module Divisions
       end
     end
 
-    def precedential_payload
-      complete_precedence.map { |p| payloads_for(p) }
+    def precedential_artifact
+      complete_precedence.map { |p| artifacts_for(p) }
     end
 
-    def payloads_for(precedence)
-      [file_copy_payload_for(precedence), division_payload_for(precedence)]
+    def artifacts_for(precedence)
+      [file_copy_artifact_for(precedence), division_artifact_for(precedence)]
     end
 
-    def division_payload_for(precedence)
-      packing_divisions.map { |d| d.packing_payload_for(precedence) if d.uses?(precedence) }
+    def division_artifact_for(precedence)
+      packing_divisions.map { |d| d.packing_artifact_for(precedence) if d.uses?(precedence) }
     end
 
-    def file_copy_payload_for(precedence)
+    def file_copy_artifact_for(precedence)
       auxiliary_folders.map do |f|
         if copy_source_path_for(f, precedence).exist?
           {

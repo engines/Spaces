@@ -38,7 +38,7 @@ module Divisions
       resolutions: :universe
     )
 
-    def packing_payload; to_h ;end
+    def packing_artifact; to_h ;end
 
     def packing_division?
       klass.ancestors.include?(::Packing::Division)
@@ -49,6 +49,7 @@ module Divisions
     def context_identifier; emission.context_identifier ;end
 
     def localized; self ;end
+    def globalized; self ;end
 
     def content
       auxiliary_folders.map do |d|
@@ -70,6 +71,14 @@ module Divisions
 
     def any?; !empty? ;end
     def empty?; struct == OpenStruct.new ;end
+
+    def inflated
+      duplicate(self).tap { |s| s.struct = s.struct.merge(inflatables) }
+    end
+
+    def deflated
+      empty.tap { |s| s.struct = OpenStruct.new(deflatables) }
+    end
 
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission

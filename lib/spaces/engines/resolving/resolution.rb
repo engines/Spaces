@@ -30,12 +30,10 @@ module Resolving
     end
 
     def connections_resolved
-      connections.map { |c| c.with_embeds.resolved_in(arena) }
+      connections_down(emission: :blueprint).map { |c| c.with_embeds.resolved_in(arena) }
     end
 
-    def connections; connect_targets.map(&:blueprint) ;end
-
-    def embeds_including_blueprint; [blueprint, embeds].flatten.compact.reverse ;end
+    def embeds_including_blueprint; [blueprint, embeds_down].flatten.compact.reverse ;end
 
     def content_into(directory, source:)
       resolutions.file_names_for(directory, source.context_identifier).map do |t|

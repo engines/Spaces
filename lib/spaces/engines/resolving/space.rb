@@ -7,7 +7,7 @@ module Resolving
       end
     end
 
-    delegate([:blueprints, :arenas] => :universe)
+    delegate([:blueprints, :arenas, :packs, :provisioning] => :universe)
 
     def identifiers(arena_identifier: '*', blueprint_identifier: '*')
       path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
@@ -26,6 +26,13 @@ module Resolving
       super.tap do
         copy_auxiliaries_for(model)
         model.content.each { |t| save_text(t) }
+      end
+    end
+
+    def delete(model)
+      super.tap do
+        packs.delete(model) if packs.exist?(model)
+        provisioning.delete(model) if provisioning.exist?(model)
       end
     end
 

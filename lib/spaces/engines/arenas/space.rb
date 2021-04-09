@@ -7,7 +7,9 @@ module Arenas
       end
     end
 
-    delegate([:resolutions, :provisioning] => :universe)
+    delegate([:resolutions, :packs, :provisioning] => :universe)
+
+    def dependent_spaces; [resolutions, packs, provisioning] ;end
 
     def save_bootstrap_resolutions_for(model)
       model.resolutions.map { |r| resolutions.save(r) }
@@ -19,18 +21,34 @@ module Arenas
 
     def save(model)
       super.tap do
-        _save(model, content: model.payload, as: payload_extension)
+        artifact_file_name_for(model).write(model.artifact)
       end
     end
 
-    def payload_path_for(model)
-      path_for(model).join("*.#{payload_extension}")
+    def save_initial(model)
+      initial_file_name_for(model).write(model.initial_artifact)
+    end
+
+    def delete(model)
+      super.tap do
+        dependent_spaces.each { |s| s.path.join(model.identifier).rmtree }
+        model.clear_resolution_map
+      end
+    end
+
+    def artifact_file_name_for(model)
+      path_for(model).join("_arena.#{artifact_extension}")
+    end
+
+    def initial_file_name_for(model)
+      path_for(model).join("_initial.#{artifact_extension}")
     end
 
     def path_for(model)
-      path.join(model.arena.context_identifier)
+      model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
 
-    def payload_extension; :tf ;end
+    def artifact_extension; :tf ;end
+
   end
 end

@@ -10,8 +10,10 @@ class OpenStruct
     other ? OpenStruct.new(self.to_h.reverse_merge(other.to_h)) : self
   end
 
-  def without(name)
-    duplicate(self).tap { |s| s.delete_field(name) if s[name] }
+  def without(*keys)
+    duplicate(self).tap do |s|
+      keys.flatten.each { |k| s.delete_field(k) if s[k] }
+    end
   end
 
   def keys; to_h.keys ;end

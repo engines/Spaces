@@ -14,10 +14,10 @@ module Provisioning
     def keys; composition.keys ;end
 
     def connections_provisioned
-      connections.map(&:provisioned)
+      connections_down.map(&:provisioned)
     end
 
-    def payload; stanzas.join("\n") ;end
+    def artifact; stanzas.join("\n") ;end
 
     def stanzas
       divisions_including_resolution_divisions.map { |d| d.blueprint_stanzas_for(self) }.flatten.compact
