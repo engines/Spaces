@@ -1,7 +1,7 @@
 module Emissions
   module Topology
 
-    def graph(**args)
+    def graphed(**args)
       empty.tap do |m|
         m.struct = struct
         m.struct.tap do |s|
