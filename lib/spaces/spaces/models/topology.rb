@@ -1,9 +1,9 @@
 module Spaces
   module Topology
 
-    def graph(identifier, **keyword_args)
+    def graph(identifier, **args)
       if exist?(identifier)
-        by(identifier).graph(**keyword_args)
+        by(identifier).graphed(**args)
       end
     end
 
