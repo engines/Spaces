@@ -2,7 +2,7 @@ module Providers
   class Lxd < ::Providers::Provider
     class Container < ::Providers::Container
 
-      def blueprint_stanzas_for(_)
+      def resolution_stanzas_for(_)
         %(
           resource "#{container_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
