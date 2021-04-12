@@ -24,7 +24,7 @@ module Providers
       )
     end
 
-    def blueprint_stanzas_for(resolution)
+    def resolution_stanzas_for(resolution)
       %(
         resource "powerdns_record" "#{resolution.blueprint_identifier}" {
           zone    = "#{universe.host}."
