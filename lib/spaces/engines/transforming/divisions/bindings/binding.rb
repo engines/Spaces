@@ -1,11 +1,13 @@
 require 'resolv'
 require_relative 'publishing'
+require_relative 'graphing'
 require_relative 'resolving'
 require_relative 'packing'
 
 module Divisions
   class Binding < ::Divisions::TargetingSubdivision
     include ::Divisions::Binding::Publishing
+    include ::Divisions::Binding::Graphing
     include ::Divisions::Binding::Resolving
     include ::Divisions::Binding::Packing
 
