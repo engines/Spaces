@@ -16,7 +16,7 @@ module Spaces
     end
 
     def reading_name_for(identifier, klass = default_model_class)
-      path.join(identifier, klass.qualifier)
+      path.join(identifier.as_path, klass.qualifier)
     end
 
   end

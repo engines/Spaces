@@ -4,9 +4,13 @@ module Tests
 
     group 'CRUD provisions' do
 
-      arena_identifier = 'development'
-      blueprint_identifier = 'phpmyadmin'
-      identifier = "#{arena_identifier}/#{blueprint_identifier}"
+      resolution_identifier = 'phpmyadmin'
+      arena_identifier = 'test'
+
+      identifier = "#{arena_identifier.with_identifier_separator}#{resolution_identifier}"
+      arena = Arenas::Arena.new(identifier: arena_identifier)
+      universe.arenas.save(arena)
+      resolution = universe.resolutions.by(resolution_identifier)
 
       test "create #{identifier} provisions" do
         resolution = universe.resolutions.by(identifier)
