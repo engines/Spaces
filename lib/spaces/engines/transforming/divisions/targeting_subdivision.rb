@@ -41,7 +41,7 @@ module Divisions
     end
 
     def resolution_target_for(arena)
-      descriptor_class.new(identifier: "#{arena.identifier}/#{target_identifier}")
+      descriptor_class.new(identifier: "#{arena.identifier.with_identifier_separator}#{target_identifier}")
     end
 
     def embed_targets

@@ -7,7 +7,7 @@ module Tests
       resolution_identifier = 'phpmyadmin'
       arena_identifier = 'test'
 
-      identifier = "#{arena_identifier}/#{resolution_identifier}"
+      identifier = "#{arena_identifier.with_identifier_separator}#{resolution_identifier}"
       arena = Arenas::Arena.new(identifier: arena_identifier)
       universe.arenas.save(arena)
       resolution = universe.resolutions.by(resolution_identifier)

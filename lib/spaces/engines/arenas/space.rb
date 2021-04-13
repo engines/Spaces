@@ -9,6 +9,8 @@ module Arenas
 
     delegate([:resolutions, :packs, :provisioning] => :universe)
 
+    alias_method :identifiers, :simple_identifiers
+
     def dependent_spaces; [resolutions, packs, provisioning] ;end
 
     def save_bootstrap_resolutions_for(model)
