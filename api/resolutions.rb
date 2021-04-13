@@ -1,12 +1,13 @@
 # Index resolutions
 get '/resolutions' do
-  universe.resolutions.identifiers(**query).to_json
+  universe.resolutions.identifiers(**query).map do |resolution_identifier|
+    resolution_identifier.sub('/', '::')
+  end.to_json
 end
 
 # Show resolution
-get '/resolutions/:arena_identifier/:blueprint_identifier' do
-  descriptor = Spaces::Descriptor.new(identifier: "#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
-  universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}").to_json
+get '/resolutions/:resolution_identifier' do
+  universe.resolutions.by(resolution_identifier).to_json
 end
 
 # Create resolution
@@ -19,7 +20,7 @@ post '/resolutions' do
 end
 
 # Update resolution
-put '/resolutions/:arena_identifier/:blueprint_identifier' do
+put '/resolutions/:resolution_identifier' do
   struct = JSON.parse(request.body.read).to_struct
   resolution = Resolving::Resolution.new(struct: struct)
   universe.resolutions.save(resolution)
@@ -27,15 +28,15 @@ put '/resolutions/:arena_identifier/:blueprint_identifier' do
 end
 
 # Delete resolution
-delete '/resolutions/:arena_identifier/:blueprint_identifier' do
-  resolution = universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
+delete '/resolutions/:resolution_identifier' do
+  resolution = universe.resolutions.by(resolution_identifier)
   universe.resolutions.delete(resolution)
   nil.to_json
 end
 
 # Show validity for a resolution
-get '/resolutions/:arena_identifier/:blueprint_identifier/validity' do
-  resolution = universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
+get '/resolutions/:resolution_identifier/validity' do
+  resolution = universe.resolutions.by(resolution_identifier)
   {}.tap do |result|
     result[:errors] = {
       incomplete_divisions: resolution.incomplete_divisions,
@@ -44,9 +45,9 @@ get '/resolutions/:arena_identifier/:blueprint_identifier/validity' do
 end
 
 # Show packing and provisioning status for a resolution
-get '/resolutions/:arena_identifier/:blueprint_identifier/status' do
-  descriptor = Spaces::Descriptor.new(identifier: "#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
-  resolution = universe.resolutions.by("#{params[:arena_identifier]}/#{params[:blueprint_identifier]}")
+get '/resolutions/:resolution_identifier/status' do
+  descriptor = Spaces::Descriptor.new(identifier: resolution_identifier)
+  resolution = universe.resolutions.by(resolution_identifier)
   {
     pack: {
       exist: universe.packs.exist?(descriptor),
@@ -54,7 +55,13 @@ get '/resolutions/:arena_identifier/:blueprint_identifier/status' do
     },
     provisions: {
       exist: universe.provisioning.exist?(descriptor),
-      allowed: resolution.provisioning_allowed?
+      allowed: resolution.provisionable?
     }
   }.to_json
+end
+
+# Show a resolution and its binding target resolutions.
+# This route is used by GUI to generate a topology graph for a resolution.
+get '/resolutions/:resolution_identifier/graph' do
+  universe.resolutions.by(resolution_identifier).graphed.to_json
 end

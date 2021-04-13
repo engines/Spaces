@@ -29,3 +29,7 @@ end
 def query
   request.env['rack.request.query_hash'].transform_keys!(&:to_sym)
 end
+
+def resolution_identifier
+  params[:resolution_identifier].sub('::', '/')
+end
