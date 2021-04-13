@@ -67,8 +67,7 @@ module Tests
 
       test 'show terraform files for arena' do
         arena = Arenas::Arena.new(identifier: identifier)
-        universe.arenas.payload_path_for(arena)
-        output `cat /tmp/spaces/Universe/ArenasSpace/development/*.tf`
+        output arena.artifact
       end
 
     end

@@ -20,7 +20,7 @@ module Provisioning
     def artifact; stanzas.join("\n") ;end
 
     def stanzas
-      divisions_including_resolution_divisions.map { |d| d.blueprint_stanzas_for(self) }.flatten.compact
+      divisions_including_resolution_divisions.map { |d| d.resolution_stanzas_for(self) }.flatten.compact
     end
 
     def divisions_including_resolution_divisions

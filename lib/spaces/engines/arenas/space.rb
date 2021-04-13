@@ -31,7 +31,11 @@ module Arenas
 
     def delete(model)
       super.tap do
-        dependent_spaces.each { |s| s.path.join(model.identifier).rmtree }
+        dependent_spaces.each do |s|
+          if (p = s.path.join(model.identifier)).exist?
+            p.rmtree
+          end
+        end
         model.clear_resolution_map
       end
     end

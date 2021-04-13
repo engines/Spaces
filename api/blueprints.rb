@@ -34,9 +34,3 @@ put '/blueprints/:identifier' do
   universe.blueprints.save(blueprint)
   blueprint.identifier.to_json
 end
-
-# List by recursive lookup of all blueprint dependencies.
-# This route is used by GUI to preload blueprints for generating a topology for a blueprint.
-get '/blueprints/:identifier/turtles' do
-  (universe.blueprints.by(params[:identifier]).turtle_descriptors || [] ).map(&:identifier).to_json
-end
