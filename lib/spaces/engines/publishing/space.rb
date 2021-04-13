@@ -9,6 +9,7 @@ module Publishing
 
     delegate(blueprints: :universe)
 
+    alias_method :identifiers, :simple_identifiers
     alias_method :by, :by_json
     alias_method :save, :save_json
     alias_method :imported?, :exist?

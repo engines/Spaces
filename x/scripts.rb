@@ -39,7 +39,7 @@ arena = universe.arenas.by('development')
 universe.arenas.save_bootstrap_resolutions_for(arena)
 
 # save bootstrap packs (only powerdns atm)
-resolution = universe.resolutions.by('development/powerdns')
+resolution = universe.resolutions.by('development::powerdns')
 pack = resolution.packed
 universe.packs.save(pack)
 
@@ -64,14 +64,14 @@ resolution = blueprint.with_embeds.resolved_in(arena)
 universe.resolutions.save(resolution)
 
 # get the topology for a resolution
-universe.resolutions.graph('development/phpmyadmin').to_json
+universe.resolutions.graph('development::phpmyadmin').to_json
 
 # save a pack for a resolution
-resolution = universe.resolutions.by('development/phpmyadmin')
+resolution = universe.resolutions.by('development::phpmyadmin')
 pack = resolution.packed
 universe.packs.save(pack)
 
 # save provisions for resolution
-resolution = universe.resolutions.by('development/phpmyadmin')
+resolution = universe.resolutions.by('development::phpmyadmin')
 provisions = resolution.provisioned
 universe.provisioning.save(provisions)

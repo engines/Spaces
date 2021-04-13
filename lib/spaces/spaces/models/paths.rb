@@ -2,7 +2,7 @@ module Spaces
   module Paths
 
     def path_for(identifiable)
-      path.join(identifiable.context_identifier)
+      path.join(identifiable.context_identifier.as_path)
     end
 
     def path

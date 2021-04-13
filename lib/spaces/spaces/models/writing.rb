@@ -37,7 +37,7 @@ module Spaces
     end
 
     def writing_path_for(identifiable)
-      path.join(identifiable.context_identifier, identifiable.subpath)
+      path.join(identifiable.context_identifier.as_path, identifiable.subpath)
     end
 
     protected

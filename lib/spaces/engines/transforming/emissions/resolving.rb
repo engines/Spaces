@@ -6,7 +6,7 @@ module Emissions
         m.predecessor = self
         m.arena = arena
         m.struct = arena.struct.without(:bindings).merge(struct)
-        m.struct.identifier = "#{arena.identifier}/#{identifier}"
+        m.struct.identifier = "#{arena.identifier.with_identifier_separator}#{identifier}"
       end.flattened.resolved
     end
 
