@@ -9,12 +9,6 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
-    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
-      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
-        "#{p.relative_path_from(path)}"
-      end
-    end
-
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
@@ -34,7 +28,7 @@ module Provisioning
     end
 
     def arena_path(model)
-      Pathname.new("#{arenas.path}/#{model.identifier}.#{arenas.artifact_extension}")
+      Pathname.new("#{arenas.path}/#{model.identifier.as_path}.#{arenas.artifact_extension}")
     end
 
     protected

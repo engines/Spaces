@@ -1,9 +1,6 @@
 class String
   BLANK_RE = /\A[[:space:]]*\z/
 
-  alias_method :identifier, :itself
-  alias_method :context_identifier, :identifier
-
   def camelize
     s = sub(/^[a-z\d]*/) { |match| match.capitalize }
     s.gsub!(/(?:_|(\/))([a-z\d]*)/i) { "#{$1}#{$2.capitalize}" }
@@ -36,6 +33,15 @@ class String
   def to_h
     self
   end
+
+  alias_method :identifier, :itself
+  alias_method :context_identifier, :identifier
+
+  def identifier_separator; '::' ;end
+  def with_identifier_separator; self + identifier_separator ;end
+  def as_path; gsub(identifier_separator, '/') ;end
+  def as_compound; gsub('/', identifier_separator) ;end
+  def split_compound; split(identifier_separator) ;end
 
   def complete?; true ;end
 end

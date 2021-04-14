@@ -9,6 +9,7 @@ module Blueprinting
 
     delegate(publications: :universe)
 
+    alias_method :identifiers, :simple_identifiers
     alias_method :imported?, :exist?
 
     def by_demand(descriptor)

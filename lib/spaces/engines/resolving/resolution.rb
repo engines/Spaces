@@ -20,7 +20,7 @@ module Resolving
 
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
-    def arena_identifier; identifier.split('/').first ;end
+    def arena_identifier; identifier.split_compound.first ;end
 
     alias_accessor :blueprint, :predecessor
     alias_accessor :binder, :predecessor
