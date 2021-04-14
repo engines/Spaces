@@ -1,6 +1,10 @@
 module Emissions
   module Topology
 
+    def all_down(emission: :blueprint)
+      all_bindings.map { |t| t.send(emission) }
+    end
+
     def connections_down(emission: :resolution)
       connect_bindings.map { |t| t.send(emission) }
     end

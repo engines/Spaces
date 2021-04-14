@@ -1,6 +1,8 @@
 module Divisions
   class Bindings < ::Divisions::Divisible
 
+    alias_method :all_bindings, :all
+
     def complete?; all_complete?(all) ;end
 
     def named(name)
@@ -11,9 +13,9 @@ module Divisions
       empty.tap { |d| d.struct = all.map(&:flattened).map(&:struct) }
     end
 
-    def graphed(type: :connect, emission: emission_qualifier, direction: nil)
+    def graphed(type: :all, emission: emission_type, direction: nil)
       empty.tap do |d|
-        d.struct = send("#{type}_bindings").map { |t| t.graphed(emission) }.map(&:struct)
+        d.struct = send("#{type}_bindings").map { |t| t.graphed(emission) }.compact.map(&:struct)
       end
     end
 
@@ -29,7 +31,7 @@ module Divisions
       all.map(&:deep_bindings).flatten
     end
 
-    def emission_qualifier; emission.qualifier ;end
+    def emission_type; emission.qualifier ;end
 
     def method_missing(m, *args, &block); named(m) || super ;end
     def respond_to_missing?(m, *); named(m) || super ;end
