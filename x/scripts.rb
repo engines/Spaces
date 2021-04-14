@@ -7,7 +7,6 @@ $LOAD_PATH.unshift(Pathname.new(__dir__).parent.join('lib').expand_path)
 
 require 'spaces'
 
-
 universe = Universe.universe
 
 # delete an arena
@@ -56,6 +55,9 @@ universe.blueprints.synchronize_with_publication('phpmyadmin')
 
 # synchronize a publication
 universe.publications.synchronize_with_blueprint('phpmyadmin')
+
+# get the topology for a blueprint
+universe.blueprints.graph('phpmyadmin').to_json
 
 # resolve a blueprint
 blueprint = universe.blueprints.by('phpmyadmin')

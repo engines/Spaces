@@ -35,6 +35,18 @@ module Divisions
       @target_configuration ||= blueprint.binding_target.struct
     end
 
+    def embed_bindings
+      deep_bindings_of_type(:embed)
+    end
+
+    def deep_bindings
+      deep_bindings_of_type(:deep)
+    end
+
+    def deep_bindings_of_type(type)
+      [self, blueprint.bindings.send("#{type}_bindings")].flatten.uniq(&:identifier)
+    end
+
     def keys; configuration.to_h.keys ;end
 
     def method_missing(m, *args, &block)

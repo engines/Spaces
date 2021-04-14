@@ -1,12 +1,16 @@
 module Emissions
   module Topology
 
+    def all_down(emission: :blueprint)
+      all_bindings.map { |t| t.send(emission) }
+    end
+
     def connections_down(emission: :resolution)
-      connect_targets.map { |t| t.send(emission) }
+      connect_bindings.map { |t| t.send(emission) }
     end
 
     def embeds_down(emission: :blueprint)
-      embed_targets.map { |t| t.send(emission) }
+      embed_bindings.map { |t| t.send(emission) }
     end
 
     def graphed(**args)

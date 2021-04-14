@@ -28,7 +28,7 @@ module Publishing
         super_import(descriptor)
         by(descriptor.identifier).tap do |m|
           blueprints.by_import(descriptor, force: force)
-          m.turtle_targets
+          m.deep_bindings
         end
       end
     rescue Errno::ENOENT => e

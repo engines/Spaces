@@ -44,13 +44,5 @@ module Divisions
       descriptor_class.new(identifier: "#{arena.identifier.with_identifier_separator}#{target_identifier}")
     end
 
-    def embed_targets
-      turtle_targets(:embed_targets)
-    end
-
-    def turtle_targets(type = :turtle_targets)
-      [self, blueprint.bindings.send(type)].flatten.uniq(&:identifier)
-    end
-
   end
 end

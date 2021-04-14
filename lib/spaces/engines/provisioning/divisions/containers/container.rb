@@ -9,7 +9,7 @@ module Divisions
 
     alias_accessor :provisions, :emission
 
-    delegate([:identifier, :connections_down, :connect_targets, :images, :volumes] => :provisions)
+    delegate([:identifier, :connections_down, :connect_bindings, :images, :volumes] => :provisions)
 
     def image_name
       struct.image || matching_image&.output_image
