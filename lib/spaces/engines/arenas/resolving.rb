@@ -14,15 +14,15 @@ module Arenas
     def clear_resolution_map; @resolution_map = nil ;end
 
     def bootstrap_blueprints
-      bootstrap_targets.flatten.map(&:blueprint)
+      bootstrap_bindings.flatten.map(&:blueprint)
     end
 
-    def bootstrap_targets
-      bootstraps.map(&:connect_targets)
+    def bootstrap_bindings
+      bootstraps.map(&:connect_bindings)
     end
 
     def bootstraps
-      connect_targets.map(&:blueprint)
+      connect_bindings.map(&:blueprint)
     end
 
   end
