@@ -13,20 +13,20 @@ module Divisions
 
     def graphed(type: :connect, emission: emission_qualifier, direction: nil)
       empty.tap do |d|
-        d.struct = send("#{type}_targets").map { |t| t.graphed(emission) }.map(&:struct)
+        d.struct = send("#{type}_bindings").map { |t| t.graphed(emission) }.map(&:struct)
       end
     end
 
-    def connect_targets
+    def connect_bindings
       all.reject(&:embed?)
     end
 
-    def embed_targets
-      all.select(&:embed?).map(&:embed_targets).flatten
+    def embed_bindings
+      all.select(&:embed?).map(&:embed_bindings).flatten
     end
 
-    def turtle_targets
-      all.map(&:turtle_targets).flatten
+    def deep_bindings
+      all.map(&:deep_bindings).flatten
     end
 
     def emission_qualifier; emission.qualifier ;end

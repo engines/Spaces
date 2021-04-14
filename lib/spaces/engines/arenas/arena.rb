@@ -17,7 +17,7 @@ module Arenas
     delegate([:arenas, :blueprints] => :universe)
 
     def runtime_binding
-      @runtime_binding ||= turtle_targets.detect(&:runtime_binding?)
+      @runtime_binding ||= deep_bindings.detect(&:runtime_binding?)
     end
 
     def artifact; arena_stanzas ;end

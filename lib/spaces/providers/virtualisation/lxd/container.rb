@@ -38,7 +38,7 @@ module Providers
       end
 
       def connect_services_stanzas
-        connect_targets.map do |c|
+        connect_bindings.map do |c|
           r = c.resolution
           if r.has?(:service_tasks)
             r.service_tasks.connection_stanza_for(c)

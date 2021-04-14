@@ -20,7 +20,7 @@ module Packing
     end
 
     delegate(
-      [:arena, :connect_targets, :images] => :resolution,
+      [:arena, :connect_bindings, :images] => :resolution,
       post_processor_artifacts: :images
     )
 

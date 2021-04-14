@@ -8,7 +8,7 @@ module Provisioning
     alias_accessor :resolution, :predecessor
 
     delegate(
-      [:arena, :images, :volumes, :connect_targets] => :resolution
+      [:arena, :images, :volumes, :connect_bindings] => :resolution
     )
 
     def keys; composition.keys ;end
