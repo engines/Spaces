@@ -21,6 +21,7 @@ module Publishing
       def model_class
         Spaces::Descriptor
       end
+      
     end
   end
 end
