@@ -15,15 +15,13 @@ module Spaces
 
       def model
         @model ||= if space.exist?(identifier)
-          space.by(identifier)
+          space.by(identifier).tap { |m| struct.result = m }
         end
       end
 
       alias_method :assemble, :model
 
-      def commit
-        struct.result = model
-      end
+      def commit ;end
 
       def model_class
         space.default_model_class
