@@ -32,7 +32,7 @@ module Spaces
       end
 
       def space_name
-        input[:space] || klass.name.split('::').first.underscore.singularize
+        input[:space] || klass.name.split('::').first.underscore
       end
 
       def initialize(**input)
