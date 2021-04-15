@@ -25,7 +25,10 @@ module Spaces
       model.identifier
     end
 
-    def delete(model); writing_path_for(model).rmtree ;end
+    def delete(model)
+      writing_path_for(model).rmtree
+      model.identifier
+    end
 
     def writing_name_for(model)
       ensure_space_for(model)

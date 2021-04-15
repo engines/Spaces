@@ -42,5 +42,6 @@ req 'spaces/spaces/requires'
 req 'spaces/engines/requires'
 
 require_all 'spaces/providers'
+require_all 'spaces/commands'
 
 req 'spaces/universe'
