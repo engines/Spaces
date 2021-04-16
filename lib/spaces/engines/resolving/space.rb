@@ -18,7 +18,7 @@ module Resolving
     def save(model)
       ensure_connections_exist_for(model)
       super.tap do
-        copy_auxiliaries_for(model)
+        copy_auxiliaries_for(blueprints, model)
         model.content.each { |t| save_text(t) }
       end
     end
@@ -40,15 +40,15 @@ module Resolving
       model.connections_resolved.each { |r| save(r) }
     end
 
-    def copy_auxiliaries_for(model)
+    def copy_auxiliaries_for(space, model)
       model.embeds_including_blueprint.map do |b|
-        b.auxiliary_folders.each { |d| copy_auxiliaries(model, b, d) }
+        b.auxiliary_folders.each { |d| copy_auxiliaries(space, model, b, d) }
       end
     end
 
-    def copy_auxiliaries(model, blueprint, segment)
+    def copy_auxiliaries(space, model, blueprint, segment)
       "#{segment}".tap do |s|
-        blueprints.path_for(blueprint).join(s).tap do |p|
+        space.path_for(blueprint).join(s).tap do |p|
           FileUtils.cp_r(p, path_for(model)) if p.exist?
         end
       end

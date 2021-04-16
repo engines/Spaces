@@ -1,6 +1,10 @@
 module Emissions
   module Content
 
+    def auxiliary_files
+      ['icon', 'README.md', 'LICENSE.md']
+    end
+
     def auxiliary_folders
       [:packing, :commissioning, :service_tasks]
     end
