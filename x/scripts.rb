@@ -52,10 +52,10 @@ descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints
 universe.publications.import(descriptor, force: true)
 
 # synchronize a blueprint
-universe.blueprints.synchronize_with_publication('phpmyadmin')
+universe.blueprints.synchronize_with(universe.publications, 'phpmyadmin')
 
 # synchronize a publication
-universe.publications.synchronize_with_blueprint('phpmyadmin')
+universe.publications.synchronize_with(universe.blueprints, 'phpmyadmin')
 
 # resolve a blueprint
 blueprint = universe.blueprints.by('phpmyadmin')
