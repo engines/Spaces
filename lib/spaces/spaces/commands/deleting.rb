@@ -1,11 +1,11 @@
-require_relative 'reading'
+require_relative 'modelling'
 
 module Spaces
   module Commands
-    class Deleting < ::Spaces::Commands::Reading
+    class Deleting < Modelling
 
       def commit
-        struct.result = space.delete(model)
+        struct.result = (space.delete(identifier) if space.exist?(identifier))
       end
 
     end

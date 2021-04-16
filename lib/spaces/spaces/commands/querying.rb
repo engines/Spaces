@@ -1,12 +1,18 @@
-require_relative 'reading'
+require_relative 'running'
 
 module Spaces
   module Commands
-    class Querying < ::Spaces::Commands::Reading
+    class Querying < Running
 
-      def assemble
-        struct.result ||= space.send(input[:method])
+      def method
+        input[:method]
       end
+
+      def models
+        @models ||= space.send(*method).tap { |m| struct.result = m }
+      end
+
+      alias_method :assemble, :models
 
     end
   end

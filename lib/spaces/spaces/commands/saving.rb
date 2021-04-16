@@ -1,19 +1,13 @@
-require_relative 'reading'
+require_relative 'modelling'
 
 module Spaces
   module Commands
-    class Saving < ::Spaces::Commands::Reading
+    class Saving < Modelling
 
-      def assemble
-        @model ||= model_class.new(identifier: identifier, struct: model_struct)
-      end
+      alias_method :model, :fresh_model
 
       def commit
         struct.result = space.save(model)
-      end
-
-      def model_struct
-        input[:model]&.to_struct
       end
 
     end
