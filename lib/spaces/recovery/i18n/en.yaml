@@ -24,23 +24,6 @@ en:
         There is no resolution saved yet for the pack for '%{identifier}'.
         Saving now.
 
-    spaces::engines::packing::space/block_in_execute_on_targets_for:
-      spaces::engines::packing::space/by: |
-        A %{klass} for %{descriptor} is yet to be saved.
-        Saving now.
-
-    spaces::engines::packing::space/block_(2_levels)_in_execute_on_targets_for:
-      spaces::engines::packing::space/execute: |
-        There are no images given in the blueprint for '%{identifier}'.
-        So there's no worthwhile pack to %{command}.
-      engines::packing::space/by: |
-        A pack for %{identifier} is yet to be saved.
-        Saving now.
-
-    spaces::engines::arenas::space/chdir:
-      spaces::engines::arenas::space/block_in_execute:
-        Provisioning failed while attempting to execute %{command} for '%{identifier}'.
-
     spaces::engines::transforming::divisions::divisible/new:
       spaces::engines::transforming::divisions::divisible/initialize: |
         Malformed %{klass} declaration in %{blueprint} blueprint.

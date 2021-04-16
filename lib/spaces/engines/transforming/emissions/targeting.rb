@@ -1,12 +1,13 @@
 module Emissions
   module Targeting
 
-    def turtle_targets; targets(:turtle_targets) ;end
-    def connect_targets; targets(:connect_targets) ;end
-    def embed_targets; targets(:embed_targets) ;end
+    def all_bindings; bindings_of_type(:all) ;end
+    def connect_bindings; bindings_of_type(:connect) ;end
+    def deep_bindings; bindings_of_type(:deep) ;end
+    def embed_bindings; bindings_of_type(:embed) ;end
 
-    def targets(type)
-      bindings.send(type).uniq(&:uniqueness)
+    def bindings_of_type(type)
+      bindings.send("#{type}_bindings").uniq(&:uniqueness)
     end
 
   end
