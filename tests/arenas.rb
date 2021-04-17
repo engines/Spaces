@@ -59,7 +59,7 @@ module Tests
         universe.arenas.save(bootstrapped_arena)
         arena_with_embeds = bootstrapped_arena.with_embeds
         universe.arenas.save(arena_with_embeds)
-        resolution_identifier = "#{identifier}/#{bootstrap_descriptor.identifier}"
+        resolution_identifier = "#{identifier}::#{bootstrap_descriptor.identifier}"
         resolution = universe.resolutions.by(resolution_identifier)
         provisions = resolution.provisioned
         universe.provisioning.save(provisions)

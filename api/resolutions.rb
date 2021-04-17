@@ -60,8 +60,7 @@ get '/resolutions/:resolution_identifier/status' do
   }.to_json
 end
 
-# Show a resolution and its binding target resolutions.
-# This route is used by GUI to generate a topology graph for a resolution.
+# Show a resolution and its bindings as a graph.
 get '/resolutions/:resolution_identifier/graph' do
   universe.resolutions.by(resolution_identifier).graphed.to_json
 end

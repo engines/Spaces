@@ -6,7 +6,7 @@ module Tests
 
       arena_identifier = 'development'
       blueprint_identifier = 'phpmyadmin'
-      identifier = "#{arena_identifier}/#{blueprint_identifier}"
+      identifier = "#{arena_identifier}::#{blueprint_identifier}"
 
       test "create #{identifier} resolution" do
         output blueprint = universe.blueprints.by(blueprint_identifier)
