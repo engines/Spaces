@@ -2,8 +2,12 @@ module Arenas
   module Commands
     class Saving < ::Spaces::Commands::Saving
 
-      def assemble
+      def model
         @model ||= super.associated
+      end
+
+      def space_name
+        super || :arenas
       end
 
     end

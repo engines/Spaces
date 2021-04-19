@@ -23,12 +23,12 @@ module Provisioning
       super
     end
 
-    def delete(model)
-      super.tap { arena_path(model).delete }
+    def delete(identifiable)
+      super.tap { arena_path(identifiable).delete }
     end
 
-    def arena_path(model)
-      Pathname.new("#{arenas.path}/#{model.identifier.as_path}.#{arenas.artifact_extension}")
+    def arena_path(identifiable)
+      Pathname.new("#{arenas.path}/#{identifiable.identifier.as_path}.#{arenas.artifact_extension}")
     end
 
     protected

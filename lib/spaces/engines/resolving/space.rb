@@ -23,10 +23,10 @@ module Resolving
       end
     end
 
-    def delete(model)
+    def delete(identifiable)
       super.tap do
-        packs.delete(model) if packs.exist?(model)
-        provisioning.delete(model) if provisioning.exist?(model)
+        packs.delete(identifiable) if packs.exist?(identifiable)
+        provisioning.delete(identifiable) if provisioning.exist?(identifiable)
       end
     end
 
