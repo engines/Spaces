@@ -3,26 +3,34 @@ module Spaces
     class Running < ::Spaces::Model
 
       def run
-        tap {
-          assemble
-          commit
-        }
+        tap { _result }
       end
-
-      def assemble ;end
-      def commit ;end
 
       def space
         universe.send(space_name)
       end
 
       def space_name
-        input[:space] || klass.name.split('::').first.underscore
+        input[:space]
       end
 
       def initialize(**input)
         self.struct = OpenStruct.new(input: input.symbolize_keys)
       end
+
+      protected
+
+      def _result
+        struct.result =
+        if c = commit
+          c
+        else
+          assembly
+        end
+      end
+
+      def assembly ;end
+      def commit ;end
 
     end
   end

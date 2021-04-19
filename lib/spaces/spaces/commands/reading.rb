@@ -5,7 +5,7 @@ module Spaces
     class Reading < Modelling
 
       alias_method :model, :current_model
-      alias_method :assemble, :model
+      alias_method :assembly, :model
 
     end
   end

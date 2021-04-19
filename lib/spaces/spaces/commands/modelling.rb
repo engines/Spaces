@@ -6,7 +6,7 @@ module Spaces
 
       def current_model
         @model ||= if space.exist?(identifier)
-          space.by(identifier).tap { |m| struct.result = m }
+          space.by(identifier)
         end
       end
 

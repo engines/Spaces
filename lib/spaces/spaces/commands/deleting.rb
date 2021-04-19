@@ -4,8 +4,10 @@ module Spaces
   module Commands
     class Deleting < Modelling
 
+      protected
+
       def commit
-        struct.result = (space.delete(identifier) if space.exist?(identifier))
+        space.delete(identifier) if space.exist?(identifier)
       end
 
     end

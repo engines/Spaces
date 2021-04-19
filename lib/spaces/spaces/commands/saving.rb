@@ -6,8 +6,10 @@ module Spaces
 
       alias_method :model, :fresh_model
 
+      protected
+
       def commit
-        struct.result = space.save(model)
+        space.save(model)
       end
 
     end

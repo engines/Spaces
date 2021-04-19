@@ -9,10 +9,10 @@ module Spaces
       end
 
       def models
-        @models ||= space.send(*method).tap { |m| struct.result = m }
+        @models ||= space.send(*method)
       end
 
-      alias_method :assemble, :models
+      alias_method :assembly, :models
 
     end
   end
