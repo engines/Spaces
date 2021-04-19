@@ -2,26 +2,30 @@ module Publishing
   module Commands
     class Importing < ::Spaces::Commands::Saving
 
-      def assemble
-        @model ||= super.deflated
-      end
+      alias_method :descriptor, :model
 
-      def commit
-        struct.result = space.import(model, force: force)
+      def assembly
+        descriptor.deflated
       end
 
       def force
         input[:force] || false
       end
 
-      def space
-        universe.publications
+      def space_name
+        super || :publications
       end
 
       def model_class
         Spaces::Descriptor
       end
-      
+
+      protected
+
+      def commit
+        space.import(descriptor, force: force)
+      end
+
     end
   end
 end
