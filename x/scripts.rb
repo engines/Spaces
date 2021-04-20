@@ -57,6 +57,9 @@ Spaces::Commands::Querying.new(method: 'identifiers', space: :resolutions).run.r
 # save a pack for a resolution
 Packing::Commands::Saving.new(identifier: 'development::phpmyadmin').run.result
 
+# get the artifacts for a pack
+Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.result
+
 # save provisions for resolution
 Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.result
 
