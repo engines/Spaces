@@ -3,7 +3,6 @@ module Packing
     class Artifacts < Spaces::Commands::Reading
 
       def assembly
-        "artifact"
         super.artifact
       end
 
