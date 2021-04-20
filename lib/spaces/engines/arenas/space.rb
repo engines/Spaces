@@ -31,10 +31,10 @@ module Arenas
       initial_file_name_for(model).write(model.initial_artifact)
     end
 
-    def delete(model)
+    def delete(identifiable)
       super.tap do
         dependent_spaces.each do |s|
-          if (p = s.path.join(model.identifier)).exist?
+          if (p = s.path.join(identifiable)).exist?
             p.rmtree
           end
         end
