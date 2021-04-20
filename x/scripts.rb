@@ -10,64 +10,67 @@ require 'spaces'
 universe = Universe.universe
 
 # delete an arena
-Spaces::Commands::Deleting.new(identifier: 'development', space: :arenas).run.result
+Spaces::Commands::Deleting.new(identifier: 'development', space: :arenas).run.struct
 
 # save a basic arena with default associations
-Arenas::Commands::Saving.new(identifier: 'development').run.result
+Arenas::Commands::Saving.new(identifier: 'development').run.struct
 
 # import an arena bootstrap
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/arena'},
   force: true
-).run.result
+).run.struct
 
 # bootstrap the arena
-Bootstrapping::Commands::Initializing.new(identifier: 'development', blueprint_identifier: 'arena').run.result
+Bootstrapping::Commands::Initializing.new(identifier: 'development', blueprint_identifier: 'arena').run.struct
 
 # resolve the bootstrap
-Bootstrapping::Commands::Resolving.new(identifier: 'development').run.result
+Bootstrapping::Commands::Resolving.new(identifier: 'development').run.struct
 
 # save all packs for an arena
-Arenas::Commands::Packing.new(identifier: 'development').run.result
+Arenas::Commands::Packing.new(identifier: 'development').run.struct
 
 # provision the bootstrap
-Arenas::Commands::Provisioning.new(identifier: 'development').run.result
+Arenas::Commands::Provisioning.new(identifier: 'development').run.struct
 
 # import a blueprint
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
   force: true
-).run.result
+).run.struct
 
 # synchronize a blueprint
-Blueprinting::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.result
+Blueprinting::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.struct
 
 # synchronize a publication
-Publishing::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.result
+Publishing::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.struct
 
 # get the topology for a blueprint
-Spaces::Commands::Graphing.new(identifier: 'phpmyadmin', space: :blueprints).run.result.to_json
+Spaces::Commands::Graphing.new(identifier: 'phpmyadmin', space: :blueprints).run.struct
 
 # resolve a blueprint
-Blueprinting::Commands::Resolving.new(identifier: 'phpmyadmin', arena_identifier: 'development').run.result
+Blueprinting::Commands::Resolving.new(identifier: 'phpmyadmin', arena_identifier: 'development').run.struct
+
+# validate a resolution
+Spaces::Commands::Validating.new(identifier: 'development::phpmyadmin', space: :resolutions).run.struct
 
 # get the identifiers of resolutions in an arena
-Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :resolutions).run.result
+Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :resolutions).run.struct
 
 # save a pack for a resolution
-Packing::Commands::Saving.new(identifier: 'development::phpmyadmin').run.result
+Packing::Commands::Saving.new(identifier: 'development::phpmyadmin').run.struct
 
 # get the identifiers of packs in an arena
-Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :packs).run.result
+Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :packs).run.struct
 
 # get the artifacts for a pack
-Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.result
+Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.struct
 
 # save provisions for resolution
-Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.result
+Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.struct
 
 # save all provisions for an arena
-Arenas::Commands::Provisioning.new(identifier: 'development').run.result
+Arenas::Commands::Provisioning.new(identifier: 'development').run.struct
 
 # params = {
 #   identifier: 'lxd',
