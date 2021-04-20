@@ -51,11 +51,14 @@ Spaces::Commands::Graphing.new(identifier: 'phpmyadmin', space: :blueprints).run
 # resolve a blueprint
 Blueprinting::Commands::Resolving.new(identifier: 'phpmyadmin', arena_identifier: 'development').run.result
 
-# get the identifiers of all resolutions in an arena
-Spaces::Commands::Querying.new(method: 'identifiers', space: :resolutions).run.result
+# get the identifiers of resolutions in an arena
+Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :resolutions).run.result
 
 # save a pack for a resolution
 Packing::Commands::Saving.new(identifier: 'development::phpmyadmin').run.result
+
+# get the identifiers of packs in an arena
+Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :packs).run.result
 
 # get the artifacts for a pack
 Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.result
