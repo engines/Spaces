@@ -1,12 +1,14 @@
 require_relative 'flattening'
 require_relative 'packing'
 require_relative 'provisioning'
+require_relative 'status'
 
 module Resolving
   class Resolution < ::Emissions::Emission
     include Resolving::Flattening
     include Resolving::Packing
     include Resolving::Provisioning
+    include Resolving::Status
 
     class << self
       def composition_class; Composition ;end
@@ -14,7 +16,7 @@ module Resolving
 
     delegate(
       runtime_binding: :arena,
-      resolutions: :universe,
+      [:resolutions, :packs, :provisioning] => :universe,
       [:arenas, :blueprints] => :resolutions
     )
 
