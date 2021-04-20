@@ -1,6 +1,7 @@
 require_relative 'boostrapping'
 require_relative 'providing'
 require_relative 'bootstrap_resolving'
+require_relative 'packing'
 require_relative 'provisioning'
 
 module Arenas
@@ -8,6 +9,7 @@ module Arenas
     include ::Arenas::Bootstrapping
     include ::Arenas::Providing
     include ::Arenas::BootstrapResolving
+    include ::Arenas::Packing
     include ::Arenas::Provisioning
 
     class << self
@@ -15,6 +17,14 @@ module Arenas
     end
 
     delegate([:arenas, :blueprints] => :universe)
+
+    def resolutions
+      identifiers.map { |i| universe.resolutions.by(i) }
+    end
+
+    def identifiers
+      universe.resolutions.identifiers(arena_identifier: identifier)
+    end
 
     def runtime_binding
       @runtime_binding ||= deep_bindings.detect(&:runtime_binding?)
