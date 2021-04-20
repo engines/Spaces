@@ -1,13 +1,13 @@
 require_relative 'boostrapping'
 require_relative 'providing'
-require_relative 'resolving'
+require_relative 'bootstrap_resolving'
 require_relative 'provisioning'
 
 module Arenas
   class Arena < ::Emissions::Emission
     include ::Arenas::Bootstrapping
     include ::Arenas::Providing
-    include ::Arenas::Resolving
+    include ::Arenas::BootstrapResolving
     include ::Arenas::Provisioning
 
     class << self

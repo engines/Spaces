@@ -14,11 +14,7 @@ module Arenas
     def dependent_spaces; [resolutions, packs, provisioning] ;end
 
     def save_bootstrap_resolutions_for(model)
-      model.resolutions.map { |r| resolutions.save(r) }
-    end
-
-    def save_bootstrap_provisionings_for(model)
-      model.provisioned.map { |p| provisioning.save(p) }
+      model.bootstrap_resolutions.map { |r| resolutions.save(r) }
     end
 
     def save(model)
@@ -38,7 +34,6 @@ module Arenas
             p.rmtree
           end
         end
-        model.clear_resolution_map
       end
     end
 
