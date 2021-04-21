@@ -13,6 +13,8 @@ module Spaces
 
     def _by(identifier, klass = default_model_class, as:)
       Pathname.new("#{reading_name_for(identifier, klass)}.#{as}").read
+    rescue Errno::ENOENT, NoMethodError
+      raise ::Spaces::Errors::LostInSpace, {space: self.identifier, identifier: identifier&.to_sym}
     end
 
     def reading_name_for(identifier, klass = default_model_class)

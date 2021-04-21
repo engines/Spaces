@@ -1,4 +1,8 @@
+require_relative 'identifiable'
+
 class String
+  include Identifiable
+
   BLANK_RE = /\A[[:space:]]*\z/
 
   def camelize
@@ -34,14 +38,4 @@ class String
     self
   end
 
-  alias_method :identifier, :itself
-  alias_method :context_identifier, :identifier
-
-  def identifier_separator; '::' ;end
-  def with_identifier_separator; self + identifier_separator ;end
-  def as_path; gsub(identifier_separator, '/') ;end
-  def as_compound; gsub('/', identifier_separator) ;end
-  def split_compound; split(identifier_separator) ;end
-
-  def complete?; true ;end
 end
