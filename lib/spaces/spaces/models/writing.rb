@@ -25,7 +25,10 @@ module Spaces
       model.identifier
     end
 
-    def delete(model); writing_path_for(model).rmtree ;end
+    def delete(identifiable)
+      writing_path_for(identifiable).rmtree
+      identifiable.identifier
+    end
 
     def writing_name_for(model)
       ensure_space_for(model)
@@ -37,7 +40,7 @@ module Spaces
     end
 
     def writing_path_for(identifiable)
-      path.join(identifiable.context_identifier.as_path, identifiable.subpath)
+      path.join(*([identifiable.context_identifier.as_path, identifiable.subpath].compact))
     end
 
     protected

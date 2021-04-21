@@ -10,70 +10,81 @@ require 'spaces'
 universe = Universe.universe
 
 # delete an arena
-if universe.arenas.exist?('development')
-  arena = universe.arenas.by('development')
-  universe.arenas.delete(arena)
-end
+Spaces::Commands::Deleting.new(identifier: 'development', space: :arenas).run.struct
 
-# save a basic arena
-arena = Arenas::Arena.new(identifier: 'development')
-universe.arenas.save(arena)
-
-# save default associations with arena
-arena = universe.arenas.by('development').associated
-universe.arenas.save(arena)
+# save a basic arena with default associations
+Arenas::Commands::Saving.new(identifier: 'development').run.struct
 
 # import an arena bootstrap
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/arena')
-universe.publications.import(descriptor, force: true)
+Publishing::Commands::Importing.new(
+  model: {repository: 'https://github.com/v2Blueprints/arena'},
+  force: true
+).run.struct
 
 # bootstrap the arena
-arena = universe.arenas.by('development')
-bootstrapped = arena.bootstrapped_with('arena')
-universe.arenas.save_initial(bootstrapped)
-universe.arenas.save(bootstrapped)
+Bootstrapping::Commands::Initializing.new(identifier: 'development', blueprint_identifier: 'arena').run.struct
 
-# resolve the arena
-arena = universe.arenas.by('development')
-universe.arenas.save_bootstrap_resolutions_for(arena)
+# resolve the bootstrap
+Bootstrapping::Commands::Resolving.new(identifier: 'development').run.struct
 
-# save bootstrap packs (only powerdns atm)
-resolution = universe.resolutions.by('development::powerdns')
-pack = resolution.packed
-universe.packs.save(pack)
+# save all packs for an arena
+Arenas::Commands::Packing.new(identifier: 'development').run.struct
 
-# save provisions for the arena
-arena = universe.arenas.by('development')
-universe.arenas.save_bootstrap_provisionings_for(arena)
+# provision the bootstrap
+Arenas::Commands::Provisioning.new(identifier: 'development').run.struct
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
-universe.publications.import(descriptor, force: true)
+Publishing::Commands::Importing.new(
+  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
+  force: true
+).run.struct
 
 # synchronize a blueprint
-universe.blueprints.synchronize_with(universe.publications, 'phpmyadmin')
+Blueprinting::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.struct
 
 # synchronize a publication
-universe.publications.synchronize_with(universe.blueprints, 'phpmyadmin')
+Publishing::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.struct
 
 # get the topology for a blueprint
-universe.blueprints.graph('phpmyadmin').to_json
+Spaces::Commands::Graphing.new(identifier: 'phpmyadmin', space: :blueprints).run.struct
 
 # resolve a blueprint
-blueprint = universe.blueprints.by('phpmyadmin')
-arena = universe.arenas.by('development')
-resolution = blueprint.with_embeds.resolved_in(arena)
-universe.resolutions.save(resolution)
+Blueprinting::Commands::Resolving.new(identifier: 'phpmyadmin', arena_identifier: 'development').run.struct
 
-# get the topology for a resolution
-universe.resolutions.graph('development::phpmyadmin').to_json
+# validate a resolution
+Spaces::Commands::Validating.new(identifier: 'development::phpmyadmin', space: :resolutions).run.struct
+
+# get the status of a resolution
+Resolving::Commands::Status.new(identifier: 'development::phpmyadmin').run.struct
+
+# get the identifiers of resolutions in an arena
+Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :resolutions).run.struct
 
 # save a pack for a resolution
-resolution = universe.resolutions.by('development::phpmyadmin')
-pack = resolution.packed
-universe.packs.save(pack)
+Packing::Commands::Saving.new(identifier: 'development::phpmyadmin').run.struct
+
+# get the identifiers of packs in an arena
+Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :packs).run.struct
+
+# get the artifacts for a pack
+Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.struct
 
 # save provisions for resolution
-resolution = universe.resolutions.by('development::phpmyadmin')
-provisions = resolution.provisioned
-universe.provisioning.save(provisions)
+Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.struct
+
+# save all provisions for an arena
+Arenas::Commands::Provisioning.new(identifier: 'development').run.struct
+
+# params = {
+#   identifier: 'lxd',
+#   model: {
+#     :identifier=>"lxd",
+#     :about=>{:title=>"lxd", :explanation=>"New LXD Configuration <--------------"},
+#     :provider=>{:type=>"lxd"},
+#     :configuration=>{:version=>"1.5.0", :source=>"terraform-lxd/lxd",
+#     :generate_client_certificates=>true,
+#     :accept_remote_certificate=>true,
+#     :password=>"^^random(16)^^"}
+#   }
+# }
+# s = Spaces::Commands::Saving.new(identifier: 'lxd', model: params, space: :blueprints)

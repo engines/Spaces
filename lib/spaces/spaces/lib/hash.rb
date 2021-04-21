@@ -1,5 +1,9 @@
 class Hash
 
+  def symbolize_keys
+    transform_keys(&:to_sym)
+  end
+  
   def except(*keys)
     duplicate(self).except!(*keys)
   end
