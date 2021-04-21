@@ -19,7 +19,9 @@ module Spaces
       def default_model_class ;end
     end
 
-    delegate([:identifier, :universe, :default_model_class] => :klass)
+    delegate([:universe, :default_model_class] => :klass)
+
+    def identifier; struct.identifier ;end
 
     def ensure_space
       path.mkpath
@@ -49,6 +51,10 @@ module Spaces
 
     def absent(array)
       array.reject { |r| exist?(r) }
+    end
+
+    def initialize(identifier)
+      self.struct = OpenStruct.new(identifier: identifier.to_sym)
     end
 
   end
