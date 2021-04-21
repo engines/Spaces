@@ -5,7 +5,11 @@ module Spaces
     class Querying < Running
 
       def method_signature
-        [input[:method], input.except(:method, :space)]
+        [method, input.except(:method, :space)]
+      end
+
+      def method
+        input[:method] || (raise ::Spaces::Errors::MissingInput, {input: input})
       end
 
       def models

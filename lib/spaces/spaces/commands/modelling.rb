@@ -5,9 +5,7 @@ module Spaces
     class Modelling < Running
 
       def current_model
-        @model ||= if space.exist?(identifier)
-          space.by(identifier)
-        end
+        @model ||= space.by(identifier)
       end
 
       def fresh_model

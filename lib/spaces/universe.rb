@@ -3,17 +3,24 @@ class Universe < ::Spaces::Model
   class << self
     def space_map
       @@space_map ||=
-      {
-        publications: Publishing::Space.new,
-        blueprints: Blueprinting::Space.new,
-        resolutions: Resolving::Space.new,
-        packs: Packing::Space.new,
-        provisioning: Provisioning::Space.new,
-        arenas: Arenas::Space.new,
+        space_array.inject({}) do |m, s|
+          m.tap { |m| m[s.identifier] = s }
+        end
+    end
 
-        domains: Associations::Domains::Space.new,
-        tenants: Associations::Tenants::Space.new
-      }
+    def space_array
+      @@space_array ||=
+      [
+        Publishing::Space.new(:publications),
+        Blueprinting::Space.new(:blueprints),
+        Resolving::Space.new(:resolutions),
+        Packing::Space.new(:packs),
+        Provisioning::Space.new(:provisioning),
+        Arenas::Space.new(:arenas),
+
+        Associations::Domains::Space.new(:domains),
+        Associations::Tenants::Space.new(:tenants)
+      ]
     end
   end
 
@@ -25,11 +32,11 @@ class Universe < ::Spaces::Model
   def host; 'spaces.internal' ;end
 
   def method_missing(m, *args, &block)
-    klass.space_map[m] || super
+    klass.space_map[m] || (raise ::Spaces::Errors::NoSpace, {identifier: m})
   end
 
   def respond_to_missing?(m, *)
-    klass.space_map[m] || super
+    klass.space_map[m]
   end
 
 end

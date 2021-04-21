@@ -6,7 +6,7 @@ module Spaces
     end
 
     def path
-      universe.path.join(identifier)
+      universe.path.join("#{identifier}")
     end
 
     def file_names_for(directory, identifier)

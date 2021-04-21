@@ -6,7 +6,7 @@ module Arenas
         @model ||= super.associated
       end
 
-      def space_name
+      def space_identifier
         super || :arenas
       end
 

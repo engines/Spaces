@@ -18,7 +18,7 @@ module Blueprinting
         @arena ||= universe.arenas.by(arena_identifier)
       end
 
-      def space_name
+      def space_identifier
         super || :blueprints
       end
 

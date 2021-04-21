@@ -31,8 +31,6 @@ module Publishing
           m.deep_bindings
         end
       end
-    rescue Errno::ENOENT => e
-      warn(error: e, descriptor: descriptor, verbosity: [:error])
     end
 
     def synchronize_with(space, identifier)

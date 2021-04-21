@@ -12,7 +12,7 @@ module Git
       begin
         git.clone(repository(descriptor), descriptor.identifier, branch: descriptor.branch, path: path, depth: 0)
       rescue ::Git::GitExecuteError => e
-        warn(error: e, descriptor: descriptor, verbosity: [:error])
+        raise ::Spaces::Errors::ImportFail, e.message
       end
     end
 

@@ -10,7 +10,7 @@ module Provisioning
         universe.resolutions.by(identifier)
       end
 
-      def space_name
+      def space_identifier
         super || :provisioning
       end
 

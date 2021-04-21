@@ -2,7 +2,7 @@ module Publishing
   module Commands
     class Synchronizing < ::Spaces::Commands::Saving
 
-      def space_name
+      def space_identifier
         super || :publications
       end
 

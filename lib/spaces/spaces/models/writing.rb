@@ -28,6 +28,8 @@ module Spaces
     def delete(identifiable)
       writing_path_for(identifiable).rmtree
       identifiable.identifier
+    rescue Errno::ENOENT
+      raise ::Spaces::Errors::LostInSpace, {space: identifier, identifier: identifiable.identifier.to_sym}
     end
 
     def writing_name_for(model)

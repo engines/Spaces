@@ -6,7 +6,7 @@ module Packing
         super.artifact
       end
 
-      def space_name
+      def space_identifier
         super || :packs
       end
 
