@@ -26,7 +26,7 @@ module Divisions
     def default_output_image; "spaces/#{tenant_context_identifier}:#{default_tag}" ;end
     def default_tag; 'latest' ;end
 
-    def tenant_context_identifier; "#{tenant.identifier}/#{context_identifier}" ;end
+    def tenant_context_identifier; "#{tenant.identifier}/#{context_identifier.as_path}" ;end
 
   end
 end
