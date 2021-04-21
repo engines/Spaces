@@ -14,7 +14,7 @@ module Packing
     end
 
     def save(model)
-      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:builders)
+      raise PackWithoutImagesError, {identifier: model.identifier} unless model.has?(:builders)
 
       ensure_connections_exist_for(model)
       super.tap do

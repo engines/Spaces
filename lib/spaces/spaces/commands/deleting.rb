@@ -7,7 +7,7 @@ module Spaces
       protected
 
       def commit
-        space.delete(identifier) if space.exist?(identifier)
+        space.delete(identifier)
       end
 
     end

@@ -3,11 +3,17 @@ module Spaces
     class Running < ::Spaces::Model
 
       def run
-        tap { _result }
+        tap do
+          _result
+        rescue ::Spaces::Errors::SpacesError => e
+          struct.exception = e.inspect
+        end
       end
 
       def space
         universe.send(space_identifier)
+      rescue TypeError
+        raise ::Spaces::Errors::MissingInput, {input: input}
       end
 
       def space_identifier
@@ -27,6 +33,8 @@ module Spaces
         else
           assembly
         end
+      rescue NoMethodError
+        raise ::Spaces::Errors::MissingInput, {input: input}
       end
 
       def assembly ;end
