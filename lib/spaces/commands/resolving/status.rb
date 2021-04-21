@@ -6,7 +6,7 @@ module Resolving
         super.status
       end
 
-      def space_name
+      def space_identifier
         super || :resolutions
       end
 

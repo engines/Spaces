@@ -12,7 +12,7 @@ module Publishing
         input[:force] || false
       end
 
-      def space_name
+      def space_identifier
         super || :publications
       end
 

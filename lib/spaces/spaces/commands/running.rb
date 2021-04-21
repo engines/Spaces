@@ -7,10 +7,10 @@ module Spaces
       end
 
       def space
-        universe.send(space_name)
+        universe.send(space_identifier)
       end
 
-      def space_name
+      def space_identifier
         input[:space]
       end
 
