@@ -32,19 +32,13 @@ module Providers
       %(
         resource "#{type}_storage_pool" "data-pool" {
           name = "data"
-          driver = "dir"
+          driver = "btrfs"
           remote = "lxd-server"
-          config = {
-            source = "/var/lib/containers/#{arena.identifier}/data"
-          }
         }
 
         resource "#{type}_storage_pool" "logs-pool" {
           name = "logs"
-          driver = "dir"
-          config = {
-            source = "/var/lib/containers/#{arena.identifier}/logs"
-          }
+          driver = "btrfs"
         }
       )
     end
