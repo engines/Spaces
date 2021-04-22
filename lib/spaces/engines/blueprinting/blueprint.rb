@@ -1,7 +1,10 @@
+require_relative 'status'
+
 module Blueprinting
   class Blueprint < Emissions::Emission
+    include Blueprinting::Status
 
-    delegate(blueprints: :universe)
+    delegate([:blueprints, :publications] => :universe)
 
     alias_method :blueprint, :itself
 

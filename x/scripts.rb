@@ -39,6 +39,9 @@ Publishing::Commands::Importing.new(
   force: true
 ).run.struct
 
+# get the status of a publication
+Spaces::Commands::Status.new(identifier: 'phpmyadmin', space: :publications).run.struct
+
 # synchronize a blueprint
 Blueprinting::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.struct
 
