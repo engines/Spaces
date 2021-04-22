@@ -30,7 +30,7 @@ module Arenas
     def delete(identifiable)
       super.tap do
         dependent_spaces.each do |s|
-          if (p = s.path.join(identifiable)).exist?
+          if (p = s.path.join(identifiable.identifier)).exist?
             p.rmtree
           end
         end
