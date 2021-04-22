@@ -5,5 +5,6 @@ module Spaces
     class NoSpace < SpacesError; end
     class LostInSpace < SpacesError; end
     class ImportFail < SpacesError; end
+    class CommandFail < SpacesError; end
   end
 end

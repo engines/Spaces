@@ -39,6 +39,9 @@ Publishing::Commands::Importing.new(
   force: true
 ).run.struct
 
+# get the status of a publication
+Spaces::Commands::Status.new(identifier: 'phpmyadmin', space: :publications).run.struct
+
 # synchronize a blueprint
 Blueprinting::Commands::Synchronizing.new(identifier: 'phpmyadmin').run.struct
 
@@ -55,7 +58,7 @@ Blueprinting::Commands::Resolving.new(identifier: 'phpmyadmin', arena_identifier
 Spaces::Commands::Validating.new(identifier: 'development::phpmyadmin', space: :resolutions).run.struct
 
 # get the status of a resolution
-Resolving::Commands::Status.new(identifier: 'development::phpmyadmin').run.struct
+Spaces::Commands::Status.new(identifier: 'development::phpmyadmin', space: :resolutions).run.struct
 
 # get the identifiers of resolutions in an arena
 Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: 'development', space: :resolutions).run.struct

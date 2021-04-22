@@ -19,7 +19,7 @@ module Git
     alias_method :import, :clone
 
     def open_for(model)
-      git.open(path_for(model), log: Logger.new(STDOUT))
+      git.open(path_for(model))
     end
 
     def repository(descriptor)
