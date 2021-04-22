@@ -1,7 +1,10 @@
+require_relative 'status'
+
 module Publishing
   class Blueprint < Emissions::Emission
+    include Publishing::Status
 
-    delegate(publications: :universe)
+    delegate([:blueprints, :publications] => :universe)
 
     attr_accessor :descriptor
 
