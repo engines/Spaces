@@ -26,7 +26,7 @@ module Spaces
     end
 
     def delete(identifiable)
-      writing_path_for(identifiable).rmtree
+      writing_path_for(identifiable.identifier).rmtree
       identifiable.identifier
     rescue Errno::ENOENT
       raise ::Spaces::Errors::LostInSpace, {space: identifier, identifier: identifiable.identifier.to_sym}
