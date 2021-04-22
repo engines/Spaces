@@ -24,7 +24,7 @@ module Provisioning
     end
 
     def delete(identifiable)
-      super.tap { arena_path(identifiable).delete }
+      super.tap { arena_path(identifiable.identifier).delete }
     end
 
     def arena_path(identifiable)
