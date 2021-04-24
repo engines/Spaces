@@ -7,7 +7,7 @@ module Bootstrapping
       end
 
       def blueprint_identifier
-        input[:blueprint_identifier] || (raise ::Spaces::Errors::MissingInput, {input: input})
+        input[:blueprint_identifier]&.to_s || (raise ::Spaces::Errors::MissingInput, {input: input})
       end
 
       protected
