@@ -5,7 +5,7 @@ module Spaces
     class Existing < ::Spaces::Commands::Running
 
       def identifier
-        input[:identifier]
+        input[:identifier]&.to_s
       end
 
       protected
