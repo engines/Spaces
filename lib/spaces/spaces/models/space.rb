@@ -31,7 +31,7 @@ module Spaces
       identifiers.map { |i| by(i) }
     end
 
-    def simple_identifiers
+    def simple_identifiers(*_)
       path.glob('*').map { |p| p.basename.to_s }
     end
 
@@ -43,10 +43,6 @@ module Spaces
 
     def exist?(identifiable)
       path_for(identifiable).exist?
-    end
-
-    def encloses?(file_name)
-      file_name.exist?
     end
 
     def absent(array)

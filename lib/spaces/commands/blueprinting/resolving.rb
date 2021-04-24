@@ -3,7 +3,7 @@ module Blueprinting
     class Resolving < ::Spaces::Commands::Reading
 
       def arena_identifier
-        input[:arena_identifier]
+        input[:arena_identifier]&.to_s
       end
 
       def model

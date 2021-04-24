@@ -20,12 +20,12 @@ module Blueprinting
       delete(descriptor) if force && imported?(descriptor)
 
       unless imported?(descriptor)
-        synchronize_with(publications, descriptor.identifier)
+        synchronize_with(publications, descriptor)
       end
     end
 
-    def synchronize_with(space, identifier)
-      identifier.tap do |i|
+    def synchronize_with(space, identifiable)
+      identifiable.tap do |i|
         space.by(i).tap do |m|
           save(m.localized)
           copy_auxiliaries_for(space, m)
