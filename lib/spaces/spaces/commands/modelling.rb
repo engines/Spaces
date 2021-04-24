@@ -9,7 +9,7 @@ module Spaces
       end
 
       def fresh_model
-        @model ||= model_class.new(identifier: identifier, struct: model_struct)
+        @model ||= model_class.new(identifiable: identifier, struct: model_struct)
       end
 
       def identifier

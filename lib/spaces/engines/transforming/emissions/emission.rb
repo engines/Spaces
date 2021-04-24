@@ -50,7 +50,7 @@ module Emissions
       has?(:scaling) ? scaling.count : 1
     end
 
-    def empty; klass.new(identifier: identifier) ;end
+    def empty; klass.new(identifiable: identifier) ;end
 
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)
