@@ -45,10 +45,6 @@ module Spaces
       path_for(identifiable).exist?
     end
 
-    def encloses?(file_name)
-      file_name.exist?
-    end
-
     def absent(array)
       array.reject { |r| exist?(r) }
     end
