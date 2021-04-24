@@ -31,7 +31,7 @@ module Spaces
       identifiers.map { |i| by(i) }
     end
 
-    def simple_identifiers
+    def simple_identifiers(*_)
       path.glob('*').map { |p| p.basename.to_s }
     end
 
