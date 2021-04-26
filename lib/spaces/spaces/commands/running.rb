@@ -2,7 +2,10 @@ module Spaces
   module Commands
     class Running < ::Spaces::Model
 
+      def result; struct[:result] ;end
+      def errors; struct[:errors] ;end
       def payload; struct.to_h.without(:input) ;end
+
       def run
         tap do
           _result
@@ -10,6 +13,10 @@ module Spaces
           struct.errors = e.inspect
         end
       end
+
+      def has_run?; !payload.empty? ;end
+      def success?; has_run? && errors.nil? ;end
+      def fail?; has_run? && !success? ;end
 
       def space
         universe.send(space_identifier)
