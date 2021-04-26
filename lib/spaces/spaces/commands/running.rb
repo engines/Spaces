@@ -2,6 +2,7 @@ module Spaces
   module Commands
     class Running < ::Spaces::Model
 
+      def payload; struct.to_h.without(:input) ;end
       def run
         tap do
           _result
