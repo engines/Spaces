@@ -6,7 +6,7 @@ module Spaces
         tap do
           _result
         rescue ::Spaces::Errors::SpacesError => e
-          struct.exception = e.inspect
+          struct.errors = e.inspect
         end
       end
 
