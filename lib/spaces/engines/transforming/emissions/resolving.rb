@@ -6,14 +6,14 @@ module Emissions
         m.predecessor = self
         m.arena = arena
         m.struct = arena.struct.without(:bindings).merge(struct)
-        m.struct.identifier = "#{arena.identifier}/#{identifier}"
+        m.cache_resolution_identifiers(arena.identifier, identifier)
       end.flattened.resolved
     end
 
     def resolved
       empty.tap do |m|
         m.predecessor = predecessor
-        m.struct = m.struct.merge(
+        m.struct = struct.merge(
           OpenStruct.new(division_map.transform_values { |v| v.resolved.struct } )
         )
       end
@@ -35,6 +35,14 @@ module Emissions
 
     def empty_resolution; resolution_class.new ;end
     def resolution_class; ::Resolving::Resolution ;end
+
+    protected
+
+    def cache_resolution_identifiers(arena_identifier, blueprint_identifier)
+      struct.identifier = "#{arena_identifier.with_identifier_separator}#{blueprint_identifier}"
+      struct.arena_identifier = arena_identifier
+      struct.blueprint_identifier = blueprint_identifier
+    end
 
   end
 end

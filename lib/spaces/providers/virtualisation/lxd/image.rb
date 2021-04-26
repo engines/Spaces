@@ -3,15 +3,18 @@ module Providers
     class Image < ::Providers::Image
 
       class << self
-        def inflatables; [:name, :output_image, :publish_properties] ;end
+        def features; [:name, :output_image, :publish_properties] ;end
       end
 
-      def publish_properties; struct.publish_properties || defaults[:publish_properties] ;end
+      def inflated; self ;end
+      def deflated; self ;end
+
+      def publish_properties; struct.publish_properties || derived_features[:publish_properties] ;end
 
       protected
 
-      def defaults
-        @defaults ||= {
+      def derived_features
+        @derived_features ||= {
           name: default_name,
           output_image: default_output_image,
           publish_properties: {

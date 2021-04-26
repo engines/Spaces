@@ -13,10 +13,6 @@ module Divisions
 
     delegate([:emission, :context_identifier] => :division)
 
-    def inflated
-      duplicate(self).tap { |s| s.struct = s.struct.merge(inflatables) }
-    end
-
     def empty; self.class.new(division: division) ;end
 
     def initialize(division:, struct: nil)

@@ -19,9 +19,9 @@ module Providers
     def remote_stanza
       %(
         lxd_remote {
-          name     = "local-lxd-server"
+          name     = "lxd-server"
           scheme   = "https"
-          address  = "127.0.0.1"
+          address  = "192.168.20.220"
           password = "#{configuration.password}"
           default  = true
         }
@@ -32,18 +32,13 @@ module Providers
       %(
         resource "#{type}_storage_pool" "data-pool" {
           name = "data"
-          driver = "dir"
-          config = {
-            source = "/var/lib/containers/#{arena.identifier}/data"
-          }
+          driver = "btrfs"
+          remote = "lxd-server"
         }
 
         resource "#{type}_storage_pool" "logs-pool" {
           name = "logs"
-          driver = "dir"
-          config = {
-            source = "/var/lib/containers/#{arena.identifier}/logs"
-          }
+          driver = "btrfs"
         }
       )
     end

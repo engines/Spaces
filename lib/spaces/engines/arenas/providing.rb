@@ -2,7 +2,7 @@ module Arenas
   module Providing
 
     def container_type
-      "#{runtime_type}_container"
+      [runtime_type, 'container'].compact.join('_')
     end
 
     def runtime_type
@@ -18,7 +18,7 @@ module Arenas
     end
 
     def provider_map
-      @provider_map ||= resolution_map.select { |_, v| v.has?(:provider) }
+      @provider_map ||= bootstrap_map.select { |_, v| v.has?(:provider) }
     end
 
     def method_missing(m, *args, &block)

@@ -1,12 +1,14 @@
 require_relative 'flattening'
 require_relative 'packing'
 require_relative 'provisioning'
+require_relative 'status'
 
 module Resolving
   class Resolution < ::Emissions::Emission
     include Resolving::Flattening
     include Resolving::Packing
     include Resolving::Provisioning
+    include Resolving::Status
 
     class << self
       def composition_class; Composition ;end
@@ -14,13 +16,13 @@ module Resolving
 
     delegate(
       runtime_binding: :arena,
-      resolutions: :universe,
+      [:resolutions, :packs, :provisioning] => :universe,
       [:arenas, :blueprints] => :resolutions
     )
 
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
-    def arena_identifier; identifier.split('/').first ;end
+    def arena_identifier; identifier.split_compound.first ;end
 
     alias_accessor :blueprint, :predecessor
     alias_accessor :binder, :predecessor
@@ -30,12 +32,10 @@ module Resolving
     end
 
     def connections_resolved
-      connections.map { |c| c.with_embeds.resolved_in(arena) }
+      connections_down(emission: :blueprint).map { |c| c.with_embeds.resolved_in(arena) }
     end
 
-    def connections; connect_targets.map(&:blueprint) ;end
-
-    def embeds_including_blueprint; [blueprint, embeds].flatten.compact.reverse ;end
+    def embeds_including_blueprint; [blueprint, embeds_down].flatten.compact.reverse ;end
 
     def content_into(directory, source:)
       resolutions.file_names_for(directory, source.context_identifier).map do |t|

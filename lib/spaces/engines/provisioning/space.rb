@@ -9,12 +9,6 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
-    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
-      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
-        "#{p.relative_path_from(path)}"
-      end
-    end
-
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
@@ -23,10 +17,18 @@ module Provisioning
 
     def save(model)
       ensure_connections_exist_for(model)
-      if model.resolution.provisioning_required?
-        Pathname.new("#{arenas.path}/#{model.identifier}.tf").write(model.payload)
+      if model.resolution.provisionable?
+        arena_path(model).write(model.artifact)
       end
       super
+    end
+
+    def delete(identifiable)
+      super.tap { arena_path(identifiable.identifier).delete }
+    end
+
+    def arena_path(identifiable)
+      Pathname.new("#{arenas.path}/#{identifiable.identifier.as_path}.#{arenas.artifact_extension}")
     end
 
     protected

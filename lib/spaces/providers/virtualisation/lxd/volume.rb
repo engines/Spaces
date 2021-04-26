@@ -2,11 +2,12 @@ module Providers
   class Lxd < ::Providers::Provider
     class Volume < ::Providers::Volume
 
-      def blueprint_stanzas_for(_)
+      def resolution_stanzas_for(_)
         %Q(
           resource "lxd_volume" "#{volume_name}" {
             name = "#{volume_name}"
             pool = "#{pool_name}"
+            remote = "lxd-server"
           }
         )
       end

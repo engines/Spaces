@@ -1,27 +1,37 @@
 require_relative 'boostrapping'
-require_relative 'resolving'
 require_relative 'providing'
+require_relative 'bootstrap_resolving'
+require_relative 'packing'
+require_relative 'provisioning'
 
 module Arenas
   class Arena < ::Emissions::Emission
     include ::Arenas::Bootstrapping
-    include ::Arenas::Resolving
     include ::Arenas::Providing
+    include ::Arenas::BootstrapResolving
+    include ::Arenas::Packing
+    include ::Arenas::Provisioning
 
     class << self
       def composition_class; Composition ;end
     end
 
-    delegate(
-      [:arenas, :blueprints] => :universe,
-      runtime_binding: :bindings
-    )
+    delegate([:arenas, :blueprints] => :universe)
 
-    def embedding_keys; @embedding_keys ||= division_keys ;end
-
-    def payload
-      [required_stanza, arena_stanzas].join
+    def resolutions
+      identifiers.map { |i| universe.resolutions.by(i) }
     end
+
+    def identifiers
+      universe.resolutions.identifiers(arena_identifier: identifier)
+    end
+
+    def runtime_binding
+      @runtime_binding ||= deep_bindings.detect(&:runtime_binding?)
+    end
+
+    def artifact; arena_stanzas ;end
+    def initial_artifact; required_stanza ;end
 
     def required_stanza
       %(

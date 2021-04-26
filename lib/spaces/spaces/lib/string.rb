@@ -1,4 +1,8 @@
+require_relative 'identifiable'
+
 class String
+  include Identifiable
+
   BLANK_RE = /\A[[:space:]]*\z/
 
   def camelize
@@ -34,5 +38,4 @@ class String
     self
   end
 
-  def complete?; true ;end
 end

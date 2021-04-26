@@ -1,14 +1,14 @@
 module Packing
 
   module Payloading
-    def payload
+    def artifact
       keys.inject({}) do |m, k|
-        m.tap { m[k] = payload_for(k) }
+        m.tap { m[k] = artifact_for(k) }
       end.compact
     end
 
-    def payload_for(key)
-      division_map[key]&.packing_payload || struct[key].to_h
+    def artifact_for(key)
+      division_map[key]&.packing_artifact || struct[key].to_h
     end
   end
 
@@ -20,8 +20,8 @@ module Packing
     end
 
     delegate(
-      [:arena, :connect_targets, :images] => :resolution,
-      post_processor_payloads: :images
+      [:arena, :connect_bindings, :images] => :resolution,
+      post_processor_artifacts: :images
     )
 
     alias_accessor :resolution, :predecessor

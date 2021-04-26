@@ -1,10 +1,18 @@
 class Hash
 
-  def except(*keys)
-    duplicate(self).except!(*keys)
+  def symbolize_keys
+    transform_keys(&:to_sym)
   end
 
-  def except!(*keys)
+  def stringify_keys
+    transform_keys(&:to_s)
+  end
+
+  def without(*keys)
+    duplicate(self).without!(*keys)
+  end
+
+  def without!(*keys)
     keys.each { |key| delete(key) }
     self
   end
@@ -17,7 +25,7 @@ class Hash
     replace(reverse_merge(other_hash))
   end
 
-  def to_json
+  def to_json(*args)
     JSON.pretty_generate(self)
   end
 

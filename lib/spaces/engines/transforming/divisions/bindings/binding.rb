@@ -1,11 +1,26 @@
 require 'resolv'
+require_relative 'publishing'
+require_relative 'graphing'
+require_relative 'resolving'
+require_relative 'packing'
 
 module Divisions
   class Binding < ::Divisions::TargetingSubdivision
+    include ::Divisions::Binding::Publishing
+    include ::Divisions::Binding::Graphing
+    include ::Divisions::Binding::Resolving
+    include ::Divisions::Binding::Packing
+
+    class << self
+      def features; [:type, :identifier, :target_identifier, :configuration] ;end
+    end
+
+    delegate(publications: :universe)
 
     alias_accessor :arena, :emission
 
-    def type; struct.type ;end
+    def type; struct.type || derived_features[:type] ;end
+
     def embed?; type == 'embed' ;end
 
     def runtime_binding?; identifier == 'containing' ;end
@@ -14,53 +29,41 @@ module Divisions
       blueprint.provider.type if runtime_binding?
     end
 
-    def localized
-      empty.tap do |m|
-        m.struct = struct.without(:target).tap do |s|
-          s.identifier ||= target_identifier
-          s.target_identifier = target_identifier
-        end
-      end
-    end
-
-    def flattened
-      empty.tap do |m|
-        m.struct = struct.tap do |s|
-          s.configuration = flattened_configuration
-        end
-      end
-    end
-
-    def flattened_configuration
-      unresolved_struct.merge(target_configuration).merge(struct_configuration)
-    end
-
-    def resolved
-      super.tap do |d|
-        d.struct.configuration = Divisions::ResolvableStruct.new(struct.configuration, self).resolved
-      end
-    end
-
-    def infix_qualifier; target_identifier ;end
+    def configuration; struct.configuration || derived_features[:configuration] ;end
 
     def target_configuration
       @target_configuration ||= blueprint.binding_target.struct
     end
 
-    def struct_configuration; struct.configuration || OpenStruct.new ;end
-
-    def keys; struct_configuration.to_h.keys ;end
-
-    def environment_variables
-      struct_configuration.to_h.map { |k, v| "--env=#{k}=#{v}" }.join(' ')
+    def embed_bindings
+      deep_bindings_of_type(:embed)
     end
 
+    def deep_bindings
+      deep_bindings_of_type(:deep)
+    end
+
+    def deep_bindings_of_type(type)
+      [self, blueprint.bindings.send("#{type}_bindings")].flatten.uniq(&:identifier)
+    end
+
+    def keys; configuration.to_h.keys ;end
+
     def method_missing(m, *args, &block)
-      keys&.include?(m) ? struct_configuration[m] : super
+      keys&.include?(m) ? configuration[m] : super
     end
 
     def respond_to_missing?(m, *)
       keys&.include?(m) || super
+    end
+
+    protected
+
+    def derived_features
+      @derived_features ||= {
+        type: 'connect',
+        configuration: OpenStruct.new
+      }
     end
 
   end

@@ -7,12 +7,6 @@ module Packing
 
     delegate(resolutions: :universe)
 
-    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
-      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
-        "#{p.relative_path_from(path)}"
-      end
-    end
-
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
@@ -20,26 +14,22 @@ module Packing
     end
 
     def save(model)
-      raise PackWithoutImagesError, "Model doesn't have images: #{model.identifier}" unless model.has?(:builders)
+      raise PackWithoutImagesError, {identifier: model.identifier} unless model.has?(:builders)
 
       ensure_connections_exist_for(model)
       super.tap do
-        path_for(model).join("#{payload_name}.json").write(model.payload.to_json)
+        path_for(model).join("#{artifact_name}.json").write(model.artifact.to_json)
       end
     rescue PackWithoutImagesError => e
       warn(error: e, identifier: model.identifier, klass: klass)
     end
 
-    def payload_path_for(model)
-      path_for(model).join("#{payload_name}.*")
-    end
-
-    def payload_name; 'template' ;end
+    def artifact_name; 'template' ;end
 
     protected
 
     def ensure_connections_exist_for(model)
-      model.connections.map(&:packed).each { |p| save(p) }
+      model.connections_down.map(&:packed).each { |p| save(p) }
     end
 
   end

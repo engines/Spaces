@@ -1,8 +1,9 @@
-require_relative 'auxiliaries'
+require_relative 'content'
 require_relative 'associating'
-require_relative 'localizing'
+require_relative 'publishing'
 require_relative 'inflating'
 require_relative 'targeting'
+require_relative 'topology'
 require_relative 'embedding'
 require_relative 'resolving'
 require_relative 'hashing'
@@ -10,11 +11,12 @@ require_relative 'hashing'
 module Emissions
   class Emission < ::Transforming::Transformable
     include ::Divisions::Dividing
-    include Auxiliaries
+    include Content
     include Associating
-    include Localizing
+    include Publishing
     include Inflating
     include Targeting
+    include Topology
     include Embedding
     include Resolving
     include Hashing
@@ -48,11 +50,11 @@ module Emissions
       has?(:scaling) ? scaling.count : 1
     end
 
-    def empty; klass.new(identifier: identifier) ;end
+    def empty; klass.new(identifiable: identifier) ;end
 
-    def initialize(struct: nil, identifier: nil)
+    def initialize(struct: nil, identifiable: nil)
       super(struct: struct)
-      self.struct.identifier = identifier if identifier
+      self.struct.identifier = identifiable.identifier if identifiable
     end
 
     def method_missing(m, *args, &block)

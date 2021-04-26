@@ -2,11 +2,11 @@ module Providers
   class Lxd < ::Providers::Provider
     class Container < ::Providers::Container
 
-      def blueprint_stanzas_for(_)
+      def resolution_stanzas_for(_)
         %(
           resource "#{container_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
-            image     = "local-lxd-server:#{image_name}"
+            image     = "lxd-server:#{image_name}"
             ephemeral = false
             profiles = ["default"]
 
@@ -34,11 +34,11 @@ module Providers
       end
 
       def dependency_stanza
-        %(depends_on=[#{dependency_string}]) if connections.any?
+        %(depends_on=[#{dependency_string}]) if connections_down.any?
       end
 
       def connect_services_stanzas
-        connect_targets.map do |c|
+        connect_bindings.map do |c|
           r = c.resolution
           if r.has?(:service_tasks)
             r.service_tasks.connection_stanza_for(c)
@@ -61,7 +61,7 @@ module Providers
       end
 
       def dependency_string
-        connections.map { |c| "#{container_type}.#{c.blueprint_identifier}" }.join(', ')
+        connections_down.map { |c| "#{container_type}.#{c.blueprint_identifier}" }.join(', ')
       end
 
     end

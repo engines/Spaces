@@ -4,16 +4,20 @@ module Resolving
     def provisioned
       empty_provisions.tap do |m|
         m.predecessor = self
-        m.struct.identifier = identifier
+        m.cache_resolution_identifiers(arena_identifier, blueprint_identifier)
       end
     end
 
-    def provisioning_required?
+    def resolvable?
+      !bootstrap?
+    end
+
+    def provisionable?
       !(bootstrap? || defines_runtime?)
     end
 
     def bootstrap?
-      arena.embeds.map(&:identifier).include?(blueprint_identifier)
+      arena.bindings.map(&:identifier).include?(blueprint_identifier)
     end
 
     def defines_runtime?

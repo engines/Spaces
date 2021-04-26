@@ -5,12 +5,12 @@ module Transforming
 
     def identifier; struct[:identifier] ;end
 
-    def blueprint_identifier; identifier.split('/').last ;end
+    def blueprint_identifier; identifier.split_compound.last ;end
 
     def descriptor_class; ::Spaces::Descriptor ;end
-    
+
     def arena_stanzas; ;end
-    def blueprint_stanzas_for(_); ;end
+    def resolution_stanzas_for(_); ;end
 
     def random(length); SecureRandom.hex(length.to_i) ;end
 

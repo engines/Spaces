@@ -5,8 +5,20 @@ module Resolving
       empty_pack.tap do |m|
         m.predecessor = self
         m.struct = builders_for(images)
-        m.struct.identifier = identifier
-      end
+        m.cache_resolution_identifiers(arena_identifier, blueprint_identifier)
+      end if packable?
+    end
+
+    def packable?
+      @packable ||= images.any? && (binding_target.empty? || bindings_to_here_imply_packable?)
+    end
+
+    def bindings_to_here_imply_packable?
+      bindings_to_here.any?(&:implies_packable?)
+    end
+
+    def bindings_to_here
+      @bindings_to_here ||= resolutions.bindings_to(self)
     end
 
     def builders_for(images); OpenStruct.new(builders: images.inflated.struct) ;end

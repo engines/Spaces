@@ -40,6 +40,7 @@ require 'spaces/recovery'
 
 req 'spaces/spaces/requires'
 req 'spaces/engines/requires'
+req 'spaces/commands/requires'
 
 require_all 'spaces/providers'
 

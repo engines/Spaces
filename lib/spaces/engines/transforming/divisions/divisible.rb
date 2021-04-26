@@ -13,7 +13,7 @@ module Divisions
 
     delegate(
       subdivision_class: :klass,
-      any?: :all
+      [:any?, :empty?, :map, :count] => :all
     )
 
     def related_divisions
@@ -21,7 +21,9 @@ module Divisions
     end
 
     def localized; with_all_as(:localized) ;end
+    def globalized; with_all_as(:globalized) ;end
     def inflated; with_all_as(:inflated) ;end
+    def deflated; with_all_as(:deflated) ;end
     def resolved; with_all_as(:resolved) ;end
 
     def with_all_as(transformation)
@@ -47,8 +49,8 @@ module Divisions
 
     def arena_stanzas; all.map(&:arena_stanzas) ;end
 
-    def blueprint_stanzas_for(resolution)
-      all.map { |d| d.blueprint_stanzas_for(resolution) }.flatten.compact
+    def resolution_stanzas_for(resolution)
+      all.map { |d| d.resolution_stanzas_for(resolution) }.flatten.compact
     end
 
     def struct_with(other); [struct, other.struct].flatten.uniq ;end

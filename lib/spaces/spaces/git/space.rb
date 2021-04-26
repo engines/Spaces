@@ -7,17 +7,19 @@ module Git
       path_for(descriptor).exist?
     end
 
-    def import(descriptor)
+    def clone(descriptor)
       ensure_space
       begin
         git.clone(repository(descriptor), descriptor.identifier, branch: descriptor.branch, path: path, depth: 0)
       rescue ::Git::GitExecuteError => e
-        warn(error: e, descriptor: descriptor, verbosity: [:error])
+        raise ::Spaces::Errors::ImportFail, e.message
       end
     end
 
+    alias_method :import, :clone
+
     def open_for(model)
-      git.open(path_for(model), log: Logger.new(STDOUT))
+      git.open(path_for(model))
     end
 
     def repository(descriptor)
