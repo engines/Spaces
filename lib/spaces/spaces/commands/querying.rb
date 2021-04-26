@@ -5,7 +5,7 @@ module Spaces
     class Querying < Running
 
       def method_signature
-        [method, input.except(:method, :space)]
+        [method, input.without(:method, :space)]
       end
 
       def method
