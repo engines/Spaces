@@ -8,11 +8,11 @@ class Hash
     transform_keys(&:to_s)
   end
 
-  def except(*keys)
-    duplicate(self).except!(*keys)
+  def without(*keys)
+    duplicate(self).without!(*keys)
   end
 
-  def except!(*keys)
+  def without!(*keys)
     keys.each { |key| delete(key) }
     self
   end
