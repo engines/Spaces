@@ -23,6 +23,8 @@ module Spaces
         alias_method "#{to}=", "#{from}="
       end
 
+      def descriptor_class; Descriptor ;end
+
       def klasses(inside:, inheriting:)
         inside.constants.map { |c| inside.const_get(c) }.select {|k| k < inheriting }
       end
@@ -31,7 +33,7 @@ module Spaces
     attr_accessor :struct
 
     delegate(
-      [:identifier, :namespace, :qualifier, :spout, :klasses] => :klass
+      [:identifier, :namespace, :qualifier, :spout, :descriptor_class, :klasses] => :klass
     )
 
     def klass; self.class ;end
