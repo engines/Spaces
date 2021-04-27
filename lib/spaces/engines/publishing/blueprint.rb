@@ -1,27 +1,23 @@
-require_relative 'status'
-
 module Publishing
   class Blueprint < Emissions::Emission
-    include Publishing::Status
 
     delegate([:blueprints, :publications] => :universe)
 
-    attr_accessor :descriptor
+    def repository
+      @respository ||= publications.respository_for(descriptor)
+    end
 
     def descriptor
-      @descriptor ||= descriptor_class.new(repository: repository, branch: branch)
+      @descriptor ||= descriptor_class.new(identifier: identifier)
     end
 
-    def repository
-      opened.remote.url
-    end
-
-    def branch
-      opened.branches.local.detect(&:current).name
-    end
-
-    def opened
-      @opened ||= publications.open_for(self)
+    def status
+      OpenStruct.new(
+        descriptor: descriptor.struct,
+        blueprint: {
+          exist: blueprints.exist?(identifier),
+        }
+      )
     end
 
   end
