@@ -39,6 +39,9 @@ Publishing::Commands::Importing.new(
   force: true
 ).run.payload
 
+# export a blueprint
+Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
+
 # get the status of a publication
 Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
 

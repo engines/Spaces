@@ -18,25 +18,48 @@ module Spaces
         space.by(descriptor)
       end
 
-      delegate([:repository_name, :identifier, :branch_name] => :descriptor)
-
-      def clone_remote
-        git.clone(repository_name, identifier, branch: branch_name, path: space.path, depth: 0)
-      rescue ::Git::GitExecuteError => e
-        raise ::Spaces::Errors::ImportFail, e.message
+      def export(**args)
+        descriptor.identifier.tap do
+          commit(**args)
+          push_remote
+        end
       end
 
       def pull_remote
         opened.pull(:origin, branch_name)
-      rescue ::Git::GitExecuteError => e
-        raise ::Spaces::Errors::ImportFail, e.message
+      rescue git_error => e
+        raise failure, e.message
+      end
+
+      def push_remote
+        opened.push(:origin, branch_name)
+      rescue git_error => e
+        raise failure, e.message
+      end
+
+      def commit(message: nil)
+        opened.commit_all("#{message || default_commit_message} [BY SPACES]")
+      rescue git_error => e
+        raise failure, e.message
       end
 
       def opened
         @opened ||= git.open(space.path_for(descriptor), log: logger)
       end
 
+      def default_commit_message; "Exported on #{Time.now}" ;end
+
+      delegate([:repository_name, :identifier, :branch_name] => :descriptor)
+
+      def clone_remote
+        git.clone(repository_name, identifier, branch: branch_name, path: space.path, depth: 0)
+      rescue git_error => e
+        raise fail, e.message
+      end
+
       def git; ::Git ;end
+      def git_error; ::Git::GitExecuteError ;end
+      def failure; ::Spaces::Errors::RepositoryFail ;end
 
       def initialize(descriptor, space:)
         self.descriptor = descriptor
