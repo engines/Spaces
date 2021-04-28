@@ -28,19 +28,19 @@ module Spaces
       def pull_remote
         opened.pull(:origin, branch_name)
       rescue git_error => e
-        raise failure, e.message
+        raise_failure_for(e)
       end
 
       def push_remote
         opened.push(:origin, branch_name)
       rescue git_error => e
-        raise failure, e.message
+        raise_failure_for(e)
       end
 
       def commit(message: nil)
         opened.commit_all("#{message || default_commit_message} [BY SPACES]")
       rescue git_error => e
-        raise failure, e.message
+        raise_failure_for(e)
       end
 
       def opened
@@ -54,7 +54,11 @@ module Spaces
       def clone_remote
         git.clone(repository_name, identifier, branch: branch_name, path: space.path, depth: 0)
       rescue git_error => e
-        raise fail, e.message
+        raise_failure_for(e)
+      end
+
+      def raise_failure_for(exception)
+        raise failure, {message: exception.message}
       end
 
       def git; ::Git ;end
