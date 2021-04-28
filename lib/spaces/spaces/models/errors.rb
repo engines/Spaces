@@ -13,7 +13,7 @@ module Spaces
     class MissingInput < SpacesError; end
     class NoSpace < SpacesError; end
     class LostInSpace < SpacesError; end
-    class ImportFail < SpacesError; end
+    class RepositoryFail < SpacesError; end
     class CommandFail < SpacesError; end
   end
 end
