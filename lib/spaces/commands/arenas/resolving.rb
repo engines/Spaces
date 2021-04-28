@@ -1,4 +1,4 @@
-module Bootstrapping
+module Arenas
   module Commands
     class Resolving < ::Arenas::Commands::Saving
 
@@ -7,7 +7,7 @@ module Bootstrapping
       protected
 
       def commit
-        space.save_bootstrap_resolutions_for(model)
+        space.save_resolutions_for(model)
       end
 
     end

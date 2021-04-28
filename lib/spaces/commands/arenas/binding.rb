@@ -1,9 +1,9 @@
-module Bootstrapping
+module Arenas
   module Commands
-    class Initializing < ::Arenas::Commands::Saving
+    class Binding < Saving
 
       def model
-        @model ||= current_model.bootstrapped_with(blueprint_identifier)
+        @model ||= current_model.bind_with(blueprint_identifier)
       end
 
       def blueprint_identifier
