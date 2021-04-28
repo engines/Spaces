@@ -15,25 +15,25 @@ Spaces::Commands::Deleting.new(identifier: :development, space: :arenas).run.pay
 # save a basic arena with default associations
 Arenas::Commands::Saving.new(identifier: :development).run.payload
 
-# import an arena bootstrap
+# import a bootstrappy blueprint
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/arena'},
   force: true
 ).run.payload
 
-# bootstrap the arena
-Bootstrapping::Commands::Initializing.new(identifier: :development, blueprint_identifier: 'arena').run.payload
+# bind the blueprint to the arena
+Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :arena).run.payload
 
-# resolve the bootstrap
-Bootstrapping::Commands::Resolving.new(identifier: :development).run.payload
+# resolve the arena so far
+Arenas::Commands::Resolving.new(identifier: :development).run.payload
 
 # save all packs for an arena
 Arenas::Commands::Packing.new(identifier: :development).run.payload
 
-# provision the bootstrap
+# provision the arena
 Arenas::Commands::Provisioning.new(identifier: :development).run.payload
 
-# import a blueprint
+# import an application blueprint
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
   force: true
@@ -54,8 +54,11 @@ Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 # get the topology for a blueprint
 Spaces::Commands::Graphing.new(identifier: :phpmyadmin, space: :blueprints).run.payload
 
-# resolve a blueprint
-Blueprinting::Commands::Resolving.new(identifier: :phpmyadmin, arena_identifier: :development).run.payload
+# bind another blueprint to the arena
+Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :phpmyadmin).run.payload
+
+# resolve the arena again for the new bindings
+Arenas::Commands::Resolving.new(identifier: :development).run.payload
 
 # validate a resolution
 Spaces::Commands::Validating.new(identifier: 'development::phpmyadmin', space: :resolutions).run.payload
@@ -75,10 +78,10 @@ Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :developm
 # get the artifacts for a pack
 Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.payload
 
-# save provisions for resolution
-Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.payload
+# # save provisions for resolution
+# Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.payload
 
-# save all provisions for an arena
+# provision the arena again
 Arenas::Commands::Provisioning.new(identifier: :development).run.payload
 
 # params = {

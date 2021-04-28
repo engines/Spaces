@@ -1,7 +1,7 @@
 module Arenas
   module Provisioning
 
-    def provisionables; resolutions.select(&:provisionable?) ;end
+    def provisionables; bound_resolutions.select(&:provisionable?) ;end
 
   end
 end

@@ -18,15 +18,7 @@ module Arenas
     end
 
     def provider_map
-      @provider_map ||= bootstrap_map.select { |_, v| v.has?(:provider) }
-    end
-
-    def method_missing(m, *args, &block)
-      provider_division_map["#{m}"] || super
-    end
-
-    def respond_to_missing?(m, *)
-      provider_division_map.keys.include?("#{m}") || super
+      @provider_map ||= resolution_map.select { |_, v| v.has?(:provider) }
     end
 
   end

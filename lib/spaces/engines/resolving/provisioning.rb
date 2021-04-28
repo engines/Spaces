@@ -8,16 +8,8 @@ module Resolving
       end
     end
 
-    def resolvable?
-      !bootstrap?
-    end
-
     def provisionable?
-      !(bootstrap? || defines_runtime?)
-    end
-
-    def bootstrap?
-      arena.bindings.map(&:identifier).include?(blueprint_identifier)
+      !defines_runtime?
     end
 
     def defines_runtime?
