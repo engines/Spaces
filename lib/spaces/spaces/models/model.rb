@@ -11,7 +11,6 @@ module Spaces
 
     delegate(universe: :klass)
 
-    # TODO: work out what to do here.
     def file_name; klass.qualifier ;end
     def subpath; Pathname(''); end
     def uniqueness; [klass.name, identifier] ;end

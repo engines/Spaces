@@ -19,7 +19,9 @@ module Spaces
       def default_model_class ;end
     end
 
-    delegate([:identifier, :universe, :default_model_class] => :klass)
+    delegate([:universe, :default_model_class] => :klass)
+
+    def identifier; struct.identifier ;end
 
     def ensure_space
       path.mkpath
@@ -29,7 +31,7 @@ module Spaces
       identifiers.map { |i| by(i) }
     end
 
-    def simple_identifiers
+    def simple_identifiers(*_)
       path.glob('*').map { |p| p.basename.to_s }
     end
 
@@ -43,12 +45,12 @@ module Spaces
       path_for(identifiable).exist?
     end
 
-    def encloses?(file_name)
-      file_name.exist?
-    end
-
     def absent(array)
       array.reject { |r| exist?(r) }
+    end
+
+    def initialize(identifier)
+      self.struct = OpenStruct.new(identifier: identifier.to_sym)
     end
 
   end

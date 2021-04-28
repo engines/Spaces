@@ -14,11 +14,7 @@ module Arenas
     def dependent_spaces; [resolutions, packs, provisioning] ;end
 
     def save_bootstrap_resolutions_for(model)
-      model.resolutions.map { |r| resolutions.save(r) }
-    end
-
-    def save_bootstrap_provisionings_for(model)
-      model.provisioned.map { |p| provisioning.save(p) }
+      model.bootstrap_resolutions.map { |r| resolutions.save(r) }
     end
 
     def save(model)
@@ -31,14 +27,13 @@ module Arenas
       initial_file_name_for(model).write(model.initial_artifact)
     end
 
-    def delete(model)
+    def delete(identifiable)
       super.tap do
         dependent_spaces.each do |s|
-          if (p = s.path.join(model.identifier)).exist?
+          if (p = s.path.join(identifiable.identifier)).exist?
             p.rmtree
           end
         end
-        model.clear_resolution_map
       end
     end
 

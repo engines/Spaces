@@ -1,24 +1,23 @@
 module Publishing
   class Blueprint < Emissions::Emission
 
-    delegate(publications: :universe)
-
-    attr_accessor :descriptor
-
-    def descriptor
-      @descriptor ||= descriptor_class.new(repository: repository, branch: branch)
-    end
+    delegate([:blueprints, :publications] => :universe)
 
     def repository
-      opened.remote.url
+      @respository ||= publications.respository_for(descriptor)
     end
 
-    def branch
-      opened.branches.local.detect(&:current).name
+    def descriptor
+      @descriptor ||= descriptor_class.new(identifier: identifier)
     end
 
-    def opened
-      @opened ||= publications.open_for(self)
+    def status
+      OpenStruct.new(
+        descriptor: descriptor.struct,
+        blueprint: {
+          exist: blueprints.exist?(identifier),
+        }
+      )
     end
 
   end

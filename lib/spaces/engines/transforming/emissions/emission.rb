@@ -50,11 +50,11 @@ module Emissions
       has?(:scaling) ? scaling.count : 1
     end
 
-    def empty; klass.new(identifier: identifier) ;end
+    def empty; klass.new(identifiable: identifier) ;end
 
-    def initialize(struct: nil, identifier: nil)
+    def initialize(struct: nil, identifiable: nil)
       super(struct: struct)
-      self.struct.identifier = identifier if identifier
+      self.struct.identifier = identifiable.identifier if identifiable
     end
 
     def method_missing(m, *args, &block)
