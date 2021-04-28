@@ -1,5 +1,9 @@
 module Emissions
-  module Targeting
+  module Binding
+
+    def connected_blueprints
+      connect_bindings.map(&:blueprint)
+    end
 
     def all_bindings; bindings_of_type(:all) ;end
     def connect_bindings; bindings_of_type(:connect) ;end

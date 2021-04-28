@@ -1,4 +1,8 @@
+require_relative 'identifiable'
+
 class Symbol
+  include Identifiable
+
   def camelize; to_s.camelize ;end
   def snakize; to_s.snakize ;end
   def singularize; to_s.singularize ;end

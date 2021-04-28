@@ -1,14 +1,14 @@
-require_relative 'boostrapping'
+require_relative 'binding'
 require_relative 'providing'
-require_relative 'bootstrap_resolving'
+require_relative 'resolving'
 require_relative 'packing'
 require_relative 'provisioning'
 
 module Arenas
   class Arena < ::Emissions::Emission
-    include ::Arenas::Bootstrapping
+    include ::Arenas::Binding
     include ::Arenas::Providing
-    include ::Arenas::BootstrapResolving
+    include ::Arenas::Resolving
     include ::Arenas::Packing
     include ::Arenas::Provisioning
 
@@ -17,14 +17,6 @@ module Arenas
     end
 
     delegate([:arenas, :blueprints] => :universe)
-
-    def resolutions
-      identifiers.map { |i| universe.resolutions.by(i) }
-    end
-
-    def identifiers
-      universe.resolutions.identifiers(arena_identifier: identifier)
-    end
 
     def runtime_binding
       @runtime_binding ||= deep_bindings.detect(&:runtime_binding?)
@@ -48,6 +40,14 @@ module Arenas
     end
 
     def arena; itself ;end
+
+    def method_missing(m, *args, &block)
+      provider_division_map["#{m}"] || super
+    end
+
+    def respond_to_missing?(m, *)
+      provider_division_map.keys.include?("#{m}") || super
+    end
 
   end
 end
