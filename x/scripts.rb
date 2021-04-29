@@ -51,14 +51,17 @@ Blueprinting::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 # synchronize a publication
 Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 
-# get the topology for a blueprint
-Spaces::Commands::Graphing.new(identifier: :phpmyadmin, space: :blueprints).run.payload
-
 # bind another blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :phpmyadmin).run.payload
 
 # resolve the arena again for the new bindings
 Arenas::Commands::Resolving.new(identifier: :development).run.payload
+
+# get the blueprint topology for an arena
+Spaces::Commands::Graphing.new(identifier: :development, space: :arenas, emission: :blueprint).run.payload
+
+# get the resolution topology for an arena
+Spaces::Commands::Graphing.new(identifier: :development, space: :arenas, emission: :resolution).run.payload
 
 # validate a resolution
 Spaces::Commands::Validating.new(identifier: 'development::phpmyadmin', space: :resolutions).run.payload
