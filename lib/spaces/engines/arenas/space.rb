@@ -13,8 +13,8 @@ module Arenas
 
     def dependent_spaces; [resolutions, packs, provisioning] ;end
 
-    def save_resolutions_for(model)
-      model.bound_resolutions.map { |r| resolutions.save(r) }
+    def reset_resolutions_for(model)
+      model.bound_resolutions.map { |r| resolutions.reset(r) }
     end
 
     def save(model)

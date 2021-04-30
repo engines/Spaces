@@ -15,11 +15,16 @@ module Resolving
       end
     end
 
-    def save(model)
-      ensure_connections_exist_for(model)
-      super.tap do
-        copy_auxiliaries_for(blueprints, model)
-        model.content.each { |t| save_text(t) }
+    def update(model)
+      reset(model).tap do
+        save_mirror(model)
+      end
+    end
+
+    def reset(model)
+      ensure_connections_reset_for(model)
+      save_yaml(model).tap do
+        reset_auxiliaries_for(model)
       end
     end
 
@@ -30,14 +35,23 @@ module Resolving
       end
     end
 
+    def save(_)
+      raise SimpleSaveDisallowed
+    end
+
     def bindings_to(model)
       all.map(&:bindings).map(&:all).flatten.select { |b| b.descriptor.identifier == model.blueprint_identifier }
     end
 
     protected
 
-    def ensure_connections_exist_for(model)
-      model.connections_resolved.each { |r| save(r) }
+    def ensure_connections_reset_for(model)
+      model.connections_resolved.each { |r| reset(r) }
+    end
+
+    def reset_auxiliaries_for(model)
+      copy_auxiliaries_for(blueprints, model)
+      model.content.each { |t| save_text(t) }
     end
 
     def copy_auxiliaries_for(space, model)
@@ -54,5 +68,11 @@ module Resolving
       end
     end
 
+    def save_mirror(model)
+      path_for(model).join('mirror.yaml').write(model.to_yaml)
+    end
+
   end
+
+  class SimpleSaveDisallowed < ::Spaces::Errors::SpacesError ;end
 end
