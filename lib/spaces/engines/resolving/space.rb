@@ -1,5 +1,8 @@
+require_relative 'mirroring'
+
 module Resolving
   class Space < ::Spaces::Space
+    include Resolving::Mirroring
 
     class << self
       def default_model_class
@@ -15,29 +18,11 @@ module Resolving
       end
     end
 
-    def update(model)
-      reset(model).tap do
-        save_mirror_for(model)
-      end
-    end
-
-    def reset(model)
-      ensure_connections_reset_for(model)
-      save_yaml(model).tap do
-        ensure_mirror_for(model)
-        reset_auxiliaries_for(model)
-      end
-    end
-
     def delete(identifiable)
       super.tap do
         packs.delete(identifiable) if packs.exist?(identifiable)
         provisioning.delete(identifiable) if provisioning.exist?(identifiable)
       end
-    end
-
-    def save(_)
-      raise SimpleSaveDisallowed
     end
 
     def bindings_to(model)
@@ -67,18 +52,6 @@ module Resolving
           FileUtils.cp_r(p, path_for(model)) if p.exist?
         end
       end
-    end
-
-    def ensure_mirror_for(model)
-      save_mirror_for(model) unless mirror_path_for(model).exist?
-    end
-
-    def save_mirror_for(model)
-      mirror_path_for(model).write(model.to_yaml)
-    end
-
-    def mirror_path_for(model)
-      path_for(model).join('mirror.yaml')
     end
 
   end
