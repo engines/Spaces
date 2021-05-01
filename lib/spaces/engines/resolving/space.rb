@@ -1,5 +1,8 @@
+require_relative 'mirroring'
+
 module Resolving
   class Space < ::Spaces::Space
+    include Resolving::Mirroring
 
     class << self
       def default_model_class
@@ -12,14 +15,6 @@ module Resolving
     def by(identifier)
       super.tap do |m|
         m.arena = arenas.by(m.arena_identifier)
-      end
-    end
-
-    def save(model)
-      ensure_connections_exist_for(model)
-      super.tap do
-        copy_auxiliaries_for(blueprints, model)
-        model.content.each { |t| save_text(t) }
       end
     end
 
@@ -36,8 +31,13 @@ module Resolving
 
     protected
 
-    def ensure_connections_exist_for(model)
-      model.connections_resolved.each { |r| save(r) }
+    def ensure_connections_reset_for(model)
+      model.connections_resolved.each { |r| reset(r) }
+    end
+
+    def reset_auxiliaries_for(model)
+      copy_auxiliaries_for(blueprints, model)
+      model.content.each { |t| save_text(t) }
     end
 
     def copy_auxiliaries_for(space, model)
