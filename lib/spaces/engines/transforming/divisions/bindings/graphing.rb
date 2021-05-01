@@ -3,11 +3,15 @@ module Divisions
     module Graphing
 
       def graphed(emission_type)
+        empty.tap do |m|
+          m.struct = struct
+          m.struct.graph = graph_for(emission_type)
+        end
+      end
+
+      def graph_for(emission_type)
         if t = target_for(emission_type)
-          empty.tap do |m|
-            m.struct = struct
-            m.struct.graph = t.struct unless hard_looping_on?(t)
-          end
+          t.struct unless hard_looping_on?(t)
         end
       end
 
