@@ -22,6 +22,15 @@ module Resolving
 
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
+    def identifiers
+      super.merge(
+        {
+          arena_identifier: arena_identifier,
+          blueprint_identifier: blueprint_identifier
+        }
+      )
+    end
+
     def arena_identifier; identifier.split_compound.first ;end
 
     alias_accessor :blueprint, :predecessor
