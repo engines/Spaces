@@ -24,7 +24,7 @@ module Packing
       warn(error: e, identifier: model.identifier, klass: klass)
     end
 
-    def artifact_name; 'template' ;end
+    def artifact_name; 'artifact' ;end
 
     protected
 

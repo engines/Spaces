@@ -15,7 +15,7 @@ module Divisions
 
     def graphed(type: :all, emission: emission_type, direction: nil)
       empty.tap do |d|
-        d.struct = send("#{type}_bindings").map { |t| t.graphed(emission) }.compact.map(&:struct)
+        d.struct = send("#{type}_bindings").map { |b| b.graphed(emission) }.compact.map(&:struct)
       end
     end
 

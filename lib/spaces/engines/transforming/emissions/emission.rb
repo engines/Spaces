@@ -2,7 +2,7 @@ require_relative 'content'
 require_relative 'associating'
 require_relative 'publishing'
 require_relative 'inflating'
-require_relative 'targeting'
+require_relative 'binding'
 require_relative 'topology'
 require_relative 'embedding'
 require_relative 'resolving'
@@ -15,7 +15,7 @@ module Emissions
     include Associating
     include Publishing
     include Inflating
-    include Targeting
+    include Binding
     include Topology
     include Embedding
     include Resolving
