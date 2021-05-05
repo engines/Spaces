@@ -6,10 +6,10 @@ Gem::Specification.new do |s|
   s.name = "spaces"
   s.version = Engines::Spaces::VERSION
   s.date = Time.now.strftime("%Y-%m-%d")
-  s.summary = "Engines' Spaces"
+  s.summary = "Engines Spaces"
   s.email = "info@engines.org"
   s.homepage = "http://github.com/engines/spaces"
-  s.description = "The component of Engines that evaluates a Blueprint and updates the system accordingly."
+  s.description = "Define Engines blueprints, export/import them, and manage the generation of artifacts required to generate images and provision virual machines and components."
   s.required_ruby_version = ">= 2.7.0"
 
   s.author = "Engines"
@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "git",             "~> 1.8"
   s.add_runtime_dependency "duplicate",       "~> 1.1"
   s.add_runtime_dependency "i18n",            "~> 1.8"
+  s.add_runtime_dependency "ruby-terraform",  "=  0.64"
+  s.add_runtime_dependency "packer-client",   "=  0.2.0"
   s.add_runtime_dependency "addressable",     "~> 2.7"
 
   s.add_runtime_dependency "engines-logger",  "0.2.0"

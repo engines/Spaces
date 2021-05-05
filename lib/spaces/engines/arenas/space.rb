@@ -1,5 +1,8 @@
+require_relative 'terraforming'
+
 module Arenas
   class Space < ::Spaces::Space
+    include ::Arenas::Terraforming
 
     class << self
       def default_model_class
@@ -51,5 +54,10 @@ module Arenas
 
     def artifact_extension; :tf ;end
 
+  end
+
+  module Errors
+    class ProvisioningError < ::Spaces::Errors::SpacesError
+    end
   end
 end
