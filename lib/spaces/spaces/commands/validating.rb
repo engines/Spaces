@@ -4,6 +4,8 @@ module Spaces
   module Commands
     class Validating < ::Spaces::Commands::Reading
 
+      protected
+
       def _result
         struct.result = identifier
         if (ic = model.incomplete_divisions).any?
