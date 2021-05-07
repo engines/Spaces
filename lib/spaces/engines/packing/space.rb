@@ -1,5 +1,8 @@
+require_relative 'packing'
+
 module Packing
   class Space < ::Spaces::Space
+    include ::Packing::Packing
 
     class << self
       def default_model_class; Pack ;end
@@ -14,17 +17,15 @@ module Packing
     end
 
     def save(model)
-      raise PackWithoutImagesError, {identifier: model.identifier} unless model.has?(:builders)
+      raise ::Packing::Errors::NoImage, {identifier: model.identifier} unless model.has?(:builders)
 
       ensure_connections_exist_for(model)
       super.tap do
-        path_for(model).join("#{artifact_name}.json").write(model.artifact.to_json)
+        path_for(model).join("commit.json").write(model.artifact.to_json)
       end
-    rescue PackWithoutImagesError => e
+    rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: model.identifier, klass: klass)
     end
-
-    def artifact_name; 'artifact' ;end
 
     protected
 
@@ -33,7 +34,9 @@ module Packing
     end
 
   end
-
-  class PackWithoutImagesError < StandardError
+  
+  module Errors
+    class NoImage < ::Spaces::Errors::SpacesError
+    end
   end
 end

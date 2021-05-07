@@ -87,6 +87,13 @@ Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.payl
 # provision the arena again
 Arenas::Commands::Provisioning.new(identifier: :development).run.payload
 
+# commit a pack
+Packing::Commands::Executing.new(identifier: 'development::phpmyadmin', execute: :commit).run.payload
+
+# apply provisions for an arena
+Spaces::Commands::Executing.new(identifier: :development, space: :arenas, execute: :apply).run.payload
+
+
 # params = {
 #   identifier: 'lxd',
 #   model: {
