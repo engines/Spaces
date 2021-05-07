@@ -1,13 +1,15 @@
+require_relative 'saving'
+
 module Arenas
   module Commands
-    class Resolving < ::Arenas::Commands::Saving
+    class ProviderProvisioning < Saving
 
       alias_method :model, :current_model
 
       protected
 
       def commit
-        space.update_resolutions_for(model)
+        space.save_other_providers(model)
       end
 
     end

@@ -9,17 +9,23 @@ require 'spaces'
 
 universe = Universe.universe
 
-# delete an arena
-Spaces::Commands::Deleting.new(identifier: :development, space: :arenas).run.payload
-
-# save a basic arena with default associations
-Arenas::Commands::Saving.new(identifier: :development).run.payload
-
 # import a bootstrappy blueprint
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/arena'},
   force: true
 ).run.payload
+
+# import an application blueprint
+Publishing::Commands::Importing.new(
+  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
+  force: true
+).run.payload
+
+# delete an arena
+Spaces::Commands::Deleting.new(identifier: :development, space: :arenas).run.payload
+
+# save a basic arena with default associations
+Arenas::Commands::Saving.new(identifier: :development).run.payload
 
 # bind the blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :arena).run.payload
@@ -29,15 +35,23 @@ Arenas::Commands::Resolving.new(identifier: :development).run.payload
 
 # save all packs for an arena
 Arenas::Commands::Packing.new(identifier: :development).run.payload
+# RUN PACKER HERE?
 
-# provision the arena
+# save provisions for the arena's runtime
+Arenas::Commands::RuntimeBooting.new(identifier: :development).run.payload
+# RUN INIT HERE?
+
+# save provisions for the atrna's other providers
 Arenas::Commands::Provisioning.new(identifier: :development).run.payload
+# RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
-# import an application blueprint
-Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
-  force: true
-).run.payload
+# save post-initialization provisions for providers
+Arenas::Commands::ProviderProvisioning.new(identifier: :development).run.payload
+# RUN APPLY HERE FOR INITIAL PROVISIONING?
+
+#
+# THE ARENA SHOULD BE BOOSTRAPPED BY THIS POINT
+#
 
 # export a blueprint
 Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
@@ -56,12 +70,16 @@ Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :p
 
 # resolve the arena again for the new bindings
 Arenas::Commands::Resolving.new(identifier: :development).run.payload
+# PROBABLY SHOULD BE REFINED TO RESOLVE ONLY NEW BLUEPRINT SINCE LAST RESOLVING
+# EXPLICT FRESH RESOLUTION SHOULD PROBABLY BE DONE MANUALLY
+# THE PROBLEM IS: fresh passwords get regenerated ... there's probably other side effects as well
 
-# get the blueprint topology for an arena
-Spaces::Commands::Graphing.new(identifier: :development, space: :arenas, emission: :blueprint).run.payload
-
-# get the resolution topology for an arena
-Spaces::Commands::Graphing.new(identifier: :development, space: :arenas, emission: :resolution).run.payload
+# GRAPHING VIA THESE COMMANDS IS DEPRECATED
+# # get the blueprint topology for an arena
+# Spaces::Commands::Graphing.new(identifier: :development, space: :arenas, emission: :blueprint).run.payload
+#
+# # get the resolution topology for an arena
+# Spaces::Commands::Graphing.new(identifier: :development, space: :arenas, emission: :resolution).run.payload
 
 # validate a resolution
 Spaces::Commands::Validating.new(identifier: 'development::phpmyadmin', space: :resolutions).run.payload
@@ -81,11 +99,17 @@ Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :developm
 # get the artifacts for a pack
 Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.payload
 
-# # save provisions for resolution
-# Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.payload
-
-# provision the arena again
+# provision the arena for applications
 Arenas::Commands::Provisioning.new(identifier: :development).run.payload
+
+# commit a pack
+Packing::Commands::Executing.new(identifier: 'development::phpmyadmin', execute: :commit).run.payload
+
+# apply provisions for an arena
+Spaces::Commands::Executing.new(identifier: :development, space: :arenas, execute: :apply).run.payload
+
+# # save provisions for a resolution
+# Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.payload
 
 # params = {
 #   identifier: 'lxd',
