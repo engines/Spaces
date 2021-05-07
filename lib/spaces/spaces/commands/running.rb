@@ -11,6 +11,8 @@ module Spaces
           _result
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
+        rescue NoMethodError => e
+          struct.errors = e.inspect
         end
       end
 
@@ -41,8 +43,6 @@ module Spaces
         else
           assembly
         end
-      rescue NoMethodError
-        raise ::Spaces::Errors::MissingInput, {input: input}
       end
 
       def assembly ;end
