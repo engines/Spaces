@@ -23,6 +23,8 @@ module Divisions
 
     def type; struct.type || derived_features[:type] ;end
 
+    def provider_artifacts; provider_stanzas ;end
+
     protected
 
     def derived_features
@@ -30,6 +32,5 @@ module Divisions
         type: context_identifier
       }
     end
-
   end
 end

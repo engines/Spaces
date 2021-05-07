@@ -23,7 +23,7 @@ module Divisions
 
     def embed?; type == 'embed' ;end
 
-    def runtime_binding?; identifier == 'containing' ;end
+    def runtime_binding?; ['runtime', 'containing'].include?(identifier) ;end
 
     def runtime_type
       blueprint.provider.type if runtime_binding?

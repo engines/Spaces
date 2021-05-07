@@ -1,7 +1,7 @@
 module Providers
   class Docker < ::Providers::Provider
 
-    def arena_stanzas
+    def provider_stanzas
       %(
         provider "#{type}" {
         }

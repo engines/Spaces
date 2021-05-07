@@ -17,14 +17,14 @@ module Provisioning
       connections_down.map(&:provisioned)
     end
 
-    def artifact; stanzas.join("\n") ;end
+    def artifacts; stanzas.join("\n") ;end
 
     def stanzas
       divisions_including_resolution_divisions.map { |d| d.resolution_stanzas_for(self) }.flatten.compact
     end
 
     def divisions_including_resolution_divisions
-      [divisions, resolution.divisions_including_provider_divisions].flatten
+      [divisions, resolution.divisions_including_providers].flatten
     end
 
     def payload_path
