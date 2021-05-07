@@ -10,13 +10,6 @@ module Arenas
         input[:blueprint_identifier]&.to_s || (raise ::Spaces::Errors::MissingInput, {input: input})
       end
 
-      protected
-
-      def commit
-        space.save_initial(model)
-        super
-      end
-
     end
   end
 end

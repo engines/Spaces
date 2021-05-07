@@ -18,7 +18,7 @@ module Provisioning
     def save(model)
       ensure_connections_exist_for(model)
       if model.resolution.provisionable?
-        arena_path(model).write(model.artifact)
+        arena_path(model).write(model.artifacts)
       end
       super
     end

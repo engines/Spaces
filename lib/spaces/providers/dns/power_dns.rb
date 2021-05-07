@@ -1,7 +1,7 @@
 module Providers
   class PowerDns < ::Providers::Provider
 
-    def arena_stanzas
+    def provider_stanzas
       %(
         provider "powerdns" {
           api_key    = "#{configuration.api_key}"
