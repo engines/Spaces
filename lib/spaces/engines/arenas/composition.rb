@@ -11,6 +11,7 @@ module Arenas
 
       def division_classes
         [
+          Divisions::Configuration,
           Divisions::Bindings,
           Divisions::About
         ]
