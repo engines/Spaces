@@ -9,6 +9,17 @@ require 'spaces'
 
 universe = Universe.universe
 
+#set up an arena configuration
+params = {
+  identifier: 'an_arena_config',
+  configuration: {
+    scheme: 'https',
+    address: '192.168.20.220',
+    password: 'zinfandel'
+  }
+}
+Spaces::Commands::Saving.new(identifier: 'an_arena_config', model: params, space: :configurations).run.payload
+
 # import a bootstrappy blueprint
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/arena'},
@@ -26,6 +37,9 @@ Spaces::Commands::Deleting.new(identifier: :development, space: :arenas).run.pay
 
 # save a basic arena with default associations
 Arenas::Commands::Saving.new(identifier: :development).run.payload
+
+# configure the basic arena with the configuration we already set up
+Arenas::Commands::Configuring.new(identifier: :development, configuration_identifier: :an_arena_config).run.payload
 
 # bind the blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :arena).run.payload

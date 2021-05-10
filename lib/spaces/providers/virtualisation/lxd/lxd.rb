@@ -20,9 +20,9 @@ module Providers
       %(
         lxd_remote {
           name     = "lxd-server"
-          scheme   = "https"
-          address  = "192.168.20.220"
-          password = "#{configuration.password}"
+          scheme   = "#{arena.configuration.scheme}"
+          address  = "#{arena.configuration.address}"
+          password = "#{arena.configuration.password}"
           default  = true
         }
       )

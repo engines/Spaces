@@ -6,6 +6,7 @@ require_relative 'binding'
 require_relative 'topology'
 require_relative 'embedding'
 require_relative 'resolving'
+require_relative 'merging'
 require_relative 'hashing'
 
 module Emissions
@@ -19,6 +20,7 @@ module Emissions
     include Topology
     include Embedding
     include Resolving
+    include Merging
     include Hashing
 
     class << self
