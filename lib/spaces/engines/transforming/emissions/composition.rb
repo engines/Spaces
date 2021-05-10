@@ -25,6 +25,7 @@ module Emissions
           Divisions::Permissions,
           Divisions::Images,
           Divisions::Volumes,
+          Divisions::Ports,
           Divisions::About
         ]
       end
