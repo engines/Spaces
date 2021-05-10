@@ -80,6 +80,8 @@ module Divisions
       empty.tap { |s| s.struct = OpenStruct.new(deflatables) }
     end
 
+    def merge(other); struct.merge(other.struct) ;end
+
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission
       self.label = label

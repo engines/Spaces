@@ -54,6 +54,7 @@ module Divisions
     end
 
     def struct_with(other); [struct, other.struct].flatten.uniq ;end
+    alias_method :merge, :struct_with
 
     def initialize(struct: nil, emission: nil, label: nil)
       check_subdivision_class
