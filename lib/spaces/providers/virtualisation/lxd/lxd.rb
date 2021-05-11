@@ -25,8 +25,8 @@ module Providers
           password = "#{arena.configuration.password}"
           default  = true        
       )
-      r = "#{r}\nport = #{arena.configuration.port} " if arena.configuration.responds_to(:port)
-      r = #{r}\n}"
+      r = "#{r}\nport = #{arena.configuration.port}" if arena.configuration.respond_to(:port)
+     #{r}\n}"
     end
 
     def pool_stanzas
