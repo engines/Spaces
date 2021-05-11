@@ -20,9 +20,12 @@ module Packing
     end
 
     delegate(
+      resolutions: :universe,
       [:arena, :connect_bindings, :images] => :resolution,
       post_processor_artifacts: :images
     )
+
+    def predecessor; @predecessor ||= resolutions.by(identifier) ;end
 
     alias_accessor :resolution, :predecessor
     alias_method :context_identifier, :identifier

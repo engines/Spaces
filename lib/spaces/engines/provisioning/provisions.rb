@@ -5,11 +5,15 @@ module Provisioning
       def composition_class; Composition ;end
     end
 
-    alias_accessor :resolution, :predecessor
 
     delegate(
+      resolutions: :universe,
       [:arena, :images, :volumes, :connect_bindings] => :resolution
     )
+
+    def predecessor; @predecessor ||= resolutions.by(identifier) ;end
+
+    alias_accessor :resolution, :predecessor
 
     def keys; composition.keys ;end
 

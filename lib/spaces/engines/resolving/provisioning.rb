@@ -3,7 +3,6 @@ module Resolving
 
     def provisioned
       empty_provisions.tap do |m|
-        m.predecessor = self
         m.cache_resolution_identifiers(arena_identifier, blueprint_identifier)
       end
     end
