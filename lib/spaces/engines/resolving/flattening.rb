@@ -9,7 +9,7 @@ module Resolving
 
     def _flattened
       empty.tap do |m|
-        m.predecessor = self
+        m.predecessor = predecessor
         m.struct = struct
         m.struct.bindings = bindings.flattened.struct
       end
