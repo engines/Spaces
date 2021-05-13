@@ -3,7 +3,6 @@ module Emissions
 
     def merge(other)
       empty.tap do |m|
-        m.predecessor = self
         m.struct = m.struct.merge(OpenStruct.new(merging_division_map(other)))
       end
     end
