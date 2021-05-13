@@ -5,11 +5,15 @@ module Spaces
     class Querying < Running
 
       def method_signature
-        [method, input.without(:method, :space)]
+        [method, arguments].compact
       end
 
       def method
         input[:method] || (raise ::Spaces::Errors::MissingInput, {input: input})
+      end
+
+      def arguments
+        a unless (a = input.without(:method, :space)).empty?
       end
 
       def models
