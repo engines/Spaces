@@ -88,6 +88,9 @@ Arenas::Commands::Resolving.new(identifier: :development).run.payload
 # EXPLICT FRESH RESOLUTION SHOULD PROBABLY BE DONE MANUALLY
 # THE PROBLEM IS: fresh passwords get regenerated ... there's probably other side effects as well
 
+# get an arena's resolutions
+Arenas::Commands::Resolutions.new(identifier: :development).run.payload
+
 # GRAPHING VIA THESE COMMANDS IS DEPRECATED
 # # get the blueprint topology for an arena
 # Spaces::Commands::Graphing.new(identifier: :development, space: :arenas, emission: :blueprint).run.payload
