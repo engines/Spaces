@@ -44,6 +44,9 @@ Arenas::Commands::Saving.new(identifier: :development).run.payload
 # configure the basic arena with the configuration we already set up
 Arenas::Commands::Configuring.new(identifier: :development, configuration_identifier: :an_arena_config).run.payload
 
+# get a list of organization blueprint identifiers that are not yet bound to an arena
+Arenas::Commands::MoreOrganizations.new(identifier: :development).run.payload
+
 # bind an organization blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :arena).run.payload
 
