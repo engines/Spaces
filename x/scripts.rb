@@ -73,11 +73,11 @@ Arenas::Commands::ProviderProvisioning.new(identifier: :development).run.payload
 # # get the status of a publication
 # Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
 
-# # synchronize a blueprint
-# Blueprinting::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
+# synchronize a blueprint
+Blueprinting::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 
-# # synchronize a publication
-# Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
+# synchronize a publication
+Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 
 # bind another blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :phpmyadmin).run.payload
