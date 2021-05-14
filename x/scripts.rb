@@ -18,7 +18,7 @@ params = {
     password: 'zinfandel'
   }
 }
-Spaces::Commands::Saving.new(identifier: 'an_arena_config', model: params, space: :configurations).run.payload
+Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
 
 # import a bootstrappy blueprint
 Publishing::Commands::Importing.new(
@@ -32,6 +32,9 @@ Publishing::Commands::Importing.new(
   force: true
 ).run.payload
 
+# get a list of all organization blueprint identifiers
+Spaces::Commands::Querying.new(method: :organization_identifiers, space: :blueprints).run.payload
+
 # delete an arena
 Spaces::Commands::Deleting.new(identifier: :development, space: :arenas).run.payload
 
@@ -41,7 +44,10 @@ Arenas::Commands::Saving.new(identifier: :development).run.payload
 # configure the basic arena with the configuration we already set up
 Arenas::Commands::Configuring.new(identifier: :development, configuration_identifier: :an_arena_config).run.payload
 
-# bind the blueprint to the arena
+# get a list of organization blueprint identifiers that are not yet bound to an arena
+Arenas::Commands::MoreOrganizations.new(identifier: :development).run.payload
+
+# bind an organization blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :development, blueprint_identifier: :arena).run.payload
 
 # resolve the arena so far
@@ -87,6 +93,9 @@ Arenas::Commands::Resolving.new(identifier: :development).run.payload
 # PROBABLY SHOULD BE REFINED TO RESOLVE ONLY NEW BLUEPRINTS SINCE LAST RESOLVING
 # EXPLICT FRESH RESOLUTION SHOULD PROBABLY BE DONE MANUALLY
 # THE PROBLEM IS: fresh passwords get regenerated ... there's probably other side effects as well
+
+# get an arena's resolutions
+Arenas::Commands::Resolutions.new(identifier: :development).run.payload
 
 # GRAPHING VIA THESE COMMANDS IS DEPRECATED
 # # get the blueprint topology for an arena

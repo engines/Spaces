@@ -21,6 +21,8 @@ module Blueprinting
       keys - documentation_only_keys == [:bindings]
     end
 
+    alias_method :organization?, :binder?
+
     def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end
 
   end

@@ -13,6 +13,10 @@ module Blueprinting
     alias_method :identifiers, :simple_identifiers
     alias_method :imported?, :exist?
 
+    def organization_identifiers
+      all.select(&:organization?).map(&:identifier)
+    end
+
     def by_demand(descriptor)
       publications.by_import(descriptor).localized
     end
