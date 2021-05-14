@@ -3,7 +3,6 @@ module Emissions
 
     def resolved_in(arena)
       empty_resolution.tap do |m|
-        m.predecessor = self
         m.arena = arena
         m.struct = arena.struct.without(:bindings).merge(struct)
         m.cache_resolution_identifiers(arena.identifier, identifier)
@@ -12,7 +11,6 @@ module Emissions
 
     def resolved
       empty.tap do |m|
-        m.predecessor = predecessor
         m.struct = struct.merge(
           OpenStruct.new(division_map.transform_values { |v| v.resolved.struct } )
         )

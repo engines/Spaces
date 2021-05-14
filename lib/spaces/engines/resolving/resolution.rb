@@ -22,6 +22,11 @@ module Resolving
 
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
+    def predecessor; @predecessor ||= blueprints.by(blueprint_identifier) ;end
+
+    alias_accessor :blueprint, :predecessor
+    alias_accessor :binder, :predecessor
+
     def identifiers
       super.merge(
         {
@@ -32,9 +37,6 @@ module Resolving
     end
 
     def arena_identifier; identifier.split_compound.first ;end
-
-    alias_accessor :blueprint, :predecessor
-    alias_accessor :binder, :predecessor
 
     def complete?
       all_complete?(divisions)

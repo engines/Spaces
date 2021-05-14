@@ -17,15 +17,19 @@ module Providers
     end
 
     def remote_stanza
-      %(
+      r = %(
         lxd_remote {
           name     = "lxd-server"
-          scheme   = "https"
-          address  = "192.168.20.220"
-          password = "#{configuration.password}"
+          scheme   = "#{arena.configuration.scheme}"
+          address  = "#{arena.configuration.address}"
+          password = "#{arena.configuration.password}"
           default  = true
-        }
+          #{optional_port_declaration}
       )
+    end
+
+    def optional_port_declaration
+      %(port = "#{arena.configuration.port}") if arena.configuration.respond_to?(:port)
     end
 
     def pool_stanzas
