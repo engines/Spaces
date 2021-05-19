@@ -4,10 +4,6 @@ module Publishing
 
       alias_method :descriptor, :model
 
-      def assembly
-        descriptor.deflated
-      end
-
       def force
         input[:force] || false
       end
