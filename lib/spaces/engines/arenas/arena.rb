@@ -18,6 +18,10 @@ module Arenas
 
     delegate([:arenas, :blueprints] => :universe)
 
+    def more_organization_identifiers
+      blueprints.organization_identifiers - target_identifiers
+    end
+
     def runtime_binding
       @runtime_binding ||= deep_bindings.detect(&:runtime_binding?)
     end
