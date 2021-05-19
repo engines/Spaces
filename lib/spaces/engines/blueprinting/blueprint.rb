@@ -25,5 +25,7 @@ module Blueprinting
 
     def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end
 
+    def transformed_for_publication; globalized ;end
+
   end
 end

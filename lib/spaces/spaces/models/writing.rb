@@ -21,8 +21,7 @@ module Spaces
     def _save(model, content:, as: nil)
       model.tap do |m|
         Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
-      end
-      model.identifier
+      end.identifier
     end
 
     def delete(identifiable)

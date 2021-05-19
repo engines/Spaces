@@ -13,7 +13,9 @@ module Spaces
       end
 
       def arguments
-        a unless (a = input.without(:method, :space)).empty?
+        unless (a = input.without(:method, :space)).empty?
+          a
+        end
       end
 
       def models

@@ -20,5 +20,6 @@ module Publishing
       )
     end
 
+    def transformed_for_publication; localized ;end
   end
 end
