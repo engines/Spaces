@@ -4,7 +4,7 @@ module Publishing
     def synchronize_with(other_space, identifier)
       identifier.tap do |i|
         other_space.by(i).tap do |m|
-          save(m.globalized)
+          save(m.transformed_for_publication)
           synchronize_auxiliaries_for(other_space, m)
         end
       end
