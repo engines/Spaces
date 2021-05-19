@@ -23,10 +23,13 @@ module Providers
           scheme   = "#{arena.configuration.scheme}"
           address  = "#{arena.configuration.address}"
           password = "#{arena.configuration.password}"
-          default  = true        
+          default  = true
+          #{optional_port_declaration}
       )
-      r = "#{r}\nport = #{arena.configuration.port} \n }" if arena.configuration.respond_to?(:port)
-     #{r}\n}"
+    end
+
+    def optional_port_declaration
+      %(port = "#{arena.configuration.port}") if arena.configuration.respond_to?(:port)
     end
 
     def pool_stanzas

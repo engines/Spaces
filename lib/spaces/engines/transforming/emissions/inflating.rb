@@ -6,8 +6,6 @@ module Emissions
 
     def flated(desired_state)
       empty.tap do |m|
-        m.predecessor = self
-
         m.struct = OpenStruct.new.tap do |s|
           s.identifier = identifier if desired_state == :inflated
 
