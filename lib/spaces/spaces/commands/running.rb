@@ -8,7 +8,7 @@ module Spaces
 
       def run
         tap do
-          _result
+          _run
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
         rescue NoMethodError => e
@@ -36,7 +36,7 @@ module Spaces
 
       protected
 
-      def _result
+      def _run
         struct.result =
         if c = commit
           c

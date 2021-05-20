@@ -9,7 +9,7 @@ module Arenas
       end
 
       def configuration
-        @configuration ||= ::Spaces::Commands::Reading.new(identifier: input[:configuration_identifier], space: :configurations).run.result
+        @configuration ||= universe.configurations.by(input[:configuration_identifier])
       end
 
     end
