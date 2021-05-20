@@ -23,6 +23,7 @@ module Providers
             }
 
             #{connect_services_stanzas}
+            #{ports_stanzas}
             #{commissioning_stanzas}
             #{device_stanzas}
 
@@ -54,6 +55,10 @@ module Providers
             }
           )
         end.join
+      end
+
+      def ports_stanzas
+        emission.ports.stanzas
       end
 
       def device_stanzas

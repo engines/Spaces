@@ -17,7 +17,7 @@ module Providers
     end
 
     def remote_stanza
-      r = %(
+      %(
         lxd_remote {
           name     = "lxd-server"
           scheme   = "#{arena.configuration.scheme}"
@@ -25,6 +25,7 @@ module Providers
           password = "#{arena.configuration.password}"
           default  = true
           #{optional_port_declaration}
+        }
       )
     end
 

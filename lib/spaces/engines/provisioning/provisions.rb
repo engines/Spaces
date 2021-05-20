@@ -8,7 +8,7 @@ module Provisioning
 
     delegate(
       resolutions: :universe,
-      [:arena, :images, :volumes, :connect_bindings] => :resolution
+      [:arena, :images, :volumes, :connect_bindings, :ports] => :resolution
     )
 
     def predecessor; @predecessor ||= resolutions.by(identifier) ;end
