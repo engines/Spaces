@@ -21,6 +21,7 @@ module Packing
 
       ensure_connections_exist_for(model)
       super.tap do
+        # PACKER-SPECIFIC
         path_for(model).join("commit.json").write(model.artifact.to_json)
       end
     rescue ::Packing::Errors::NoImage => e
@@ -34,7 +35,7 @@ module Packing
     end
 
   end
-  
+
   module Errors
     class NoImage < ::Spaces::Errors::SpacesError
     end

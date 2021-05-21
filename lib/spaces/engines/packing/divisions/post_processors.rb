@@ -1,3 +1,4 @@
+# PACKER-SPECIFIC
 module Divisions
   class PostProcessors < ::Divisions::Divisible
 

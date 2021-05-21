@@ -38,6 +38,7 @@ module Divisions
       resolutions: :universe
     )
 
+    # PACKER-SPECIFIC #to_h?
     def packing_artifact; to_h ;end
 
     def packing_division?

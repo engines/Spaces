@@ -20,6 +20,7 @@ module Divisions
 
     def inflated_struct; inflated.struct ;end
 
+    # PACKER-SPECIFIC
     def post_processor_artifacts; end
 
     def default_name; tenant_context_identifier ;end

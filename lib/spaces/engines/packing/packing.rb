@@ -1,5 +1,6 @@
 require 'packer'
 
+# PACKER-SPECIFIC
 module Packing
   module Packing
 
