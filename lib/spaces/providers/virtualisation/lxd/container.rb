@@ -58,7 +58,7 @@ module Providers
       end
 
       def ports_stanzas
-        emission.ports.stanzas
+        emission.ports.stanzas if emission.has?(:ports)
       end
 
       def device_stanzas
