@@ -20,6 +20,7 @@ module Packing
       folders ||= resolutions.path_for(pack).join(path).children.select(&:directory?)
     end
 
+    # PACKER-SPECIFIC
     def packing_artifact_for(precedence)
       {
         type: 'shell',

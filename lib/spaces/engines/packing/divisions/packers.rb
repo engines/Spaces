@@ -32,6 +32,7 @@ module Divisions
       [auxiliary_files_artifact, precedential_artifact].flatten.compact
     end
 
+    # PACKER-SPECIFIC
     def auxiliary_files_artifact
       auxiliary_folders.map do |f|
         if source_path_for(f).exist?
@@ -56,6 +57,7 @@ module Divisions
       packing_divisions.map { |d| d.packing_artifact_for(precedence) if d.uses?(precedence) }
     end
 
+    # PACKER-SPECIFIC
     def file_copy_artifact_for(precedence)
       auxiliary_folders.map do |f|
         if copy_source_path_for(f, precedence).exist?

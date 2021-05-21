@@ -6,6 +6,7 @@ module Divisions
       def features; [:file, :mode, :ownership] ;end
     end
 
+    # PACKER-SPECIFIC
     def packing_artifact
       {
         type: 'shell',

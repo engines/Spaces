@@ -8,14 +8,17 @@ module Providers
 
       def privileged; struct.privileged || derived_features[:privileged] ;end
 
+      # PACKER-SPECIFIC?
       def export
         duplicate(struct).tap { |m| m[:export_path] = "#{identifier}.tar" }
       end
 
+      # PACKER-SPECIFIC?
       def commit
         duplicate(struct).tap { |m| m[:commit] = true }
       end
 
+      # PACKER-SPECIFIC
       def post_processor_artifacts
         {
           type: "#{type}-tag",
@@ -26,6 +29,7 @@ module Providers
 
       protected
 
+      # PACKER-SPECIFIC?
       def derived_features
         @derived_features ||= {
           name: default_name,

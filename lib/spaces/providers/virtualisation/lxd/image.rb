@@ -13,6 +13,7 @@ module Providers
 
       protected
 
+      # PACKER-SPECIFIC
       def derived_features
         @derived_features ||= {
           name: default_name,

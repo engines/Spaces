@@ -16,6 +16,7 @@ module Divisions
       subdivision_class.prototype(type: key, struct: struct[key], division: self)
     end
 
+    # PACKER-SPECIFIC
     def packing_artifact_for(key)
       {
         type: 'shell',

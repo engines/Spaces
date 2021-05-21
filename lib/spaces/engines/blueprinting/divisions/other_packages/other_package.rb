@@ -16,6 +16,7 @@ module Divisions
     def extraction; struct.extraction ||= derived_features[:extraction] ;end
     def extracted_path; struct.extracted_path ||= derived_features[:extracted_path] ;end
 
+    # PACKER-SPECIFIC
     def packing_artifact
       {
         type: 'shell',
@@ -24,6 +25,7 @@ module Divisions
       }
     end
 
+    # PACKER-SPECIFIC
     def environment_vars
       [:repository, :extraction, :extracted_path, :destination].map do |v|
         "#{v}=#{send(v) if respond_to?(v)}"

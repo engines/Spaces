@@ -5,6 +5,7 @@ module Divisions
     def inflated; self ;end
     def deflated; self ;end
 
+    # PACKER-SPECIFIC?
     def packing_artifact_for(key)
       {
         type: 'shell',
