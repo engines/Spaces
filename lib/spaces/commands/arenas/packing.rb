@@ -1,18 +1,16 @@
-require_relative 'saving'
-
 module Arenas
   module Commands
-    class Packing < Saving
+    class Packing < ::Spaces::Commands::Iterating
 
-      alias_method :model, :current_model
-
-      protected
-
-      def commit
-        model.packables.map do |p|
-          ::Packing::Commands::Saving.new(identifier: p.identifier).run.result
-        end
+      def array
+        @array ||= model.packables
       end
+
+      def space_identifier
+        super || :arenas
+      end
+
+      def subcommand_class; ::Packing::Commands::Saving ;end
 
     end
   end
