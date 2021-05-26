@@ -26,6 +26,10 @@ module Arenas
       @runtime_binding ||= deep_bindings.detect(&:runtime_binding?)
     end
 
+    def packing_binding
+      @packing_binding ||= deep_bindings.detect(&:packing_binding?)
+    end
+
     def initial_artifacts
       %(
         terraform {

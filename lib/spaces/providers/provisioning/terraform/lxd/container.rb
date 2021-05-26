@@ -4,7 +4,7 @@ module Providers
 
       def resolution_stanzas_for(_)
         %(
-          resource "#{container_type}" "#{blueprint_identifier}" {
+          resource "#{provisioning_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
             image     = "lxd-server:#{image_name}"
             ephemeral = false
@@ -66,7 +66,7 @@ module Providers
       end
 
       def dependency_string
-        connections_down.map { |c| "#{container_type}.#{c.blueprint_identifier}" }.join(', ')
+        connections_down.map { |c| "#{provisioning_type}.#{c.blueprint_identifier}" }.join(', ')
       end
 
     end

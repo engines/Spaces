@@ -1,29 +1,19 @@
 require_relative 'embeddable'
 require_relative 'resolvable'
+require_relative 'provider_aspect'
 
 module Divisions
   class Division < ::Transforming::Transformable
     include Engines::Logger
     include Embeddable
     include Resolvable
+    include ProviderAspect
 
     attr_accessor :label
 
     class << self
       def prototype(emission:, label:)
         new(emission: emission, label: label)
-      end
-
-      def constant_for(type)
-        if type
-          return Module.const_get("::Providers::#{type.to_s.camelize}")
-        else
-          return Module.const_get("::Divisions::#{qualifier.camelize}")
-        end
-      end
-
-      def type_for(emission)
-        "#{emission.runtime_type}/#{qualifier.singularize}" if emission.runtime_type
       end
 
       def default_struct; OpenStruct.new ;end
@@ -33,7 +23,7 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :runtime_type, :container_type, :arena] => :emission,
+      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :runtime_type, :packing_type, :provisioning_type, :arena] => :emission,
       ranking: :composition,
       resolutions: :universe
     )

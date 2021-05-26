@@ -44,8 +44,12 @@ module Emissions
       arena&.runtime_type
     end
 
-    def container_type
-      arena&.container_type
+    def packing_type
+      arena&.runtime_type
+    end
+
+    def provisioning_type
+      arena&.provisioning_type
     end
 
     def count

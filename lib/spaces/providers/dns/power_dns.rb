@@ -36,9 +36,9 @@ module Providers
       )
     end
 
-    def dns_address; "#{container_type}.#{blueprint_identifier}.ipv4_address" ;end
+    def dns_address; "#{provisioning_type}.#{blueprint_identifier}.ipv4_address" ;end
 
-    def container_address_for(resolution); "#{container_type}.#{resolution.blueprint_identifier}.ipv6_address" ;end
+    def container_address_for(resolution); "#{provisioning_type}.#{resolution.blueprint_identifier}.ipv6_address" ;end
 
     def protocol; configuration.struct.protocol || 'http' ;end
     def port; configuration.struct.port || 8081 ;end

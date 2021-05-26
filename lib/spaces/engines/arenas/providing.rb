@@ -4,19 +4,27 @@ module Arenas
     def providers; provider_map.values ;end
 
     def runtime_provider
-      @runtime_provider ||= providers.detect { |p| p.emission.defines_runtime? }
+      @runtime_provider ||= providers.detect { |p| p.emission.defines_runtime_provider? }
+    end
+
+    def packing_provider
+      @packing_provider ||= providers.detect { |p| p.emission.defines_packing_provider? }
     end
 
     def other_providers
-      providers - [runtime_provider]
+      providers - [runtime_provider, packing_provider]
     end
 
-    def container_type
+    def provisioning_type
       [runtime_type, 'container'].compact.join('_')
     end
 
     def runtime_type
       runtime_binding&.runtime_type
+    end
+
+    def packing_type
+      packing_binding&.packing_type
     end
 
     def provider_resolutions; provider_resolution_map.values ;end
