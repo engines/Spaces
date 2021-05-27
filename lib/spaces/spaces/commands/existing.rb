@@ -10,7 +10,7 @@ module Spaces
 
       protected
 
-      def _result
+      def _run
         struct.result = space.exist?(identifier)
       end
 

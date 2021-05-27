@@ -6,7 +6,7 @@ module Spaces
 
       protected
 
-      def _result
+      def _run
         struct.result = identifier
         if (ic = model.incomplete_divisions).any?
           struct.errors = {incomplete_divisions: ic.map(&:qualifier)}
