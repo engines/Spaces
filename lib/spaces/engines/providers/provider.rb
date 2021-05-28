@@ -1,8 +1,21 @@
+require_relative 'provider_aspect'
+
 module Providers
-  Provider = ::Divisions::Provider
-  Image = ::Divisions::Image
-  Container = ::Commissioning::Container
-  Volume = ::Divisions::Volume
-  Modules = ::Divisions::NoduleArray
-  Inflating = ::Emissions::Inflating
+  class Provider < ProviderAspect
+
+    class << self
+      def constant_for(division)
+        Module.const_get("::Providers::#{type_for(division).to_s.camelize}")
+      end
+
+      def type_for(division)
+        division.struct.type
+      end
+    end
+
+    delegate type: :division
+
+    def required_stanza; end
+
+  end
 end
