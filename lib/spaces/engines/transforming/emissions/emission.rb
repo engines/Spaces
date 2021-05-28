@@ -40,16 +40,12 @@ module Emissions
 
     def has?(property); struct[property] ;end
 
-    def runtime_type
-      arena&.runtime_type
+    def runtime_identifier
+      arena&.runtime_identifier
     end
 
-    def packing_type
-      arena&.runtime_type
-    end
-
-    def provisioning_type
-      arena&.provisioning_type
+    def packing_identifier
+      arena&.packing_identifier
     end
 
     def count

@@ -26,11 +26,11 @@ module Divisions
     def runtime_binding?; ['runtime', 'containing'].include?(identifier) ;end
     def packing_binding?; ['packing'].include?(identifier) ;end
 
-    def runtime_type
+    def runtime_identifier
       blueprint.provider.type if runtime_binding?
     end
 
-    def packing_type
+    def packing_identifier
       blueprint.provider.type if packing_binding?
     end
 
