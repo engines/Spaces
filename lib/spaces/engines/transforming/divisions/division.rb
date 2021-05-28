@@ -1,13 +1,13 @@
 require_relative 'embeddable'
 require_relative 'resolvable'
-require_relative 'provider_aspect'
+require_relative 'provider_independent'
 
 module Divisions
   class Division < ::Transforming::Transformable
     include Engines::Logger
     include Embeddable
     include Resolvable
-    include ProviderAspect
+    include ProviderIndependent
 
     attr_accessor :label
 
