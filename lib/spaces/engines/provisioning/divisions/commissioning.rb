@@ -1,5 +1,5 @@
-module Commissioning
-  module Division
+module Divisions
+  module Commissioning
 
     def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
 

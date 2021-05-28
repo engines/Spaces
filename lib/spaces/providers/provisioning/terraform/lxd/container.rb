@@ -4,7 +4,7 @@ module Providers
 
       def resolution_stanzas_for(_)
         %(
-          resource "#{provisioning_type}" "#{blueprint_identifier}" {
+          resource "#{container_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
             image     = "lxd-server:#{image_name}"
             ephemeral = false
@@ -58,15 +58,15 @@ module Providers
       end
 
       def ports_stanzas
-        emission.ports.stanzas if emission.has?(:ports)
+        provisions.ports.stanzas if provisions.has?(:ports)
       end
 
       def device_stanzas
-        emission.volumes.all.map(&:device_stanzas).join
+        provisions.volumes.all.map(&:device_stanzas).join
       end
 
       def dependency_string
-        connections_down.map { |c| "#{provisioning_type}.#{c.blueprint_identifier}" }.join(', ')
+        connections_down.map { |c| "#{container_type}.#{c.blueprint_identifier}" }.join(', ')
       end
 
     end
