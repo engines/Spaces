@@ -1,8 +1,7 @@
 require 'packer'
 
-# PACKER-SPECIFIC
-module Packing
-  module Packing
+module Providers
+  class Packer < ::Providers::Provider
 
     def export(model); execute(:export, model) ;end
     def commit(model); execute(:commit, model) ;end
