@@ -15,10 +15,6 @@ module Arenas
       providers - [runtime_provider, packing_provider]
     end
 
-    def provisioning_type
-      [runtime_type, 'container'].compact.join('_')
-    end
-
     def runtime_identifier
       runtime_binding&.runtime_identifier
     end
