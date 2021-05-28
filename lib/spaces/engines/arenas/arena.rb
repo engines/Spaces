@@ -30,20 +30,6 @@ module Arenas
       @packing_binding ||= deep_bindings.detect(&:packing_binding?)
     end
 
-    def initial_artifacts
-      %(
-        terraform {
-          required_providers {
-            #{providers.flatten.map(&:required_stanza).flatten.compact.join}
-          }
-        }
-      )
-    end
-
-    def runtime_artifacts
-      runtime_provider.provider_stanzas
-    end
-
     def arena; itself ;end
 
     def method_missing(m, *args, &block)
