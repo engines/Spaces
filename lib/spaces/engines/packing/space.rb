@@ -1,6 +1,5 @@
 module Packing
   class Space < ::Spaces::Space
-    # include ::Packing::Packing
 
     class << self
       def default_model_class; Pack ;end
