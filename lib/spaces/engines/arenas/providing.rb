@@ -3,6 +3,8 @@ module Arenas
 
     def providers; provider_map.values ;end
 
+    def provider_aspects; providers.map(&:provider_aspect).compact ;end
+
     def runtime_provider
       @runtime_provider ||= providers.detect { |p| p.emission.defines_runtime_provider? }
     end
