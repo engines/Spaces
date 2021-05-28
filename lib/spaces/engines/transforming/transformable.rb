@@ -7,9 +7,6 @@ module Transforming
 
     def blueprint_identifier; identifier.split_compound.last ;end
 
-    def arena_stanzas; ;end
-    def resolution_stanzas_for(_); ;end
-
     def random(length); SecureRandom.hex(length.to_i) ;end
 
     protected
