@@ -97,31 +97,31 @@ Arenas::Commands::Resolutions.new(identifier: :lxd_arena).run.payload
 # Spaces::Commands::Graphing.new(identifier: :lxd_arena, space: :arenas, emission: :resolution).run.payload
 
 # # validate a resolution
-Spaces::Commands::Validating.new(identifier: 'development::phpmyadmin', space: :resolutions).run.payload
+Spaces::Commands::Validating.new(identifier: 'lxd_arena::phpmyadmin', space: :resolutions).run.payload
 
 # # get the status of a resolution
-Spaces::Commands::Status.new(identifier: 'development::phpmyadmin', space: :resolutions).run.payload
+Spaces::Commands::Status.new(identifier: 'lxd_arena::phpmyadmin', space: :resolutions).run.payload
 
 # # get the identifiers of resolutions in an arena
 # Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :lxd_arena, space: :resolutions).run.payload
 
 # save a pack for a resolution
-Packing::Commands::Saving.new(identifier: 'development::phpmyadmin').run.payload
+Packing::Commands::Saving.new(identifier: 'lxd_arena::phpmyadmin').run.payload
 
 # # get the identifiers of packs in an arena
 # Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :lxd_arena, space: :packs).run.payload
 
 # # get the artifacts for a pack
-Packing::Commands::Artifacts.new(identifier: 'development::phpmyadmin').run.payload
+Packing::Commands::Artifacts.new(identifier: 'lxd_arena::phpmyadmin').run.payload
 
 # provision the arena for applications
 Arenas::Commands::Provisioning.new(identifier: :lxd_arena).run.payload
 
 # # commit a pack
-# Packing::Commands::Executing.new(identifier: 'development::phpmyadmin', execute: :commit).run.payload
+# Packing::Commands::Executing.new(identifier: 'lxd_arena::phpmyadmin', execute: :commit).run.payload
 #
 # # apply provisions for an arena
 # Spaces::Commands::Executing.new(identifier: :lxd_arena, space: :arenas, execute: :apply).run.payload
 
 # # save provisions for a resolution
-# Provisioning::Commands::Saving.new(identifier: 'development::phpmyadmin').run.payload
+# Provisioning::Commands::Saving.new(identifier: 'lxd_arena::phpmyadmin').run.payload
