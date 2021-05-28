@@ -19,12 +19,12 @@ module Arenas
       [runtime_type, 'container'].compact.join('_')
     end
 
-    def runtime_type
-      runtime_binding&.runtime_type
+    def runtime_identifier
+      runtime_binding&.runtime_identifier
     end
 
-    def packing_type
-      packing_binding&.packing_type
+    def packing_identifier
+      packing_binding&.packing_identifier
     end
 
     def provider_resolutions; provider_resolution_map.values ;end
