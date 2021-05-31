@@ -15,10 +15,6 @@ module Divisions
       @all ||= languages.map { |l| subdivision_for(l) }.compact
     end
 
-    def provider_aspect_name_elements
-      ['providers', packing_identifier, qualifier]
-    end
-
     def subdivision_for(language)
       subdivision_class.prototype(type: language, struct: struct[language], division: self)
     end

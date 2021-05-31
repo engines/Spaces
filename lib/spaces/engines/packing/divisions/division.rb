@@ -36,5 +36,9 @@ module Packing
       keys.sort_by { |k| precedence.index(k) || precedence_midpoint }
     end
 
+    def provider_aspect_name_elements
+      ['providers', packing_identifier, qualifier]
+    end
+
   end
 end
