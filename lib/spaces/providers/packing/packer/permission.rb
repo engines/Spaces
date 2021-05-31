@@ -2,7 +2,7 @@ module Providers
   class Packer < ::Providers::Provider
     class Permission < ::Providers::Permission
 
-      delegate [:recursion, :ownership, :mode] => :division
+      delegate [:recursion, :ownership, :file, :mode] => :division
 
       def packing_artifact
         {
