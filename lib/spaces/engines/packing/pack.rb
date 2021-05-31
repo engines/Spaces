@@ -21,9 +21,7 @@ module Packing
 
     delegate(
       resolutions: :universe,
-      [:arena, :connect_bindings, :images] => :resolution,
-      # PACKER-SPECIFIC
-      post_processor_artifacts: :images
+      [:arena, :connect_bindings, :images] => :resolution
     )
 
     def predecessor; @predecessor ||= resolutions.by(identifier) ;end
