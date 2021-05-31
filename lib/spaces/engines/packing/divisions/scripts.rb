@@ -2,6 +2,7 @@ require_relative 'division'
 
 module Packing
   class Scripts < ::Divisions::Division
+    include ::Divisions::ProviderDependent
     include ::Packing::Division
 
     alias_method :pack, :emission
@@ -18,16 +19,6 @@ module Packing
 
     def folders
       folders ||= resolutions.path_for(pack).join(path).children.select(&:directory?)
-    end
-
-    # PACKER-SPECIFIC
-    def packing_artifact_for(precedence)
-      {
-        type: 'shell',
-        inline: scripts_for(precedence).map do |s|
-          temporary_script_path.join("#{precedence}", s)
-        end
-      }
     end
 
   end

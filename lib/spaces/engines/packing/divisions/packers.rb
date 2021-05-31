@@ -2,7 +2,7 @@ require_relative 'division'
 
 module Divisions
   class Packers < ::Divisions::Division
-    include ProviderDependent
+    include ::Divisions::ProviderDependent
     include ::Packing::Division
 
     alias_method :pack, :emission

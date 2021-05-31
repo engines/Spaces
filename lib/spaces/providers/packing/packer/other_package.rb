@@ -2,8 +2,6 @@ module Providers
   class Packer < ::Providers::Provider
     class OtherPackage < ::Providers::OtherPackage
 
-      delegate temporary_script_path: :division
-
       def packing_artifact
         {
           type: 'shell',
