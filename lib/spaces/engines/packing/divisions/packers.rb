@@ -2,13 +2,15 @@ require_relative 'division'
 
 module Divisions
   class Packers < ::Divisions::Division
+    include ProviderDependent
     include ::Packing::Division
 
     alias_method :pack, :emission
 
     delegate(
       resolutions: :universe,
-      resolution: :pack
+      resolution: :pack,
+      [:packing_artifact, :auxiliary_file_artifact_for, :file_copy_artifact_for] => :provider_aspect
     )
 
     def complete_precedence
@@ -26,51 +28,36 @@ module Divisions
         end
     end
 
-    # PACKER-SPECIFIC
-    def packing_artifact; packing_artifacts.map(&:to_h) ;end
-
     def packing_artifacts
-      [auxiliary_files_artifact, precedential_artifact].flatten.compact
+      [auxiliary_file_artifacts, precedential_artifacts].flatten.compact
     end
 
-    # PACKER-SPECIFIC
-    def auxiliary_files_artifact
+    def auxiliary_file_artifacts
       auxiliary_folders.map do |f|
-        if source_path_for(f).exist?
-          {
-            type: 'file',
-            source: "#{source_path_for(f)}/",
-            destination: 'tmp'
-          }
+        if (p = source_path_for(f)).exist?
+          auxiliary_file_artifact_for(p)
         end
-      end
+      end.compact
     end
 
-    def precedential_artifact
+    def precedential_artifacts
       complete_precedence.map { |p| artifacts_for(p) }
     end
 
     def artifacts_for(precedence)
-      [file_copy_artifact_for(precedence), division_artifacts_for(precedence)]
+      [file_copy_artifacts_for(precedence), division_artifacts_for(precedence)]
     end
 
     def division_artifacts_for(precedence)
       packing_divisions.map { |d| d.packing_artifact_for(precedence) if d.uses?(precedence) }
     end
 
-    # PACKER-SPECIFIC
-    def file_copy_artifact_for(precedence)
+    def file_copy_artifacts_for(precedence)
       auxiliary_folders.map do |f|
         if copy_source_path_for(f, precedence).exist?
-          {
-            type: 'shell',
-            inline: [
-              "chown -R root:root /tmp/#{f}/#{precedence}/",
-              "tar -C /tmp/#{f}/#{precedence}/ -cf - . | tar -C / -xf -"
-            ]
-          }
+          file_copy_artifact_for(f, precedence)
         end
-      end
+      end.compact
     end
 
     def scripts_class; ::Packing::Scripts ;end
