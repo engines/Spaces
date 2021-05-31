@@ -26,6 +26,7 @@ module Divisions
         end
     end
 
+    # PACKER-SPECIFIC
     def packing_artifact; packing_artifacts.map(&:to_h) ;end
 
     def packing_artifacts
@@ -50,10 +51,10 @@ module Divisions
     end
 
     def artifacts_for(precedence)
-      [file_copy_artifact_for(precedence), division_artifact_for(precedence)]
+      [file_copy_artifact_for(precedence), division_artifacts_for(precedence)]
     end
 
-    def division_artifact_for(precedence)
+    def division_artifacts_for(precedence)
       packing_divisions.map { |d| d.packing_artifact_for(precedence) if d.uses?(precedence) }
     end
 
