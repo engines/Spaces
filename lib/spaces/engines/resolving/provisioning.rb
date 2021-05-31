@@ -8,11 +8,15 @@ module Resolving
     end
 
     def provisionable?
-      !defines_runtime?
+      !defines_runtime_provider? & !defines_packing_provider?
     end
 
-    def defines_runtime?
+    def defines_runtime_provider?
       blueprint_identifier == runtime_binding&.target_identifier
+    end
+
+    def defines_packing_provider?
+      blueprint_identifier == packing_binding&.target_identifier
     end
 
     def divisions_including_providers

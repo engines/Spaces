@@ -1,5 +1,5 @@
 module Providers
-  class Npm < ::Providers::Modules
+  class Npm < ::Providers::ModuleList
 
     def inline
       struct.map { |s| "npm install #{s}" }

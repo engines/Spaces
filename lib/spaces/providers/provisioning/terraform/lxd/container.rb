@@ -58,11 +58,11 @@ module Providers
       end
 
       def ports_stanzas
-        emission.ports.stanzas if emission.has?(:ports)
+        provisions.ports.stanzas if provisions.has?(:ports)
       end
 
       def device_stanzas
-        emission.volumes.all.map(&:device_stanzas).join
+        provisions.volumes.all.map(&:device_stanzas).join
       end
 
       def dependency_string

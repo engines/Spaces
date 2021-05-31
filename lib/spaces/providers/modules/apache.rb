@@ -1,7 +1,7 @@
 module Providers
-  class Apache < ::Providers::Modules
+  class Apache < ::Providers::ModuleList
 
-    def inline
+    def inline      
       struct.map { |s| "a2enmod #{s}" }
     end
 

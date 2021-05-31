@@ -5,8 +5,7 @@ module Emissions
 
       def naming_map
         {
-          target: :binding_target,
-          nodules: :modules
+          target: :binding_target
         }
       end
 
@@ -20,7 +19,7 @@ module Emissions
           Divisions::Scaling,
           Divisions::SystemPackages,
           Divisions::OtherPackages,
-          Divisions::Nodules,
+          Divisions::Modules,
           Divisions::Repositories,
           Divisions::Permissions,
           Divisions::Images,

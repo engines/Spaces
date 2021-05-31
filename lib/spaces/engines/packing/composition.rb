@@ -5,16 +5,14 @@ module Packing
       def division_classes
         [
           Divisions::Images,
-          Divisions::Packers,
-          Divisions::PostProcessors
+          Divisions::Packers
         ]
       end
 
       def naming_map
         {
           images: 'builders',
-          packers: 'provisioners',
-          post_processors: 'post-processors'
+          packers: 'provisioners'
         }
       end
 

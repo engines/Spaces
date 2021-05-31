@@ -15,7 +15,7 @@ module Resolving
     end
 
     delegate(
-      runtime_binding: :arena,
+      [:runtime_binding, :packing_binding] => :arena,
       [:resolutions, :packs, :provisioning] => :universe,
       [:arenas, :blueprints] => :resolutions
     )
