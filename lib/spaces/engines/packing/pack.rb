@@ -37,6 +37,10 @@ module Packing
       connections.map(&:packed)
     end
 
+    def provider_aspect_name_elements
+      ['providers', packing_identifier]
+    end
+
     def method_missing(m, *args, &block)
       return division_map[m.to_s] if division_keys.include?(m.to_s)
       super

@@ -32,16 +32,24 @@ module Divisions
     end
 
     def resolution
-      @resolution ||= resolution_in(emission.arena)
+      @resolution ||= resolution_in(arena)
+    end
+
+    def resolution_identifier
+      resolution_identifier_in(arena)
     end
 
     def resolution_in(arena)
-      t = resolution_target_for(arena)
+      t = resolution_target_in(arena)
       resolutions.by(t.identifier) if resolutions.exist?(t)
     end
 
-    def resolution_target_for(arena)
-      descriptor_class.new(identifier: "#{arena.identifier.with_identifier_separator}#{target_identifier}")
+    def resolution_target_in(arena)
+      descriptor_class.new(identifier: resolution_identifier_in(arena))
+    end
+
+    def resolution_identifier_in(arena)
+      "#{arena.identifier.with_identifier_separator}#{target_identifier}"
     end
 
   end

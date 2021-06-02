@@ -4,30 +4,24 @@ module ProviderAspects
   class Provider < Aspect
 
     class << self
-      def prototype(division, space)
-        constant_for(division).new(space)
-      end
-
-      def constant_for(division)
-        Module.const_get("::Providers::#{type_for(division).to_s.camelize}")
-      end
-
-      def type_for(division)
-        division.struct.type
+      def prototype(emission, space)
+        constant_for(emission).new(emission, space)
       end
     end
 
     relation_accessor :space
 
+    alias_method :emission, :division
+
     delegate(
-      type: :division,
+      [:type, :descriptor] => :emission,
       [:by, :save, :path_for] => :space
     )
 
     def required_stanza; end
 
-    def initialize(division, space = nil)
-      super(division)
+    def initialize(emission, space = nil)
+      super(emission)
       self.space = space
     end
 
