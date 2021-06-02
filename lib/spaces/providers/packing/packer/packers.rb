@@ -1,6 +1,6 @@
 module Providers
-  class Packer < ::Providers::Provider
-    class Packers < ::Providers::Packers
+  class Packer < ::ProviderAspects::Provider
+    class Packers < ::ProviderAspects::Packers
 
       delegate [:packing_artifacts, :auxiliary_folders, :source_path_for, :copy_source_path_for] => :division
 

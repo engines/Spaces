@@ -1,7 +1,7 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
-  class SystemPackages < ProviderAspect
+module ProviderAspects
+  class SystemPackages < Aspect
 
   end
 end

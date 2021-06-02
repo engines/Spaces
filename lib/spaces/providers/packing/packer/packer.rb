@@ -1,7 +1,7 @@
 require 'packer'
 
 module Providers
-  class Packer < ::Providers::Provider
+  class Packer < ::ProviderAspects::Provider
 
     def export(model); execute(:export, model) ;end
     def commit(model); execute(:commit, model) ;end

@@ -1,6 +1,6 @@
 module Providers
-  class Docker < ::Providers::Provider
-    class Container < ::Providers::Container
+  class Docker < ::ProviderAspects::Provider
+    class Container < ::ProviderAspects::Container
 
       def resolution_stanzas_for(_)
         %(

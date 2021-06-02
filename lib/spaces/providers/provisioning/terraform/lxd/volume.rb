@@ -1,6 +1,6 @@
 module Providers
-  class Lxd < ::Providers::Provider
-    class Volume < ::Providers::Volume
+  class Lxd < ::ProviderAspects::Provider
+    class Volume < ::ProviderAspects::Volume
 
       def resolution_stanzas_for(_)
         %Q(

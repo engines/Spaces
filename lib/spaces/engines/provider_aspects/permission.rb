@@ -1,7 +1,7 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
-  class Permission < ProviderAspect
+module ProviderAspects
+  class Permission < Aspect
 
   end
 end

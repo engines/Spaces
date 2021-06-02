@@ -1,6 +1,6 @@
 module Providers
-  class Lxd < ::Providers::Provider
-    class Container < ::Providers::Container
+  class Lxd < ::ProviderAspects::Provider
+    class Container < ::ProviderAspects::Container
 
       def resolution_stanzas_for(_)
         %(

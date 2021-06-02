@@ -1,5 +1,5 @@
-module Providers
-  class ProviderAspect < ::Spaces::Model
+module ProviderAspects
+  class Aspect < ::Spaces::Model
 
     class << self
       def prototype(division)

@@ -1,7 +1,7 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
-  class Volume < ProviderAspect
+module ProviderAspects
+  class Volume < Aspect
 
     delegate [:source, :destination] => :division
 

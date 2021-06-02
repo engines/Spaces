@@ -1,9 +1,13 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
-  class Provider < ProviderAspect
+module ProviderAspects
+  class Provider < Aspect
 
     class << self
+      def prototype(division, space)
+        constant_for(division).new(space)
+      end
+
       def constant_for(division)
         Module.const_get("::Providers::#{type_for(division).to_s.camelize}")
       end
@@ -13,9 +17,19 @@ module Providers
       end
     end
 
-    delegate type: :division
+    relation_accessor :space
+
+    delegate(
+      type: :division,
+      [:by, :save, :path_for] => :space
+    )
 
     def required_stanza; end
+
+    def initialize(division, space = nil)
+      super(division)
+      self.space = space
+    end
 
   end
 end
