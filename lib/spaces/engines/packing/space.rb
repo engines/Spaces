@@ -23,8 +23,7 @@ module Packing
 
       ensure_connections_exist_for(model)
       super.tap do
-        # PACKER-SPECIFIC
-        path_for(model).join("commit.json").write(model.artifact.to_json)
+        provider_aspect_for(model, self).save
       end
     rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: model.identifier, klass: klass)
