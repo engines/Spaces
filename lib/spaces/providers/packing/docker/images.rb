@@ -1,12 +1,10 @@
 module Providers
   class Docker < ::ProviderAspects::Provider
     module Docker
-      class Image < ::ProviderAspects::Image
-
-        delegate image: :division
+      class Images < ::ProviderAspects::Images
 
         def packing_artifact
-          "FROM #{image}"
+          super.join("\n")
         end
 
       end

@@ -8,7 +8,7 @@ module Packing
     end
 
     def artifact_for(key)
-      division_map[key]&.packing_artifact || struct[key].to_h
+      division_map[key]&.provider_aspect&.packing_artifact
     end
   end
 
