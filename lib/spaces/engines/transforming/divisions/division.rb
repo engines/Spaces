@@ -28,9 +28,6 @@ module Divisions
       resolutions: :universe
     )
 
-    # PACKER-SPECIFIC
-    def packing_artifact; to_h ;end
-
     def packing_division?
       klass.ancestors.include?(::Packing::Division)
     end
