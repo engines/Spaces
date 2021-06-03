@@ -1,6 +1,6 @@
 module Providers
-  class Packer < ::Providers::Provider
-    class Scripts < ::Providers::Scripts
+  class Packer < ::ProviderAspects::Provider
+    class Scripts < ::ProviderAspects::Scripts
 
       delegate scripts_for: :division
 

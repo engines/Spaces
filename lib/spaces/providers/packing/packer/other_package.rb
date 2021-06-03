@@ -1,6 +1,6 @@
 module Providers
-  class Packer < ::Providers::Provider
-    class OtherPackage < ::Providers::OtherPackage
+  class Packer < ::ProviderAspects::Provider
+    class OtherPackage < ::ProviderAspects::OtherPackage
 
       def packing_artifact
         {

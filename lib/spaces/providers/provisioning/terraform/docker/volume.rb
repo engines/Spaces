@@ -1,6 +1,6 @@
 module Providers
-  class Docker < ::Providers::Provider
-    class Volume < ::Providers::Volume
+  class Docker < ::ProviderAspects::Provider
+    class Volume < ::ProviderAspects::Volume
 
     end
   end

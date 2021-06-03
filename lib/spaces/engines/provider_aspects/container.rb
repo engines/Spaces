@@ -1,7 +1,7 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
-  class Container < ProviderAspect
+module ProviderAspects
+  class Container < Aspect
 
     delegate [:provisions, :image_name, :commissioning_scripts] => :division
     delegate [:connections_down, :connect_bindings] => :provisions

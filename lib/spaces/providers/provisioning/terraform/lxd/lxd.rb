@@ -1,6 +1,6 @@
 module Providers
-  class Lxd < ::Providers::Provider
-    
+  class Lxd < ::ProviderAspects::Provider
+
     def provider_stanzas
       [provider_stanza, pool_stanzas].join
     end

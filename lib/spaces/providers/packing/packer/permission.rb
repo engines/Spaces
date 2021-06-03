@@ -1,6 +1,6 @@
 module Providers
-  class Packer < ::Providers::Provider
-    class Permission < ::Providers::Permission
+  class Packer < ::ProviderAspects::Provider
+    class Permission < ::ProviderAspects::Permission
 
       delegate [:recursion, :ownership, :file, :mode] => :division
 

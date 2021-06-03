@@ -1,11 +1,16 @@
 module Packing
   class Space < ::Spaces::Space
+    include ::Emissions::ProviderDependent
 
     class << self
       def default_model_class; Pack ;end
     end
 
     delegate(resolutions: :universe)
+
+    def commit(model)
+      provider_aspect_for(model, self).commit
+    end
 
     def by(identifier, klass = default_model_class)
       super.tap do |m|

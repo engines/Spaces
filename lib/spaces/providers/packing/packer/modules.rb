@@ -1,6 +1,6 @@
 module Providers
-  class Packer < ::Providers::Provider
-    class Modules < ::Providers::Modules
+  class Packer < ::ProviderAspects::Provider
+    class Modules < ::ProviderAspects::Modules
 
       def packing_artifact_for(language)
         {

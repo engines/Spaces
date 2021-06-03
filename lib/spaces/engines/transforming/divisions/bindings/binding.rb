@@ -17,8 +17,6 @@ module Divisions
 
     delegate(publications: :universe)
 
-    alias_accessor :arena, :emission
-
     def type; struct.type || derived_features[:type] ;end
 
     def embed?; type == 'embed' ;end

@@ -1,7 +1,7 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
-  class Image < ProviderAspect
+module ProviderAspects
+  class Image < Aspect
 
   end
 end

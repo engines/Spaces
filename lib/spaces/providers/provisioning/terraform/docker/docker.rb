@@ -1,5 +1,5 @@
 module Providers
-  class Docker < ::Providers::Provider
+  class Docker < ::ProviderAspects::Provider
 
     def provider_stanzas
       %(

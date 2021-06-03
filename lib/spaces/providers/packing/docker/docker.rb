@@ -1,7 +1,7 @@
 require 'docker-api'
 
 module Providers
-  class Docker < ::Providers::Provider
+  class Docker < ::ProviderAspects::Provider
 
     def create(descriptor)
       bridge.create(

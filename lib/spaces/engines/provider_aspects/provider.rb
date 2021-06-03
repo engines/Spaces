@@ -1,21 +1,29 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
-  class Provider < ProviderAspect
+module ProviderAspects
+  class Provider < Aspect
 
     class << self
-      def constant_for(division)
-        Module.const_get("::Providers::#{type_for(division).to_s.camelize}")
-      end
-
-      def type_for(division)
-        division.struct.type
+      def prototype(emission, space)
+        constant_for(emission).new(emission, space)
       end
     end
 
-    delegate type: :division
+    relation_accessor :space
+
+    alias_method :emission, :division
+
+    delegate(
+      [:type, :descriptor] => :emission,
+      [:by, :save, :path_for] => :space
+    )
 
     def required_stanza; end
+
+    def initialize(emission, space = nil)
+      super(emission)
+      self.space = space
+    end
 
   end
 end

@@ -1,9 +1,9 @@
-require_relative 'provider_aspect'
+require_relative 'aspect'
 
-module Providers
+module ProviderAspects
   ModuleList = ::Divisions::ModuleList
 
-  class Modules < ProviderAspect
+  class Modules < Aspect
 
   end
 end
