@@ -1,13 +1,11 @@
 module Divisions
   class Image < ::Divisions::Subdivision
+    include ProviderDependent
 
-    class << self
-      def constant_for(type)
-        Module.const_get("::Providers::#{type.to_s.camelize}::Image")
-      end
-    end
-
-    delegate(tenant: :emission)
+    delegate(
+      tenant: :emission,
+      features: :provider_aspect
+    )
 
     def identifier; type ;end
 
@@ -15,12 +13,17 @@ module Divisions
       !(type && image).nil?
     end
 
+    def inflated; self ;end
+    def deflated; self ;end
+
+    def provider_aspect_name_elements
+      ['providers', packing_identifier, runtime_identifier, qualifier]
+    end
+
     def name; struct.name || derived_features[:name] ;end
     def output_image; struct.output_image || derived_features[:output_image] ;end
 
     def inflated_struct; inflated.struct ;end
-
-    def post_processor_artifacts; end
 
     def default_name; tenant_context_identifier ;end
     def default_output_image; "spaces/#{tenant_context_identifier}:#{default_tag}" ;end

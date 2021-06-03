@@ -1,3 +1,5 @@
+require_relative 'trace'
+
 module Recovery
   module Warning
     extend Warning

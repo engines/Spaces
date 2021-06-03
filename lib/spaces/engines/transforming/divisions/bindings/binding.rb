@@ -17,16 +17,19 @@ module Divisions
 
     delegate(publications: :universe)
 
-    alias_accessor :arena, :emission
-
     def type; struct.type || derived_features[:type] ;end
 
     def embed?; type == 'embed' ;end
 
     def runtime_binding?; ['runtime', 'containing'].include?(identifier) ;end
+    def packing_binding?; ['packing'].include?(identifier) ;end
 
-    def runtime_type
+    def runtime_identifier
       blueprint.provider.type if runtime_binding?
+    end
+
+    def packing_identifier
+      blueprint.provider.type if packing_binding?
     end
 
     def configuration; struct.configuration || derived_features[:configuration] ;end

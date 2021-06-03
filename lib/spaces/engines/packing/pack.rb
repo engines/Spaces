@@ -21,8 +21,7 @@ module Packing
 
     delegate(
       resolutions: :universe,
-      [:arena, :connect_bindings, :images] => :resolution,
-      post_processor_artifacts: :images
+      [:arena, :connect_bindings, :images] => :resolution
     )
 
     def predecessor; @predecessor ||= resolutions.by(identifier) ;end
@@ -36,6 +35,10 @@ module Packing
 
     def connections_packed
       connections.map(&:packed)
+    end
+
+    def provider_aspect_name_elements
+      ['providers', packing_identifier]
     end
 
     def method_missing(m, *args, &block)
