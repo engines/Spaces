@@ -1,14 +1,16 @@
-require_relative 'packing'
-
 module Packing
   class Space < ::Spaces::Space
-    include ::Packing::Packing
+    include ::Emissions::ProviderDependent
 
     class << self
       def default_model_class; Pack ;end
     end
 
     delegate(resolutions: :universe)
+
+    def commit(model)
+      provider_aspect_for(model, self).commit
+    end
 
     def by(identifier, klass = default_model_class)
       super.tap do |m|
@@ -21,6 +23,7 @@ module Packing
 
       ensure_connections_exist_for(model)
       super.tap do
+        # PACKER-SPECIFIC
         path_for(model).join("commit.json").write(model.artifact.to_json)
       end
     rescue ::Packing::Errors::NoImage => e
@@ -34,7 +37,7 @@ module Packing
     end
 
   end
-  
+
   module Errors
     class NoImage < ::Spaces::Errors::SpacesError
     end

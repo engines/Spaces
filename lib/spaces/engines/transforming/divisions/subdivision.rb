@@ -3,12 +3,6 @@ require_relative 'division'
 module Divisions
   class Subdivision < Division
 
-    class << self
-      def prototype(type:, struct:, division:)
-        constant_for(type || struct.type).new(struct: struct, division: division)
-      end
-    end
-
     relation_accessor :division
 
     delegate([:emission, :context_identifier] => :division)

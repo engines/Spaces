@@ -1,5 +1,5 @@
 module Providers
-  class PowerDns < ::Providers::Provider
+  class PowerDns < ::ProviderAspects::Provider
 
     def provider_stanzas
       %(

@@ -39,15 +39,8 @@ module Divisions
     end
 
     def subdivision_for(struct)
-      subdivision_class.prototype(type: type, struct: struct, division: self)
-    rescue ArgumentError => e
-      warn(error: e, klass: self.class, blueprint: context_identifier, content: struct.to_h_deep)
-      nil
+      subdivision_class.new(struct: struct, division: self)
     end
-
-    def type; ;end
-
-    def arena_stanzas; all.map(&:arena_stanzas) ;end
 
     def resolution_stanzas_for(resolution)
       all.map { |d| d.resolution_stanzas_for(resolution) }.flatten.compact
@@ -55,17 +48,6 @@ module Divisions
 
     def struct_with(other); [struct, other.struct].flatten.uniq ;end
     alias_method :merge, :struct_with
-
-    def initialize(struct: nil, emission: nil, label: nil)
-      check_subdivision_class
-      super
-    end
-
-    def check_subdivision_class
-      subdivision_class
-    rescue NameError => e
-      warn(error: e, klass: klass.name.singularize, verbosity: [:silence])
-    end
 
   end
 end
