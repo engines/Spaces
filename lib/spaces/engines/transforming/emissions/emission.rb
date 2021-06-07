@@ -40,6 +40,10 @@ module Emissions
 
     def has?(property); struct[property] ;end
 
+    def runtime_image
+      images&.all&.detect { |i| i.type == runtime_identifier }
+    end
+
     def runtime_identifier
       arena&.runtime_identifier
     end

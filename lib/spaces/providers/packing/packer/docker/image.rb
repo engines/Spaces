@@ -4,7 +4,7 @@ module Providers
       class Image < ::ProviderAspects::Image
 
         class << self
-          def features; [:name, :output_image, :privileged] ;end
+          def features; [:name, :output_name, :privileged] ;end
         end
 
         def privileged; struct.privileged || derived_features[:privileged] ;end
@@ -22,7 +22,7 @@ module Providers
         def derived_features
           @derived_features ||= {
             name: default_name,
-            output_image: default_output_image,
+            output_name: default_output_name,
             privileged: false
           }
         end

@@ -14,7 +14,7 @@ module Providers
         end
       end
 
-      def connector; " &&\n" ;end
+      def connector; " && " ;end
 
     end
   end

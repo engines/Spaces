@@ -8,7 +8,7 @@ module Providers
       def packing_artifact; packing_artifacts.compact.join("\n") ;end
 
       def auxiliary_file_artifact_for(path)
-        "ADD #{path}/ /"
+        "ADD #{path.basename}/ /tmp/"
       end
 
       def file_copy_artifact_for(folder, precedence) ;end

@@ -21,7 +21,7 @@ module Packing
 
     delegate(
       resolutions: :universe,
-      [:arena, :connect_bindings, :images] => :resolution
+      [:arena, :connect_bindings, :runtime_image] => :resolution
     )
 
     def predecessor; @predecessor ||= resolutions.by(identifier) ;end
@@ -40,6 +40,9 @@ module Packing
     def provider_aspect_name_elements
       ['providers', packing_identifier]
     end
+
+    def image_name; runtime_image&.name ;end
+    def output_name; runtime_image&.output_name ;end
 
     def method_missing(m, *args, &block)
       return division_map[m.to_s] if division_keys.include?(m.to_s)

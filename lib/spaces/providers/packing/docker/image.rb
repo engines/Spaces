@@ -3,10 +3,10 @@ module Providers
     module Docker
       class Image < ::ProviderAspects::Image
 
-        delegate image: :division
+        delegate name: :division
 
         def packing_artifact
-          "FROM #{image}"
+          "FROM #{name}"
         end
 
       end
