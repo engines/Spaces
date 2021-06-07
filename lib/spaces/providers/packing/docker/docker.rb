@@ -45,6 +45,8 @@ module Providers
       # end
     end
 
+    alias_method :commit, :build
+
     def from_pack
       bridge.build_from_dir("#{path_for(pack)}", options, connection, default_header) do |k|
         pp "#{k}"
