@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'docker-api'
 gem 'engines-logger', '0.2.0', :git => 'git@github.com:engines/logger'
 
 group :development do
@@ -14,3 +13,4 @@ group :development do
   gem 'pry'
   gem 'ripper-tags'
 end
+gem 'docker-api'
