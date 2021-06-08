@@ -8,8 +8,8 @@ module Packing
 
     delegate(resolutions: :universe)
 
-    def commit(model)
-      provider_aspect_for(model, self).commit
+    def commit(pack)
+      provider_aspect_for(pack, self).commit
     end
 
     def by(identifier, klass = default_model_class)
@@ -18,22 +18,21 @@ module Packing
       end
     end
 
-    def save(model)
-      raise ::Packing::Errors::NoImage, {identifier: model.identifier} unless model.has?(:builders)
+    def save(pack)
+      raise ::Packing::Errors::NoImage, {identifier: pack.identifier} unless pack.has?(:builders)
 
-      ensure_connections_exist_for(model)
+      ensure_connections_exist_for(pack)
       super.tap do
-        # PACKER-SPECIFIC
-        path_for(model).join("commit.json").write(model.artifact.to_json)
+        provider_aspect_for(pack, self).save
       end
     rescue ::Packing::Errors::NoImage => e
-      warn(error: e, identifier: model.identifier, klass: klass)
+      warn(error: e, identifier: pack.identifier, klass: klass)
     end
 
     protected
 
-    def ensure_connections_exist_for(model)
-      model.connections_down.map(&:packed).each { |p| save(p) }
+    def ensure_connections_exist_for(pack)
+      pack.connections_down.map(&:packed).each { |p| save(p) }
     end
 
   end

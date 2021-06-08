@@ -4,7 +4,7 @@ module Providers
       class Image < ::ProviderAspects::Image
 
         class << self
-          def features; [:name, :output_image, :publish_properties] ;end
+          def features; [:name, :output_name, :publish_properties] ;end
         end
 
         def publish_properties; struct.publish_properties || derived_features[:publish_properties] ;end
@@ -14,7 +14,7 @@ module Providers
         def derived_features
           @derived_features ||= {
             name: default_name,
-            output_image: default_output_image,
+            output_image: default_output_name,
             publish_properties: {
               description: "Spaces #{tenant.identifier} #{context_identifier} image",
               aliases: tenant.identifier,

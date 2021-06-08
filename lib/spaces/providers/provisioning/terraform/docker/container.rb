@@ -4,10 +4,9 @@ module Providers
 
       def resolution_stanzas_for(_)
         %(
-          resource "docker_container" "#{blueprint_identifier}" {
-            name  = "#{blueprint_identifier}"
-            image = "#{image}"
-          }
+          resource "#{container_type}" "#{blueprint_identifier}" {
+            name      = "#{blueprint_identifier}"
+            image     = "docker-server:#{image_name}"
         )
       end
 
