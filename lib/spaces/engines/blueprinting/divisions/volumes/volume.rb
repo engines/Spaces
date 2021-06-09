@@ -1,5 +1,6 @@
 module Divisions
   class Volume < ::Divisions::Subdivision
+    include ProviderDependent
 
     class << self
       def features; [:source, :destination] ;end
@@ -7,7 +8,11 @@ module Divisions
 
     alias_method :identifier, :context_identifier
 
-    def device_stanzas; ;end
+    delegate device_stanzas: :provider_aspect
+
+    def provider_aspect_name_elements
+      ['providers', runtime_identifier, qualifier]
+    end
 
   end
 end

@@ -1,5 +1,5 @@
 module Providers
-  class R < ::Providers::Modules
+  class R < ::ProviderAspects::ModuleList
 
     def inline
       struct.map { |s| "R -e 'install.packages(\"#{s}\")'" }

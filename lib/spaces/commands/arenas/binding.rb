@@ -1,3 +1,5 @@
+require_relative 'saving'
+
 module Arenas
   module Commands
     class Binding < Saving

@@ -17,6 +17,10 @@ module Packing
       by_precedence([other.keys, keys].flatten.uniq)
     end
 
+    def all_provider_aspects
+      all.map(&:provider_aspect)
+    end
+
     def source_path_for(folder)
       resolutions.file_path_for(folder, context_identifier)
     end
@@ -34,6 +38,10 @@ module Packing
 
     def by_precedence(keys)
       keys.sort_by { |k| precedence.index(k) || precedence_midpoint }
+    end
+
+    def provider_aspect_name_elements
+      ['providers', packing_identifier, qualifier]
     end
 
   end

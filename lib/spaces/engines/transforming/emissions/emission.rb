@@ -40,12 +40,16 @@ module Emissions
 
     def has?(property); struct[property] ;end
 
-    def runtime_type
-      arena&.runtime_type
+    def runtime_image
+      images&.all&.detect { |i| i.type == runtime_identifier }
     end
 
-    def container_type
-      arena&.container_type
+    def runtime_identifier
+      arena&.runtime_identifier
+    end
+
+    def packing_identifier
+      arena&.packing_identifier
     end
 
     def count

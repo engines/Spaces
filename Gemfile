@@ -13,3 +13,4 @@ group :development do
   gem 'pry'
   gem 'ripper-tags'
 end
+gem 'docker-api'
