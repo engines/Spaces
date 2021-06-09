@@ -7,7 +7,7 @@ module Arenas
       protected
 
       def commit
-        space.update_resolutions_for(model)
+        space.save_resolutions_for(model)
       end
 
     end
