@@ -4,7 +4,7 @@ module Emissions
     def resolved_in(arena)
       empty_resolution.tap do |m|
         m.arena = arena
-        m.struct = arena.struct.without(:bindings).merge(struct)
+        m.struct = arena.struct.without(:bindings).merge(struct.without(:input))
         m.cache_primary_identifiers(arena.identifier, identifier)
       end.flattened.resolved
     end
