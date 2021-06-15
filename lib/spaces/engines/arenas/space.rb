@@ -17,11 +17,11 @@ module Arenas
     def dependent_spaces; [resolutions, packs, provisioning] ;end
 
     def save_installations_for(arena)
-      arena.bound_installations.map { |r| installations.save(r) }
+      arena.unsaved_installations.map { |i| installations.save(i) }
     end
 
     def save_resolutions_for(arena)
-      arena.bound_resolutions.map { |r| resolutions.save(r) }
+      arena.unsaved_resolutions.map { |r| resolutions.save(r) }
     end
 
     def save_initial(arena)

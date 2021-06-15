@@ -1,6 +1,10 @@
 module Arenas
   module Resolving
 
+    def unsaved_resolutions
+       bound_resolutions.reject { |i| resolutions.exist?(i) }
+    end
+
     def bound_resolutions; bound_resolution_map.values ;end
 
     def bound_resolution_map

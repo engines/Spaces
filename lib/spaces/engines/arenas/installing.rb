@@ -1,6 +1,10 @@
 module Arenas
   module Installing
 
+    def unsaved_installations
+       bound_installations.reject { |i| installations.exist?(i) }
+    end
+
     def bound_installations; bound_installation_map.values ;end
 
     def bound_installation_map

@@ -18,7 +18,7 @@ module Arenas
       def composition_class; Composition ;end
     end
 
-    delegate([:arenas, :blueprints] => :universe)
+    delegate([:arenas, :blueprints, :installations, :resolutions] => :universe)
 
     def more_organization_identifiers
       blueprints.organization_identifiers - target_identifiers
