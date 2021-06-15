@@ -11,8 +11,8 @@ module Spaces
           _run
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
-        # rescue NoMethodError => e
-        #   struct.errors = e.inspect
+        rescue NoMethodError => e
+          struct.errors = e.inspect
         end
       end
 
