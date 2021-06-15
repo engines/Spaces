@@ -8,6 +8,8 @@ module Blueprinting
       def documentation_only_keys
         [:identifier, :about]
       end
+
+      def composition_class; Composition ;end
     end
 
     delegate(
