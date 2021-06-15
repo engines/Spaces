@@ -22,13 +22,13 @@ Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space:
 
 # import a bootstrappy blueprint
 Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
+  model: {repository: 'https://github.com/MarkRatjens/docker_arena'},
   force: true
 ).run.payload
 
 # import an application blueprint
 Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
+  model: {repository: 'https://github.com/MarkRatjens/phpmyadmin'},
   force: true
 ).run.payload
 
@@ -49,6 +49,9 @@ Arenas::Commands::MoreOrganizations.new(identifier: :docker_arena).run.payload
 
 # bind an organization blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :docker_arena).run.payload
+
+# save installations the arena so far
+Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
 
 # resolve the arena so far
 Arenas::Commands::Resolving.new(identifier: :docker_arena).run.payload
@@ -87,6 +90,9 @@ Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 
 # bind another blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :phpmyadmin).run.payload
+
+# save installations for the new bindings
+Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
 
 # resolve the arena again for the new bindings
 Arenas::Commands::Resolving.new(identifier: :docker_arena).run.payload
