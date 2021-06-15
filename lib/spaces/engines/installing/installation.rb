@@ -11,7 +11,8 @@ module Installing
     delegate(
       [:runtime_binding, :packing_binding] => :arena,
       [:resolutions, :packs, :provisioning] => :universe,
-      [:arenas, :blueprints] => :resolutions
+      [:arenas, :blueprints] => :resolutions,
+      bindings_of_type: :predecessor
     )
 
     def arena; @arena ||= arenas.by(arena_identifier) ;end

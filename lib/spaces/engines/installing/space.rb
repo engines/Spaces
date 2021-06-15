@@ -15,5 +15,17 @@ module Installing
       end
     end
 
+    def save(installation)
+      super.tap do
+        ensure_connections_exist_for(installation)
+      end
+    end
+
+    protected
+
+    def ensure_connections_exist_for(installation)
+      installation.connections_installed.each { |i| save(i) }
+    end
+
   end
 end
