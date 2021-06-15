@@ -5,7 +5,7 @@ module Emissions
       empty_resolution.tap do |m|
         m.arena = arena
         m.struct = arena.struct.without(:bindings).merge(struct)
-        m.cache_resolution_identifiers(arena.identifier, identifier)
+        m.cache_primary_identifiers(arena.identifier, identifier)
       end.flattened.resolved
     end
 
@@ -33,14 +33,6 @@ module Emissions
 
     def empty_resolution; resolution_class.new ;end
     def resolution_class; ::Resolving::Resolution ;end
-
-    protected
-
-    def cache_resolution_identifiers(arena_identifier, blueprint_identifier)
-      struct.identifier = "#{arena_identifier.with_identifier_separator}#{blueprint_identifier}"
-      struct.arena_identifier = arena_identifier
-      struct.blueprint_identifier = blueprint_identifier
-    end
 
   end
 end

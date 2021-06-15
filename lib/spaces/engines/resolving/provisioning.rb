@@ -3,7 +3,7 @@ module Resolving
 
     def provisioned
       empty_provisions.tap do |m|
-        m.cache_resolution_identifiers(arena_identifier, blueprint_identifier)
+        m.cache_primary_identifiers(arena_identifier, blueprint_identifier)
       end
     end
 

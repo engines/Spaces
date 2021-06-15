@@ -5,6 +5,7 @@ require_relative 'inflating'
 require_relative 'binding'
 require_relative 'topology'
 require_relative 'embedding'
+require_relative 'installing'
 require_relative 'resolving'
 require_relative 'merging'
 require_relative 'hashing'
@@ -19,6 +20,7 @@ module Emissions
     include Binding
     include Topology
     include Embedding
+    include Installing
     include Resolving
     include Merging
     include Hashing
@@ -71,6 +73,14 @@ module Emissions
 
     def respond_to_missing?(m, *)
       division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
+    end
+
+    protected
+
+    def cache_primary_identifiers(arena_identifier, blueprint_identifier)
+      struct.identifier = "#{arena_identifier.with_identifier_separator}#{blueprint_identifier}"
+      struct.arena_identifier = arena_identifier
+      struct.blueprint_identifier = blueprint_identifier
     end
 
   end
