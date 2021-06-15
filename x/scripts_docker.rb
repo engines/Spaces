@@ -22,13 +22,13 @@ Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space:
 
 # import a bootstrappy blueprint
 Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/MarkRatjens/docker_arena'},
+  model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
   force: true
 ).run.payload
 
 # import an application blueprint
 Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/MarkRatjens/phpmyadmin'},
+  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
   force: true
 ).run.payload
 
