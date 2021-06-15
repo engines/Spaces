@@ -15,17 +15,5 @@ module Installing
       end
     end
 
-    def save(model)
-      super.tap do
-        ensure_connections_exist_for(model)
-      end
-    end
-
-    protected
-
-    def ensure_connections_exist_for(model)
-      model.connections_resolved.each { |r| save(r) }
-    end
-
   end
 end
