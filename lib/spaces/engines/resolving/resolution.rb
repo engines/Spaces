@@ -16,13 +16,16 @@ module Resolving
 
     delegate(
       [:runtime_binding, :packing_binding] => :arena,
-      [:resolutions, :packs, :provisioning] => :universe,
-      [:arenas, :blueprints] => :resolutions
+      [:resolutions, :installations, :packs, :provisioning] => :universe,
+      [:arenas, :blueprints] => :resolutions,
+      input: :installation
     )
 
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
     def predecessor; @predecessor ||= blueprints.by(blueprint_identifier) ;end
+
+    def installation; @installation ||= installations.by(identifier) ;end
 
     alias_accessor :blueprint, :predecessor
     alias_accessor :binder, :predecessor
