@@ -1,12 +1,7 @@
 require_relative 'content'
 require_relative 'associating'
-require_relative 'publishing'
-require_relative 'inflating'
 require_relative 'binding'
 require_relative 'topology'
-require_relative 'embedding'
-require_relative 'installing'
-require_relative 'resolving'
 require_relative 'merging'
 require_relative 'hashing'
 
@@ -15,13 +10,8 @@ module Emissions
     include ::Divisions::Dividing
     include Content
     include Associating
-    include Publishing
-    include Inflating
     include Binding
     include Topology
-    include Embedding
-    include Installing
-    include Resolving
     include Merging
     include Hashing
 

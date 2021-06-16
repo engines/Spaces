@@ -1,4 +1,4 @@
-module Emissions
+module Blueprinting
   module Installing
 
     def installation_in(arena)
