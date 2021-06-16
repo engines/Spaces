@@ -1,7 +1,7 @@
 module Emissions
   module Installing
 
-    def installed_in(arena)
+    def installation_in(arena)
       empty_installation.tap do |m|
         m.arena = arena
         m.struct.input = struct.input

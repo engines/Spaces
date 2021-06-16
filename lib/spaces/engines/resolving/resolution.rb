@@ -27,7 +27,7 @@ module Resolving
     end
 
     def connections_settled
-      super { |c| c.with_embeds.resolved_in(arena) }
+      super { |c| c.with_embeds.resolution_in(arena) }
     end
 
     def embeds_including_blueprint; [blueprint, embeds_down].flatten.compact.reverse ;end

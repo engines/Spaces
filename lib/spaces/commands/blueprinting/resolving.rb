@@ -5,7 +5,7 @@ module Blueprinting
     class Resolving < Settling
 
       def resolution
-        @resolution ||= model.resolved_in(arena)
+        @resolution ||= model.resolution_in(arena)
       end
 
       protected

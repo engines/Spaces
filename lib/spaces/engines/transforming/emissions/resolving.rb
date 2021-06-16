@@ -1,7 +1,7 @@
 module Emissions
   module Resolving
 
-    def resolved_in(arena)
+    def resolution_in(arena)
       empty_resolution.tap do |m|
         m.arena = arena
         m.struct = arena.struct.without(:bindings).merge(struct.without(:input))

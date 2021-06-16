@@ -5,7 +5,7 @@ module Blueprinting
     class Installing < Settling
 
       def installation
-        @installation ||= model.installed_in(arena)
+        @installation ||= model.installation_in(arena)
       end
 
       protected

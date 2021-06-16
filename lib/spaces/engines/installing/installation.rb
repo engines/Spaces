@@ -11,7 +11,7 @@ module Installing
     delegate(bindings_of_type: :predecessor)
 
     def connections_settled
-      super { |c| c.with_embeds.installed_in(arena) }
+      super { |c| c.with_embeds.installation_in(arena) }
     end
 
   end

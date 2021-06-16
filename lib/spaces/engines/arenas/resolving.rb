@@ -1,21 +1,14 @@
+require_relative 'settling'
+
 module Arenas
   module Resolving
+    include Settling
 
-    def unsaved_resolutions
-       bound_resolutions.reject { |i| resolutions.exist?(i) }
-    end
+    def unsaved_resolutions; unsaved_settlements_of(:resolution) ;end
 
-    def bound_resolutions; bound_resolution_map.values ;end
+    def bound_resolutions; bound_settlements_of(:resolution) ;end
 
-    def bound_resolution_map
-      @bound_resolution_map ||= connectable_blueprints.map(&:with_embeds).inject({}) do |m, b|
-        m.tap do
-          m[b.identifier] = b.resolved_in(self)
-        end
-      end.compact
-    end
-
-    alias_method :resolution_map, :bound_resolution_map
+    def resolution_map; bound_settlement_map_for(:resolution) ;end
 
   end
 end
