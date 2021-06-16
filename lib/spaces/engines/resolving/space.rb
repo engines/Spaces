@@ -1,5 +1,5 @@
 module Resolving
-  class Space < ::Spaces::Space
+  class Space < ::Settling::Space
 
     class << self
       def default_model_class
@@ -7,13 +7,7 @@ module Resolving
       end
     end
 
-    delegate([:blueprints, :arenas, :packs, :provisioning] => :universe)
-
-    def by(identifier)
-      super.tap do |m|
-        m.arena = arenas.by(m.arena_identifier)
-      end
-    end
+    delegate([:packs, :provisioning] => :universe)
 
     def save(model)
       ensure_connections_exist_for(model)
@@ -35,10 +29,6 @@ module Resolving
     end
 
     protected
-
-    def ensure_connections_exist_for(model)
-      model.connections_resolved.each { |r| save(r) }
-    end
 
     def copy_auxiliaries_for(space, model)
       model.embeds_including_blueprint.map do |b|

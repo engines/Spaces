@@ -4,7 +4,7 @@ require_relative 'provisioning'
 require_relative 'status'
 
 module Resolving
-  class Resolution < ::Emissions::Emission
+  class Resolution < ::Settling::Settlement
     include Resolving::Flattening
     include Resolving::Packing
     include Resolving::Provisioning
@@ -16,37 +16,18 @@ module Resolving
 
     delegate(
       [:runtime_binding, :packing_binding] => :arena,
-      [:resolutions, :installations, :packs, :provisioning] => :universe,
-      [:arenas, :blueprints] => :resolutions,
+      [:installations, :packs, :provisioning] => :universe,
       input: :installation
     )
 
-    def arena; @arena ||= arenas.by(arena_identifier) ;end
-
-    def predecessor; @predecessor ||= blueprints.by(blueprint_identifier) ;end
-
     def installation; @installation ||= installations.by(identifier) ;end
-
-    alias_accessor :blueprint, :predecessor
-    alias_accessor :binder, :predecessor
-
-    def identifiers
-      super.merge(
-        {
-          arena_identifier: arena_identifier,
-          blueprint_identifier: blueprint_identifier
-        }
-      )
-    end
-
-    def arena_identifier; identifier.split_compound.first ;end
 
     def complete?
       all_complete?(divisions)
     end
 
-    def connections_resolved
-      connections_down(emission: :blueprint).map { |c| c.with_embeds.resolved_in(arena) }
+    def connections_settled
+      super { |c| c.with_embeds.resolved_in(arena) }
     end
 
     def embeds_including_blueprint; [blueprint, embeds_down].flatten.compact.reverse ;end
@@ -56,8 +37,6 @@ module Resolving
         Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
       end
     end
-
-    def empty; super.tap { |m| m.arena = arena } ;end
 
   end
 end

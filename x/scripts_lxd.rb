@@ -43,7 +43,7 @@ Arenas::Commands::MoreOrganizations.new(identifier: :lxd_arena).run.payload
 Arenas::Commands::Binding.new(identifier: :lxd_arena, blueprint_identifier: :lxd_arena).run.payload
 
 # save installations the arena so far
-Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
+Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
 
 # resolve the arena so far
 Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
@@ -69,10 +69,10 @@ Arenas::Commands::ProviderProvisioning.new(identifier: :lxd_arena).run.payload
 #
 
 # # export a blueprint
-Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
+# Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
 
 # # get the status of a publication
-Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
+# Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
 
 # synchronize a blueprint
 Blueprinting::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
