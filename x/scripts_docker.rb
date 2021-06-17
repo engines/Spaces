@@ -1,14 +1,6 @@
 # load the code!
 # require './x/universe'
 
-require 'pathname'
-
-$LOAD_PATH.unshift(Pathname.new(__dir__).parent.join('lib').expand_path)
-
-require 'spaces'
-
-universe = Universe.universe
-
 #set up an arena configuration
 params = {
   identifier: 'an_arena_config',
@@ -50,6 +42,9 @@ Arenas::Commands::MoreOrganizations.new(identifier: :docker_arena).run.payload
 # bind an organization blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :docker_arena).run.payload
 
+# save installations the arena so far
+Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
+
 # resolve the arena so far
 Arenas::Commands::Resolving.new(identifier: :docker_arena).run.payload
 
@@ -88,11 +83,11 @@ Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 # bind another blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :phpmyadmin).run.payload
 
+# save installations for the new bindings
+Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
+
 # resolve the arena again for the new bindings
 Arenas::Commands::Resolving.new(identifier: :docker_arena).run.payload
-# PROBABLY SHOULD BE REFINED TO RESOLVE ONLY NEW BLUEPRINTS SINCE LAST RESOLVING
-# EXPLICT FRESH RESOLUTION SHOULD PROBABLY BE DONE MANUALLY
-# THE PROBLEM IS: fresh passwords get regenerated ... there's probably other side effects as well
 
 # get an arena's resolutions
 Arenas::Commands::Resolutions.new(identifier: :docker_arena).run.payload

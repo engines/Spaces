@@ -1,19 +1,26 @@
+require_relative 'inflating'
+require_relative 'embedding'
+require_relative 'installing'
+require_relative 'resolving'
 require_relative 'status'
 
 module Blueprinting
-  class Blueprint < Emissions::Emission
-    include Blueprinting::Status
+  class Blueprint < Publishing::Blueprint
+    include Inflating
+    include Embedding
+    include Installing
+    include Resolving
+    include ::Blueprinting::Status
 
     class << self
       def documentation_only_keys
         [:identifier, :about]
       end
+
+      def composition_class; Composition ;end
     end
 
-    delegate(
-      documentation_only_keys: :klass,
-      [:blueprints, :publications] => :universe
-    )
+    delegate(documentation_only_keys: :klass)
 
     alias_method :blueprint, :itself
 

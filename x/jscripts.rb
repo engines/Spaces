@@ -16,7 +16,7 @@ universe.publications.import(descriptor, force: true)
 # resolve the bootstrap
 arena = universe.arenas.by('development')
 bootstrap = universe.blueprints.by(descriptor.identifier)
-resolution = bootstrap.with_embeds.resolved_in(arena)
+resolution = bootstrap.with_embeds.resolution_in(arena)
 universe.resolutions.save(resolution)
 
 # bootstrap the arena
@@ -41,7 +41,7 @@ universe.publications.import(descriptor, force: true)
 # resolve a blueprint
 blueprint = universe.blueprints.by('powerdns')
 arena = universe.arenas.by('development')
-resolution = blueprint.with_embeds.resolved_in(arena)
+resolution = blueprint.with_embeds.resolution_in(arena)
 universe.resolutions.save(resolution)
 
 # save a pack for a resolution
@@ -61,7 +61,7 @@ universe.publications.import(descriptor, force: true)
 # resolve a blueprint
 blueprint = universe.blueprints.by('phpmyadmin')
 arena = universe.arenas.by('development')
-resolution = blueprint.with_embeds.resolved_in(arena)
+resolution = blueprint.with_embeds.resolution_in(arena)
 universe.resolutions.save(resolution)
 
 # save a pack for a resolution

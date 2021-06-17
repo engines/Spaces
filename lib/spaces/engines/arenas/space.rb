@@ -10,32 +10,32 @@ module Arenas
       end
     end
 
-    delegate([:resolutions, :packs, :provisioning] => :universe)
+    delegate([:installations, :resolutions, :packs, :provisioning] => :universe)
 
     alias_method :identifiers, :simple_identifiers
 
     def dependent_spaces; [resolutions, packs, provisioning] ;end
 
-    def update_resolutions_for(model)
-      model.bound_resolutions.map { |r| resolutions.update(r) }
+    def save_installations_for(arena)
+      arena.unsaved_installations.map { |i| installations.save(i) }
     end
 
-    def reset_resolutions_for(model)
-      model.bound_resolutions.map { |r| resolutions.reset(r) }
+    def save_resolutions_for(arena)
+      arena.unsaved_resolutions.map { |r| resolutions.save(r) }
     end
 
-    def save_initial(model)
-      initial_file_name_for(model).write(model.initial_artifacts)
-      model.identifier
+    def save_initial(arena)
+      initial_file_name_for(arena).write(arena.initial_artifacts)
+      arena.identifier
     end
 
-    def save_runtime(model)
-      runtime_file_name_for(model).write(model.runtime_artifacts)
-      model.identifier
+    def save_runtime(arena)
+      runtime_file_name_for(arena).write(arena.runtime_artifacts)
+      arena.identifier
     end
 
-    def save_other_providers(model)
-      model.tap do |m|
+    def save_other_providers(arena)
+      arena.tap do |m|
         m.other_providers.each do |p|
           provider_file_name_for(p).write(p.provider_artifacts)
         end
@@ -52,12 +52,12 @@ module Arenas
       end
     end
 
-    def initial_file_name_for(model)
-      path_for(model).join("_initial.#{artifact_extension}")
+    def initial_file_name_for(arena)
+      path_for(arena).join("_initial.#{artifact_extension}")
     end
 
-    def runtime_file_name_for(model)
-      path_for(model).join("_runtime.#{artifact_extension}")
+    def runtime_file_name_for(arena)
+      path_for(arena).join("_runtime.#{artifact_extension}")
     end
 
     def provider_file_name_for(provider)

@@ -1,5 +1,6 @@
 require_relative 'binding'
 require_relative 'providing'
+require_relative 'installing'
 require_relative 'resolving'
 require_relative 'packing'
 require_relative 'provisioning'
@@ -8,6 +9,7 @@ module Arenas
   class Arena < ::Emissions::Emission
     include ::Arenas::Binding
     include ::Arenas::Providing
+    include ::Arenas::Installing
     include ::Arenas::Resolving
     include ::Arenas::Packing
     include ::Arenas::Provisioning
@@ -16,7 +18,7 @@ module Arenas
       def composition_class; Composition ;end
     end
 
-    delegate([:arenas, :blueprints] => :universe)
+    delegate([:arenas, :blueprints, :installations, :resolutions] => :universe)
 
     def more_organization_identifiers
       blueprints.organization_identifiers - target_identifiers
@@ -28,6 +30,12 @@ module Arenas
 
     def packing_binding
       @packing_binding ||= deep_bindings.detect(&:packing_binding?)
+    end
+
+    def connectable_blueprints
+      connected_blueprints.map do |b|
+        b.binder? ? b.connected_blueprints.flatten.map(&:blueprint) : b
+      end.flatten
     end
 
     def arena; itself ;end

@@ -1,4 +1,4 @@
-module Emissions
+module Blueprinting
   module Embedding
 
     def with_embeds
