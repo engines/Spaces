@@ -15,7 +15,7 @@ module ProviderAspects
 
     delegate(
       [:type, :descriptor] => :emission,
-      [:by, :save, :path_for] => :space
+      [:by, :path_for] => :space
     )
 
     def required_stanza; end

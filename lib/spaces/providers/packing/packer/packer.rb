@@ -5,6 +5,10 @@ module Providers
 
     alias_method :pack, :emission
 
+    def save
+      path_for(pack).join("commit.json").write(pack.artifact.to_json)
+    end
+
     def export; execute(:export) ;end
     def commit; execute(:commit) ;end
 
@@ -38,7 +42,7 @@ module Providers
 
     def execute(command)
       raise ::Packing::Errors::NoImage, "Model doesn't have images: #{pack.identifier}" unless pack.has?(:builders)
-      save(pack)
+      space.save(pack)
 
       Dir.chdir(path_for(pack).to_path) do
         Pathname.new("#{command}").mkpath

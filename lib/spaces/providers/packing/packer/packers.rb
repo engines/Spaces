@@ -4,7 +4,7 @@ module Providers
 
       delegate [:packing_artifacts, :auxiliary_folders, :source_path_for, :copy_source_path_for] => :division
 
-      def packing_artifact; packing_artifacts.map(&:to_h) ;end
+      def packing_artifact; packing_artifacts.compact.map(&:to_h) ;end
 
       def auxiliary_file_artifact_for(path)
         {

@@ -1,4 +1,4 @@
-module Emissions
+module Publishing
   module Publishing
 
     def localized; transformed_to(:localized) ; end
