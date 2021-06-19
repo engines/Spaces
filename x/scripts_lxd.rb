@@ -42,6 +42,9 @@ Arenas::Commands::MoreOrganizations.new(identifier: :lxd_arena).run.payload
 # bind an organization blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :lxd_arena, blueprint_identifier: :lxd_arena).run.payload
 
+# save installations the arena so far
+Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
+
 # resolve the arena so far
 Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
 
@@ -66,10 +69,10 @@ Arenas::Commands::ProviderProvisioning.new(identifier: :lxd_arena).run.payload
 #
 
 # # export a blueprint
-Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
+# Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
 
 # # get the status of a publication
-Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
+# Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
 
 # synchronize a blueprint
 Blueprinting::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
@@ -80,11 +83,11 @@ Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
 # bind another blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :lxd_arena, blueprint_identifier: :phpmyadmin).run.payload
 
+# save installations for the new bindings
+Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
+
 # resolve the arena again for the new bindings
 Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
-# PROBABLY SHOULD BE REFINED TO RESOLVE ONLY NEW BLUEPRINTS SINCE LAST RESOLVING
-# EXPLICT FRESH RESOLUTION SHOULD PROBABLY BE DONE MANUALLY
-# THE PROBLEM IS: fresh passwords get regenerated ... there's probably other side effects as well
 
 # get an arena's resolutions
 Arenas::Commands::Resolutions.new(identifier: :lxd_arena).run.payload

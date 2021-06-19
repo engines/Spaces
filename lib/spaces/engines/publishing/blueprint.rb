@@ -1,5 +1,10 @@
+require_relative 'publishing'
+require_relative 'status'
+
 module Publishing
   class Blueprint < Emissions::Emission
+    include ::Publishing::Publishing
+    include ::Publishing::Status
 
     delegate([:blueprints, :publications] => :universe)
 
@@ -9,15 +14,6 @@ module Publishing
 
     def descriptor
       @descriptor ||= descriptor_class.new(identifier: identifier)
-    end
-
-    def status
-      OpenStruct.new(
-        descriptor: descriptor.struct,
-        blueprint: {
-          exist: blueprints.exist?(identifier),
-        }
-      )
     end
 
     def transformed_for_publication; localized ;end

@@ -1,25 +1,11 @@
+require_relative 'settling'
+
 module Blueprinting
   module Commands
-    class Resolving < ::Spaces::Commands::Reading
-
-      def arena_identifier
-        input[:arena_identifier]&.to_s
-      end
-
-      def model
-        @model ||= super.with_embeds
-      end
+    class Resolving < Settling
 
       def resolution
-        @resolution ||= model.resolved_in(arena)
-      end
-
-      def arena
-        @arena ||= universe.arenas.by(arena_identifier)
-      end
-
-      def space_identifier
-        super || :blueprints
+        @resolution ||= model.resolution_in(arena)
       end
 
       protected

@@ -1,4 +1,4 @@
-module Emissions
+module Blueprinting
   module Inflating
 
     def inflated; flated(:inflated) ;end

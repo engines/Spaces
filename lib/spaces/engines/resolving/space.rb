@@ -1,8 +1,5 @@
-require_relative 'mirroring'
-
 module Resolving
-  class Space < ::Spaces::Space
-    include Resolving::Mirroring
+  class Space < ::Settling::Space
 
     class << self
       def default_model_class
@@ -10,11 +7,13 @@ module Resolving
       end
     end
 
-    delegate([:blueprints, :arenas, :packs, :provisioning] => :universe)
+    delegate([:packs, :provisioning] => :universe)
 
-    def by(identifier)
-      super.tap do |m|
-        m.arena = arenas.by(m.arena_identifier)
+    def save(model)
+      ensure_connections_exist_for(model)
+      super.tap do
+        copy_auxiliaries_for(blueprints, model)
+        model.content.each { |t| save_text(t) }
       end
     end
 
@@ -30,15 +29,6 @@ module Resolving
     end
 
     protected
-
-    def ensure_connections_reset_for(model)
-      model.connections_resolved.each { |r| reset(r) }
-    end
-
-    def reset_auxiliaries_for(model)
-      copy_auxiliaries_for(blueprints, model)
-      model.content.each { |t| save_text(t) }
-    end
 
     def copy_auxiliaries_for(space, model)
       model.embeds_including_blueprint.map do |b|

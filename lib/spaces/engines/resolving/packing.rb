@@ -4,7 +4,7 @@ module Resolving
     def packed
       empty_pack.tap do |m|
         m.struct = builders_for(images)
-        m.cache_resolution_identifiers(arena_identifier, blueprint_identifier)
+        m.cache_primary_identifiers(arena_identifier, blueprint_identifier)
       end if packable?
     end
 
