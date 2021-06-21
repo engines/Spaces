@@ -37,7 +37,7 @@ Arenas::Commands::Configuring.new(identifier: :base_arena, configuration_identif
 Arenas::Commands::Binding.new(identifier: :base_arena, blueprint_identifier: :docker_arena).run.payload
 
 # save installations for the arena so far
-Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
+Arenas::Commands::Installing.new(identifier: :base_arena).run.payload
 
 # bind a base blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :base_arena, blueprint_identifier: :enginesd_debian_base).run.payload
