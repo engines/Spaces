@@ -40,9 +40,9 @@ module Providers
     end
 
     def build
-      # Dir.chdir(space.path_for(pack)) do
-        bridge.build_from_dir(path_for(pack).to_path)
-      # end
+      space.copy_auxiliaries_for(pack)
+      bridge.build_from_dir(path_for(pack).to_path)
+      space.remove_auxiliaries_for(pack)
     end
 
     alias_method :commit, :build
