@@ -90,7 +90,7 @@ Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
 Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
 
 # get an arena's resolutions
-Arenas::Commands::Resolutions.new(identifier: :lxd_arena).run.payload
+# Arenas::Commands::Resolutions.new(identifier: :lxd_arena).run.payload
 
 # GRAPHING VIA THESE COMMANDS IS DEPRECATED
 # # get the blueprint topology for an arena
