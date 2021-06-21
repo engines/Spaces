@@ -1,3 +1,5 @@
+require 'docker-api'
+
 class Docker::Image
 
   class << self
