@@ -15,7 +15,7 @@ module Providers
         ].compact
       end
 
-      def connector; " && " ;end
+      def connector; " &\&\\\n  " ;end
 
     end
   end
