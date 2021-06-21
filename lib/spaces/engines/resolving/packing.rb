@@ -9,15 +9,7 @@ module Resolving
     end
 
     def packable?
-      @packable ||= images.any? && (binding_target.empty? || bindings_to_here_imply_packable?)
-    end
-
-    def bindings_to_here_imply_packable?
-      bindings_to_here.any?(&:implies_packable?)
-    end
-
-    def bindings_to_here
-      @bindings_to_here ||= resolutions.bindings_to(self)
+      @packable ||= images.any?
     end
 
     def builders_for(images); OpenStruct.new(builders: images.inflated.struct) ;end
