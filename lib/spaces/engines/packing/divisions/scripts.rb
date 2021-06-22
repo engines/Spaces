@@ -6,6 +6,7 @@ module Packing
     include ::Packing::Division
 
     alias_method :pack, :emission
+    alias_method :path, :script_path
 
     delegate(resolutions: :universe)
 

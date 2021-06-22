@@ -2,7 +2,7 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     class Scripts < ::ProviderAspects::Scripts
 
-      delegate scripts_for: :division
+      delegate [:scripts_for, :temporary_script_path] => :division
 
       def packing_artifact_for(precedence)
         "RUN #{temporary_script_paths_for(precedence).join(connector)}"
