@@ -29,10 +29,10 @@ module Divisions
     end
 
     def packing_artifacts
-      [auxiliary_file_artifacts, precedential_artifacts].flatten.compact
+      [first_artifacts, precedential_artifacts].flatten.compact
     end
 
-    def auxiliary_file_artifacts
+    def first_artifacts
       auxiliary_folders.map do |f|
         if (p = source_path_for(f)).exist?
           auxiliary_file_artifact_for(p)

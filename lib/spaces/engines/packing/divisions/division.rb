@@ -29,8 +29,9 @@ module Packing
       source_path_for(folder).join("#{precedence}")
     end
 
-    def temporary_script_path; Pathname('/tmp').join(path) ;end
-    def path; 'packing/scripts' ;end
+    def temporary_script_path; temporary_path.join(script_path) ;end
+    def temporary_path; Pathname('/tmp') ;end
+    def script_path; 'packing/scripts' ;end
 
     def uses?(precedence); keys.include?(precedence.to_sym) ;end
 
