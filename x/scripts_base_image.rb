@@ -27,9 +27,6 @@ Publishing::Commands::Importing.new(
 # delete an arena
 Spaces::Commands::Deleting.new(identifier: :base_arena, space: :arenas).run.payload
 
-# save a basic arena with default associations
-# Arenas::Commands::Saving.new(identifier: :base_arena).run.payload
-
 # configure the basic arena with the configuration we already set up
 Arenas::Commands::Configuring.new(identifier: :base_arena, configuration_identifier: :an_arena_config).run.payload
 
