@@ -1,12 +1,7 @@
 module Divisions
   class Executions < ::Divisions::Divisible
     include DivisibleAspects
-
-    alias_method :divisible_embedded_with, :embedded_with
-
-    include ::Packing::Division
-
-    def embedded_with(other); divisible_embedded_with(other) ;end
+    include ::Packing::Divisible
 
     def transformed_to(transformation)
       if runtime_identifier

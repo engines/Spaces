@@ -16,6 +16,8 @@ module Divisions
       [:any?, :empty?, :map, :count] => :all
     )
 
+    alias_method :divisible_embedded_with, :embedded_with
+
     def related_divisions
       @related_divisions ||= emission.divisions
     end
