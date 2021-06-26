@@ -9,7 +9,7 @@ module Providers
 
     delegate(
       [:connection, :version, :info, :default_socket_url] => :klass,
-      [:image_name, :ourput_name] => :pack,
+      [:image_name, :output_name] => :pack,
       [:all, :get, :prune] => :bridge
     )
 
