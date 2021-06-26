@@ -17,10 +17,6 @@ module Packing
       by_precedence([other.keys, keys].flatten.uniq)
     end
 
-    def all_provider_aspects
-      all.map(&:provider_aspect)
-    end
-
     def source_path_for(folder)
       resolutions.file_path_for(folder, context_identifier)
     end
