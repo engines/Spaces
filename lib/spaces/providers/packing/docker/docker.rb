@@ -5,12 +5,12 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
 
-    alias pack emission
+    alias_method :pack, :emission
 
     delegate(
-      %i[connection version info default_socket_url] => :klass,
-      %i[image_name output_name] => :pack,
-      %i[all get prune] => :bridge
+      [:connection, :version, :info, :default_socket_url] => :klass,
+      [:image_name, :output_name] => :pack,
+      [:all, :get, :prune] => :bridge
     )
 
     def save
@@ -33,7 +33,7 @@ module Providers
       bridge.create(fromImage: image_name)
     end
 
-    alias import pull
+    alias_method :import, :pull
 
     def all(options = {})
       bridge.all(options.reverse_merge(all: true))
@@ -46,11 +46,11 @@ module Providers
       space.remove_auxiliaries_for(pack)
     end
 
-    alias commit build
+    alias_method :commit, :build
 
     def from_pack
-      bridge.build_from_dir(path_for(pack).to_s, options, connection, default_header) do |k|
-        pp k.to_s
+      bridge.build_from_dir("#{path_for(pack)}", options, connection, default_header) do |k|
+        pp "#{k}"
       end.tap do |i|
         i.tag(repo: pack.output_name)
       end
