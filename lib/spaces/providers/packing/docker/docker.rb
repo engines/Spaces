@@ -60,21 +60,11 @@ module Providers
       bridge.build_from_tar(Pathname.new("#{path_for(pack)}.tar").read)
     end
 
-    def artifact_path
-      path_for(pack).join(artifact_filename)
-    end
+    def artifact_path; path_for(pack).join(artifact_filename) ;end
 
-    def options
-      default_options
-    end
-
-    def bridge
-      ::Docker::Image
-    end
-
-    def file_class
-      Files::File
-    end
+    def options; default_options ;end
+    def bridge; ::Docker::Image ;end
+    def file_class; Files::File ;end
 
     def default_options
       {
@@ -84,9 +74,7 @@ module Providers
       }
     end
 
-    def artifact_filename
-      'Dockerfile'
-    end
+    def artifact_filename; 'Dockerfile' ;end
 
     def default_header
       {
@@ -96,5 +84,6 @@ module Providers
         # 'Content-Length': "#{::File.size(?)}"
       }
     end
+
   end
 end
