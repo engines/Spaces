@@ -5,12 +5,12 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
 
-    alias_method :pack, :emission
+    alias pack emission
 
     delegate(
-      [:connection, :version, :info, :default_socket_url] => :klass,
-      [:image_name, :output_name] => :pack,
-      [:all, :get, :prune] => :bridge
+      %i[connection version info default_socket_url] => :klass,
+      %i[image_name output_name] => :pack,
+      %i[all get prune] => :bridge
     )
 
     def save
@@ -18,10 +18,7 @@ module Providers
     end
 
     def create
-STDERR.puts("Building #{image_name}")
-      i = bridge.create(name: image_name)
-     STDERR.puts("Tagging #{pack.output_name}")
-	  i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
+      bridge.create(name: image_name)
     end
 
     # def create
@@ -36,7 +33,7 @@ STDERR.puts("Building #{image_name}")
       bridge.create(fromImage: image_name)
     end
 
-    alias_method :import, :pull
+    alias import pull
 
     def all(options = {})
       bridge.all(options.reverse_merge(all: true))
@@ -44,15 +41,17 @@ STDERR.puts("Building #{image_name}")
 
     def build
       space.copy_auxiliaries_for(pack)
-      bridge.build_from_dir(path_for(pack).to_path)
+      i = bridge.build_from_dir(path_for(pack).to_path)
+      warn("Tagging #{pack.output_name}")
+      i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
       space.remove_auxiliaries_for(pack)
     end
 
-    alias_method :commit, :build
+    alias commit build
 
     def from_pack
-      bridge.build_from_dir("#{path_for(pack)}", options, connection, default_header) do |k|
-        pp "#{k}"
+      bridge.build_from_dir(path_for(pack).to_s, options, connection, default_header) do |k|
+        pp k.to_s
       end.tap do |i|
         i.tag(repo: pack.output_name)
       end
@@ -62,11 +61,21 @@ STDERR.puts("Building #{image_name}")
       bridge.build_from_tar(Pathname.new("#{path_for(pack)}.tar").read)
     end
 
-    def artifact_path; path_for(pack).join(artifact_filename) ;end
+    def artifact_path
+      path_for(pack).join(artifact_filename)
+    end
 
-    def options; default_options ;end
-    def bridge; ::Docker::Image ;end
-    def file_class; Files::File ;end
+    def options
+      default_options
+    end
+
+    def bridge
+      ::Docker::Image
+    end
+
+    def file_class
+      Files::File
+    end
 
     def default_options
       {
@@ -76,7 +85,9 @@ STDERR.puts("Building #{image_name}")
       }
     end
 
-    def artifact_filename; 'Dockerfile' ;end
+    def artifact_filename
+      'Dockerfile'
+    end
 
     def default_header
       {
@@ -86,6 +97,5 @@ STDERR.puts("Building #{image_name}")
         # 'Content-Length': "#{::File.size(?)}"
       }
     end
-
   end
 end
