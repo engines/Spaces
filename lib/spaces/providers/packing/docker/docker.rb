@@ -18,7 +18,7 @@ module Providers
     end
 
     def create
-      bridge.create(name: image_name)
+      bridge.create(name: image_name).tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
     end
 
     # def create
