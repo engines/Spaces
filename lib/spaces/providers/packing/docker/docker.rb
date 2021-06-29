@@ -41,7 +41,8 @@ module Providers
 
     def build
       space.copy_auxiliaries_for(pack)
-      bridge.build_from_dir(path_for(pack).to_path)
+      i = bridge.build_from_dir(path_for(pack).to_path)
+      i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
       space.remove_auxiliaries_for(pack)
     end
 
