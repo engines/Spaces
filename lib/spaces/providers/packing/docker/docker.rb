@@ -18,7 +18,9 @@ module Providers
     end
 
     def create
+STDERR.puts("Building #{image_name}")
       i = bridge.create(name: image_name)
+     STDERR.puts("Tagging #{pack.output_name}")
 	  i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
     end
 
