@@ -16,5 +16,7 @@ module Divisions
       end
     end
 
+    def struct_merged_with(other); super.uniq(&:type) ;end
+
   end
 end
