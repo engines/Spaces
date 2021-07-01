@@ -5,6 +5,9 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
 
+    ::Docker.options[:read_timeout] = 1000
+    ::Docker.options[:write_timeout] = 1000
+
     alias_method :pack, :emission
 
     delegate(
@@ -41,7 +44,9 @@ module Providers
 
     def build
       space.copy_auxiliaries_for(pack)
-      i = bridge.build_from_dir(path_for(pack).to_path)
+      i = bridge.build_from_dir(path_for(pack).to_path) do |chunk|
+        puts chunk
+      end
       i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
       space.remove_auxiliaries_for(pack)
     end
@@ -84,6 +89,5 @@ module Providers
         # 'Content-Length': "#{::File.size(?)}"
       }
     end
-
   end
 end
