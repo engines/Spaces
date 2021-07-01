@@ -1,4 +1,4 @@
-require_relative 'resolving'
+require_relative 'infixing'
 require_relative 'flattening'
 require_relative 'packing'
 require_relative 'provisioning'
@@ -6,7 +6,7 @@ require_relative 'status'
 
 module Resolving
   class Resolution < ::Settling::Settlement
-    include ::Resolving::Resolving
+    include Infixing
     include Flattening
     include Packing
     include Provisioning

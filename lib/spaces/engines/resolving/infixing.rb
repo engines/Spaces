@@ -1,7 +1,7 @@
 module Resolving
-  module Resolving
+  module Infixing
 
-    def resolved
+    def infixes_resolved
       empty.tap do |m|
         m.struct = struct.merge(
           OpenStruct.new(division_map.transform_values { |v| v.resolved.struct } )
