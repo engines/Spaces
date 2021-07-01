@@ -48,8 +48,8 @@ module Divisions
       all.map { |d| d.resolution_stanzas_for(resolution) }.flatten.compact
     end
 
-    def struct_with(other); [struct, other.struct].flatten.uniq ;end
-    alias_method :merge, :struct_with
+    def struct_merged_with(other); [struct, other.struct].flatten.uniq ;end
+    alias_method :merge, :struct_merged_with
 
   end
 end

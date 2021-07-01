@@ -3,6 +3,9 @@ module Resolving
 
     def status
       OpenStruct.new(
+        installation: {
+          exist: installations.exist?(identifier)
+        },
         pack: {
           exist: packs.exist?(identifier),
           allowed: packable?
