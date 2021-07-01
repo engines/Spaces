@@ -8,7 +8,7 @@ module Providers
     options[:read_timeout] = 1000
     options[:write_timeout] = 1000
 
-    alias :pack, :emission
+    alias_method :pack, :emission
 
     delegate(
       [:connection, :version, :info, :default_socket_url] => :klass,
