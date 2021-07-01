@@ -3,7 +3,9 @@ module Resolving
 
     def provisioned
       empty_provisions.tap do |m|
-        m.cache_primary_identifiers(arena_identifier, blueprint_identifier)
+        #FIX!
+        m.struct.identifier = identifier
+        m.cache_primary_identifiers
       end
     end
 

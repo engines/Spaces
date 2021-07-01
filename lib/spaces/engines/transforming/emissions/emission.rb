@@ -30,19 +30,27 @@ module Emissions
 
     alias_method :emission, :itself
 
+    #FIX!
+    def arena; @arena ||= predecessor&.arena ;end
+
     def has?(property); struct[property] ;end
 
     def runtime_image
       images&.all&.detect { |i| i.type == runtime_identifier }
     end
 
+    #FIX!
     def runtime_identifier
       arena&.runtime_identifier
     end
 
+    #FIX!
     def packing_identifier
       arena&.packing_identifier
     end
+
+    #FIX!
+    def arena_identifier; identifier.split_compound.first ;end
 
     def count
       has?(:scaling) ? scaling.count : 1
@@ -65,11 +73,9 @@ module Emissions
       division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
     end
 
-    protected
-
-    def cache_primary_identifiers(arena_identifier, blueprint_identifier)
-      struct.identifier = "#{arena_identifier.with_identifier_separator}#{blueprint_identifier}"
-      struct.arena_identifier = arena_identifier
+    def cache_primary_identifiers
+      # struct.identifier = "#{arena.identifier.with_identifier_separator}#{blueprint_identifier}"
+      struct.arena_identifier = arena.identifier
       struct.blueprint_identifier = blueprint_identifier
     end
 

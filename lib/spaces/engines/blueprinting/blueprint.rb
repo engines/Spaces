@@ -1,5 +1,4 @@
 require_relative 'inflating'
-require_relative 'embedding'
 require_relative 'installing'
 require_relative 'resolving'
 require_relative 'status'
@@ -7,7 +6,6 @@ require_relative 'status'
 module Blueprinting
   class Blueprint < Publishing::Blueprint
     include Inflating
-    include Embedding
     include Installing
     include Resolving
     include ::Blueprinting::Status
