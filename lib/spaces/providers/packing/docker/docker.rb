@@ -5,8 +5,8 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
 
-    options[:read_timeout] = 1000
-    options[:write_timeout] = 1000
+    ::Docker.options[:read_timeout] = 1000
+    ::Docker.options[:write_timeout] = 1000
 
     alias_method :pack, :emission
 
