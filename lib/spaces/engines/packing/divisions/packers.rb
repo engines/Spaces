@@ -14,7 +14,7 @@ module Divisions
     )
 
     def complete_precedence
-      by_precedence(packing_divisions.map(&:keys).flatten.uniq)
+      by_precedence([precedence, packing_divisions.map(&:keys)].flatten.uniq)
     end
 
     def packing_divisions
