@@ -8,12 +8,12 @@ module Providers
     ::Docker.options[:read_timeout] = 1000
     ::Docker.options[:write_timeout] = 1000
 
-    alias pack emission
+    alias :pack, :emission
 
     delegate(
-      %i[connection version info default_socket_url] => :klass,
-      %i[image_name output_name] => :pack,
-      %i[all get prune] => :bridge
+      [:connection, :version, :info, :default_socket_url] => :klass,
+      [:image_name, :output_name] => :pack,
+      [:all, :get, :prune] => :bridge
     )
 
     def save
@@ -36,7 +36,7 @@ module Providers
       bridge.create(fromImage: image_name)
     end
 
-    alias import pull
+    alias_method :import, :pull
 
     def all(options = {})
       bridge.all(options.reverse_merge(all: true))
@@ -51,11 +51,11 @@ module Providers
       space.remove_auxiliaries_for(pack)
     end
 
-    alias commit build
+    alias_method :commit, :build
 
     def from_pack
-      bridge.build_from_dir(path_for(pack).to_s, options, connection, default_header) do |k|
-        pp k.to_s
+      bridge.build_from_dir("#{path_for(pack)}", options, connection, default_header) do |k|
+        pp "#{k}"
       end.tap do |i|
         i.tag(repo: pack.output_name)
       end
@@ -65,21 +65,11 @@ module Providers
       bridge.build_from_tar(Pathname.new("#{path_for(pack)}.tar").read)
     end
 
-    def artifact_path
-      path_for(pack).join(artifact_filename)
-    end
+    def artifact_path; path_for(pack).join(artifact_filename) ;end
 
-    def options
-      default_options
-    end
-
-    def bridge
-      ::Docker::Image
-    end
-
-    def file_class
-      Files::File
-    end
+    def options; default_options ;end
+    def bridge; ::Docker::Image ;end
+    def file_class; Files::File ;end
 
     def default_options
       {
@@ -89,9 +79,7 @@ module Providers
       }
     end
 
-    def artifact_filename
-      'Dockerfile'
-    end
+    def artifact_filename; 'Dockerfile' ;end
 
     def default_header
       {
