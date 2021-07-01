@@ -5,6 +5,9 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
 
+    ::Docker.options[:read_timeout] = 1000
+    ::Docker.options[:write_timeout] = 1000
+
     alias pack emission
 
     delegate(
@@ -40,9 +43,6 @@ module Providers
     end
 
     def build
-
-    bridge.options[:read_timeout] = 1000
-    bridge.options[:write_timeout] = 1000
       space.copy_auxiliaries_for(pack)
       i = bridge.build_from_dir(path_for(pack).to_path) do |chunk|
         puts chunk
