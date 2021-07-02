@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
-wget $repository -O /tmp/package
+wget $1 -O /tmp/package
 cd /tmp
 
-$extraction /tmp/package
+$2 /tmp/package
 
-mv /tmp/$extracted_path $destination
+mv /tmp/$3 $4
