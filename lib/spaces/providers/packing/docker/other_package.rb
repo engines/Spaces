@@ -2,8 +2,12 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     class OtherPackage < ::ProviderAspects::OtherPackage
 
-      def packing_artifact
-        "RUN #{temporary_script_path}/#{qualifier}/add #{environment_vars.join(' ')}"
+     def packing_artifact
+        "RUN #{temporary_script_path}/#{qualifier}/add #{quoted_environment_vars.join(' ')}"
+      end
+
+      def quoted_environment_vars
+        environment_vars.map { |v| %("#{v}")}
       end
 
       def environment_vars
