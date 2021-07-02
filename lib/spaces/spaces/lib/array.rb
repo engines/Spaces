@@ -24,4 +24,8 @@ class Array
     !any?(false)
   end
 
+  def in_quotes
+    map { |v| %("#{v}")}
+  end
+
 end
