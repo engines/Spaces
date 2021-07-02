@@ -3,11 +3,7 @@ module Providers
     class OtherPackage < ::ProviderAspects::OtherPackage
 
      def packing_artifact
-        "RUN #{temporary_script_path}/#{qualifier}/add #{quoted_environment_vars.join(' ')}"
-      end
-
-      def quoted_environment_vars
-        environment_vars.map { |v| %("#{v}")}
+        "RUN #{temporary_script_path}/#{qualifier}/add #{quoted_environment_vars.in_quotes.join(' ')}"
       end
 
       def environment_vars
