@@ -24,7 +24,7 @@ module Settling
     end
 
     def runtime_embeds
-      @embeds_down ||= embeds_down_for(runtime_identifier)
+      @runtime_embeds ||= runtime_embeds_for(runtime_identifier)
     end
 
     def bindings_flattened

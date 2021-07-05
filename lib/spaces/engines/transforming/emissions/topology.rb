@@ -13,7 +13,7 @@ module Emissions
       embed_bindings.map { |t| t.send(emission) }.compact
     end
 
-    def embeds_down_for(runtime, emission: :blueprint)
+    def runtime_embeds_for(runtime, emission: :blueprint)
       embed_bindings.select { |t| t.for_runtime?(runtime) }.map { |t| t.send(emission) }.compact
     end
 
