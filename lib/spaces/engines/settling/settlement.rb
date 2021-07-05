@@ -34,8 +34,6 @@ module Settling
       connections_down(emission: :blueprint).map { |c| block.call(c) }
     end
 
-    def embeds_including_blueprint; [blueprint, embeds_down].flatten.compact.reverse ;end
-
     def content_into(directory, source:)
       resolutions.file_names_for(directory, source.context_identifier).map do |t|
         Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
