@@ -1,13 +1,9 @@
-require_relative 'infixing'
-require_relative 'flattening'
 require_relative 'packing'
 require_relative 'provisioning'
 require_relative 'status'
 
 module Resolving
   class Resolution < ::Settling::Settlement
-    include Infixing
-    include Flattening
     include Packing
     include Provisioning
     include ::Resolving::Status
@@ -29,15 +25,7 @@ module Resolving
     end
 
     def connections_settled
-      super { |c| c.with_embeds.resolution_in(arena) }
-    end
-
-    def embeds_including_blueprint; [blueprint, embeds_down].flatten.compact.reverse ;end
-
-    def content_into(directory, source:)
-      resolutions.file_names_for(directory, source.context_identifier).map do |t|
-        Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
-      end
+      super { |c| c.resolution_in(arena) }
     end
 
   end

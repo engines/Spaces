@@ -20,11 +20,7 @@ module Divisions
     end
 
     def transformed_to(transformation)
-      if runtime_identifier
-        super.select { |s| [runtime_identifier, nil].include?(s.runtime) }
-      else
-        super
-      end
+      super.select { |s| [runtime_identifier, nil].include?(s.runtime) }
     end
 
     def connect_bindings
