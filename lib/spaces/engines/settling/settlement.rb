@@ -16,9 +16,6 @@ module Settling
     alias_accessor :blueprint, :predecessor
     alias_accessor :binder, :predecessor
 
-    #FIX!
-    # def arena_identifier; identifier.split_compound.first ;end
-
     def identifiers
       super.merge(
         {
@@ -27,8 +24,6 @@ module Settling
         }
       )
     end
-
-    # def arena_identifier; identifier.split_compound.first ;end
 
     def connections_settled(&block)
       connections_down(emission: :blueprint).map { |c| block.call(c) }
