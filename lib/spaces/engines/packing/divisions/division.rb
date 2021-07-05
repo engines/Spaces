@@ -17,10 +17,6 @@ module Packing
       by_precedence([other.keys, keys].flatten.uniq)
     end
 
-    def all_provider_aspects
-      all.map(&:provider_aspect)
-    end
-
     def source_path_for(folder)
       resolutions.file_path_for(folder, context_identifier)
     end
@@ -29,8 +25,9 @@ module Packing
       source_path_for(folder).join("#{precedence}")
     end
 
-    def temporary_script_path; Pathname('/tmp').join(path) ;end
-    def path; 'packing/scripts' ;end
+    def temporary_script_path; temporary_path.join(script_path) ;end
+    def temporary_path; Pathname('/tmp') ;end
+    def script_path; 'packing/scripts' ;end
 
     def uses?(precedence); keys.include?(precedence.to_sym) ;end
 

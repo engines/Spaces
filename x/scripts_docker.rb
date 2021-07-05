@@ -12,15 +12,15 @@ params = {
 }
 Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
 
-# import a bootstrappy blueprint
-Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
-  force: true
-).run.payload
-
 # import an application blueprint
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
+  force: true
+).run.payload
+
+# import a bootstrappy blueprint
+Publishing::Commands::Importing.new(
+  model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
   force: true
 ).run.payload
 
@@ -42,7 +42,7 @@ Arenas::Commands::MoreOrganizations.new(identifier: :docker_arena).run.payload
 # bind an organization blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :docker_arena).run.payload
 
-# save installations the arena so far
+# save installations for the arena so far
 Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
 
 # resolve the arena so far
@@ -90,7 +90,7 @@ Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
 Arenas::Commands::Resolving.new(identifier: :docker_arena).run.payload
 
 # get an arena's resolutions
-Arenas::Commands::Resolutions.new(identifier: :docker_arena).run.payload
+# Arenas::Commands::Resolutions.new(identifier: :docker_arena).run.payload
 
 # GRAPHING VIA THESE COMMANDS IS DEPRECATED
 # # get the blueprint topology for an arena

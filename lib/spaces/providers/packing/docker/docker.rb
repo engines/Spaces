@@ -5,11 +5,14 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
 
+    ::Docker.options[:read_timeout] = 1000
+    ::Docker.options[:write_timeout] = 1000
+
     alias_method :pack, :emission
 
     delegate(
       [:connection, :version, :info, :default_socket_url] => :klass,
-      [:image_name, :ourput_name] => :pack,
+      [:image_name, :output_name] => :pack,
       [:all, :get, :prune] => :bridge
     )
 
@@ -40,9 +43,12 @@ module Providers
     end
 
     def build
-      # Dir.chdir(space.path_for(pack)) do
-        bridge.build_from_dir(path_for(pack).to_path)
-      # end
+      space.copy_auxiliaries_for(pack)
+      i = bridge.build_from_dir(path_for(pack).to_path) do |chunk|
+        puts chunk
+      end
+      i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
+      space.remove_auxiliaries_for(pack)
     end
 
     alias_method :commit, :build
@@ -83,6 +89,5 @@ module Providers
         # 'Content-Length': "#{::File.size(?)}"
       }
     end
-
   end
 end

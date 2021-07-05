@@ -9,16 +9,14 @@ module Divisions
     end
 
     def transformed_to(transformation)
-      if should_limit_for_runtime?
+      if runtime_identifier
         super.select { |s| s.type == runtime_identifier }
       else
         super
       end
     end
 
-    def should_limit_for_runtime?
-      runtime_identifier
-    end
+    def struct_merged_with(other); super.uniq(&:type) ;end
 
   end
 end
