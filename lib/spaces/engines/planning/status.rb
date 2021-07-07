@@ -1,13 +1,13 @@
-module Blueprinting
+module Planning
   module Status
 
     def status
       OpenStruct.new(
-        plan: {
-          exist: plans.exist?(identifier)
-        },
         publication: {
           exist: publications.exist?(identifier)
+        },
+        blueprint: {
+          exist: blueprints.exist?(identifier)
         }
       )
     end
