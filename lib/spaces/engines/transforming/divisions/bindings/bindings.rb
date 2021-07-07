@@ -35,6 +35,10 @@ module Divisions
       all.map(&:deep_bindings).flatten
     end
 
+    def descriptors
+      all.map(&:descriptor).compact
+    end
+
     def emission_type; emission.qualifier ;end
 
     def method_missing(m, *args, &block); named(m) || super ;end

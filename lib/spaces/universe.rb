@@ -13,6 +13,7 @@ class Universe < ::Spaces::Model
       [
         Publishing::Space.new(:publications),
         Planning::Space.new(:plans),
+        Locating::Space.new(:locations),
         Blueprinting::Space.new(:blueprints),
         Installing::Space.new(:installations),
         Resolving::Space.new(:resolutions),
