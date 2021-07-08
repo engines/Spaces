@@ -3,7 +3,6 @@ module Resolving
 
     def provisioned
       empty_provisions.tap do |m|
-        #FIX!
         m.struct.identifier = identifier
         m.cache_primary_identifiers
       end
