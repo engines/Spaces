@@ -12,7 +12,7 @@ module Arenas
     end
 
     def bound_settlement_map_for(type)
-      bound_map[type] ||= connectable_blueprints.map(&:with_embeds).inject({}) do |m, b|
+      bound_map[type] ||= connectable_blueprints.inject({}) do |m, b|
         m.tap do
           m[b.identifier] = b.send("#{type}_in", self)
         end

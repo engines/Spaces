@@ -13,6 +13,10 @@ module Emissions
       embed_bindings.map { |t| t.send(emission) }.compact
     end
 
+    def runtime_embeds_for(runtime, emission: :blueprint)
+      embed_bindings.select { |t| t.for_runtime?(runtime) }.map { |t| t.send(emission) }.compact
+    end
+
     def graphed(**args)
       empty.tap do |m|
         m.struct = struct

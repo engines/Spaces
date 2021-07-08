@@ -1,9 +1,11 @@
 require_relative 'publishing'
+require_relative 'planning'
 require_relative 'status'
 
 module Publishing
   class Blueprint < Emissions::Emission
     include ::Publishing::Publishing
+    include ::Publishing::Planning
     include ::Publishing::Status
 
     delegate([:blueprints, :publications] => :universe)
@@ -17,5 +19,6 @@ module Publishing
     end
 
     def transformed_for_publication; localized ;end
+
   end
 end

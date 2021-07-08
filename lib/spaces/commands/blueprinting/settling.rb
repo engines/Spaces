@@ -6,10 +6,6 @@ module Blueprinting
         input[:arena_identifier]&.to_s
       end
 
-      def model
-        @model ||= super.with_embeds
-      end
-
       def arena
         @arena ||= universe.arenas.by(arena_identifier)
       end

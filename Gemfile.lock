@@ -74,6 +74,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  docker-api
   engines-logger (= 0.2.0)!
   pry
   ripper-tags
