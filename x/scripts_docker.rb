@@ -12,15 +12,15 @@ params = {
 }
 Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
 
-# import an application blueprint
-Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
-  force: true
-).run.payload
-
 # import a bootstrappy blueprint
 Publishing::Commands::Importing.new(
   model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
+  force: true
+).run.payload
+
+# import an application blueprint
+Publishing::Commands::Importing.new(
+  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
   force: true
 ).run.payload
 
