@@ -8,6 +8,8 @@
     sed -i '/^kill_udevd.*{/,/^}/ckill_udevd() {\n  true\n}' /var/lib/dpkg/info/eudev.prerm
  fi
 
+apt-get -y update
+
 # If this isn't included build will hang forever if dpkg asks any questions.
 export DEBIAN_FRONTEND=noninteractive
 if test -z $SYSTEM_PACKAGE_ADDS
