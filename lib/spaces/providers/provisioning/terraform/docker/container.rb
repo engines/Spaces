@@ -7,12 +7,14 @@ module Providers
           resource "#{container_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
             image     = "#{spaces_image_registry}:#{image_name}"
-         }
+          }
         )
       end
 
-	def spaces_image_registry
-		image_host.nil? ? nil : "#{image_host}"
+  	  def spaces_image_registry
+        "#{image_host}:" if image_host
+      end
+
     end
   end
 end
