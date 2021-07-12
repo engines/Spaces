@@ -12,7 +12,7 @@ module Providers
       end
 
   	  def spaces_image_registry
-        "#{image_host}:" if image_host
+        # "#{image_host}:" if image_host
       end
 
     end
