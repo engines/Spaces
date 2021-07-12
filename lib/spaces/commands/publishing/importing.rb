@@ -2,7 +2,9 @@ module Publishing
   module Commands
     class Importing < ::Spaces::Commands::Saving
 
-      alias_method :descriptor, :model
+      def model
+        @model ||= universe.locations.by(identifier)
+      end
 
       def force
         input[:force] || false
@@ -12,14 +14,10 @@ module Publishing
         super || :publications
       end
 
-      def model_class
-        Spaces::Descriptor
-      end
-
       protected
 
       def commit
-        space.import(descriptor, force: force)
+        space.import(model, force: force)
       end
 
     end

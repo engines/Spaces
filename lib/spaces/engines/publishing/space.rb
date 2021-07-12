@@ -10,7 +10,7 @@ module Publishing
       end
     end
 
-    delegate([:locations, :blueprints, :plans] => :universe)
+    delegate([:locations, :blueprints] => :universe)
 
     alias_method :identifiers, :simple_identifiers
     alias_method :by, :by_json
@@ -25,7 +25,6 @@ module Publishing
       super.tap do |m|
         locations.ensure_located(m)
         blueprints.by_import(descriptor, force: force)
-        plans.ensure_planned(m) unless plans.exist?(descriptor)
         m.deep_bindings
       end
     end
