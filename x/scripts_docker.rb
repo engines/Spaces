@@ -28,7 +28,7 @@ Publishing::Commands::Importing.new(
 Spaces::Commands::Querying.new(method: :organization_identifiers, space: :blueprints).run.payload
 
 # delete an arena
-Spaces::Commands::Deleting.new(identifier: :docker_arena, space: :arenas).run.payload
+#Spaces::Commands::Deleting.new(identifier: :docker_arena, space: :arenas).run.payload
 
 # save a basic arena with default associations
 Arenas::Commands::Saving.new(identifier: :docker_arena).run.payload
