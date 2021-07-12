@@ -12,17 +12,23 @@ params = {
 }
 Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
 
-# import a bootstrappy blueprint
-Publishing::Commands::Importing.new(
+# save a location to a bootstrappy blueprint
+Spaces::Commands::Saving.new(
   model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
-  force: true
+  space: :locations
+).run.payload
+
+# import a bootstrappy blueprint
+Publishing::Commands::Importing.new(identifier: :docker_arena, force: true).run.payload
+
+# save a location to an image-packing blueprint
+Spaces::Commands::Saving.new(
+  model: {repository: 'https://github.com/v2Blueprints/enginesd_debian_base'},
+  space: :locations
 ).run.payload
 
 # import an image-packing blueprint
-Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/enginesd_debian_base'},
-  force: true
-).run.payload
+Publishing::Commands::Importing.new(identifier: :enginesd_debian_base, force: true).run.payload
 
 # delete an arena
 Spaces::Commands::Deleting.new(identifier: :base_arena, space: :arenas).run.payload
