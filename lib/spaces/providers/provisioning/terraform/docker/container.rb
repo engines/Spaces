@@ -11,7 +11,7 @@ module Providers
       end
 
       def spaces_image_registry
-        #image_host.nil? ? nil : "#{image_host}:"
+        image_host.nil? ? nil : "#{image_host}:"
       end
     end
   end
