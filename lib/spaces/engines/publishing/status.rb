@@ -6,9 +6,6 @@ module Publishing
         descriptor: descriptor.struct,
         blueprint: {
           exist: blueprints.exist?(identifier)
-        },
-        plan: {
-          exist: plans.exist?(identifier)
         }
       )
     end

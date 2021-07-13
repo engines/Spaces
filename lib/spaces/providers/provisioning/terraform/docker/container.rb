@@ -6,11 +6,15 @@ module Providers
           resource "#{container_type}" "#{blueprint_identifier}" {
             name      = "#{blueprint_identifier}"
             image     = "#{spaces_image_registry}#{image_name}"
-			#{device_stanzas}
-         }
-
+            #{device_stanzas}
+          }
         )
       end
+
+  	  def spaces_image_registry
+        # "#{image_host}:" if image_host
+      end
+
 
       def device_stanzas
         provisions.volumes.all.map(&:device_stanzas).join

@@ -3,9 +3,6 @@ module Blueprinting
 
     def status
       OpenStruct.new(
-        plan: {
-          exist: plans.exist?(identifier)
-        },
         publication: {
           exist: publications.exist?(identifier)
         }
