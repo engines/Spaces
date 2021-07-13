@@ -2,7 +2,7 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     class Volume < ::ProviderAspects::Volume
 
-      def resolution_stanzas_for(_)
+      def volumes_stanzas
         %Q(
           volumes { 
             volume_name = "#{volume_name}"
@@ -11,7 +11,7 @@ module Providers
         )
       end
 
-      def device_stanzas
+      def resolution_stanzas_for(_)
         %Q(
           resource "docker_volume" "#{volume_name}"  {
             name = "#{volume_name}"
