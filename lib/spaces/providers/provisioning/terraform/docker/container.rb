@@ -12,6 +12,10 @@ module Providers
         )
       end
 
+      def device_stanzas
+        provisions.volumes.all.map(&:device_stanzas).join
+      end
+
       def spaces_image_registry
       #  image_host.nil? ? nil : "#{image_host}:"
       end
