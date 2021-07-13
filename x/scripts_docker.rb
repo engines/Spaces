@@ -12,23 +12,29 @@ params = {
 }
 Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
 
-# import an application blueprint
-Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
-  force: true
+# save a location to a bootstrappy blueprint
+Spaces::Commands::Saving.new(
+  model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
+  space: :locations
 ).run.payload
 
 # import a bootstrappy blueprint
-Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
-  force: true
+Publishing::Commands::Importing.new(identifier: :docker_arena, force: true).run.payload
+
+# save a location to an application blueprint
+Spaces::Commands::Saving.new(
+  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
+  space: :locations
 ).run.payload
+
+# import an application blueprint
+Publishing::Commands::Importing.new(identifier: :phpmyadmin, force: true).run.payload
 
 # get a list of all organization blueprint identifiers
 Spaces::Commands::Querying.new(method: :organization_identifiers, space: :blueprints).run.payload
 
 # delete an arena
-Spaces::Commands::Deleting.new(identifier: :docker_arena, space: :arenas).run.payload
+#Spaces::Commands::Deleting.new(identifier: :docker_arena, space: :arenas).run.payload
 
 # save a basic arena with default associations
 Arenas::Commands::Saving.new(identifier: :docker_arena).run.payload

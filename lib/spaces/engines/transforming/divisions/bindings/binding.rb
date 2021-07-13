@@ -21,6 +21,8 @@ module Divisions
 
     def embed?; type == 'embed' ;end
 
+    def for_runtime?(value); [value, nil].include?(struct.runtime) ;end
+
     def runtime_binding?; ['runtime', 'containing'].include?(identifier) ;end
     def packing_binding?; ['packing'].include?(identifier) ;end
 

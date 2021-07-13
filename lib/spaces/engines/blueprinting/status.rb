@@ -4,7 +4,7 @@ module Blueprinting
     def status
       OpenStruct.new(
         publication: {
-          exist: publications.exist?(identifier),
+          exist: publications.exist?(identifier)
         }
       )
     end

@@ -5,7 +5,7 @@ module Publishing
       OpenStruct.new(
         descriptor: descriptor.struct,
         blueprint: {
-          exist: blueprints.exist?(identifier),
+          exist: blueprints.exist?(identifier)
         }
       )
     end

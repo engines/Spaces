@@ -4,6 +4,8 @@ module Providers
     def provider_stanzas
       %(
         provider "#{type}" {
+        # Note need to expand this to support remote hosts                                      \                 
+         host = "unix:///var/run/docker.sock"
         }
       )
     end
