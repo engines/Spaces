@@ -2,7 +2,7 @@ module Providers
   class Docker < ::ProviderAspects::Provider
     class Volume < ::ProviderAspects::Volume
 
-      def volumes_stanzas
+      def device_stanzas
         %Q(
           volumes { 
             volume_name = "#{volume_name}"
