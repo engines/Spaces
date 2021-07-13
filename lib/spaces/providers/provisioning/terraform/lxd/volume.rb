@@ -2,16 +2,6 @@ module Providers
   class Lxd < ::ProviderAspects::Provider
     class Volume < ::ProviderAspects::Volume
 
-      def resolution_stanzas_for(_)
-        %Q(
-          resource "lxd_volume" "#{volume_name}" {
-            name = "#{volume_name}"
-            pool = "#{pool_name}"
-            remote = "lxd-server"
-          }
-        )
-      end
-
       def device_stanzas
         %Q(
           device {
@@ -22,6 +12,16 @@ module Providers
               source = "#{volume_name}"
               pool = "#{pool_name}"
             }
+          }
+        )
+      end
+
+      def resolution_stanzas_for(_)
+        %Q(
+          resource "lxd_volume" "#{volume_name}" {
+            name = "#{volume_name}"
+            pool = "#{pool_name}"
+            remote = "lxd-server"
           }
         )
       end

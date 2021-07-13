@@ -61,10 +61,6 @@ module Providers
         provisions.ports.stanzas if provisions.has?(:ports)
       end
 
-      def device_stanzas
-        provisions.volumes.all.map(&:device_stanzas).join
-      end
-
       def dependency_string
         connections_down.map { |c| "#{container_type}.#{c.blueprint_identifier}" }.join(', ')
       end

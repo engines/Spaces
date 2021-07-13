@@ -4,9 +4,9 @@ module Providers
 
       def device_stanzas
         %Q(
-          volumes { 
+          volumes {
             volume_name = "#{volume_name}"
-			 container_path = "#{destination}"
+            container_path = "#{destination}"
           }
         )
       end
@@ -15,10 +15,11 @@ module Providers
         %Q(
           resource "docker_volume" "#{volume_name}"  {
             name = "#{volume_name}"
-            driver = "local"           
+            driver = "local"
           }
         )
       end
+
     end
   end
 end
