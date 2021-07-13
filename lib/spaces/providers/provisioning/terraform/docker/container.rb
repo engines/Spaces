@@ -8,6 +8,7 @@ module Providers
             name      = "#{blueprint_identifier}"
             image     = "#{spaces_image_registry}#{image_name}"
 
+            #{connect_services_stanzas}
             #{device_stanzas}
           }
         )

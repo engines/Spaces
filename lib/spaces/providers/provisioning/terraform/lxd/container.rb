@@ -38,15 +38,6 @@ module Providers
         %(depends_on=[#{dependency_string}]) if connections_down.any?
       end
 
-      def connect_services_stanzas
-        connect_bindings.map do |c|
-          r = c.resolution
-          if r.has?(:service_tasks)
-            r.service_tasks.connection_stanza_for(c)
-          end
-        end.compact.join
-      end
-
       def commissioning_stanzas
         commissioning_scripts.map do |s|
           %(
