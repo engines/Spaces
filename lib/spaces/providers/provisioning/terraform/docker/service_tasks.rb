@@ -6,7 +6,7 @@ module Providers
         connect&.map do |c|
           %(
             provisioner "local-exec" {
-              command = "docker exec #{blueprint_identifier} #{binding.environment_variables} #{c}"
+              command = "docker #{binding.environment_variables} exec #{blueprint_identifier} #{c} "
             }
           )
         end.join
