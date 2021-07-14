@@ -6,7 +6,7 @@ module Arenas
 
     def unsaved_resolutions; unsaved_settlements_of(:resolution) ;end
 
-    def bound_resolutions; bound_settlements_of(:resolution) ;end
+    def bound_resolutions; resolution_map.values ;end
 
     def resolution_map; bound_settlement_map_for(:resolution) ;end
 

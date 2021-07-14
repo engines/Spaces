@@ -4,10 +4,14 @@ module Arenas
 
       alias_method :model, :current_model
 
+      def force
+        input[:force] || false
+      end
+
       protected
 
       def commit
-        space.save_resolutions_for(model)
+        space.save_resolutions_for(model, force: force)
       end
 
     end
