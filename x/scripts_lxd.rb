@@ -52,7 +52,7 @@ Arenas::Commands::Binding.new(identifier: :lxd_arena, blueprint_identifier: :lxd
 Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
 
 # resolve the arena so far
-Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
+Arenas::Commands::Resolving.new(identifier: :lxd_arena, force: true).run.payload
 
 # save all packs for an arena
 Arenas::Commands::Packing.new(identifier: :lxd_arena).run.payload
@@ -92,8 +92,8 @@ Arenas::Commands::Binding.new(identifier: :lxd_arena, blueprint_identifier: :php
 # save installations for the new bindings
 Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
 
-# resolve the arena again for the new bindings
-Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
+# resolve the arena including the new bindings
+Arenas::Commands::Resolving.new(identifier: :lxd_arena, force: true).run.payload
 
 # get an arena's resolutions
 # Arenas::Commands::Resolutions.new(identifier: :lxd_arena).run.payload
