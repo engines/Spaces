@@ -4,7 +4,7 @@ module Blueprinting
     def resolution_in(arena)
       empty_resolution.tap do |m|
         m.arena = arena
-        m.struct = arena.struct.without(:bindings).merge(struct.without(:input))
+        m.struct = arena.struct.without(:bindings, :configuration).merge(struct.without(:input))
         m.cache_primary_identifiers
       end.with_embeds.infixes_resolved
     end
