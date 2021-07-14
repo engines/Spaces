@@ -6,7 +6,7 @@ module Spaces
   class Descriptor < Model
 
     class << self
-      def features; [:identifier, :repository, :branch, :protocol] ;end
+      def features; [:identifier, :repository, :remote, :branch, :protocol] ;end
     end
 
     attr_accessor :uri
@@ -14,6 +14,7 @@ module Spaces
     def identifier; struct.identifier || derived_features[:identifier] ;end
 
     def repository; uri.to_s ;end
+    def remote; struct.remote || derived_features[:remote] ;end
     def branch; struct.branch || derived_features[:branch] ;end
     def protocol; struct.protocol || derived_features[:protocol] ;end
     def git?; protocol == 'git' ;end
@@ -35,6 +36,7 @@ module Spaces
     def derived_features
       @derived_features ||= {
         identifier: root_identifier,
+        remote: 'origin',
         branch: 'main',
         protocol: default_protocol
       }
