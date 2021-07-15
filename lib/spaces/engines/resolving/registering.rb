@@ -4,10 +4,9 @@ module Resolving
     def registered
       connect_bindings.map do |c|
         empty_entry.tap do |m|
-          m.struct = OpenStruct.new.tap do |s|
-            s.resolution_identifier = identifier
-            s.bindings = [c.struct]
-          end
+          m.consumer = self
+          m.struct = OpenStruct.new.tap { |s| s.bindings = [c.struct] }
+          m.cache_primary_identifiers
         end
       end
     end
