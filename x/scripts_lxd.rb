@@ -12,17 +12,23 @@ params = {
 }
 Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
 
-# import an application blueprint
-Publishing::Commands::Importing.new(
+# save a location to an application blueprint
+Spaces::Commands::Saving.new(
   model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
-  force: true
+  space: :locations
+).run.payload
+
+# import an application blueprint
+Publishing::Commands::Importing.new(identifier: :phpmyadmin, force: true).run.payload
+
+# save a location to a bootstrappy blueprint
+Spaces::Commands::Saving.new(
+  model: {repository: 'https://github.com/v2Blueprints/lxd_arena'},
+  space: :locations
 ).run.payload
 
 # import a bootstrappy blueprint
-Publishing::Commands::Importing.new(
-  model: {repository: 'https://github.com/v2Blueprints/lxd_arena'},
-  force: true
-).run.payload
+Publishing::Commands::Importing.new(identifier: :lxd_arena, force: true).run.payload
 
 # get a list of all organization blueprint identifiers
 Spaces::Commands::Querying.new(method: :organization_identifiers, space: :blueprints).run.payload
@@ -46,7 +52,7 @@ Arenas::Commands::Binding.new(identifier: :lxd_arena, blueprint_identifier: :lxd
 Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
 
 # resolve the arena so far
-Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
+Arenas::Commands::Resolving.new(identifier: :lxd_arena, force: true).run.payload
 
 # save all packs for an arena
 Arenas::Commands::Packing.new(identifier: :lxd_arena).run.payload
@@ -86,8 +92,8 @@ Arenas::Commands::Binding.new(identifier: :lxd_arena, blueprint_identifier: :php
 # save installations for the new bindings
 Arenas::Commands::Installing.new(identifier: :lxd_arena).run.payload
 
-# resolve the arena again for the new bindings
-Arenas::Commands::Resolving.new(identifier: :lxd_arena).run.payload
+# resolve the arena including the new bindings
+Arenas::Commands::Resolving.new(identifier: :lxd_arena, force: true).run.payload
 
 # get an arena's resolutions
 # Arenas::Commands::Resolutions.new(identifier: :lxd_arena).run.payload
