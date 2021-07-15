@@ -7,11 +7,12 @@ module Resolving
       end
     end
 
-    delegate([:packs, :provisioning] => :universe)
+    delegate([:registry, :packs, :provisioning] => :universe)
 
     def save(model)
       ensure_connections_exist_for(model)
       super.tap do
+        registry.ensure_entered(model)
         copy_auxiliaries_for(blueprints, model)
         model.content.each { |t| save_text(t) }
       end

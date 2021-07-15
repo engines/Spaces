@@ -11,8 +11,8 @@ module Resolving
       end
     end
 
-    def registerable?
-      @registerable ||= connect_bindings.any?
+    def registrable?
+      @registrable ||= connect_bindings.any?
     end
 
     def empty_entry; entry_class.new ;end
