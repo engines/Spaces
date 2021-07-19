@@ -1,5 +1,3 @@
-require_relative 'status'
-
 module Registry
   class Entry < Emissions::Emission
 
