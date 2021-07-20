@@ -1,9 +1,11 @@
+require_relative 'registering'
 require_relative 'packing'
 require_relative 'provisioning'
 require_relative 'status'
 
 module Resolving
   class Resolution < ::Settling::Settlement
+    include Registering
     include Packing
     include Provisioning
     include ::Resolving::Status

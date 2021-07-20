@@ -134,3 +134,6 @@ Arenas::Commands::Provisioning.new(identifier: :docker_arena).run.payload
 
 # # save provisions for a resolution
 # Provisioning::Commands::Saving.new(identifier: 'docker_arena::phpmyadmin').run.payload
+
+# capture registry entries for an application
+Registry::Commands::Registering.new(identifier: 'docker_arena::phpmyadmin').run.payload
