@@ -58,6 +58,8 @@ module Emissions
 
     def empty; klass.new(identifiable: identifier) ;end
 
+    def in_blueprint?; ;end
+
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)
       self.struct.identifier = identifiable.identifier if identifiable
