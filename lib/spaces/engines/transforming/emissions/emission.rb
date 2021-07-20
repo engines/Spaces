@@ -21,7 +21,6 @@ module Emissions
     end
 
     relation_accessor :predecessor
-    relation_accessor :arena
 
     delegate(
       composition: :klass,
@@ -30,33 +29,19 @@ module Emissions
 
     alias_method :emission, :itself
 
-    #FIX!
-    def arena; @arena ||= predecessor&.arena ;end
-
     def has?(property); struct[property] ;end
 
     def runtime_image
       images&.all&.detect { |i| i.type == runtime_identifier }
     end
 
-    #FIX!
-    def runtime_identifier
-      arena&.runtime_identifier
-    end
-
-    #FIX!
-    def packing_identifier
-      arena&.packing_identifier
-    end
-
-    #FIX!
-    def arena_identifier; identifier.split_compound.first ;end
-
     def count
       has?(:scaling) ? scaling.count : 1
     end
 
     def empty; klass.new(identifiable: identifier) ;end
+
+    def in_blueprint?; ;end
 
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)
@@ -71,12 +56,6 @@ module Emissions
 
     def respond_to_missing?(m, *)
       division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
-    end
-
-    def cache_primary_identifiers
-      # struct.identifier = "#{arena.identifier.with_identifier_separator}#{blueprint_identifier}"
-      struct.arena_identifier = arena.identifier
-      struct.blueprint_identifier = blueprint_identifier
     end
 
   end

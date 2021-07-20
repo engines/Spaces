@@ -12,24 +12,16 @@ module Packing
     end
   end
 
-  class Pack < ::Emissions::Emission
+  class Pack < ::Resolving::Emission
     include Payloading
 
     class << self
       def composition_class; Composition ;end
     end
 
-    delegate(
-      resolutions: :universe,
-      [:arena, :connect_bindings, :runtime_image] => :resolution
-    )
+    delegate(runtime_image: :resolution)
 
-    def predecessor; @predecessor ||= resolutions.by(identifier) ;end
-
-    alias_accessor :resolution, :predecessor
     alias_method :context_identifier, :identifier
-
-    def keys; composition.keys ;end
 
     def packers; provisioners ;end
 

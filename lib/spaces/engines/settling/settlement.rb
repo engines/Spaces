@@ -2,14 +2,11 @@ require_relative 'embedding'
 require_relative 'infixing'
 
 module Settling
-  class Settlement < ::Emissions::Emission
+  class Settlement < ::Arenas::Emission
     include Embedding
     include Infixing
 
-    delegate(
-      resolutions: :universe,
-      [:arenas, :blueprints] => :resolutions
-    )
+    delegate([:blueprints, :resolutions] => :universe)
 
     def predecessor; @predecessor ||= blueprints.by(blueprint_identifier) ;end
 
@@ -33,14 +30,6 @@ module Settling
       resolutions.file_names_for(directory, source.context_identifier).map do |t|
         Interpolating::FileText.new(origin: t, directory: directory, transformable: self)
       end
-    end
-
-    def empty; super.tap { |m| m.arena = arena } ;end
-
-    def cache_primary_identifiers
-      struct.identifier = "#{arena.identifier.with_identifier_separator}#{blueprint_identifier}"
-      struct.arena_identifier = arena.identifier
-      struct.blueprint_identifier = blueprint_identifier
     end
 
   end

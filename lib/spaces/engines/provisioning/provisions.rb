@@ -1,21 +1,13 @@
 module Provisioning
-  class Provisions < ::Emissions::Emission
+  class Provisions < ::Resolving::Emission
 
     class << self
       def composition_class; Composition ;end
     end
 
-
     delegate(
-      resolutions: :universe,
-      [:arena, :images, :volumes, :connect_bindings, :ports, :has?] => :resolution
+      [:images, :volumes, :ports, :has?] => :resolution
     )
-
-    def predecessor; @predecessor ||= resolutions.by(identifier) ;end
-
-    alias_accessor :resolution, :predecessor
-
-    def keys; composition.keys ;end
 
     def connections_provisioned
       connections_down.map(&:provisioned)
