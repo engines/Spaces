@@ -52,7 +52,7 @@ Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :
 Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
 
 # resolve the arena so far
-Arenas::Commands::Resolving.new(identifier: :docker_arena).run.payload
+Arenas::Commands::Resolving.new(identifier: :docker_arena, force: true).run.payload
 
 # save all packs for an arena
 Arenas::Commands::Packing.new(identifier: :docker_arena).run.payload
@@ -92,8 +92,8 @@ Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :
 # save installations for the new bindings
 Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
 
-# resolve the arena again for the new bindings
-Arenas::Commands::Resolving.new(identifier: :docker_arena).run.payload
+# resolve the arena including the new bindings
+Arenas::Commands::Resolving.new(identifier: :docker_arena, force: true).run.payload
 
 # get an arena's resolutions
 # Arenas::Commands::Resolutions.new(identifier: :docker_arena).run.payload
@@ -134,3 +134,6 @@ Arenas::Commands::Provisioning.new(identifier: :docker_arena).run.payload
 
 # # save provisions for a resolution
 # Provisioning::Commands::Saving.new(identifier: 'docker_arena::phpmyadmin').run.payload
+
+# capture registry entries for an application
+Registry::Commands::Registering.new(identifier: 'docker_arena::phpmyadmin').run.payload

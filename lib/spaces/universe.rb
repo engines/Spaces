@@ -16,6 +16,7 @@ class Universe < ::Spaces::Model
         Blueprinting::Space.new(:blueprints),
         Installing::Space.new(:installations),
         Resolving::Space.new(:resolutions),
+        Registry::Space.new(:registry),
         Packing::Space.new(:packs),
         Provisioning::Space.new(:provisioning),
         Arenas::Space.new(:arenas),

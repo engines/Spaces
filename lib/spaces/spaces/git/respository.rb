@@ -8,6 +8,8 @@ module Spaces
       relation_accessor :descriptor
       relation_accessor :space
 
+      delegate remote: :descriptor
+
       def by_import(force: false)
         if space.imported?(descriptor)
           pull_remote if force
@@ -26,13 +28,13 @@ module Spaces
       end
 
       def pull_remote
-        opened.pull(:origin, branch_name)
+        opened.pull(remote, branch_name)
       rescue git_error => e
         raise_failure_for(e)
       end
 
       def push_remote
-        opened.push(:origin, branch_name)
+        opened.push(remote, branch_name)
       rescue git_error => e
         raise_failure_for(e)
       end
