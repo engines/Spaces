@@ -8,7 +8,7 @@ module Installing
       def composition_class; Composition ;end
     end
 
-    delegate(bindings_of_type: :predecessor)
+    delegate(bindings_of_type: :blueprint)
 
     def connections_settled
       super { |c| c.installation_in(arena) }

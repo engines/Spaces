@@ -21,7 +21,6 @@ module Emissions
     end
 
     relation_accessor :predecessor
-    relation_accessor :arena
 
     delegate(
       composition: :klass,
@@ -30,27 +29,11 @@ module Emissions
 
     alias_method :emission, :itself
 
-    #FIX!
-    def arena; @arena ||= predecessor&.arena ;end
-
     def has?(property); struct[property] ;end
 
     def runtime_image
       images&.all&.detect { |i| i.type == runtime_identifier }
     end
-
-    #FIX!
-    def runtime_identifier
-      arena&.runtime_identifier
-    end
-
-    #FIX!
-    def packing_identifier
-      arena&.packing_identifier
-    end
-
-    #FIX!
-    def arena_identifier; identifier.split_compound.first ;end
 
     def count
       has?(:scaling) ? scaling.count : 1
