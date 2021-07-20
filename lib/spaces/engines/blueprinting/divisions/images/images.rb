@@ -9,11 +9,7 @@ module Divisions
     end
 
     def transformed_to(transformation)
-      if runtime_identifier
-        super.select { |s| s.type == runtime_identifier }
-      else
-        super
-      end
+      in_blueprint? ? super : super.select { |s| s.type == runtime_identifier }
     end
 
     def struct_merged_with(other); super.uniq(&:type) ;end
