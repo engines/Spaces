@@ -58,11 +58,5 @@ module Emissions
       division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
     end
 
-    def cache_primary_identifiers
-      # struct.identifier = "#{arena.identifier.with_identifier_separator}#{blueprint_identifier}"
-      struct.arena_identifier = arena.identifier
-      struct.blueprint_identifier = blueprint_identifier
-    end
-
   end
 end
