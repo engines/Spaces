@@ -1,6 +1,22 @@
 module Emissions
   module Topology
 
+    def all_identifiers_up_in(emissions)
+      all_emissions_up_in(emissions).map(&:identifier)
+    end
+
+    def all_emissions_up_in(emissions)
+      all_up_in(emissions).map(&:emission).uniq
+    end
+
+    def all_up_in(emissions)
+      all_in(emissions).select { |b| identifier == b.target_identifier }
+    end
+
+    def all_in(emissions)
+      emissions.map(&:all_bindings).flatten
+    end
+
     def all_down(emission: :blueprint)
       all_bindings.map { |t| t.send(emission) }.compact
     end
