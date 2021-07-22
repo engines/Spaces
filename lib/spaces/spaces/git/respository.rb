@@ -1,62 +1,21 @@
 require 'git'
+require_relative 'importing'
+require_relative 'exporting'
 
 module Spaces
   module Git
     class Repository < ::Spaces::Model
       include Engines::Logger
+      include Importing
+      include Exporting
 
       relation_accessor :descriptor
       relation_accessor :space
 
-      delegate remote: :descriptor
-
-      def by_import(force: false)
-        if space.imported?(descriptor)
-          pull_remote if force
-        else
-          clone_remote
-        end
-
-        space.by(descriptor)
-      end
-
-      def export(**args)
-        descriptor.identifier.tap do
-          commit(**args)
-          push_remote
-        end
-      end
-
-      def pull_remote
-        opened.pull(remote, branch_name)
-      rescue git_error => e
-        raise_failure_for(e)
-      end
-
-      def push_remote
-        opened.push(remote, branch_name)
-      rescue git_error => e
-        raise_failure_for(e)
-      end
-
-      def commit(message: nil)
-        opened.commit_all("#{message || default_commit_message} [BY SPACES]")
-      rescue git_error => e
-        raise_failure_for(e)
-      end
+      delegate([:repository_name, :identifier, :branch_name, :remote] => :descriptor)
 
       def opened
         @opened ||= git.open(space.path_for(descriptor), log: logger)
-      end
-
-      def default_commit_message; "Exported on #{Time.now}" ;end
-
-      delegate([:repository_name, :identifier, :branch_name] => :descriptor)
-
-      def clone_remote
-        git.clone(repository_name, identifier, branch: branch_name, path: space.path, depth: 0)
-      rescue git_error => e
-        raise_failure_for(e)
       end
 
       def raise_failure_for(exception)

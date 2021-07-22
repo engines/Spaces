@@ -3,14 +3,14 @@ module Spaces
     class Space < ::Spaces::Space
 
       def by_import(descriptor, force: false)
-        respository_for(descriptor).by_import(force: force)
+        repository_for(descriptor).by_import(force: force)
       end
 
       def export(identifiable, **args)
-        respository_for(descriptor_class.new(identifier: identifiable.identifier)).export(**args)
+        repository_for(descriptor_class.new(identifier: identifiable.identifier)).export(**args)
       end
 
-      def respository_for(descriptor)
+      def repository_for(descriptor)
         respository_class.new(descriptor, space: self)
       end
 
