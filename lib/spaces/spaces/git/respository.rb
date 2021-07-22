@@ -12,7 +12,16 @@ module Spaces
       relation_accessor :descriptor
       relation_accessor :space
 
-      delegate([:repository_name, :identifier, :branch_name, :remote] => :descriptor)
+      delegate(
+        [:repository_name, :identifier, :branch_name, :remote] => :descriptor,
+        [:branch, :checkout] => :opened
+      )
+
+      def branch_names_without_head
+        opened.branches.map(&:name).uniq.reject { |b| b.include?(head_identifier) }
+      end
+
+      alias_method :branch_names, :branch_names_without_head
 
       def opened
         @opened ||= git.open(space.path_for(descriptor), log: logger)
@@ -25,6 +34,7 @@ module Spaces
       def git; ::Git ;end
       def git_error; ::Git::GitExecuteError ;end
       def failure; ::Spaces::Errors::RepositoryFail ;end
+      def head_identifier; 'HEAD ->' ;end
 
       def initialize(descriptor, space:)
         self.descriptor = descriptor
