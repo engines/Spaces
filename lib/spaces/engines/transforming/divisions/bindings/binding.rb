@@ -15,8 +15,6 @@ module Divisions
       def features; [:type, :identifier, :target_identifier, :configuration] ;end
     end
 
-    delegate(publications: :universe)
-
     def type; struct.type || derived_features[:type] ;end
 
     def embed?; type == 'embed' ;end

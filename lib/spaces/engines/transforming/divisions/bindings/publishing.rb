@@ -12,29 +12,20 @@ module Divisions
       end
 
       def globalized
-        if p = publication
-          if pb = publishing_binding
-            empty.tap do |m|
-              m.struct = struct.without([:identifier, :target_identifier]).tap do |s|
-                s.target = pb.struct.target
-                s.identifier = identifier unless identifier == pb.identifier
-              end
+        if l = location
+          empty.tap do |m|
+            m.struct = struct.without([:identifier, :target_identifier]).tap do |s|
+              s.target = l.struct
+              s.identifier = identifier unless identifier == l.identifier
             end
           end
         end
       end
 
-      def publication
-        if publications.exist?(context_identifier)
-          publications.by(context_identifier)
+      def location
+        if locations.exist?(target_identifier)
+          locations.by(target_identifier)
         end
-      end
-
-
-      protected
-
-      def publishing_binding
-        publication.bindings.all.detect { |b| b.identifier == identifier }
       end
 
     end
