@@ -13,8 +13,7 @@ module Spaces
       relation_accessor :space
 
       delegate(
-        [:repository_name, :identifier, :branch_name, :remote] => :descriptor,
-        [:branch, :checkout] => :opened
+        [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor
       )
 
       def branch_names_without_head
@@ -27,8 +26,27 @@ module Spaces
         opened.diff.patch
       end
 
-      def opened
-        @opened ||= git.open(space.path_for(descriptor), log: logger)
+      def checkout
+        opened.branch(branch_name).checkout
+      end
+
+      def add_remote
+        opened.add_remote(remote_name, repository_url).tap { fetch }
+      end
+
+      def fetch
+        opened.fetch(remote_name)
+      end
+
+      def opened(&block)
+        @opened ||= (
+          init unless exist?
+          git.open(space.path_for(descriptor), log: logger).tap { yield if block_given? }
+        )
+      end
+
+      def exist?
+        space.path_for(descriptor).join(".#{protocol}").exist?
       end
 
       def raise_failure_for(exception)
@@ -43,6 +61,15 @@ module Spaces
       def initialize(descriptor, space:)
         self.descriptor = descriptor
         self.space = space
+      end
+
+      protected
+
+      def init
+        git.init("#{space.path_for(descriptor)}", log: logger).tap do
+          add_remote
+          checkout
+        end
       end
 
     end

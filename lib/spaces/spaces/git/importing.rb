@@ -15,13 +15,13 @@ module Spaces
       end
 
       def pull_remote
-        opened.pull(:origin, branch_name)
+        opened.pull(remote_name, branch_name)
       rescue git_error => e
         raise_failure_for(e)
       end
 
       def clone_remote
-        git.clone(repository_name, identifier, branch: branch_name, path: space.path, depth: 0)
+        git.clone(repository_url, identifier, branch: branch_name, path: space.path, depth: 0)
       rescue git_error => e
         raise_failure_for(e)
       end

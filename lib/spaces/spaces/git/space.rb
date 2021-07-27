@@ -6,8 +6,8 @@ module Spaces
         repository_for(descriptor).by_import(force: force)
       end
 
-      def export(identifiable, **args)
-        repository_for(descriptor_class.new(identifier: identifiable.identifier)).export(**args)
+      def export(descriptor, **args, &block)
+        repository_for(descriptor).export(**args, &block)
       end
 
       def repository_for(descriptor)
