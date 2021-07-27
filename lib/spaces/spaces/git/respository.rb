@@ -23,6 +23,10 @@ module Spaces
 
       alias_method :branch_names, :branch_names_without_head
 
+      def diff
+        opened.diff.patch
+      end
+
       def opened
         @opened ||= git.open(space.path_for(descriptor), log: logger)
       end
