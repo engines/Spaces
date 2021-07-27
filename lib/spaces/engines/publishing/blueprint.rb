@@ -9,7 +9,7 @@ module Publishing
     delegate([:blueprints, :publications] => :universe)
 
     def repository
-      @respository ||= publications.repository_for(descriptor)
+      @repository ||= publications.repository_for(descriptor)
     end
 
     def descriptor

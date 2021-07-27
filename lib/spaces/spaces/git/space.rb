@@ -11,10 +11,10 @@ module Spaces
       end
 
       def repository_for(descriptor)
-        respository_class.new(descriptor, space: self)
+        repository_class.new(descriptor, space: self)
       end
 
-      def respository_class; ::Spaces::Git::Repository ;end
+      def repository_class; ::Spaces::Git::Repository ;end
 
     end
   end
