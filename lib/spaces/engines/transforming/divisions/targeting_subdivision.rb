@@ -10,7 +10,7 @@ module Divisions
     end
 
     delegate(
-      [:blueprints, :publications, :resolutions] => :universe
+      [:locations, :blueprints, :resolutions] => :universe
     )
 
     def blueprint
