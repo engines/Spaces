@@ -10,7 +10,7 @@ module Divisions
     end
 
     delegate(
-      [:blueprints, :publications, :resolutions] => :universe
+      [:locations, :blueprints, :resolutions] => :universe
     )
 
     def blueprint
@@ -27,7 +27,7 @@ module Divisions
 
     def descriptor
       @descriptor ||= descriptor_class.new(
-        struct.target || {identifier: target_identifier}
+        struct.target || {identifier: struct.target_identifier}
       )
     end
 

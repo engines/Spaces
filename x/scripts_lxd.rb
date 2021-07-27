@@ -21,6 +21,8 @@ Spaces::Commands::Saving.new(
 # import an application blueprint
 Publishing::Commands::Importing.new(identifier: :phpmyadmin, force: true).run.payload
 
+# ------------------------------------------------------------------------------
+
 # save a location to a bootstrappy blueprint
 Spaces::Commands::Saving.new(
   model: {repository: 'https://github.com/v2Blueprints/lxd_arena'},

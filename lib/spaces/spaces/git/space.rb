@@ -3,18 +3,18 @@ module Spaces
     class Space < ::Spaces::Space
 
       def by_import(descriptor, force: false)
-        respository_for(descriptor).by_import(force: force)
+        repository_for(descriptor).by_import(force: force)
       end
 
-      def export(identifiable, **args)
-        respository_for(descriptor_class.new(identifier: identifiable.identifier)).export(**args)
+      def export(descriptor, **args, &block)
+        repository_for(descriptor).export(**args, &block)
       end
 
-      def respository_for(descriptor)
-        respository_class.new(descriptor, space: self)
+      def repository_for(descriptor)
+        repository_class.new(descriptor, space: self)
       end
 
-      def respository_class; ::Spaces::Git::Repository ;end
+      def repository_class; ::Spaces::Git::Repository ;end
 
     end
   end

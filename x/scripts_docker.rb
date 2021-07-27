@@ -21,6 +21,8 @@ Spaces::Commands::Saving.new(
 # import a bootstrappy blueprint
 Publishing::Commands::Importing.new(identifier: :docker_arena, force: true).run.payload
 
+# ------------------------------------------------------------------------------
+
 # save a location to an application blueprint
 Spaces::Commands::Saving.new(
   model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
@@ -81,7 +83,7 @@ Arenas::Commands::ProviderProvisioning.new(identifier: :docker_arena).run.payloa
 # Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
 
 # synchronize a blueprint
-Blueprinting::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
+Blueprinting::Commands::Synchronizing.new(identifier: :owncloud).run.payload
 
 # synchronize a publication
 Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
