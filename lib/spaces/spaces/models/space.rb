@@ -27,6 +27,10 @@ module Spaces
       path.mkpath
     end
 
+    def summaries
+      all.map(&:summary)
+    end
+
     def all
       identifiers.map { |i| by(i) }
     end
