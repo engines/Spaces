@@ -18,8 +18,8 @@ class OpenStruct
 
   def keys; to_h.keys ;end
 
-  def to_json
-    to_h_deep.to_json
+  def to_json(*args)
+    to_h_deep.to_json(*args)
   end
 
   def to_h_deep
