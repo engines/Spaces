@@ -21,7 +21,7 @@ module Spaces
       end
 
       def model_struct
-        input[:model]&.to_struct
+        input[:model]&.clean&.to_struct
       end
 
     end

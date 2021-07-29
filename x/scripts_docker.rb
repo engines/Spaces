@@ -32,6 +32,15 @@ Spaces::Commands::Saving.new(
 # import an application blueprint
 Publishing::Commands::Importing.new(identifier: :phpmyadmin, force: true).run.payload
 
+# get the summary of a blueprint
+Spaces::Commands::Summary.new(identifier: :phpmyadmin, space: :blueprints).run.payload
+
+# get a list of all blueprint identifiers
+Spaces::Commands::Querying.new(method: :identifiers, space: :blueprints).run.payload
+
+# get a list of all blueprint summaries
+Spaces::Commands::Querying.new(method: :summaries, space: :blueprints).run.payload
+
 # get a list of all organization blueprint identifiers
 Spaces::Commands::Querying.new(method: :organization_identifiers, space: :blueprints).run.payload
 
@@ -100,12 +109,16 @@ Arenas::Commands::Resolving.new(identifier: :docker_arena, force: true).run.payl
 # get an arena's resolutions
 # Arenas::Commands::Resolutions.new(identifier: :docker_arena).run.payload
 
+# ------------------------------------------------------------------------------
+
 # GRAPHING VIA THESE COMMANDS IS DEPRECATED
 # # get the blueprint topology for an arena
 # Spaces::Commands::Graphing.new(identifier: :docker_arena, space: :arenas, emission: :blueprint).run.payload
 
 # # get the resolution topology for an arena
 # Spaces::Commands::Graphing.new(identifier: :docker_arena, space: :arenas, emission: :resolution).run.payload
+
+# ------------------------------------------------------------------------------
 
 # # validate a resolution
 # Spaces::Commands::Validating.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
