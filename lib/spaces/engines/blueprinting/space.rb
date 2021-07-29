@@ -29,5 +29,7 @@ module Blueprinting
       end
     end
 
+    def cascade_deletes; [:publications] ;end
+
   end
 end

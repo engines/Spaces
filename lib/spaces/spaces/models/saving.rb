@@ -1,5 +1,5 @@
 module Spaces
-  module Writing
+  module Saving
     include Engines::Logger
 
     def save_yaml(model)
@@ -22,13 +22,6 @@ module Spaces
       model.tap do |m|
         Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
       end.identifier
-    end
-
-    def delete(identifiable)
-      writing_path_for(identifiable.identifier).rmtree
-      identifiable.identifier
-    rescue Errno::ENOENT
-      raise ::Spaces::Errors::LostInSpace, {space: identifier, identifier: identifiable.identifier.to_sym}
     end
 
     def writing_name_for(model)
