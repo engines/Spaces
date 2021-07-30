@@ -1,6 +1,6 @@
 module Publishing
   module Commands
-    class Exporting < ::Spaces::Commands::Running
+    class Exporting < ::Spaces::Commands::Command
 
       def space_identifier
         super || :publications
