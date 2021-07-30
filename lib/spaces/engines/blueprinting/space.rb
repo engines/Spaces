@@ -22,12 +22,14 @@ module Blueprinting
     end
 
     def by_import(descriptor, force: false)
-      delete(descriptor) if force && imported?(descriptor)
+      delete(descriptor, cascade: false) if force && imported?(descriptor)
 
       unless imported?(descriptor)
         synchronize_with(publications, descriptor)
       end
     end
+
+    def cascade_deletes; [:publications] ;end
 
   end
 end
