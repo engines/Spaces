@@ -1,6 +1,6 @@
 module Spaces
   module Commands
-    class Running < ::Spaces::Model
+    class Command < ::Spaces::Model
 
       def result; struct[:result] ;end
       def errors; struct[:errors] ;end
