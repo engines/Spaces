@@ -12,6 +12,8 @@ params = {
 }
 Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
 
+# ------------------------------------------------------------------------------
+
 # save a location to a bootstrappy blueprint
 Spaces::Commands::Saving.new(
   model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
@@ -32,6 +34,8 @@ Spaces::Commands::Saving.new(
 # import an application blueprint
 Publishing::Commands::Importing.new(identifier: :phpmyadmin, force: true).run.payload
 
+# ------------------------------------------------------------------------------
+
 # get the summary of a blueprint
 Spaces::Commands::Summary.new(identifier: :phpmyadmin, space: :blueprints).run.payload
 
@@ -43,6 +47,8 @@ Spaces::Commands::Querying.new(method: :summaries, space: :blueprints).run.paylo
 
 # get a list of all organization blueprint identifiers
 Spaces::Commands::Querying.new(method: :organization_identifiers, space: :blueprints).run.payload
+
+# ------------------------------------------------------------------------------
 
 # delete an arena
 #Spaces::Commands::Deleting.new(identifier: :docker_arena, space: :arenas).run.payload
@@ -56,14 +62,20 @@ Arenas::Commands::Configuring.new(identifier: :docker_arena, configuration_ident
 # get a list of organization blueprint identifiers that are not yet bound to an arena
 Arenas::Commands::MoreOrganizations.new(identifier: :docker_arena).run.payload
 
-# bind an organization blueprint to the arena
+# ------------------------------------------------------------------------------
+
+# bind a bootstrappy blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :docker_arena).run.payload
+
+# ------------------------------------------------------------------------------
 
 # save installations for the arena so far
 Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
 
 # resolve the arena so far
 Arenas::Commands::Resolving.new(identifier: :docker_arena, force: true).run.payload
+
+# ------------------------------------------------------------------------------
 
 # save all packs for an arena
 Arenas::Commands::Packing.new(identifier: :docker_arena).run.payload
@@ -91,11 +103,15 @@ Arenas::Commands::ProviderProvisioning.new(identifier: :docker_arena).run.payloa
 # # get the status of a publication
 # Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
 
+# ------------------------------------------------------------------------------
+
 # synchronize a blueprint
 Blueprinting::Commands::Synchronizing.new(identifier: :owncloud).run.payload
 
 # synchronize a publication
 Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
+
+# ------------------------------------------------------------------------------
 
 # bind another blueprint to the arena
 Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :phpmyadmin).run.payload

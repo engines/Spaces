@@ -1,9 +1,9 @@
 module Spaces
   module Deleting
 
-    def delete(identifiable)
+    def delete(identifiable, cascade: true)
       identifiable.tap do |i|
-        cascade_deletes.each { |s| universe.send(s).delete(i) }
+        cascade_deletes.each { |s| universe.send(s).delete(i) } if cascade
 
         writing_path_for(i.identifier).rmtree
       end
