@@ -100,8 +100,8 @@ Arenas::Commands::ProviderProvisioning.new(identifier: :docker_arena).run.payloa
 # # export a blueprint
 # Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
 
-# # get the status of a publication
-# Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
+# # get the summary of a publication
+# Spaces::Commands::Summary.new(identifier: :phpmyadmin, space: :publications).run.payload
 
 # ------------------------------------------------------------------------------
 
@@ -139,8 +139,8 @@ Arenas::Commands::Resolving.new(identifier: :docker_arena, force: true).run.payl
 # # validate a resolution
 # Spaces::Commands::Validating.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
 
-# # get the status of a resolution
-# Spaces::Commands::Status.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
+# # get the summary of a resolution
+# Spaces::Commands::Summary.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
 
 # # get the identifiers of resolutions in an arena
 # Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :docker_arena, space: :resolutions).run.payload

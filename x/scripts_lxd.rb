@@ -79,8 +79,8 @@ Arenas::Commands::ProviderProvisioning.new(identifier: :lxd_arena).run.payload
 # # export a blueprint
 # Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
 
-# # get the status of a publication
-# Spaces::Commands::Status.new(identifier: :phpmyadmin, space: :publications).run.payload
+# # get the summary of a publication
+# Spaces::Commands::Summary.new(identifier: :phpmyadmin, space: :publications).run.payload
 
 # synchronize a blueprint
 Blueprinting::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
@@ -110,8 +110,8 @@ Arenas::Commands::Resolving.new(identifier: :lxd_arena, force: true).run.payload
 # # validate a resolution
 Spaces::Commands::Validating.new(identifier: 'lxd_arena::phpmyadmin', space: :resolutions).run.payload
 
-# # get the status of a resolution
-Spaces::Commands::Status.new(identifier: 'lxd_arena::phpmyadmin', space: :resolutions).run.payload
+# # get the summary of a resolution
+Spaces::Commands::Summary.new(identifier: 'lxd_arena::phpmyadmin', space: :resolutions).run.payload
 
 # # get the identifiers of resolutions in an arena
 # Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :lxd_arena, space: :resolutions).run.payload

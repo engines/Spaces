@@ -2,7 +2,7 @@ require_relative 'reading'
 
 module Spaces
   module Commands
-    class Validating < ::Spaces::Commands::Reading
+    class Validating < Reading
 
       protected
 
