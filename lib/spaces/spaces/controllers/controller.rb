@@ -34,6 +34,14 @@ module Spaces
         self.struct = OpenStruct.new(args.symbolize_keys)
       end
 
+      def method_missing(m, *args, &block)
+        control(m, *args) if respond_to_missing?(m)
+      end
+
+      def respond_to_missing?(m, *)
+        method_class_map.keys.include?(m)
+      end
+
     end
   end
 end
