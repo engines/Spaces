@@ -13,10 +13,10 @@ module Publishing
       end
 
       def method_class_map
-        @method_class_map ||= {
+        @method_class_map ||= super.merge({
           import: [::Publishing::Commands::Importing, force: true],
           export: ::Publishing::Commands::Exporting
-        }
+        })
       end
 
       def location_controller
