@@ -4,7 +4,7 @@ module Spaces
   module Git
     module Importing
 
-      def by_import(force: false)
+      def by_import(force:)
         if space.imported?(descriptor)
           pull_remote if force
         else

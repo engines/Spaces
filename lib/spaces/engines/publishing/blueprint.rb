@@ -1,10 +1,10 @@
 require_relative 'publishing'
-require_relative 'status'
+require_relative 'summary'
 
 module Publishing
   class Blueprint < Emissions::Emission
     include ::Publishing::Publishing
-    include ::Publishing::Status
+    include ::Publishing::Summary
 
     delegate([:blueprints, :publications] => :universe)
 
