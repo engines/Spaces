@@ -4,8 +4,8 @@ module Arenas
 
       def space_identifier; :arenas ;end
 
-      def method_class_map
-        @method_class_map ||= super.merge({
+      def action_command_map
+        @action_command_map ||= super.merge({
           install: [::Arenas::Commands::Installing, force: true],
           resolve: [::Arenas::Commands::Resolving, force: true],
           pack: [::Arenas::Commands::Packing, force: true],
