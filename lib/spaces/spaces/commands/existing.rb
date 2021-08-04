@@ -2,7 +2,7 @@ require_relative 'command'
 
 module Spaces
   module Commands
-    class Existing < ::Spaces::Commands::Command
+    class Existing < Command
 
       def identifier
         input[:identifier]&.to_s

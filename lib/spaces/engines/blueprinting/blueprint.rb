@@ -3,6 +3,7 @@ require_relative 'installing'
 require_relative 'resolving'
 require_relative 'arenas'
 require_relative 'summary'
+require_relative 'relations'
 
 module Blueprinting
   class Blueprint < Publishing::Blueprint
@@ -11,6 +12,7 @@ module Blueprinting
     include Resolving
     include Arenas
     include Summary
+    include Relations
 
     class << self
       def documentation_only_keys

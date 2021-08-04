@@ -1,8 +1,8 @@
-require_relative 'status'
+require_relative 'summary'
 
 module Installing
   class Installation < ::Settling::Settlement
-    include Installing::Status
+    include Installing::Summary
 
     class << self
       def composition_class; Composition ;end

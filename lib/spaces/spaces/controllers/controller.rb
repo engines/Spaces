@@ -25,10 +25,10 @@ module Spaces
       end
 
       def method_array_for(method)
-        [method_class_map[method]].flatten
+        [action_command_map[method]].flatten
       end
 
-      def method_class_map; {} ;end
+      def action_command_map; {} ;end
 
       def initialize(**args)
         self.struct = OpenStruct.new(args.symbolize_keys)
@@ -39,7 +39,7 @@ module Spaces
       end
 
       def respond_to_missing?(m, *)
-        method_class_map.keys.include?(m)
+        action_command_map.keys.include?(m)
       end
 
     end

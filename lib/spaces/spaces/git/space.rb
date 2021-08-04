@@ -2,7 +2,7 @@ module Spaces
   module Git
     class Space < ::Spaces::Space
 
-      def by_import(descriptor, force: false)
+      def by_import(descriptor, force:)
         repository_for(descriptor).by_import(force: force)
       end
 

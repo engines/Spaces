@@ -1,6 +1,8 @@
+require_relative 'reading'
+
 module Spaces
   module Commands
-    class Executing < Spaces::Commands::Reading
+    class Executing < Reading
 
       def execution_instruction
         input[:execute]

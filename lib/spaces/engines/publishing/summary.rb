@@ -1,7 +1,7 @@
 module Publishing
-  module Status
+  module Summary
 
-    def status
+    def summary
       OpenStruct.new(
         descriptor: descriptor.struct,
         blueprint: {

@@ -2,7 +2,7 @@ require_relative 'reading'
 
 module Spaces
   module Commands
-    class Summary < Reading
+    class Summarizing < Reading
 
       def assembly
         super.summary

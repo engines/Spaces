@@ -1,7 +1,7 @@
 module Resolving
-  module Status
+  module Summary
 
-    def status
+    def summary
       OpenStruct.new(
         installation: {
           exist: installations.exist?(identifier)
