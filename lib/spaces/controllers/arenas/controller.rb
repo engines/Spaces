@@ -6,10 +6,14 @@ module Arenas
 
       def action_command_map
         @action_command_map ||= super.merge({
-          install: [::Arenas::Commands::Installing, force: true],
-          resolve: [::Arenas::Commands::Resolving, force: true],
-          pack: [::Arenas::Commands::Packing, force: true],
-          provision: Arenas::Commands::Provisioning,
+          new: Commands::Saving,
+          update: Commands::Saving,
+          configure: Commands::Configuring,
+          bind: Commands::Binding,
+          install: [Commands::Installing, force: true],
+          resolve: [Commands::Resolving, force: true],
+          pack: [Commands::Packing, force: true],
+          provision: Commands::Provisioning,
           apply: [::Spaces::Commands::Executing, execute: :apply]
         })
       end
