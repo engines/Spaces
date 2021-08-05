@@ -13,7 +13,7 @@ module Blueprinting
     alias_method :identifiers, :simple_identifiers
     alias_method :imported?, :exist?
 
-    def organization_identifiers
+    def binder_identifiers
       all.select(&:organization?).map(&:identifier)
     end
 
