@@ -10,10 +10,13 @@ module Arenas
           update: Commands::Saving,
           configure: Commands::Configuring,
           bind: Commands::Binding,
+          more_binders: Commands::MoreBinders,
           install: [Commands::Installing, force: true],
           resolve: [Commands::Resolving, force: true],
           pack: [Commands::Packing, force: true],
+          runtime: Commands::RuntimeBooting,
           provision: Commands::Provisioning,
+          provision_providers: Commands::ProviderProvisioning,
           apply: [::Spaces::Commands::Executing, execute: :apply]
         })
       end
