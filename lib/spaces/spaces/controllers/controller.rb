@@ -8,7 +8,7 @@ module Spaces
 
       def command_for(method, **args)
         method_class_for(method).new(
-          default_args.
+          **default_args.
           merge(method_args_for(method)).
           merge(args)
         )
