@@ -5,6 +5,7 @@ require_relative 'resolving'
 require_relative 'packing'
 require_relative 'provisioning'
 require_relative 'summary'
+require_relative 'state'
 
 module Arenas
   class Arena < ::Emissions::Emission
@@ -15,6 +16,7 @@ module Arenas
     include ::Arenas::Packing
     include ::Arenas::Provisioning
     include ::Arenas::Summary
+    include ::Arenas::State
 
     class << self
       def composition_class; Composition ;end

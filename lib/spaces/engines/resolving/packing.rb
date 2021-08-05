@@ -13,6 +13,10 @@ module Resolving
       @packable ||= images.any?
     end
 
+    def packed?
+      packs.exist?(identifier)
+    end
+
     def builders_for(images); OpenStruct.new(builders: images.inflated.struct) ;end
 
     def packing_divisions
