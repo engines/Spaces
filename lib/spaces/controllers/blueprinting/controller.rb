@@ -6,7 +6,8 @@ module Blueprinting
 
       def action_command_map
         @action_command_map ||= super.merge({
-          relations: ::Blueprinting::Commands::Relations
+          relations: Commands::Relations,
+          synchronize: Commands::Synchronizing
         })
       end
 
