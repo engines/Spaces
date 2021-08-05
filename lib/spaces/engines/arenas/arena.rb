@@ -22,8 +22,8 @@ module Arenas
 
     delegate([:arenas, :blueprints, :installations, :resolutions] => :universe)
 
-    def more_organization_identifiers
-      blueprints.organization_identifiers - target_identifiers
+    def more_binder_identifiers
+      blueprints.binder_identifiers - target_identifiers
     end
 
     def runtime_binding
