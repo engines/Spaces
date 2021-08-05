@@ -1,170 +1,123 @@
 # load the code!
 # require './x/universe'
 
-#set up an arena configuration
-params = {
-  identifier: 'an_arena_config',
-  configuration: {
-    scheme: 'https',
-    address: '192.168.20.220',
-    password: 'zinfandel'
-  }
-}
-Spaces::Commands::Saving.new(identifier: :an_arena_config, model: params, space: :configurations).run.payload
-
-# ------------------------------------------------------------------------------
-
-# save a location to a bootstrappy blueprint
-Spaces::Commands::Saving.new(
-  model: {repository: 'https://github.com/v2Blueprints/docker_arena'},
-  space: :locations
-).run.payload
-
-# import a bootstrappy blueprint
-Publishing::Commands::Importing.new(identifier: :docker_arena, force: true).run.payload
-
-# ------------------------------------------------------------------------------
-
-# save a location to an application blueprint
-Spaces::Commands::Saving.new(
-  model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'},
-  space: :locations
-).run.payload
+def controllers
+  @controllers ||= OpenStruct.new(
+    publishing: Publishing::Controllers::Controller.new,
+    blueprinting: Blueprinting::Controllers::Controller.new,
+    querying: ::Spaces::Controllers::Querying.new,
+    arenas: Arenas::Controllers::Controller.new,
+    packing: Packing::Controllers::Controller.new,
+    provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
+    registry: Registry::Controllers::Controller.new
+  )
+end
 
 # import an application blueprint
-Publishing::Commands::Importing.new(identifier: :phpmyadmin, force: true).run.payload
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'})
+
+# ------------------------------------------------------------------------------
+# blueprint indices and lists
+
+controllers.blueprinting.index
+
+controllers.blueprinting.list
+
+controllers.querying.list(method: :binder_identifiers, space: :blueprints)
 
 # ------------------------------------------------------------------------------
 
-# get the summary of a blueprint
-Spaces::Commands::Summarizing.new(identifier: :phpmyadmin, space: :blueprints).run.payload
-
-# get a list of all blueprint identifiers
-Spaces::Commands::Querying.new(method: :identifiers, space: :blueprints).run.payload
-
-# get a list of all blueprint summaries
-Spaces::Commands::Querying.new(method: :summaries, space: :blueprints).run.payload
-
-# get a list of all organization blueprint identifiers
-Spaces::Commands::Querying.new(method: :organization_identifiers, space: :blueprints).run.payload
-
-# ------------------------------------------------------------------------------
-
-# delete an arena
-#Spaces::Commands::Deleting.new(identifier: :docker_arena, space: :arenas).run.payload
+# blueprint gets
+controllers.blueprinting.show(identifier: :phpmyadmin)
+controllers.blueprinting.summary(identifier: :phpmyadmin)
 
 # save a basic arena with default associations
-Arenas::Commands::Saving.new(identifier: :docker_arena).run.payload
+controllers.arenas.new(model: {identifier: :docker_arena})
 
 # configure the basic arena with the configuration we already set up
-Arenas::Commands::Configuring.new(identifier: :docker_arena, configuration_identifier: :an_arena_config).run.payload
+controllers.arenas.configure(identifier: :docker_arena, configuration_identifier: :the_arena_config)
 
-# get a list of organization blueprint identifiers that are not yet bound to an arena
-Arenas::Commands::MoreOrganizations.new(identifier: :docker_arena).run.payload
+# get a list of binder identifiers that are not yet bound to an arena
+controllers.arenas.more_binders(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
 # bind a bootstrappy blueprint to the arena
-Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :docker_arena).run.payload
+controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
 # save installations for the arena so far
-Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
+controllers.arenas.install(identifier: :docker_arena)
 
 # resolve the arena so far
-Arenas::Commands::Resolving.new(identifier: :docker_arena, force: true).run.payload
+controllers.arenas.resolve(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
 # save all packs for an arena
-Arenas::Commands::Packing.new(identifier: :docker_arena).run.payload
+controllers.arenas.pack(identifier: :docker_arena)
 # RUN PACKER HERE?
 
 # save provisions for the arena's runtime
-Arenas::Commands::RuntimeBooting.new(identifier: :docker_arena).run.payload
+controllers.arenas.runtime(identifier: :docker_arena)
 # RUN INIT HERE?
 
 # save provisions for the arena's other providers
-Arenas::Commands::Provisioning.new(identifier: :docker_arena).run.payload
+controllers.arenas.provision(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
 # save post-initialization provisions for providers
-Arenas::Commands::ProviderProvisioning.new(identifier: :docker_arena).run.payload
+controllers.arenas.provision_providers(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING?
 
 #
 # THE ARENA SHOULD BE BOOSTRAPPED BY THIS POINT
 #
 
-# # export a blueprint
-# Publishing::Commands::Exporting.new(identifier: :phpmyadmin, message: nil).run.payload
-
-# # get the summary of a publication
-# Spaces::Commands::Summarizing.new(identifier: :phpmyadmin, space: :publications).run.payload
-
 # ------------------------------------------------------------------------------
 
-# synchronize a blueprint
-Blueprinting::Commands::Synchronizing.new(identifier: :owncloud).run.payload
+# synchronize a blueprint to a publication
+controllers.blueprinting.synchronize(identifier: :phpmyadmin)
 
-# synchronize a publication
-Publishing::Commands::Synchronizing.new(identifier: :phpmyadmin).run.payload
+# synchronize a publication to a blueprint
+controllers.publishing.synchronize(identifier: :phpmyadmin)
 
 # ------------------------------------------------------------------------------
 
 # bind another blueprint to the arena
-Arenas::Commands::Binding.new(identifier: :docker_arena, blueprint_identifier: :phpmyadmin).run.payload
+controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :phpmyadmin)
+
 
 # save installations for the new bindings
-Arenas::Commands::Installing.new(identifier: :docker_arena).run.payload
+controllers.arenas.install(identifier: :docker_arena)
 
 # resolve the arena including the new bindings
-Arenas::Commands::Resolving.new(identifier: :docker_arena, force: true).run.payload
-
-# get an arena's resolutions
-# Arenas::Commands::Resolutions.new(identifier: :docker_arena).run.payload
-
-# ------------------------------------------------------------------------------
-
-# GRAPHING VIA THESE COMMANDS IS DEPRECATED
-# # get the blueprint topology for an arena
-# Spaces::Commands::Graphing.new(identifier: :docker_arena, space: :arenas, emission: :blueprint).run.payload
-
-# # get the resolution topology for an arena
-# Spaces::Commands::Graphing.new(identifier: :docker_arena, space: :arenas, emission: :resolution).run.payload
-
-# ------------------------------------------------------------------------------
+controllers.arenas.resolve(identifier: :docker_arena)
 
 # # validate a resolution
 # Spaces::Commands::Validating.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
 
-# # get the summary of a resolution
-# Spaces::Commands::Summarizing.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
-
-# # get the identifiers of resolutions in an arena
-# Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :docker_arena, space: :resolutions).run.payload
-
 # save a pack for a resolution
-Packing::Commands::Saving.new(identifier: 'docker_arena::phpmyadmin').run.payload
+controllers.packing.new(identifier: 'docker_arena::phpmyadmin')
 
 # # get the identifiers of packs in an arena
-# Spaces::Commands::Querying.new(method: :identifiers, arena_identifier: :docker_arena, space: :packs).run.payload
+# controllers.querying.list((method: :identifiers, arena_identifier: :docker_arena, space: :packs)
 
 # # get the artifacts for a pack
-# Packing::Commands::Artifacts.new(identifier: 'docker_arena::phpmyadmin').run.payload
+# controllers.packing.artifacts(identifier: 'docker_arena::phpmyadmin')
 
 # provision the arena for applications
-Arenas::Commands::Provisioning.new(identifier: :docker_arena).run.payload
+controllers.arenas.provision(identifier: :docker_arena)
 
 # # commit a pack
-# Packing::Commands::Executing.new(identifier: 'docker_arena::phpmyadmin', execute: :commit).run.payload
+# controllers.packing.commit(identifier: 'docker_arena::phpmyadmin')
 #
 # # apply provisions for an arena
-# Spaces::Commands::Executing.new(identifier: :docker_arena, space: :arenas, execute: :apply).run.payload
+# controllers.arenas.apply(identifier: :docker_arena)
 
 # # save provisions for a resolution
-# Provisioning::Commands::Saving.new(identifier: 'docker_arena::phpmyadmin').run.payload
+# controllers.provisioning.new(identifier: 'docker_arena::phpmyadmin')
 
 # capture registry entries for an application
-Registry::Commands::Registering.new(identifier: 'docker_arena::phpmyadmin').run.payload
+controllers.registry.register(identifier: 'docker_arena::phpmyadmin')
