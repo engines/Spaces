@@ -29,7 +29,7 @@ module Emissions
 
     alias_method :emission, :itself
 
-    def has?(property); struct[property] ;end
+    def has?(property); !struct[property].nil? ;end
 
     def runtime_image
       images&.all&.detect { |i| i.type == runtime_identifier }

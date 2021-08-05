@@ -3,6 +3,8 @@ module Arenas
 
     def provisionables; bound_resolutions.select(&:provisionable?) ;end
 
+    def unsaved_provisions; provisionables.reject(&:provisioned?) ;end
+
     def initial_artifacts
       %(
         terraform {
