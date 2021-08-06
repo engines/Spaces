@@ -1,6 +1,12 @@
 module Arenas
   module Provisioning
 
+    def unprovisioned
+      deep_connect_bindings.reject do |b|
+        provisioning.exist?(b.settlement_identifier_in(self))
+      end
+    end
+
     def provisionables; bound_resolutions.select(&:provisionable?) ;end
 
     def unsaved_provisions; provisionables.reject(&:provisioned?) ;end

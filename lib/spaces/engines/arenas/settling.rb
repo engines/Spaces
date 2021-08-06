@@ -1,17 +1,17 @@
 module Arenas
   module Settling
 
-    def unsaved_settlements_of(type)
-      bound_settlements_of(type).reject do |s|
+    def unsaved_of(type)
+      bound_of(type).reject do |s|
         space_for(type).exist?(s)
       end
     end
 
-    def bound_settlements_of(type)
-      bound_settlement_map_for(type).values
+    def bound_of(type)
+      bound_map_for(type).values
     end
 
-    def bound_settlement_map_for(type)
+    def bound_map_for(type)
       bound_map[type] ||= connectable_blueprints.inject({}) do |m, b|
         m.tap do
           m[b.identifier] = b.send("#{type}_in", self)
