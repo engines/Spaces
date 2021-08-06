@@ -4,6 +4,8 @@ module Arenas
     def unprovisioned
       deep_connect_bindings.reject do |b|
         provisioning.exist?(b.settlement_identifier_in(self))
+      end.select do |b|
+        b.resolution_in(self)&.provisionable?
       end
     end
 

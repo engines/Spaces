@@ -3,6 +3,7 @@
 
 def controllers
   @controllers ||= OpenStruct.new(
+    configuration: Spaces::Controllers::RESTController.new(space: :configurations),
     publishing: Publishing::Controllers::Controller.new,
     blueprinting: Blueprinting::Controllers::Controller.new,
     querying: ::Spaces::Controllers::Querying.new,
@@ -12,6 +13,26 @@ def controllers
     registry: Registry::Controllers::Controller.new
   )
 end
+
+#set up an arena configuration
+params = {
+  model: {
+    identifier: 'the_arena_config',
+    configuration: {
+      scheme: 'https',
+      address: '192.168.20.220',
+      password: 'zinfandel'
+    }
+  }
+}
+controllers.configuration.new(**params)
+
+# ------------------------------------------------------------------------------
+
+# import a bootstrappy blueprint
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/docker_arena'})
+
+# ------------------------------------------------------------------------------
 
 # import an application blueprint
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'})
@@ -87,7 +108,6 @@ controllers.publishing.synchronize(identifier: :phpmyadmin)
 
 # bind another blueprint to the arena
 controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :phpmyadmin)
-
 
 # save installations for the new bindings
 controllers.arenas.install(identifier: :docker_arena)
