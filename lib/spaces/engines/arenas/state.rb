@@ -23,10 +23,10 @@ module Arenas
       providers.select { |p| arenas.provider_file_name_for(p).exist? }.map(&:type)
     end
 
-    def missing_installations; unsaved_installations.map(&:identifier) ;end #TODO: doesn't go deep
-    def missing_resolutions; unsaved_resolutions.map(&:identifier) ;end #TODO: doesn't go deep
-    def missing_packs; unsaved_packs.map(&:identifier) ;end #TODO: doesn't go deep
-    def missing_provisions; unsaved_provisions.map(&:identifier) ;end #TODO: doesn't go deep
+    def missing_installations; uninstalled.map(&:identifier) ;end
+    def missing_resolutions; unresolved.map(&:identifier) ;end
+    def missing_packs; unpacked.map(&:identifier) ;end
+    def missing_provisions; unprovisioned.map(&:identifier) ;end
 
   end
 end

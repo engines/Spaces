@@ -15,6 +15,8 @@ module Divisions
       def features; [:type, :identifier, :target_identifier, :configuration] ;end
     end
 
+    delegate(binder?: :blueprint)
+
     def runtime; struct.runtime ;end
 
     def type; struct.type || derived_features[:type] ;end

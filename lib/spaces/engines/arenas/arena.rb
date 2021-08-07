@@ -22,7 +22,7 @@ module Arenas
       def composition_class; Composition ;end
     end
 
-    delegate([:arenas, :blueprints, :installations, :resolutions] => :universe)
+    delegate([:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe)
 
     def more_binder_identifiers
       blueprints.binder_identifiers - target_identifiers
