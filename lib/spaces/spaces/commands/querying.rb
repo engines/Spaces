@@ -1,8 +1,8 @@
-require_relative 'running'
+require_relative 'command'
 
 module Spaces
   module Commands
-    class Querying < Running
+    class Querying < Command
 
       def method_signature
         [method, arguments].compact

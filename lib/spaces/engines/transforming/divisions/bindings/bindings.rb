@@ -20,23 +20,27 @@ module Divisions
     end
 
     def transformed_to(transformation)
-      if runtime_identifier
-        super.select { |s| [runtime_identifier, nil].include?(s.runtime) }
-      else
-        super
-      end
+      in_blueprint? ? super : super.select { |s| [runtime_identifier, nil].include?(s.runtime) }
+    end
+
+    def embed_bindings
+      all.select(&:embed?).map(&:embed_bindings).flatten.uniq
     end
 
     def connect_bindings
       all.reject(&:embed?)
     end
 
-    def embed_bindings
-      all.select(&:embed?).map(&:embed_bindings).flatten
+    def deep_connect_bindings
+      deep_bindings.reject { |b| b.embed? || b.binder? }
+    end
+
+    def deep_binder_bindings
+      deep_bindings.select(&:binder?)
     end
 
     def deep_bindings
-      all.map(&:deep_bindings).flatten
+      all.map(&:deep_bindings).flatten.uniq
     end
 
     def descriptors

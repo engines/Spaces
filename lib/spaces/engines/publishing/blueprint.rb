@@ -1,15 +1,15 @@
 require_relative 'publishing'
-require_relative 'status'
+require_relative 'summary'
 
 module Publishing
   class Blueprint < Emissions::Emission
     include ::Publishing::Publishing
-    include ::Publishing::Status
+    include ::Publishing::Summary
 
     delegate([:blueprints, :publications] => :universe)
 
     def repository
-      @respository ||= publications.respository_for(descriptor)
+      @repository ||= publications.repository_for(descriptor)
     end
 
     def descriptor
@@ -18,5 +18,7 @@ module Publishing
 
     def transformed_for_publication; localized ;end
 
+    def in_blueprint?; true ;end
+    
   end
 end

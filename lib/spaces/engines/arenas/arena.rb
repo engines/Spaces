@@ -4,6 +4,8 @@ require_relative 'installing'
 require_relative 'resolving'
 require_relative 'packing'
 require_relative 'provisioning'
+require_relative 'summary'
+require_relative 'state'
 
 module Arenas
   class Arena < ::Emissions::Emission
@@ -13,15 +15,17 @@ module Arenas
     include ::Arenas::Resolving
     include ::Arenas::Packing
     include ::Arenas::Provisioning
+    include ::Arenas::Summary
+    include ::Arenas::State
 
     class << self
       def composition_class; Composition ;end
     end
 
-    delegate([:arenas, :blueprints, :installations, :resolutions] => :universe)
+    delegate([:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe)
 
-    def more_organization_identifiers
-      blueprints.organization_identifiers - target_identifiers
+    def more_binder_identifiers
+      blueprints.binder_identifiers - target_identifiers
     end
 
     def runtime_binding

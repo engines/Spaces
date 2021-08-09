@@ -1,13 +1,15 @@
 module Providers
   class Docker < ::ProviderAspects::Provider
     class Container < ::ProviderAspects::Container
+
       def resolution_stanzas_for(_)
         %(
           resource "#{container_type}" "#{blueprint_identifier}" {
-            name      = "#{blueprint_identifier}"
-            image     = "#{spaces_image_registry}#{image_name}"
-			domainname = "#{universe.host}"
-			hostname  = "#{blueprint_identifier}"
+            name = "#{blueprint_identifier}"
+            image = "#{spaces_image_registry}#{image_name}"
+            domainname = "#{universe.host}"
+            hostname = "#{blueprint_identifier}"
+
             #{connect_services_stanzas}
             #{device_stanzas}
           }

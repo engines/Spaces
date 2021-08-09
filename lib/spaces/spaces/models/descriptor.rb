@@ -19,7 +19,8 @@ module Spaces
     def protocol; struct.protocol || derived_features[:protocol] ;end
     def git?; protocol == 'git' ;end
 
-    alias_method :repository_name, :repository
+    alias_method :repository_url, :repository
+    alias_method :remote_name, :remote
     alias_method :branch_name, :branch
 
     def initialize(args)

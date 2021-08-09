@@ -1,9 +1,9 @@
 module Arenas
   module Commands
-    class MoreOrganizations < ::Spaces::Commands::Reading
+    class MoreBinders < ::Spaces::Commands::Reading
 
       def assembly
-        model.more_organization_identifiers
+        model.more_binder_identifiers
       end
 
       def space_identifier

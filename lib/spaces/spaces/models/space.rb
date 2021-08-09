@@ -1,14 +1,16 @@
 require_relative 'model'
 require_relative 'paths'
 require_relative 'reading'
-require_relative 'writing'
+require_relative 'saving'
+require_relative 'deleting'
 require_relative 'topology'
 
 module Spaces
   class Space < Model
     include ::Spaces::Paths
     include ::Spaces::Reading
-    include ::Spaces::Writing
+    include ::Spaces::Saving
+    include ::Spaces::Deleting
     include ::Spaces::Topology
 
     class << self
@@ -25,6 +27,10 @@ module Spaces
 
     def ensure_space
       path.mkpath
+    end
+
+    def summaries
+      all.map(&:summary)
     end
 
     def all

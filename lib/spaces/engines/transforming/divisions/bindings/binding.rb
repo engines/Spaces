@@ -15,13 +15,15 @@ module Divisions
       def features; [:type, :identifier, :target_identifier, :configuration] ;end
     end
 
-    delegate(publications: :universe)
+    delegate(binder?: :blueprint)
+
+    def runtime; struct.runtime ;end
 
     def type; struct.type || derived_features[:type] ;end
 
     def embed?; type == 'embed' ;end
 
-    def for_runtime?(value); [value, nil].include?(struct.runtime) ;end
+    def for_runtime?(value); [value, nil].include?(runtime) ;end
 
     def runtime_binding?; ['runtime', 'containing'].include?(identifier) ;end
     def packing_binding?; ['packing'].include?(identifier) ;end

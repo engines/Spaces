@@ -13,7 +13,7 @@ module Divisions
 
     delegate(
       subdivision_class: :klass,
-      [:any?, :empty?, :map, :count] => :all
+      [:any?, :empty?, :map, :count, :[], :first] => :all
     )
 
     alias_method :divisible_embedded_with, :embedded_with
@@ -29,11 +29,11 @@ module Divisions
     def resolved; with_all_as(:resolved) ;end
 
     def with_all_as(transformation)
-      empty.tap { |d| d.struct = transformed_to(transformation) }
+      empty.tap { |d| d.struct = transformed_to(transformation).map(&:struct) }
     end
 
     def transformed_to(transformation)
-      all.map { |i| i.send(transformation).struct }
+      all.map { |i| i.send(transformation) }.compact
     end
 
     def all

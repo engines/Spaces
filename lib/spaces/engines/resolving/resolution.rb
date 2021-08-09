@@ -1,12 +1,14 @@
+require_relative 'registering'
 require_relative 'packing'
 require_relative 'provisioning'
-require_relative 'status'
+require_relative 'summary'
 
 module Resolving
   class Resolution < ::Settling::Settlement
+    include Registering
     include Packing
     include Provisioning
-    include ::Resolving::Status
+    include ::Resolving::Summary
 
     class << self
       def composition_class; Composition ;end

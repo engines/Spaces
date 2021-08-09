@@ -12,6 +12,10 @@ module Resolving
       !defines_runtime_provider? & !defines_packing_provider?
     end
 
+    def provisioned?
+      provisioning.exist?(identifier)
+    end
+
     def defines_runtime_provider?
       blueprint_identifier == runtime_binding&.target_identifier
     end

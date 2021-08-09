@@ -1,14 +1,18 @@
 require_relative 'inflating'
 require_relative 'installing'
 require_relative 'resolving'
-require_relative 'status'
+require_relative 'arenas'
+require_relative 'summary'
+require_relative 'relations'
 
 module Blueprinting
   class Blueprint < Publishing::Blueprint
     include Inflating
     include Installing
     include Resolving
-    include ::Blueprinting::Status
+    include Arenas
+    include Summary
+    include Relations
 
     class << self
       def documentation_only_keys
@@ -18,7 +22,10 @@ module Blueprinting
       def composition_class; Composition ;end
     end
 
-    delegate(documentation_only_keys: :klass)
+    delegate(
+      documentation_only_keys: :klass,
+      [:blueprints, :locations, :arenas] => :universe
+    )
 
     alias_method :blueprint, :itself
 

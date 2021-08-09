@@ -63,7 +63,7 @@ module Arenas
     end
 
     def provider_file_name_for(provider)
-      path_for(provider.arena).join("_#{provider.qualifier}.#{artifact_extension}")
+      path_for(provider.arena).join("_#{provider.type}.#{artifact_extension}")
     end
 
     def path_for(model)

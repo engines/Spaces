@@ -13,21 +13,23 @@ module Blueprinting
     alias_method :identifiers, :simple_identifiers
     alias_method :imported?, :exist?
 
-    def organization_identifiers
+    def binder_identifiers
       all.select(&:organization?).map(&:identifier)
     end
 
-    def by_demand(descriptor)
-      publications.by_import(descriptor).localized
+    def by_demand(descriptor, force: false)
+      publications.by_import(descriptor, force: force).localized
     end
 
-    def by_import(descriptor, force: false)
-      delete(descriptor) if force && imported?(descriptor)
+    def by_import(descriptor, force:)
+      delete(descriptor, cascade: false) if force && imported?(descriptor)
 
       unless imported?(descriptor)
         synchronize_with(publications, descriptor)
       end
     end
+
+    def cascade_deletes; [:publications] ;end
 
   end
 end

@@ -17,6 +17,10 @@ class Hash
     self
   end
 
+  def clean
+    compact.delete_if { |k, v| v == '' }
+  end
+
   def reverse_merge(other = {})
     other.merge(self)
   end

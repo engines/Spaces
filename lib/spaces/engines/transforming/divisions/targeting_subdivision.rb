@@ -10,7 +10,7 @@ module Divisions
     end
 
     delegate(
-      [:blueprints, :publications, :resolutions] => :universe
+      [:locations, :blueprints, :resolutions] => :universe
     )
 
     def blueprint
@@ -27,7 +27,7 @@ module Divisions
 
     def descriptor
       @descriptor ||= descriptor_class.new(
-        struct.target || {identifier: target_identifier}
+        struct.target || {identifier: struct.target_identifier}
       )
     end
 
@@ -35,20 +35,21 @@ module Divisions
       @resolution ||= resolution_in(arena)
     end
 
-    def resolution_identifier
-      resolution_identifier_in(arena)
-    end
-
     def resolution_in(arena)
-      t = resolution_target_in(arena)
+      t = settlement_target_in(arena)
       resolutions.by(t.identifier) if resolutions.exist?(t)
     end
 
-    def resolution_target_in(arena)
-      descriptor_class.new(identifier: resolution_identifier_in(arena))
+    def settlement_identifier
+      settlement_identifier_in(arena)
+    end
+    alias_method :resolution_identifier, :settlement_identifier
+
+    def settlement_target_in(arena)
+      descriptor_class.new(identifier: settlement_identifier_in(arena))
     end
 
-    def resolution_identifier_in(arena)
+    def settlement_identifier_in(arena)
       "#{arena.identifier.with_identifier_separator}#{target_identifier}"
     end
 

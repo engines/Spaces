@@ -1,8 +1,8 @@
-require_relative 'running'
+require_relative 'command'
 
 module Spaces
   module Commands
-    class Modelling < Running
+    class Modelling < Command
 
       def current_model
         @model ||= space.by(identifier)
@@ -21,7 +21,7 @@ module Spaces
       end
 
       def model_struct
-        input[:model]&.to_struct
+        input[:model]&.clean&.to_struct
       end
 
     end
