@@ -4,7 +4,7 @@ module Arenas
     def provisioned; present_in(provisioning) ;end
 
     def unprovisioned
-      absent_in(packs).select { |b| b.resolution&.provisionable? }
+      absent_in(provisioning).select { |b| b.resolution&.provisionable? }
     end
 
     def unsaved_provisions; provisionables.reject(&:provisioned?) ;end
