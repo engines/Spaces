@@ -47,30 +47,34 @@ module Arenas
     def delete(identifiable)
       super.tap do
         dependent_spaces.each do |s|
-          if (p = s.path.join(identifiable.identifier)).exist?
-            p.rmtree
-          end
+          s.path.join(identifiable.identifier).exist_then(&:rmtree)
         end
       end
     end
 
     def initial_file_name_for(arena)
-      path_for(arena).join("_initial.#{artifact_extension}")
+      path_for(arena).join(initial_basename)
     end
 
     def runtime_file_name_for(arena)
-      path_for(arena).join("_runtime.#{artifact_extension}")
+      path_for(arena).join(runtime_basename)
     end
 
     def provider_file_name_for(provider)
-      path_for(provider.arena).join("_#{provider.type}.#{artifact_extension}")
+      path_for(provider.arena).join(provider_basename_for(provider))
     end
 
     def path_for(model)
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
 
+    def initial_basename; "_initial.#{artifact_extension}" ;end
+    def runtime_basename; "_runtime.#{artifact_extension}" ;end
+    def provider_basename_for(provider); "_#{provider.type}.#{artifact_extension}" ;end
     def artifact_extension; :tf ;end
+
+    def initialized_at(arena); initial_file_name_for(arena).exist_then(&:mtime) ;end
+    def bootstrapped_at(arena); runtime_file_name_for(arena).exist_then(&:mtime) ;end
 
   end
 

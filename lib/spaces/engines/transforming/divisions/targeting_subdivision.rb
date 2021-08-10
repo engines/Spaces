@@ -10,7 +10,7 @@ module Divisions
     end
 
     delegate(
-      [:locations, :blueprints, :resolutions] => :universe
+      [:locations, :blueprints, :installations, :resolutions] => :universe
     )
 
     def blueprint
@@ -31,13 +31,11 @@ module Divisions
       )
     end
 
-    def resolution
-      @resolution ||= resolution_in(arena)
-    end
+    def installation; @installation ||= settlement_in(arena, installations) ;end
+    def resolution; @resolution ||= settlement_in(arena, resolutions) ;end
 
-    def resolution_in(arena)
-      t = settlement_target_in(arena)
-      resolutions.by(t.identifier) if resolutions.exist?(t)
+    def settlement_in(arena, space)
+      space.exist_then(arena) { space.by(settlement_target_in(arena)) }
     end
 
     def settlement_identifier
