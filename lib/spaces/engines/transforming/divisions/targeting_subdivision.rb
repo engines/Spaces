@@ -31,7 +31,7 @@ module Divisions
       )
     end
 
-    def installation; @resolution ||= settlement_in(arena, installations) ;end
+    def installation; @installation ||= settlement_in(arena, installations) ;end
     def resolution; @resolution ||= settlement_in(arena, resolutions) ;end
 
     def settlement_in(arena, space)
