@@ -17,6 +17,10 @@ module Publishing
     alias_method :save, :save_json
     alias_method :imported?, :exist?
 
+    def modified_at(*args)
+      super(*args, as: :json)
+    end
+
     def import(descriptor, force:)
       by_import(descriptor, force: force).identifier
     end
