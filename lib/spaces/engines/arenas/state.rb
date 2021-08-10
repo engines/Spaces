@@ -10,7 +10,18 @@ module Arenas
     end
 
     def state_keys
-      [:configured?, :initialized?, :packer, :runtime, :runtime_bootstrapped?, :providers_bootstrapped, :missing_installations, :missing_resolutions, :missing_packs, :missing_provisions]
+      [
+        :configured?,
+        :initialized?, :fresh_initialization?,
+        :packer,
+        :runtime,
+        :runtime_bootstrapped?, :fresh_bootstrap?,
+        :providers_bootstrapped, :fresh_providers,
+        :missing_installations, :fresh_installations,
+        :missing_resolutions, :fresh_resolutions,
+        :missing_packs, :fresh_packs, #:fresh_packing_attempt?,
+        :missing_provisioning, :fresh_provisioning, #:fresh_provisioning_attempt?
+      ]
     end
 
     def configured?; has?(:configuration) ;end
@@ -20,13 +31,40 @@ module Arenas
     def runtime_bootstrapped?; arenas.runtime_file_name_for(self).exist? ;end
 
     def providers_bootstrapped
-      providers.select { |p| arenas.provider_file_name_for(p).exist? }.map(&:type)
+      other_providers.select { |p| arenas.provider_file_name_for(p).exist? }.map(&:type)
     end
 
-    def missing_installations; uninstalled.map(&:identifier) ;end
-    def missing_resolutions; unresolved.map(&:identifier) ;end
-    def missing_packs; unpacked.map(&:identifier) ;end
-    def missing_provisions; unprovisioned.map(&:identifier) ;end
+    def missing_installations; missing(:uninstalled) ;end
+    def missing_resolutions; missing(:unresolved) ;end
+    def missing_packs; missing(:unpacked) ;end
+    def missing_provisioning; missing(:unprovisioned) ;end
+
+    def missing(method); send(method).map(&:identifier) ;end
+
+    def fresh_initialization?; initialized_at > modified_at ;end
+    def fresh_bootstrap?; bootstrapped_at > modified_at ;end
+
+    def fresh_providers
+      other_providers.select do |p|
+        arenas.provider_file_name_for(p).mtime > modified_at
+      end.map(&:type)
+    end
+
+    def fresh_installations; fresh(:installed, installations) ;end
+    def fresh_resolutions; fresh(:resolved, resolutions) ;end
+    def fresh_packs; fresh(:packed, packs) ;end
+    def fresh_provisioning; fresh(:provisioned, provisioning) ;end
+
+    def fresh(method, space)
+      send(method).
+        map { |b| b.settlement_identifier_in(self) }.
+        select { |si| space.modified_at(si) > modified_at }
+    end
+
+    def exist?; arenas.exist?(self) ;end
+    def modified_at; arenas.modified_at(self) ;end
+    def initialized_at; arenas.initialized_at(self) ;end
+    def bootstrapped_at; arenas.bootstrapped_at(self) ;end
 
   end
 end
