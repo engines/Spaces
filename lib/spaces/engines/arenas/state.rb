@@ -17,6 +17,7 @@ module Arenas
         :runtime,
         :runtime_bootstrapped?, :fresh_bootstrap?,
         :providers_bootstrapped, :fresh_providers,
+        :missing_blueprints, :fresh_blueprints,
         :missing_installations, :fresh_installations,
         :missing_resolutions, :fresh_resolutions,
         :missing_packs, :fresh_packs, #:fresh_packing_attempt?,
@@ -34,6 +35,7 @@ module Arenas
       other_providers.select { |p| arenas.provider_file_name_for(p).exist? }.map(&:type)
     end
 
+    def missing_blueprints; missing(:unblueprinted) ;end
     def missing_installations; missing(:uninstalled) ;end
     def missing_resolutions; missing(:unresolved) ;end
     def missing_packs; missing(:unpacked) ;end
@@ -41,13 +43,19 @@ module Arenas
 
     def missing(method); send(method).map(&:identifier) ;end
 
-    def fresh_initialization?; initialized_at > modified_at ;end
-    def fresh_bootstrap?; bootstrapped_at > modified_at ;end
+    def fresh_initialization?; times(initialized_at, :>, modified_at) ;end
+    def fresh_bootstrap?; times(bootstrapped_at, :>, modified_at) ;end
 
     def fresh_providers
       other_providers.select do |p|
-        arenas.provider_file_name_for(p).mtime > modified_at
+        times(arenas.provider_file_name_for(p).mtime, :>, modified_at)
       end.map(&:type)
+    end
+
+    def fresh_blueprints
+      blueprinted.
+        map { |b| b.target_identifier }.
+        select { |ti| times(blueprints.modified_at(ti), :>, modified_at) }
     end
 
     def fresh_installations; fresh(:installed, installations) ;end
@@ -58,7 +66,7 @@ module Arenas
     def fresh(method, space)
       send(method).
         map { |b| b.settlement_identifier_in(self) }.
-        select { |si| space.modified_at(si) > modified_at }
+        select { |si| times(space.modified_at(si), :>, modified_at) }
     end
 
     def exist?; arenas.exist?(self) ;end

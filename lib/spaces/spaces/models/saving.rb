@@ -2,6 +2,10 @@ module Spaces
   module Saving
     include Engines::Logger
 
+    def touch(model)
+      FileUtils.touch(file_name_for(model))
+    end
+
     def save_yaml(model)
       _save(model, content: model.to_yaml, as: :yaml)
     end
@@ -22,6 +26,10 @@ module Spaces
       model.tap do |m|
         Pathname.new([writing_name_for(m), as].compact.join('.')).write(content)
       end.identifier
+    end
+
+    def file_name_for(model)
+      Pathname.new([writing_name_for(model), default_extension].join('.'))
     end
 
     def writing_name_for(model)

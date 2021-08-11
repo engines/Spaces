@@ -42,6 +42,10 @@ module Spaces
 
     def context_identifier; identifier ;end
 
+    def times(first, operator, second)
+      (first || Time.at(0)).send(operator, (second || Time.at(0)))
+    end
+
     def to_yaml; YAML.dump(struct) ;end
 
     def to_json(*args); to_h.to_json(*args) ;end

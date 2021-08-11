@@ -2,9 +2,9 @@ module Arenas
   module Packing
 
     def packed; present_in(packs) ;end
-    
+
     def unpacked
-      absent_in(packs).select { |b| b.resolution&.packable? }
+      absent_in(packs).select { |b| b.resolution_in(arena)&.packable? }
     end
 
     def unsaved_packs; packables.reject(&:packed?) ;end
