@@ -1,7 +1,7 @@
 module Spaces
   module Reading
 
-    def modified_at(identifiable, klass = default_model_class, as: :yaml)
+    def modified_at(identifiable, klass = default_model_class, as: default_extension)
       Pathname.new("#{reading_name_for(identifiable, klass)}.#{as}").mtime
     rescue Errno::ENOENT, NoMethodError
       raise_lost_error(identifiable)
@@ -12,6 +12,8 @@ module Spaces
     end
 
     alias_method :by, :by_yaml
+
+    def default_extension; :yaml ;end
 
     def by_json(identifiable, klass = default_model_class)
       klass.new(identifiable: identifiable, struct: open_struct_from_json(_by(identifiable, klass, as: :json)))
