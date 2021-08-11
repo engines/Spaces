@@ -18,14 +18,12 @@ module Arenas
 
     def save_installations_for(arena, force: false)
       (force ? arena.bound_installations : arena.unsaved_installations).
-        map { |i| installations.save(i) }.
-        tap { touch(arena) }
+        map { |i| installations.save(i) }
     end
 
     def save_resolutions_for(arena, force: false)
       (force ? arena.bound_resolutions : arena.unsaved_resolutions).
-        map { |r| resolutions.save(r) }.
-        tap { touch(arena) }
+        map { |r| resolutions.save(r) }
     end
 
     def save_initial(arena)

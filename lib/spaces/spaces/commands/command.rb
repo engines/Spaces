@@ -2,9 +2,14 @@ module Spaces
   module Commands
     class Command < ::Spaces::Model
 
+      class << self
+        def mutating?; itself <= Saving ;end
+      end
+
       def result; struct[:result] ;end
       def errors; struct[:errors] ;end
       def payload; OpenStruct.new(struct.to_h.without(:input)) ;end
+
 
       def run
         tap do
