@@ -31,8 +31,11 @@ module Divisions
       )
     end
 
-    def installation; @installation ||= settlement_in(arena, installations) ;end
-    def resolution; @resolution ||= settlement_in(arena, resolutions) ;end
+    def installation; @installation ||= installation_in(arena) ;end
+    def resolution; @resolution ||= resolution_in(arena) ;end
+
+    def installation_in(arena); @installation ||= settlement_in(arena, installations) ;end
+    def resolution_in(arena); @resolution ||= settlement_in(arena, resolutions) ;end
 
     def settlement_in(arena, space)
       space.exist_then(arena) { space.by(settlement_target_in(arena)) }
