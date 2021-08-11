@@ -2,30 +2,30 @@ module Spaces
   module Controllers
     class Controller < ::Spaces::Model
 
-      def control(method, with: [:run, :payload], **args)
-        with.reduce(command_for(method, **args)) { |c, w| c.send(w) }
+      def control(action, with: [:run, :payload], **args)
+        with.reduce(command_for(action, **args)) { |c, w| c.send(w) }
       end
 
-      def command_for(method, **args)
-        method_class_for(method).new(
+      def command_for(action, **args)
+        action_class_for(action).new(
           **default_args.
-          merge(method_args_for(method)).
+          merge(action_args_for(action)).
           merge(args)
         )
       end
 
       def default_args; struct.to_h ;end
 
-      def method_class_for(method)
-        method_array_for(method).first
+      def action_class_for(action)
+        action_array_for(action).first
       end
 
-      def method_args_for(method)
-        method_array_for(method)[1] || {}
+      def action_args_for(action)
+        action_array_for(action)[1] || {}
       end
 
-      def method_array_for(method)
-        [action_command_map[method]].flatten
+      def action_array_for(action)
+        [action_command_map[action]].flatten
       end
 
       def action_command_map; {} ;end
