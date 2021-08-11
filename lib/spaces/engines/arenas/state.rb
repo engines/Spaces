@@ -41,12 +41,12 @@ module Arenas
 
     def missing(method); send(method).map(&:identifier) ;end
 
-    def fresh_initialization?; initialized_at > modified_at ;end
-    def fresh_bootstrap?; bootstrapped_at > modified_at ;end
+    def fresh_initialization?; times(initialized_at, :>, modified_at) ;end
+    def fresh_bootstrap?; times(bootstrapped_at, :>, modified_at) ;end
 
     def fresh_providers
       other_providers.select do |p|
-        arenas.provider_file_name_for(p).mtime > modified_at
+        times(arenas.provider_file_name_for(p).mtime, :>, modified_at)
       end.map(&:type)
     end
 
@@ -58,7 +58,7 @@ module Arenas
     def fresh(method, space)
       send(method).
         map { |b| b.settlement_identifier_in(self) }.
-        select { |si| space.modified_at(si) > modified_at }
+        select { |si| times(space.modified_at(si), :>, modified_at) }
     end
 
     def exist?; arenas.exist?(self) ;end
