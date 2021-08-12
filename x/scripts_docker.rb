@@ -1,31 +1,5 @@
 # load the code!
-# require './x/universe'
-
-def controllers
-  @controllers ||= OpenStruct.new(
-    configuration: Spaces::Controllers::RESTController.new(space: :configurations),
-    publishing: Publishing::Controllers::Controller.new,
-    blueprinting: Blueprinting::Controllers::Controller.new,
-    querying: ::Spaces::Controllers::Querying.new,
-    arenas: Arenas::Controllers::Controller.new,
-    packing: Packing::Controllers::Controller.new,
-    provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
-    registry: Registry::Controllers::Controller.new
-  )
-end
-
-#set up an arena configuration
-params = {
-  model: {
-    identifier: 'the_arena_config',
-    configuration: {
-      scheme: 'https',
-      address: '192.168.20.220',
-      password: 'zinfandel'
-    }
-  }
-}
-controllers.configuration.new(**params)
+# require './x/controllers'
 
 # ------------------------------------------------------------------------------
 
@@ -54,9 +28,7 @@ controllers.blueprinting.summary(identifier: :phpmyadmin)
 
 # save a basic arena with default associations
 controllers.arenas.new(model: {identifier: :docker_arena})
-
-# configure the basic arena with the configuration we already set up
-controllers.arenas.configure(identifier: :docker_arena, configuration_identifier: :the_arena_config)
+controllers.arenas.state(identifier: :docker_arena)
 
 # get a list of binder identifiers that are not yet bound to an arena
 controllers.arenas.more_binders(identifier: :docker_arena)
@@ -65,31 +37,38 @@ controllers.arenas.more_binders(identifier: :docker_arena)
 
 # bind a bootstrappy blueprint to the arena
 controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
 # save installations for the arena so far
 controllers.arenas.install(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 
 # resolve the arena so far
 controllers.arenas.resolve(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
 # save all packs for an arena
 controllers.arenas.pack(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 # RUN PACKER HERE?
 
 # save provisions for the arena's runtime
 controllers.arenas.runtime(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 # RUN INIT HERE?
 
 # save provisions for the arena's other providers
 controllers.arenas.provision(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
 # save post-initialization provisions for providers
 controllers.arenas.provision_providers(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING?
 
 #
@@ -108,18 +87,22 @@ controllers.publishing.synchronize(identifier: :phpmyadmin)
 
 # bind another blueprint to the arena
 controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :phpmyadmin)
+controllers.arenas.state(identifier: :docker_arena)
 
 # save installations for the new bindings
 controllers.arenas.install(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 
 # resolve the arena including the new bindings
 controllers.arenas.resolve(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 
 # # validate a resolution
 # Spaces::Commands::Validating.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
 
 # save a pack for a resolution
 controllers.packing.new(identifier: 'docker_arena::phpmyadmin')
+controllers.arenas.state(identifier: :docker_arena)
 
 # # get the identifiers of packs in an arena
 # controllers.querying.list((method: :identifiers, arena_identifier: :docker_arena, space: :packs)
@@ -129,6 +112,7 @@ controllers.packing.new(identifier: 'docker_arena::phpmyadmin')
 
 # provision the arena for applications
 controllers.arenas.provision(identifier: :docker_arena)
+controllers.arenas.state(identifier: :docker_arena)
 
 # # commit a pack
 # controllers.packing.commit(identifier: 'docker_arena::phpmyadmin')
