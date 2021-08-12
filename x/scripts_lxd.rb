@@ -34,9 +34,6 @@ controllers.blueprinting.summary(identifier: :phpmyadmin)
 # save a basic arena with default associations
 controllers.arenas.new(model: {identifier: :lxd_arena})
 
-# configure the basic arena with the configuration we already set up
-controllers.arenas.configure(identifier: :lxd_arena, configuration_identifier: :the_arena_config)
-
 # get a list of binder identifiers that are not yet bound to an arena
 controllers.arenas.more_binders(identifier: :lxd_arena)
 

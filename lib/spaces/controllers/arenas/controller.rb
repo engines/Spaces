@@ -8,7 +8,6 @@ module Arenas
         @action_command_map ||= super.merge({
           new: Commands::Saving,
           update: Commands::Saving,
-          configure: Commands::Configuring,
           bind: Commands::Binding,
           more_binders: Commands::MoreBinders,
           install: [Commands::Installing, force: true],

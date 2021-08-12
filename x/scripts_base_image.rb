@@ -3,25 +3,11 @@
 
 def controllers
   @controllers ||= OpenStruct.new(
-    configuration: Spaces::Controllers::RESTController.new(space: :configurations),
     publishing: Publishing::Controllers::Controller.new,
     arenas: Arenas::Controllers::Controller.new,
     packing: Packing::Controllers::Controller.new
   )
 end
-
-#set up an arena configuration
-params = {
-  model: {
-    identifier: 'the_arena_config',
-    configuration: {
-      scheme: 'https',
-      address: '192.168.20.220',
-      password: 'zinfandel'
-    }
-  }
-}
-controllers.configuration.new(**params)
 
 # ------------------------------------------------------------------------------
 
@@ -32,9 +18,6 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 
 # save a basic arena with default associations
 controllers.arenas.new(model: {identifier: :base_arena})
-
-# configure the basic arena with the configuration we already set up
-controllers.arenas.configure(identifier: :base_arena, configuration_identifier: :the_arena_config)
 
 # ------------------------------------------------------------------------------
 

@@ -11,7 +11,6 @@ module Arenas
 
     def state_keys
       [
-        :configured?,
         :initialized?, :fresh_initialization?,
         :packer,
         :runtime,
@@ -25,7 +24,6 @@ module Arenas
       ]
     end
 
-    def configured?; has?(:configuration) ;end
     def initialized?; arenas.initial_file_name_for(self).exist? ;end
     def packer; packing_binding&.target_identifier ;end
     def runtime; runtime_binding&.target_identifier ;end
