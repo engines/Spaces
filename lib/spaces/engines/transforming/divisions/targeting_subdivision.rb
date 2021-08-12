@@ -38,7 +38,7 @@ module Divisions
     def resolution_in(arena); @resolution ||= settlement_in(arena, resolutions) ;end
 
     def settlement_in(arena, space)
-      space.exist_then(arena) { space.by(settlement_target_in(arena)) }
+      space.exist_then(t = settlement_target_in(arena)) { space.by(t) }
     end
 
     def settlement_identifier
