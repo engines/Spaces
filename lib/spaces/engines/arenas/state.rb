@@ -48,6 +48,7 @@ module Arenas
       other_providers.select do |p|
         times(arenas.provider_file_name_for(p).mtime, :>, modified_at)
       end.map(&:type)
+        times(arenas.provider_file_name_for(p).exist_then(&:mtime), :>, modified_at)
     end
 
     def fresh_blueprints
