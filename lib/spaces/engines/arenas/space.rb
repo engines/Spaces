@@ -18,21 +18,25 @@ module Arenas
 
     def save_installations_for(arena, force: false)
       (force ? arena.bound_installations : arena.unsaved_installations).
-        map { |i| installations.save(i) }
+        map { |i| installations.save(i) }.
+        tap { touch(arena) }
     end
 
     def save_resolutions_for(arena, force: false)
       (force ? arena.bound_resolutions : arena.unsaved_resolutions).
-        map { |r| resolutions.save(r) }
+        map { |r| resolutions.save(r) }.
+        tap { touch(arena) }
     end
 
     def save_initial(arena)
       initial_file_name_for(arena).write(arena.initial_artifacts)
+      # touch(arena) TODO: dunno if needed
       arena.identifier
     end
 
     def save_runtime(arena)
       runtime_file_name_for(arena).write(arena.runtime_artifacts)
+      # touch(arena) TODO: dunno if needed
       arena.identifier
     end
 
@@ -41,12 +45,13 @@ module Arenas
         m.other_providers.each do |p|
           provider_file_name_for(p).write(p.provider_artifacts)
         end
+        touch(arena)
       end.identifier
     end
 
     def delete(identifiable)
       super.tap do
-        dependent_spaces.each do |s|
+        dependent_spaces.each do |s| #TODO: should use cascading feature?
           s.path.join(identifiable.identifier).exist_then(&:rmtree)
         end
       end
