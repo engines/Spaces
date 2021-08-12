@@ -1,13 +1,5 @@
 # load the code!
-# require './x/universe'
-
-def controllers
-  @controllers ||= OpenStruct.new(
-    publishing: Publishing::Controllers::Controller.new,
-    arenas: Arenas::Controllers::Controller.new,
-    packing: Packing::Controllers::Controller.new
-  )
-end
+# require './x/controllers'
 
 # ------------------------------------------------------------------------------
 

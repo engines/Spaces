@@ -1,17 +1,7 @@
 # load the code!
 # require './x/universe'
 
-def controllers
-  @controllers ||= OpenStruct.new(
-    publishing: Publishing::Controllers::Controller.new,
-    blueprinting: Blueprinting::Controllers::Controller.new,
-    querying: ::Spaces::Controllers::Querying.new,
-    arenas: Arenas::Controllers::Controller.new,
-    packing: Packing::Controllers::Controller.new,
-    provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
-    registry: Registry::Controllers::Controller.new
-  )
-end
+require './x/controllers'
 
 # import an application blueprint
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'})
