@@ -12,6 +12,7 @@ module Spaces
           show: Commands::Reading,
           new: Commands::Saving,
           update: Commands::Saving,
+          copy: Commands::Copying,
           delete: Commands::Deleting
         }
       end

@@ -11,6 +11,8 @@ module Spaces
 
     delegate(universe: :klass)
 
+    def space_named(name); universe.send(name) ;end
+
     def file_name; klass.qualifier ;end
     def subpath; Pathname(''); end
     def uniqueness; [klass.name, identifier] ;end

@@ -6,7 +6,7 @@ module Divisions
     end
 
     def command
-      "/usr/local/bin/open_port.sh -h #{arena.configuration.address} -p #{protocol} -e #{external_port} -s #{port_range}"
+      "/usr/local/bin/open_port.sh -h #{configuration.address} -p #{protocol} -e #{external_port} -s #{port_range}"
     end
 
     def port_range; [start_port, end_port].compact.join(':') ;end

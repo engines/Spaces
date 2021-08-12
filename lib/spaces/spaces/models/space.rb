@@ -51,8 +51,12 @@ module Spaces
       path_for(identifiable).exist?
     end
 
+    def exist_then(identifiable, &block)
+      yield(identifiable) if exist?(identifiable) && block_given?
+    end
+
     def absent(array)
-      array.reject { |r| exist?(r) }
+      array.reject { |m| exist?(m) }
     end
 
     def initialize(identifier)
