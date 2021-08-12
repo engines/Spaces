@@ -46,15 +46,15 @@ module Arenas
 
     def fresh_providers
       other_providers.select do |p|
-        times(arenas.provider_file_name_for(p).mtime, :>, modified_at)
-      end.map(&:type)
         times(arenas.provider_file_name_for(p).exist_then(&:mtime), :>, modified_at)
+      end.map(&:type).uniq
     end
 
     def fresh_blueprints
       blueprinted.
         map { |b| b.target_identifier }.
-        select { |ti| times(blueprints.modified_at(ti), :>, modified_at) }
+        select { |ti| times(blueprints.modified_at(ti), :>, modified_at) }.
+        uniq
     end
 
     def fresh_installations; fresh(:installed, installations) ;end
@@ -65,7 +65,8 @@ module Arenas
     def fresh(method, space)
       send(method).
         map { |b| b.settlement_identifier_in(self) }.
-        select { |si| times(space.modified_at(si), :>, modified_at) }
+        select { |si| times(space.modified_at(si), :>, modified_at) }.
+        uniq
     end
 
     def exist?; arenas.exist?(self) ;end
