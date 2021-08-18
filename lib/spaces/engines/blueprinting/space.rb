@@ -17,10 +17,6 @@ module Blueprinting
       all.select(&:binder?).map(&:identifier)
     end
 
-    def by_demand(descriptor, force: false)
-      publications.by_import(descriptor, force: force).localized
-    end
-
     def by_import(descriptor, force:)
       delete(descriptor, cascade: false) if force && imported?(descriptor)
 

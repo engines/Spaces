@@ -13,7 +13,7 @@ module Divisions
 
     delegate(
       subdivision_class: :klass,
-      [:any?, :empty?, :map, :count, :[], :first] => :all
+      [:any?, :empty?, :map, :each, :count, :[], :first] => :all
     )
 
     alias_method :divisible_embedded_with, :embedded_with

@@ -5,9 +5,10 @@ module Spaces
     module Importing
 
       def by_import(force:)
-        if space.imported?(descriptor)
+        if space.imported?(descriptor) && remote_current?
           pull_remote if force
         else
+          space.delete(descriptor)
           clone_remote
         end
 
@@ -24,6 +25,10 @@ module Spaces
         git.clone(repository_url, identifier, branch: branch_name, path: space.path, depth: 0)
       rescue git_error => e
         raise_failure_for(e)
+      end
+
+      def remote_current?
+        remote_url == repository_url
       end
 
     end
