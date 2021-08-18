@@ -41,7 +41,7 @@ module Arenas
     def connectable_blueprints
       connected_blueprints.map do |b|
         b.binder? ? b.connected_blueprints.flatten.map(&:blueprint) : b
-      end.flatten
+      end.flatten.uniq(&:uniqueness)
     end
 
     def arena; itself ;end
