@@ -17,7 +17,7 @@ module Spaces
       end
 
       def location_maybe_already_set_for(descriptor)
-        locations.exist_then_by(descriptor) || d
+        locations.exist_then_by(descriptor) || ddescriptor
       end
 
       def repository_class; ::Spaces::Git::Repository ;end
