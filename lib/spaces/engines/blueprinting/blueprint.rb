@@ -18,13 +18,11 @@ module Blueprinting
       def documentation_only_keys
         [:identifier, :about]
       end
-
-      def composition_class; Composition ;end
     end
 
     delegate(
       documentation_only_keys: :klass,
-      [:blueprints, :locations, :arenas] => :universe
+      [:locations, :arenas] => :universe
     )
 
     alias_method :blueprint, :itself
@@ -32,8 +30,6 @@ module Blueprinting
     def binder?
       keys - documentation_only_keys == [:bindings]
     end
-
-    alias_method :organization?, :binder?
 
     def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end
 
