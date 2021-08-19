@@ -14,12 +14,7 @@ module Divisions
     )
 
     def blueprint
-      @blueprint ||=
-      if blueprints.exist?(descriptor)
-        blueprints.by(descriptor.identifier)
-      else
-        blueprints.by_demand(descriptor)
-      end
+      @blueprint ||= blueprints.exist_then_by(descriptor)
     end
 
     def identifier; struct.identifier || target_identifier ;end

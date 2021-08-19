@@ -38,6 +38,10 @@ module Spaces
         opened.fetch(remote_name)
       end
 
+      def remote_url
+        opened.remote(remote_name).url
+      end
+
       def opened(&block)
         @opened ||= (
           init unless exist?

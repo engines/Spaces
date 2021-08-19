@@ -25,8 +25,6 @@ module Arenas
       packing_binding&.packing_identifier
     end
 
-    def provider_resolutions; provider_resolution_map.values ;end
-
     def provider_map
       @provider_map ||= provider_resolution_map.transform_values(&:provider)
     end

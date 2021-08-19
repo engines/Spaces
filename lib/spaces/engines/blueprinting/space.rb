@@ -14,11 +14,7 @@ module Blueprinting
     alias_method :imported?, :exist?
 
     def binder_identifiers
-      all.select(&:organization?).map(&:identifier)
-    end
-
-    def by_demand(descriptor, force: false)
-      publications.by_import(descriptor, force: force).localized
+      all.select(&:binder?).map(&:identifier)
     end
 
     def by_import(descriptor, force:)

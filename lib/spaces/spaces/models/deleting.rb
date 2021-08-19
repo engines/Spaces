@@ -3,7 +3,7 @@ module Spaces
 
     def delete(identifiable, cascade: true)
       identifiable.tap do |i|
-        delete_cascades(i, cascade: true)
+        delete_cascades(i, cascade: cascade)
         writing_path_for(i.identifier).rmtree
       end
     rescue Errno::ENOENT
