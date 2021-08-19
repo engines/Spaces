@@ -1,6 +1,10 @@
 module Spaces
   module Reading
 
+    def exist_then_by(identifiable)
+      exist_then(identifiable) { by(identifiable) }
+    end
+
     def modified_at(identifiable, klass = default_model_class, as: default_extension)
       Pathname.new("#{reading_name_for(identifiable, klass)}.#{as}").mtime
     rescue Errno::ENOENT, NoMethodError

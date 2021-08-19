@@ -51,10 +51,6 @@ module Spaces
       path_for(identifiable).exist?
     end
 
-    def exist_then_by(identifiable)
-      exist_then(identifiable) { by(identifiable) }
-    end
-
     def exist_then(identifiable, &block)
       yield(identifiable) if exist?(identifiable) && block_given?
     end
