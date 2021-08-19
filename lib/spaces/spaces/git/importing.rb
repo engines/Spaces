@@ -8,7 +8,7 @@ module Spaces
         if space.imported?(descriptor) && remote_current?
           pull_remote if force
         else
-          space.delete(descriptor)
+          space.exist_then_delete(descriptor)
           clone_remote
         end
 
