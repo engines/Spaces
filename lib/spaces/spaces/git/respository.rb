@@ -72,7 +72,6 @@ module Spaces
       def init
         git.init("#{space.path_for(descriptor)}", log: logger).tap do
           add_remote
-          checkout
         end
       end
 
