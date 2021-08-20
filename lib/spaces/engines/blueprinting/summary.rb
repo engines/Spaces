@@ -17,7 +17,7 @@ module Blueprinting
     end
 
     def location_struct
-      locations.exist_then_by(identifier)&.struct
+      @location_struct ||= locations.exist_then_by(identifier)&.struct
     end
 
   end
