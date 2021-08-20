@@ -18,7 +18,9 @@ module Spaces
       end
 
       def commit(**args, &block)
-        opened(&block).commit_all("#{args[:message] || default_commit_message} [BY SPACES]")
+        opened(&block).tap do |o|
+          o.commit_all("#{args.dig(:model, :message) || default_commit_message} [BY SPACES]")
+        end
       rescue git_error => e
         raise_failure_for(e)
       end
