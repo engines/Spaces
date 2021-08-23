@@ -11,8 +11,8 @@ module Arenas
     end
 
     def unsaved(bound_key)
-      bound_of(bound_key.singularized).reject do |s|
-        space_for(bound_key).exist?(s)
+      bound_of(bound_key.singularize).reject do |s|
+        space_named(bound_key).exist?(s)
       end
     end
 
