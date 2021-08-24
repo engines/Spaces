@@ -11,12 +11,6 @@ module Spaces
         end
       end
 
-      def push_remote
-        opened.push(remote_name, branch_name)
-      rescue git_error => e
-        raise_failure_for(e)
-      end
-
       def commit(**args, &block)
         opened(&block).tap do |o|
           o.add
@@ -25,6 +19,18 @@ module Spaces
         end
       rescue git_error => e
         raise_failure_for(e)
+      end
+
+      def push_remote
+        redefine_remote unless remote_current?
+        opened.push(remote_name, branch_name)
+      rescue git_error => e
+        raise_failure_for(e)
+      end
+
+      def redefine_remote
+        remove_remote
+        add_remote
       end
 
       def default_commit_message; "Exported on #{Time.now}" ;end

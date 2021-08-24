@@ -30,8 +30,8 @@ module Spaces
         opened.branch(branch_name).checkout
       end
 
-      def add_remote
-        opened.add_remote(remote_name, repository_url).tap { fetch }
+      def remote_current?
+        remote_url == repository_url
       end
 
       def fetch
@@ -40,6 +40,14 @@ module Spaces
 
       def remote_url
         opened.remote(remote_name).url
+      end
+
+      def add_remote
+        opened.add_remote(remote_name, repository_url).tap { fetch }
+      end
+
+      def remove_remote
+        opened.remote(remote_name).remove
       end
 
       def opened(&block)
