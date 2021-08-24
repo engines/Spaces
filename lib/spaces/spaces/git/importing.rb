@@ -27,10 +27,6 @@ module Spaces
         raise_failure_for(e)
       end
 
-      def remote_current?
-        remote_url == repository_url
-      end
-
     end
   end
 end
