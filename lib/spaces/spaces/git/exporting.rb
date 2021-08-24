@@ -23,7 +23,6 @@ module Spaces
 
       def push_remote
         redefine_remote unless remote_current?
-        pull_remote
         opened.push(remote_name, branch_name)
       rescue git_error => e
         raise_failure_for(e)
