@@ -1,5 +1,3 @@
-require 'git'
-
 module Spaces
   module Git
     module Importing

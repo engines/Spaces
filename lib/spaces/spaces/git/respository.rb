@@ -13,7 +13,8 @@ module Spaces
       relation_accessor :space
 
       delegate(
-        [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor
+        [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor,
+        [:git, :git_error] => :space
       )
 
       def branch_names_without_head
@@ -65,8 +66,6 @@ module Spaces
         raise failure, {message: exception.message}
       end
 
-      def git; ::Git ;end
-      def git_error; ::Git::GitExecuteError ;end
       def failure; ::Spaces::Errors::RepositoryFail ;end
       def head_identifier; 'HEAD ->' ;end
 
