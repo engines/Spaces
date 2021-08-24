@@ -3,7 +3,7 @@ module Resolving
 
     delegate(
       resolutions: :universe,
-      [:arena, :connect_bindings] => :resolution
+      [:arena, :configuration, :connect_bindings] => :resolution
     )
 
     def predecessor; @predecessor ||= resolutions.by(identifier) ;end
@@ -13,7 +13,6 @@ module Resolving
     def keys; composition.keys ;end
 
     def cache_primary_identifiers
-      # struct.identifier = "#{arena.identifier.with_identifier_separator}#{blueprint_identifier}"
       struct.arena_identifier = arena.identifier
       struct.blueprint_identifier = blueprint_identifier
     end
