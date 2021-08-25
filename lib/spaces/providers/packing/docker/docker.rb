@@ -64,7 +64,6 @@ module Providers
       end
     end
 
-
     def emit(file, output)
       output.split("\n").each do |line|
         file.write "#{line}\n"
