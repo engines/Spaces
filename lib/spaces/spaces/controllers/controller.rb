@@ -2,8 +2,8 @@ module Spaces
   module Controllers
     class Controller < ::Spaces::Model
 
-      def control(action, with: [:run, :payload], **args)
-        with.reduce(command_for(action, **args)) { |c, w| c.send(w) }
+      def control(action, with: [:run, :payload], **args, &block)
+        with.reduce(command_for(action, **args)) { |c, w| c.send(w, &block) }
       end
 
       def command_for(action, **args)
@@ -35,7 +35,7 @@ module Spaces
       end
 
       def method_missing(m, *args, &block)
-        control(m, *args) if respond_to_missing?(m)
+        control(m, *args, &block) if respond_to_missing?(m)
       end
 
       def respond_to_missing?(m, *)
