@@ -42,13 +42,43 @@ module Providers
       bridge.all(options.reverse_merge(all: true))
     end
 
-    def build
+    def build(&block)
+      dir = path_for(pack)
+      filepath = dir.join("build.log")
+      FileUtils.touch(filepath)
       space.copy_auxiliaries_for(pack)
-      i = bridge.build_from_dir(path_for(pack).to_path) do |chunk|
-        puts chunk
+      File.open(filepath, 'w') do |file|
+        call_bridge(dir, file, &block)
       end
-      i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
       space.remove_auxiliaries_for(pack)
+    end
+
+    def call_bridge(dir, file, &block)
+      begin
+        i = bridge.build_from_dir(dir.to_path) do |chunk|
+          emit(file, output_for(chunk), &block)
+        end
+        i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
+      rescue StandardError => e
+        emit(file, "\n\033[1;31mServer exception.\n\033[0;31m#{e}\033[0m", &block)
+      end
+    end
+
+    def emit(file, output)
+      output.split("\n").each do |line|
+        file.write "#{line}\n"
+        yield line if block_given?
+      end
+    end
+
+    def output_for(chunk)
+      data = JSON.parse(chunk, symbolize_names: true)
+      if data[:stream]
+        data[:stream]
+      elsif data[:errorDetail]
+        message = (data[:errorDetail] || {})[:message] || 'No error message.'
+        "\n\033[1;31mBuild error.\n\033[0;31m#{message}\033[0m"
+      end
     end
 
     alias_method :commit, :build
