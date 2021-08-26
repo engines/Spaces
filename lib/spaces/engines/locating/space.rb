@@ -3,7 +3,7 @@ module Locating
 
     class << self
       def default_model_class
-        ::Spaces::Descriptor
+        ::Locating::Location
       end
     end
 

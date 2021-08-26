@@ -28,7 +28,7 @@ module Spaces
     end
 
     def to_s
-      [repository, branch, identifier].compact.join(' ')
+      [repository_url, branch, identifier].compact.join(' ')
     end
 
     protected
