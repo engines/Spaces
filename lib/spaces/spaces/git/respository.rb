@@ -13,7 +13,8 @@ module Spaces
       relation_accessor :space
 
       delegate(
-        [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor
+        [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor,
+        [:git, :git_error] => :space
       )
 
       def branch_names_without_head
@@ -30,12 +31,24 @@ module Spaces
         opened.branch(branch_name).checkout
       end
 
-      def add_remote
-        opened.add_remote(remote_name, repository_url).tap { fetch }
+      def remote_current?
+        remote_url == repository_url
       end
 
       def fetch
         opened.fetch(remote_name)
+      end
+
+      def remote_url
+        opened.remote(remote_name).url
+      end
+
+      def add_remote
+        opened.add_remote(remote_name, repository_url).tap { fetch }
+      end
+
+      def remove_remote
+        opened.remote(remote_name).remove
       end
 
       def opened(&block)
@@ -53,8 +66,6 @@ module Spaces
         raise failure, {message: exception.message}
       end
 
-      def git; ::Git ;end
-      def git_error; ::Git::GitExecuteError ;end
       def failure; ::Spaces::Errors::RepositoryFail ;end
       def head_identifier; 'HEAD ->' ;end
 
@@ -68,7 +79,6 @@ module Spaces
       def init
         git.init("#{space.path_for(descriptor)}", log: logger).tap do
           add_remote
-          checkout
         end
       end
 

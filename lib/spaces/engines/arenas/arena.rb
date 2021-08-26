@@ -24,7 +24,10 @@ module Arenas
       def composition_class; Composition ;end
     end
 
-    delegate([:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe)
+    delegate(
+      [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
+      configuration: :runtime_provider
+    )
 
     def more_binder_identifiers
       blueprints.binder_identifiers - target_identifiers
@@ -41,7 +44,7 @@ module Arenas
     def connectable_blueprints
       connected_blueprints.map do |b|
         b.binder? ? b.connected_blueprints.flatten.map(&:blueprint) : b
-      end.flatten
+      end.flatten.uniq(&:uniqueness)
     end
 
     def arena; itself ;end

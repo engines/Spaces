@@ -7,7 +7,7 @@ module Arenas
     def installed; present_in(installations) ;end
     def uninstalled; absent_in(installations) ;end
 
-    def unsaved_installations; unsaved(:installation) ;end
+    def unsaved_installations; unsaved(:installations) ;end
     def bound_installations; installation_map.values ;end
 
     def installation_map; bound_map_for(:installation) ;end

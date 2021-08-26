@@ -11,9 +11,9 @@ module Spaces
       def payload; OpenStruct.new(struct.to_h.without(:input)) ;end
 
 
-      def run
+      def run(&block)
         tap do
-          _run
+          _run(&block)
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
         # rescue NoMethodError => e
@@ -41,9 +41,9 @@ module Spaces
 
       protected
 
-      def _run
+      def _run(&block)
         struct.result =
-        if c = commit
+        if c = commit(&block)
           c
         else
           assembly

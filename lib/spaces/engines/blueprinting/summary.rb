@@ -5,16 +5,17 @@ module Blueprinting
       OpenStruct.new(
         identifier: identifier,
         about: struct.about,
-        location: location&.struct,
+        location: flat_location_struct,
         publication: {
           exist: publications.exist?(identifier)
         },
         utilized: all_arenas.any?
-      ).compact
+      )
     end
 
-    def location
-      @location ||= locations.by(identifier) if locations.exist?(identifier)
+    def flat_location_struct
+      @flat_location_struct ||=
+        OpenStruct.new(exist: locations.exist?(identifier)).merge(locations.exist_then_by(identifier)&.struct)
     end
 
   end

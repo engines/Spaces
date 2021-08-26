@@ -1,13 +1,12 @@
-require 'git'
-
 module Spaces
   module Git
     module Importing
 
       def by_import(force:)
-        if space.imported?(descriptor)
+        if space.imported?(descriptor) && remote_current?
           pull_remote if force
         else
+          space.exist_then_delete(descriptor)
           clone_remote
         end
 

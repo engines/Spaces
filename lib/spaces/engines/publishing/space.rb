@@ -31,8 +31,11 @@ module Publishing
       super.tap do |m|
         locations.ensure_located(m)
         blueprints.by_import(descriptor, force: force)
-        m.deep_bindings
+        m.bindings.each { |b| by_import(b.descriptor, force: force) }
       end
+    rescue ::Spaces::Errors::RepositoryFail => e
+      locations.exist_then_delete(descriptor)
+      raise e
     end
 
     def export(**args)
