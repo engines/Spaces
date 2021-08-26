@@ -4,14 +4,14 @@ module Spaces
 
       def export(**args, &block)
         descriptor.identifier.tap do
-          commit(**args, &block)
+          opened.add
+          commit(**args, &block) if opened.status.commitable.any?
           push_remote
         end
       end
 
       def commit(**args, &block)
         opened(&block).tap do |o|
-          o.add
           o.commit_all("#{args.dig(:model, :message) || default_commit_message} [BY SPACES]")
           checkout
         end
