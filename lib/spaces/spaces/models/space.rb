@@ -48,11 +48,11 @@ module Spaces
     end
 
     def exist?(identifiable)
-      path_for(identifiable).exist?
+      identifiable && path_for(identifiable).exist?
     end
 
     def exist_then(identifiable, &block)
-      yield(identifiable) if exist?(identifiable) && block_given?
+      yield(identifiable) if block_given? && exist?(identifiable)
     end
 
     def absent(array)
