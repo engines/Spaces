@@ -1,4 +1,5 @@
 require 'git'
+require_relative 'status'
 require_relative 'ssh'
 
 module Spaces
