@@ -20,6 +20,7 @@ class Universe < ::Spaces::Model
         Packing::Space.new(:packs),
         Provisioning::Space.new(:provisioning),
         Arenas::Space.new(:arenas),
+        Keys::Space.new(:user_keys),
 
         Associations::Domains::Space.new(:domains),
         Associations::Tenants::Space.new(:tenants)

@@ -15,5 +15,6 @@ require_all   'spaces/engines/resolving'
 # require_all   'spaces/engines/packing' #FIX!: this should be here
 require_all   'spaces/engines/registry'
 require_all   'spaces/engines/provisioning'
+require_all   'spaces/engines/keys'
 
 require_all   'spaces/engines/provider_aspects'

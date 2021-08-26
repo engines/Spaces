@@ -8,6 +8,7 @@ def controllers
     arenas: Arenas::Controllers::Controller.new,
     packing: Packing::Controllers::Controller.new,
     provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
+    user_keys: ::Spaces::Controllers::RESTController.new(space: :user_keys),
     registry: Registry::Controllers::Controller.new
   )
 end
