@@ -11,8 +11,8 @@ module Keys
 
     def identifiers
         {
-          username: username,
           domain: domain,
+          username: username,
           tie_breaker: tie_breaker
         }
     end
