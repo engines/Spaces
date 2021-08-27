@@ -41,10 +41,6 @@ module Spaces
       writing_path_for(identifiable).mkpath
     end
 
-    def writing_path_for(identifiable)
-      path.join(*([identifiable.context_identifier.as_path, identifiable.subpath].compact))
-    end
-
     protected
 
     # FIXME: the permissions should be passed in

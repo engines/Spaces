@@ -6,7 +6,7 @@ module Spaces
     end
 
     def modified_at(identifiable, klass = default_model_class, as: default_extension)
-      Pathname.new("#{reading_name_for(identifiable, klass)}.#{as}").mtime
+      Pathname.new("#{reading_path_for(identifiable, klass)}.#{as}").mtime
     rescue Errno::ENOENT, NoMethodError
       raise_lost_error(identifiable)
     end
@@ -24,17 +24,9 @@ module Spaces
     end
 
     def _by(identifiable, klass = default_model_class, as:)
-      Pathname.new("#{reading_name_for(identifiable, klass)}.#{as}").read
+      Pathname.new("#{reading_path_for(identifiable, klass)}.#{as}").read
     rescue Errno::ENOENT, NoMethodError
       raise_lost_error(identifiable)
-    end
-
-    def reading_name_for(identifiable, klass = default_model_class)
-      path.join(identifiable.identifier.as_path, klass.qualifier)
-    end
-
-    def raise_lost_error(identifiable)
-      raise ::Spaces::Errors::LostInSpace, {space: self.identifier, identifier: identifiable&.identifier}
     end
 
   end

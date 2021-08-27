@@ -6,12 +6,9 @@ module Spaces
     end
 
     def delete(identifiable, cascade: true)
-      identifiable.tap do |i|
-        delete_cascades(i, cascade: cascade)
-        writing_path_for(i.identifier).rmtree
-      end
+      identifiable.tap { |i| _delete(i, cascade: cascade) }
     rescue Errno::ENOENT
-      raise ::Spaces::Errors::LostInSpace, {space: identifier, identifier: identifiable.identifier.to_sym}
+      raise_lost_error(identifiable)
     end
 
     def delete_cascades(identifiable, cascade: true)
@@ -23,6 +20,13 @@ module Spaces
     end
 
     def cascade_deletes; [] ;end
+
+    protected
+
+    def _delete(identifiable, cascade: true)
+      delete_cascades(identifiable, cascade: cascade)
+      writing_path_for(identifiable).rmtree
+    end
 
   end
 end
