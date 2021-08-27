@@ -10,11 +10,11 @@ module Keys
     end
 
     def identifiers
-        {
-          domain: domain,
-          username: username,
-          tie_breaker: tie_breaker
-        }
+      {
+        domain: domain,
+        username: username,
+        tie_breaker: tie_breaker
+      }
     end
 
     def qualifier; "#{username}:#{token}@" ;end
@@ -23,6 +23,7 @@ module Keys
 
     def initialize(args)
       self.struct = args[:struct] || OpenStruct.new(args)
+      self.struct.identifier = self.identifier
     end
 
   end
