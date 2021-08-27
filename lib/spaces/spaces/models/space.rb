@@ -63,5 +63,11 @@ module Spaces
       self.struct = OpenStruct.new(identifier: identifier.to_sym)
     end
 
+    protected
+
+    def raise_lost_error(identifiable)
+      raise ::Spaces::Errors::LostInSpace, {space: self.identifier, identifier: identifiable&.identifier}
+    end
+
   end
 end
