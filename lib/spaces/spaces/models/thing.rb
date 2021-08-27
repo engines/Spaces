@@ -36,6 +36,8 @@ module Spaces
       [:identifier, :namespace, :qualifier, :spout, :descriptor_class, :klasses] => :klass
     )
 
+    alias_method :summary, :struct
+
     def klass; self.class ;end
 
     def keys; struct&.to_h&.keys ;end
