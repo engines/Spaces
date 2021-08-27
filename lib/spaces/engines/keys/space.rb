@@ -15,5 +15,16 @@ module Keys
       end
     end
 
+    def key_path_for(identifiable)
+      Pathname.new("#{reading_path_for(identifiable)}.#{default_extension}")
+    end
+
+    protected
+
+    def _delete(identifiable, cascade: true)
+      key_path_for(identifiable).delete
+      writing_path_for(identifiable).delete_if_empty
+    end
+
   end
 end
