@@ -7,8 +7,10 @@ module Keys
       end
     end
 
-    def identifiers(username: '*', domain: '*', tie_breaker: nil)
-      path.glob([username, domain, tie_breaker].compact.join('/')).map do |p|
+    def identifiers(domain: '*', username: '*', tie_breaker: '*')
+      path.glob([domain, username, tie_breaker].compact.join('/')).map do |p|
+        p.directory? ? p : p.parent
+      end.uniq.map do |p|
         "#{p.relative_path_from(path)}".as_compound
       end
     end
