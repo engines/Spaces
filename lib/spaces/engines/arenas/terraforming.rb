@@ -11,17 +11,25 @@ module Arenas
     protected
 
     def execute(command, model, &block)
-      Dir.chdir(path_for(model)) do
-        Emit.new(&block).open do |t|
-          # TODO: USE bridge.send(command, options[command] || {})
-          Object
-          .const_get("RubyTerraform::Commands::#{command.camelize}")
-          .new(stdout: t, stderr: t)
-          .execute
+      dir = path_for(model)
+      filepath = dir.join("build.log")
+      FileUtils.touch(filepath)
+      begin
+        Emitting::Output.new(filepath, &block).follow do |output|
+          Dir.chdir(dir) do
+            # TODO: USE bridge.send(command, options[command] || {})
+            begin
+              Object
+              .const_get("RubyTerraform::Commands::#{command.camelize}")
+              .new(stdout: output, stderr: output)
+              .execute
+            rescue RubyTerraform::Errors::ExecutionError => e
+              raise ::Arenas::Errors::ProvisioningError, {execute: command, error: e}
+            end
+          end
         end
       end
-    rescue RubyTerraform::Errors::ExecutionError => e
-      raise ::Arenas::Errors::ProvisioningError, {execute: command, error: e}
+      command
     end
 
     def bridge; RubyTerraform ;end
