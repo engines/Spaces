@@ -48,12 +48,12 @@ module Providers
       FileUtils.touch(filepath)
       space.copy_auxiliaries_for(pack)
       File.open(filepath, 'w') do |file|
-        call_bridge(dir, file, &block)
+        build_from_dir(dir, file, &block)
       end
       space.remove_auxiliaries_for(pack)
     end
 
-    def call_bridge(dir, file, &block)
+    def build_from_dir(dir, file, &block)
       begin
         i = bridge.build_from_dir(dir.to_path) do |chunk|
           emit(file, output_for(chunk), &block)
