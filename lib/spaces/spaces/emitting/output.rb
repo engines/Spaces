@@ -10,7 +10,7 @@ module Emitting
     end
 
     def write(chunk)
-      puts chunk
+      logger.info(chunk.sub(/\n$/, ''))
       @file.write(chunk)
       @callback.call(chunk)
     end

@@ -15,13 +15,13 @@ module Arenas
       filepath = dir.join("build.log")
       FileUtils.touch(filepath)
       begin
-        Emitting::Output.new(filepath, &block).follow do |emit|
+        Emitting::Output.new(filepath, &block).follow do |output|
           Dir.chdir(dir) do
             # TODO: USE bridge.send(command, options[command] || {})
             begin
               Object
               .const_get("RubyTerraform::Commands::#{command.camelize}")
-              .new(stdout: emit, stderr: emit)
+              .new(stdout: output, stderr: output)
               .execute
             rescue RubyTerraform::Errors::ExecutionError => e
               raise ::Arenas::Errors::ProvisioningError, {execute: command, error: e}
