@@ -27,6 +27,10 @@ module Spaces
         opened.diff.patch
       end
 
+      def add
+        opened.add
+      end
+
       def checkout
         opened.branch(branch_name).checkout
       end
@@ -51,11 +55,8 @@ module Spaces
         opened.remote(remote_name).remove
       end
 
-      def opened(&block)
-        @opened ||= (
-          init unless exist?
-          git.open(space.path_for(descriptor), log: logger).tap { yield if block_given? }
-        )
+      def opened
+        @opened ||= git.open(space.path_for(descriptor), log: logger)
       end
 
       def exist?
@@ -72,14 +73,6 @@ module Spaces
       def initialize(descriptor, space:)
         self.descriptor = descriptor
         self.space = space
-      end
-
-      protected
-
-      def init
-        git.init("#{space.path_for(descriptor)}", log: logger).tap do
-          add_remote
-        end
       end
 
     end

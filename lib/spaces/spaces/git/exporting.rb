@@ -2,19 +2,14 @@ module Spaces
   module Git
     module Exporting
 
-      def export(**args, &block)
+      def export(**args)
         descriptor.identifier.tap do
-          opened.add
-          commit(**args, &block) if opened.status.commitable.any?
-          push_remote
+          exist? ? export_existing(**args) : export_new(**args)
         end
       end
 
-      def commit(**args, &block)
-        opened(&block).tap do |o|
-          o.commit_all("#{args.dig(:model, :message) || default_commit_message} [BY SPACES]")
-          checkout
-        end
+      def commit(**args)
+        opened.commit_all("#{args.dig(:model, :message) || default_commit_message} [BY SPACES]")
       rescue git_error => e
         raise_failure_for(e)
       end
@@ -32,6 +27,30 @@ module Spaces
       end
 
       def default_commit_message; "Exported on #{Time.now}" ;end
+
+      protected
+
+      def export_existing(**args)
+        add
+        if opened.status.commitable.any?
+          checkout
+          commit(**args)
+          push_remote
+        end
+      end
+
+      def export_new(**args)
+        init
+        add
+        commit(**args)
+        checkout
+        add_remote
+        push_remote
+      end
+
+      def init
+        git.init("#{space.path_for(descriptor)}", log: logger)
+      end
 
     end
   end
