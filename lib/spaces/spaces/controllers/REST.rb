@@ -17,6 +17,10 @@ module Spaces
         }
       end
 
+      def summary(**args)
+        control(command: :summary, **args)
+      end
+
       def initialize(**args)
         self.struct = OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
       end
