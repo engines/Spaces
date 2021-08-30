@@ -23,15 +23,15 @@ module Publishing
       super(*args, as: default_extension)
     end
 
-    def import(descriptor, force:)
-      by_import(descriptor, force: force).identifier
+    def import(descriptor, force:, &block)
+      by_import(descriptor, force: force, &block).identifier
     end
 
-    def by_import(descriptor, force:)
+    def by_import(descriptor, force:, &block)
       super.tap do |m|
         locations.ensure_located(m)
-        blueprints.by_import(descriptor, force: force)
-        m.bindings.each { |b| by_import(b.descriptor, force: force) }
+        blueprints.by_import(descriptor, force: force, &block)
+        m.bindings.each { |b| by_import(b.descriptor, force: force, &block) }
       end
     rescue ::Spaces::Errors::RepositoryFail => e
       locations.exist_then_delete(descriptor)

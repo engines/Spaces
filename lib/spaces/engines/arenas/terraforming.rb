@@ -12,20 +12,18 @@ module Arenas
 
     def execute(command, model, &block)
       dir = path_for(model)
-      filepath = dir.join("build.log")
+      filepath = dir.join("#{command}.log")
       FileUtils.touch(filepath)
-      begin
-        Emitting::Output.new(filepath, &block).follow do |output|
-          Dir.chdir(dir) do
-            # TODO: USE bridge.send(command, options[command] || {})
-            begin
-              Object
-              .const_get("RubyTerraform::Commands::#{command.camelize}")
-              .new(stdout: output, stderr: output)
-              .execute
-            rescue RubyTerraform::Errors::ExecutionError => e
-              raise ::Arenas::Errors::ProvisioningError, {execute: command, error: e}
-            end
+      Emitting::Output.new(filepath, &block).follow do |output|
+        Dir.chdir(dir) do
+          # TODO: USE bridge.send(command, options[command] || {})
+          begin
+            Object
+            .const_get("RubyTerraform::Commands::#{command.camelize}")
+            .new(stdout: output, stderr: output)
+            .execute
+          rescue RubyTerraform::Errors::ExecutionError => e
+            output.error("\n\033[1;31mTerraform #{command} error.\n\033[0;31m#{e}\033[0m")
           end
         end
       end

@@ -9,8 +9,8 @@ module Spaces
 
       delegate(locations: :universe)
 
-      def by_import(descriptor, force:)
-        repository_for(descriptor).by_import(force: force)
+      def by_import(descriptor, force:, &block)
+        repository_for(descriptor).by_import(force: force, &block)
       end
 
       def export(descriptor, **args, &block)

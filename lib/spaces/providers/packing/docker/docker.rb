@@ -49,14 +49,14 @@ module Providers
       FileUtils.touch(filepath)
       file = File.open(filepath, 'w')
       begin
-        Emitting::Logger.new(file, &block).follow do |l|
+        Emitting::Logger.new(file, &block).follow do |logger|
           i = bridge.build_from_dir(dir.to_path) do |chunk|
             data = JSON.parse(chunk, symbolize_names: true)
             if data[:stream]
-              l.info(data[:stream])
+              logger.info(data[:stream])
             elsif data[:errorDetail]
               message = (data[:errorDetail] || {})[:message] || 'No error message.'
-              l.error("\n\033[1;31mBuild error.\n\033[0;31m#{message}\033[0m")
+              logger.error("\n\033[1;31mBuild error.\n\033[0;31m#{message}\033[0m")
             end
           end
           i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
