@@ -1,6 +1,9 @@
 # load the code!
 # require './x/controllers'
 
+# destroy the universe
+# universe.workspace.rmtree
+
 # ------------------------------------------------------------------------------
 
 # import a bootstrappy blueprint
