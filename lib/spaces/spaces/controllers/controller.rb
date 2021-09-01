@@ -35,7 +35,7 @@ module Spaces
       end
 
       def method_missing(m, **args, &block)
-        control(command: m, **args, &block) if respond_to_missing?(m)
+        control(command: m, **args, &block) if action_command_map.keys.include?(m)
       end
 
       def respond_to_missing?(m, *)
