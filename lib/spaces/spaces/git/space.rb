@@ -1,11 +1,9 @@
-require 'git'
+require_relative 'patched-git-gem'
 require_relative 'status'
-require_relative 'ssh'
 
 module Spaces
   module Git
     class Space < ::Spaces::Space
-      include Ssh
 
       delegate(locations: :universe)
 
@@ -28,19 +26,6 @@ module Spaces
       def git; ::Git ;end
       def git_error; ::Git::GitExecuteError ;end
       def repository_class; ::Spaces::Git::Repository ;end
-
-      def initialize(*args)
-        super.tap do
-          write_ssh_command
-          configure
-        end
-      end
-
-      protected
-
-      def configure
-        ::Git.configure { |c| c.git_ssh = "#{ssh_command_path}" }
-      end
 
     end
   end
