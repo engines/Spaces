@@ -16,6 +16,7 @@ module Arenas
     end
 
     def execute(command, model, &block)
+<<<<<<< Updated upstream
       Dir.chdir(path_for(model)) do
         emit_to(output_filepath(command, model), output_callback(&block)) do |emit|
           emit.info(color.green("\nTerraform #{command} start\n", bold: true))
@@ -31,6 +32,21 @@ module Arenas
             emit.info(color.red("#{e}\n"))
           ensure
             emit.close
+=======
+      dir = path_for(model)
+      filepath = dir.join("#{command}.log")
+      FileUtils.touch(filepath)
+      Emitting::Output.new(filepath, &block).follow do |output|
+        Dir.chdir(dir) do
+          # TODO: USE bridge.send(command, options[command] || {})
+          begin
+            Object
+            .const_get("RubyTerraform::Commands::#{command.camelize}")
+            .new(stdout: output, stderr: output)
+            .execute
+          rescue RubyTerraform::Errors::ExecutionError => e
+            output.error("\n\033[1;31mTerraform #{command} error.\n\033[0;31m#{e}\033[0m")
+>>>>>>> Stashed changes
           end
         end
       end
