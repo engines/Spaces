@@ -53,7 +53,6 @@ module Providers
 
     def build(&block)
       space.copy_auxiliaries_for(pack)
-<<<<<<< Updated upstream
       # _build(&block)
       i = bridge.build_from_dir(dir.to_path)
       i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
@@ -73,22 +72,6 @@ module Providers
             message = (data[:errorDetail] || {})[:message] || 'No error message.'
             emit.error(color.red("\nBuild error\n", bold: true))
             emit.error(color.red("#{message}\n"))
-=======
-      dir = path_for(pack)
-      filepath = dir.join("build.log")
-      FileUtils.touch(filepath)
-      file = File.open(filepath, 'w')
-      begin
-        Emitting::Logger.new(file, &block).follow do |logger|
-          i = bridge.build_from_dir(dir.to_path) do |chunk|
-            data = JSON.parse(chunk, symbolize_names: true)
-            if data[:stream]
-              logger.info(data[:stream])
-            elsif data[:errorDetail]
-              message = (data[:errorDetail] || {})[:message] || 'No error message.'
-              logger.error("\n\033[1;31mBuild error.\n\033[0;31m#{message}\033[0m")
-            end
->>>>>>> Stashed changes
           end
         end
         i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
