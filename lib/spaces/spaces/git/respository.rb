@@ -57,6 +57,8 @@ module Spaces
 
       def opened
         @opened ||= git.open(space.path_for(descriptor), log: logger)
+      rescue git_error => e
+        raise_failure_for(e)
       end
 
       def exist?

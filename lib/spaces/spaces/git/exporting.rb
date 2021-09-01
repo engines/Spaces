@@ -5,6 +5,8 @@ module Spaces
       def export(**args)
         descriptor.identifier.tap do
           exist? ? export_existing(**args) : export_new(**args)
+        rescue git_error => e
+          raise_failure_for(e)
         end
       end
 
@@ -25,6 +27,8 @@ module Spaces
         remove_remote
         add_remote
         fetch
+      rescue git_error => e
+        raise_failure_for(e)
       end
 
       def default_commit_message; "Exported on #{Time.now}" ;end
