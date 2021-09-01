@@ -48,7 +48,7 @@ module Spaces
       end
 
       def add_remote
-        opened.add_remote(remote_name, repository_url).tap { fetch }
+        opened.add_remote(remote_name, repository_url)
       end
 
       def remove_remote
@@ -57,6 +57,8 @@ module Spaces
 
       def opened
         @opened ||= git.open(space.path_for(descriptor), log: logger)
+      rescue git_error => e
+        raise_failure_for(e)
       end
 
       def exist?

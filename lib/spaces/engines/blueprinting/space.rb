@@ -13,6 +13,8 @@ module Blueprinting
     alias_method :identifiers, :simple_identifiers
     alias_method :imported?, :exist?
 
+    def cascade_deletes; [:publications] ;end
+
     def binder_identifiers
       all.select(&:binder?).map(&:identifier)
     end
@@ -24,8 +26,6 @@ module Blueprinting
         synchronize_with(publications, descriptor)
       end
     end
-
-    def cascade_deletes; [:publications] ;end
 
   end
 end

@@ -14,7 +14,7 @@ module Arenas
 
     alias_method :identifiers, :simple_identifiers
 
-    def dependent_spaces; [resolutions, packs, provisioning] ;end
+    def cascade_deletes; [:installations] ;end
 
     def save_installations_for(arena, force: false)
       (force ? arena.bound_installations : arena.unsaved_installations).
@@ -47,14 +47,6 @@ module Arenas
         end
         touch(arena)
       end.identifier
-    end
-
-    def delete(identifiable)
-      super.tap do
-        dependent_spaces.each do |s| #TODO: should use cascading feature?
-          s.path.join(identifiable.identifier).exist_then(&:rmtree)
-        end
-      end
     end
 
     def initial_file_name_for(arena)

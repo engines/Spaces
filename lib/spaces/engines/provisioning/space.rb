@@ -9,6 +9,8 @@ module Provisioning
 
     delegate([:arenas, :resolutions] => :universe)
 
+    def cascade_deletes; [:registry] ;end
+
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
@@ -23,8 +25,10 @@ module Provisioning
       super
     end
 
-    def delete(identifiable)
-      super.tap { arena_path(identifiable.identifier).delete }
+    def delete(identifiable, cascade: true)
+      super.tap do
+        arena_path(identifiable.identifier).exist_then { delete }
+      end
     end
 
     def arena_path(identifiable)

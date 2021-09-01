@@ -9,18 +9,13 @@ module Resolving
 
     delegate([:registry, :packs, :provisioning] => :universe)
 
+    def cascade_deletes; [:packs, :provisioning] ;end
+
     def save(model)
       ensure_connections_exist_for(model)
-      super.tap do        
+      super.tap do
         copy_auxiliaries_for(blueprints, model)
         model.content.each { |t| save_text(t) }
-      end
-    end
-
-    def delete(identifiable)
-      super.tap do
-        packs.delete(identifiable) if packs.exist?(identifiable)
-        provisioning.delete(identifiable) if provisioning.exist?(identifiable)
       end
     end
 
