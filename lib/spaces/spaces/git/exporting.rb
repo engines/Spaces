@@ -24,6 +24,7 @@ module Spaces
       def redefine_remote
         remove_remote
         add_remote
+        fetch
       end
 
       def default_commit_message; "Exported on #{Time.now}" ;end
