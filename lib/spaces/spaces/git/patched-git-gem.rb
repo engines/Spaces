@@ -1,9 +1,6 @@
 require 'git'
 
 # Monkey patch git gem
-# 1. Pass block through to command.
-#    The block is for callback to sever-sent events stream.
-# 2. Add --verbose and --progress options to clone.
 module Git
   def self.clone(repository, name, options = {}, &block)
     Base.clone(repository, name, options, &block)
@@ -15,12 +12,34 @@ module Git
     def pull(remote='origin', branch='master', &block)
       self.lib.pull(remote, branch, &block)
     end
+    # New method.
+    def branch_move_to(branch = 'master')
+      self.lib.branch_move_to(branch)
+    end
+  end
+  class Branch
+    def checkout(opts = {})
+      check_if_create unless opts[:new_branch]
+      @base.checkout(@full, opts)
+    end
+    # New method.
+    def move(branch)
+      @base.branch_move_to(branch)
+    end
   end
   class Lib
+    # New method.
+    def branch_move_to(branch)
+      command('branch', '-M', branch)
+    end
+    # Redefine existing method.
+    #  Add &block as arguments for passing down to command.
     def pull(remote='origin', branch='master', &block)
-      debugger
       command('pull', remote, branch, &block)
     end
+    # Redefine existing method.
+    #  Add &block as arguments for passing down to command.
+    #  Add --verbose and --progress options.
     def clone(repository, name, opts = {}, &block)
       @path = opts[:path] || '.'
       clone_dir = opts[:path] ? File.join(@path, name) : name

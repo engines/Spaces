@@ -31,8 +31,24 @@ module Spaces
         opened.add
       end
 
-      def checkout
-        opened.branch(branch_name).checkout
+      def set_branch
+        if local_branches.any?
+          opened.branch(local_current).move(branch_name)
+        else
+          create_first_branch
+        end
+      end
+
+      def create_first_branch
+        opened.branch(branch_name).checkout(new_branch: true)
+      end
+
+      def local_branches
+        opened.branches.local
+      end
+
+      def local_current
+        opened.branches.local.find(&:current).name
       end
 
       def remote_current?
