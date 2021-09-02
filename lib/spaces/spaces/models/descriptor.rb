@@ -21,10 +21,19 @@ module Spaces
     alias_method :remote_name, :remote
     alias_method :branch_name, :branch
 
-    def pathname; Pathname.new(repository_url) ;end
+    def pathname
+      Pathname.new(repository_url)
+    end
 
     def initialize(args)
-      self.struct = args[:struct] || OpenStruct.new(args)
+      if args[:struct]
+        self.struct = args[:struct]
+        if args[:identifier]
+          self.struct.identifier = args[:identifier]
+        end
+      else
+         self.struct = OpenStruct.new(args)
+       end
     end
 
     def to_s

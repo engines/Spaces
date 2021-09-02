@@ -3,22 +3,19 @@ module Spaces
     module Exporting
 
       def export(**args)
-        descriptor.identifier.tap do
-          init unless exist?
-          export_repo(**args)
-        rescue git_error => e
-          raise_failure_for(e)
-        end
+        export_repo(**args)
+        descriptor.identifier
+      rescue git_error => e
+        raise_failure_for(e)
       end
 
       def commit(**args)
-        opened.commit_all("#{args.dig(:model, :message) || default_commit_message} [BY SPACES]")
+        opened.commit_all("#{args.dig(:model, :message) || default_commit_message} [BY SPACES]", allow_empty: true)
       rescue git_error => e
         raise_failure_for(e)
       end
 
       def push_remote
-        redefine_remote unless remote_current?
         opened.push(remote_name, branch_name, force: true)
       rescue git_error => e
         raise_failure_for(e)
@@ -27,7 +24,6 @@ module Spaces
       def redefine_remote
         remove_remote
         add_remote
-        # fetch
       rescue git_error => e
         raise_failure_for(e)
       end
@@ -38,16 +34,24 @@ module Spaces
 
       def export_repo(**args)
         set_branch
+        set_remote
         add
-        if opened.status.commitable.any?
-          commit(**args)
-        end
+        commit(**args) # if opened.status.commitable.any?
         push_remote
       end
 
-      def init
-        git.init("#{space.path_for(descriptor)}", log: logger)
-      end
+
+
+      # def setup_repo
+      # echo "" >> README.md
+      # add
+      # end
+
+      # def init
+      #
+      #   git.init("#{space.path_for(descriptor)}", log: logger)
+      #
+      # end
 
     end
   end

@@ -53,16 +53,14 @@ module Providers
 
     def build(&block)
       space.copy_auxiliaries_for(pack)
-      # _build(&block)
-      i = bridge.build_from_dir(dir.to_path)
-      i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
+      _build(&block)
       space.remove_auxiliaries_for(pack)
     end
 
     def _build(&block)
       emit_to(output_filepath, output_callback(&block)) do |emit|
         errors = 0
-        emit.info(color.green("\nDocker build start", bold: true))
+        emit.info(color.green("\nDocker build start\n\n", bold: true))
         i = bridge.build_from_dir(dir.to_path) do |chunk|
           data = JSON.parse(chunk, symbolize_names: true)
           if data[:stream]
