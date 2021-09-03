@@ -5,11 +5,7 @@ module Spaces
 
       def by_import(force:, &block)
         if space.imported?(descriptor) && remote_current?
-          if force
-            pull_remote(&block)
-          else
-            do_nothing(&block)
-          end
+          pull_remote(&block)
         else
           space.exist_then_delete(descriptor)
           clone_remote(&block)
@@ -19,13 +15,6 @@ module Spaces
       end
 
       private
-
-      def do_nothing(&block)
-        emit_to(output_filepath, output_callback(&block)) do |emit|
-          emit.info(color.yellow("\nGit repo already exists", bold: true))
-          emit.info("\n#{repository_url}(#{branch_name})\n")
-        end
-      end
 
       def pull_remote(&block)
         emit_to(output_filepath, output_callback(&block)) do |emit|

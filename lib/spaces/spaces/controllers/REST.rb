@@ -22,8 +22,6 @@ module Spaces
       end
 
       def initialize(**args)
-puts "#{self.class} / Spaces::Controllers::RESTController :initialize ARGS: #{args}"
-
         self.struct = OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
       end
 

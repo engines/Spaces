@@ -3,8 +3,13 @@ module Spaces
     module Exporting
 
       def export(**args)
-        export_repo(**args)
-        descriptor.identifier
+        descriptor.identifier.tap do
+          set_branch
+          set_remote
+          add
+          commit(**args)
+          push_remote
+        end
       rescue git_error => e
         raise_failure_for(e)
       end
@@ -21,37 +26,7 @@ module Spaces
         raise_failure_for(e)
       end
 
-      def redefine_remote
-        remove_remote
-        add_remote
-      rescue git_error => e
-        raise_failure_for(e)
-      end
-
       def default_commit_message; "Exported on #{Time.now}" ;end
-
-      protected
-
-      def export_repo(**args)
-        set_branch
-        set_remote
-        add
-        commit(**args) # if opened.status.commitable.any?
-        push_remote
-      end
-
-
-
-      # def setup_repo
-      # echo "" >> README.md
-      # add
-      # end
-
-      # def init
-      #
-      #   git.init("#{space.path_for(descriptor)}", log: logger)
-      #
-      # end
 
     end
   end

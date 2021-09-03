@@ -25,14 +25,6 @@ module Providers
       bridge.create(name: image_name)
     end
 
-    # def create
-    #   bridge.create(
-    #     name: image_name,
-    #     Image: image_name,
-    #     Volumes: { image_name => {} }
-    #   )
-    # end
-
     def pull
       bridge.create(fromImage: image_name)
     end
@@ -62,14 +54,19 @@ module Providers
         errors = 0
         emit.info(color.green("\nDocker build start\n\n", bold: true))
         i = bridge.build_from_dir(dir.to_path) do |chunk|
-          data = JSON.parse(chunk, symbolize_names: true)
-          if data[:stream]
-            emit.info(data[:stream])
-          elsif data[:errorDetail]
-            errors += 1
-            message = (data[:errorDetail] || {})[:message] || 'No error message.'
-            emit.error(color.red("\nBuild error\n", bold: true))
-            emit.error(color.red("#{message}\n"))
+          begin
+            data = JSON.parse("bad json", symbolize_names: true)
+            if data[:stream]
+              emit.info(data[:stream])
+            elsif data[:errorDetail]
+              errors += 1
+              message = (data[:errorDetail] || {})[:message] || 'No error message.'
+              emit.error(color.red("\nBuild error\n", bold: true))
+              emit.error(color.red("#{message}\n"))
+            end
+          rescue JSON::ParserError => e
+            emit.error(color.red("\nFailed to parse JSON sent from Docker build output stream.\n", bold: true))
+            emit.error(color.red("#{chunk}\n"))
           end
         end
         i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')

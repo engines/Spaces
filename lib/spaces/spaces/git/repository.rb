@@ -102,14 +102,9 @@ module Spaces
         init unless exist?
       end
 
-      # def setup_repo
-      #
-      # end
       def init
-        # debugger
         git.init("#{space.path_for(descriptor)}", log: logger)
       end
-
     end
   end
 end
