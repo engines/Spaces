@@ -1,55 +1,43 @@
 module Spaces
   module Git
     module Importing
-      include Emitting::Lib
+      include Spaces::Filing
 
-      def by_import(force:, &block)
-        if space.imported?(descriptor) && remote_current?
-          pull_remote(&block)
-        else
-          space.exist_then_delete(descriptor)
-          clone_remote(&block)
+      def by_import(force: true, thread: true)
+        # TODO: Pass :force option from client.
+        clear_file(import_output_filepath)
+        descriptor.tap do
+          thread ?
+          Thread.new { import_remote(thread: thread) } :
+          import_remote
         end
-
-        space.by(descriptor)
       end
 
       private
 
-      def pull_remote(&block)
-        emit_to(output_filepath, output_callback(&block)) do |emit|
-          emit.info(color.green("\nGit pull start", bold: true))
-          emit.info("\nCloning from #{repository_url}(#{branch_name})\n")
-          begin
-            opened.pull(remote_name, branch_name) do |io|
-              io.each_line { |line| emit.info(line) }
-            end
-          rescue git_error => e
-            emit.error(color.red("Git pull failed\n", bold: true))
-            raise_failure_for(e)
-          end
-          emit.info(color.green("Git pull complete\n", bold: true))
+      def import_remote(opts={})
+        if space.imported?(descriptor) && remote_current?
+          file_output_from(:pull_remote, import_output_filepath, opts)
+        else
+          space.exist_then_delete(descriptor)
+          file_output_from(:clone_remote, import_output_filepath, opts)
         end
       end
 
-      def clone_remote(&block)
-        emit_to(output_filepath, output_callback(&block)) do |emit|
-          emit.info(color.green("\nGit clone start", bold: true))
-          emit.info("\nCloning from #{repository_url}(#{branch_name})\n")
-          begin
-            git.clone(repository_url, identifier, clone_opts) do |io|
-              io.each_line { |line| emit.info(line) }
-            end
-          rescue git_error => e
-            emit.error(color.red("Git clone failed\n", bold: true))
-            raise_failure_for(e)
-          end
-          emit.info(color.green("Git clone complete\n", bold: true))
+      def pull_remote
+        opened.pull(remote_name, branch_name) do |io|
+          io.each_line { |line| yield line }
         end
       end
 
-      def output_filepath
-        space.path.join("git.out")
+      def clone_remote
+        git.clone(repository_url, identifier, clone_opts) do |io|
+          io.each_line { |line| yield line }
+        end
+      end
+
+      def import_output_filepath
+        space.path.join("import.out")
       end
 
       def clone_opts

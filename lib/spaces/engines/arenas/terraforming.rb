@@ -2,7 +2,6 @@ require 'ruby_terraform'
 
 module Arenas
   module Terraforming
-    include Spaces::Emitting::Lib
 
     def init(model, &block); execute(:init, model, &block) ;end
     def plan(model, &block); execute(:plan, model, &block) ;end
