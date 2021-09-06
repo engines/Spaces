@@ -39,35 +39,39 @@ module Providers
       path_for(pack)
     end
 
-    def build_output_filepath
+    def build_out_path
       dir.join("build.out")
     end
 
+    # TODO: The :thread option should default to false and be set by controller.
     def build(thread: true)
-      clear_file(build_output_filepath)
       pack.tap do
         thread ?
-        Thread.new { build_with_auxiliaries(thread: true) } :
-        build_with_auxiliaries
+        Thread.new { build_with_output(rescue_exceptions: true) } :
+        build_with_output
       end
-    end
-
-    def build_with_auxiliaries(opts)
-      space.copy_auxiliaries_for(pack)
-      file_output_from(:build_from_dir, build_output_filepath, opts)
-      space.remove_auxiliaries_for(pack)
     end
 
     alias_method :commit, :build
 
-    def build_from_dir
-      bridge.build_from_dir(dir.to_path) do |data|
-        logger.info("Docker build output: #{data.strip}")
-        yield data if block_given?
-      end.tap { |image| tag(image) }
+    def build_with_output(rescue_exceptions: false)
+      space.copy_auxiliaries_for(pack)
+      output_to_file(build_out_path,
+        content_lambda: ->(out) { build_from_dir { |output| out.call(output) } },
+        rescue_exceptions: rescue_exceptions
+      )
+      space.remove_auxiliaries_for(pack)
     end
 
-    def tag(image)
+    def build_from_dir
+      logger.info("Docker build...")
+      bridge.build_from_dir(dir.to_path) do |output|
+        logger.info("> #{output.strip}")
+        yield output if block_given?
+      end.tap { |image| tag_latest(image) }
+    end
+
+    def tag_latest(image)
       image.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
     end
 
