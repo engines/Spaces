@@ -19,5 +19,9 @@ module Locating
       @user_key ||= user_keys.exist_then_by(struct.key_identifier)
     end
 
+    def well_formed?
+      repository
+    end
+
   end
 end
