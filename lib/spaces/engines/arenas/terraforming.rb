@@ -2,7 +2,7 @@ require 'ruby_terraform'
 
 module Arenas
   module Terraforming
-    include Spaces::Emitting::Lib
+    include Spaces::Filing
 
     def init(model, &block); execute(:init, model, &block) ;end
     def plan(model, &block); execute(:plan, model, &block) ;end
@@ -11,30 +11,38 @@ module Arenas
 
     protected
 
-    def output_filepath(command, model)
+    def command_out_path(command, model)
       path_for(model).join("#{command}.out")
     end
 
-    def execute(command, model, &block)
+    # TODO: The :thread option should default to false and be set by controller.
+    def execute(command, model, thread: true)
+      identifier.tap do
+        thread ?
+        Thread.new { execute_with_output(command, model, rescue_exceptions: true) } :
+        execute_with_output(command, model)
+      end
+    end
+
+    def execute_with_output(command, model, rescue_exceptions: false)
+      output_to_file(command_out_path(command, model),
+        content_lambda: ->(out) { perform_command_for(command, model) { |output| out.call(output) } },
+        rescue_exceptions: rescue_exceptions
+      )
+    end
+
+    def perform_command_for(command, model)
       Dir.chdir(path_for(model)) do
-        emit_to(output_filepath(command, model), output_callback(&block)) do |emit|
-          emit.info(color.green("\nTerraform #{command} start\n", bold: true))
-          begin
-            # TODO: USE bridge.send(command, options[command] || {})
-            Object
-            .const_get("RubyTerraform::Commands::#{command.camelize}")
-            .new(stdout: emit, stderr: emit, logger: logger)
-            .execute
-            emit.info(color.green("Terraform #{command} complete\n", bold: true))
-          rescue RubyTerraform::Errors::ExecutionError => e
-            emit.info(color.red("Terraform #{command} error\n", bold: true))
-            emit.info(color.red("#{e}\n"))
-          ensure
-            emit.close
-          end
+        begin
+          Object.const_get("RubyTerraform::Commands::#{command.camelize}").new(
+            stdout: Proxy::Stdout.new(command_out_path(command, model)),
+            stderr: Proxy::Stdout.new(command_out_path(command, model)),
+            logger: logger
+          ).execute
+        rescue RubyTerraform::Errors::ExecutionError => e
+          yield("#{{error: e.message}.to_json}\n")
         end
       end
-      command
     end
 
     def bridge; RubyTerraform ;end

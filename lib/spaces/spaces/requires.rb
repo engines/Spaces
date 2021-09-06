@@ -1,6 +1,6 @@
+require_relative 'filing'
 require_all   'spaces/spaces/lib'
 
-require_all   'spaces/spaces/emitting'
 require_level 'spaces/spaces/models'
 require_all   'spaces/spaces/git'
 require_all   'spaces/spaces/defaultables'
