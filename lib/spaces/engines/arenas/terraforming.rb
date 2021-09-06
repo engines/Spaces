@@ -35,14 +35,18 @@ module Arenas
       Dir.chdir(path_for(model)) do
         begin
           Object.const_get("RubyTerraform::Commands::#{command.camelize}").new(
-            stdout: Proxy::Stdout.new(command_out_path(command, model)),
-            stderr: Proxy::Stdout.new(command_out_path(command, model)),
+            stdout: output_lambda_for(command, model),
+            stderr: output_lambda_for(command, model),
             logger: logger
           ).execute
         rescue RubyTerraform::Errors::ExecutionError => e
           yield("#{{error: e.message}.to_json}\n")
         end
       end
+    end
+
+    def output_lambda_for(command, model)
+      ->(output) { append_file_lambda_for(command_out_path(command, model)).call("#{{output: output}.to_json}\n") }
     end
 
     def bridge; RubyTerraform ;end
