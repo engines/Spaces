@@ -16,8 +16,8 @@ module Publishing
 
       protected
 
-      def commit
-        space.import(model, force: force)
+      def commit(&block)
+        space.import(model, force: force, &block)
       end
 
     end

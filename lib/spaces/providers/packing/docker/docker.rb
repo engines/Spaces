@@ -4,6 +4,7 @@ require_relative 'patch/image'
 module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
+    include Spaces::Emitting::Lib
 
     ::Docker.options[:read_timeout] = 1000
     ::Docker.options[:write_timeout] = 1000
@@ -24,14 +25,6 @@ module Providers
       bridge.create(name: image_name)
     end
 
-    # def create
-    #   bridge.create(
-    #     name: image_name,
-    #     Image: image_name,
-    #     Volumes: { image_name => {} }
-    #   )
-    # end
-
     def pull
       bridge.create(fromImage: image_name)
     end
@@ -42,35 +35,55 @@ module Providers
       bridge.all(options.reverse_merge(all: true))
     end
 
+    def dir
+      path_for(pack)
+    end
+
+    def output_filepath
+      dir.join("build.out")
+    end
+
     def build(&block)
       space.copy_auxiliaries_for(pack)
-      dir = path_for(pack)
-      filepath = dir.join("build.log")
-      FileUtils.touch(filepath)
-      file = File.open(filepath, 'w')
-      begin
-        Emitting::Logger.new(file, &block).follow do |l|
-          i = bridge.build_from_dir(dir.to_path) do |chunk|
-            data = JSON.parse(chunk, symbolize_names: true)
-            if data[:stream]
-              l.info(data[:stream])
-            elsif data[:errorDetail]
-              message = (data[:errorDetail] || {})[:message] || 'No error message.'
-              l.error("\n\033[1;31mBuild error.\n\033[0;31m#{message}\033[0m")
-            end
-          end
-          i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
-        end
-      ensure
-        file.close
-      end
+      _build(&block)
       space.remove_auxiliaries_for(pack)
+    end
+
+    def _build(&block)
+      emit_to(output_filepath, output_callback(&block)) do |emit|
+        errors = 0
+        emit.info(color.green("\nDocker build start\n\n", bold: true))
+        i = bridge.build_from_dir(dir.to_path) do |chunk|
+          begin
+            data = JSON.parse("bad json", symbolize_names: true)
+            if data[:stream]
+              emit.info(data[:stream])
+            elsif data[:errorDetail]
+              errors += 1
+              message = (data[:errorDetail] || {})[:message] || 'No error message.'
+              emit.error(color.red("\nBuild error\n", bold: true))
+              emit.error(color.red("#{message}\n"))
+            end
+          rescue JSON::ParserError => e
+            emit.error(color.red("\nFailed to parse JSON sent from Docker build output stream.\n", bold: true))
+            emit.error(color.red("#{chunk}\n"))
+          end
+        end
+        i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
+        if errors.zero?
+          emit.info(color.green("Docker build complete\n", bold: true))
+        else
+          emit.info(color.red("Docker build complete ", bold: true))
+          emit.info(color.red("#{errors} error#{errors == 1 ? 's' : ''}\n"))
+        end
+      end
     end
 
     alias_method :commit, :build
 
     def from_pack
       bridge.build_from_dir("#{path_for(pack)}", options, connection, default_header) do |k|
+        # TODO: Does this output need to be logged, or sent to a streaming callback?
         pp "#{k}"
       end.tap do |i|
         i.tag(repo: pack.output_name)
