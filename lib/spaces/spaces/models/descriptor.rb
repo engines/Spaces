@@ -7,8 +7,6 @@ module Spaces
       def features; [:identifier, :repository, :remote, :branch, :protocol] ;end
     end
 
-    delegate([:basename, :extname] => :pathname)
-
     def identifier; struct.identifier || derived_features[:identifier] ;end
 
     def repository; struct.repository ;end
@@ -21,7 +19,7 @@ module Spaces
     alias_method :remote_name, :remote
     alias_method :branch_name, :branch
 
-    def pathname; Pathname.new(repository_url) ;end
+    def pathname; Pathname.new(repository) if repository ;end
 
     def initialize(args)
       self.struct = args[:struct] || OpenStruct.new(args)
@@ -42,11 +40,14 @@ module Spaces
       }
     end
 
-    def root_identifier; "#{basename}".split('.')&.first ;end
+    def root_identifier; "#{basename}"&.split('.')&.first ;end
 
     def default_protocol
       extname.blank? ? 'git' : extname.gsub('.', '')
     end
+
+    def basename; pathname&.basename ;end
+    def extname; pathname&.extname ;end
 
   end
 end

@@ -13,7 +13,7 @@ module Spaces
       end
 
       def identifier
-        input[:identifier]&.to_s
+        (input[:identifier] || input.dig(:model, :identifier))&.to_s
       end
 
       def model_class
