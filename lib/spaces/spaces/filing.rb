@@ -1,29 +1,5 @@
 module Spaces
   module Filing
-    class Proxy
-      include Filing
-
-      def initialize(filepath)
-        @filepath = filepath
-      end
-
-      class Stdout < Proxy
-
-        def call(output)
-          append_file(@filepath, "#{{output: output}.to_json}\n")
-        end
-
-      end
-
-      class Stderr < Proxy
-
-        def call(output)
-          append_file(@filepath, "#{{error: output}.to_json}\n")
-        end
-
-      end
-
-    end
 
     # EOT inserted at end of file. This is so that when the client is tailing
     # the file it knows when to stop and close its SSE stream.
