@@ -24,6 +24,7 @@ module Spaces
         content_lambda.call(append_file_lambda_for(filepath))
       rescue => e
         raise e unless rescue_exceptions
+        logger.error(e)
         append_file(filepath, "#{exception_json_for(e)}\n")
       ensure
         append_file(filepath, "#{EOT}\n")
