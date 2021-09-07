@@ -84,8 +84,5 @@ module Git
       end
     end
 
-
-
-
   end
 end
