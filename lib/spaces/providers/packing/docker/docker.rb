@@ -1,4 +1,3 @@
-require 'docker'
 require_relative 'patch/image'
 
 module Providers
@@ -69,6 +68,8 @@ module Providers
         logger.info("> #{output.strip}")
         yield output if block_given?
       end.tap { |image| tag_latest(image) }
+    rescue ::Docker::Error::ImageNotFoundError
+      yield "#{{error: 'Failed to find built image.'}.to_json}\n" if block_given?
     end
 
     def tag_latest(image)
