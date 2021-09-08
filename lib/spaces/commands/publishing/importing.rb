@@ -10,7 +10,7 @@ module Publishing
       end
 
       def force
-        input[:model][:force] || false
+        input[:force] || false
       end
 
       def space_identifier
