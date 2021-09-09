@@ -1,4 +1,3 @@
-require_relative 'patched-git-gem'
 require_relative 'status'
 
 module Spaces

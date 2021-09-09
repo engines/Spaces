@@ -30,7 +30,7 @@ module Spaces
           yield "#{{output: "\n"}.to_json}\n"
         rescue git_error => e
           yield "#{{output: "\n"}.to_json}\n"
-          yield "#{{error: "Failed to export #{options[:identifier]})"}.to_json}\n"
+          yield "#{{error: "Failed to export #{options[:identifier]}"}.to_json}\n"
         end
       end
 
