@@ -30,7 +30,7 @@ controllers.blueprinting.show(identifier: :phpmyadmin)
 controllers.blueprinting.summary(identifier: :phpmyadmin)
 
 # save a basic arena with default associations
-controllers.arenas.new(model: {identifier: :docker_arena})
+controllers.arenas.create(model: {identifier: :docker_arena})
 controllers.arenas.state(identifier: :docker_arena)
 
 # get a list of binder identifiers that are not yet bound to an arena
@@ -101,10 +101,10 @@ controllers.arenas.resolve(identifier: :docker_arena)
 controllers.arenas.state(identifier: :docker_arena)
 
 # # validate a resolution
-# Spaces::Commands::Validating.new(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
+# Spaces::Commands::Validating.create(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
 
 # save a pack for a resolution
-controllers.packing.new(identifier: 'docker_arena::phpmyadmin')
+controllers.packing.create(identifier: 'docker_arena::phpmyadmin')
 controllers.arenas.state(identifier: :docker_arena)
 
 # # get the identifiers of packs in an arena
@@ -124,7 +124,7 @@ controllers.arenas.state(identifier: :docker_arena)
 # controllers.arenas.apply(identifier: :docker_arena)
 
 # # save provisions for a resolution
-# controllers.provisioning.new(identifier: 'docker_arena::phpmyadmin')
+# controllers.provisioning.create(identifier: 'docker_arena::phpmyadmin')
 
 # capture registry entries for an application
 controllers.registry.register(identifier: 'docker_arena::phpmyadmin')
