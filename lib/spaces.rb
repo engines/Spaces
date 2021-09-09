@@ -5,6 +5,8 @@ require 'duplicate'
 require 'pathname'
 require 'i18n'
 require 'engines-logger'
+require 'gems/git'
+require 'gems/docker'
 
 require 'spaces/requiring'
 include Requiring
