@@ -53,7 +53,6 @@ module Publishing
       end
     end
 
-
     def by_import(descriptor, force:, &block)
       super.tap do |m|
         locations.ensure_located(m)

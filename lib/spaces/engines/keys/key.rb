@@ -19,6 +19,8 @@ module Keys
 
     def qualifier; "#{username}:#{token}@" ;end
 
+    def domain; struct.domain ;end
+    def username; struct.username ;end
     def tie_breaker; struct.tie_breaker ;end
 
     def initialize(args)
