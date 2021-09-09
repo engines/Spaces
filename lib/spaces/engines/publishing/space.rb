@@ -3,6 +3,7 @@ require_relative 'synchronizing'
 module Publishing
   class Space < Spaces::Git::Space
     include ::Publishing::Synchronizing
+    include Spaces::Filing
 
     class << self
       def default_model_class
@@ -23,9 +24,35 @@ module Publishing
       super(*args, as: default_extension)
     end
 
-    def import(descriptor, force:, &block)
-      by_import(descriptor, force: force, &block).identifier
+    # TODO: The :thread option should default to false and be set by controller.
+    def import(descriptor, force:, thread: true)
+      identifier.tap do
+        thread ?
+        Thread.new { import_with_output(descriptor, force: force, rescue_exceptions: true) } :
+        import_with_output(descriptor)
+      end
     end
+
+    def import_with_output(descriptor, force:, rescue_exceptions: false)
+      output_to_file(import_out_path,
+        content_lambda: ->(out) { import_git_repo(descriptor, force: force) { |output| out.call(output) } },
+        rescue_exceptions: rescue_exceptions
+      )
+    end
+
+    def import_git_repo(descriptor, force:)
+      logger.info("Git import...")
+      begin
+        by_import(descriptor, force: force) do |output|
+          logger.info("> #{output.strip}")
+          yield "#{{output: output}.to_json}\n"
+        end
+      rescue git_error => e
+        yield "#{{output: "\n"}.to_json}\n"
+        yield "#{{error: "Failed to import from #{descriptor.repository} (#{descriptor.branch})"}.to_json}\n"
+      end
+    end
+
 
     def by_import(descriptor, force:, &block)
       super.tap do |m|
@@ -45,6 +72,10 @@ module Publishing
         synchronize_with(blueprints, i)
         super(locations.by(i), **args)
       end
+    end
+
+    def import_out_path
+      path.join("import.out")
     end
 
   end

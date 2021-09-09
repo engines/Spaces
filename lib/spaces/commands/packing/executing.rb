@@ -4,7 +4,7 @@ module Packing
 
       def payload
         return super unless result&.class == Packer::Output::Build
-        
+
         if (e = result.errors).any?
           { errors: e.map(&:error) }
         else
