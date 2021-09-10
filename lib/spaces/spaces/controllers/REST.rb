@@ -10,7 +10,7 @@ module Spaces
           list: [Commands::Querying, method: :identifiers],
           summary: Commands::Summarizing,
           show: Commands::Reading,
-          new: Commands::Saving,
+          create: Commands::Saving,
           update: Commands::Saving,
           copy: Commands::Copying,
           delete: Commands::Deleting

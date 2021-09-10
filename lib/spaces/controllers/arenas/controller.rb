@@ -6,7 +6,7 @@ module Arenas
 
       def action_command_map
         @action_command_map ||= super.merge({
-          new: Commands::Saving,
+          create: Commands::Saving,
           state: Commands::StateReading,
           update: Commands::Saving,
           bind: Commands::Binding,

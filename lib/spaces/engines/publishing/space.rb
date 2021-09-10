@@ -25,11 +25,11 @@ module Publishing
     end
 
     # TODO: The :thread option should default to false and be set by controller.
-    def import(descriptor, force:, thread: true)
+    def import(descriptor, force:, thread: false)
       identifier.tap do
         thread ?
         Thread.new { import_with_output(descriptor, force: force, rescue_exceptions: true) } :
-        import_with_output(descriptor)
+        import_with_output(descriptor, force: force)
       end
     end
 
@@ -40,7 +40,7 @@ module Publishing
       )
     end
 
-    def import_git_repo(descriptor, force:)
+    def import_git_repo(descriptor, force: false)
       logger.info("Git import...")
       begin
         by_import(descriptor, force: force) do |output|
@@ -53,12 +53,13 @@ module Publishing
       end
     end
 
-
     def by_import(descriptor, force:, &block)
       super.tap do |m|
         locations.ensure_located(m)
         blueprints.by_import(descriptor, force: force, &block)
-        m.bindings.each { |b| by_import(b.descriptor, force: force, &block) } if force
+        m.bindings.each do |b|
+          by_import(b.descriptor, force: force, &block) if (!imported?(b.descriptor) || force)
+        end
       end
     rescue ::Spaces::Errors::RepositoryFail => e
       locations.exist_then_delete(descriptor)
