@@ -1,4 +1,4 @@
-require_relative 'synchronizing'
+orequire_relative 'synchronizing'
 
 module Publishing
   class Space < Spaces::Git::Space
@@ -25,7 +25,7 @@ module Publishing
     end
 
     # TODO: The :thread option should default to false and be set by controller.
-    def import(descriptor, force:, thread: false)
+    def import(descriptor, force: false, thread: true)
       identifier.tap do
         thread ?
         Thread.new { import_with_output(descriptor, force: force, rescue_exceptions: true) } :
