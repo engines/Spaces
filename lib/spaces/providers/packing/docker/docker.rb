@@ -38,12 +38,19 @@ module Providers
       path_for(pack)
     end
 
+    def build(&block)
+      # puts caller(0)
+      space.copy_auxiliaries_for(pack)
+      build_from_dir(&block)
+      space.remove_auxiliaries_for(pack)
+    end
+
     def build_out_path
       dir.join("build.out")
     end
 
     # TODO: The :thread option should default to false and be set by controller.
-    def build(thread: true)
+    def bbbbbbbuild(thread: true)
       pack.tap do
         thread ?
         Thread.new { build_with_output(rescue_exceptions: true) } :
@@ -63,11 +70,9 @@ module Providers
     end
 
     def build_from_dir
-      logger.info("Docker build...")
-      bridge.build_from_dir(dir.to_path) do |output|
-        logger.info("> #{output.strip}")
-        yield output if block_given?
-      end.tap { |image| tag_latest(image) }
+      bridge
+      .build_from_dir(dir.to_path) { |output| yield output }
+      .tap { |image| tag_latest(image) }
     rescue ::Docker::Error::ImageNotFoundError
       yield "#{{error: 'Failed to generate an image id'}.to_json}\n" if block_given?
     end

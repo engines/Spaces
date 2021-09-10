@@ -10,7 +10,6 @@ module Packing
           update: Commands::Saving,
           commit: [Commands::Executing, execute: :commit],
           artifacts: Commands::Artifacts
-
         })
       end
 

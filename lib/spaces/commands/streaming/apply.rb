@@ -1,6 +1,6 @@
 module Streaming
   module Commands
-    class Export < ::Spaces::Commands::Command
+    class Apply < ::Spaces::Commands::Command
 
       def space_identifier
         super || :streaming
@@ -9,7 +9,7 @@ module Streaming
       protected
 
       def commit(&block)
-        space.export(**input, &block)
+        space.apply(**input, &block)
       end
 
     end

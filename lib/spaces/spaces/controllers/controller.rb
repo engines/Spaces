@@ -2,16 +2,26 @@ module Spaces
   module Controllers
     class Controller < ::Spaces::Model
 
-      def control(with: [:run, :payload], **args, &block)
+      def action(**args, &block)
+        args[:threaded] ? control_thread(args, &block) : control(args, &block)
+      end
+
+      def control_thread(args, &block)
+        args.tap { Thread.new { control(filing: true, **args, &block) } }
+      end
+
+      def control(args, &block)
         with.reduce(command_for(args)) { |c, w| c.send(w, &block) }
       end
 
       def command_for(args)
-        action_class_for(args[:command]).new(
-          **default_args.
-          merge(action_args_for(args[:command])).
-          merge(args.without(:command))
-        )
+        action_class_for(args[:action]).new(**command_args_for(args))
+      end
+
+      def command_args_for(args)
+        default_args
+        .merge(action_args_for(args[:action]))
+        .merge(args.without(:action))
       end
 
       def default_args; struct.to_h ;end
