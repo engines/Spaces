@@ -1,4 +1,4 @@
-orequire_relative 'synchronizing'
+require_relative 'synchronizing'
 
 module Publishing
   class Space < Spaces::Git::Space
