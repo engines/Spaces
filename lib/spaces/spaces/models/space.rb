@@ -13,15 +13,14 @@ module Spaces
     include ::Spaces::Deleting
     include ::Spaces::Topology
 
+
     class << self
-      def universe
-        @@universe ||= Universe.new
-      end
+      def universes; @@universe_space ||= UniverseSpace.new ;end
 
       def default_model_class ;end
     end
 
-    delegate([:universe, :default_model_class] => :klass)
+    delegate([:universes, :default_model_class] => :klass)
 
     def identifier; struct.identifier ;end
 
