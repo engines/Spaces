@@ -22,7 +22,7 @@ module Spaces
       end
 
       def initialize(**args)
-        self.struct = OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
+        self.struct = struct_in_space(**args)
       end
 
     end

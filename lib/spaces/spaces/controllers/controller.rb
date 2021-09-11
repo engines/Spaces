@@ -42,6 +42,12 @@ module Spaces
         action_command_map.keys.include?(m)
       end
 
+      protected
+
+      def struct_in_space(**args)
+        OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
+      end
+
     end
   end
 end
