@@ -1,9 +1,9 @@
-require 'docker'
 require_relative 'patch/image'
 
 module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
+    include Spaces::Filing
 
     ::Docker.options[:read_timeout] = 1000
     ::Docker.options[:write_timeout] = 1000
@@ -24,14 +24,6 @@ module Providers
       bridge.create(name: image_name)
     end
 
-    # def create
-    #   bridge.create(
-    #     name: image_name,
-    #     Image: image_name,
-    #     Volumes: { image_name => {} }
-    #   )
-    # end
-
     def pull
       bridge.create(fromImage: image_name)
     end
@@ -42,46 +34,47 @@ module Providers
       bridge.all(options.reverse_merge(all: true))
     end
 
-    def build(&block)
-      dir = path_for(pack)
-      filepath = dir.join("build.log")
-      FileUtils.touch(filepath)
-      space.copy_auxiliaries_for(pack)
-      File.open(filepath, 'w') do |file|
-        call_bridge(dir, file, &block)
-      end
-      space.remove_auxiliaries_for(pack)
+    def dir
+      path_for(pack)
     end
 
-    def call_bridge(dir, file, &block)
-      begin
-        i = bridge.build_from_dir(dir.to_path) do |chunk|
-          emit(file, output_for(chunk), &block)
-        end
-        i.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
-      rescue StandardError => e
-        emit(file, "\n\033[1;31mServer exception.\n\033[0;31m#{e}\033[0m", &block)
-      end
+    def build_out_path
+      dir.join("build.out")
     end
 
-    def emit(file, output)
-      output.split("\n").each do |line|
-        file.write "#{line}\n"
-        yield line if block_given?
-      end
-    end
-
-    def output_for(chunk)
-      data = JSON.parse(chunk, symbolize_names: true)
-      if data[:stream]
-        data[:stream]
-      elsif data[:errorDetail]
-        message = (data[:errorDetail] || {})[:message] || 'No error message.'
-        "\n\033[1;31mBuild error.\n\033[0;31m#{message}\033[0m"
+    # TODO: The :thread option should default to false and be set by controller.
+    def build(thread: true)
+      pack.tap do
+        thread ?
+        Thread.new { build_with_output(rescue_exceptions: true) } :
+        build_with_output
       end
     end
 
     alias_method :commit, :build
+
+    def build_with_output(rescue_exceptions: false)
+      space.copy_auxiliaries_for(pack)
+      output_to_file(build_out_path,
+        content_lambda: ->(out) { build_from_dir { |output| out.call(output) } },
+        rescue_exceptions: rescue_exceptions
+      )
+      space.remove_auxiliaries_for(pack)
+    end
+
+    def build_from_dir
+      logger.info("Docker build...")
+      bridge.build_from_dir(dir.to_path) do |output|
+        logger.info("> #{output.strip}")
+        yield output if block_given?
+      end.tap { |image| tag_latest(image) }
+    rescue ::Docker::Error::ImageNotFoundError
+      yield "#{{error: 'Failed to find built image.'}.to_json}\n" if block_given?
+    end
+
+    def tag_latest(image)
+      image.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
+    end
 
     def from_pack
       bridge.build_from_dir("#{path_for(pack)}", options, connection, default_header) do |k|
@@ -119,5 +112,6 @@ module Providers
         # 'Content-Length': "#{::File.size(?)}"
       }
     end
+
   end
 end

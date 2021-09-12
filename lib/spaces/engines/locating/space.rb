@@ -3,14 +3,16 @@ module Locating
 
     class << self
       def default_model_class
-        ::Spaces::Descriptor
+        ::Locating::Location
       end
     end
 
     alias_method :identifiers, :simple_identifiers
 
     def ensure_located(publication)
-      publication.bindings.descriptors.each { |d| save(d) unless exist?(d)}
+      publication.bindings.descriptors.each do |d|
+        save(default_model_class.new(d.struct)) unless exist?(d)
+      end
     end
 
   end

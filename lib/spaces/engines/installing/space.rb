@@ -7,5 +7,7 @@ module Installing
       end
     end
 
+    def cascade_deletes; [:resolutions] ;end
+
   end
 end

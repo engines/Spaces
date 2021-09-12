@@ -27,8 +27,28 @@ module Spaces
         opened.diff.patch
       end
 
-      def checkout
-        opened.branch(branch_name).checkout
+      def add
+        opened.add
+      end
+
+      def set_branch
+        if local_branches.any?
+          opened.branch(local_current).move(branch_name)
+        else
+          create_first_branch
+        end
+      end
+
+      def create_first_branch
+        opened.branch(branch_name).checkout(new_branch: true)
+      end
+
+      def local_branches
+        opened.branches.local
+      end
+
+      def local_current
+        opened.branches.local.find(&:current).name
       end
 
       def remote_current?
@@ -43,19 +63,26 @@ module Spaces
         opened.remote(remote_name).url
       end
 
+      def set_remote
+        if opened.remotes.find { |r| r.name == remote_name }
+          opened.set_remote_url(remote_name, repository_url)
+        else
+          add_remote
+        end
+      end
+
       def add_remote
-        opened.add_remote(remote_name, repository_url).tap { fetch }
+        opened.add_remote(remote_name, repository_url)
       end
 
       def remove_remote
         opened.remote(remote_name).remove
       end
 
-      def opened(&block)
-        @opened ||= (
-          init unless exist?
-          git.open(space.path_for(descriptor), log: logger).tap { yield if block_given? }
-        )
+      def opened
+        @opened ||= git.open(space.path_for(descriptor), log: logger)
+      rescue git_error => e
+        raise_failure_for(e)
       end
 
       def exist?
@@ -72,16 +99,12 @@ module Spaces
       def initialize(descriptor, space:)
         self.descriptor = descriptor
         self.space = space
+        init unless exist?
       end
-
-      protected
 
       def init
-        git.init("#{space.path_for(descriptor)}", log: logger).tap do
-          add_remote
-        end
+        git.init("#{space.path_for(descriptor)}", log: logger)
       end
-
     end
   end
 end

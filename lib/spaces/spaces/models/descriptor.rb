@@ -1,5 +1,3 @@
-require 'addressable/uri'
-
 require_relative 'model'
 
 module Spaces
@@ -9,11 +7,9 @@ module Spaces
       def features; [:identifier, :repository, :remote, :branch, :protocol] ;end
     end
 
-    attr_accessor :uri
-
     def identifier; struct.identifier || derived_features[:identifier] ;end
 
-    def repository; uri.to_s ;end
+    def repository; struct.repository ;end
     def remote; struct.remote || derived_features[:remote] ;end
     def branch; struct.branch || derived_features[:branch] ;end
     def protocol; struct.protocol || derived_features[:protocol] ;end
@@ -23,13 +19,14 @@ module Spaces
     alias_method :remote_name, :remote
     alias_method :branch_name, :branch
 
+    def pathname; Pathname.new(repository) if repository ;end
+
     def initialize(args)
-      self.uri = Addressable::URI.parse(args[:repository] || args[:struct]&.repository)
       self.struct = args[:struct] || OpenStruct.new(args)
     end
 
     def to_s
-      [repository, branch, identifier].compact.join(' ')
+      [repository_url, branch, identifier].compact.join(' ')
     end
 
     protected
@@ -43,12 +40,14 @@ module Spaces
       }
     end
 
-    def root_identifier; basename&.split('.')&.first ;end
-    def basename; uri&.basename ;end
+    def root_identifier; "#{basename}"&.split('.')&.first ;end
 
     def default_protocol
-      ((e = uri&.extname).blank?) ? 'git' : e.gsub('.', '')
+      extname.blank? ? 'git' : extname.gsub('.', '')
     end
+
+    def basename; pathname&.basename ;end
+    def extname; pathname&.extname ;end
 
   end
 end

@@ -19,6 +19,6 @@ module Publishing
     def transformed_for_publication; localized ;end
 
     def in_blueprint?; true ;end
-    
+
   end
 end

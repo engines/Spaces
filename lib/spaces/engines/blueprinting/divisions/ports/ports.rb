@@ -1,6 +1,6 @@
 module Divisions
   class Ports < ::Divisions::Divisible
-    
+
     def stanzas
       %(
         provisioner = "local-exec" {

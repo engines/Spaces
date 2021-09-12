@@ -10,15 +10,19 @@ module Spaces
           list: [Commands::Querying, method: :identifiers],
           summary: Commands::Summarizing,
           show: Commands::Reading,
-          new: Commands::Saving,
+          create: Commands::Saving,
           update: Commands::Saving,
           copy: Commands::Copying,
           delete: Commands::Deleting
         }
       end
 
+      def summary(**args)
+        control(command: :summary, **args)
+      end
+
       def initialize(**args)
-        self.struct = OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
+        self.struct = struct_in_space(**args)
       end
 
     end

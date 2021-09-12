@@ -2,15 +2,15 @@ module Spaces
   module Controllers
     class Controller < ::Spaces::Model
 
-      def control(action, with: [:run, :payload], **args, &block)
-        with.reduce(command_for(action, **args)) { |c, w| c.send(w, &block) }
+      def control(with: [:run, :payload], **args, &block)
+        with.reduce(command_for(args)) { |c, w| c.send(w, &block) }
       end
 
-      def command_for(action, **args)
-        action_class_for(action).new(
+      def command_for(args)
+        action_class_for(args[:command]).new(
           **default_args.
-          merge(action_args_for(action)).
-          merge(args)
+          merge(action_args_for(args[:command])).
+          merge(args.without(:command))
         )
       end
 
@@ -25,7 +25,7 @@ module Spaces
       end
 
       def action_array_for(action)
-        [action_command_map[action]].flatten
+        [action_command_map[action.to_sym]].flatten
       end
 
       def action_command_map; {} ;end
@@ -34,12 +34,18 @@ module Spaces
         self.struct = OpenStruct.new(args.symbolize_keys)
       end
 
-      def method_missing(m, *args, &block)
-        control(m, *args, &block) if respond_to_missing?(m)
+      def method_missing(m, **args, &block)
+        control(command: m, **args, &block) if action_command_map.keys.include?(m)
       end
 
       def respond_to_missing?(m, *)
         action_command_map.keys.include?(m)
+      end
+
+      protected
+
+      def struct_in_space(**args)
+        OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
       end
 
     end

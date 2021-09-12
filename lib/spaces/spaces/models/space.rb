@@ -13,15 +13,14 @@ module Spaces
     include ::Spaces::Deleting
     include ::Spaces::Topology
 
+
     class << self
-      def universe
-        @@universe ||= Universe.new
-      end
+      def universes; @@universe_space ||= UniverseSpace.new ;end
 
       def default_model_class ;end
     end
 
-    delegate([:universe, :default_model_class] => :klass)
+    delegate([:universes, :default_model_class] => :klass)
 
     def identifier; struct.identifier ;end
 
@@ -48,11 +47,11 @@ module Spaces
     end
 
     def exist?(identifiable)
-      path_for(identifiable).exist?
+      identifiable && path_for(identifiable).exist?
     end
 
     def exist_then(identifiable, &block)
-      yield(identifiable) if exist?(identifiable) && block_given?
+      yield(identifiable) if block_given? && exist?(identifiable)
     end
 
     def absent(array)
@@ -61,6 +60,12 @@ module Spaces
 
     def initialize(identifier)
       self.struct = OpenStruct.new(identifier: identifier.to_sym)
+    end
+
+    protected
+
+    def raise_lost_error(identifiable)
+      raise ::Spaces::Errors::LostInSpace, {space: self.identifier, identifier: identifiable&.identifier}
     end
 
   end
