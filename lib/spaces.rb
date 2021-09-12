@@ -18,5 +18,3 @@ require_level 'spaces/controllers'
 require_level 'spaces/engines'
 
 require_all 'spaces/providers'
-
-require 'spaces/universe'

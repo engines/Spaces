@@ -1,4 +1,4 @@
-require_level 'spaces/engines/transforming'
+orequire_level 'spaces/engines/transforming'
 require_level 'spaces/engines/transforming/divisions'
 require_level 'spaces/engines/transforming/divisions/bindings'
 require_all   'spaces/engines/transforming/emissions'
@@ -16,6 +16,6 @@ require_all   'spaces/engines/resolving'
 require_all   'spaces/engines/registry'
 require_all   'spaces/engines/provisioning'
 require_all   'spaces/engines/keys'
-require_all   'spaces/engines/streaming'
+require_all   'spaces/engines/universes'
 
 require_all   'spaces/engines/provider_aspects'

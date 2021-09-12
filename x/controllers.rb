@@ -2,6 +2,7 @@ require './x/universe'
 
 def controllers
   @controllers ||= OpenStruct.new(
+    universe: Universes::Controllers::Controller.new,
     publishing: Publishing::Controllers::Controller.new,
     blueprinting: Blueprinting::Controllers::Controller.new,
     querying: ::Spaces::Controllers::Querying.new,
@@ -9,7 +10,7 @@ def controllers
     packing: Packing::Controllers::Controller.new,
     provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
     locations: ::Spaces::Controllers::RESTController.new(space: :locations),
-    user_keys: Keys::Controllers::Controller.new(space: :user_keys),
+    user_keys: Keys::Controllers::Controller.new,
     registry: Registry::Controllers::Controller.new
   )
 end
