@@ -5,12 +5,6 @@ module Spaces
   class Model < Thing
     include Inflatable
 
-    class << self
-      def universe; @universe ||= Universe.new ;end
-    end
-
-    delegate(universe: :klass)
-
     def space_named(name); universe.send(name) ;end
 
     def file_name; klass.qualifier ;end
