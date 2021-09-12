@@ -3,7 +3,6 @@ require_relative 'patch/image'
 module Providers
   class Docker < ::ProviderAspects::Provider
     extend Docker
-    include Spaces::Filing
 
     ::Docker.options[:read_timeout] = 1000
     ::Docker.options[:write_timeout] = 1000
@@ -39,42 +38,20 @@ module Providers
     end
 
     def build(&block)
-      # puts caller(0)
       space.copy_auxiliaries_for(pack)
       build_from_dir(&block)
       space.remove_auxiliaries_for(pack)
     end
 
-    def build_out_path
-      dir.join("build.out")
-    end
-
-    # TODO: The :thread option should default to false and be set by controller.
-    def bbbbbbbuild(thread: true)
-      pack.tap do
-        thread ?
-        Thread.new { build_with_output(rescue_exceptions: true) } :
-        build_with_output
-      end
-    end
-
     alias_method :commit, :build
 
-    def build_with_output(rescue_exceptions: false)
-      space.copy_auxiliaries_for(pack)
-      output_to_file(build_out_path,
-        content_lambda: ->(out) { build_from_dir { |output| out.call(output) } },
-        rescue_exceptions: rescue_exceptions
-      )
-      space.remove_auxiliaries_for(pack)
-    end
-
-    def build_from_dir
+    def build_from_dir(&block)
       bridge
-      .build_from_dir(dir.to_path) { |output| yield output }
+      .build_from_dir(dir.to_path, &block)
       .tap { |image| tag_latest(image) }
-    rescue ::Docker::Error::ImageNotFoundError
-      yield "#{{error: 'Failed to generate an image id'}.to_json}\n" if block_given?
+    rescue ::Docker::Error::ImageNotFoundError => e
+      raise e unless block_given?
+      yield "#{{error: 'Failed to generate an image id'}.to_json}\n"
     end
 
     def tag_latest(image)
@@ -82,6 +59,7 @@ module Providers
     end
 
     def from_pack
+      # TODO: Should this output be logged, or streamed to client? Is it used?
       bridge.build_from_dir("#{path_for(pack)}", options, connection, default_header) do |k|
         pp "#{k}"
       end.tap do |i|

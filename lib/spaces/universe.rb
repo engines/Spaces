@@ -21,7 +21,7 @@ class Universe < ::Spaces::Model
         Provisioning::Space.new(:provisioning),
         Arenas::Space.new(:arenas),
         Keys::Space.new(:user_keys),
-        Streaming::Space.new(:streaming),
+        Outputting::Space.new(:outputting),
 
         Associations::Domains::Space.new(:domains),
         Associations::Tenants::Space.new(:tenants)

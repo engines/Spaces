@@ -1,9 +1,9 @@
-module Streaming
+module Outputting
   module Commands
     class Build < ::Spaces::Commands::Command
 
       def space_identifier
-        super || :streaming
+        super || :outputting
       end
 
       protected

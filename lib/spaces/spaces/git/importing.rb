@@ -2,29 +2,40 @@ module Spaces
   module Git
     module Importing
 
-      def by_import(force:, &block)
+      def by_import(&block)
+        begin
+          clone_or_pull(&block)
+        rescue git_error => e
+          raise_failure_for(e) unless block_given?
+          yield(error_json_for("Failed to import\n#{e}"))
+        end
+        space.by(descriptor)
+      end
+
+      private
+
+      def clone_or_pull(&block)
         if space.imported?(descriptor) && remote_current?
           pull_remote(&block)
         else
           space.exist_then_delete(descriptor)
           clone_remote(&block)
         end
-        yield "\n" if block_given?
-        space.by(descriptor)
       end
 
-      private
 
-      def pull_remote
-        opened.pull(remote_name, branch_name) do |io|
-          io.each_line { |output| yield output if block_given?}
-        end
+      def pull_remote(&block)
+        opened.pull(remote_name, branch_name) { |io| outputting(io, &block) }
+      rescue git_error => e
+        raise_failure_for(e) unless block_given?
+        yield(error_json_for(e))
       end
 
-      def clone_remote
-        git.clone(repository_url, identifier, clone_opts) do |io|
-          io.each_line { |output| yield output if block_given?}
-        end
+      def clone_remote(&block)
+        git.clone(repository_url, identifier, clone_opts) { |io| outputting(io, &block) }
+      rescue git_error => e
+        raise_failure_for(e) unless block_given?
+        yield(error_json_for(e))
       end
 
       def clone_opts

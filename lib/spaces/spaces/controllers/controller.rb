@@ -2,15 +2,26 @@ module Spaces
   module Controllers
     class Controller < ::Spaces::Model
 
-      def action(**args, &block)
+      def action(args, &block)
+        log_action(args, &block)
         args[:threaded] ? control_thread(args, &block) : control(args, &block)
       end
 
-      def control_thread(args, &block)
-        args.tap { Thread.new { control(filing: true, **args, &block) } }
+      protected
+
+      def initialize(**args)
+        self.struct = OpenStruct.new(args.symbolize_keys)
       end
 
-      def control(args, &block)
+      def log_action(args, &block)
+        logger.info("Controller action: #{args} #{block_given? ? block : 'Block not given'}")
+      end
+
+      def control_thread(args, &block)
+        args.tap { Thread.new { control(args, &block) } }
+      end
+
+      def control(with: [:run, :payload], **args, &block)
         with.reduce(command_for(args)) { |c, w| c.send(w, &block) }
       end
 
@@ -39,10 +50,6 @@ module Spaces
       end
 
       def action_command_map; {} ;end
-
-      def initialize(**args)
-        self.struct = OpenStruct.new(args.symbolize_keys)
-      end
 
       def method_missing(m, **args, &block)
         control(command: m, **args, &block) if action_command_map.keys.include?(m)

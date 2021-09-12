@@ -16,6 +16,6 @@ require_all   'spaces/engines/resolving'
 require_all   'spaces/engines/registry'
 require_all   'spaces/engines/provisioning'
 require_all   'spaces/engines/keys'
-require_all   'spaces/engines/streaming'
+require_all   'spaces/engines/outputting'
 
 require_all   'spaces/engines/provider_aspects'

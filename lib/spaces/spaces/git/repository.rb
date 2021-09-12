@@ -81,8 +81,23 @@ module Spaces
 
       def opened
         @opened ||= git.open(space.path_for(descriptor), log: logger)
-      rescue git_error => e
-        raise_failure_for(e)
+      end
+
+      def outputting(io)
+        io.each_line do |output|
+          block_given? ? 
+          yield(output_json_for(output)) :
+          logger.info(output)
+        end
+        yield(output_json_for("\n")) if block_given?
+      end
+
+      def output_json_for(output)
+        {output: output}.to_json
+      end
+
+      def error_json_for(error)
+        {error: error}.to_json
       end
 
       def exist?
@@ -105,6 +120,7 @@ module Spaces
       def init
         git.init("#{space.path_for(descriptor)}", log: logger)
       end
+
     end
   end
 end

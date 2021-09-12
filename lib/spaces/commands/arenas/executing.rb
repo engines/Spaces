@@ -1,19 +1,9 @@
-module Packing
+module Arenas
   module Commands
-    class Executing < Spaces::Commands::Executing
-
-      def payload
-        return super unless result&.class == Packer::Output::Build
-
-        if (e = result.errors).any?
-          { errors: e.map(&:error) }
-        else
-          { result: result.artifacts.map(&:string) }
-        end
-      end
+    class Executing < ::Spaces::Commands::Executing
 
       def space_identifier
-        super || :packs
+        super || :arenas
       end
 
       def execute(&block)
@@ -27,7 +17,7 @@ module Packing
       end
 
       def filing(&block)
-        Spaces::Outputting::Build
+        Spaces::Outputting::Execution
         .new(command: self, identifier: input[:identifier])
         .write(&block)
       end

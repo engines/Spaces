@@ -21,11 +21,25 @@ module Publishing
         locations.default_model_class
       end
 
-      protected
-
-      def commit(&block)
+      def execute(&block)
         locations.save(model)
         space.import(model, force: force, &block)
+      end
+
+      protected
+
+      def force
+        input[:force]
+      end
+
+      def commit(&block)
+        input[:threaded] ? filing(&block) : execute(&block)
+      end
+
+      def filing(&block)
+        Spaces::Outputting::Import
+        .new(command: self, identifier: input[:identifier])
+        .write(&block)
       end
 
     end
