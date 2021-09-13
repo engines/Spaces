@@ -40,10 +40,10 @@ module Publishing
       raise e
     end
 
-    def export(**args)
+    def export(**args, &block)
       args[:identifier].tap do |i|
         synchronize_with(blueprints, i)
-        super(locations.by(i), **args)
+        super(locations.by(i), **args, &block)
       end
     end
 

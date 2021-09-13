@@ -24,7 +24,7 @@ module Spaces
       end
 
       def pull_remote(&block)
-        opened.pull(remote_name, branch_name) { |io| collect_output(io, &block) }
+        opened.pull(remote_name, branch_name, command_opts) { |io| collect_output(io, &block) }
       rescue git_error => e
         raise_failure_for(e) unless block_given?
         yield(error_json_for(e))
@@ -38,14 +38,11 @@ module Spaces
       end
 
       def clone_opts
-        {
+        command_opts.merge({
           branch: branch_name,
           path: space.path,
-          logger: logger,
           depth: 0,
-          verbose: true,
-          progress: true,
-        }
+        })
       end
 
     end

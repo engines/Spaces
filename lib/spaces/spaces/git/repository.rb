@@ -120,6 +120,14 @@ module Spaces
         git.init("#{space.path_for(descriptor)}", log: logger)
       end
 
+      def command_opts
+        {
+          logger: logger,
+          verbose: true,
+          progress: true,
+        }
+      end
+
     end
   end
 end

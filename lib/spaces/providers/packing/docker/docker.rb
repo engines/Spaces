@@ -51,7 +51,18 @@ module Providers
       .tap { |image| tag_latest(image) }
     rescue ::Docker::Error::ImageNotFoundError => e
       raise e unless block_given?
-      yield "#{{error: 'Failed to generate an image id'}.to_json}\n"
+      stream_json_for("\n")
+      yield error_json_for('Failed to generate an image id')
+    end
+
+    # Note that Docker output is serialized as json,
+    # with :stream as the key name for the output from stdout.
+    def stream_json_for(stream)
+      {stream: stream}.to_json
+    end
+
+    def error_json_for(error)
+      {error: error}.to_json
     end
 
     def tag_latest(image)
