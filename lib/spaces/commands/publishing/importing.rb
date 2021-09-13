@@ -33,10 +33,10 @@ module Publishing
       end
 
       def commit(&block)
-        input[:threaded] ? filing(&block) : execute(&block)
+        input[:threaded] ? outputting(&block) : execute(&block)
       end
 
-      def filing(&block)
+      def outputting(&block)
         Spaces::Outputting::Import
         .new(command: self, identifier: input[:identifier])
         .write(&block)

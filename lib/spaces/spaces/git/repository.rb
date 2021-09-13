@@ -82,7 +82,7 @@ module Spaces
         @opened ||= git.open(space.path_for(descriptor), log: logger)
       end
 
-      def outputting(io)
+      def collect_output(io)
         io.each_line do |output|
           block_given? ?
           yield(output_json_for(output)) :

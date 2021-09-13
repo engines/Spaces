@@ -20,7 +20,7 @@ module Spaces
       end
 
       def push_remote(&block)
-        opened.push(remote_name, branch_name) { |io| outputting(io, &block) }
+        opened.push(remote_name, branch_name) { |io| collect_output(io, &block) }
       end
 
       def commit_message_for(args)

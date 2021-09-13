@@ -24,14 +24,14 @@ module Spaces
       end
 
       def pull_remote(&block)
-        opened.pull(remote_name, branch_name) { |io| outputting(io, &block) }
+        opened.pull(remote_name, branch_name) { |io| collect_output(io, &block) }
       rescue git_error => e
         raise_failure_for(e) unless block_given?
         yield(error_json_for(e))
       end
 
       def clone_remote(&block)
-        git.clone(repository_url, identifier, clone_opts) { |io| outputting(io, &block) }
+        git.clone(repository_url, identifier, clone_opts) { |io| collect_output(io, &block) }
       rescue git_error => e
         raise_failure_for(e) unless block_given?
         yield(error_json_for(e))

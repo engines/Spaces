@@ -23,10 +23,10 @@ module Packing
       protected
 
       def commit(&block)
-        input[:threaded] ? filing(&block) : execute(&block)
+        input[:threaded] ? outputting(&block) : execute(&block)
       end
 
-      def filing(&block)
+      def outputting(&block)
         Spaces::Outputting::Build
         .new(command: self, identifier: input[:identifier])
         .write(&block)
