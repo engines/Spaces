@@ -31,8 +31,6 @@ module Spaces
       end
     end
 
-    def universes; Space.universes ;end
-
     def identifier; struct.identifier ;end
 
     def host; 'engines.internal' ;end
