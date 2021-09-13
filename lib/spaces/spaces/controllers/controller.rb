@@ -52,7 +52,7 @@ module Spaces
       def action_command_map; {} ;end
 
       def method_missing(m, **args, &block)
-        control(command: m, **args, &block) if action_command_map.keys.include?(m)
+        control(action: m, **args, &block) if action_command_map.keys.include?(m)
       end
 
       def respond_to_missing?(m, *)
