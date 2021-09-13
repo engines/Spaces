@@ -74,7 +74,7 @@ module Spaces
       end
 
       def filepath_for(*args)
-        command.universe.path.join(*args.map(&:to_s))
+        Space.universes.path.join(*args.map(&:to_s))
       end
 
     end

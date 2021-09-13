@@ -5,7 +5,6 @@ module Spaces
     class Querying < Command
 
       def method_signature
-        # debugger
         [method, arguments].compact
       end
 
@@ -18,7 +17,6 @@ module Spaces
       end
 
       def models
-        # debugger
         @models ||= space.send(*method_signature)
       end
 
@@ -27,7 +25,6 @@ module Spaces
       protected
 
       def _arguments
-        # debugger
         input.slice(space.method(method).parameters.map(&:last))
       end
 

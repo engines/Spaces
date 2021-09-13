@@ -1,4 +1,3 @@
-require 'git'
 require_relative 'importing'
 require_relative 'exporting'
 
@@ -85,7 +84,7 @@ module Spaces
 
       def outputting(io)
         io.each_line do |output|
-          block_given? ? 
+          block_given? ?
           yield(output_json_for(output)) :
           logger.info(output)
         end

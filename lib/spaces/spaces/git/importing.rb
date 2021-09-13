@@ -23,7 +23,6 @@ module Spaces
         end
       end
 
-
       def pull_remote(&block)
         opened.pull(remote_name, branch_name) { |io| outputting(io, &block) }
       rescue git_error => e
