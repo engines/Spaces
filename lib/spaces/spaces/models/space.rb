@@ -15,7 +15,9 @@ module Spaces
 
 
     class << self
-      def universes; @@universe_space ||= UniverseSpace.new ;end
+      def universes; @@universes ||= UniverseSpace.new ;end
+
+      def universe; universes.universe ;end
 
       def default_model_class ;end
     end
