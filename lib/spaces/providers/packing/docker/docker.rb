@@ -16,7 +16,11 @@ module Providers
     )
 
     def save
-      artifact_path.write(pack.artifact.values.join("\n"))
+      artifact_path.write(artifact)
+    end
+
+    def artifact
+      pack.artifact.values.join("\n")
     end
 
     def create
