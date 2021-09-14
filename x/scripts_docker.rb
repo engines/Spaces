@@ -108,7 +108,7 @@ controllers.packing.create(identifier: 'docker_arena::phpmyadmin')
 controllers.arenas.state(identifier: :docker_arena)
 
 # # get the identifiers of packs in an arena
-# controllers.querying.list((method: :identifiers, arena_identifier: :docker_arena, space: :packs)
+# controllers.querying.list(method: :identifiers, arena_identifier: :docker_arena, space: :packs)
 
 # # get the artifacts for a pack
 # controllers.packing.artifacts(identifier: 'docker_arena::phpmyadmin')
