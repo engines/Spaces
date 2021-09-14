@@ -10,10 +10,6 @@ module Spaces
         }
       end
 
-      def initialize(**args)
-        self.struct = OpenStruct.new(symbolize_keys)
-      end
-
     end
   end
 end
