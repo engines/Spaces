@@ -2,7 +2,6 @@ require 'ruby_terraform'
 
 module Arenas
   module Terraforming
-    include Spaces::Filing
 
     def init(model, &block); execute(:init, model, &block) ;end
     def plan(model, &block); execute(:plan, model, &block) ;end
@@ -11,42 +10,54 @@ module Arenas
 
     protected
 
-    def command_out_path(command, model)
-      path_for(model).join("#{command}.out")
+    def execute(command, model, &block)
+      identifier.tap { provisioning_for(command, model, &block) }
     end
 
-    # TODO: The :thread option should default to false and be set by controller.
-    def execute(command, model, thread: true)
-      identifier.tap do
-        thread ?
-        Thread.new { execute_with_output(command, model, rescue_exceptions: true) } :
-        execute_with_output(command, model)
-      end
-    end
-
-    def execute_with_output(command, model, rescue_exceptions: false)
-      output_to_file(command_out_path(command, model),
-        content_lambda: ->(out) { perform_command_for(command, model) { |output| out.call(output) } },
-        rescue_exceptions: rescue_exceptions
-      )
-    end
-
-    def perform_command_for(command, model)
+    def provisioning_for(command, model, &block)
       Dir.chdir(path_for(model)) do
-        begin
-          Object.const_get("RubyTerraform::Commands::#{command.camelize}").new(
-            stdout: output_lambda_for(command, model),
-            stderr: output_lambda_for(command, model),
-            logger: logger
-          ).execute
-        rescue RubyTerraform::Errors::ExecutionError => e
-          yield("#{{error: e.message}.to_json}\n")
-        end
+        # TODO: USE bridge.send(command, options[command] || {})
+        RubyTerraform::Commands
+        .const_get(command.camelize)
+        .new(command_options(&block))
+        .execute
+      end
+    rescue RubyTerraform::Errors::ExecutionError => e
+      raise e unless block_given?
+      yield error_json_for(e.message)
+    end
+
+    # TODO: Incorporate into options hash below
+    def command_options(&block)
+      {
+        stdout: stdout(&block),
+        stderr: stderr(&block),
+        logger: logger
+      }
+    end
+
+    def stdout(&block)
+      ->(output) do
+        block_given? ?
+        yield(output_json_for(output)) :
+        logger.info(output)
       end
     end
 
-    def output_lambda_for(command, model)
-      ->(output) { append_file_lambda_for(command_out_path(command, model)).call("#{{output: output}.to_json}\n") }
+    def stderr(&block)
+      ->(error) do
+        block_given? ?
+        yield(error_json_for(error)) :
+        logger.warn(error)
+      end
+    end
+
+    def output_json_for(output)
+      {output: output}.to_json
+    end
+
+    def error_json_for(error)
+      {error: error}.to_json
     end
 
     def bridge; RubyTerraform ;end

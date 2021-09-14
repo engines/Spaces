@@ -3,14 +3,16 @@ module Git
 
     # Redefine existing method.
     #  Add &block as argument for passing down to command.
-    def self.clone(repository, name, options = {}, &block)
-      self.new(Git::Lib.new(nil, options[:log]).clone(repository, name, options, &block))
+    #  Rename options to opts, to be consistent with other methods.
+    def self.clone(repository, name, opts = {}, &block)
+      self.new(Git::Lib.new(nil, opts[:log]).clone(repository, name, opts, &block))
     end
 
     # Redefine existing method.
     #  Add &block as argument for passing down to command.
-    def pull(remote='origin', branch='master', &block)
-      self.lib.pull(remote, branch, &block)
+    # Add opts
+    def pull(remote='origin', branch='master', opts = {}, &block)
+      self.lib.pull(remote, branch, opts, &block)
     end
 
     # Redefine existing method.

@@ -1,4 +1,3 @@
-require_relative 'filing'
 require_all   'spaces/spaces/lib'
 
 require_level 'spaces/spaces/models'

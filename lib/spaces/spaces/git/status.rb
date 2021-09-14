@@ -1,5 +1,3 @@
-require 'git'
-
 module Git
   class Status
 

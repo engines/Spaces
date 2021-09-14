@@ -1,4 +1,3 @@
-require_relative 'patched-git-gem'
 require_relative 'status'
 
 module Spaces
@@ -7,8 +6,8 @@ module Spaces
 
       delegate(locations: :universe)
 
-      def by_import(descriptor, force:, &block)
-        repository_for(descriptor).by_import(force: force, &block)
+      def by_import(descriptor, args, &block)
+        repository_for(descriptor).by_import(&block)
       end
 
       def export(descriptor, **args, &block)
