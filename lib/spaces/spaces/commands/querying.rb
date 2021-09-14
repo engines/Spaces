@@ -4,11 +4,11 @@ module Spaces
   module Commands
     class Querying < Command
 
-      def methud_signature
-        [methud, arguments].compact
+      def method_signature
+        [method, arguments].compact
       end
 
-      def methud
+      def method
         input[:method] || (raise ::Spaces::Errors::MissingInput, {input: input})
       end
 
@@ -17,7 +17,7 @@ module Spaces
       end
 
       def models
-        @models ||= space.send(*methud_signature)
+        @models ||= space.send(*method_signature)
       end
 
       alias_method :assembly, :models
@@ -25,7 +25,7 @@ module Spaces
       protected
 
       def _arguments
-        input.slice(space.method(methud).parameters.map(&:last))
+        input.slice(space.method(method).parameters.map(&:last))
       end
 
     end
