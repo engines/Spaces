@@ -52,11 +52,11 @@ module Spaces
       def space_identifier; ;end
 
       def method_missing(m, **args, &block)
-        (control(action: m, **args, &block) if action_command_map.keys.include?(m))
+        (control(action: m, **args, &block) if action_command_map.keys.include?(m)) || super
       end
 
       def respond_to_missing?(m, *)
-        action_command_map.keys.include?(m)
+        action_command_map.keys.include?(m) || super
       end
 
     end
