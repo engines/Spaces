@@ -2,27 +2,9 @@ module Spaces
   module Controllers
     class Controller < ::Spaces::Model
 
-      def action(args, &block)
-        log_action(args, &block)
-        args[:threaded] ? control_thread(args, &block) : control(args, &block)
-      end
-
-      protected
-
-      def initialize(**args)
-        self.struct = OpenStruct.new(args.symbolize_keys)
-      end
-
-      def log_action(args, &block)
-        logger.info("Controller action: #{args} #{block_given? ? block : 'Block not given'}")
-      end
-
-      def control_thread(args, &block)
-        args.tap { Thread.new { control(args, &block) } }
-      end
-
-      def control(with: [:run, :payload], **args, &block)
-        with.reduce(command_for(args)) { |c, w| c.send(w, &block) }
+      def control(args, &block)
+        log_control(args, &block)
+        args[:threaded] ? _control_with_threading(args, &block) : _control(args, &block)
       end
 
       def command_for(args)
@@ -51,6 +33,10 @@ module Spaces
 
       def action_command_map; {} ;end
 
+      def initialize(**args)
+        self.struct = OpenStruct.new(args.symbolize_keys)
+      end
+
       def method_missing(m, **args, &block)
         control(action: m, **args, &block) if action_command_map.keys.include?(m)
       end
@@ -61,8 +47,20 @@ module Spaces
 
       protected
 
+      def _control_with_threading(args, &block)
+        (Thread.new { _control(args, &block) }).join
+      end
+
+      def _control(with: [:run, :payload], **args, &block)
+        with.reduce(command_for(args)) { |c, w| c.send(w, &block) }
+      end
+
       def struct_in_space(**args)
         OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
+      end
+
+      def log_control(args, &block)
+        logger.info("Controller command: #{args} #{block_given? ? block : 'Block not given'}")
       end
 
     end
