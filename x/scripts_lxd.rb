@@ -19,7 +19,7 @@ controllers.querying.list(method: :binder_identifiers, space: :blueprints)
 
 # blueprint gets
 controllers.blueprinting.show(identifier: :phpmyadmin)
-controllers.blueprinting.summary(identifier: :phpmyadmin)
+controllers.blueprinting.summarize(identifier: :phpmyadmin)
 
 # save a basic arena with default associations
 controllers.arenas.new(model: {identifier: :lxd_arena})

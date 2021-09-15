@@ -5,10 +5,10 @@ module Spaces
     class Querying < Command
 
       def method_signature
-        [method, arguments].compact
+        [query_method, arguments].compact
       end
 
-      def method
+      def query_method
         input[:method] || (raise ::Spaces::Errors::MissingInput, {input: input})
       end
 
@@ -25,7 +25,7 @@ module Spaces
       protected
 
       def _arguments
-        input.slice(space.method(method).parameters.map(&:last))
+        input.slice(space.method(query_method).parameters.map(&:last))
       end
 
     end

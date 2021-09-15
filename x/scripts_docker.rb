@@ -27,7 +27,7 @@ controllers.querying.list(method: :binder_identifiers, space: :blueprints)
 
 # blueprint gets
 controllers.blueprinting.show(identifier: :phpmyadmin)
-controllers.blueprinting.summary(identifier: :phpmyadmin)
+controllers.blueprinting.summarize(identifier: :phpmyadmin)
 
 # save a basic arena with default associations
 controllers.arenas.create(model: {identifier: :docker_arena})
@@ -108,7 +108,7 @@ controllers.packing.create(identifier: 'docker_arena::phpmyadmin')
 controllers.arenas.state(identifier: :docker_arena)
 
 # # get the identifiers of packs in an arena
-# controllers.querying.list((method: :identifiers, arena_identifier: :docker_arena, space: :packs)
+# controllers.querying.list(method: :identifiers, arena_identifier: :docker_arena, space: :packs)
 
 # # get the artifacts for a pack
 # controllers.packing.artifacts(identifier: 'docker_arena::phpmyadmin')

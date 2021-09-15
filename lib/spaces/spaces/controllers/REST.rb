@@ -8,17 +8,13 @@ module Spaces
         @action_command_map ||= {
           index: [Commands::Querying, method: :summaries],
           list: [Commands::Querying, method: :identifiers],
-          summary: Commands::Summarizing,
+          summarize: Commands::Summarizing,
           show: Commands::Reading,
           create: Commands::Saving,
           update: Commands::Saving,
           copy: Commands::Copying,
           delete: Commands::Deleting
         }
-      end
-
-      def summary(**args)
-        control(command: :summary, **args)
       end
 
       def initialize(**args)
