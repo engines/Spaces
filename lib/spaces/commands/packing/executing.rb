@@ -16,22 +16,6 @@ module Packing
         super || :packs
       end
 
-      def execute(&block)
-        space.send(execution_instruction, model, &block)
-      end
-
-      protected
-
-      def commit(&block)
-        input[:threaded] ? outputting(&block) : execute(&block)
-      end
-
-      def outputting(&block)
-        Spaces::Outputting::Build
-        .new(command: self, identifier: input[:identifier])
-        .write(&block)
-      end
-
     end
   end
 end
