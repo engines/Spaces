@@ -3,8 +3,10 @@ module Associations
 
     class << self
       def default_struct
-        OpenStruct.new(identifier: 'current.engines.org')
+        OpenStruct.new(identifier: default_identifier)
       end
+
+      def default_identifier; 'localhost'; end
     end
 
     def name; identifier ;end
