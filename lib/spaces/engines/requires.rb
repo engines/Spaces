@@ -18,5 +18,12 @@ require_all   'spaces/engines/provisioning'
 require_all   'spaces/engines/keys'
 require_all   'spaces/engines/universes'
 
-require_all   'spaces/engines/outputting'
+# TODO: Reinstate require _all for outputting
+# require_all   'spaces/engines/outputting'
+require   'spaces/engines/outputting/space'
+require   'spaces/engines/outputting/output'
+require   'spaces/engines/outputting/output/build'
+require   'spaces/engines/outputting/output/execution'
+require   'spaces/engines/outputting/output/export'
+require   'spaces/engines/outputting/output/import'
 require_all   'spaces/engines/provider_aspects'
