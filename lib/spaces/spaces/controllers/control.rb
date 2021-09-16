@@ -7,7 +7,6 @@ module Spaces
       alias_method :signature, :struct
 
       def attempt
-        log
         arguments[:threaded] ? _attempt_with_threading : _attempt
       end
 
@@ -34,10 +33,6 @@ module Spaces
 
       def _attempt(with: calling_chain)
         with.reduce(command) { |c, w| c.send(w, &block) }
-      end
-
-      def log
-        logger.info("Controller command: #{arguments} #{block&.call || 'Block not given'}")
       end
 
     end

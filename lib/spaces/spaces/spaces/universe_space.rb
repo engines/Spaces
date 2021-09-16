@@ -1,4 +1,3 @@
-require_relative 'model'
 require_relative 'space'
 
 module Spaces
