@@ -3,11 +3,14 @@ require_relative 'stream'
 module Spaces
   module Streaming
 
-    def stream_for(identifiable, identifier = nil)
-      stream_class.new(identifiable, space: self, identifier: identifier)
+    def with_streaming(identifiable, identifier = nil, &block)
+      stream_for(identifiable, identifier).produce(&block)
     end
 
-    # def default_identifier; super.identifier ;end
+    def stream_for(identifiable, identifier = nil)
+      stream_class.new(identifiable, space: space, identifier: identifier)
+    end
+
     def stream_class; Stream ;end
 
     def default_streaming_location; :streams ;end

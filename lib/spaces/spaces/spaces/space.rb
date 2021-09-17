@@ -24,6 +24,7 @@ module Spaces
     delegate([:universes, :default_model_class] => :klass)
 
     def identifier; struct.identifier ;end
+    def space; itself ;end
 
     def ensure_space
       path.mkpath

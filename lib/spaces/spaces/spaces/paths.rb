@@ -17,7 +17,7 @@ module Spaces
     end
 
     def streaming_path_for(identifiable)
-      workspace.join("#{universes.identifier}", "#{default_streaming_location}", "#{identifier}", identifiable.context_identifier.as_path)
+      workspace.join("#{universes.identifier}", "#{default_streaming_location}", "#{identifier}")
     end
 
     def path_for(identifiable)

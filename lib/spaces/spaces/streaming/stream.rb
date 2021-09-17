@@ -7,8 +7,6 @@ module Spaces
       include Producing
       include Consuming
 
-      EOT = 4.chr
-
       attr_accessor :identifier
       relation_accessor :identifiable
       relation_accessor :space
@@ -18,6 +16,7 @@ module Spaces
       def path; streaming_path_for(identifiable).join("#{identifier}.#{default_extension}") ;end
 
       def default_extension; :out ;end
+      def eot; 4.chr ;end
 
       def initialize(identifiable, space:, identifier:)
         self.identifier = identifier || qualifier

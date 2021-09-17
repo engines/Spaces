@@ -2,40 +2,41 @@ module Spaces
   module Streaming
     module Producing
 
-      def produce
+      def produce(&block)
         clear
-        execute
+        yield
       rescue => e
-        exception(e)
+        collect_exception(e)
       ensure
-        eot
+        append(eot)
+      end
+
+      def collect(io)
+        io.each_line { |l| append(message(l)) }
+        append(message("\n"))
       end
 
       protected
-
-      def execute
-        # command.execute do |output|
-        #   out(output)
-        # end
-      end
 
       def clear
         path.dirname.mkpath
         File.open(path, 'w') {}
       end
 
-      def out(message)
-        append({message: message}.to_json)
+      def message(line)
+        {message: standard_for(:output, line)}
+      end
+
+      def standard_for(type, value)
+        {}.tap { |h| h[type] = value }.to_json
+      end
+
+      def collect_exception(e)
+        append(standard_for(:exception, exception_message_for(e)))
       end
 
       def append(line)
         File.open(path, 'a') { |f| f.write("#{line}\n") }
-      end
-
-      def eot; append(EOT) ;end
-
-      def exception(e)
-        append({exception: exception_message_for(e)}.to_json)
       end
 
       def exception_message_for(e)

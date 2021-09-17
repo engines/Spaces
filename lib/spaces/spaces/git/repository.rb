@@ -7,6 +7,7 @@ module Spaces
       include Engines::Logger
       include Importing
       include Exporting
+      include ::Spaces::Streaming
 
       relation_accessor :descriptor
       relation_accessor :space
@@ -82,23 +83,6 @@ module Spaces
         @opened ||= git.open(space.path_for(descriptor), log: logger)
       end
 
-      def collect_output(io)
-        io.each_line do |output|
-          block_given? ?
-          yield(output_json_for(output)) :
-          logger.info(output)
-        end
-        yield(output_json_for("\n")) if block_given?
-      end
-
-      def output_json_for(output)
-        {output: output}.to_json
-      end
-
-      def error_json_for(error)
-        {error: error}.to_json
-      end
-
       def exist?
         space.path_for(descriptor).join(".#{protocol}").exist?
       end
@@ -110,6 +94,10 @@ module Spaces
       def failure; ::Spaces::Errors::RepositoryFail ;end
       def head_identifier; 'HEAD ->' ;end
 
+      def stream_for(identifier)
+        super(descriptor, identifier)
+      end
+
       def initialize(descriptor, space:)
         self.descriptor = descriptor
         self.space = space
@@ -120,7 +108,7 @@ module Spaces
         git.init("#{space.path_for(descriptor)}", log: logger)
       end
 
-      def command_opts
+      def command_options
         {
           logger: logger,
           verbose: true,

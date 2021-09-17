@@ -32,7 +32,7 @@ module Spaces
       end
 
       def _attempt(with: calling_chain)
-        with.reduce(command) { |c, w| c.send(w, &block) }
+        with.reduce(command) { |c, w| c.send(w) }
       end
 
     end
