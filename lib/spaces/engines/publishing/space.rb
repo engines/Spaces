@@ -44,8 +44,10 @@ module Publishing
 
     def export(**args)
       args[:identifier].tap do |i|
-        synchronize_with(blueprints, i)
-        super(locations.by(i), **args)
+        with_streaming(i, :export) do
+          synchronize_with(blueprints, i)
+          super(locations.by(i), **args)
+        end
       end
     end
 

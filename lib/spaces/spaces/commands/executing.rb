@@ -10,8 +10,8 @@ module Spaces
 
       protected
 
-      def commit(&block)
-        space.send(execution_instruction, model, &block)
+      def commit
+        space.send(execution_instruction, model)
       end
 
     end

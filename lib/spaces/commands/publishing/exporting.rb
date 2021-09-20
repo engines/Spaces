@@ -8,8 +8,8 @@ module Publishing
 
       protected
 
-      def commit(&block)
-        space.export(**input, &block)
+      def commit
+        space.export(**input)
       end
 
     end

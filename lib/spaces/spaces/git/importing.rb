@@ -14,13 +14,13 @@ module Spaces
 
       def pull_remote
         opened.pull(remote_name, branch_name, command_options) do |io|
-          stream_for(:import).collect(io)
+          stream_on(:import).collect(io)
         end
       end
 
       def clone_remote
         git.clone(repository_url, identifier, clone_options) do |io|
-          stream_for(:import).collect(io)
+          stream_on(:import).collect(io)
         end
       end
 

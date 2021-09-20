@@ -8,7 +8,7 @@ module Packing
 
     delegate(resolutions: :universe)
 
-    def commit(pack, &block)
+    def commit(pack)
       provider_aspect_for(pack, self).commit(&block)
     end
 

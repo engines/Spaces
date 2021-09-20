@@ -94,8 +94,8 @@ module Spaces
       def failure; ::Spaces::Errors::RepositoryFail ;end
       def head_identifier; 'HEAD ->' ;end
 
-      def stream_for(identifier)
-        super(descriptor, identifier)
+      def stream_on(identifier)
+        stream_for(descriptor, identifier)
       end
 
       def initialize(descriptor, space:)

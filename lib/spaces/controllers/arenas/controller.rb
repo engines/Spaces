@@ -17,9 +17,9 @@ module Arenas
           runtime: Commands::RuntimeBooting,
           provision: Commands::Provisioning,
           provision_providers: Commands::ProviderProvisioning,
-          init: [Commands::Executing, execute: :init],
-          plan: [Commands::Executing, execute: :plan],
-          apply: [Commands::Executing, execute: :apply],
+          init: [::Spaces::Commands::Executing, execute: :init],
+          plan: [::Spaces::Commands::Executing, execute: :plan],
+          apply: [::Spaces::Commands::Executing, execute: :apply],
         })
       end
 
