@@ -94,6 +94,10 @@ module Spaces
       def failure; ::Spaces::Errors::RepositoryFail ;end
       def head_identifier; 'HEAD ->' ;end
 
+      def collect(io, identifier)
+        stream_on(identifier).collect(io) { |l| {output: l} }
+      end
+
       def stream_on(identifier)
         stream_for(descriptor, identifier)
       end

@@ -17,7 +17,9 @@ module Spaces
       end
 
       def push_remote
-        opened.push(remote_name, branch_name, command_options) { |io| stream_on(:export).collect(io) }
+        opened.push(remote_name, branch_name, command_options) do |io|
+          collect(io, :import)
+        end
       end
 
       def commit_message_for(args)

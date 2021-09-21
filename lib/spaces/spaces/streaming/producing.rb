@@ -6,14 +6,14 @@ module Spaces
         clear
         yield
       rescue => e
-        collect_exception(e)
+        append(exception_for(e))
       ensure
         append(eot)
       end
 
-      def collect(io)
-        io.each_line { |l| append(message(l)) }
-        append(message("\n"))
+      def collect(io, &block)
+        io.each_line { |l| append({message: yield(l)}.to_json) }
+        append({message: yield("\n")}.to_json)
       end
 
       protected
@@ -23,16 +23,8 @@ module Spaces
         File.open(path, 'w') {}
       end
 
-      def message(line)
-        {message: standard_for(:output, line)}
-      end
-
-      def standard_for(type, value)
-        {}.tap { |h| h[type] = value }.to_json
-      end
-
-      def collect_exception(e)
-        append(standard_for(:exception, exception_message_for(e)))
+      def exception_for(e)
+        {exception: exception_message_for(e)}.to_json
       end
 
       def append(line)
