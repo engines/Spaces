@@ -16,6 +16,10 @@ module Spaces
         append({message: yield("\n")}.to_json)
       end
 
+      def append(line)
+        File.open(path, 'a') { |f| f.write("#{line}\n") }
+      end
+
       protected
 
       def clear
@@ -25,10 +29,6 @@ module Spaces
 
       def exception_for(e)
         {exception: exception_message_for(e)}.to_json
-      end
-
-      def append(line)
-        File.open(path, 'a') { |f| f.write("#{line}\n") }
       end
 
       def exception_message_for(e)
