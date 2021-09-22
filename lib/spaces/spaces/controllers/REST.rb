@@ -8,6 +8,7 @@ module Spaces
         @action_command_map ||= {
           index: [Commands::Querying, method: :summaries],
           list: [Commands::Querying, method: :identifiers],
+          all: [Commands::Querying, method: :all],
           summarize: Commands::Summarizing,
           show: Commands::Reading,
           create: Commands::Saving,

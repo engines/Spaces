@@ -3,6 +3,7 @@ module Spaces
     class Controller < ::Spaces::Model
 
       def control(args, &block)
+        log(args, &block)
         instance_for(args, &block).attempt
       end
 
@@ -50,6 +51,10 @@ module Spaces
       end
 
       def space_identifier; ;end
+
+      def log(args, &block)
+        logger.info("Arguments: #{args} #{block_given? ? block : 'Block not given'}")
+      end
 
       def method_missing(m, **args, &block)
         (control(action: m, **args, &block) if action_command_map.keys.include?(m)) || super

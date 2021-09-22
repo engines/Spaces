@@ -1,5 +1,3 @@
-require 'ruby_terraform'
-
 module Arenas
   module Terraforming
 
@@ -16,19 +14,14 @@ module Arenas
 
     def provisioning_for(command, model, &block)
       Dir.chdir(path_for(model)) do
-        # TODO: USE bridge.send(command, options[command] || {})
-        RubyTerraform::Commands
-        .const_get(command.camelize)
-        .new(command_options(&block))
-        .execute
+        bridge.send(command, options[command] || {}, config(&block))
+      rescue RubyTerraform::Errors::ExecutionError => e
+        raise e unless block_given?
+        yield error_json_for(e.message)
       end
-    rescue RubyTerraform::Errors::ExecutionError => e
-      raise e unless block_given?
-      yield error_json_for(e.message)
     end
 
-    # TODO: Incorporate into options hash below
-    def command_options(&block)
+    def config(&block)
       {
         stdout: stdout(&block),
         stderr: stderr(&block),
