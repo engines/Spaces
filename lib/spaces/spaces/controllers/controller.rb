@@ -2,13 +2,13 @@ module Spaces
   module Controllers
     class Controller < ::Spaces::Model
 
-      def control(args, &block)
-        log(args, &block) #TODO: args should be vetted rather than defending against potential bugs
-        instance_for(args, &block).attempt
+      def control(args)
+        log(args) #TODO: args should be vetted rather than defending against potential bugs
+        instance_for(args).attempt
       end
 
-      def instance_for(args, &block)
-        instance_class.new(signature_for(args), &block)
+      def instance_for(args)
+        instance_class.new(signature_for(args))
       end
 
       def instance_class; Control ;end
@@ -52,12 +52,12 @@ module Spaces
 
       def space_identifier; ;end
 
-      def log(args, &block) #TODO: args should be vetted rather than defending against potential bugs
-        logger.info("Arguments: #{args} #{block_given? ? block : 'Block not given'}")
+      def log(args) #TODO: args should be vetted rather than defending against potential bugs
+        logger.info("Arguments: #{args}")
       end
 
       def method_missing(m, **args, &block)
-        (control(action: m, **args, &block) if action_command_map.keys.include?(m)) || super
+        (control(action: m, **args) if action_command_map.keys.include?(m)) || super
       end
 
       def respond_to_missing?(m, *)

@@ -2,8 +2,6 @@ module Spaces
   module Controllers
     class Control < ::Spaces::Model
 
-      attr_accessor :block
-
       alias_method :signature, :struct
 
       def attempt
@@ -20,9 +18,8 @@ module Spaces
 
       def calling_chain; [:run, :payload] ;end
 
-      def initialize(signature, &block)
+      def initialize(signature)
         self.struct = signature
-        self.block = block
       end
 
       protected
