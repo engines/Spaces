@@ -1,5 +1,3 @@
-require 'ruby_terraform'
-
 module Arenas
   module Terraforming
     include ::Spaces::Streaming
@@ -19,18 +17,13 @@ module Arenas
 
     def provisioning_for(command, model)
       Dir.chdir(path_for(model)) do
-        # TODO: USE bridge.send(command, options[command] || {})
-        RubyTerraform::Commands
-        .const_get(command.camelize)
-        .new(command_options(stream_for(model, command)))
-        .execute
+        bridge.send(command, options[command] || {}, config(stream_for(model, command)))
       rescue RubyTerraform::Errors::ExecutionError => e
         raise e
       end
     end
 
-    # TODO: Incorporate into options hash below
-    def command_options(stream)
+    def config(stream)
       {
         stdout: stdout(stream),
         stderr: stderr(stream),

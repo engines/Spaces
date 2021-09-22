@@ -7,6 +7,7 @@ require 'i18n'
 require 'engines-logger'
 require 'gems/git'
 require 'gems/docker'
+require 'gems/ruby_terraform'
 
 require 'spaces/requiring'
 include Requiring
