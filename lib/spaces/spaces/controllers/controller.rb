@@ -23,7 +23,11 @@ module Spaces
       def full_args_for(**args)
         default_args
         .merge(args_for(args[:action]))
-        .merge(args.without(:action))
+        .merge(usable_args(args))
+      end
+
+      def usable_args(args)
+        args.without(:action)
       end
 
       def args_for(action)
