@@ -8,8 +8,8 @@ module Packing
 
     delegate(resolutions: :universe)
 
-    def commit(pack, &block)
-      provider_aspect_for(pack, self).commit(&block)
+    def commit(pack)
+      provider_aspect_for(pack, self).commit
     end
 
     def by(identifier, klass = default_model_class)

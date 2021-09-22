@@ -23,16 +23,18 @@ module Publishing
       super(*args, as: default_extension)
     end
 
-    def import(descriptor, args, &block)
-      by_import(descriptor, args, &block)
+    def import(descriptor, args)
+      with_streaming(descriptor, :import) do
+        by_import(descriptor, args)
+      end
     end
 
-    def by_import(descriptor, force: false, &block)
+    def by_import(descriptor, force: false)
       super.tap do |m|
         locations.ensure_located(m)
-        blueprints.by_import(descriptor, force: force, &block)
+        blueprints.by_import(descriptor, force: force)
         m.bindings.each do |b|
-          by_import(b.descriptor, &block) if (!imported?(b.descriptor) || force)
+          by_import(b.descriptor) if (!imported?(b.descriptor) || force)
         end
       end
     rescue ::Spaces::Errors::RepositoryFail => e
@@ -40,10 +42,12 @@ module Publishing
       raise e
     end
 
-    def export(**args, &block)
+    def export(**args)
       args[:identifier].tap do |i|
-        synchronize_with(blueprints, i)
-        super(locations.by(i), **args, &block)
+        with_streaming(i, :export) do
+          synchronize_with(blueprints, i)
+          super(locations.by(i), **args)
+        end
       end
     end
 

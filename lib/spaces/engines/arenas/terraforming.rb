@@ -1,56 +1,56 @@
 module Arenas
   module Terraforming
+    include ::Spaces::Streaming
 
-    def init(model, &block); execute(:init, model, &block) ;end
-    def plan(model, &block); execute(:plan, model, &block) ;end
-    def show(model, &block); execute(:show, model, &block) ;end
-    def apply(model, &block); execute(:apply, model, &block) ;end
+    def init(model); execute(:init, model) ;end
+    def plan(model); execute(:plan, model) ;end
+    def show(model); execute(:show, model) ;end
+    def apply(model); execute(:apply, model) ;end
 
     protected
 
-    def execute(command, model, &block)
-      identifier.tap { provisioning_for(command, model, &block) }
-    end
-
-    def provisioning_for(command, model, &block)
-      Dir.chdir(path_for(model)) do
-        bridge.send(command, options[command] || {}, config(&block))
-      rescue RubyTerraform::Errors::ExecutionError => e
-        raise e unless block_given?
-        yield error_json_for(e.message)
+    def execute(command, model)
+      with_streaming(model, command) do
+        identifier.tap { provisioning_for(command, model) }
       end
     end
 
-    def config(&block)
+    def provisioning_for(command, model)
+      Dir.chdir(path_for(model)) do
+        bridge.send(command, options[command] || {}, config(stream_for(model, command)))
+      rescue RubyTerraform::Errors::ExecutionError => e
+        raise e
+      end
+    end
+
+    def config(stream)
       {
-        stdout: stdout(&block),
-        stderr: stderr(&block),
+        stdout: stdout(stream),
+        stderr: stderr(stream),
         logger: logger
       }
     end
 
-    def stdout(&block)
+    def stdout(stream)
       ->(output) do
-        block_given? ?
-        yield(output_json_for(output)) :
+        stream.append(output_json_for(output))
         logger.info(output)
       end
     end
 
-    def stderr(&block)
+    def stderr(stream)
       ->(error) do
-        block_given? ?
-        yield(error_json_for(error)) :
+        stream.append(error_json_for(error))
         logger.warn(error)
       end
     end
 
     def output_json_for(output)
-      {output: output}.to_json
+      {message: {output: output}}.to_json
     end
 
     def error_json_for(error)
-      {error: error}.to_json
+      {message: {error: error}}.to_json
     end
 
     def bridge; RubyTerraform ;end

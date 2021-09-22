@@ -2,7 +2,7 @@ module Spaces
   module Paths
 
     def path
-      workspace.join(*(["#{universes.identifier}", "#{identifier}"]))
+      workspace.join("#{universes.identifier}", "#{identifier}")
     end
 
     def workspace; Pathname(ENV['ENGINES_WORKSPACE'] || default_workspace) ;end
@@ -14,6 +14,10 @@ module Spaces
 
     def writing_path_for(identifiable)
       path.join(*([identifiable.context_identifier.as_path, identifiable.subpath].compact))
+    end
+
+    def streaming_path_for(identifiable)
+      workspace.join("#{universes.identifier}", "#{default_streaming_location}", "#{identifier}")
     end
 
     def path_for(identifiable)

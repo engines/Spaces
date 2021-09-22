@@ -11,6 +11,7 @@ def controllers
     provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
     locations: ::Spaces::Controllers::RESTController.new(space: :locations),
     user_keys: Keys::Controllers::Controller.new,
-    registry: Registry::Controllers::Controller.new
+    registry: Registry::Controllers::Controller.new,
+    streaming: Spaces::Controllers::Streaming.new
   )
 end

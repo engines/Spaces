@@ -1,4 +1,3 @@
-require_relative 'model'
 require_relative 'paths'
 require_relative 'reading'
 require_relative 'saving'
@@ -12,7 +11,7 @@ module Spaces
     include ::Spaces::Saving
     include ::Spaces::Deleting
     include ::Spaces::Topology
-
+    include ::Spaces::Streaming
 
     class << self
       def universes; @@universes ||= UniverseSpace.new ;end
@@ -25,6 +24,7 @@ module Spaces
     delegate([:universes, :default_model_class] => :klass)
 
     def identifier; struct.identifier ;end
+    def space; itself ;end
 
     def ensure_space
       path.mkpath

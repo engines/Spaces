@@ -9,7 +9,7 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 # ------------------------------------------------------------------------------
 
 # save a basic arena with default associations
-controllers.arenas.new(model: {identifier: :base_arena})
+controllers.arenas.create(model: {identifier: :base_arena})
 
 # ------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ controllers.arenas.resolve(identifier: :base_arena)
 # ------------------------------------------------------------------------------
 
 # save a pack for the base resolution
-controllers.packing.new(identifier: 'base_arena::enginesd_debian_base')
+controllers.packing.create(identifier: 'base_arena::enginesd_debian_base')
 
 # # commit the base pack
 # controllers.packing.commit(identifier: 'base_arena::enginesd_debian_base')
