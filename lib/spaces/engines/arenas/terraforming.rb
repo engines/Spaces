@@ -26,7 +26,7 @@ module Arenas
     def config(stream)
       {
         stdout: stdout(stream),
-        stderr: stderr(stream),
+        stderr: stdout(stream),
         logger: logger
       }
     end

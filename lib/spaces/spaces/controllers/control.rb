@@ -25,7 +25,7 @@ module Spaces
       protected
 
       def _attempt_with_threading
-        Thread.new { _attempt }.join.value
+        arguments.tap { Thread.new { _attempt } }
       end
 
       def _attempt(with: calling_chain)

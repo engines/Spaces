@@ -95,7 +95,10 @@ module Spaces
       def head_identifier; 'HEAD ->' ;end
 
       def collect(io, identifier)
-        stream_on(identifier).collect(io) { |l| {output: l} }
+        stream_on(identifier).tap do |stream|
+          stream.collect(io) { |l| {output: l} }
+          stream.append({message: {output: "\n"}}.to_json)
+        end
       end
 
       def stream_on(identifier)
