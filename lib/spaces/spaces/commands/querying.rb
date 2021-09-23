@@ -25,7 +25,7 @@ module Spaces
       protected
 
       def _arguments
-        input.slice(space.method(query_method).parameters.map(&:last))
+        input.slice(*space.method(query_method).parameters.map(&:last))
       end
 
     end
