@@ -46,11 +46,11 @@ module Arenas
     end
 
     def output_json_for(output)
-      {message: {output: output}}.to_json
+      {output: output}.to_json
     end
 
     def error_json_for(error)
-      {message: {error: error}}.to_json
+      {error: error}.to_json
     end
 
     def bridge; RubyTerraform ;end

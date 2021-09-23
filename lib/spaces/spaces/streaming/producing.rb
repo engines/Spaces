@@ -12,7 +12,7 @@ module Spaces
       end
 
       def collect(io, &block)
-        io.each_line { |l| append({message: yield(l)}.to_json) }
+        io.each_line { |l| append({output: yield(l)}.to_json) }
       end
 
       def append(line)
