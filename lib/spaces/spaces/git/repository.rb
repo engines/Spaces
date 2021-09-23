@@ -88,7 +88,7 @@ module Spaces
       end
 
       def raise_failure_for(exception)
-        raise failure, {message: exception.message}
+        raise failure, {error: exception.message}
       end
 
       def failure; ::Spaces::Errors::RepositoryFail ;end
@@ -97,7 +97,7 @@ module Spaces
       def collect(io, identifier)
         stream_on(identifier).tap do |stream|
           stream.collect(io) { |l| {output: l} }
-          stream.append({message: {output: "\n"}}.to_json)
+          stream.append({output: "\n"}.to_json)
         end
       end
 
