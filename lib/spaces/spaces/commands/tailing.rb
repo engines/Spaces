@@ -10,7 +10,7 @@ module Spaces
       protected
 
       def commit
-        stream_for(stream_identifier, stream_identifier).consume
+        stream_for(stream_identifier, stream_identifier).consume(input[:callback])
       end
 
     end
