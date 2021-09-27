@@ -25,7 +25,10 @@ module Publishing
 
     def import(descriptor, args)
       with_streaming(descriptor, :import) do
+        stream_for(descriptor, :import).output("\n")
         by_import(descriptor, args)
+      rescue ::Git::GitExecuteError => e
+        stream_for(descriptor, :import).error("Failed to import #{descriptor}")
       end
     end
 
@@ -45,6 +48,7 @@ module Publishing
     def export(**args)
       args[:identifier].tap do |i|
         with_streaming(i, :export) do
+          stream_for(i, :export).output("\n")
           synchronize_with(blueprints, i)
           super(locations.by(i), **args)
         end

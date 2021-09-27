@@ -87,22 +87,18 @@ module Spaces
         space.path_for(descriptor).join(".#{protocol}").exist?
       end
 
-      def raise_failure_for(exception)
-        raise failure, {error: exception.message}
-      end
+      # def raise_failure_for(exception)
+      #   raise failure, {exception: exception.message}
+      # end
 
-      def failure; ::Spaces::Errors::RepositoryFail ;end
+      # def failure; ::Spaces::Errors::RepositoryFail ;end
       def head_identifier; 'HEAD ->' ;end
 
-      def collect(io, identifier)
-        stream_on(identifier).tap do |stream|
-          stream.collect(io) { |l| {output: l} }
-          stream.append({output: "\n"}.to_json)
+      def collect(io, command)
+        stream_for(descriptor, command).tap do |stream|
+          stream.output_lines_from(io)
+          stream.output("\n")
         end
-      end
-
-      def stream_on(identifier)
-        stream_for(descriptor, identifier)
       end
 
       def initialize(descriptor, space:)
