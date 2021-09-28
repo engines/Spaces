@@ -2,10 +2,10 @@ module Arenas
   module Terraforming
     include ::Spaces::Streaming
 
-    def init(model); execute(:init, model) ;end
-    def plan(model); execute(:plan, model) ;end
-    def show(model); execute(:show, model) ;end
-    def apply(model); execute(:apply, model) ;end
+    def terraform_init(model); execute(:init, model) ;end
+    def terraform_plan(model); execute(:plan, model) ;end
+    def terraform_show(model); execute(:show, model) ;end
+    def terraform_apply(model); execute(:apply, model) ;end
 
     protected
 
@@ -16,41 +16,31 @@ module Arenas
     end
 
     def provisioning_for(command, model)
-      Dir.chdir(path_for(model)) do
-        bridge.send(command, options[command] || {}, config(stream_for(model, command)))
-      rescue RubyTerraform::Errors::ExecutionError => e
-        raise e
+      stream_for(model, command).tap do |stream|
+        stream.output("\n") unless command == :init
+        Dir.chdir(path_for(model)) do
+          bridge.send(command, options[command] || {}, config(out(command, model)))
+          stream.output("\n")
+        rescue RubyTerraform::Errors::ExecutionError => e
+          stream.output("\n")
+          stream.error("#{e}\n")
+        end
       end
     end
 
-    def config(stream)
+    def config(out)
       {
-        stdout: stdout(stream),
-        stderr: stdout(stream),
+        stdout: out,
+        stderr: out,
         logger: logger
       }
     end
 
-    def stdout(stream)
+    def out(command, model)
       ->(output) do
-        stream.append(output_json_for(output))
-        logger.info(output)
+        stream_for(model, command).output(output)
+        logger.info(output.strip)
       end
-    end
-
-    def stderr(stream)
-      ->(error) do
-        stream.append(error_json_for(error))
-        logger.warn(error)
-      end
-    end
-
-    def output_json_for(output)
-      {output: output}.to_json
-    end
-
-    def error_json_for(error)
-      {error: error}.to_json
     end
 
     def bridge; RubyTerraform ;end

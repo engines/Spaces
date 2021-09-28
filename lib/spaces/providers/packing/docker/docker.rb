@@ -39,31 +39,36 @@ module Providers
     end
 
     def build
-      with_streaming(pack, :build) do
-        space.copy_auxiliaries_for(pack)
-        build_from_pack
-        space.remove_auxiliaries_for(pack)
-      end
+      space.copy_auxiliaries_for(pack)
+      build_from_pack
+      space.remove_auxiliaries_for(pack)
     end
 
     alias_method :commit, :build
 
     def build_from_pack
-      bridge
-      .build_from_dir("#{path_for(pack)}") { |io| collect(io) }
-      .tap { |image| tag_latest(image) }
-    end
-
-    def collect(io)
-      stream_on(:build).collect(io) do |raw|
-        event = JSON.parse(raw, symbolize_names: true)
-        return event.slice(:error) if event[:error]
-        {output: event[:stream]}
+      with_streaming(pack, :build) do
+        build_from_dir.tap { |image| tag_latest(image) }
+      rescue ::Docker::Error::ImageNotFoundError => e
+        # Do nothing: ignore any ImageNotFoundError.
       end
     end
 
-    def stream_on(identifier)
-      stream_for(pack, identifier)
+    def build_from_dir
+      stream.output("\n")
+      bridge.build_from_dir("#{path_for(pack)}") do |encoded|
+        process_output(encoded)
+      end
+    end
+
+    def process_output(encoded)
+      output = JSON.parse(encoded, symbolize_names: true)
+      stream.error("#{output[:error]}\n") if output[:error]
+      stream.output(output[:stream]) if output[:stream]
+    end
+
+    def stream
+      stream_for(pack, :build)
     end
 
     def tag_latest(image)
