@@ -2,10 +2,10 @@ module Arenas
   module Terraforming
     include ::Spaces::Streaming
 
-    def init(model); execute(:init, model) ;end
-    def plan(model); execute(:plan, model) ;end
-    def show(model); execute(:show, model) ;end
-    def apply(model); execute(:apply, model) ;end
+    def terraform_init(model); execute(:init, model) ;end
+    def terraform_plan(model); execute(:plan, model) ;end
+    def terraform_show(model); execute(:show, model) ;end
+    def terraform_apply(model); execute(:apply, model) ;end
 
     protected
 
@@ -16,12 +16,15 @@ module Arenas
     end
 
     def provisioning_for(command, model)
-      Dir.chdir(path_for(model)) do
-        bridge.send(command, options[command] || {}, config(out(command, model)))
-      rescue RubyTerraform::Errors::ExecutionError => e
-        stream_for(model, command).error(e)
-      ensure
-        stream_for(model, command).output("\n")
+      stream_for(model, command).tap do |stream|
+        stream.output("\n") unless command == :init
+        Dir.chdir(path_for(model)) do
+          bridge.send(command, options[command] || {}, config(out(command, model)))
+          stream.output("\n")
+        rescue RubyTerraform::Errors::ExecutionError => e
+          stream.output("\n")
+          stream.error("#{e}\n")
+        end
       end
     end
 

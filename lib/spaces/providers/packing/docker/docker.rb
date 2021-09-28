@@ -55,6 +55,7 @@ module Providers
     end
 
     def build_from_dir
+      stream.output("\n")
       bridge.build_from_dir("#{path_for(pack)}") do |encoded|
         process_output(encoded)
       end
@@ -62,7 +63,7 @@ module Providers
 
     def process_output(encoded)
       output = JSON.parse(encoded, symbolize_names: true)
-      stream.error(output[:error]) if output[:error]
+      stream.error("#{output[:error]}\n") if output[:error]
       stream.output(output[:stream]) if output[:stream]
     end
 
