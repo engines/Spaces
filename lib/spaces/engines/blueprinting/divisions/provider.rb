@@ -16,8 +16,8 @@ module Divisions
       provider_aspect.provider_stanzas
     end
 
-    def provider_aspect_name_elements
-      ['providers', struct.type]
+    def aspect_name_elements
+      [super, [struct.type] * 2].flatten
     end
 
     protected

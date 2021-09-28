@@ -1,8 +1,14 @@
+#TODO: remove hard-coded Terraform hacks
 require_relative 'terraforming'
 
 module Arenas
   class Space < ::Spaces::Space
+    include ::Emissions::ProviderDependent
     include ::Arenas::Terraforming
+
+    def provider_aspect_for(arena, space)
+      ::Providers::Terraform::Terraform.new(arena, space)
+    end
 
     class << self
       def default_model_class
@@ -29,14 +35,12 @@ module Arenas
     end
 
     def save_initial(arena)
-      initial_file_name_for(arena).write(arena.initial_artifacts)
-      # touch(arena) TODO: dunno if needed
+      initial_file_name_for(arena).write(provider_aspect_for(arena, self).initial_artifacts)
       arena.identifier
     end
 
     def save_runtime(arena)
-      runtime_file_name_for(arena).write(arena.runtime_artifacts)
-      # touch(arena) TODO: dunno if needed
+      runtime_file_name_for(arena).write(provider_aspect_for(arena, self).runtime_artifacts)
       arena.identifier
     end
 

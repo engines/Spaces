@@ -21,7 +21,7 @@ module Arenas
           terraform_init: [::Spaces::Commands::Executing, {execute: :terraform_init, threaded: true}],
           terraform_plan: [::Spaces::Commands::Executing, {execute: :terraform_plan, threaded: true}],
           terraform_show: [::Spaces::Commands::Executing, {execute: :terraform_show, threaded: true}],
-          terraform_apply: [::Spaces::Commands::Executing, {execute: :terraform_apply, threaded: true}],
+          terraform_apply: [::Spaces::Commands::Executing, {execute: :terraform_apply, threaded: true}]
         })
       end
 

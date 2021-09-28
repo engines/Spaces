@@ -1,5 +1,6 @@
 module Packing
   module Division
+    include ::Divisions::PackDefining
 
     def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
 
@@ -35,10 +36,6 @@ module Packing
 
     def by_precedence(keys)
       keys.sort_by { |k| precedence.index(k) || precedence_midpoint }
-    end
-
-    def provider_aspect_name_elements
-      ['providers', packing_identifier, qualifier]
     end
 
   end

@@ -1,5 +1,5 @@
 module Divisions
-  module ProviderIndependent
+  module ProviderIndependent #TODO: try to illiminate this class ... refer to super test in PackDefining
 
     def provider_aspect; self ;end
 
