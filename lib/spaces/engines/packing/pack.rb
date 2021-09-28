@@ -29,8 +29,8 @@ module Packing
       connections.map(&:packed)
     end
 
-    def provider_aspect_name_elements
-      ['providers', packing_identifier]
+    def aspect_name_elements
+      ['providers', [packing_identifier] * 2].flatten
     end
 
     def image_name; runtime_image&.name ;end

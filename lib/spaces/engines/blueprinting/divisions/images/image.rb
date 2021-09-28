@@ -1,6 +1,6 @@
 module Divisions
   class Image < ::Divisions::Subdivision
-    include ProviderDependent
+    include PackDefining
 
     class << self
       def features; [:name, :output_name] ;end
@@ -19,10 +19,6 @@ module Divisions
 
     def inflated; self ;end
     def deflated; self ;end
-
-    def provider_aspect_name_elements
-      ['providers', packing_identifier, runtime_identifier, qualifier]
-    end
 
     def name; struct.image || derived_features[:name] ;end
     def output_name; struct.output_name || derived_features[:output_name] ;end
