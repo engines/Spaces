@@ -4,6 +4,8 @@ module ProviderAspects
     class << self
       def prototype(division)
         constant_for(division).new(division)
+      rescue NameError
+        division
       end
 
       def constant_for(division)
@@ -11,7 +13,7 @@ module ProviderAspects
       end
 
       def class_name_for(division)
-        division.provider_aspect_name_elements.compact.map(&:camelize).join('::')
+        division.aspect_name_elements.compact.map(&:camelize).join('::')
       end
     end
 
