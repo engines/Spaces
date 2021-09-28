@@ -22,10 +22,15 @@ module Providers
       protected
 
       def provisioning_for(command, model)
-        Dir.chdir(path_for(model)) do
-          bridge.send(command, options[command] || {}, config(stream_for(model, command)))
-        rescue RubyTerraform::Errors::ExecutionError => e
-          raise e
+        stream_for(model, command).tap do |stream|
+          stream.output("\n") unless command == :init
+          Dir.chdir(path_for(model)) do
+            bridge.send(command, options[command] || {}, config(out(command, model)))
+            stream.output("\n")
+          rescue RubyTerraform::Errors::ExecutionError => e
+            stream.output("\n")
+            stream.error("#{e}\n")
+          end
         end
       end
 

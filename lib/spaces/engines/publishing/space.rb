@@ -25,6 +25,7 @@ module Publishing
 
     def import(descriptor, args)
       with_streaming(descriptor, :import) do
+        stream_for(descriptor, :import).output("\n")
         by_import(descriptor, args)
       end
     end
@@ -37,16 +38,21 @@ module Publishing
           by_import(b.descriptor) if (!imported?(b.descriptor) || force)
         end
       end
-    rescue ::Spaces::Errors::RepositoryFail => e
+    rescue ::Spaces::Errors::ImportFailure => e
       locations.exist_then_delete(descriptor)
-      raise e
+      logger.info(e)
+    rescue ::Spaces::Errors::ReimportFailure => e
+      logger.info(e)
     end
 
     def export(**args)
       args[:identifier].tap do |i|
         with_streaming(i, :export) do
+          stream_for(i, :export).output("\n")
           synchronize_with(blueprints, i)
           super(locations.by(i), **args)
+        rescue ::Spaces::Errors::ExportFailure => e
+          logger.info(e)
         end
       end
     end

@@ -87,22 +87,25 @@ module Spaces
         space.path_for(descriptor).join(".#{protocol}").exist?
       end
 
-      def raise_failure_for(exception)
-        raise failure, {error: exception.message}
+      # TODO: I18N for literal strings "Failed to import" and "Failed to export"
+      def stream_import_error
+        stream_for(descriptor, :import).error("Failed to import #{descriptor}\n")
       end
 
-      def failure; ::Spaces::Errors::RepositoryFail ;end
+      def stream_export_error
+        stream_for(descriptor, :export).error("Failed to export #{descriptor}\n")
+      end
+
+      def clone_failure; ::Spaces::Errors::ImportFailure ;end
+      def pull_failure; ::Spaces::Errors::ReimportFailure ;end
+      def push_failure; ::Spaces::Errors::ExportFailure ;end
       def head_identifier; 'HEAD ->' ;end
 
-      def collect(io, identifier)
-        stream_on(identifier).tap do |stream|
-          stream.collect(io) { |l| {output: l} }
-          stream.append({output: "\n"}.to_json)
+      def collect(io, command)
+        stream_for(descriptor, command).tap do |stream|
+          stream.output_lines_from(io)
+          stream.output("\n")
         end
-      end
-
-      def stream_on(identifier)
-        stream_for(descriptor, identifier)
       end
 
       def initialize(descriptor, space:)

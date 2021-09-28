@@ -8,8 +8,6 @@ module Spaces
         add
         commit_all(commit_message_for(args))
         push_remote
-      rescue git_error => e
-        raise_failure_for(e)
       end
 
       def commit_all(message)
@@ -18,8 +16,11 @@ module Spaces
 
       def push_remote
         opened.push(remote_name, branch_name, command_options) do |io|
-          collect(io, :import)
+          collect(io, :export)
         end
+      rescue git_error
+        stream_export_error
+        raise push_failure
       end
 
       def commit_message_for(args)

@@ -10,7 +10,6 @@ module Spaces
       def errors; struct[:errors] ;end
       def payload; OpenStruct.new(struct.to_h.without(:input)) ;end
 
-
       def run
         tap do
           _run
