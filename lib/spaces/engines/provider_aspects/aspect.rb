@@ -19,7 +19,7 @@ module ProviderAspects
 
     relation_accessor :division
 
-    delegate [:arena, :configuration, :runtime_identifier, :blueprint_identifier, :qualifier, :type, :temporary_script_path] => :division
+    delegate [:arena, :configuration, :blueprint_identifier, :runtime_identifier, :qualifier, :type, :temporary_script_path] => :division
 
     def resolution_stanzas_for(_); ;end
 

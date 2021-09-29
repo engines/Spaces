@@ -1,23 +1,23 @@
 require_relative 'streaming'
-require_relative 'runtime_providing'
+require_relative 'providing'
 
 module Providers
   module Terraform
     class Terraform < ::ProviderAspects::Provider
       include Streaming
-      include RuntimeProviding
+      include Providing
 
       alias_method :arena, :emission
 
-      delegate(
-        [:provider_aspects, :runtime_provider] => :arena
-      )
+      delegate(other_identifiers: :arena)
 
       def execute(command, model)
         with_streaming(model, command) do
           identifier.tap { provisioning_for(command, model) }
         end
       end
+
+      def aspect_name_elements; super.uniq ;end
 
       protected
 

@@ -30,7 +30,7 @@ module Arenas
     def runtime_bootstrapped?; arenas.runtime_file_name_for(self).exist? ;end
 
     def providers_bootstrapped
-      other_providers.select { |p| arenas.provider_file_name_for(p).exist? }.map(&:type)
+      other_provider_divisions.select { |p| arenas.provider_file_name_for(p).exist? }.map(&:type)
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end
@@ -45,7 +45,7 @@ module Arenas
     def fresh_bootstrap?; times(bootstrapped_at, :>, modified_at) ;end
 
     def fresh_providers
-      other_providers.select do |p|
+      other_provider_divisions.select do |p|
         times(arenas.provider_file_name_for(p).exist_then(&:mtime), :>, modified_at)
       end.map(&:type).uniq
     end
