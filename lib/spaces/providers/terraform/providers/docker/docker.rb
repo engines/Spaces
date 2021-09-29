@@ -6,8 +6,8 @@ module Providers
         def provider_stanzas
           %(
             provider "#{type}" {
-            # Note need to expand this to support remote hosts                                      \
-             host = "unix:///var/run/docker.sock"
+              # Note need to expand this to support remote hosts
+              host = "unix:///var/run/docker.sock"
             }
           )
         end
@@ -15,8 +15,8 @@ module Providers
         def required_stanza
           %(
             docker = {
-              source = "kreuzwerker/docker"
-              version = "2.11.0"
+              version = "#{configuration.version}"
+              source = "#{configuration.source}"
             }
           )
         end

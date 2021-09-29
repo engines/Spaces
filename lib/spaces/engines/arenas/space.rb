@@ -46,8 +46,8 @@ module Arenas
 
     def save_other_providers(arena)
       arena.tap do |m|
-        m.other_providers.each do |p|
-          provider_file_name_for(p).write(p.provider_artifacts)
+        provider_aspect_for(m, self).other_aspects.each do |a|
+          provider_file_name_for(a).write(a.provider_artifacts)
         end
         touch(arena)
       end.identifier

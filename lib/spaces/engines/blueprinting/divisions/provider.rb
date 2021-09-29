@@ -12,9 +12,9 @@ module Divisions
       struct.type || derived_features[:type]
     end
 
-    def provider_artifacts
-      provider_aspect.provider_stanzas
-    end
+    # def provider_artifacts
+    #   provider_aspect.provider_stanzas
+    # end
 
     def aspect_name_elements
       [super, [struct.type] * 2].flatten

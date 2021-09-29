@@ -1,7 +1,7 @@
 # TODO: FIX -- Terraform-specific!----------------------------------------------
 
 module Providers
-  # module Terraform
+  module Terraform
     module PowerDns
       class PowerDns < ::ProviderAspects::Provider
 
@@ -14,7 +14,7 @@ module Providers
         def endpoint; configuration.struct.endpoint ;end
 
 
-        def provider_stanzas
+        def provider_artifacts
           %(
             provider "powerdns" {
               api_key    = "#{configuration.api_key}"
@@ -51,5 +51,5 @@ module Providers
 
       end
     end
-  # end
+  end
 end

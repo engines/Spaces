@@ -1,22 +1,6 @@
 module Arenas
   module Providing
 
-    def providers; provider_map.values ;end
-
-    def provider_aspects; providers.map(&:provider_aspect).compact ;end
-
-    def runtime_provider
-      @runtime_provider ||= providers.detect { |p| p.emission.defines_runtime_provider? }
-    end
-
-    def packing_provider
-      @packing_provider ||= providers.detect { |p| p.emission.defines_packing_provider? }
-    end
-
-    def other_providers
-      providers - [runtime_provider, packing_provider]
-    end
-
     def runtime_identifier
       runtime_binding&.runtime_identifier
     end
@@ -25,9 +9,37 @@ module Arenas
       packing_binding&.packing_identifier
     end
 
-    def provider_map
-      @provider_map ||= provider_resolution_map.transform_values(&:provider)
+    def other_identifiers
+      provider_division_map.keys - [runtime_identifier, packing_identifier]
     end
+
+    #---------------------------------------------------------------------------
+
+    def runtime_aspect; provider_aspect_for(:runtime) ;end
+
+    def packing_aspect; provider_aspect_for(:packing) ;end
+
+    def provider_aspect_for(purpose); provider_aspect_map["#{purpose}"] ;end
+
+    def provider_aspects; provider_aspect_map.values ;end
+
+    def provider_aspect_map
+      @provider_aspect_map ||= provider_division_map.transform_values(&:provider_aspect)
+    end
+
+    #---------------------------------------------------------------------------
+
+    def other_provider_divisions
+      other_identifiers.map { |i| provider_division_map[i] }
+    end
+
+    def provider_divisions; provider_division_map.values ;end
+
+    def provider_division_map
+      @provider_division_map ||= provider_resolution_map.transform_values(&:provider)
+    end
+
+    #---------------------------------------------------------------------------
 
     def provider_resolution_map
       @provider_resolution_map ||= resolution_map.select { |_, v| v.has?(:provider) }

@@ -50,11 +50,11 @@ module Arenas
     def arena; itself ;end
 
     def method_missing(m, *args, &block)
-      provider_map["#{m}"] || super
+      provider_division_map["#{m}"] || super
     end
 
     def respond_to_missing?(m, *)
-      provider_map.keys.include?("#{m}") || super
+      provider_division_map.keys.include?("#{m}") || super
     end
 
   end
