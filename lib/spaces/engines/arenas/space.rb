@@ -35,19 +35,19 @@ module Arenas
     end
 
     def save_initial(arena)
-      initial_file_name_for(arena).write(provider_aspect_for(arena, self).initial_artifacts)
+      initial_file_name_for(arena).write(provider_aspect_for(arena, self).initial_artifact)
       arena.identifier
     end
 
     def save_runtime(arena)
-      runtime_file_name_for(arena).write(provider_aspect_for(arena, self).runtime_artifacts)
+      runtime_file_name_for(arena).write(provider_aspect_for(arena, self).runtime_artifact)
       arena.identifier
     end
 
     def save_other_providers(arena)
       arena.tap do |m|
         provider_aspect_for(m, self).other_aspects.each do |a|
-          provider_file_name_for(a).write(a.provider_artifacts)
+          provider_file_name_for(a).write(a.provider_artifact)
         end
         touch(arena)
       end.identifier

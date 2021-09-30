@@ -2,7 +2,7 @@ module Providers
   module Docker
     class OtherPackage < ::ProviderAspects::OtherPackage
 
-     def packing_artifact
+     def packing_stanza
         "RUN #{temporary_script_path}/#{qualifier}/add #{environment_vars.in_quotes.join(' ')}"
       end
 

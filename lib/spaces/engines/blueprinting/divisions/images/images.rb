@@ -2,7 +2,7 @@ module Divisions
   class Images < ::Divisions::Divisible
     include PackDefining
 
-    delegate packing_artifact: :provider_aspect
+    delegate packing_stanza: :provider_aspect
 
     def transformed_to(transformation)
       in_blueprint? ? super : super.select { |s| s.type == runtime_identifier }

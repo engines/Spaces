@@ -12,7 +12,7 @@ module Providers
           )
         end
 
-        def resolution_stanzas_for(_)
+        def stanzas_for(_)
           %Q(
             resource "docker_volume" "#{volume_name}"  {
               name = "#{volume_name}"

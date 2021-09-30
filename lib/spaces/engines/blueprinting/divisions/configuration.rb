@@ -8,7 +8,7 @@ module Divisions
 
     def embedded_with(other); original_embedded_with(other) ;end
 
-    def packing_artifact_for(_); provider_aspect.packing_artifact ;end
+    def packing_stanza_for(_); provider_aspect.packing_stanza ;end
 
     def inflated; self ;end
     def deflated; self ;end

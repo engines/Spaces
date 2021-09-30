@@ -21,7 +21,7 @@ module ProviderAspects
 
     delegate [:arena, :configuration, :blueprint_identifier, :runtime_identifier, :qualifier, :type, :temporary_script_path] => :division
 
-    def resolution_stanzas_for(_); ;end
+    def stanzas_for(_); ;end
 
     def container_type
       [runtime_identifier, 'container'].compact.join('_')

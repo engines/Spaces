@@ -4,7 +4,7 @@ module Providers
 
       delegate name: :division
 
-      def packing_artifact
+      def packing_stanza
         "FROM #{name}"
       end
 

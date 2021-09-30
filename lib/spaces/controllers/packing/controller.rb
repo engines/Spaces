@@ -9,7 +9,7 @@ module Packing
           create: Commands::Saving,
           update: Commands::Saving,
           commit: [Commands::Executing, {execute: :commit, threaded: true}],
-          artifacts: Commands::Artifacts
+          artifact: Commands::Artifact
         })
       end
 

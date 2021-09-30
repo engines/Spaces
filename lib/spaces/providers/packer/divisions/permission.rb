@@ -4,7 +4,7 @@ module Providers
 
       delegate [:recursion, :ownership, :file, :mode] => :division
 
-      def packing_artifact
+      def packing_stanza
         {
           type: 'shell',
           inline: [

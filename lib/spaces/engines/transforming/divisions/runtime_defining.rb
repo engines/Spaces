@@ -8,9 +8,9 @@ module Divisions
       [super, runtime_identifier, qualifier].flatten
     end
 
-    def resolution_stanzas_for(_)
+    def stanzas_for(_)
       unless self == provider_aspect
-        provider_aspect.resolution_stanzas_for(_)
+        provider_aspect.stanzas_for(_)
       else
         super
       end        

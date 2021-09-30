@@ -5,8 +5,8 @@ module ProviderAspects
 
     delegate all: :division
 
-    def packing_artifact
-      all.map(&:provider_aspect).map(&:packing_artifact)
+    def packing_stanza
+      all.map(&:provider_aspect).map(&:packing_stanza)
     end
 
   end

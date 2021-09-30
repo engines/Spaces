@@ -4,7 +4,7 @@ module Providers
 
       delegate to_h: :division
 
-      def packing_artifact
+      def packing_stanza
         (h = to_h).keys.map { |k| statement(k, h[k]) }.join(connector)
       end
 

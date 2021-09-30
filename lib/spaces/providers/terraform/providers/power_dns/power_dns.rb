@@ -14,7 +14,7 @@ module Providers
         def endpoint; configuration.struct.endpoint ;end
 
 
-        def provider_artifacts
+        def provider_artifact
           %(
             provider "powerdns" {
               api_key    = "#{configuration.api_key}"
@@ -37,7 +37,7 @@ module Providers
           )
         end
 
-        def resolution_stanzas_for(resolution)
+        def stanzas_for(resolution)
           %(
             resource "powerdns_record" "#{resolution.blueprint_identifier}" {
               zone    = "#{universe.host}."

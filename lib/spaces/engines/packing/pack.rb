@@ -1,19 +1,24 @@
 module Packing
 
-  module Payloading
+  module Artifact
+
     def artifact
+      stanza_map.values.join("\n")
+    end
+
+    def stanza_map
       keys.inject({}) do |m, k|
-        m.tap { m[k] = artifact_for(k) }
+        m.tap { m[k] = stanza_for(k) }
       end.compact
     end
 
-    def artifact_for(key)
-      division_map[key]&.provider_aspect&.packing_artifact
+    def stanza_for(key)
+      division_map[key]&.provider_aspect&.packing_stanza
     end
   end
 
   class Pack < ::Resolving::Emission
-    include Payloading
+    include Artifact
 
     class << self
       def composition_class; Composition ;end

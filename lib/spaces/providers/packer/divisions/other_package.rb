@@ -2,7 +2,7 @@ module Providers
   module Packer
     class OtherPackage < ::ProviderAspects::OtherPackage
 
-      def packing_artifact
+      def packing_stanza
         {
           type: 'shell',
           environment_vars: environment_vars,

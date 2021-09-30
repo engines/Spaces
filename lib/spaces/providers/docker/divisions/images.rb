@@ -2,7 +2,7 @@ module Providers
   module Docker
     class Images < ::ProviderAspects::Images
 
-      def packing_artifact
+      def packing_stanza
         super.join("\n")
       end
 

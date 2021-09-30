@@ -17,7 +17,7 @@ module Providers
           )
         end
 
-        def resolution_stanzas_for(_)
+        def stanzas_for(_)
           %Q(
             resource "lxd_volume" "#{volume_name}" {
               name = "#{volume_name}"

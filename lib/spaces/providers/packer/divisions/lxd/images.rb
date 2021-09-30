@@ -3,7 +3,7 @@ module Providers
     module Lxd
       class Images < ::ProviderAspects::Images
 
-        def packing_artifact; division.to_h ;end
+        def packing_stanza; division.to_h ;end
 
       end
     end

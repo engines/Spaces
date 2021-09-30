@@ -13,16 +13,12 @@ module Providers
 
       delegate(
         [:connection, :version, :info, :default_socket_url] => :klass,
-        [:image_name, :output_name] => :pack,
+        [:artifact, :image_name, :output_name] => :pack,
         [:all, :get, :prune] => :bridge
       )
 
       def save
         artifact_path.write(artifact)
-      end
-
-      def artifact
-        pack.artifact.values.join("\n")
       end
 
       def create

@@ -3,7 +3,7 @@ module Providers
     module Lxd
       class Container < ::ProviderAspects::Container
 
-        def resolution_stanzas_for(_)
+        def stanzas_for(_)
           %(
             resource "#{container_type}" "#{blueprint_identifier}" {
               name      = "#{blueprint_identifier}"

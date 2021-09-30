@@ -2,7 +2,7 @@ module Providers
   module Packer
     class SystemPackages < ::ProviderAspects::SystemPackages
 
-      def packing_artifact_for(key)
+      def packing_stanza_for(key)
         {
           type: 'shell',
           environment_vars: "SYSTEM_PACKAGE_#{key.upcase}=#{division.send(key)&.join(' ')}",

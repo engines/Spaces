@@ -3,7 +3,7 @@ module Divisions
 
     def provider_aspect; self ;end
 
-    def resolution_stanzas_for(_) ;end
+    def stanzas_for(_) ;end
 
   end
 end

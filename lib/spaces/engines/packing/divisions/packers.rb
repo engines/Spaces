@@ -9,7 +9,7 @@ module Divisions
     delegate(
       resolutions: :universe,
       resolution: :pack,
-      [:packing_artifact, :auxiliary_file_artifact_for, :file_copy_artifact_for] => :provider_aspect
+      [:packing_stanza, :auxiliary_file_stanza_for, :file_copy_stanza_for] => :provider_aspect
     )
 
     def complete_precedence
@@ -27,34 +27,34 @@ module Divisions
         end
     end
 
-    def packing_artifacts
-      [first_artifacts, precedential_artifacts].flatten.compact
+    def packing_stanzas
+      [first_stanzas, precedential_stanzas].flatten.compact
     end
 
-    def first_artifacts
+    def first_stanzas
       auxiliary_folders.map do |f|
         if (p = source_path_for(f)).exist?
-          auxiliary_file_artifact_for(p)
+          auxiliary_file_stanza_for(p)
         end
       end.compact
     end
 
-    def precedential_artifacts
-      complete_precedence.map { |p| artifacts_for(p) }
+    def precedential_stanzas
+      complete_precedence.map { |p| stanzas_for(p) }
     end
 
-    def artifacts_for(precedence)
-      [file_copy_artifacts_for(precedence), division_artifacts_for(precedence)]
+    def stanzas_for(precedence)
+      [file_copy_stanzas_for(precedence), division_stanzas_for(precedence)]
     end
 
-    def division_artifacts_for(precedence)
-      packing_divisions.map { |d| d.packing_artifact_for(precedence) if d.uses?(precedence) }
+    def division_stanzas_for(precedence)
+      packing_divisions.map { |d| d.packing_stanza_for(precedence) if d.uses?(precedence) }
     end
 
-    def file_copy_artifacts_for(precedence)
+    def file_copy_stanzas_for(precedence)
       auxiliary_folders.map do |f|
         if copy_source_path_for(f, precedence).exist?
-          file_copy_artifact_for(f, precedence)
+          file_copy_stanza_for(f, precedence)
         end
       end.compact
     end
