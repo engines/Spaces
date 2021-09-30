@@ -1,9 +1,20 @@
-# require_relative 'runtime_providing'
-#
 module Providers
   module Terraform
-    module Providing
-      # include RuntimeProviding
+    module Arena
+
+      def runtime_artifact
+        runtime_aspect.provider_stanzas
+      end
+
+      def initial_artifact
+        %(
+          terraform {
+            required_providers {
+              #{provider_aspects.flatten.map(&:required_stanza).flatten.compact.join}
+            }
+          }
+        )
+      end
 
       #-------------------------------------------------------------------------
 
@@ -44,22 +55,6 @@ module Providers
 
       def aspect_name_elements_for(provider_aspect)
         [aspect_name_elements, provider_aspect.aspect_name_elements - ['providers']].flatten
-      end
-
-      #-------------------------------------------------------------------------
-
-      def runtime_artifacts
-        runtime_aspect.provider_stanzas
-      end
-
-      def initial_artifacts
-        %(
-          terraform {
-            required_providers {
-              #{provider_aspects.flatten.map(&:required_stanza).flatten.compact.join}
-            }
-          }
-        )
       end
 
     end

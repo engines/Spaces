@@ -1,15 +1,23 @@
 require_relative 'streaming'
-require_relative 'providing'
+require_relative 'arena'
+require_relative 'provisions'
 
 module Providers
   module Terraform
     class Terraform < ::ProviderAspects::Provider
       include Streaming
-      include Providing
+      include Arena
+      include Provisions
 
+      #TODO: resolve this goofiness---------------------------------------------
       alias_method :arena, :emission
+      alias_method :provisions, :emission
+      #-------------------------------------------------------------------------
 
-      delegate(other_identifiers: :arena)
+      delegate(
+        other_identifiers: :arena,
+        artifact: :provisions
+      )
 
       def execute(command, model)
         with_streaming(model, command) do

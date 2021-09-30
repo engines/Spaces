@@ -20,7 +20,7 @@ module ProviderAspects
 
     def aspect_name_elements; name_array.map(&:downcase) ;end
 
-    def required_stanza; end #TODO: TERRAFORM SPECIFIC?
+    # def required_stanza; end #TODO: TERRAFORM SPECIFIC?
 
     def initialize(emission, space = nil)
       super(emission)
