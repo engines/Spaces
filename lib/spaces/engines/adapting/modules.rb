@@ -1,5 +1,3 @@
-require_relative 'aspect'
-
 module ProviderAspects
   ModuleList = ::Divisions::ModuleList
 

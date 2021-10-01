@@ -1,6 +1,5 @@
 module Divisions
   class Permission < ::Divisions::Subdivision
-    include ProviderDependent
     include ::Packing::Division
 
     class << self

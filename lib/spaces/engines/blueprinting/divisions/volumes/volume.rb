@@ -1,6 +1,5 @@
 module Divisions
   class Volume < ::Divisions::Subdivision
-    include RuntimeDefining
 
     class << self
       def features; [:source, :destination] ;end
@@ -8,7 +7,7 @@ module Divisions
 
     alias_method :identifier, :context_identifier
 
-    delegate device_stanzas: :provider_aspect
+    delegate device_stanzas: :provider_division_aspect
 
   end
 end

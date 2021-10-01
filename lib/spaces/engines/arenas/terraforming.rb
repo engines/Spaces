@@ -8,7 +8,7 @@ module Arenas
     def terraform_apply(model); execute_on_aspect(:apply, model) ;end
 
     def execute_on_aspect(command, model)
-      provider_aspect_for(model, space).execute(command, model)
+      execution_aspect_for(model, space).execute(command, model)
     end
 
   end

@@ -1,13 +1,9 @@
 require_relative 'streaming'
-require_relative 'arena'
-require_relative 'provisions'
 
 module Providers
   module Terraform
     class Terraform < ::ProviderAspects::Provider
       include Streaming
-      include Arena
-      include Provisions
 
       #TODO: resolve this goofiness---------------------------------------------
       alias_method :arena, :emission

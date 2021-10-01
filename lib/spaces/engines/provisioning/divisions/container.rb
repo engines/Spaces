@@ -2,7 +2,6 @@ require_relative 'commissioning'
 
 module Divisions
   class Container < ::Divisions::Division
-    include RuntimeDefining
     include Commissioning
 
     alias_accessor :provisions, :emission

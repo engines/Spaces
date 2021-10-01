@@ -15,16 +15,16 @@ module Arenas
 
     #---------------------------------------------------------------------------
 
-    def runtime_aspect; provider_aspect_for(:runtime) ;end
+    def runtime_aspect; execution_aspect_for(:runtime) ;end
 
-    def packing_aspect; provider_aspect_for(:packing) ;end
+    def packing_aspect; execution_aspect_for(:packing) ;end
 
-    def provider_aspect_for(purpose); provider_aspect_map["#{purpose}"] ;end
+    def execution_aspect_for(purpose); provider_division_aspect_map["#{purpose}"] ;end
 
-    def provider_aspects; provider_aspect_map.values ;end
+    def provider_division_aspects; provider_division_aspect_map.values ;end
 
-    def provider_aspect_map
-      @provider_aspect_map ||= provider_division_map.transform_values(&:provider_aspect)
+    def provider_division_aspect_map
+      @provider_division_aspect_map ||= provider_division_map.transform_values(&:provider_division_aspect)
     end
 
     #---------------------------------------------------------------------------

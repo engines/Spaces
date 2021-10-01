@@ -1,6 +1,5 @@
 module Divisions
   class OtherPackage < ::Divisions::Subdivision
-    include ProviderDependent
     include ::Packing::Division
 
     class << self

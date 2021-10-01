@@ -1,6 +1,5 @@
 module Packing
   module Division
-    include ::Divisions::PackDefining
 
     def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
 

@@ -1,6 +1,5 @@
 module Divisions
   class Modules < ::Divisions::Division
-    include ProviderDependent
     include ::Packing::Division
 
     class << self

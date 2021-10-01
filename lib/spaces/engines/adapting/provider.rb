@@ -1,5 +1,3 @@
-require_relative 'aspect'
-
 module ProviderAspects
   class Provider < Aspect
 
@@ -17,8 +15,6 @@ module ProviderAspects
       [:type, :descriptor] => :emission,
       [:by, :path_for] => :space
     )
-
-    def aspect_name_elements; name_array.map(&:downcase) ;end
 
     # def required_stanza; end #TODO: TERRAFORM SPECIFIC?
 

@@ -1,6 +1,5 @@
 module Divisions
   class Configuration < ::Divisions::Division
-    include ProviderDependent
 
     alias_method :original_embedded_with, :embedded_with
 
@@ -8,7 +7,7 @@ module Divisions
 
     def embedded_with(other); original_embedded_with(other) ;end
 
-    def packing_stanza_for(_); provider_aspect.packing_stanza ;end
+    def packing_stanza_for(_); provider_division_aspect.packing_stanza ;end
 
     def inflated; self ;end
     def deflated; self ;end

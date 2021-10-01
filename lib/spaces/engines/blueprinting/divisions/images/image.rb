@@ -1,6 +1,5 @@
 module Divisions
   class Image < ::Divisions::Subdivision
-    include PackDefining
 
     class << self
       def features; [:name, :output_name] ;end
@@ -8,7 +7,7 @@ module Divisions
 
     delegate(
       tenant: :emission,
-      features: :provider_aspect
+      features: :provider_division_aspect
     )
 
     def identifier; type ;end

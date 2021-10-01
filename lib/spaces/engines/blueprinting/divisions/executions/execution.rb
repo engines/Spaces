@@ -1,6 +1,5 @@
 module Divisions
   class Execution < ::Divisions::Subdivision
-    include PackDefining
 
     def identifier; type ;end
 

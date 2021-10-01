@@ -1,5 +1,7 @@
 require_level 'spaces/engines/transforming'
+require_all   'spaces/engines/transforming/aspects'
 require_level 'spaces/engines/transforming/divisions'
+require_all   'spaces/engines/transforming/providers'
 require_level 'spaces/engines/transforming/divisions/bindings'
 require_all   'spaces/engines/transforming/emissions'
 
@@ -18,4 +20,5 @@ require_all   'spaces/engines/provisioning'
 require_all   'spaces/engines/keys'
 require_all   'spaces/engines/universes'
 
-require_all   'spaces/engines/provider_aspects'
+require_all   'spaces/engines/adapting'
+require_all   'spaces/engines/zero'

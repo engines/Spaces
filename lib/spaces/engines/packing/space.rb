@@ -1,6 +1,5 @@
 module Packing
   class Space < ::Spaces::Space
-    include ::Emissions::ProviderDependent
 
     class << self
       def default_model_class; Pack ;end
@@ -9,7 +8,7 @@ module Packing
     delegate(resolutions: :universe)
 
     def commit(pack)
-      provider_aspect_for(pack, self).commit
+      execution_aspect_for(pack, self).commit
     end
 
     def by(identifier, klass = default_model_class)
@@ -23,7 +22,7 @@ module Packing
 
       ensure_connections_exist_for(pack)
       super.tap do
-        provider_aspect_for(pack, self).save
+        execution_aspect_for(pack, self).save
       end
     rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: pack.identifier, klass: klass)

@@ -3,10 +3,9 @@ require_relative 'terraforming'
 
 module Arenas
   class Space < ::Spaces::Space
-    include ::Emissions::ProviderDependent
     include ::Arenas::Terraforming
 
-    def provider_aspect_for(arena, space)
+    def execution_aspect_for(arena, space)
       ::Providers::Terraform::Terraform.new(arena, space)
     end
 
@@ -35,18 +34,18 @@ module Arenas
     end
 
     def save_initial(arena)
-      initial_file_name_for(arena).write(provider_aspect_for(arena, self).initial_artifact)
+      initial_file_name_for(arena).write(arena.provider_aspect.initial_artifact)
       arena.identifier
     end
 
     def save_runtime(arena)
-      runtime_file_name_for(arena).write(provider_aspect_for(arena, self).runtime_artifact)
+      runtime_file_name_for(arena).write(arena.provider_aspect.runtime_artifact)
       arena.identifier
     end
 
     def save_other_providers(arena)
       arena.tap do |m|
-        provider_aspect_for(m, self).other_aspects.each do |a|
+        execution_aspect_for(m, self).other_aspects.each do |a|
           provider_file_name_for(a).write(a.provider_artifact)
         end
         touch(arena)

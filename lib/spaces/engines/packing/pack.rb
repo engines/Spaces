@@ -13,7 +13,7 @@ module Packing
     end
 
     def stanza_for(key)
-      division_map[key]&.provider_aspect&.packing_stanza
+      division_map[key]&.provider_division_aspect&.packing_stanza
     end
   end
 
@@ -35,7 +35,7 @@ module Packing
     end
 
     def aspect_name_elements
-      ['providers', [packing_identifier] * 2].flatten
+      [super, [packing_identifier] * 2].flatten #TODO: refactor uses of '] * 2]'
     end
 
     def image_name; runtime_image&.name ;end

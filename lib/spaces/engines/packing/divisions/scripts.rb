@@ -2,7 +2,6 @@ require_relative 'division'
 
 module Packing
   class Scripts < ::Divisions::Division
-    include ::Divisions::ProviderDependent
     include ::Packing::Division
 
     alias_method :pack, :emission

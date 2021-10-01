@@ -9,7 +9,7 @@ module Provisioning
 
     delegate(
       [:arenas, :resolutions] => :universe,
-      provider_aspect_for: :arenas
+      execution_aspect_for: :arenas
     )
 
     def cascade_deletes; [:registry] ;end
@@ -23,7 +23,7 @@ module Provisioning
     def save(model)
       ensure_connections_exist_for(model)
       if model.resolution.provisionable?
-        arena_path(model).write(provider_aspect_for(model, self).artifact)
+        arena_path(model).write(execution_aspect_for(model, self).artifact)
       end
       super
     end

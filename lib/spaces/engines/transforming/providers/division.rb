@@ -1,12 +1,11 @@
 module Divisions
   class Provider < ::Divisions::Division
-    include ProviderDependent
 
     class << self
       def features; [:type] ;end
     end
 
-    delegate required_stanza: :provider_aspect
+    delegate required_stanza: :provider_division_aspect
 
     def type
       struct.type || derived_features[:type]

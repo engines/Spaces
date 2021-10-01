@@ -1,28 +1,25 @@
 module Provisioning
 
-    module Artifact
+  module Artifact
 
-      def artifact
-
-                pp '.' * 55
-                pp klass
-                pp identifier
-                pp divisions_including_resolution_divisions.map(&:qualifier)                
-        stanza_map.values.join("\n")
-      end
-
-      def stanza_map
-        pp '.' * 11
-        pp keys
-        keys.inject({}) do |m, k|
-          m.tap { m[k] = stanza_for(k) }
-        end.compact
-      end
-
-      def stanza_for(key)
-        division_map[key]&.provider_aspect&.stanzas_for(nil)
-      end
+    def provider_aspect
+      @provider_aspect ||= ::Providers::Terraform::Provisions.new(self)
     end
+
+    def artifact
+      stanza_map.values.join("\n")
+    end
+
+    def stanza_map
+      keys.inject({}) do |m, k|
+        m.tap { m[k] = stanza_for(k) }
+      end.compact
+    end
+
+    def stanza_for(key)
+      division_map[key]&.provider_division_aspect&.stanzas_for(nil)
+    end
+  end
 
   class Provisions < ::Resolving::Emission
     include Artifact
@@ -39,8 +36,6 @@ module Provisioning
       connections_down.map(&:provisioned)
     end
 
-    # def artifact; stanzas.join("\n") ;end
-    #
     def stanzas
       divisions_including_resolution_divisions.map { |d| d.stanzas_for(self) }.flatten.compact
     end

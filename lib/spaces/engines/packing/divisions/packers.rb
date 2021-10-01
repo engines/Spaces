@@ -9,7 +9,7 @@ module Divisions
     delegate(
       resolutions: :universe,
       resolution: :pack,
-      [:packing_stanza, :auxiliary_file_stanza_for, :file_copy_stanza_for] => :provider_aspect
+      [:packing_stanza, :auxiliary_file_stanza_for, :file_copy_stanza_for] => :provider_division_aspect
     )
 
     def complete_precedence

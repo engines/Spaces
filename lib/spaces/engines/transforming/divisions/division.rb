@@ -1,13 +1,11 @@
 require_relative 'embeddable'
 require_relative 'resolvable'
-require_relative 'provider_independent'
 
 module Divisions
   class Division < ::Transforming::Transformable
     include Engines::Logger
     include Embeddable
     include Resolvable
-    include ProviderIndependent
 
     attr_accessor :label
 
@@ -27,6 +25,10 @@ module Divisions
       ranking: :composition,
       resolutions: :universe
     )
+
+    def aspect_name_elements
+      [super, name_array].flatten
+    end
 
     def packing_division?
       klass.ancestors.include?(::Packing::Division)
