@@ -1,9 +1,6 @@
 require_relative 'content'
-require_relative 'associating'
-require_relative 'binding'
 require_relative 'topology'
-require_relative 'merging'
-require_relative 'hashing'
+require_relative 'requires'
 
 module Emissions
   class Emission < ::Transforming::Transformable

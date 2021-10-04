@@ -1,10 +1,4 @@
-require_relative 'binding'
-require_relative 'providing'
-require_relative 'blueprinting'
-require_relative 'installing'
-require_relative 'resolving'
-require_relative 'packing'
-require_relative 'provisioning'
+require_relative 'requires'
 require_relative 'summary'
 require_relative 'state'
 

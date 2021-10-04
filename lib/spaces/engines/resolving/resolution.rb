@@ -1,6 +1,4 @@
-require_relative 'registering'
-require_relative 'packing'
-require_relative 'provisioning'
+require_relative 'requires'
 require_relative 'summary'
 
 module Resolving
