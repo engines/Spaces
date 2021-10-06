@@ -2,9 +2,9 @@ require_relative 'patch/image'
 
 module Providers
   module Docker
-    class Docker < ::ProviderAspects::Provider
+    class Interface < ::Providers::Interface
       extend ::Docker
-      include ::Spaces::Streaming
+      include Streaming
 
       ::Docker.options[:read_timeout] = 1000
       ::Docker.options[:write_timeout] = 1000

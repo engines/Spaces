@@ -2,12 +2,12 @@ require_relative 'streaming'
 
 module Providers
   module Terraform
-    class Terraform < ::ProviderAspects::Provider
+    class Terraform < ::Providers::Provider
       include Streaming
 
       #TODO: resolve this goofiness---------------------------------------------
-      alias_method :arena, :emission
-      alias_method :provisions, :emission
+      # alias_method :arena, :emission
+      # alias_method :provisions, :emission
       #-------------------------------------------------------------------------
 
       delegate(

@@ -1,5 +1,2 @@
-require_all 'spaces/providers/modules'
-require_all 'spaces/providers/docker'
-require_all 'spaces/providers/lxd'
-require_all 'spaces/providers/power_dns'
-require_all 'spaces/providers/terraform'
+require_all 'spaces/providers/subordinates'
+require_all 'spaces/providers/primaries'

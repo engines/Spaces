@@ -2,9 +2,9 @@ require 'packer'
 
 module Providers
   module Packer
-    class Packer < ::ProviderAspects::Provider
+    class Packer < ::Providers::Provider
 
-      alias_method :pack, :emission
+      # alias_method :pack, :emission
 
       def save
         path_for(pack).join("commit.json").write(pack.artifact.to_json)

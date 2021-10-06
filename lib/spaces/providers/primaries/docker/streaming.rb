@@ -1,7 +1,6 @@
 module Providers
   module Docker
     module Streaming
-      include ::Spaces::Streaming
 
       def collect(io)
         stream_on(:build).collect(io) do |raw|

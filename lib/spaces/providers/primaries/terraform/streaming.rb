@@ -1,7 +1,6 @@
 module Providers
   module Terraform
     module Streaming
-    include ::Spaces::Streaming
 
     def config(out)
       {
