@@ -13,7 +13,6 @@ module Resolving
     end
 
     delegate(
-      [:runtime_binding, :packing_binding] => :arena,
       [:installations, :packs, :provisioning] => :universe,
       input: :installation
     )

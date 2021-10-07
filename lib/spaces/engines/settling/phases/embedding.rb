@@ -11,20 +11,16 @@ module Settling
 
     def embedding_division_map
       embedding_keys.inject({}) do |m, k|
-        m.tap { m[k] = division_for(k)&.with_embeds(runtime_embeds) }
+        m.tap { m[k] = division_for(k)&.with_embeds(embeds_down) } #TODO: check if this overrides in the wrong direction
       end.compact
     end
 
     def embedding_keys
-      @embedding_keys ||= [division_keys, runtime_embeds.map(&:division_keys)].flatten.uniq
+      @embedding_keys ||= [division_keys, embeds_down.map(&:division_keys)].flatten.uniq
     end
 
     def embeds_including_blueprint
-      [blueprint, runtime_embeds].flatten.compact.reverse
-    end
-
-    def runtime_embeds
-      @runtime_embeds ||= runtime_embeds_for(runtime_identifier)
+      [blueprint, embeds_down].flatten.compact.reverse
     end
 
     def bindings_flattened
