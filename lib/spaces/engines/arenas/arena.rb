@@ -1,6 +1,5 @@
 require_relative 'requires'
 require_relative 'summary'
-require_relative 'state'
 
 module Arenas
   class Arena < ::Emissions::Emission
@@ -12,7 +11,6 @@ module Arenas
     include ::Arenas::Packing
     include ::Arenas::Provisioning
     include ::Arenas::Summary
-    include ::Arenas::State
 
     class << self
       def composition_class; Composition ;end
@@ -42,6 +40,9 @@ module Arenas
     end
 
     def arena; itself ;end
+    def state
+      @state ||= State.new(self)
+    end
 
     def method_missing(m, *args, &block)
       provider_division_map["#{m}"] || super
