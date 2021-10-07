@@ -33,6 +33,9 @@ module Arenas
         tap { touch(arena) }
     end
 
+    # --------------------------------------------------------------------------
+    # TODO: possibly all changes with providers being assumed
+
     def save_initial(arena)
       initial_file_name_for(arena).write(arena.provider_aspect.initial_artifact)
       arena.identifier
@@ -43,7 +46,7 @@ module Arenas
       arena.identifier
     end
 
-    def save_other_providers(arena)
+    def save_subordinate_providers(arena)
       arena.tap do |m|
         execution_aspect_for(m, self).other_aspects.each do |a|
           provider_file_name_for(a).write(a.provider_artifact)
@@ -63,6 +66,8 @@ module Arenas
     def provider_file_name_for(provider)
       path_for(provider.arena).join(provider_basename_for(provider))
     end
+
+    # --------------------------------------------------------------------------
 
     def path_for(model)
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super

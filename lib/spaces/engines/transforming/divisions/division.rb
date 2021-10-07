@@ -21,13 +21,13 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :in_blueprint?, :runtime_identifier, :packing_identifier, :arena] => :emission,
+      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :in_blueprint?, :runtime_qualifier, :packtime_qualifier, :arena] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
 
     def aspect_name_elements
-      [super, name_array].flatten
+      [super, name_elements].flatten
     end
 
     def packing_division?

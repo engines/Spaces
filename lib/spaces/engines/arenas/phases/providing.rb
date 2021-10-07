@@ -1,49 +1,36 @@
 module Arenas
   module Providing
 
-    def runtime_identifier
-      runtime_binding&.runtime_identifier
+    def runtime_provider; provider_for(:runtime) ;end
+    def packing_provider; provider_for(:packing) ;end
+    def provisioning_provider; provider_for(:provisioning) ;end
+
+    def provider_for(purpose); provider_map[purpose] ;end
+
+    def primary_providers
+      providers.select do |p|
+        zero.primary_provider_roles.include?(p.role)
+      end
     end
 
-    def packing_identifier
-      packing_binding&.packing_identifier
+    def subordinate_providers
+       providers - primary_providers
     end
 
-    def other_identifiers
-      provider_division_map.keys - [runtime_identifier, packing_identifier]
+    def providers
+      provider_map.values
     end
 
-    #---------------------------------------------------------------------------
-
-    def runtime_aspect; execution_aspect_for(:runtime) ;end
-
-    def packing_aspect; execution_aspect_for(:packing) ;end
-
-    def execution_aspect_for(purpose); provider_division_aspect_map["#{purpose}"] ;end
-
-    def provider_division_aspects; provider_division_aspect_map.values ;end
-
-    def provider_division_aspect_map
-      @provider_division_aspect_map ||= provider_division_map.transform_values(&:provider_division_aspect)
+    def provider_map
+      @provider_map ||= zero.keys.inject({}) do |m, k|
+        m.tap do
+          m[k] = zero.class_map[k].first.new(k)
+        end
+      end
     end
 
-    #---------------------------------------------------------------------------
-
-    def other_provider_divisions
-      other_identifiers.map { |i| provider_division_map[i] }
-    end
-
-    def provider_divisions; provider_division_map.values ;end
-
-    def provider_division_map
-      @provider_division_map ||= provider_resolution_map.transform_values(&:provider)
-    end
-
-    #---------------------------------------------------------------------------
-
-    def provider_resolution_map
-      @provider_resolution_map ||= resolution_map.select { |_, v| v.has?(:provider) }
-    end
+    def runtime_qualifier; runtime_provider.qualifier ;end
+    def packing_qualifier; provpacking_provider.qualifier ;end
 
   end
 end

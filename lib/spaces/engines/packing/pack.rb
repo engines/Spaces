@@ -35,7 +35,7 @@ module Packing
     end
 
     def aspect_name_elements
-      [super, [packing_identifier] * 2].flatten #TODO: refactor uses of '] * 2]'
+      [super, [packtime_qualifier] * 2].flatten #TODO: refactor uses of '] * 2]'
     end
 
     def image_name; runtime_image&.name ;end

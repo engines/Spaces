@@ -4,7 +4,7 @@ module Divisions
     include ::Packing::Divisible
 
     def transformed_to(transformation)
-      in_blueprint? ? super : super.select { |s| s.type == runtime_identifier }
+      in_blueprint? ? super : super.select { |s| s.type == runtime_qualifier }
     end
 
     def keys; [:first] ;end

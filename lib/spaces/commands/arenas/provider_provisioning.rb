@@ -9,7 +9,7 @@ module Arenas
       protected
 
       def commit
-        space.save_other_providers(model)
+        space.save_subordinate_providers(model)
       end
 
     end
