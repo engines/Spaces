@@ -11,7 +11,7 @@ module Emissions
 
       def division_classes
         [
-          Divisions::Provider,
+          # Divisions::Provider,
           Divisions::Executions,
           Divisions::Configuration,
           Divisions::Bindings,

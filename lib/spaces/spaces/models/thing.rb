@@ -9,10 +9,11 @@ module Spaces
 
     class << self
       def name_elements; name.split('::') ;end
+      def nesting_elements; name_elements[0..-2] ;end
 
       def identifier; name_elements.join ;end
 
-      def namespace; name_elements[0..-2].join.snakize ;end
+      def namespace; nesting_elements.join.snakize ;end
 
       def qualifier; name_elements.last.snakize ;end
 
@@ -35,7 +36,7 @@ module Spaces
     attr_accessor :struct
 
     delegate(
-      [:identifier, :namespace, :qualifier, :name_elements, :spout, :descriptor_class, :klasses] => :klass
+      [:identifier, :namespace, :qualifier, :name_elements, :nesting_elements, :spout, :descriptor_class, :klasses] => :klass
     )
 
     alias_method :summary, :struct

@@ -28,4 +28,12 @@ class Array
     map { |v| %("#{v}")}
   end
 
+  def camelize
+    map(&:to_s).map(&:camelize).join('::')
+  end
+
+  def constantize
+    camelize.constantize
+  end
+
 end
