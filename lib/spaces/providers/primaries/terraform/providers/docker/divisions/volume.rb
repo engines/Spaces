@@ -1,7 +1,7 @@
 module Providers
   module Terraform
     module Docker
-      class Volume < ::ProviderAspects::Volume
+      class Volume < ::Adapters::Volume
 
         def device_stanzas
           %Q(

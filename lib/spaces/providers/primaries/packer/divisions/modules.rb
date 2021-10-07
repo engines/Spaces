@@ -1,6 +1,6 @@
 module Providers
   module Packer
-    class Modules < ::ProviderAspects::Modules
+    class Modules < ::Adapters::Modules
 
       def packing_stanza_for(language)
         {

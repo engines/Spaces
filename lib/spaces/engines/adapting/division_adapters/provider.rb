@@ -1,5 +1,7 @@
-module ProviderAspects
-  class Provider < Aspect
+# TODO: still required?
+
+module Adapters
+  class Provider < DivisionAdapter
 
     class << self
       def prototype(emission, space)

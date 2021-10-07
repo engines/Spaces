@@ -1,7 +1,7 @@
 module Providers
   module Terraform
     module Lxd
-      class Container < ::ProviderAspects::Container
+      class Container < ::Adapters::Container
 
         def stanzas_for(_)
           %(

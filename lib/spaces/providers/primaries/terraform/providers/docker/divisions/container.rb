@@ -1,7 +1,7 @@
 module Providers
   module Terraform
     module Docker
-      class Container < ::ProviderAspects::Container
+      class Container < ::Adapters::Container
 
         def stanzas_for(_)
           %(

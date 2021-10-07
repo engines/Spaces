@@ -1,7 +1,7 @@
 module Providers
   module Terraform
     module Lxd
-      class Lxd < ::ProviderAspects::Provider
+      class Lxd < ::Adapters::Provider
 
         def provider_stanzas
           [provider_stanza, pool_stanzas].join

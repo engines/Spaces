@@ -1,7 +1,7 @@
 module Providers
   module Packer
     module Docker
-      class Image < ::ProviderAspects::Image
+      class Image < ::Adapters::Image
 
         class << self
           def features; [:name, :output_name, :privileged] ;end

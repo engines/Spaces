@@ -1,7 +1,7 @@
 module Providers
   module Terraform
     module Docker
-      class Docker < ::ProviderAspects::Provider
+      class Docker < ::Adapters::Provider
 
         def provider_stanzas
           %(

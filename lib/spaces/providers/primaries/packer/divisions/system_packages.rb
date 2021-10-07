@@ -1,6 +1,6 @@
 module Providers
   module Packer
-    class SystemPackages < ::ProviderAspects::SystemPackages
+    class SystemPackages < ::Adapters::SystemPackages
 
       def packing_stanza_for(key)
         {

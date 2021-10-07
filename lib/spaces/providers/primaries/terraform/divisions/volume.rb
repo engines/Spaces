@@ -1,6 +1,6 @@
 module Providers
   module Terraform
-    class Volume < ::ProviderAspects::Volume
+    class Volume < ::Adapters::Volume
 
       def device_stanzas; ;end
 

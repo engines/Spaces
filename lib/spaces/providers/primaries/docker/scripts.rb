@@ -1,6 +1,6 @@
 module Providers
   module Docker
-    class Scripts < ::ProviderAspects::Scripts
+    class Scripts < ::Adapters::Scripts
 
       delegate [:scripts_for, :temporary_script_path] => :division
 

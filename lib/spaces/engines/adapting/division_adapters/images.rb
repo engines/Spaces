@@ -1,5 +1,5 @@
-module ProviderAspects
-  class Images < Aspect
+module Adapters
+  class Images < DivisionAdapter
 
     delegate all: :division
 

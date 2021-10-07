@@ -1,7 +1,7 @@
 module Providers
   module Terraform
     module Lxd
-      class ServiceTasks < ::ProviderAspects::ServiceTasks
+      class ServiceTasks < ::Adapters::ServiceTasks
 
         def connection_stanza_for(binding)
           connect&.map do |c|

@@ -1,6 +1,6 @@
 module Providers
   module Packer
-    class Configuration < ::ProviderAspects::Configuration
+    class Configuration < ::Adapters::Configuration
 
       def packing_stanza ;end
 

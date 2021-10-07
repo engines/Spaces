@@ -1,5 +1,5 @@
-module ProviderAspects
-  class Volume < Aspect
+module Adapters
+  class Volume < DivisionAdapter
 
     delegate [:source, :destination] => :division
 

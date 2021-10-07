@@ -1,7 +1,7 @@
 module Providers
   module Packer
     module Lxd
-      class Image < ::ProviderAspects::Image
+      class Image < ::Adapters::Image
 
         class << self
           def features; [:name, :output_name, :publish_properties] ;end

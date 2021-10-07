@@ -1,6 +1,6 @@
 module Providers
   module Packer
-    class OtherPackage < ::ProviderAspects::OtherPackage
+    class OtherPackage < ::Adapters::OtherPackage
 
       def packing_stanza
         {

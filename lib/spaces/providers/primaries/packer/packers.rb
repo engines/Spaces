@@ -1,6 +1,6 @@
 module Providers
   module Packer
-    class Packers < ::ProviderAspects::Packers
+    class Packers < ::Adapters::Packers
 
       delegate [:packing_stanzas, :auxiliary_folders, :source_path_for, :copy_source_path_for] => :division
 

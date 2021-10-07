@@ -1,7 +1,7 @@
-module ProviderAspects
+module Adapters
   ModuleList = ::Divisions::ModuleList
 
-  class Modules < Aspect
+  class Modules < DivisionAdapter
 
   end
 end
