@@ -5,7 +5,7 @@ module Providers
       delegate scripts_for: :division
 
 
-      def packing_stanza_for(precedence)
+      def packing_snippet_for(precedence)
         {
           type: 'shell',
           inline: scripts_for(precedence).map do |s|

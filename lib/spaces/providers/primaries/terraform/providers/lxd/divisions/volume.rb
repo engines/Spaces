@@ -3,7 +3,7 @@ module Providers
     module Lxd
       class Volume < ::Adapters::Volume
 
-        def device_stanzas
+        def device_snippets
           %Q(
             device {
               name = "#{volume_name}"
@@ -17,7 +17,7 @@ module Providers
           )
         end
 
-        def stanzas_for(_)
+        def snippets_for(_)
           %Q(
             resource "lxd_volume" "#{volume_name}" {
               name = "#{volume_name}"

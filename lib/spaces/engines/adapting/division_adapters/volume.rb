@@ -3,7 +3,7 @@ module Adapters
 
     delegate [:source, :destination] => :division
 
-    def device_stanzas; ;end
+    def device_snippets; ;end
 
     # TERRAFORM SPECIFIC
     def volume_name; "#{blueprint_identifier.hyphenated}-#{source}" ;end

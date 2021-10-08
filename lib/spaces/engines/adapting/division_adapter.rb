@@ -5,7 +5,7 @@ module Adapters
 
     # delegate [:arena, :configuration, :runtime_qualifier, :blueprint_identifier, :qualifier, :type, :temporary_script_path] => :division
     #
-    # def resolution_stanzas_for(_); ;end
+    # def resolution_snippets_for(_); ;end
     #
     # def container_type
     #   [runtime_qualifier, 'container'].compact.join('_')

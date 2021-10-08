@@ -3,7 +3,7 @@ module Providers
     module Lxd
       class Container < ::Adapters::Container
 
-        def stanzas_for(_)
+        def snippets_for(_)
           %(
             resource "#{container_type}" "#{blueprint_identifier}" {
               name      = "#{blueprint_identifier}"
@@ -11,7 +11,7 @@ module Providers
               ephemeral = false
               profiles = ["default"]
 
-              #{dependency_stanza}
+              #{dependency_snippet}
 
               device {
                 name  = "root"
@@ -23,10 +23,10 @@ module Providers
                 }
               }
 
-              #{connect_services_stanzas}
-              #{ports_stanzas}
-              #{commissioning_stanzas}
-              #{device_stanzas}
+              #{connect_services_snippets}
+              #{ports_snippets}
+              #{commissioning_snippets}
+              #{device_snippets}
 
               config = {
                 "boot.autostart" = true
@@ -35,11 +35,11 @@ module Providers
           )
         end
 
-        def dependency_stanza
+        def dependency_snippet
           %(depends_on=[#{dependency_string}]) if connections_down.any?
         end
 
-        def commissioning_stanzas
+        def commissioning_snippets
           commissioning_scripts.map do |s|
             %(
               provisioner "local-exec" {
@@ -49,8 +49,8 @@ module Providers
           end.join
         end
 
-        def ports_stanzas
-          provisions.ports.stanzas if provisions.has?(:ports)
+        def ports_snippets
+          provisions.ports.snippets if provisions.has?(:ports)
         end
 
         def dependency_string

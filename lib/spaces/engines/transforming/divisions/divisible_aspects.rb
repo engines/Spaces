@@ -1,8 +1,8 @@
 module Divisions
   module DivisibleAspects
 
-    def packing_stanza_for(key)
-      all_provider_division_aspects.map(&:packing_stanza) if keys.include?(key)
+    def packing_snippet_for(key)
+      all_provider_division_aspects.map(&:packing_snippet) if keys.include?(key)
     end
 
     def all_provider_division_aspects

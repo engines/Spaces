@@ -2,7 +2,7 @@ module Providers
   module Terraform
     class Volume < ::Adapters::Volume
 
-      def device_stanzas; ;end
+      def device_snippets; ;end
 
       # TERRAFORM SPECIFIC
       def volume_name; "#{blueprint_identifier.hyphenated}-#{source}" ;end

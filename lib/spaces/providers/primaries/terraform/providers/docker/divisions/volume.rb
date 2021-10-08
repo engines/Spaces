@@ -3,7 +3,7 @@ module Providers
     module Docker
       class Volume < ::Adapters::Volume
 
-        def device_stanzas
+        def device_snippets
           %Q(
             volumes {
               volume_name = "#{volume_name}"
@@ -12,7 +12,7 @@ module Providers
           )
         end
 
-        def stanzas_for(_)
+        def snippets_for(_)
           %Q(
             resource "docker_volume" "#{volume_name}"  {
               name = "#{volume_name}"

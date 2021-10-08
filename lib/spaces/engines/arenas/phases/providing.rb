@@ -30,7 +30,7 @@ module Arenas
     end
 
     def runtime_qualifier; runtime_provider.qualifier ;end
-    def packing_qualifier; provpacking_provider.qualifier ;end
+    def packing_qualifier; packing_provider.qualifier ;end
 
   end
 end

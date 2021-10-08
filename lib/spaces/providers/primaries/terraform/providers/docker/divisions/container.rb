@@ -3,7 +3,7 @@ module Providers
     module Docker
       class Container < ::Adapters::Container
 
-        def stanzas_for(_)
+        def snippets_for(_)
           %(
             resource "#{container_type}" "#{blueprint_identifier}" {
               name = "#{blueprint_identifier}"
@@ -11,8 +11,8 @@ module Providers
               domainname = "#{universe.host}"
               hostname = "#{blueprint_identifier}"
 
-              #{connect_services_stanzas}
-              #{device_stanzas}
+              #{connect_services_snippets}
+              #{device_snippets}
             }
           )
         end

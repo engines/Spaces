@@ -3,7 +3,7 @@ module Providers
     module Docker
       class Docker < ::Adapters::Provider
 
-        def provider_stanzas
+        def provider_snippets
           %(
             provider "#{type}" {
               # Note need to expand this to support remote hosts
@@ -12,7 +12,7 @@ module Providers
           )
         end
 
-        def required_stanza
+        def required_snippet
           %(
             docker = {
               version = "#{configuration.version}"

@@ -3,22 +3,22 @@ module Providers
     module Lxd
       class Lxd < ::Adapters::Provider
 
-        def provider_stanzas
-          [provider_stanza, pool_stanzas].join
+        def provider_snippets
+          [provider_snippet, pool_snippets].join
         end
 
-        def provider_stanza
+        def provider_snippet
           %(
             provider "#{type}" {
               generate_client_certificates = "#{configuration.generate_client_certificates}"
               accept_remote_certificate    = "#{configuration.accept_remote_certificate}"
 
-              #{remote_stanza}
+              #{remote_snippet}
             }
           )
         end
 
-        def remote_stanza
+        def remote_snippet
           %(
             lxd_remote {
               name     = "lxd-server"
@@ -35,7 +35,7 @@ module Providers
           %(port = "#{arena.configuration.port}") if arena.configuration.respond_to?(:port)
         end
 
-        def pool_stanzas
+        def pool_snippets
           %(
             resource "#{type}_storage_pool" "data-pool" {
               name = "data"
@@ -50,7 +50,7 @@ module Providers
           )
         end
 
-        def required_stanza
+        def required_snippet
           %(
             lxd = {
               version = "#{configuration.version}"

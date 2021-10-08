@@ -2,7 +2,7 @@ module Providers
   module Packer
     class Modules < ::Adapters::Modules
 
-      def packing_stanza_for(language)
+      def packing_snippet_for(language)
         {
           type: 'shell',
           inline: division.send(language).inline

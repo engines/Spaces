@@ -3,7 +3,7 @@ module Providers
     module Lxd
       class ServiceTasks < ::Adapters::ServiceTasks
 
-        def connection_stanza_for(binding)
+        def connection_snippet_for(binding)
           connect&.map do |c|
             %(
               provisioner "local-exec" {

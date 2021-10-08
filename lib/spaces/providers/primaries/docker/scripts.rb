@@ -4,7 +4,7 @@ module Providers
 
       delegate [:scripts_for, :temporary_script_path] => :division
 
-      def packing_stanza_for(precedence)
+      def packing_snippet_for(precedence)
         "RUN #{temporary_script_paths_for(precedence).join(connector)}"
       end
 

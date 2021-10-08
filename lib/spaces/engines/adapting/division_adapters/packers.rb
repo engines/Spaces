@@ -3,7 +3,7 @@
 module Adapters
   class Packers < DivisionAdapter
 
-    delegate packing_stanzas: :division
+    delegate packing_snippets: :division
 
   end
 end

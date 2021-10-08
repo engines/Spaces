@@ -2,9 +2,9 @@ require_relative 'artifact'
 
 module Providers
   class EmissionAdapter < ::Spaces::Model
-    include Artifact
 
     relation_accessor :arena_emission
+    relation_accessor :artifact
 
     delegate(
       [:arena, :resolution] => :arena_emission,
@@ -13,6 +13,10 @@ module Providers
     )
 
     alias_method :emission, :arena_emission
+
+    def artifact
+      @artifact ||= Artifact.new(self)
+    end
 
     def division_adapter_map
       @division_adapter_map ||=

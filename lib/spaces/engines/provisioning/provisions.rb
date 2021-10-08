@@ -1,23 +1,23 @@
 module Provisioning
 
-  module Artifact
+  module Artifact #TODO refactor to use same patterns as packing
 
     def provider_aspect
       @provider_aspect ||= ::Providers::Terraform::Provisions.new(self)
     end
 
     def artifact
-      stanza_map.values.join("\n")
+      snippet_map.values.join("\n")
     end
 
-    def stanza_map
+    def snippet_map
       keys.inject({}) do |m, k|
-        m.tap { m[k] = stanza_for(k) }
+        m.tap { m[k] = snippet_for(k) }
       end.compact
     end
 
-    def stanza_for(key)
-      division_map[key]&.provider_division_aspect&.stanzas_for(nil)
+    def snippet_for(key)
+      division_map[key]&.provider_division_aspect&.snippets_for(nil)
     end
   end
 
@@ -36,8 +36,8 @@ module Provisioning
       connections_down.map(&:provisioned)
     end
 
-    def stanzas
-      divisions_including_resolution_divisions.map { |d| d.stanzas_for(self) }.flatten.compact
+    def snippets
+      divisions_including_resolution_divisions.map { |d| d.snippets_for(self) }.flatten.compact
     end
 
     def divisions_including_resolution_divisions

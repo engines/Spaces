@@ -17,7 +17,7 @@ module Providers
           )
         end
 
-        def required_stanza
+        def required_snippet
           %(
             powerdns = {
               version = "#{configuration.version}"
@@ -26,7 +26,7 @@ module Providers
           )
         end
 
-        def stanzas_for(resolution)
+        def snippets_for(resolution)
           %(
             resource "powerdns_record" "#{resolution.blueprint_identifier}" {
               zone    = "#{universe.host}."

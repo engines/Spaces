@@ -18,7 +18,7 @@ module Adapters
       [:by, :path_for] => :space
     )
 
-    # def required_stanza; end #TODO: TERRAFORM SPECIFIC?
+    # def required_snippet; end #TODO: TERRAFORM SPECIFIC?
 
     def initialize(emission, space = nil)
       super(emission)

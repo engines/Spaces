@@ -2,7 +2,7 @@ module Divisions
   module Terraform
     class Ports < ::Divisions::Divisible
 
-      def stanzas
+      def snippets
         %(
           provisioner = "local-exec" {
             command = "#{commands}"

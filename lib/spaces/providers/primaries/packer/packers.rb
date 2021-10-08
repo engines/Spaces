@@ -2,11 +2,11 @@ module Providers
   module Packer
     class Packers < ::Adapters::Packers
 
-      delegate [:packing_stanzas, :auxiliary_folders, :source_path_for, :copy_source_path_for] => :division
+      delegate [:packing_snippets, :auxiliary_folders, :source_path_for, :copy_source_path_for] => :division
 
-      def packing_stanza; packing_stanzas.compact.map(&:to_h) ;end
+      def packing_snippet; packing_snippets.compact.map(&:to_h) ;end
 
-      def auxiliary_file_stanza_for(path)
+      def auxiliary_file_snippet_for(path)
         {
           type: 'file',
           source: "#{path}/",
@@ -14,7 +14,7 @@ module Providers
         }
       end
 
-      def file_copy_stanza_for(folder, precedence)
+      def file_copy_snippet_for(folder, precedence)
         {
           type: 'shell',
           inline: [

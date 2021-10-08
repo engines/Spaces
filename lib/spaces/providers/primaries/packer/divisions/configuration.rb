@@ -2,7 +2,7 @@ module Providers
   module Packer
     class Configuration < ::Adapters::Configuration
 
-      def packing_stanza ;end
+      def packing_snippet ;end
 
     end
   end
