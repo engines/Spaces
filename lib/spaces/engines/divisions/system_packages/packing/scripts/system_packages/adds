@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+
+# This little gem is because udev isn't running and start-stop-daemon shits
+# itself trying to stop it and the removal of the entire package fails.
+ if test -f /var/lib/dpkg/info/eudev.prerm
+ then
+    sed -i '/^kill_udevd.*{/,/^}/ckill_udevd() {\n  true\n}' /var/lib/dpkg/info/eudev.prerm
+ fi
+
+apt-get -y update
+
+# If this isn't included build will hang forever if dpkg asks any questions.
+export DEBIAN_FRONTEND=noninteractive
+if test -z $SYSTEM_PACKAGE_ADDS
+	then 
+		SYSTEM_PACKAGE_ADDS="$*"
+fi		
+[ -n "$SYSTEM_PACKAGE_ADDS" ] && apt-get -o Dpkg::Options::=--force-confnew  install -y --no-install-recommends $SYSTEM_PACKAGE_ADDS

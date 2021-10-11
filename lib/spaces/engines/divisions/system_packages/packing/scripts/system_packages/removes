@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+# If this isn't included build will hang forever if dpkg asks any questions.
+export DEBIAN_FRONTEND=noninteractive
+if test -z $SYSTEM_PACKAGE_REMOVES
+	then 
+		SYSTEM_PACKAGE_REMOVES="$*"
+fi		
+[ -n "$SYSTEM_PACKAGE_REMOVES" ] && apt-get purge -y --autoremove $SYSTEM_PACKAGE_REMOVES

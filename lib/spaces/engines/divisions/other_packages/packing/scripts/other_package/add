@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+wget $1 -O /tmp/package
+cd /tmp
+
+$2 /tmp/package
+
+mv $3 $4
