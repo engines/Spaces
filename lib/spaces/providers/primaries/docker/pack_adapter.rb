@@ -1,6 +1,6 @@
 module Providers
   module Docker
-    class PackAdapter < ::Providers::PackAdapter
+    class PackAdapter < ::Adapters::Pack
 
     end
   end

@@ -20,5 +20,6 @@ require_all   'spaces/engines/provisioning'
 require_all   'spaces/engines/keys'
 require_all   'spaces/engines/universes'
 
-require_all   'spaces/engines/adapting'
+require_all   'spaces/engines/divisions'
+require_all   'spaces/engines/adapters'
 require_all   'spaces/engines/zero'
