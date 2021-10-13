@@ -1,1 +1,1 @@
-require_all 'divisions'
+require_all 'artifacts'

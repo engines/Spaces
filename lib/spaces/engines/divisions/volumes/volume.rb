@@ -7,7 +7,5 @@ module Divisions
 
     alias_method :identifier, :context_identifier
 
-    delegate device_snippets: :provider_division_aspect
-
   end
 end

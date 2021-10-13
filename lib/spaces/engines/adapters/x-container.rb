@@ -1,8 +1,8 @@
 module Adapters
-  class Container < Division
+  class Container < Adapter # TODO: this is not an adapter!
 
     delegate [:provisions, :image_name, :commissioning_scripts] => :division
-    delegate [:connections_down, :connect_bindings, :volumes] => :provisions
+    delegate [:connections_down, :connect_bindings, :volumes] => :provisions # TODO: is this in the right place?
 
     def connect_services_snippets
       connect_bindings.map do |c|

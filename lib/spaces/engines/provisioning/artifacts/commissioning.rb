@@ -1,6 +1,7 @@
 module Divisions
   module Commissioning
 
+    # TODO: eliminate duplication
     def precedence; [:first, :early, :adds, :middle, :late, :removes, :last] ;end
 
     def commissioning_scripts

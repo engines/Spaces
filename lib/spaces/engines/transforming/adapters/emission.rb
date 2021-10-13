@@ -7,7 +7,8 @@ module Adapters
     delegate(
       [:arena, :resolution] => :arena_emission,
       division_map: :resolution,
-      keys: :division_map
+      keys: :division_map,
+      order: :artifact
     )
 
     alias_method :emission, :arena_emission
@@ -16,14 +17,20 @@ module Adapters
       @artifact ||= Artifacts::Artifact.new(self)
     end
 
-    def division_adapter_map
-      @division_adapter_map ||=
-        keys.inject({}) do |m, k|
-          m.tap do
-            m[k] = division_adapter_for(resolution.division_map[k])
-          end.compact
-        end
+    def division_adapters
+      @division_adapters ||= keys.map do |k|
+        division_adapter_for(resolution.division_map[k])
+      end.compact
     end
+
+    # def division_adapter_map
+    #   @division_adapter_map ||=
+    #     keys.inject({}) do |m, k|
+    #       m.tap do
+    #         m[k] = division_adapter_for(resolution.division_map[k])
+    #       end.compact
+    #     end
+    # end
 
     def division_adapter_for(division)
       adapter_class_for(division).new(division)
@@ -31,8 +38,12 @@ module Adapters
 
     def adapter_class_for(division)
       [nesting_elements, division.qualifier].flatten.constantize #TODO: refactor .flatten.constantize
-    rescue NameError => e
-      [nesting_elements, default_name_elements].flatten.constantize
+    rescue NameError
+      begin
+        [nesting_elements, default_name_elements].flatten.constantize
+      rescue NameError
+        ::Adapters::Default
+      end
     end
 
     def default_name_elements; [:default_adapter] ;end
