@@ -7,7 +7,7 @@
 # ------------------------------------------------------------------------------
 
 # import a bootstrappy blueprint
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/docker_arena'}, threaded: false)
+# controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/docker_arena'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 
@@ -39,39 +39,39 @@ controllers.arenas.more_binders(identifier: :docker_arena)
 # ------------------------------------------------------------------------------
 
 # bind a bootstrappy blueprint to the arena
-controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :docker_arena)
+# controllers.arenas.state(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
 # save installations for the arena so far
-controllers.arenas.install(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# controllers.arenas.install(identifier: :docker_arena) #-----------------------
+# controllers.arenas.state(identifier: :docker_arena) #-------------------------
 
 # resolve the arena so far
-controllers.arenas.resolve(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# controllers.arenas.resolve(identifier: :docker_arena)
+# controllers.arenas.state(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
 # save all packs for an arena
-controllers.arenas.pack(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# controllers.arenas.pack(identifier: :docker_arena)
+# controllers.arenas.state(identifier: :docker_arena)
 # RUN PACKER HERE?
 
 # save provisions for the arena's runtime
-controllers.arenas.runtime(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# controllers.arenas.runtime(identifier: :docker_arena)
+# controllers.arenas.state(identifier: :docker_arena)
 # RUN INIT HERE?
 
 # save provisions for the arena's other providers
-controllers.arenas.provision(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# controllers.arenas.provision(identifier: :docker_arena)
+# controllers.arenas.state(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
 # save post-initialization provisions for providers
-controllers.arenas.provision_providers(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# controllers.arenas.provision_providers(identifier: :docker_arena)
+# controllers.arenas.state(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING?
 
 #
@@ -102,6 +102,9 @@ controllers.arenas.state(identifier: :docker_arena)
 
 # # validate a resolution
 # Spaces::Commands::Validating.create(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
+
+# save all packs for an arena
+# controllers.arenas.pack(identifier: :docker_arena)
 
 # save a pack for a resolution
 controllers.packing.create(identifier: 'docker_arena::phpmyadmin')
