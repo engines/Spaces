@@ -1,7 +1,7 @@
 module Providers
   module Terraform
     module Lxd
-      class Container < ::Adapters::Container
+      class ContainerStanza < ::Artifacts::Stanza
 
         def snippets_for(_)
           %(
