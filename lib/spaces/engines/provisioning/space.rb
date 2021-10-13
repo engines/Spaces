@@ -9,7 +9,7 @@ module Provisioning
 
     delegate(
       [:arenas, :resolutions] => :universe,
-      execution_aspect_for: :arenas
+      provider_interface_for: :arenas
     )
 
     def cascade_deletes; [:registry] ;end
@@ -20,12 +20,15 @@ module Provisioning
       end
     end
 
-    def save(model)
-      ensure_connections_exist_for(model)
-      if model.resolution.provisionable?
-        arena_path(model).write(execution_aspect_for(model, self).artifact)
-      end
+    def save(provisions)
+      ensure_connections_exist_for(provisions)
+      # arena_path(provisions).write(provider_interface_for(provisions).save_artifact)
+      provider_interface_for(provisions).save_artifact
       super
+    end
+
+    def provider_interface_for(provisions)  #TODO: refactor
+      provisions.arena.provisioning_provider.interface_for(provisions, self)
     end
 
     def delete(identifiable, cascade: true)
@@ -33,15 +36,15 @@ module Provisioning
         arena_path(identifiable.identifier).exist_then { delete }
       end
     end
-
-    def arena_path(identifiable)
-      Pathname.new("#{arenas.path}/#{identifiable.identifier.as_path}.#{arenas.artifact_extension}")
-    end
+    #
+    # def arena_path(identifiable)
+    #   Pathname.new("#{arenas.path}/#{identifiable.identifier.as_path}.#{arenas.artifact_extension}")
+    # end
 
     protected
 
-    def ensure_connections_exist_for(model)
-      model.connections_provisioned.each { |p| save(p) }
+    def ensure_connections_exist_for(provisions)
+      provisions.connections_provisioned.each { |p| save(p) }
     end
 
   end

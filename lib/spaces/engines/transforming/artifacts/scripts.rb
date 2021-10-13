@@ -1,7 +1,7 @@
-# TODO: still required?
+require_relative 'stanza'
 
-module Adapters
-  class Scripts < Division
+module Artifacts
+  class Scripts < Stanza
 
   end
 end

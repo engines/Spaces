@@ -1,7 +1,7 @@
-require_relative 'division'
+require_relative 'adapter'
 
 module Adapters
-  class Divisible < Division
+  class Divisible < Adapter
 
     class << self
       def subadapter_class

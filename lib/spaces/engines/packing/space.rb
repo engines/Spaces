@@ -8,7 +8,7 @@ module Packing
     delegate(resolutions: :universe)
 
     def commit(pack)
-      execution_aspect_for(pack, self).commit
+      provider_interface_for(pack).commit
     end
 
     def by(identifier, klass = default_model_class)
@@ -22,10 +22,14 @@ module Packing
 
       ensure_connections_exist_for(pack)
       super.tap do
-        execution_aspect_for(pack, self).save
+        provider_interface_for(pack).save_artifact
       end
     rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: pack.identifier, klass: klass)
+    end
+
+    def provider_interface_for(pack)  #TODO: refactor
+      pack.arena.packing_provider.interface_for(pack, self)
     end
 
     def copy_auxiliaries_for(pack)

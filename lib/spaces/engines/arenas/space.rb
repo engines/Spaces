@@ -5,10 +5,6 @@ module Arenas
   class Space < ::Spaces::Space
     include ::Arenas::Terraforming
 
-    def execution_aspect_for(arena, space)
-      ::Providers::Terraform::Terraform.new(arena, space)
-    end
-
     class << self
       def default_model_class
         Arena
@@ -34,7 +30,8 @@ module Arenas
     end
 
     # --------------------------------------------------------------------------
-    # TODO: possibly all changes with providers being assumed
+    # TODO: possibly all changes with providers being assumed and terraform
+    # is not hard-wired in
 
     def save_initial(arena)
       initial_file_name_for(arena).write(arena.provider_aspect.initial_artifact)
@@ -48,7 +45,7 @@ module Arenas
 
     def save_subordinate_providers(arena)
       arena.tap do |m|
-        execution_aspect_for(m, self).other_aspects.each do |a|
+        provider_interface_for(m, self).other_aspects.each do |a|
           provider_file_name_for(a).write(a.provider_artifact)
         end
         touch(arena)
@@ -79,7 +76,7 @@ module Arenas
     def artifact_extension; :tf ;end
 
     def initialized_at(arena); initial_file_name_for(arena).exist_then(&:mtime) ;end
-    def bootstrapped_at(arena); runtime_file_name_for(arena).exist_then(&:mtime) ;end
+    # def bootstrapped_at(arena); runtime_file_name_for(arena).exist_then(&:mtime) ;end
 
   end
 
