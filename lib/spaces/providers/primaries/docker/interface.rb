@@ -9,16 +9,16 @@ module Providers
       ::Docker.options[:read_timeout] = 1000
       ::Docker.options[:write_timeout] = 1000
 
-      alias_method :pack, :emission
-
       delegate(
+        [:pack, :artifact] => :adapter,
+        [:image_name, :output_name] => :pack,
+        path_for: :space,
+        [:all, :get, :prune] => :bridge,
         [:connection, :version, :info, :default_socket_url] => :klass,
-        [:artifact, :image_name, :output_name] => :pack,
-        [:all, :get, :prune] => :bridge
       )
 
-      def save
-        artifact_path.write(artifact)
+      def save_artifact
+        artifact_path.write(artifact.value)
       end
 
       def create

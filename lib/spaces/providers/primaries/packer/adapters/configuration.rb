@@ -2,7 +2,7 @@ module Providers
   module Packer
     class Configuration < ::Adapters::Configuration
 
-      def packing_snippet ;end
+      def snippets ;end
 
     end
   end

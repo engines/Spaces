@@ -1,11 +1,11 @@
 module Providers
   module Packer
-    class Scripts < ::Adapters::Scripts
+    class Scripts < ::Artifacts::Scripts
 
       delegate scripts_for: :division
 
 
-      def packing_snippet_for(precedence)
+      def snippets_for(precedence)
         {
           type: 'shell',
           inline: scripts_for(precedence).map do |s|

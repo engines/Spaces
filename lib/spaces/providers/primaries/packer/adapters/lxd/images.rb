@@ -3,7 +3,7 @@ module Providers
     module Lxd
       class Images < ::Adapters::Images
 
-        def packing_snippet; division.to_h ;end
+        def snippets; division.to_h ;end
 
       end
     end

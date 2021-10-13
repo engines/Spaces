@@ -2,7 +2,7 @@ module Providers
   module Packer
     class Modules < ::Adapters::Modules
 
-      def packing_snippet_for(language)
+      def snippets_for(language)
         {
           type: 'shell',
           inline: division.send(language).inline

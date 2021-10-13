@@ -1,10 +1,10 @@
 module Providers
   module Packer
-    class Packers < ::Adapters::Packers
+    class Packers < ::Artifacts::Stanza
 
-      delegate [:packing_snippets, :auxiliary_folders, :source_path_for, :copy_source_path_for] => :division
+      delegate [:snippets, :auxiliary_folders, :source_path_for, :copy_source_path_for] => :division
 
-      def packing_snippet; packing_snippets.compact.map(&:to_h) ;end
+      def snippets; snippets.compact.map(&:to_h) ;end
 
       def auxiliary_file_snippet_for(path)
         {

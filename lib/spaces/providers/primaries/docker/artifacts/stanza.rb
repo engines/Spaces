@@ -1,10 +1,10 @@
 module Providers
   module Docker
-    class Packers < ::Adapters::Packers
+    class Stanza < ::Artifacts::Stanza
 
       delegate script_path: :division
 
-      def packing_snippet; packing_snippets.compact.join("\n") ;end
+      def snippets; snippets.compact.join("\n") ;end
 
       def auxiliary_file_snippet_for(path)
         "ADD #{script_path}/ #{temporary_script_path}/" if path.basename.to_s == 'packing'
