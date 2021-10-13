@@ -28,10 +28,6 @@ module Emissions
 
     def has?(property); !struct[property].nil? ;end
 
-    # def runtime_image
-    #   images&.all&.detect { |i| i.type == runtime_qualifier }
-    # end
-
     def count
       has?(:scaling) ? scaling.count : 1
     end

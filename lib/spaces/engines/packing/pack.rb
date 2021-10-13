@@ -9,16 +9,6 @@ module Packing
 
     alias_method :context_identifier, :identifier
 
-    # def packers; provisioners ;end
-
-    # def connections_packed
-    #   connections.map(&:packed)
-    # end
-
-    # def aspect_name_elements
-    #   [super, [packtime_qualifier] * 2].flatten #TODO: refactor uses of '] * 2]'
-    # end
-
     def image_name; runtime_image&.name ;end
     def output_name; runtime_image&.output_name ;end
 

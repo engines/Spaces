@@ -18,8 +18,6 @@ module Arenas
 
     delegate(
       [:blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
-      # [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
-      # configuration: :runtime_provider
     )
 
     def more_binder_identifiers

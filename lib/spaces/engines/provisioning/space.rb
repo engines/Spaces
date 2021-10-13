@@ -22,7 +22,6 @@ module Provisioning
 
     def save(provisions)
       ensure_connections_exist_for(provisions)
-      # arena_path(provisions).write(provider_interface_for(provisions).save_artifact)
       provider_interface_for(provisions).save_artifact
       super
     end
@@ -36,10 +35,6 @@ module Provisioning
         arena_path(identifiable.identifier).exist_then { delete }
       end
     end
-    #
-    # def arena_path(identifiable)
-    #   Pathname.new("#{arenas.path}/#{identifiable.identifier.as_path}.#{arenas.artifact_extension}")
-    # end
 
     protected
 

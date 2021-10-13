@@ -23,15 +23,6 @@ module Adapters
       end.compact
     end
 
-    # def division_adapter_map
-    #   @division_adapter_map ||=
-    #     keys.inject({}) do |m, k|
-    #       m.tap do
-    #         m[k] = division_adapter_for(resolution.division_map[k])
-    #       end.compact
-    #     end
-    # end
-
     def division_adapter_for(division)
       adapter_class_for(division).new(division)
     end
