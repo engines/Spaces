@@ -1,5 +1,5 @@
 module Adapters
-  class Image < Division
+  class Image < Adapter
 
   end
 end

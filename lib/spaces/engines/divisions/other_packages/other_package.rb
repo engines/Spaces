@@ -1,6 +1,5 @@
 module Divisions
   class OtherPackage < ::Divisions::Subdivision
-    include ::Packing::Division
 
     class << self
       def features; [:identifier, :target, :extraction, :extracted_path, :destination] ;end

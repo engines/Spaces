@@ -1,5 +1,5 @@
 module Adapters
-  class ServiceTasks < Division
+  class ServiceTasks < Adapter
 
     delegate connect: :division
 

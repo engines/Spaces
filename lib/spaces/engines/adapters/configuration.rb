@@ -1,5 +1,5 @@
 module Adapters
-  class Configuration < Division
+  class Configuration < Adapter
 
   end
 end

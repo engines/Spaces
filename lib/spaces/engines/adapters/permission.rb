@@ -1,5 +1,5 @@
 module Adapters
-  class Permission < Division
+  class Permission < Adapter
 
   end
 end

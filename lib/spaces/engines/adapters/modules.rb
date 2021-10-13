@@ -1,7 +1,7 @@
 module Adapters
   ModuleList = ::Divisions::ModuleList
 
-  class Modules < Division
+  class Modules < Keyed
 
   end
 end

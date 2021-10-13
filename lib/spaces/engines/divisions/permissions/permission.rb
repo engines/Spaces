@@ -1,6 +1,5 @@
 module Divisions
   class Permission < ::Divisions::Subdivision
-    include ::Packing::Division
 
     class << self
       def features; [:file, :mode, :ownership] ;end

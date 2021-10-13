@@ -1,6 +1,5 @@
 module Divisions
   class Modules < ::Divisions::Division
-    include ::Packing::Division
 
     class << self
       def subdivision_class; ModuleList ;end

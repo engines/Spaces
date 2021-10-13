@@ -1,5 +1,5 @@
 module Adapters
-  class SystemPackages < Division
+  class SystemPackages < Keyed
 
   end
 end

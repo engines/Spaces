@@ -1,5 +1,5 @@
 module Adapters
-  class OtherPackage < Division
+  class OtherPackage < Adapter
 
   end
 end
