@@ -1,6 +1,6 @@
-module Providers
+module Adapters
   module Packer
-    class PackAdapter < ::Adapters::Pack
+    class Pack < ::Adapters::Pack
 
     end
   end

@@ -1,7 +1,7 @@
-module Providers
+module Artifacts
   module Terraform
     module Docker
-      class Docker < ::Providers::Provider
+      class ProviderStanza < ::Artifacts::Stanza
 
         def provider_snippets
           %(

@@ -1,6 +1,6 @@
-module Divisions
+module Adapters
   module Terraform
-    class Ports < ::Divisions::Divisible
+    class Ports < ::Adapters::Ports
 
       def snippets
         %(

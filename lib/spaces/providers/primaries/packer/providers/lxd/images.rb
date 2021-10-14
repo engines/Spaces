@@ -1,4 +1,4 @@
-module Providers
+module Adapters
   module Packer
     module Lxd
       class Images < ::Adapters::Images

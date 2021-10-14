@@ -1,7 +1,7 @@
-module Providers
+module Artifacts
   module Terraform
     module Lxd
-      class Lxd < ::Providers::Provider
+      class Lxd < ::Artifacts::Stanza
 
         def provider_snippets
           [provider_snippet, pool_snippets].join

@@ -1,4 +1,4 @@
-module Providers
+module Adapters
   module Docker
     class Modules < ::Adapters::Modules
 

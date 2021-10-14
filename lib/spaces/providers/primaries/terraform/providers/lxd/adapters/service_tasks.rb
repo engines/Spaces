@@ -1,13 +1,13 @@
-module Providers
+module Adapters
   module Terraform
-    module Docker
+    module Lxd
       class ServiceTasks < ::Adapters::ServiceTasks
 
         def connection_snippet_for(binding)
           connect&.map do |c|
             %(
               provisioner "local-exec" {
-                command = "docker exec #{binding.environment_variables}  #{blueprint_identifier} #{c} "
+                command = "lxc exec #{blueprint_identifier} #{binding.environment_variables} #{c}"
               }
             )
           end.join

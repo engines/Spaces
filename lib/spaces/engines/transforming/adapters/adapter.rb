@@ -10,6 +10,8 @@ module Adapters
       @snippet_map ||= {}.tap { |m| m[qualifier] = snippets }.compact
     end
 
+    def snippets; ;end
+
     # TODO: find the right place for this
     def temporary_script_path; temporary_path.join(script_path) ;end
     def temporary_path; Pathname('/tmp') ;end

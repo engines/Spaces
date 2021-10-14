@@ -16,8 +16,10 @@ module Providers
     end
 
     def adapter_class_for(qualifier)
-      [name_elements, "#{qualifier}_adapter"].flatten.uniq.constantize
+      [:adapters, provider_qualifier, qualifier].flatten.uniq.constantize
     end
+
+    def provider_qualifier; name_elements.last ;end
 
     def initialize(role)
       self.role = role

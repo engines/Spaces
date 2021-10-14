@@ -1,4 +1,4 @@
-module Providers
+module Adapters
   module Terraform
     module Lxd
       class Volume < ::Adapters::Volume

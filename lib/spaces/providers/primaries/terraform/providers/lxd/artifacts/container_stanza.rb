@@ -1,4 +1,4 @@
-module Providers
+module Artifacts
   module Terraform
     module Lxd
       class ContainerStanza < ::Artifacts::Stanza

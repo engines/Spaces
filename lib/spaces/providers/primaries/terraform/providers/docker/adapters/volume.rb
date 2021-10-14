@@ -1,10 +1,10 @@
-module Providers
+module Adapters
   module Terraform
     module Docker
       class Volume < ::Adapters::Volume
 
         def device_snippets
-          %Q(
+          %(
             volumes {
               volume_name = "#{volume_name}"
               container_path = "#{destination}"
@@ -13,7 +13,7 @@ module Providers
         end
 
         def snippets_for(_)
-          %Q(
+          %(
             resource "docker_volume" "#{volume_name}"  {
               name = "#{volume_name}"
               driver = "local"

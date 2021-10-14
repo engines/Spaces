@@ -37,7 +37,7 @@ module Adapters
       end
     end
 
-    def default_name_elements; [:default_adapter] ;end
+    def default_name_elements; [:default] ;end
 
     def initialize(arena_emission)
       self.arena_emission = arena_emission

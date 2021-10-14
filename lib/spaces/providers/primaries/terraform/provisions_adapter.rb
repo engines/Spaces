@@ -1,6 +1,6 @@
-module Providers
+module Adapters
   module Terraform
-    class ProvisionsAdapter < ::Adapters::Provisions
+    class Provisions < ::Adapters::Provisions
 
     end
   end

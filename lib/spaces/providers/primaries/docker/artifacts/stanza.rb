@@ -1,4 +1,4 @@
-module Providers
+module Artifacts
   module Docker
     class Stanza < ::Artifacts::Stanza
 

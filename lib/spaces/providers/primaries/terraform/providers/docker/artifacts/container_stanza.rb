@@ -1,4 +1,4 @@
-module Providers
+module Artifacts
   module Terraform
     module Docker
       class ContainerStanza < ::Artifacts::Stanza

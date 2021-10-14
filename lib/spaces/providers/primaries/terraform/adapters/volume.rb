@@ -1,4 +1,4 @@
-module Providers
+module Adapters
   module Terraform
     class Volume < ::Adapters::Volume
 

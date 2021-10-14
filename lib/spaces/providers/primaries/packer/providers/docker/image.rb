@@ -1,4 +1,4 @@
-module Providers
+module Adapters
   module Packer
     module Docker
       class Image < ::Adapters::Image
