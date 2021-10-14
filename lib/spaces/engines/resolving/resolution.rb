@@ -1,6 +1,4 @@
-require_relative 'registering'
-require_relative 'packing'
-require_relative 'provisioning'
+require_relative 'requires'
 require_relative 'summary'
 
 module Resolving
@@ -15,7 +13,6 @@ module Resolving
     end
 
     delegate(
-      [:runtime_binding, :packing_binding] => :arena,
       [:installations, :packs, :provisioning] => :universe,
       input: :installation
     )

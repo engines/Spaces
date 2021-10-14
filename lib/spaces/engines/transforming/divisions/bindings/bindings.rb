@@ -19,10 +19,6 @@ module Divisions
       end
     end
 
-    def transformed_to(transformation)
-      in_blueprint? ? super : super.select { |s| [runtime_identifier, nil].include?(s.runtime) }
-    end
-
     def embed_bindings
       all.select(&:embed?).map(&:embed_bindings).flatten.uniq
     end

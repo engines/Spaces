@@ -11,8 +11,7 @@ module Resolving
           allowed: packable?
         },
         provisions: {
-          exist: provisioning.exist?(identifier),
-          allowed: provisionable?
+          exist: provisioning.exist?(identifier)
         }
       )
     end

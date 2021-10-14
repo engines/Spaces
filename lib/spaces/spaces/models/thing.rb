@@ -8,13 +8,14 @@ module Spaces
     delegate t: I18n
 
     class << self
-      def name_array; name.split('::') ;end
+      def name_elements; name.split('::') ;end
+      def nesting_elements; name_elements[0..-2] ;end
 
-      def identifier; name_array.join ;end
+      def identifier; name_elements.join ;end
 
-      def namespace; name_array[0..-2].join.snakize ;end
+      def namespace; nesting_elements.join.snakize ;end
 
-      def qualifier; name_array.last.snakize ;end
+      def qualifier; name_elements.last.snakize ;end
 
       def from_yaml(y); YAML::load(y) ;end
 
@@ -35,12 +36,14 @@ module Spaces
     attr_accessor :struct
 
     delegate(
-      [:identifier, :namespace, :qualifier, :name_array, :spout, :descriptor_class, :klasses] => :klass
+      [:identifier, :namespace, :qualifier, :name_elements, :nesting_elements, :spout, :descriptor_class, :klasses] => :klass
     )
 
     alias_method :summary, :struct
 
     def klass; self.class ;end
+
+    def class_for(*elements); elements.flatten.constantize ;end
 
     def keys; struct&.to_h&.keys ;end
 

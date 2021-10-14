@@ -3,12 +3,7 @@ require_relative 'terraforming'
 
 module Arenas
   class Space < ::Spaces::Space
-    include ::Emissions::ProviderDependent
     include ::Arenas::Terraforming
-
-    def provider_aspect_for(arena, space)
-      ::Providers::Terraform::Terraform.new(arena, space)
-    end
 
     class << self
       def default_model_class
@@ -34,20 +29,24 @@ module Arenas
         tap { touch(arena) }
     end
 
+    # --------------------------------------------------------------------------
+    # TODO: possibly all changes with providers being assumed and terraform
+    # is not hard-wired in
+
     def save_initial(arena)
-      initial_file_name_for(arena).write(provider_aspect_for(arena, self).initial_artifacts)
+      initial_file_name_for(arena).write(arena.provider_aspect.initial_artifact)
       arena.identifier
     end
 
     def save_runtime(arena)
-      runtime_file_name_for(arena).write(provider_aspect_for(arena, self).runtime_artifacts)
+      runtime_file_name_for(arena).write(arena.provider_aspect.runtime_artifact)
       arena.identifier
     end
 
-    def save_other_providers(arena)
+    def save_subordinate_providers(arena)
       arena.tap do |m|
-        provider_aspect_for(m, self).other_aspects.each do |a|
-          provider_file_name_for(a).write(a.provider_artifacts)
+        provider_interface_for(m, self).other_aspects.each do |a|
+          provider_file_name_for(a).write(a.provider_artifact)
         end
         touch(arena)
       end.identifier
@@ -65,6 +64,8 @@ module Arenas
       path_for(provider.arena).join(provider_basename_for(provider))
     end
 
+    # --------------------------------------------------------------------------
+
     def path_for(model)
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
@@ -75,7 +76,7 @@ module Arenas
     def artifact_extension; :tf ;end
 
     def initialized_at(arena); initial_file_name_for(arena).exist_then(&:mtime) ;end
-    def bootstrapped_at(arena); runtime_file_name_for(arena).exist_then(&:mtime) ;end
+    # def bootstrapped_at(arena); runtime_file_name_for(arena).exist_then(&:mtime) ;end
 
   end
 

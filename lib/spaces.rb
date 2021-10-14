@@ -18,4 +18,4 @@ require_level 'spaces/commands'
 require_level 'spaces/controllers'
 require_level 'spaces/engines'
 
-require_all 'spaces/providers'
+require_level 'spaces/providers'

@@ -1,9 +1,6 @@
 require_relative 'content'
-require_relative 'associating'
-require_relative 'binding'
 require_relative 'topology'
-require_relative 'merging'
-require_relative 'hashing'
+require_relative 'requires'
 
 module Emissions
   class Emission < ::Transforming::Transformable
@@ -30,10 +27,6 @@ module Emissions
     alias_method :emission, :itself
 
     def has?(property); !struct[property].nil? ;end
-
-    def runtime_image
-      images&.all&.detect { |i| i.type == runtime_identifier }
-    end
 
     def count
       has?(:scaling) ? scaling.count : 1

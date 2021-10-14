@@ -1,13 +1,11 @@
 require_relative 'embeddable'
 require_relative 'resolvable'
-require_relative 'provider_independent'
 
 module Divisions
   class Division < ::Transforming::Transformable
     include Engines::Logger
     include Embeddable
     include Resolvable
-    include ProviderIndependent
 
     attr_accessor :label
 
@@ -23,16 +21,10 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :in_blueprint?, :runtime_identifier, :packing_identifier, :arena] => :emission,
+      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :in_blueprint?, :runtime_qualifier, :packtime_qualifier, :arena] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
-
-    def packing_division?
-      klass.ancestors.include?(::Packing::Division)
-    end
-
-    def composition_rank; ranking.index(klass) ;end
 
     def context_identifier; emission.context_identifier ;end
 

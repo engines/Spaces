@@ -1,5 +1,4 @@
-require_relative 'embedding'
-require_relative 'infixing'
+require_relative 'requires'
 
 module Settling
   class Settlement < ::Arenas::Emission

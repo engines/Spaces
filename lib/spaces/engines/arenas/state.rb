@@ -1,21 +1,17 @@
 module Arenas
-  module State
+  class State < ::Spaces::Model
 
-    def state
-      OpenStruct.new(
-        state_keys.inject({identifier: identifier}) do |m, k|
-          m.tap { m[k] = send(k) }
-        end
-      ).compact
-    end
+    relation_accessor :arena
 
-    def state_keys
+    delegate(
+      [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
+      [:identifier, :blueprinted] => :arena
+    )
+
+    def keys
       [
         :initialized?, :fresh_initialization?,
-        :packer,
-        :runtime,
-        :runtime_bootstrapped?, :fresh_bootstrap?,
-        :providers_bootstrapped, :fresh_providers,
+        :providers,
         :missing_blueprints, :fresh_blueprints,
         :missing_installations, :fresh_installations,
         :missing_resolutions, :fresh_resolutions,
@@ -24,13 +20,10 @@ module Arenas
       ]
     end
 
-    def initialized?; arenas.initial_file_name_for(self).exist? ;end
-    def packer; packing_binding&.target_identifier ;end
-    def runtime; runtime_binding&.target_identifier ;end
-    def runtime_bootstrapped?; arenas.runtime_file_name_for(self).exist? ;end
+    def initialized?; arenas.initial_file_name_for(arena).exist? ;end
 
-    def providers_bootstrapped
-      other_provider_divisions.select { |p| arenas.provider_file_name_for(p).exist? }.map(&:type)
+    def providers
+       arena.provider_map.transform_values { |v| v.class.name }
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end
@@ -39,16 +32,9 @@ module Arenas
     def missing_packs; missing(:unpacked) ;end
     def missing_provisioning; missing(:unprovisioned) ;end
 
-    def missing(method); send(method).map(&:identifier) ;end
+    def missing(method); arena.send(method).map(&:identifier) ;end
 
     def fresh_initialization?; times(initialized_at, :>, modified_at) ;end
-    def fresh_bootstrap?; times(bootstrapped_at, :>, modified_at) ;end
-
-    def fresh_providers
-      other_provider_divisions.select do |p|
-        times(arenas.provider_file_name_for(p).exist_then(&:mtime), :>, modified_at)
-      end.map(&:type).uniq
-    end
 
     def fresh_blueprints
       blueprinted.
@@ -63,16 +49,29 @@ module Arenas
     def fresh_provisioning; fresh(:provisioned, provisioning) ;end
 
     def fresh(method, space)
-      send(method).
-        map { |b| b.settlement_identifier_in(self) }.
+      arena.send(method).
+        map { |b| b.settlement_identifier_in(arena) }.
         select { |si| times(space.modified_at(si), :>, modified_at) }.
         uniq
     end
 
-    def exist?; arenas.exist?(self) ;end
-    def modified_at; arenas.modified_at(self) ;end
-    def initialized_at; arenas.initialized_at(self) ;end
-    def bootstrapped_at; arenas.bootstrapped_at(self) ;end
+    def modified_at; arenas.modified_at(arena) ;end
+    def initialized_at; arenas.initialized_at(arena) ;end
+
+    def initialize(arena)
+      self.arena = arena
+      self.struct = _struct
+    end
+
+    protected
+
+    def _struct
+      OpenStruct.new(
+        keys.inject({identifier: identifier}) do |m, k|
+          m.tap { m[k] = send(k) }
+        end
+      ).compact
+    end
 
   end
 end

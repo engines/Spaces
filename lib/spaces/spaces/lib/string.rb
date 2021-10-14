@@ -20,6 +20,10 @@ class String
       downcase
   end
 
+  def constantize
+    Module.const_get(self)
+  end
+
   alias_method :underscore, :snakize
 
   def hyphenated

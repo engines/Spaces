@@ -14,7 +14,6 @@ module Arenas
           install: Commands::Installing,
           resolve: Commands::Resolving,
           pack: Commands::Packing,
-          runtime: Commands::RuntimeBooting,
           provision: Commands::Provisioning,
           provision_providers: Commands::ProviderProvisioning,
           # TODO: Generalise provissioning steps rather than terraform_<command>
