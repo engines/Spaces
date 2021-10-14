@@ -21,5 +21,14 @@ module Adapters
       self.division = division
     end
 
+    def method_missing(m, *args, &block)
+      return division.send(m, *args, &block) if division.respond_to?(m)
+      super
+    end
+
+    def respond_to_missing?(m, *)
+      division.respond_to?(m) || super
+    end
+
   end
 end

@@ -43,6 +43,8 @@ module Spaces
 
     def klass; self.class ;end
 
+    def class_for(*elements); elements.flatten.constantize ;end
+
     def keys; struct&.to_h&.keys ;end
 
     def context_identifier; identifier ;end

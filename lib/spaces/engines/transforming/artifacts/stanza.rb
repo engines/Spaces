@@ -5,9 +5,9 @@ module Artifacts
 
     relation_accessor :artifact
 
-    delegate(
-      snippets_for: :artifact
-    )
+    # delegate(
+    #   snippets_for: :artifact
+    # )
 
     def initialize(artifact)
       self.artifact = artifact

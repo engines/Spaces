@@ -28,16 +28,23 @@ module Adapters
     end
 
     def adapter_class_for(division)
-      [nesting_elements, division.qualifier].flatten.constantize #TODO: refactor .flatten.constantize
+      q = division.qualifier
+      class_for(adapter_name_elements, q)
     rescue NameError
       begin
-        [nesting_elements, default_name_elements].flatten.constantize
+        class_for(nesting_elements, q)
       rescue NameError
-        ::Adapters::Default
+        begin
+          class_for(adapter_name_elements, default_name_elements)
+        rescue NameError
+          default_adapter_class
+        end
       end
     end
 
+    def adapter_name_elements; nesting_elements ;end
     def default_name_elements; [:default] ;end
+    def default_adapter_class; ::Adapters::Default ;end
 
     def initialize(arena_emission)
       self.arena_emission = arena_emission

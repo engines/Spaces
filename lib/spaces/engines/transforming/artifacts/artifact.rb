@@ -17,6 +17,8 @@ module Artifacts
     end
 
     def snippets_here
+      # pp '-' * 88
+      # pp snippet_map
       precedence.map { |p| snippet_map[p] }.compact
     end
 
@@ -42,18 +44,6 @@ module Artifacts
     def stanza_class_for(qualifier)
       qualifier
     end
-
-    # def keys; division_adapter_map.keys ;end
-
-    # def adapter_for(key)
-    #   division_adapter_map[key].snippets
-    # end
-    #
-    # def snippet_map
-    #   @snippet_map ||= keys.inject({}) do |m, k|
-    #     m.tap { m[k] = snippets_for(k) }
-    #   end.compact
-    # end
 
     def initialize(adapter)
       self.adapter = adapter

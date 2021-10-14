@@ -3,8 +3,8 @@ module Adapters
     module Lxd
       class Volume < ::Adapters::Volume
 
-        def device_snippets
-          %Q(
+        def snippets
+          %(
             device {
               name = "#{volume_name}"
               type = "disk"
@@ -18,7 +18,7 @@ module Adapters
         end
 
         def snippets_for(_)
-          %Q(
+          %(
             resource "lxd_volume" "#{volume_name}" {
               name = "#{volume_name}"
               pool = "#{pool_name}"

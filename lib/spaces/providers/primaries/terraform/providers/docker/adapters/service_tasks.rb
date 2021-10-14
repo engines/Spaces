@@ -1,7 +1,7 @@
 module Adapters
   module Terraform
     module Docker
-      class ServiceTasks < ::Adapters::ServiceTasks
+      class ServiceTasks < ::Adapters::Terraform::ServiceTasks
 
         def connection_snippet_for(binding)
           connect&.map do |c|

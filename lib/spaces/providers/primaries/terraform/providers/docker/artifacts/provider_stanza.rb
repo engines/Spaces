@@ -3,7 +3,7 @@ module Artifacts
     module Docker
       class ProviderStanza < ::Artifacts::Stanza
 
-        def provider_snippets
+        def snippets
           %(
             provider "#{type}" {
               # Note need to expand this to support remote hosts
