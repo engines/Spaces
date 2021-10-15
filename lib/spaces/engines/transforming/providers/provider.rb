@@ -3,6 +3,10 @@ module Providers
 
     attr_accessor :role
 
+    def artifact_for(adapter)
+      artifact_class_for(adapter).new(adapter)
+    end
+
     def interface_for(arena_emission, space = nil)
       interface_class.new(adapter_for(arena_emission), space)
     end
@@ -11,13 +15,21 @@ module Providers
       adapter_class_for(arena_emission.qualifier).new(arena_emission)
     end
 
+    def artifact_class_for(adapter)
+      class_for(:artifacts, qualifier, :artifact)
+    rescue NameError
+      default_artifact_class
+    end
+
     def interface_class
-      [name_elements, :interface].flatten.uniq.constantize #TODO: refactor
+      class_for(nesting_elements, :interface)
     end
 
     def adapter_class_for(qualifier)
-      [:adapters, provider_qualifier, qualifier].flatten.uniq.constantize
+      class_for(:adapters, provider_qualifier, qualifier)
     end
+
+    def default_artifact_class; ::Artifacts::Artifact ;end
 
     def provider_qualifier; name_elements.last ;end
 
