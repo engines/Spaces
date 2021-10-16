@@ -38,8 +38,6 @@ module Artifacts
     end
 
     def stanza_class_for(qualifier)
-      pp '-' * 77
-      pp [nesting_elements, qualifier, :stanza].flatten
       class_for(nesting_elements, "#{qualifier}_stanza")
     end
 
