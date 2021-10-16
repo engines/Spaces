@@ -7,18 +7,18 @@ module Providers
       artifact_class_for(adapter).new(adapter)
     end
 
+    def artifact_class_for(adapter)
+      class_for(:artifacts, qualifier, :artifact)
+    rescue NameError
+      default_artifact_class
+    end
+
     def interface_for(arena_emission, space = nil)
       interface_class.new(adapter_for(arena_emission), space)
     end
 
     def adapter_for(arena_emission)
       adapter_class_for(arena_emission.qualifier).new(arena_emission)
-    end
-
-    def artifact_class_for(adapter)
-      class_for(:artifacts, qualifier, :artifact)
-    rescue NameError
-      default_artifact_class
     end
 
     def interface_class

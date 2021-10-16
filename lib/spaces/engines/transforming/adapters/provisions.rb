@@ -12,5 +12,13 @@ module Adapters
       [super, runtime_qualifier].flatten
     end
 
+    def image_name
+      image&.name
+    end
+
+    def image
+      images&.all&.detect { |i| i.type == runtime_qualifier }
+    end
+
   end
 end

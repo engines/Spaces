@@ -5,7 +5,7 @@ module Adapters
     relation_accessor :artifact
 
     delegate(
-      [:arena, :resolution] => :arena_emission,
+      [:arena, :resolution, :blueprint_identifier] => :arena_emission,
       division_map: :resolution,
       keys: :division_map,
       order: :artifact
@@ -14,7 +14,7 @@ module Adapters
     alias_method :emission, :arena_emission
 
     def artifact
-      @artifact ||= Artifacts::Artifact.new(self)
+      @artifact ||= default_artifact_class.new(self)
     end
 
     def division_adapters
@@ -42,12 +42,22 @@ module Adapters
       end
     end
 
+    def default_artifact_class; ::Artifacts::Artifact ;end
     def adapter_name_elements; nesting_elements ;end
     def default_name_elements; [:default] ;end
     def default_adapter_class; ::Adapters::Default ;end
 
     def initialize(arena_emission)
       self.arena_emission = arena_emission
+    end
+
+    def method_missing(m, *args, &block)
+      return resolution.send(m, *args, &block) if resolution.respond_to?(m)
+      super
+    end
+
+    def respond_to_missing?(m, *)
+      resolution.respond_to?(m) || super
     end
 
   end

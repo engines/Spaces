@@ -10,16 +10,10 @@ module Providers
       ::Docker.options[:write_timeout] = 1000
 
       delegate(
-        [:pack, :artifact] => :adapter,
         [:image_name, :output_name] => :pack,
-        path_for: :space,
         [:all, :get, :prune] => :bridge,
         [:connection, :version, :info, :default_socket_url] => :klass,
       )
-
-      def save_artifact
-        artifact_path.write(artifact.value)
-      end
 
       def create
         bridge.create(name: image_name)
