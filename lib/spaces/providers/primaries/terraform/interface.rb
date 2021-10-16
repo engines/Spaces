@@ -3,17 +3,6 @@ module Providers
     class Interface < ::Providers::Interface
       include Streaming
 
-      delegate(
-        [:pack, :artifact] => :adapter,
-        arena: :provisions,
-        arenas: :space,
-        path: :arenas
-      )
-
-      def save_artifact
-        artifact_path.write(artifact.value)
-      end
-
       def execute(command, model)
         with_streaming(model, command) do
           identifier.tap { provisioning_for(command, model) }

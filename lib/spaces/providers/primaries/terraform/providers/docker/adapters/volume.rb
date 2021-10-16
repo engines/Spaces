@@ -3,7 +3,7 @@ module Adapters
     module Docker
       class Volume < ::Adapters::Terraform::Volume
 
-        def snippets
+        def container_snippets
           %(
             volumes {
               volume_name = "#{volume_name}"

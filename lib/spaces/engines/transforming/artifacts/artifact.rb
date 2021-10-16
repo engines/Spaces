@@ -4,9 +4,7 @@ module Artifacts
 
     relation_accessor :adapter
 
-    delegate(
-      division_adapters: :adapter
-    )
+    delegate(division_adapters: :adapter)
 
     def value
       [snippets].flatten.join("\n") #TODO: is this a good default?
@@ -17,8 +15,6 @@ module Artifacts
     end
 
     def snippets_here
-      # pp '-' * 88
-      # pp snippet_map
       precedence.map { |p| snippet_map[p] }.compact
     end
 
@@ -42,11 +38,20 @@ module Artifacts
     end
 
     def stanza_class_for(qualifier)
-      qualifier
+      class_for(nesting_elements, "#{qualifier}_stanza")
     end
 
     def initialize(adapter)
       self.adapter = adapter
+    end
+
+    def method_missing(m, *args, &block)
+      return adapter.send(m, *args, &block) if adapter.respond_to?(m)
+      super
+    end
+
+    def respond_to_missing?(m, *)
+      adapter.respond_to?(m) || super
     end
 
   end
