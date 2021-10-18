@@ -43,15 +43,6 @@ module Arenas
       arena.identifier
     end
 
-    def save_subordinate_providers(arena)
-      arena.tap do |m|
-        provider_interface_for(m, self).other_aspects.each do |a|
-          provider_file_name_for(a).write(a.provider_artifact)
-        end
-        touch(arena)
-      end.identifier
-    end
-
     def initial_file_name_for(arena)
       path_for(arena).join(initial_basename)
     end
