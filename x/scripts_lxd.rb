@@ -55,7 +55,7 @@ controllers.arenas.provision(identifier: :lxd_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
 # save post-initialization provisions for providers
-controllers.arenas.provision_providers(identifier: :lxd_arena)
+controllers.arenas.provision_prerequisites(identifier: :lxd_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING?
 
 #

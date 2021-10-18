@@ -2,7 +2,7 @@ module Transforming
   class Transformable < ::Spaces::Model
 
     class << self
-      def zero; @@zero ||= EnginesZero.new ;end
+      def zero; @@zero ||= ::Engines::Zero.new ;end
     end
 
     delegate zero: :klass

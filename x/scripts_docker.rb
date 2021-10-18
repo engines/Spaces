@@ -70,7 +70,7 @@ controllers.arenas.more_binders(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
 # save post-initialization provisions for providers
-# controllers.arenas.provision_providers(identifier: :docker_arena)
+# controllers.arenas.provision_prerequisites(identifier: :docker_arena)
 # controllers.arenas.state(identifier: :docker_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING?
 

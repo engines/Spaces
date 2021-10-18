@@ -3,8 +3,8 @@ require_relative 'summary'
 
 module Arenas
   class Arena < ::Emissions::Emission
+    include ::Arenas::Prerequisites
     include ::Arenas::Binding
-    include ::Arenas::Providing
     include ::Arenas::Blueprinting
     include ::Arenas::Installing
     include ::Arenas::Resolving
@@ -37,11 +37,11 @@ module Arenas
     def arena; self ;end
 
     def method_missing(m, *args, &block)
-      provider_map["#{m}"] || super
+      prerequisite_map["#{m}"] || super
     end
 
     def respond_to_missing?(m, *)
-      provider_map.keys.include?("#{m}") || super
+      prerequisite_map.keys.include?("#{m}") || super
     end
 
   end

@@ -27,7 +27,7 @@ module Provisioning
     end
 
     def provider_interface_for(provisions)  #TODO: refactor
-      provisions.arena.provisioning_provider.interface_for(provisions, self)
+      provisions.arena.provisioning_prerequisite.interface_for(provisions, self)
     end
 
     def delete(identifiable, cascade: true)
