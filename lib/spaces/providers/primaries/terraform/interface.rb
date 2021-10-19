@@ -1,3 +1,5 @@
+require_relative 'streaming'
+
 module Providers
   module Terraform
     class Interface < ::Providers::Interface

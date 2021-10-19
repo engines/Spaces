@@ -1,4 +1,3 @@
-require_relative 'requires'
 require_relative 'summary'
 
 module Resolving
