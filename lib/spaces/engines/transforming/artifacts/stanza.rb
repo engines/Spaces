@@ -6,7 +6,7 @@ module Artifacts
     relation_accessor :artifact
 
     delegate(
-      division_adapters: :artifact
+      delegate([:blueprint_identifier, :division_adapters] => :artifact)
     )
 
     def initialize(artifact)
