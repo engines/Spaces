@@ -18,7 +18,7 @@ module Providers
     end
 
     def adapter_for(arena_emission)
-      adapter_class_for(arena_emission.qualifier).new(arena_emission)
+      adapter_class_for(arena_emission.qualifier).new(self, arena_emission)
     end
 
     def interface_class

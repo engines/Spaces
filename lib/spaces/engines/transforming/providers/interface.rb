@@ -6,7 +6,7 @@ module Providers
     relation_accessor :space
 
     delegate(
-      [:provider, :emission] => :adapter,
+      [:artifact, :emission] => :adapter,
       [:arenas, :path_for] => :space,
       path: :arenas
     )
@@ -16,10 +16,6 @@ module Providers
 
     def save_artifact
       artifact_path.write(artifact.value)
-    end
-
-    def artifact
-      provider.artifact_for(adapter)
     end
 
     def initialize(adapter, space = nil)
