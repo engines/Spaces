@@ -1,25 +1,31 @@
-require_level 'spaces/engines/transforming'
-require_all   'spaces/engines/transforming/aspects'
-require_level 'spaces/engines/transforming/divisions'
-require_all   'spaces/engines/transforming/providers'
-require_level 'spaces/engines/transforming/divisions/bindings'
-require_all   'spaces/engines/transforming/emissions'
+requires 'transforming', only: ['requires'], recurse: false
 
-require_level   'spaces/engines/arenas'
-require       'spaces/engines/resolving/emission' #FIX!: kludge!
-require_all   'spaces/engines/packing' #FIX!: this is too early in the layers
-require_all   'spaces/engines/publishing'
-require_level   'spaces/engines/blueprinting'
-require_all   'spaces/engines/locating'
-require_all   'spaces/engines/settling'
-require_all   'spaces/engines/installing'
-require_all   'spaces/engines/resolving'
-# require_all   'spaces/engines/packing' #FIX!: this should be here
-require_all   'spaces/engines/registry'
-require_all   'spaces/engines/provisioning'
-require_all   'spaces/engines/keys'
-require_all   'spaces/engines/universes'
+requires 'divisions',
+         'adapters',
+         'keys',
+         'locating',
+         'publishing'
 
-require_all   'spaces/engines/divisions'
-require_all   'spaces/engines/adapters'
-require_all   'spaces/engines/zero'
+requires 'blueprinting/phases'
+requires 'blueprinting', recurse: false
+
+requires 'arenas/associations',
+         'arenas/phases'
+requires 'arenas', recurse: false
+
+requires 'settling/phases'
+requires 'settling', recurse: false
+
+requires 'resolving/phases'
+requires 'resolving', recurse: false
+
+requires 'installing',
+         'registry'
+
+requires 'packing/artifacts'
+requires 'packing', recurse: false
+
+requires 'provisioning/artifacts'
+requires 'provisioning', recurse: false
+
+requires 'zero'

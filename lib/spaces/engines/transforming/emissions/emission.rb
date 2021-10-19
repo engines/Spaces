@@ -1,6 +1,5 @@
 require_relative 'content'
 require_relative 'topology'
-require_relative 'requires'
 
 module Emissions
   class Emission < ::Transforming::Transformable

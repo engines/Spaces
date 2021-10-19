@@ -1,5 +1,5 @@
 # load the code!
-# require './x/controllers'
+require './x/controllers'
 
 # destroy the universe
 # universe.workspace.rmtree
