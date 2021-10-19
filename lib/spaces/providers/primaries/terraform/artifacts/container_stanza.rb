@@ -10,19 +10,9 @@ module Artifacts
             domainname = "#{universe.host}"
             hostname = "#{blueprint_identifier}"
 
-            #{connect_services_snippets}
             #{device_snippets}
           }
         )
-      end
-
-      def connect_services_snippets
-        connect_bindings.map do |c|
-          r = c.resolution
-          if r.has?(:service_tasks)
-            # r.service_tasks.connection_snippet_for(c) TODO: FIX!
-          end
-        end.compact.join
       end
 
       def device_snippets
