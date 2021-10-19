@@ -1,5 +1,10 @@
-require_all 'spaces/engines/transforming/divisions'
-require_all 'spaces/engines/transforming/adapters'
-require_all 'spaces/engines/transforming/providers'
-require_level 'spaces/engines/transforming/artifacts'
-require_level 'spaces/engines/transforming/emissions'
+require_relative 'transformable'
+
+requires 'divisions'
+
+requires 'emissions/phases'
+requires 'emissions', recurse: false
+
+requires 'adapters',
+         'artifacts',
+         'providers'

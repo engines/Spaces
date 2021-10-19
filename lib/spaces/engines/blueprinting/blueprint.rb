@@ -1,4 +1,3 @@
-require_relative 'requires'
 require_relative 'arenas'
 require_relative 'summary'
 require_relative 'relations'

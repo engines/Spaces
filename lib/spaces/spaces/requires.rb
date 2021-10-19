@@ -1,10 +1,8 @@
-require_all   'spaces/spaces/lib'
-
-require_all 'spaces/spaces/models'
-require_all 'spaces/spaces/streaming'
-require_all 'spaces/spaces/spaces'
-require_all 'spaces/spaces/git'
-require_all 'spaces/spaces/defaultables'
-require_all 'spaces/spaces/interpolating'
-require_all 'spaces/spaces/controllers'
-require_all 'spaces/spaces/commands'
+requires 'lib',
+         'models',
+         'streaming',
+         'spaces',
+         'commands',
+         'controllers',
+         'git',
+         'interpolating'

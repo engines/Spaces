@@ -1,5 +1,3 @@
-require_relative 'requires'
-
 module Settling
   class Settlement < ::Arenas::Emission
     include Embedding

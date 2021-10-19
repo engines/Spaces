@@ -8,14 +8,6 @@ require 'engines-logger'
 require 'gems/git'
 require 'gems/docker'
 require 'gems/ruby_terraform'
+require 'spaces/spaces'
 
-require 'spaces/requiring'
-include Requiring
-
-require_all 'spaces/recovery'
-require_level 'spaces/spaces'
-require_level 'spaces/commands'
-require_level 'spaces/controllers'
-require_level 'spaces/engines'
-
-require_level 'spaces/providers'
+include Engines::Logger
