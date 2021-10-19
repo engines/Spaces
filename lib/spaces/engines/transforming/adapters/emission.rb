@@ -18,7 +18,7 @@ module Adapters
     end
 
     def division_adapters
-      @division_adapters ||= keys.map do |k|
+      @division_adapters ||= resolution.keys.map do |k|
         division_adapter_for(resolution.division_map[k])
       end.compact
     end

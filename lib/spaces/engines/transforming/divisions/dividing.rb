@@ -5,12 +5,12 @@ module Divisions
       divisions.reject(&:complete?)
     end
 
-    def bindings; important_division(:bindings) ;end
-    def binding_target; important_division(:binding_target) ;end
-    def images; important_division(:images) ;end
-    def volumes; important_division(:volumes) ;end
+    def bindings; mandatory_division_for(:bindings) ;end
+    def binding_target; mandatory_division_for(:binding_target) ;end
+    def images; mandatory_division_for(:images) ;end
+    def volumes; mandatory_division_for(:volumes) ;end
 
-    def important_division(key)
+    def mandatory_division_for(key)
       has?(key) ? division_map[key] : division_for(key)
     end
 
