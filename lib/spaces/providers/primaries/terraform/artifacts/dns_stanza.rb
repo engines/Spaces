@@ -3,28 +3,19 @@ module Artifacts
     class DnsStanza < ::Artifacts::Stanza
 
       def snippets
-        # TODO: FIX --- remove hard-coding for PowerDNS
-        # %(
-        #   resource "#{resource_qualifier}_record" "#{blueprint_identifier}" {
-        #     zone    = "#{universe.host}."
-        #     name    = "#{blueprint_identifier}.#{universe.host}."
-        #     type    = "AAAA"
-        #     ttl     = #{dns.input.ttl}
-        #     records = [#{container_address_for(resolution)}]
-        #   }
-        # )
         %(
-          resource "#{resource_qualifier}_record" "#{blueprint_identifier}" {
+          resource "#{dns_qualifier}_record" "#{blueprint_identifier}" {
             zone    = "#{universe.host}."
             name    = "#{blueprint_identifier}.#{universe.host}."
             type    = "AAAA"
             ttl     = #{dns.input.ttl}
+            records = [#{container_address_snippet}]
           }
         )
       end
 
-      def resource_qualifier #TODO: REFACTOR!
-        artifact.adapter.provisioning_provider.dns_qualifier.camelize.downcase
+      def container_address_snippet
+        "#{container_type}.#{blueprint_identifier}.ipv6_address"
       end
 
     end
