@@ -3,7 +3,7 @@ module Resolving
 
     delegate(
       resolutions: :universe,
-      mandatory_division_for: :resolution
+      important_division_for: :resolution
     )
 
     def predecessor; @predecessor ||= resolutions.by(identifier) ;end
