@@ -1,9 +1,8 @@
-#TODO: remove hard-coded Terraform hacks
-require_relative 'terraforming'
+require_relative 'interfacing'
 
 module Arenas
   class Space < ::Spaces::Space
-    include ::Arenas::Terraforming
+    include ::Arenas::Interfacing
 
     class << self
       def default_model_class
