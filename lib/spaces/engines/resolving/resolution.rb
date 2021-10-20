@@ -16,6 +16,8 @@ module Resolving
       input: :installation
     )
 
+    alias_method :input, :configuration # TODO FIX: probably temporary until installations are declared properly in blueprints
+
     def installation; @installation ||= installations.by(identifier) ;end
 
     def complete?

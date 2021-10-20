@@ -3,9 +3,11 @@ require_relative 'emission'
 module Adapters
   class Provisions < Emission
 
-    delegate([:provisioning_prerequisite, :runtime_qualifier] => :arena)
+    delegate(
+      [:provisioning_provider, :runtime_qualifier] => :arena,
+    )
 
-    alias_method :provider, :provisioning_prerequisite
+    alias_method :provider, :provisioning_provider
     alias_method :provisions, :emission
 
     def adapter_name_elements

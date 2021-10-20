@@ -1,16 +1,15 @@
 module Providers
   module Terraform
     class Terraform < ::Providers::Provider
-      include ::Engines::Prerequisites
 
-        def prerequisite_role_map
-          @prerequisite_map ||= {
-            dns: [:power_dns]
-          }
-        end
+      def provider_role_map
+        @provider_role_map ||= {
+          dns: [:power_dns]
+        }
+      end
 
-        def dns_prerequisite; prerequisite_for(:dns) ;end
-        def dns_qualifier; dns_prerequisite.qualifier ;end
+      def dns_provider; provider_for(:dns) ;end
+      def dns_qualifier; dns_provider.qualifier ;end
 
     end
   end

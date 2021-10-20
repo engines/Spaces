@@ -1,3 +1,4 @@
+require_relative 'prerequisites'
 require_relative 'summary'
 
 module Arenas
@@ -34,14 +35,6 @@ module Arenas
     end
 
     def arena; self ;end
-
-    def method_missing(m, *args, &block)
-      prerequisite_map["#{m}"] || super
-    end
-
-    def respond_to_missing?(m, *)
-      prerequisite_map.keys.include?("#{m}") || super
-    end
 
   end
 end

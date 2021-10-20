@@ -61,12 +61,13 @@ module Adapters
     end
 
     def method_missing(m, *args, &block)
+      return arena.send(m, *args, &block) if arena.respond_to?(m)
       return resolution.send(m, *args, &block) if resolution.respond_to?(m)
       super
     end
 
     def respond_to_missing?(m, *)
-      resolution.respond_to?(m) || super
+      arena.respond_to?(m) || resolution.respond_to?(m) || super
     end
 
   end

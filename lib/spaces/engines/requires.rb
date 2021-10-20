@@ -27,5 +27,3 @@ requires 'packing', recurse: false
 
 requires 'provisioning/artifacts'
 requires 'provisioning', recurse: false
-
-requires 'zero'

@@ -23,7 +23,7 @@ module Arenas
     def initialized?; arenas.initial_file_name_for(arena).exist? ;end
 
     def providers
-       arena.prerequisite_map.transform_values { |v| v.class.name }
+       arena.provider_map.transform_values { |v| v.class.name }
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end

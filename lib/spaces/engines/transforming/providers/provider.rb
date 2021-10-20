@@ -1,5 +1,8 @@
+require_relative 'providers'
+
 module Providers
   class Provider < ::Spaces::Model
+    include ::Providers::Providers
 
     attr_accessor :role
 

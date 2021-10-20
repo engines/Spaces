@@ -29,7 +29,7 @@ module Packing
     end
 
     def provider_interface_for(pack)  #TODO: refactor
-      pack.arena.packing_prerequisite.interface_for(pack, self)
+      pack.arena.packing_provider.interface_for(pack, self)
     end
 
     def copy_auxiliaries_for(pack)
