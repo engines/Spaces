@@ -11,8 +11,10 @@ module Artifacts
             ttl     = #{dns.input.ttl}
             records = [#{container_address_snippet}]
           }
-        )
+        ) unless redundant
       end
+
+      def redundant; dns_qualifier == blueprint_identifier ;end
 
       def container_address_snippet
         "#{container_type}.#{blueprint_identifier}.ipv6_address"
