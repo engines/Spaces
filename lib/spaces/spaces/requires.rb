@@ -1,4 +1,5 @@
 requires 'lib',
+         'recovery',
          'models',
          'streaming',
          'spaces',
