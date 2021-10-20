@@ -25,11 +25,14 @@ module Adapters
       default_artifact_class
     end
 
-    def division_adapters
-      @division_adapters ||= resolution.keys.map do |k|
-        division_adapter_for(resolution.division_map[k])
+    def division_adapter_map
+      @division_map ||= resolution.keys.inject({}) do |m, k|
+        m.tap { m[k] = division_adapter_for(resolution.division_map[k]) }
       end.compact
     end
+
+    def division_adapters; division_adapter_map.values ;end
+    def division_adapter_keys; division_adapter_map.keys ;end
 
     def division_adapter_for(division)
       adapter_class_for(division).new(division)
