@@ -4,29 +4,19 @@ module Artifacts
 
       def snippets
         %(
-          resource "#{runtime_qualifier}" "#{blueprint_identifier}" {
+          resource "#{runtime_qualifier}_container" "#{blueprint_identifier}" {
             name = "#{blueprint_identifier}"
             image = "#{spaces_image_registry}#{image_name}"
             domainname = "#{universe.host}"
             hostname = "#{blueprint_identifier}"
 
-            #{connect_services_snippets}
-            #{device_snippets}
+            #{volume_snippets if volumes}
           }
         )
       end
 
-      def connect_services_snippets
-        connect_bindings.map do |c|
-          r = c.resolution
-          if r.has?(:service_tasks)
-            # r.service_tasks.connection_snippet_for(c) TODO: FIX!
-          end
-        end.compact.join
-      end
-
-      def device_snippets
-        # volumes.all.map(&:container_snippets).join TODO: FIX!
+      def volume_snippets
+        volumes.all.map(&:snippets).join
       end
 
       def spaces_image_registry

@@ -14,7 +14,6 @@ module Emissions
           Divisions::Configuration,
           Divisions::Bindings,
           Divisions::Target,
-          Divisions::ServiceTasks,
           Divisions::Scaling,
           Divisions::SystemPackages,
           Divisions::OtherPackages,

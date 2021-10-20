@@ -15,8 +15,7 @@ module Arenas
           resolve: Commands::Resolving,
           pack: Commands::Packing,
           provision: Commands::Provisioning,
-          provision_providers: Commands::ProviderProvisioning,
-          # TODO: Generalise provissioning steps rather than terraform_<command>
+          # TODO: Generalise provisioning steps rather than terraform_<command>
           terraform_init: [::Spaces::Commands::Executing, {execute: :terraform_init, threaded: true}],
           terraform_plan: [::Spaces::Commands::Executing, {execute: :terraform_plan, threaded: true}],
           terraform_show: [::Spaces::Commands::Executing, {execute: :terraform_show, threaded: true}],

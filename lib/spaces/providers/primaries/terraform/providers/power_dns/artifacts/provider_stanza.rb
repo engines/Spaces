@@ -1,9 +1,9 @@
 module Providers
   module Terraform
     module PowerDns
-      class PowerDns < ::Providers::PowerDns::PowerDns
+      class PowerDns < ::Artifacts::Stanza
 
-        def provider_artifact
+        def provider_snippets
           %(
             provider "powerdns" {
               api_key    = "#{configuration.api_key}"
@@ -22,18 +22,6 @@ module Providers
             powerdns = {
               version = "#{configuration.version}"
               source  = "#{configuration.source}"
-            }
-          )
-        end
-
-        def snippets_for(resolution)
-          %(
-            resource "powerdns_record" "#{resolution.blueprint_identifier}" {
-              zone    = "#{universe.host}."
-              name    = "#{resolution.blueprint_identifier}.#{universe.host}."
-              type    = "AAAA"
-              ttl     = #{configuration.ttl}
-              records = [#{container_address_for(resolution)}]
             }
           )
         end

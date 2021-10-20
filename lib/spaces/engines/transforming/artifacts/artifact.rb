@@ -4,7 +4,7 @@ module Artifacts
 
     relation_accessor :adapter
 
-    delegate(division_adapters: :adapter)
+    delegate([:blueprint_identifier, :division_adapter_map, :division_adapter_keys] => :adapter)
 
     def value
       [snippets].flatten.join("\n") #TODO: is this a good default?
@@ -29,6 +29,8 @@ module Artifacts
       end
     end
 
+    def snippet_keys; snippet_map.keys ;end
+
     def no_stanzas?; stanza_qualifiers.empty? ;end
 
     def stanza_qualifiers; [] ;end
@@ -46,12 +48,13 @@ module Artifacts
     end
 
     def method_missing(m, *args, &block)
+      return division_adapter_map[m] if division_adapter_keys.include?(m)
       return adapter.send(m, *args, &block) if adapter.respond_to?(m)
       super
     end
 
     def respond_to_missing?(m, *)
-      adapter.respond_to?(m) || super
+      division_adapter_map.include?(m) || adapter.respond_to?(m) || super
     end
 
   end

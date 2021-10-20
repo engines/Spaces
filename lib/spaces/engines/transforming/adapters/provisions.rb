@@ -3,7 +3,10 @@ require_relative 'emission'
 module Adapters
   class Provisions < Emission
 
-    delegate([:provisioning_provider, :runtime_qualifier] => :arena)
+    delegate(
+      [:provisioning_provider, :runtime_qualifier] => :arena,
+      image: :emission
+    )
 
     alias_method :provider, :provisioning_provider
     alias_method :provisions, :emission
@@ -13,11 +16,7 @@ module Adapters
     end
 
     def image_name
-      image&.name
-    end
-
-    def image
-      images&.all&.detect { |i| i.type == runtime_qualifier }
+      image&.output_name
     end
 
   end
