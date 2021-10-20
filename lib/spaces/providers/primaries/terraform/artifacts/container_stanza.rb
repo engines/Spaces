@@ -4,19 +4,19 @@ module Artifacts
 
       def snippets
         %(
-          resource "#{runtime_qualifier}" "#{blueprint_identifier}" {
+          resource "#{runtime_qualifier}_container" "#{blueprint_identifier}" {
             name = "#{blueprint_identifier}"
             image = "#{spaces_image_registry}#{image_name}"
             domainname = "#{universe.host}"
             hostname = "#{blueprint_identifier}"
 
-            #{device_snippets}
+            #{volume_snippets if volumes}
           }
         )
       end
 
-      def device_snippets
-        # volumes.all.map(&:container_snippets).join TODO: FIX!
+      def volume_snippets
+        volumes.all.map(&:snippets).join
       end
 
       def spaces_image_registry

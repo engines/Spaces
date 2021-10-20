@@ -24,6 +24,10 @@ module Resolving
       all_complete?(divisions)
     end
 
+    def image
+      images&.first
+    end
+
     def connections_settled
       super { |c| c.resolution_in(arena) }
     end

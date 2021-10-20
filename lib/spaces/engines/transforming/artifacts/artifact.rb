@@ -48,23 +48,14 @@ module Artifacts
     end
 
     def method_missing(m, *args, &block)
-      return division_adapter_map[m.to_sym] if division_adapter_keys.include?(m)
+      return division_adapter_map[m] if division_adapter_keys.include?(m)
       return adapter.send(m, *args, &block) if adapter.respond_to?(m)
       super
     end
 
     def respond_to_missing?(m, *)
-      snippet_map.include?(m) || adapter.respond_to?(m) || super
+      division_adapter_map.include?(m) || adapter.respond_to?(m) || super
     end
-    #
-    # def method_missing(m, *args, &block)
-    #   return adapter.send(m, *args, &block) if adapter.respond_to?(m)
-    #   super
-    # end
-    #
-    # def respond_to_missing?(m, *)
-    #   adapter.respond_to?(m) || super
-    # end
 
   end
 end
