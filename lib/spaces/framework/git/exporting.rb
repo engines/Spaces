@@ -24,7 +24,7 @@ module Spaces
       end
 
       def commit_message_for(args)
-        "#{args.dig(:model, :message) || default_commit_message} [BY SPACES]"
+        "#{args.dig(:model, :message) || default_commit_message} [BY ENGINES]"
       end
 
       def default_commit_message; "Exported on #{Time.now}" ;end
