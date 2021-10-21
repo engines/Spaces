@@ -19,6 +19,9 @@ module Divisions
 
     def type; struct.type || derived_features[:type] ;end
 
+    def runtime; struct.runtime ;end    
+    def for_runtime?(value); [value, nil].include?(runtime) ;end
+
     def embed?; type == 'embed' ;end
 
     def configuration; struct.configuration || derived_features[:configuration] ;end

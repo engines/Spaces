@@ -11,7 +11,7 @@ module Settling
 
     def embedding_division_map
       embedding_keys.inject({}) do |m, k|
-        m.tap { m[k] = division_for(k)&.with_embeds(embeds_down) } #TODO: check if this overrides in the wrong direction
+        m.tap { m[k] = division_for(k)&.with_embeds(embeds_for_arena_runtime) }
       end.compact
     end
 
@@ -21,6 +21,10 @@ module Settling
 
     def embeds_including_blueprint
       [blueprint, embeds_down].flatten.compact.reverse
+    end
+
+    def embeds_for_arena_runtime
+      @embeds_for_arena_runtime ||= arena_runtime_embeds_for(runtime_qualifier)
     end
 
     def bindings_flattened
