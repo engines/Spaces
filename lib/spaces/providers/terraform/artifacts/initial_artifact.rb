@@ -1,6 +1,6 @@
 module Artifacts
   module Terraform
-    class InitialArtifact < ::Artifacts::Artifact
+    class InitialArtifact < ::Artifacts::Provisioning::Artifact
 
     end
   end
