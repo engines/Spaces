@@ -1,5 +1,4 @@
-requires 'recovery',
-         'spaces',
+requires 'spaces',
          'engines',
          'commands',
          'controllers',

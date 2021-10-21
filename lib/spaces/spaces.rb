@@ -2,9 +2,8 @@ require 'spaces/requiring'
 
 include Requiring
 
-requires 'recovery',
-         'spaces',
-         'engines',
+requires 'framework',
+         'models',
          'commands',
          'controllers',
          'providers',

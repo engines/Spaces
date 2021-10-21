@@ -1,17 +1,11 @@
-requires 'transforming', only: ['requires'], recurse: false
-
-requires 'divisions',
-         'adapters',
-         'keys',
-         'locating',
-         'publishing'
-
-requires 'blueprinting/phases'
-requires 'blueprinting', recurse: false
-
 requires 'arenas/associations',
          'arenas/phases'
 requires 'arenas', recurse: false
+
+requires 'publishing'
+
+requires 'blueprinting/phases'
+requires 'blueprinting', recurse: false
 
 requires 'settling/phases'
 requires 'settling', recurse: false

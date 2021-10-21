@@ -25,7 +25,7 @@ module Divisions
     def inflated_struct; inflated.struct ;end
 
     def default_name; tenant_context_identifier ;end
-    def default_output_name; "spaces/#{tenant_context_identifier}:#{default_tag}" ;end
+    def default_output_name; "engines/#{tenant_context_identifier}:#{default_tag}" ;end
     def default_tag; 'latest' ;end
 
     def tenant_context_identifier; "#{tenant.identifier}/#{context_identifier.as_path}" ;end
