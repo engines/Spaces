@@ -3,7 +3,7 @@ require 'spaces/requiring'
 include Requiring
 
 requires 'framework',
-         'engines',
+         'models',
          'commands',
          'controllers',
          'providers',
