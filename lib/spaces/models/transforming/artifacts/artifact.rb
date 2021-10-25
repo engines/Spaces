@@ -4,7 +4,7 @@ module Artifacts
 
     relation_accessor :adapter
 
-    delegate([:blueprint_identifier, :division_adapter_map, :division_adapter_keys] => :adapter)
+    delegate([:blueprint_identifier, :adapter_map, :adapter_keys] => :adapter)
 
     def value
       [snippets].flatten.join("\n") #TODO: is this a good default?
@@ -19,7 +19,7 @@ module Artifacts
     end
 
     def snippet_map
-      @snippet_map ||= division_adapters.reduce({}) do |m, a|
+      @snippet_map ||= adapters.reduce({}) do |m, a|
         m.tap do
           a.snippet_map.keys.map do |k|
             p = precedence_for(k)
@@ -48,13 +48,13 @@ module Artifacts
     end
 
     def method_missing(m, *args, &block)
-      return division_adapter_map[m] if division_adapter_keys.include?(m)
+      return adapter_map[m] if adapter_keys.include?(m)
       return adapter.send(m, *args, &block) if adapter.respond_to?(m)
       super
     end
 
     def respond_to_missing?(m, *)
-      division_adapter_map.include?(m) || adapter.respond_to?(m) || super
+      adapter_map.include?(m) || adapter.respond_to?(m) || super
     end
 
   end

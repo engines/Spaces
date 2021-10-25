@@ -1,5 +1,7 @@
+require_relative 'adapter'
+
 module Adapters
-  class Emission < ::Spaces::Model
+  class Emission < Adapter
 
     relation_accessor :provider
     relation_accessor :arena_emission
@@ -25,14 +27,14 @@ module Adapters
       default_artifact_class
     end
 
-    def division_adapter_map
-      @division_map ||= resolution.keys.inject({}) do |m, k|
+    def adapter_map
+      @adapter_map ||= resolution.keys.inject({}) do |m, k|
         m.tap { m[k] = division_adapter_for(resolution.division_map[k]) }
       end.compact
     end
 
-    def division_adapters; division_adapter_map.values ;end
-    def division_adapter_keys; division_adapter_map.keys ;end
+    def adapters; adapter_map.values ;end
+    def adapter_keys; adapter_map.keys ;end
 
     def division_adapter_for(division)
       adapter_class_for(division).new(division)
