@@ -33,13 +33,13 @@ module Packing
     end
 
     def copy_auxiliaries_for(pack)
-      pack.auxiliary_folders.each do |d|
+      pack.auxiliary_directories.each do |d|
         copy_auxiliaries(pack, d)
       end
     end
 
     def remove_auxiliaries_for(pack)
-      pack.auxiliary_folders.each do |d|
+      pack.auxiliary_directories.each do |d|
         remove_auxiliaries(pack, d)
       end
     end

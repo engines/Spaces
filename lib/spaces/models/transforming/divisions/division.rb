@@ -21,7 +21,7 @@ module Divisions
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_folders, :blueprint_identifier, :configuration, :in_blueprint?, :runtime_qualifier, :packtime_qualifier, :arena] => :emission,
+      [:composition, :auxiliary_directories, :blueprint_identifier, :configuration, :in_blueprint?, :runtime_qualifier, :packtime_qualifier, :arena] => :emission,
       ranking: :composition,
       resolutions: :universe
     )
@@ -32,7 +32,7 @@ module Divisions
     def globalized; self ;end
 
     def content
-      auxiliary_folders.map do |d|
+      auxiliary_directories.map do |d|
         auxiliary_paths_for(d).map do |p|
           Interpolating::FileText.new(origin: p, directory: d, transformable: self)
         end
