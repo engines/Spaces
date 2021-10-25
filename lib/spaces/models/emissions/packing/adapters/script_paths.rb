@@ -2,7 +2,6 @@ module Adapters
   module ScriptPaths
 
     def temporary_script_paths_for(precedence)
-      pp precedence
       scripts_for(precedence).map do |s|
         temporary_script_path.join("#{precedence}", s)
       end
