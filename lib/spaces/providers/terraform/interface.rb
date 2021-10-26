@@ -11,9 +11,9 @@ module Providers
         end
       end
 
-      def artifact_path; path.join(artifact_filename) ;end
+      def artifact_path_for(artifact); path.join(artifact_filename_for(artifact)) ;end
 
-      def artifact_filename
+      def artifact_filename_for(qualifier)
         "#{provisions.identifier.as_path}.#{artifact_extension}"
       end
 

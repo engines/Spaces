@@ -6,6 +6,8 @@ module Artifacts
 
     delegate([:blueprint_identifier, :adapter_map, :adapter_keys] => :adapter)
 
+    alias_method :filename, :qualifier
+
     def value
       [snippets].flatten.join("\n") #TODO: is this a good default?
     end

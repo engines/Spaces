@@ -16,9 +16,11 @@ module Providers
 
     def save_artifacts
       artifacts.each do |a|
-        artifact_path.write(a.value)
+        artifact_path_for(a).write(a.value)
       end
     end
+
+    def artifact_path_for(artifact); path_for(emission).join(artifact.filename) ;end
 
     def initialize(adapter, space = nil)
       self.adapter = adapter

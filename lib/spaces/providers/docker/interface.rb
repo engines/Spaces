@@ -66,12 +66,8 @@ module Providers
         image.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
       end
 
-      def artifact_path; path_for(pack).join(artifact_filename) ;end
-
       def bridge; ::Docker::Image ;end
       def file_class; Files::File ;end
-
-      def artifact_filename; 'Dockerfile' ;end
 
     end
   end
