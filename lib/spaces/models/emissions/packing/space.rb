@@ -22,7 +22,7 @@ module Packing
 
       ensure_connections_exist_for(pack)
       super.tap do
-        provider_interface_for(pack).save_artifact
+        provider_interface_for(pack).save_artifacts
       end
     rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: pack.identifier, klass: klass)

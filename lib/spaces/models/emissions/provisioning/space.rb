@@ -22,7 +22,7 @@ module Provisioning
 
     def save(provisions)
       ensure_connections_exist_for(provisions)
-      provider_interface_for(provisions).save_artifact
+      provider_interface_for(provisions).save_artifacts
       super
     end
 

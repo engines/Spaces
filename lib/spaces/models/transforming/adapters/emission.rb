@@ -17,12 +17,18 @@ module Adapters
 
     alias_method :emission, :arena_emission
 
-    def artifact
-      @artifact ||= artifact_class.new(self)
+    def artifact_qualifiers
+      [:artifact]
     end
 
-    def artifact_class
-      class_for(:artifacts, qualifier, :artifact)
+    def artifacts
+      @artifacts ||= artifact_qualifiers.map do |q|
+        artifact_class_for(q).new(self)
+      end
+    end
+
+    def artifact_class_for(artifact_qualifier)
+      class_for(:artifacts, qualifier, artifact_qualifier)
     rescue NameError
       default_artifact_class
     end
