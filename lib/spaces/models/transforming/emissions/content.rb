@@ -18,7 +18,7 @@ module Emissions
     end
 
     def blueprints_content
-      auxiliary_directories.map { |d| content_into(d, source: itself) }.flatten
+      auxiliary_directories.map { |d| content_into(d, source: self) }.flatten
     end
 
     def content_into(directory, source:)

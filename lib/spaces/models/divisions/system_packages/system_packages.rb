@@ -16,5 +16,7 @@ module Divisions
       [other.keys, keys].flatten.uniq
     end
 
+    def path; Pathname(__dir__) ;end
+
   end
 end
