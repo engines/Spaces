@@ -27,6 +27,7 @@ module Adapters
       default_artifact_class
     end
 
+    # TODO: possible refactor ... the levels of dynamic class generation are a repeating pattern
     def adapter_map
       @adapter_map ||= resolution.keys.inject({}) do |m, k|
         m.tap { m[k] = division_adapter_for(resolution.division_map[k]) }
@@ -58,7 +59,10 @@ module Adapters
     def default_artifact_class; ::Artifacts::Artifact ;end
     def adapter_name_elements; nesting_elements ;end
     def default_name_elements; [:default] ;end
-    def default_adapter_class; ::Adapters::Default ;end
+    def default_adapter_class; Default ;end
+    def default_emission_adapter_class; EmissionDefault ;end
+
+    def snippet_map; {} ;end
 
     def initialize(provider, arena_emission)
       self.provider = provider

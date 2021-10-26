@@ -6,12 +6,13 @@ module Adapters
     alias_method :provider, :packing_provider
     alias_method :pack, :emission
 
-    def adapter_qualifiers; [:file_packing, :script_running] ;end
+    def adapter_qualifiers; [:script_copying, :file_packing, :script_running, :execution] ;end
 
     def adapter_map
       pack_adapter_map.merge(super)
     end
 
+    # TODO: possible refactor ... the levels of dynamic class generation are a repeating pattern
     def pack_adapter_map
       @pack_adapter_map ||= adapter_qualifiers.inject({}) do |m, q|
         m.tap { m[q] = pack_adapter_for(q) }
@@ -31,7 +32,7 @@ module Adapters
         begin
           class_for(adapter_name_elements, default_name_elements)
         rescue NameError
-          default_adapter_class
+          default_emission_adapter_class
         end
       end
     end

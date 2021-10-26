@@ -1,12 +1,7 @@
-require_relative 'pack'
-require_relative 'script_paths'
+require_relative 'scripting'
 
 module Adapters
-  class ScriptRunning < Pack
-    include Keyed
-    include ScriptPaths
-
-    alias_method :path, :script_path
+  class ScriptRunning < Scripting
 
     def adapter_keys
       precedence & directories.map { |d| :"#{d.basename}" }

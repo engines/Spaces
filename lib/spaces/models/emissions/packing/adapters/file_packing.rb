@@ -1,10 +1,8 @@
 require_relative 'pack'
-require_relative 'file_paths'
 
 module Adapters
   class FilePacking < Pack
     include Keyed
-    include FilePaths
 
       def adapter_keys
         precedence

@@ -1,7 +1,6 @@
 module Adapters
 
   class Configuration < Division ;end
-  class Default < Division ;end
   class Images < Divisible ;end
   class Image < Division ;end
   class OtherPackages < Divisible ;end
@@ -12,5 +11,7 @@ module Adapters
   class Port < Division ;end
   class Volumes < Divisible ;end
   class Volume < Division ;end
+  class Default < Division ;end
+  class EmissionDefault < Emission ;end
 
 end
