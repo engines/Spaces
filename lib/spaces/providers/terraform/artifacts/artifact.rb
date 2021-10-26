@@ -1,6 +1,6 @@
 module Artifacts
   module Terraform
-    class Artifact < ::Artifacts::Artifact
+    class Artifact < ::Artifacts::Provisioning::Artifact
 
       def stanza_qualifiers; [:container, :volume, :dns] ;end
 

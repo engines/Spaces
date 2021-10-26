@@ -2,7 +2,7 @@ module Adapters
   module Precedence
 
     def precedence
-      [:first, :images, :configuration, :early, :adds, :middle, :permissions, :removes, :late, :last]
+      [:images, :first, :configuration, :early, :adds, :middle, :permissions, :removes, :late, :last, :execution]
     end
 
     def precedence_for(qualifier)

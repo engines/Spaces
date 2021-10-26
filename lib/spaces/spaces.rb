@@ -6,5 +6,5 @@ requires 'framework',
          'models',
          'commands',
          'controllers',
-         'providers',
-         only: ['requires'], recurse: false
+         'providers'
+         # only: ['requires'], recurse: false

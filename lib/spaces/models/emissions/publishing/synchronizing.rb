@@ -14,7 +14,7 @@ module Publishing
 
     def synchronize_auxiliaries_for(other_space, model)
       model.auxiliary_files.each  { |d| synchronize_auxiliaries(other_space, model, d) }
-      model.auxiliary_folders.each { |d| synchronize_auxiliaries(other_space, model, d) }
+      model.auxiliary_directories.each { |d| synchronize_auxiliaries(other_space, model, d) }
     end
 
     def synchronize_auxiliaries(other_space, model, segment)

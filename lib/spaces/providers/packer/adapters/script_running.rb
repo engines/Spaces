@@ -1,9 +1,6 @@
-module Providers
+module Adapters
   module Packer
-    class Scripts < ::Artifacts::Scripts
-
-      delegate scripts_for: :division
-
+    class ScriptRunning < ::Adapters::ScriptRunning
 
       def snippets_for(precedence)
         {

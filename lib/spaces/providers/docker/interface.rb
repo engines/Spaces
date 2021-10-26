@@ -1,4 +1,3 @@
-require_relative 'patch/image'
 require_relative 'streaming'
 
 module Providers
