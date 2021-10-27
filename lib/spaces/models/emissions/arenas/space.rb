@@ -32,27 +32,27 @@ module Arenas
     # TODO: possibly all changes with providers being assumed and terraform
     # is not hard-wired in
 
-    def save_initial(arena)
-      initial_file_name_for(arena).write(arena.provider_aspect.initial_artifact)
-      arena.identifier
-    end
-
-    def save_runtime(arena)
-      runtime_file_name_for(arena).write(arena.provider_aspect.runtime_artifact)
-      arena.identifier
-    end
-
-    def initial_file_name_for(arena)
-      path_for(arena).join(initial_basename)
-    end
-
-    def runtime_file_name_for(arena)
-      path_for(arena).join(runtime_basename)
-    end
-
-    def provider_file_name_for(provider)
-      path_for(provider.arena).join(provider_basename_for(provider))
-    end
+    # def save_initial(arena)
+    #   initial_file_name_for(arena).write(arena.provider_aspect.initial_artifact)
+    #   arena.identifier
+    # end
+    #
+    # def save_runtime(arena)
+    #   runtime_file_name_for(arena).write(arena.provider_aspect.runtime_artifact)
+    #   arena.identifier
+    # end
+    #
+    # def initial_file_name_for(arena)
+    #   path_for(arena).join(initial_basename)
+    # end
+    #
+    # def runtime_file_name_for(arena)
+    #   path_for(arena).join(runtime_basename)
+    # end
+    #
+    # def provider_file_name_for(provider)
+    #   path_for(provider.arena).join(provider_basename_for(provider))
+    # end
 
     # --------------------------------------------------------------------------
 
@@ -60,12 +60,12 @@ module Arenas
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
 
-    def initial_basename; "_initial.#{artifact_extension}" ;end
-    def runtime_basename; "_runtime.#{artifact_extension}" ;end
-    def provider_basename_for(provider); "_#{provider.type}.#{artifact_extension}" ;end
-    def artifact_extension; :tf ;end
+    # def initial_basename; "_initial.#{artifact_extension}" ;end
+    # def runtime_basename; "_runtime.#{artifact_extension}" ;end
+    # def provider_basename_for(provider); "_#{provider.type}.#{artifact_extension}" ;end
+    # def artifact_extension; :tf ;end
 
-    def initialized_at(arena); initial_file_name_for(arena).exist_then(&:mtime) ;end
+    # def initialized_at(arena); initial_file_name_for(arena).exist_then(&:mtime) ;end
     # def bootstrapped_at(arena); runtime_file_name_for(arena).exist_then(&:mtime) ;end
 
   end

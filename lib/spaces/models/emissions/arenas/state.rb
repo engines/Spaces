@@ -10,7 +10,7 @@ module Arenas
 
     def keys
       [
-        :initialized?, :fresh_initialization?,
+        # :initialized?, :fresh_initialization?,
         :providers,
         :missing_blueprints, :fresh_blueprints,
         :missing_installations, :fresh_installations,
@@ -20,7 +20,7 @@ module Arenas
       ]
     end
 
-    def initialized?; arenas.initial_file_name_for(arena).exist? ;end
+    # def initialized?; arenas.initial_file_name_for(arena).exist? ;end
 
     def providers
        arena.provider_map.transform_values { |v| v.class.name }
@@ -34,7 +34,7 @@ module Arenas
 
     def missing(method); arena.send(method).map(&:identifier) ;end
 
-    def fresh_initialization?; times(initialized_at, :>, modified_at) ;end
+    # def fresh_initialization?; times(initialized_at, :>, modified_at) ;end
 
     def fresh_blueprints
       blueprinted.
@@ -56,7 +56,7 @@ module Arenas
     end
 
     def modified_at; arenas.modified_at(arena) ;end
-    def initialized_at; arenas.initialized_at(arena) ;end
+    # def initialized_at; arenas.initialized_at(arena) ;end
 
     def initialize(arena)
       self.arena = arena
