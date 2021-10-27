@@ -13,12 +13,6 @@ module Artifacts
       [snippets].flatten.join("\n") #TODO: is this a good default?
     end
 
-    def filename
-      "#{emission.identifier.as_path}.#{extension}"
-    end
-
-    def extension; qualifier ;end
-
     def initialize(adapter)
       self.adapter = adapter
     end

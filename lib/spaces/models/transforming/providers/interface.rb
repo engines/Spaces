@@ -7,8 +7,8 @@ module Providers
 
     delegate(
       [:artifacts, :emission] => :adapter,
-      [:arenas, :path_for] => :space,
-      path: :arenas
+      # [:arenas, :path, :path_for] => :space
+      [:path_for] => :space
     )
 
     alias_method :pack, :emission
@@ -20,7 +20,7 @@ module Providers
       end
     end
 
-    def artifact_path_for(artifact); path.join(artifact.filename) ;end
+    def artifact_path_for(artifact); path_for(artifact.emission).join(artifact.filename) ;end
 
     def initialize(adapter, space = nil)
       self.adapter = adapter
