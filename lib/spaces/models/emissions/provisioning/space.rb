@@ -22,8 +22,9 @@ module Provisioning
 
     def save(provisions)
       ensure_connections_exist_for(provisions)
-      provider_interface_for(provisions).save_artifacts
-      super
+      super.tap do
+        provider_interface_for(provisions).save_artifacts
+      end
     end
 
     def provider_interface_for(provisions)  #TODO: refactor
