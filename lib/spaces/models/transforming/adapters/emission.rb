@@ -4,18 +4,16 @@ module Adapters
   class Emission < Adapter
 
     relation_accessor :provider
-    relation_accessor :arena_emission
-    relation_accessor :artifact
+    relation_accessor :resolved_emission
 
     delegate(
       qualifier: :provider,
-      [:arena, :resolution, :blueprint_identifier] => :arena_emission,
+      [:arena, :resolution, :blueprint_identifier] => :resolved_emission,
       division_map: :resolution,
-      keys: :division_map,
-      order: :artifact
+      keys: :division_map
     )
 
-    alias_method :emission, :arena_emission
+    alias_method :emission, :resolved_emission
 
     def artifact_qualifiers
       [:artifact]
@@ -70,9 +68,9 @@ module Adapters
 
     def snippet_map; {} ;end
 
-    def initialize(provider, arena_emission)
+    def initialize(provider, resolved_emission)
       self.provider = provider
-      self.arena_emission = arena_emission
+      self.resolved_emission = resolved_emission
     end
 
     def method_missing(m, *args, &block)

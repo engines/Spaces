@@ -16,12 +16,12 @@ module Providers
       default_artifact_class
     end
 
-    def interface_for(arena_emission, space = nil)
-      interface_class.new(adapter_for(arena_emission), space)
+    def interface_for(resolved_emission, space = nil)
+      interface_class.new(adapter_for(resolved_emission), space)
     end
 
-    def adapter_for(arena_emission)
-      adapter_class_for(arena_emission.qualifier).new(self, arena_emission)
+    def adapter_for(resolved_emission)
+      adapter_class_for(resolved_emission.qualifier).new(self, resolved_emission)
     end
 
     def interface_class
