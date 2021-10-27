@@ -1,6 +1,6 @@
 module Artifacts
   module Terraform
-    class Container < ::Artifacts::Provisioning::Artifact
+    class Container < Artifact
 
       def stanza_qualifiers; [:container, :volume, :dns] ;end
 
@@ -11,8 +11,6 @@ module Artifacts
       def container_type
         [runtime_qualifier, 'container'].compact.join('_')
       end
-
-      def extension; "tf.#{super}" ;end
 
     end
   end

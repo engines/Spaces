@@ -3,7 +3,8 @@ module Adapters
     class Provisions < ::Adapters::Provisions
 
       def artifact_qualifiers
-        [:container]
+        # [:container, :initial, :prerequisites, :zones]
+        [:container, :prerequisites, :zones]
       end
 
     end
