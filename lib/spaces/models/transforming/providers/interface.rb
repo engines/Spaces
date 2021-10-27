@@ -20,7 +20,7 @@ module Providers
       end
     end
 
-    def artifact_path_for(artifact); path_for(emission).join(artifact.filename) ;end
+    def artifact_path_for(artifact); path.join(artifact.filename) ;end
 
     def initialize(adapter, space = nil)
       self.adapter = adapter

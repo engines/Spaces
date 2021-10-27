@@ -12,6 +12,8 @@ module Artifacts
         [runtime_qualifier, 'container'].compact.join('_')
       end
 
+      def extension; "tf.#{super}" ;end
+
     end
   end
 end
