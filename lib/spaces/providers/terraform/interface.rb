@@ -11,14 +11,6 @@ module Providers
         end
       end
 
-      def artifact_path; path.join(artifact_filename) ;end
-
-      def artifact_filename
-        "#{provisions.identifier.as_path}.#{artifact_extension}"
-      end
-
-      def artifact_extension; :tf ;end
-
       protected
 
       def provisioning_for(command, model)

@@ -6,17 +6,17 @@ module Providers
     relation_accessor :space
 
     delegate(
-      [:artifact, :emission] => :adapter,
-      [:arenas, :path_for] => :space,
-      path: :arenas
+      [:artifacts, :emission] => :adapter,
+      [:path_for] => :space
     )
 
-    alias_method :pack, :emission
-    alias_method :provisions, :emission
-
-    def save_artifact
-      artifact_path.write(artifact.value)
+    def save_artifacts
+      artifacts.each do |a|
+        artifact_path_for(a).write(a.value)
+      end
     end
+
+    def artifact_path_for(artifact); path_for(artifact.emission).join(artifact.filename) ;end
 
     def initialize(adapter, space = nil)
       self.adapter = adapter

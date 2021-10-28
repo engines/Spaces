@@ -12,6 +12,12 @@ module Arenas
 
       def subcommand_class; ::Provisioning::Commands::Saving ;end
 
+      protected
+
+      def _run
+        [space.save_provisioning_artifacts_for(model), super].flatten
+      end
+
     end
   end
 end

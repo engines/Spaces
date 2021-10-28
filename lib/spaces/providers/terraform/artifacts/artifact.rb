@@ -2,10 +2,14 @@ module Artifacts
   module Terraform
     class Artifact < ::Artifacts::Provisioning::Artifact
 
-      def stanza_qualifiers; [:container, :volume, :dns] ;end
+      def filename
+        "#{emission.blueprint_identifier}.#{extension}"
+      end
 
-      def dns_qualifier
-        provider.dns_qualifier.camelize.downcase
+      def extension; "tf.#{qualifier}" ;end
+
+      def dns_address
+        "#{container_type}.#{blueprint_identifier}.ipv4_address"
       end
 
       def container_type
