@@ -8,11 +8,16 @@ module Artifacts
     relation_accessor :holder
     alias_method :adapter, :holder
 
-    # delegate([:blueprint_identifier, :adapter_map, :adapter_keys] => :adapter)
-    delegate([:adapter_map, :adapter_keys] => :adapter)
+    delegate(
+      [:provider, :adapter_map, :adapter_keys] => :adapter
+    )
 
     def value
       [snippets].flatten.join("\n") #TODO: is this a good default?
+    end
+
+    def provider_qualifiers
+      super - [provider.qualifier]
     end
 
     def initialize(holder)

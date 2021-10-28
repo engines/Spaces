@@ -3,7 +3,6 @@ require_relative 'emission'
 module Adapters
   class ResolvedEmission < Emission
 
-    relation_accessor :provider
     relation_accessor :arena_adapter
 
     delegate(
