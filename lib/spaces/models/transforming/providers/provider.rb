@@ -6,16 +6,6 @@ module Providers
 
     attr_accessor :role
 
-    def artifact_for(adapter)
-      artifact_class_for(adapter).new(adapter)
-    end
-
-    def artifact_class_for(adapter)
-      class_for(:artifacts, qualifier, :artifact)
-    rescue NameError
-      default_artifact_class
-    end
-
     def interface_for(resolved_emission, space = nil)
       interface_class.new(adapter_for(resolved_emission), space)
     end

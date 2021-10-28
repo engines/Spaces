@@ -7,12 +7,8 @@ module Providers
 
     delegate(
       [:artifacts, :emission] => :adapter,
-      # [:arenas, :path, :path_for] => :space
       [:path_for] => :space
     )
-
-    alias_method :pack, :emission
-    alias_method :provisions, :emission
 
     def save_artifacts
       artifacts.each do |a|
