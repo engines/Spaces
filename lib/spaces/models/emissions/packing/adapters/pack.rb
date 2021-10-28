@@ -1,5 +1,5 @@
 module Adapters
-  class Pack < Emission
+  class Pack < ResolvedEmission
 
     delegate(packing_provider: :arena)
 

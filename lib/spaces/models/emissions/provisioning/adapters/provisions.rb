@@ -1,5 +1,5 @@
 module Adapters
-  class Provisions < Emission
+  class Provisions < ResolvedEmission
 
     delegate(
       [:provisioning_provider, :runtime_qualifier] => :arena,
