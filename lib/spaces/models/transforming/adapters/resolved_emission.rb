@@ -14,7 +14,7 @@ module Adapters
 
     # TODO: possible refactor ... the levels of dynamic class generation are a repeating pattern
     def adapter_map
-      @adapter_map ||= resolution.keys.inject({}) do |m, k|
+      @adapter_map ||= keys.inject({}) do |m, k|
         m.tap { m[k] = division_adapter_for(resolution.division_map[k]) }
       end.compact
     end

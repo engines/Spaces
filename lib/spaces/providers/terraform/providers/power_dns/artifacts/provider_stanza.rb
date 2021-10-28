@@ -1,30 +1,18 @@
-module Providers
+module Artifacts
   module Terraform
     module PowerDns
-      class PowerDns < ::Artifacts::Stanza
+      class ProviderStanza < ::Artifacts::Stanza
 
-        def provider_snippets
+        def snippets
           %(
             provider "powerdns" {
-              api_key    = "#{configuration.api_key}"
-              server_url = "#{protocol}://${#{dns_address}}:#{port}/#{endpoint}"
-            }
-            resource "powerdns_zone" "#{arena.identifier}-zone" {
-              name        = "#{arena.identifier}.#{universe.host}."
-              kind        = "native"
-              nameservers = [#{dns_address}]
+              api_key    = "#{dns.api_key}"
+              server_url = "#{dns.protocol}://${#{dns_address}}:#{port}/#{endpoint}"
             }
           )
         end
 
-        def required_snippet
-          %(
-            powerdns = {
-              version = "#{configuration.version}"
-              source  = "#{configuration.source}"
-            }
-          )
-        end
+        def dns; provider.dns_provider ;end
 
       end
     end
