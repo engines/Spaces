@@ -9,7 +9,7 @@ module Artifacts
       def extension; "tf.#{qualifier}" ;end
 
       def dns_address
-        "#{container_type}.#{provider.dns_qualifier}.ipv4_address"
+        "#{container_type}.#{blueprint_identifier}.ipv4_address"
       end
 
       def container_type
