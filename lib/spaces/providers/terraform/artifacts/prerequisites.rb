@@ -1,6 +1,8 @@
+require_relative 'arena'
+
 module Artifacts
   module Terraform
-    class Prerequisite < Artifact
+    class Prerequisites < Arena
 
       def stanza_qualifiers; [:provider] ;end
 

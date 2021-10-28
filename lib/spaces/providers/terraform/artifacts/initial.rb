@@ -1,6 +1,8 @@
+require_relative 'arena'
+
 module Artifacts
   module Terraform
-    class Initial < Artifact
+    class Initial < Arena
 
     end
   end

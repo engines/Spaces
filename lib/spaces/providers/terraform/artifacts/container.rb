@@ -1,3 +1,5 @@
+require_relative 'artifact'
+
 module Artifacts
   module Terraform
     class Container < Artifact
