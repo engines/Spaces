@@ -19,6 +19,10 @@ module Providers
       provider_map.transform_values(&:qualifier)
     end
 
+    def provider_keys
+      provider_qualifier_map.keys
+    end
+
     def provider_qualifiers
       provider_qualifier_map.values.uniq
     end

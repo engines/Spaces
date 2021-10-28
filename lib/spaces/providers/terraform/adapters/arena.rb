@@ -4,7 +4,7 @@ module Adapters
 
       def artifact_qualifiers
         # [:initial, :prerequisites, :zones]
-        [:prerequisites]
+        [:initial, :prerequisites]
       end
 
     end
