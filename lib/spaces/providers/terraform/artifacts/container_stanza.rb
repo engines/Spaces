@@ -26,7 +26,7 @@ module Artifacts
       def dependency_string
         connections_down.map { |c| "#{runtime_qualifier}.#{c.blueprint_identifier}" }.join(', ')
       end
-    end
 
+    end
   end
 end

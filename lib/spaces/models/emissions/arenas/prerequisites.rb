@@ -5,7 +5,7 @@ module Arenas
     def provider_role_map
       @provider_role_map ||= {
         packing: [:docker],
-        provisioning: [:terraform],
+        provisioning: [:docker_compose, :terraform],
         runtime: [:docker]
       }
     end

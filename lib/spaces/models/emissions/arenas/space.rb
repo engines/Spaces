@@ -30,7 +30,7 @@ module Arenas
 
     def save_provisioning_artifacts_for(arena)
       ensure_space_for(arena)
-      provider_interface_for(arena).save_artifacts
+      provider_interface_for(arena)&.save_artifacts # FIX!
     end
 
     def provider_interface_for(arena)  #TODO: refactor
