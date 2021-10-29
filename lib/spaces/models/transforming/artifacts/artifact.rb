@@ -12,8 +12,8 @@ module Artifacts
       [:provider, :adapter_map, :adapter_keys] => :adapter
     )
 
-    def value
-      [snippets].flatten.join("\n") #TODO: is this a good default?
+    def content
+      [snippets].flatten.join("\n") #TODO: is this a good default? NOPE!
     end
 
     def provider_qualifiers

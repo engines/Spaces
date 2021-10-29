@@ -12,7 +12,7 @@ module Providers
 
     def save_artifacts
       artifacts.each do |a|
-        artifact_path_for(a).write(a.value)
+        artifact_path_for(a).write(a.content)
       end
     end
 
