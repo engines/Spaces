@@ -1,20 +1,18 @@
-require_relative 'snippets'
+require_relative 'content'
 
 module Artifacts
   class Artifact < ::Spaces::Model
     include Adapters::Precedence
-    include Snippets
+    include Content
 
     relation_accessor :holder
+
     alias_method :adapter, :holder
+    alias_method :content, :text_content
 
     delegate(
       [:provider, :adapter_map, :adapter_keys] => :adapter
     )
-
-    def content
-      [snippets].flatten.join("\n") #TODO: is this a good default? NOPE!
-    end
 
     def provider_qualifiers
       super - [provider.qualifier]
