@@ -1,5 +1,9 @@
 class Array
 
+  %w(all keys values).each do |w|
+    alias_method w, :itself
+  end
+
   def to_h_deep
     map do |i|
       i.to_h_deep
@@ -14,10 +18,6 @@ class Array
     rescue NoMethodError
       i
     end
-  end
-
-  def all
-    self
   end
 
   def all_true?
