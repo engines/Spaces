@@ -2,10 +2,15 @@ module Artifacts
   module DockerCompose
     class Artifact < ::Artifacts::Provisioning::Artifact
 
-      def stanza_qualifiers; [:container] ;end
+      alias_method :content, :yaml_content
 
-      def filename; 'docker-compose' ;end
+      def stanza_qualifiers; [:containers] ;end
 
+      def filename
+        "docker-compose.#{extension}"
+      end
+
+      def extension; :yaml ;end
 
     end
   end

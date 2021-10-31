@@ -1,10 +1,10 @@
 module Arenas
   module Settling
 
-    def present_in(space); deep_in(space, :select) ;end
-    def absent_in(space); deep_in(space, :reject) ;end
+    def present_in(space); deep_bindings_in(space, :select) ;end
+    def absent_in(space); deep_bindings_in(space, :reject) ;end
 
-    def deep_in(space, method)
+    def deep_bindings_in(space, method)
       deep_connect_bindings.send(method) do |b|
         space.exist?(b.settlement_identifier_in(self))
       end
