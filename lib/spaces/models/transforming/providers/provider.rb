@@ -6,12 +6,12 @@ module Providers
 
     attr_accessor :role
 
-    def interface_for(resolved_emission, space = nil)
-      interface_class.new(adapter_for(resolved_emission), space)
+    def interface_for(emission, space = nil)
+      interface_class.new(adapter_for(emission), space)
     end
 
-    def adapter_for(resolved_emission)
-      adapter_class_for(resolved_emission.qualifier).new(self, resolved_emission)
+    def adapter_for(emission)
+      adapter_class_for(emission.qualifier).new(self, emission)
     end
 
     def interface_class

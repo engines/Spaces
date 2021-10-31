@@ -23,7 +23,7 @@ module Provisioning
     def save(provisions)
       ensure_connections_exist_for(provisions)
       super.tap do
-        provider_interface_for(provisions).save_artifacts
+        provider_interface_for(provisions)&.save_artifacts
       end
     end
 

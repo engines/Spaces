@@ -4,6 +4,12 @@ module Arenas
   module Resolving
     include Settling
 
+    def all_resolutions
+      resolutions.identifiers(arena_identifier: identifier).map do |i|
+        resolutions.by(i)
+      end
+    end
+
     def resolved; present_in(resolutions) ;end
     def unresolved; absent_in(resolutions) ;end
 
