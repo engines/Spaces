@@ -14,4 +14,6 @@ group :development do
   gem 'ripper-tags'
   gem 'irb', require: false
 end
+
 gem 'docker-api'
+gem 'docker-compose'
