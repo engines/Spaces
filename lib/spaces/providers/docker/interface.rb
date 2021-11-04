@@ -53,9 +53,11 @@ module Providers
       end
 
       def process_output(encoded)
-        output = JSON.parse(encoded, symbolize_names: true)
-        stream.error("#{output[:error]}\n") if output[:error]
-        stream.output(output[:stream]) if output[:stream]
+        # FIX ME! The commented-out code causes JSON parse errors while building an image
+        # output = JSON.parse(encoded, symbolize_names: true)
+        # stream.error("#{output[:error]}\n") if output[:error]
+        # stream.output(output[:stream]) if output[:stream]
+        stream.output(encoded)
       end
 
       def stream
