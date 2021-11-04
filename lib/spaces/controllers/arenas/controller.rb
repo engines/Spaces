@@ -14,6 +14,7 @@ module Arenas
           install: Commands::Installing,
           resolve: Commands::Resolving,
           pack: Commands::Packing,
+          build: Commands::Building,
           provision: Commands::Provisioning,
           init: [::Spaces::Commands::Executing, {execute: :init, threaded: true}],
           plan: [::Spaces::Commands::Executing, {execute: :plan, threaded: true}],
