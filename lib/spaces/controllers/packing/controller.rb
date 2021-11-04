@@ -8,7 +8,7 @@ module Packing
         @action_command_map ||= super.merge({
           create: Commands::Saving,
           update: Commands::Saving,
-          commit: [Commands::Executing, {execute: :commit, threaded: true}],
+          build: Commands::Building,
           artifact: Commands::Artifact
         })
       end

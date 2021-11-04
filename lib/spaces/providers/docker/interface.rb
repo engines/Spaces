@@ -36,8 +36,6 @@ module Providers
         space.remove_auxiliaries_for(pack)
       end
 
-      alias_method :commit, :build
-
       def build_from_pack
         with_streaming(pack, :build) do
           build_from_dir.tap { |image| tag_latest(image) }

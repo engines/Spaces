@@ -7,8 +7,8 @@ module Packing
 
     delegate(resolutions: :universe)
 
-    def commit(pack)
-      provider_interface_for(pack).commit
+    def build(pack)
+      provider_interface_for(pack).build
     end
 
     def by(identifier, klass = default_model_class)
