@@ -27,6 +27,10 @@ module Provisioning
       end
     end
 
+    def commit(provisions)
+      provider_interface_for(provisions).commit
+    end
+
     def provider_interface_for(provisions)  #TODO: refactor
       provisions.arena.provisioning_provider.interface_for(provisions, self)
     end

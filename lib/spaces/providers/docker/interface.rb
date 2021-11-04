@@ -9,8 +9,9 @@ module Providers
       ::Docker.options[:read_timeout] = 1000
       ::Docker.options[:write_timeout] = 1000
 
+      alias_method :pack, :emission
+
       delegate(
-        [:image_name, :output_name] => :pack,
         [:all, :get, :prune] => :bridge,
         [:connection, :version, :info, :default_socket_url] => :klass,
       )
