@@ -12,7 +12,7 @@ module Artifacts
       def container_snippets
         all_resolutions.reduce({}) do |m, r|
           m.tap do
-            m[r.identifier] =container_stanza_class.new(self, r).snippets
+            m[r.identifier.underscore] = container_stanza_class.new(self, r).snippets
           end
         end
       end

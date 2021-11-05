@@ -4,32 +4,30 @@ module Artifacts
 
       def snippets
         {
-          deploy: {
-            restart_policy: {
-              condition: 'on-failure',
-              delay: '5s',
-              max_attempts: 3,
-              window: '120s'
-            },
-            ports: ports_snippets,
-            resources: {
-              limits: {
-                cpus: '1',
-                memory: '1G'
-              }
-            },
-            environment: environment_snippets,
-            logging: {
-              driver: :syslog,
-              options: {
-                'syslog-address': "tcp://192.168.0.42:123"
-              }
-            },
-            volumes: volumes_snippets,
-            domainname: resolution.domain.identifier,
-            hostname: resolution.blueprint_identifier
-          }.compact
-        }
+          restart_policy: {
+            condition: 'on-failure',
+            delay: '5s',
+            max_attempts: 3,
+            window: '120s'
+          },
+          ports: ports_snippets,
+          resources: {
+            limits: {
+              cpus: '1',
+              memory: '1G'
+            }
+          },
+          environment: environment_snippets,
+          logging: {
+            driver: :syslog,
+            options: {
+              'syslog-address': "tcp://192.168.0.42:123"
+            }
+          },
+          volumes: volumes_snippets,
+          domainname: resolution.domain.identifier,
+          hostname: resolution.blueprint_identifier
+        }.compact
       end
 
       def ports_snippets

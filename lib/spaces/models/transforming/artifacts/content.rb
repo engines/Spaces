@@ -9,7 +9,7 @@ module Artifacts
     end
 
     def yaml_content
-      YAML.dump(hash_content)
+      YAML.dump(hash_content.no_symbols)
     end
 
     def hash_content
