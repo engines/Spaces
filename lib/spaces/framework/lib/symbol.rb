@@ -10,5 +10,6 @@ class Symbol
   def as_path; to_s.as_path ;end
 
   alias_method :underscore, :snakize
+  alias_method :no_symbols, :to_s
 
 end

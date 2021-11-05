@@ -33,9 +33,12 @@ class Hash
     OpenStruct.new(values_to_struct)
   end
 
-  def values_to_struct
+  def no_symbols; stringify_keys.deep(:no_symbols) ;end
+  def values_to_struct; deep(:to_struct) ;end
+
+  def deep(method)
     transform_values do |v|
-      v.to_struct
+      v.send(method)
     rescue NoMethodError
       v
     end

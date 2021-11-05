@@ -46,4 +46,6 @@ class String
     self
   end
 
+  alias_method :no_symbols, :to_s
+
 end

@@ -4,17 +4,13 @@ class Array
     alias_method w, :itself
   end
 
-  def to_h_deep
-    map do |i|
-      i.to_h_deep
-    rescue NoMethodError
-      i
-    end
-  end
+  def to_h_deep; deep(:to_h_deep) ;end
+  def to_struct; deep(:to_struct) ;end
+  def no_symbols; deep(:no_symbols) ;end
 
-  def to_struct
+  def deep(method)
     map do |i|
-      i.to_struct
+      i.send(method)
     rescue NoMethodError
       i
     end

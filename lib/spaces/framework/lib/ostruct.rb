@@ -24,9 +24,12 @@ class OpenStruct
     to_h_deep.to_json(*args)
   end
 
-  def to_h_deep
+  def to_h_deep; deep(:to_h_deep) ;end
+  def no_symbols; deep(:no_symbols) ;end
+
+  def deep(method)
     to_h.transform_values do |v|
-      v.to_h_deep
+      v.send(method)
     rescue NoMethodError
       v
     end
