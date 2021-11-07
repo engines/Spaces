@@ -14,12 +14,12 @@ module Arenas
           install: Commands::Installing,
           resolve: Commands::Resolving,
           pack: Commands::Packing,
+          build: Commands::Building,
           provision: Commands::Provisioning,
-          # TODO: Generalise provisioning steps rather than terraform_<command>
-          terraform_init: [::Spaces::Commands::Executing, {execute: :terraform_init, threaded: true}],
-          terraform_plan: [::Spaces::Commands::Executing, {execute: :terraform_plan, threaded: true}],
-          terraform_show: [::Spaces::Commands::Executing, {execute: :terraform_show, threaded: true}],
-          terraform_apply: [::Spaces::Commands::Executing, {execute: :terraform_apply, threaded: true}]
+          init: [::Spaces::Commands::Executing, {execute: :init, threaded: true}],
+          plan: [::Spaces::Commands::Executing, {execute: :plan, threaded: true}],
+          show: [::Spaces::Commands::Executing, {execute: :show, threaded: true}],
+          apply: [::Spaces::Commands::Executing, {execute: :apply, threaded: true}]
         })
       end
 

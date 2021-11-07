@@ -1,6 +1,12 @@
 module Arenas
   module Packing
 
+    def all_packs
+      packs.identifiers(arena_identifier: identifier).map do |i|
+        packs.by(i)
+      end
+    end
+
     def packed; present_in(packs) ;end
 
     def unpacked

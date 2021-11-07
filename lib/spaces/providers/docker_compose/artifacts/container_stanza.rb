@@ -8,6 +8,14 @@ module Artifacts
         [:build, :deploy]
       end
 
+      def snippets
+        stanza_qualifiers.reduce({}) do |m, q|
+          m.tap do
+            m[q] = stanza_class_for(q).new(self).snippets
+          end
+        end
+      end
+
       def initialize(holder, resolution)
         super(holder)
         self.resolution = resolution

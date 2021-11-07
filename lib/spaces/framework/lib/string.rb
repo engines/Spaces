@@ -20,14 +20,16 @@ class String
       downcase
   end
 
+  def underscore
+    snakize.gsub('/', '_')
+  end
+
   def constantize
     Module.const_get(self)
   end
 
-  alias_method :underscore, :snakize
-
   def hyphenated
-    tr('-', '_')
+    tr('_', '-')
   end
 
   def singularize
@@ -45,5 +47,7 @@ class String
   def to_h
     self
   end
+
+  alias_method :no_symbols, :to_s
 
 end

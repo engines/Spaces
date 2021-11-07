@@ -17,7 +17,7 @@ module Arenas
     end
 
     delegate(
-      [:blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
+      [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
     )
 
     def more_binder_identifiers

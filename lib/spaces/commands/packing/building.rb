@@ -1,6 +1,8 @@
 module Packing
   module Commands
-    class Executing < Spaces::Commands::Executing
+    class Building < Spaces::Commands::Executing
+
+      def execution_instruction; :build ;end
 
       def payload
         return super unless result&.class == Packer::Output::Build

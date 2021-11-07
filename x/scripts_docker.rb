@@ -80,7 +80,7 @@ controllers.arenas.state(identifier: :docker_arena)
 # controllers.packing.commit(identifier: 'docker_arena::phpmyadmin')
 #
 # # apply provisions for an arena
-# controllers.arenas.terraform_apply(identifier: :docker_arena)
+# controllers.arenas.apply(identifier: :docker_arena)
 
 # # save provisions for a resolution
 # controllers.provisioning.create(identifier: 'docker_arena::phpmyadmin')

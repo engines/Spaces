@@ -9,8 +9,9 @@ module Providers
       ::Docker.options[:read_timeout] = 1000
       ::Docker.options[:write_timeout] = 1000
 
+      alias_method :pack, :emission
+
       delegate(
-        [:image_name, :output_name] => :pack,
         [:all, :get, :prune] => :bridge,
         [:connection, :version, :info, :default_socket_url] => :klass,
       )
@@ -35,8 +36,6 @@ module Providers
         space.remove_auxiliaries_for(pack)
       end
 
-      alias_method :commit, :build
-
       def build_from_pack
         with_streaming(pack, :build) do
           build_from_dir.tap { |image| tag_latest(image) }
@@ -53,9 +52,11 @@ module Providers
       end
 
       def process_output(encoded)
-        output = JSON.parse(encoded, symbolize_names: true)
-        stream.error("#{output[:error]}\n") if output[:error]
-        stream.output(output[:stream]) if output[:stream]
+        # FIX ME! The commented-out code causes JSON parse errors while building an image
+        # output = JSON.parse(encoded, symbolize_names: true)
+        # stream.error("#{output[:error]}\n") if output[:error]
+        # stream.output(output[:stream]) if output[:stream]
+        stream.output(encoded)
       end
 
       def stream
