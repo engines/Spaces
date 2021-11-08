@@ -13,7 +13,6 @@ module Artifacts
             author: :james,
             other_label: :gidday
           },
-          target: resolution.identifier.underscore,
           depends_on: connections_down.map(&:identifier).map(&:underscore)
         }
       end
