@@ -14,12 +14,12 @@ module Arenas
           install: Commands::Installing,
           resolve: Commands::Resolving,
           pack: Commands::Packing,
-          runtime: Commands::RuntimeBooting,
+          build: Commands::Building,
           provision: Commands::Provisioning,
-          provision_providers: Commands::ProviderProvisioning,
-          init: [Commands::Executing, execute: :init],
-          plan: [Commands::Executing, execute: :plan],
-          apply: [Commands::Executing, execute: :apply],
+          init: [::Spaces::Commands::Executing, {execute: :init, threaded: true}],
+          plan: [::Spaces::Commands::Executing, {execute: :plan, threaded: true}],
+          show: [::Spaces::Commands::Executing, {execute: :show, threaded: true}],
+          apply: [::Spaces::Commands::Executing, {execute: :apply, threaded: true}]
         })
       end
 

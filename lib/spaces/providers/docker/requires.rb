@@ -1,0 +1,3 @@
+requires 'adapters',
+         'artifacts',
+         'patch'

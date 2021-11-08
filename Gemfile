@@ -12,5 +12,8 @@ group :development do
 
   gem 'pry'
   gem 'ripper-tags'
+  gem 'irb', require: false
 end
+
 gem 'docker-api'
+gem 'docker-compose'

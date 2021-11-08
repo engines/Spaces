@@ -19,7 +19,7 @@ controllers.querying.list(method: :binder_identifiers, space: :blueprints)
 
 # blueprint gets
 controllers.blueprinting.show(identifier: :phpmyadmin)
-controllers.blueprinting.summary(identifier: :phpmyadmin)
+controllers.blueprinting.summarize(identifier: :phpmyadmin)
 
 # save a basic arena with default associations
 controllers.arenas.new(model: {identifier: :lxd_arena})
@@ -55,7 +55,7 @@ controllers.arenas.provision(identifier: :lxd_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
 # save post-initialization provisions for providers
-controllers.arenas.provision_providers(identifier: :lxd_arena)
+controllers.arenas.provision_prerequisites(identifier: :lxd_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING?
 
 #

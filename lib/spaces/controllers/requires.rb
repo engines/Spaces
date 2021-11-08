@@ -1,8 +1,7 @@
-require_all   'spaces/controllers/universes'
-require_all   'spaces/controllers/arenas'
-require_all   'spaces/controllers/keys'
-require_all   'spaces/controllers/publishing'
-require_all   'spaces/controllers/blueprinting'
-require_all   'spaces/controllers/packing'
-require_all   'spaces/controllers/registry'
-require_all   'spaces/controllers/outputting'
+requires 'universes',
+         'arenas',
+         'keys',
+         'publishing',
+         'blueprinting',
+         'packing',
+         'registry'

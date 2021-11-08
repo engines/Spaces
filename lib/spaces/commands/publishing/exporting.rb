@@ -6,20 +6,10 @@ module Publishing
         super || :publications
       end
 
-      def execute(&block)
-        space.export(**input, &block)
-      end
-
       protected
 
-      def commit(&block)
-        input[:threaded] ? outputting(&block) : execute(&block)
-      end
-
-      def outputting(&block)
-        Spaces::Outputting::Export
-        .new(command: self, identifier: input[:identifier])
-        .write(&block)
+      def commit
+        space.export(**input)
       end
 
     end

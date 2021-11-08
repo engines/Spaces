@@ -1,5 +1,5 @@
 module Providers
-  class Lua < ::ProviderAspects::ModuleList
+  class Lua < ::Adapters::ModuleList
 
     def inline
       struct.map { |s| "luarocks install #{s}" }

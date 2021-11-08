@@ -1,5 +1,5 @@
 module Providers
-  class Pecl < ::ProviderAspects::ModuleList
+  class Pecl < ::Adapters::ModuleList
 
     def inline
       struct.map { |s| "pecl install #{s}" }
