@@ -5,7 +5,7 @@ module Artifacts
       relation_accessor :resolution
 
       def stanza_qualifiers
-        [:build, :deploy]
+        [:build, :deploy, :environment, :ports, :logging, :volumes]
       end
 
       def snippets
@@ -13,7 +13,7 @@ module Artifacts
           m.tap do
             m[q] = stanza_class_for(q).new(self).snippets
           end
-        end
+        end.compact
       end
 
       def initialize(holder, resolution)

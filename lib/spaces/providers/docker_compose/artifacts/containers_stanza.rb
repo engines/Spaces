@@ -4,7 +4,7 @@ module Artifacts
 
       def snippets
         {
-          version: "3.9",
+          version: "3.3",
           services: container_snippets
         }
       end
