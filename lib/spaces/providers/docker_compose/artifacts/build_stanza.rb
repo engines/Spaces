@@ -4,7 +4,7 @@ module Artifacts
 
       def snippets
         {
-          context: "./#{resolution.identifier.as_path}_dir",
+          context: "./#{resolution.identifier.as_path}",
           args: [
             :buildno,
             :gitcommithash
