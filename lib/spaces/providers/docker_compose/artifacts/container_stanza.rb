@@ -9,11 +9,18 @@ module Artifacts
       end
 
       def snippets
-        stanza_qualifiers.reduce({}) do |m, q|
+        stanza_qualifiers.reduce(domain_and_hostname_snippets) do |m, q|
           m.tap do
             m[q] = stanza_class_for(q).new(self).snippets
           end
         end.compact
+      end
+
+      def domain_and_hostname_snippets
+        {
+          domainname: universe.host,
+          hostname: resolution.blueprint_identifier
+        }
       end
 
       def initialize(holder, resolution)
