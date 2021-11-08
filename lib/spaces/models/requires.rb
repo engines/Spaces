@@ -1,6 +1,6 @@
 requires 'transforming', only: ['requires'], recurse: false
 
-requires 'emissions',
-         'divisions',
+requires 'divisions',
+         'emissions',
          'adapters',
          'keys'

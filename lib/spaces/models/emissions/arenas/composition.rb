@@ -11,6 +11,7 @@ module Arenas
 
       def division_classes
         [
+          Arenas::Input,
           Divisions::Bindings,
           Divisions::About
         ]
