@@ -19,7 +19,7 @@ module Artifacts
       def domain_and_hostname_snippets
         {
           domainname: universe.host,
-          hostname: resolution.blueprint_identifier
+          hostname: resolution.identifier.underscore
         }
       end
 
