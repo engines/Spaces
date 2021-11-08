@@ -12,8 +12,7 @@ module Artifacts
           labels: {
             author: :james,
             other_label: :gidday
-          },
-          depends_on: connections_down.map(&:identifier).map(&:underscore)
+          }
         }
       end
 
