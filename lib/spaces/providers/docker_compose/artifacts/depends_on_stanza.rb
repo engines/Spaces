@@ -4,7 +4,7 @@ module Artifacts
 
       def snippets
         if (rcd = resolution.connections_down).any?
-          rcd.map { |c| c.identifier.underscore }
+          rcd.map { |c| c.blueprint_identifier.hyphenated }
         end
       end
 
