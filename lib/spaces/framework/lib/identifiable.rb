@@ -6,6 +6,7 @@ module Identifiable
   def identifier_separator; '::' ;end
   def with_identifier_separator; identifier + identifier_separator ;end
   def as_path; gsub(identifier_separator, '/') ;end
+  def as_subdomain; gsub(identifier_separator, '.').hyphenated ;end
   def as_compound; gsub('/', identifier_separator) ;end
   def split_compound; split(identifier_separator) ;end
   def subpath; nil ;end
