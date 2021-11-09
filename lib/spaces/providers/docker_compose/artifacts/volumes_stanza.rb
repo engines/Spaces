@@ -4,10 +4,7 @@ module Artifacts
 
       def snippets
         resolution.volumes.map do |v|
-          {
-            type: v.type,
-            "#{v.source}": v.destination
-          }
+          "#{v.source}-#{v.type}:#{v.destination}"
         end if resolution.has?(:volumes)
       end
 
