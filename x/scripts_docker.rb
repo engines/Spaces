@@ -7,7 +7,7 @@ require './x/controllers'
 # ------------------------------------------------------------------------------
 
 # import some blueprints
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/docker_arena'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/wap'}, threaded: false)
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
 
 # ------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ controllers.publishing.synchronize(identifier: :phpmyadmin)
 # ------------------------------------------------------------------------------
 
 # bind some blueprints to the arena
-controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :docker_arena)
+controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :wap)
 controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :phpmyadmin)
 controllers.arenas.state(identifier: :docker_arena)
 
