@@ -3,11 +3,7 @@ module Arenas
     include ::Providers::Providers
 
     def provider_role_map
-      @provider_role_map ||= {
-        packing: [:docker],
-        provisioning: [:docker_compose, :terraform],
-        runtime: [:docker]
-      }
+      @provider_role_map ||= struct.input.to_h_deep
     end
 
     def prerequisite_map

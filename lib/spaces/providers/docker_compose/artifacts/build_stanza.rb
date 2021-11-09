@@ -4,7 +4,7 @@ module Artifacts
 
       def snippets
         {
-          context: "./#{resolution.identifier.as_path}_dir",
+          context: "./#{resolution.blueprint_identifier.hyphenated}",
           args: [
             :buildno,
             :gitcommithash
@@ -12,9 +12,7 @@ module Artifacts
           labels: {
             author: :james,
             other_label: :gidday
-          },
-          target: resolution.identifier.underscore,
-          depends_on: connections_down.map(&:identifier).map(&:underscore)
+          }
         }
       end
 
