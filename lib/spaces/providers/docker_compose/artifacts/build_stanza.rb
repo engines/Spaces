@@ -4,7 +4,7 @@ module Artifacts
 
       def snippets
         {
-          context: "./#{resolution.identifier.as_path}",
+          context: "./#{resolution.blueprint_identifier.hyphenated}",
           args: [
             :buildno,
             :gitcommithash

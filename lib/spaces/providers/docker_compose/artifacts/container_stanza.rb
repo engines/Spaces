@@ -18,8 +18,8 @@ module Artifacts
 
       def domain_and_hostname_snippets
         {
-          domainname: universe.host,
-          hostname: resolution.identifier.underscore
+          domainname: "#{arena.identifier.hyphenated}.#{universe.host}",
+          hostname: resolution.blueprint_identifier.hyphenated
         }
       end
 
