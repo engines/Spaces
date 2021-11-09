@@ -7,9 +7,10 @@ module Divisions
 
     alias_method :identifier, :context_identifier
 
-    def type
-      struct.type || 'volume'
-    end
+    def bind?; type == default_type; end
+
+    def type; struct.type || 'bind' ;end
+    def default_type; 'bind' ;end
 
   end
 end
