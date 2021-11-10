@@ -10,6 +10,10 @@ module Identifiable
   def split_compound; split(identifier_separator) ;end
   def subpath; nil ;end
 
+  def as_subdomain
+    split_compound.reverse.join('.').hyphenated
+  end
+
   def complete?; true ;end
 
 end

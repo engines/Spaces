@@ -5,15 +5,22 @@ module Artifacts
       relation_accessor :resolution
 
       def stanza_qualifiers
-        [:build, :deploy]
+        [:build, :depends_on, :deploy, :environment, :ports, :logging, :volumes]
       end
 
       def snippets
-        stanza_qualifiers.reduce({}) do |m, q|
+        stanza_qualifiers.reduce(domain_and_hostname_snippets) do |m, q|
           m.tap do
             m[q] = stanza_class_for(q).new(self).snippets
           end
-        end
+        end.compact
+      end
+
+      def domain_and_hostname_snippets
+        {
+          domainname: "#{arena.identifier.as_subdomain}.#{universe.host}",
+          hostname: resolution.blueprint_identifier.as_subdomain
+        }
       end
 
       def initialize(holder, resolution)

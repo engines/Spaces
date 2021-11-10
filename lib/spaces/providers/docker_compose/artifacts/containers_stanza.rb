@@ -4,7 +4,7 @@ module Artifacts
 
       def snippets
         {
-          version: "3.9",
+          version: "3.3",
           services: container_snippets
         }
       end
@@ -12,7 +12,7 @@ module Artifacts
       def container_snippets
         all_resolutions.reduce({}) do |m, r|
           m.tap do
-            m[r.identifier.underscore] = container_stanza_class.new(self, r).snippets
+            m[r.blueprint_identifier.hyphenated] = container_stanza_class.new(self, r).snippets
           end
         end
       end

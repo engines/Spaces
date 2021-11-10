@@ -7,8 +7,8 @@ module Artifacts
           resource "#{runtime_qualifier}_container" "#{blueprint_identifier}" {
             name = "#{blueprint_identifier}"
             image = "#{spaces_image_registry}#{image_name}"
-            domainname = "#{universe.host}"
-            hostname = "#{blueprint_identifier}"
+            domainname = "#{arena.identifier.as_subdomain}.#{universe.host}"
+            hostname = "#{blueprint_identifier.as_subdomain}"
 
             #{volume_snippets if volumes}
           }
