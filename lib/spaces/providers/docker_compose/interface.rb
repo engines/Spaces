@@ -11,12 +11,12 @@ module Providers
         alias_method :arena, :emission
 
         def execute(command)
-          identifier.tap { send(command) }
+          identifier.tap { provisioning_for(execution_map[:"#{command}"]) }
         end
 
-        def apply
+        def provisioning_for(command)
           copy_auxiliaries
-          bridge.up(arena.provisioned.map(&:identifier))
+          bridge.send(command)
         rescue ::Docker::Compose::Error => e
           pp e.inspect
         ensure
@@ -25,6 +25,13 @@ module Providers
 
         def plan
           bridge.config(arena.provisioned.map(&:identifier))
+        end
+
+        def execution_map
+          {
+            plan: :build,
+            apply: :up
+          }
         end
 
         def bridge
