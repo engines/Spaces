@@ -31,19 +31,19 @@ module Spaces
       def klasses(inside:, inheriting:)
         inside.constants.map { |c| inside.const_get(c) }.select {|k| k < inheriting }
       end
+
+      def class_for(*elements); elements.flatten.constantize ;end
     end
 
     attr_accessor :struct
 
     delegate(
-      [:identifier, :namespace, :qualifier, :name_elements, :nesting_elements, :spout, :descriptor_class, :klasses] => :klass
+      [:identifier, :namespace, :qualifier, :name_elements, :nesting_elements, :spout, :descriptor_class, :klasses, :class_for] => :klass
     )
 
     alias_method :summary, :struct
 
     def klass; self.class ;end
-
-    def class_for(*elements); elements.flatten.constantize ;end
 
     def keys; struct&.to_h&.keys ;end
 

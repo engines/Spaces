@@ -13,7 +13,7 @@ module Resolving
 
     delegate(
       [:installations, :packs, :provisioning] => :universe,
-      input: :installation
+      [:input, :deployment] =>  :installation
     )
 
     alias_method :input, :configuration # TODO FIX: probably temporary until installations are declared properly in blueprints
