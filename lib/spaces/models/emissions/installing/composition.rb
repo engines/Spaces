@@ -4,7 +4,8 @@ module Installing
     class << self
       def division_classes
         [
-          Divisions::Input
+          Divisions::Input,
+          Divisions::Deployment
         ]
       end
     end
