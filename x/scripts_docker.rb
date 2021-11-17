@@ -34,10 +34,10 @@ controllers.arenas.more_binders(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
-# synchronize a blueprint to a publication
+# synchronize a blueprint from a publication
 controllers.blueprinting.synchronize(identifier: :phpmyadmin)
 
-# synchronize a publication to a blueprint
+# synchronize a publication from a blueprint
 controllers.publishing.synchronize(identifier: :phpmyadmin)
 
 # ------------------------------------------------------------------------------
