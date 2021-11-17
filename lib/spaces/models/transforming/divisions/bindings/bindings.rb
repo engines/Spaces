@@ -20,7 +20,9 @@ module Divisions
     end
 
     def transformed_to(transformation)
-      in_blueprint? ? super : super.select { |s| [runtime_qualifier, nil].include?(s.runtime) }
+      in_blueprint? ? super : super.select do |s|
+        s.for_runtime?(runtime_qualifier)
+      end
     end
 
     def embed_bindings
