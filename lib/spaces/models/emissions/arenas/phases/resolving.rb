@@ -4,10 +4,8 @@ module Arenas
   module Resolving
     include Settling
 
-    def all_resolutions
-      resolutions.identifiers(arena_identifier: identifier).map do |i|
-        resolutions.by(i)
-      end
+    def bound_resolutions_deep
+      resolved.map { |b| b.resolution_in(self) }
     end
 
     def resolved; present_in(resolutions) ;end
