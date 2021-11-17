@@ -12,15 +12,22 @@ module Divisions
     include ::Divisions::Binding::Packing
 
     class << self
-      def features; [:type, :identifier, :target_identifier, :configuration] ;end
+      def features; [:type, :runtimes, :identifier, :target_identifier, :configuration] ;end
     end
 
     delegate(binder?: :blueprint)
 
     def type; struct.type || derived_features[:type] ;end
 
-    def runtime; struct.runtime ;end    
-    def for_runtime?(value); [value, nil].include?(runtime) ;end
+    def runtimes; struct.runtimes ;end
+
+    def for_runtime?(value)
+      generic? || runtimes&.include?("#{value}")
+    end
+
+    def generic?
+      [[], nil].include?(runtimes)
+    end
 
     def embed?; type == 'embed' ;end
 

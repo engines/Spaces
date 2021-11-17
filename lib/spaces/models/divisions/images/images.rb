@@ -5,7 +5,7 @@ module Divisions
       in_blueprint? ? super : super.select { |s| s.type == runtime_qualifier }
     end
 
-    def struct_merged_with(other); super.uniq(&:type) ;end
+    def struct_merged_with(other); super.uniq(&:runtimes) ;end
 
   end
 end
