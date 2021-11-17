@@ -44,10 +44,6 @@ module Divisions
       subdivision_class.new(struct: struct, division: self)
     end
 
-    # def snippets_for(resolution)
-    #   all.map { |d| d.snippets_for(resolution) }.flatten.compact
-    # end
-
     def struct_merged_with(other); [struct, other.struct].flatten.uniq ;end
     alias_method :merge, :struct_merged_with
 
