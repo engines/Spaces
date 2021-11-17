@@ -1,9 +1,5 @@
 module Divisions
-  class Images < ::Divisions::Divisible
-
-    def transformed_to(transformation)
-      in_blueprint? ? super : super.select { |s| s.type == runtime_qualifier }
-    end
+  class Images < ::Divisions::Bindings
 
     def struct_merged_with(other); super.uniq(&:runtimes) ;end
 

@@ -31,7 +31,9 @@ module Divisions
 
     def embed?; type == 'embed' ;end
 
-    def configuration; struct.configuration || derived_features[:configuration] ;end
+    def configuration
+      struct.configuration || derived_features[:configuration]
+    end
 
     def target_configuration
       @target_configuration ||= blueprint.binding_target.struct
