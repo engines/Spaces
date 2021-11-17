@@ -11,7 +11,17 @@ module Divisions
     def deflated; self ;end
 
     def name
-      struct.identifier || derived_features[:identifier]
+      targetted_name || struct.identifier || derived_features[:identifier]
+    end
+
+    def targetted_name
+      targetted_image.output_identifier
+    end
+
+    def targetted_image
+      if target_identifier
+        blueprint&.images.resolved.first
+      end
     end
 
     def output_identifier; struct.output_identifier || derived_features[:output_identifier] ;end
