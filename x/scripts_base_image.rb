@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------------------
 
 # import a bootstrappy blueprint
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/docker_arena'})
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/enginesd_debian_base', threaded: false})
 
 # ------------------------------------------------------------------------------
 
@@ -24,8 +24,8 @@ controllers.arenas.resolve(identifier: :base_arena)
 
 # ------------------------------------------------------------------------------
 
-# save a pack for the base resolution
-controllers.packing.create(identifier: 'base_arena::enginesd_debian_base')
+# save all packs for an arena
+controllers.arenas.pack(identifier: :base_arena)
 
-# # build the base pack
-# controllers.packing.build(identifier: 'base_arena::enginesd_debian_base', threaded: false)
+# build packs for the arena
+controllers.arenas.build(identifier: :base_arena, threaded: false)
