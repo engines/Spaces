@@ -49,7 +49,8 @@ module Providers
         end
 
         def remove_auxiliaries
-          arena.all_packs.each { |p| packs.remove_auxiliaries_for(p) }
+#removed by James for Testing
+         # arena.all_packs.each { |p| packs.remove_auxiliaries_for(p) }
         end
 
     end
