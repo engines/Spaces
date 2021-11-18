@@ -76,8 +76,11 @@ controllers.arenas.state(identifier: :docker_arena)
 controllers.arenas.provision(identifier: :docker_arena)
 controllers.arenas.state(identifier: :docker_arena)
 
-# # commit a pack
-# controllers.packing.commit(identifier: 'docker_arena::phpmyadmin')
+# # build packs for an arena
+# controllers.arenas.build(identifier: :docker_arena)
+#
+# # build a pack
+# controllers.packing.build(identifier: 'docker_arena::phpmyadmin')
 #
 # # apply provisions for an arena
 # controllers.arenas.apply(identifier: :docker_arena)
