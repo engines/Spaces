@@ -7,7 +7,7 @@ module Artifacts
           %(
             resource "#{container_type}" "#{blueprint_identifier}" {
               name      = "#{blueprint_identifier}"
-              image     = "lxd-server:#{image_name}"
+              image     = "lxd-server:#{image_identifier}"
               ephemeral = false
               profiles = ["default"]
 

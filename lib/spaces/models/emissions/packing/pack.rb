@@ -5,7 +5,7 @@ module Packing
       def composition_class; Composition ;end
     end
 
-    delegate(output_name: :image)
+    delegate(output_identifier: :image)
 
     alias_method :context_identifier, :identifier
 

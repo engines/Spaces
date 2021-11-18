@@ -17,11 +17,11 @@ module Providers
       )
 
       def create
-        bridge.create(name: image_name)
+        bridge.create(name: output_image_identifier)
       end
 
       def pull
-        bridge.create(fromImage: image_name)
+        bridge.create(fromImage: output_image_identifier)
       end
 
       alias_method :import, :pull
@@ -64,7 +64,7 @@ module Providers
       end
 
       def tag_latest(image)
-        image.tag('repo' => pack.output_name, 'force' => true, 'tag' => 'latest')
+        image.tag('repo' => pack.output_identifier, 'force' => true, 'tag' => 'latest')
       end
 
       def bridge; ::Docker::Image ;end

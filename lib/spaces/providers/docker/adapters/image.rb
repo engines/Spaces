@@ -5,7 +5,7 @@ module Adapters
       delegate name: :division
 
       def snippets
-        "FROM #{name}"
+        "FROM #{base_image_identifier}"
       end
 
     end
