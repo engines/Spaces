@@ -4,7 +4,7 @@ module Adapters
       class Image < ::Adapters::Image
 
         class << self
-          def features; [:name, :output_name, :publish_properties] ;end
+          def features; [:name, :output_identifier, :publish_properties] ;end
         end
 
         def publish_properties; struct.publish_properties || derived_features[:publish_properties] ;end
@@ -13,8 +13,8 @@ module Adapters
 
         def derived_features
           @derived_features ||= {
-            name: default_name,
-            output_image: default_output_name,
+            name: default_identifier,
+            output_image: default_output_identifier,
             publish_properties: {
               description: "Spaces #{tenant.identifier} #{context_identifier} image",
               aliases: tenant.identifier,
@@ -25,7 +25,7 @@ module Adapters
           }
         end
 
-        def default_name; super.gsub('/', '-') ;end
+        def default_identifier; super.gsub('/', '-') ;end
 
       end
     end

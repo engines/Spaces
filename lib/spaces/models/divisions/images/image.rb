@@ -10,15 +10,15 @@ module Divisions
     def inflated; self ;end
     def deflated; self ;end
 
-    def name
-      targetted_name || struct.identifier || derived_features[:identifier]
+    def base_image_identifier
+      targetted_base_identifier || struct.identifier || derived_features[:identifier]
     end
 
-    def targetted_name
-      targetted_image.output_identifier
+    def targetted_base_identifier
+      targetted_base_image&.output_identifier
     end
 
-    def targetted_image
+    def targetted_base_image
       if target_identifier
         blueprint&.images.resolved.first
       end

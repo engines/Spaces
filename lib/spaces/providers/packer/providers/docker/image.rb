@@ -4,7 +4,7 @@ module Adapters
       class Image < ::Adapters::Image
 
         class << self
-          def features; [:name, :output_name, :privileged] ;end
+          def features; [:identifier, :output_identifier, :privileged] ;end
         end
 
         def privileged; struct.privileged || derived_features[:privileged] ;end
@@ -21,8 +21,8 @@ module Adapters
 
         def derived_features
           @derived_features ||= {
-            name: default_name,
-            output_name: default_output_name,
+            name: default_identifier,
+            output_identifier: default_output_identifier,
             privileged: false
           }
         end

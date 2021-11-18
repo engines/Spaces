@@ -13,8 +13,8 @@ module Adapters
       [super, runtime_qualifier].flatten
     end
 
-    def image_name
-      image&.output_name
+    def image_identifier
+      image&.output_identifier
     end
 
   end
