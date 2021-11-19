@@ -5,7 +5,7 @@ module Divisions
 
     class << self
       def subdivision_class
-        Module.const_get(name.singularize)
+        class_for(name.singularize)
       end
 
       def default_struct; [] ;end

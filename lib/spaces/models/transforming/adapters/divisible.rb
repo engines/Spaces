@@ -5,7 +5,7 @@ module Adapters
 
     class << self
       def subadapter_class
-        Module.const_get(name.singularize)
+        class_for(name.singularize)
       end
     end
 
