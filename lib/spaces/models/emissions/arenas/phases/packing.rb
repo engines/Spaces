@@ -14,7 +14,7 @@ module Arenas
     end
 
     def unsaved_packs; packables.reject(&:packed?) ;end
-    def packables; bound_resolutions.select(&:packable?) ;end
+    def packables; bound_resolutions.select(&:packable?) ;end # NOW WHAT?
 
   end
 end

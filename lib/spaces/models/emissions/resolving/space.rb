@@ -19,7 +19,7 @@ module Resolving
       end
     end
 
-    def bindings_to(model)
+    def bindings_to(model) # NOW WHAT?
       all.map(&:bindings).map(&:all).flatten.select { |b| b.descriptor.identifier == model.blueprint_identifier }
     end
 

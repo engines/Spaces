@@ -47,11 +47,11 @@ controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :wap)
 controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :phpmyadmin)
 controllers.arenas.state(identifier: :docker_arena)
 
-# save installations for the new bindings
+# save installations for the new bindings # NOW WHAT?
 controllers.arenas.install(identifier: :docker_arena)
 controllers.arenas.state(identifier: :docker_arena)
 
-# resolve the arena including the new bindings
+# resolve the arena including the new bindings # NOW WHAT?
 controllers.arenas.resolve(identifier: :docker_arena)
 controllers.arenas.state(identifier: :docker_arena)
 

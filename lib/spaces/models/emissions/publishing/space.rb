@@ -34,7 +34,7 @@ module Publishing
       super.tap do |m|
         locations.ensure_located(m)
         blueprints.by_import(descriptor, force: force)
-        m.bindings.each do |b|
+        m.bindings.each do |b| # NOW WHAT?
           by_import(b.descriptor) if (!imported?(b.descriptor) || force)
         end
       end

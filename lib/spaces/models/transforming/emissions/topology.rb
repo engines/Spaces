@@ -14,30 +14,30 @@ module Emissions
     end
 
     def all_in(emissions)
-      emissions.map(&:all_bindings).flatten
+      emissions.map(&:all_bindings).flatten # NOW WHAT?
     end
 
     def all_down(emission: :blueprint)
-      all_bindings.map { |t| t.send(emission) }.compact
+      all_bindings.map { |t| t.send(emission) }.compact # NOW WHAT?
     end
 
     def connections_down(emission: :resolution)
-      connect_bindings.map { |t| t.send(emission) }.compact
+      connect_bindings.map { |t| t.send(emission) }.compact # NOW WHAT?
     end
 
     def embeds_down(emission: :blueprint)
-      embed_bindings.map { |t| t.send(emission) }.compact
+      embed_bindings.map { |t| t.send(emission) }.compact # NOW WHAT?
     end
 
     def arena_runtime_embeds_for(runtime, emission: :blueprint)
-      embed_bindings.select { |t| t.for_runtime?(runtime) }.map { |t| t.send(emission) }.compact
+      embed_bindings.select { |t| t.for_runtime?(runtime) }.map { |t| t.send(emission) }.compact # NOW WHAT?
     end
 
     def graphed(**args)
       empty.tap do |m|
         m.struct = struct
         m.struct.tap do |s|
-          s.bindings = bindings.graphed(**args).struct
+          s.bindings = bindings.graphed(**args).struct # NOW WHAT?
         end
       end
     end

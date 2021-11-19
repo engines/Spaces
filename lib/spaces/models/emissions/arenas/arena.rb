@@ -4,7 +4,7 @@ require_relative 'summary'
 module Arenas
   class Arena < ::Emissions::Emission
     include ::Arenas::Prerequisites
-    include ::Arenas::Binding
+    include ::Arenas::Binding # NOW WHAT?
     include ::Arenas::Blueprinting
     include ::Arenas::Installing
     include ::Arenas::Resolving
@@ -20,7 +20,7 @@ module Arenas
       [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
     )
 
-    def more_binder_identifiers
+    def more_binder_identifiers # NOW WHAT?
       blueprints.binder_identifiers - target_identifiers
     end
 

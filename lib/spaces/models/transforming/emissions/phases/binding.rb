@@ -1,5 +1,5 @@
 module Emissions
-  module Binding
+  module Binding # NOW WHAT?
 
     def connected_blueprints
       connect_bindings.map(&:blueprint)

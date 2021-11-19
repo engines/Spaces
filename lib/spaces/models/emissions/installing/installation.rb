@@ -8,7 +8,7 @@ module Installing
       def composition_class; Composition ;end
     end
 
-    delegate(bindings_of_type: :blueprint)
+    delegate(bindings_of_type: :blueprint) # NOW WHAT?
 
     def division_map
       @division_map ||= super.tap do |d|

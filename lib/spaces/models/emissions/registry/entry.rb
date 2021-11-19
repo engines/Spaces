@@ -11,7 +11,7 @@ module Registry
     def arena_identifier; struct[:arena_identifier] ;end
     def blueprint_identifier; struct[:blueprint_identifier] ;end
 
-    def binding; bindings.first ;end
+    def binding; bindings.first ;end # NOW WHAT?
 
     def cache_primary_identifiers
       struct.arena_identifier = consumer.arena_identifier

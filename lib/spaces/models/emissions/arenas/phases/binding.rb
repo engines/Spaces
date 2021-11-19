@@ -1,20 +1,20 @@
 module Arenas
-  module Binding
+  module Binding # NOW WHAT?
 
-    def bind_with(blueprint_identifier)
+    def bind_with(blueprint_identifier) # NOW WHAT?
       empty.tap do |m|
         m.struct = struct
         m.struct.tap do |s|
-          s.bindings = bindings_merged_for(blueprint_identifier)
+          s.bindings = bindings_merged_for(blueprint_identifier) # NOW WHAT?
         end
       end
     end
 
-    def bindings_merged_for(blueprint_identifier)
+    def bindings_merged_for(blueprint_identifier) # NOW WHAT?
       [binding_for(blueprint_identifier), struct[:bindings]].compact.flatten.uniq
     end
 
-    def binding_for(blueprint_identifier)
+    def binding_for(blueprint_identifier) # NOW WHAT?
       OpenStruct.new(target_identifier: blueprint_identifier)
     end
 

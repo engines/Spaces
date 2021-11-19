@@ -3,7 +3,7 @@ module Arenas
     class Provisioning < ::Spaces::Commands::Iterating
 
       def array
-        @array ||= model.bound_resolutions
+        @array ||= model.bound_resolutions # NOW WHAT?
       end
 
       def space_identifier

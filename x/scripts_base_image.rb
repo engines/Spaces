@@ -16,10 +16,10 @@ controllers.arenas.create(model: {identifier: :base_arena})
 # bind a base blueprint to the arena
 controllers.arenas.bind(identifier: :base_arena, blueprint_identifier: :enginesd_debian_base)
 
-# save installations for the bindings
+# save installations for the bindings # NOW WHAT?
 controllers.arenas.install(identifier: :base_arena)
 
-# resolve the arena for the bindings
+# resolve the arena for the bindings # NOW WHAT?
 controllers.arenas.resolve(identifier: :base_arena)
 
 # ------------------------------------------------------------------------------
