@@ -25,9 +25,5 @@ module Divisions
     def installation; @installation ||= emission_from(installations) ;end
     def resolution; @resolution ||= emission_from(resolutions) ;end
 
-    # def qualified_identifier_for(arena)
-    #   "#{arena.identifier.with_identifier_separator}#{target_identifier}"
-    # end
-
   end
 end
