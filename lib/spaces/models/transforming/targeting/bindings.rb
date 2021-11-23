@@ -1,4 +1,4 @@
-module Divisions
+module Targeting
   class Bindings < ::Divisions::Divisible
 
     alias_method :all_bindings, :all # NOW WHAT?
@@ -20,6 +20,7 @@ module Divisions
     end
 
     def transformed_to(transformation)
+      # TODO: cannot refer to blueprint here
       in_blueprint? ? super : super.select do |s| # NOW WHAT?
         s.for_runtime?(runtime_qualifier)
       end
@@ -31,14 +32,6 @@ module Divisions
 
     def connect_bindings # NOW WHAT?
       all.reject(&:embed?)
-    end
-
-    def deep_connect_bindings # NOW WHAT?
-      deep_bindings.reject { |b| b.embed? || b.binder? }
-    end
-
-    def deep_binder_bindings # NOW WHAT?
-      deep_bindings.select(&:binder?)
     end
 
     def deep_bindings # NOW WHAT?

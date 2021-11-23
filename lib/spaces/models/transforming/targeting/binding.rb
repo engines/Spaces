@@ -1,21 +1,18 @@
 require 'resolv'
-require_relative 'publishing'
+require_relative 'subdivision'
+require_relative 'targeting'
 require_relative 'graphing'
 require_relative 'resolving'
-require_relative 'packing'
 
-module Divisions
-  class Binding < ::Divisions::TargetingSubdivision
-    include ::Divisions::Binding::Publishing # NOW WHAT?
-    include ::Divisions::Binding::Graphing
-    include ::Divisions::Binding::Resolving # NOW WHAT?
-    include ::Divisions::Binding::Packing # NOW WHAT?
+module Targeting
+  class Binding < ::Targeting::Subdivision
+    include ::Targeting::Targeting
+    include ::Targeting::Graphing
+    include ::Targeting::Resolving
 
     class << self
       def features; [:type, :runtimes, :identifier, :target_identifier, :configuration] ;end
     end
-
-    delegate(binder?: :blueprint) # NOW WHAT?
 
     def type; struct.type || derived_features[:type] ;end # NOW WHAT?
 
@@ -31,14 +28,6 @@ module Divisions
 
     def embed?; type == 'embed' ;end # NOW WHAT?
 
-    def configuration # NOW WHAT?
-      struct.configuration || derived_features[:configuration]
-    end
-
-    def target_configuration # NOW WHAT?
-      @target_configuration ||= blueprint.binding_target.struct
-    end
-
     def embed_bindings # NOW WHAT?
       deep_bindings_of_type(:embed)
     end
@@ -48,6 +37,8 @@ module Divisions
     end
 
     def deep_bindings_of_type(type) # NOW WHAT?
+      #TODO: can't use blueprint here ... must be more gerneric
+      # #better_emission method?
       [self, blueprint.bindings.send("#{type}_bindings")].flatten.uniq(&:identifier)
     end
 

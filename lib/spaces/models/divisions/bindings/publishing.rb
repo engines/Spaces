@@ -1,5 +1,5 @@
 module Divisions
-  class Binding < ::Divisions::TargetingSubdivision
+  class Binding < ::Targeting::Binding
     module Publishing
 
       def localized

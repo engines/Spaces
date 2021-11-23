@@ -1,6 +1,7 @@
 require_relative 'transformable'
 
-requires 'divisions'
+requires 'divisions',
+         'targeting'
 
 requires 'emissions/phases'
 requires 'emissions', recurse: false

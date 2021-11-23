@@ -5,7 +5,7 @@ module Transforming
 
     def identifier; struct[:identifier] ;end
 
-    def blueprint_identifier; identifier.split_compound.last ;end
+    def blueprint_identifier; identifier.low ;end
 
     def identifier_separator; ''.with_identifier_separator; end
 

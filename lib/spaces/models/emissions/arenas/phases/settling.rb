@@ -6,7 +6,7 @@ module Arenas
 
     def deep_bindings_in(space, method) # NOW WHAT?
       deep_connect_bindings.send(method) do |b|
-        space.exist?(b.settlement_identifier_in(self))
+        space.exist?(b.context_identifier)
       end
     end
 
