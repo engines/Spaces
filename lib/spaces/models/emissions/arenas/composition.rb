@@ -5,14 +5,15 @@ module Arenas
       def associative_classes
         [
           Associations::Tenant,
-          Associations::Domain
+          Associations::Domain,
+          Associations::ArenaBindings
         ]
       end
 
       def division_classes
         [
           Arenas::Input,
-          Divisions::Bindings, # NOW WHAT?
+          Divisions::Bindings,
           Divisions::About
         ]
       end
