@@ -4,10 +4,18 @@ module Blueprinting
     def resolution_in(arena)
       empty_resolution.tap do |m|
         m.arena = arena
-        # REFACTOR: the following line picks up an arena's associations
-        m.struct = arena.struct.without(:bindings, :configuration).merge(struct.without(:input)) # NOW WHAT?
+        m.struct = arena.struct.
+          without(irrelevant_arena_divisions).
+          merge(struct.without(irrelevant_blueprint_divisions)) # NOW WHAT?
         m.cache_primary_identifiers
       end.with_embeds.infixes_resolved
+    end
+
+    def irrelevant_arena_divisions
+      [:bindings, :connections, :configuration]
+    end
+    def irrelevant_blueprint_divisions
+      [:input]
     end
 
     def empty_resolution; resolution_class.new ;end
