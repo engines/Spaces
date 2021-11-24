@@ -1,7 +1,7 @@
 require 'resolv'
 
 module Associations
-  class Binding < ::Targeting::Subdivision
+  class Connection < ::Targeting::Subdivision
 
   end
 end
