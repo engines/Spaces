@@ -1,12 +1,10 @@
 require 'resolv'
 require_relative 'subdivision'
-require_relative 'targeting'
 require_relative 'graphing'
 require_relative 'resolving'
 
 module Targeting
   class Binding < ::Targeting::Subdivision
-    include ::Targeting::Targeting
     include ::Targeting::Graphing
     include ::Targeting::Resolving
 

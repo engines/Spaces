@@ -1,5 +1,8 @@
+require_relative 'targeting'
+
 module Targeting
   class Subdivision < ::Divisions::Subdivision
+    include ::Targeting::Targeting
 
     class << self
       def prototype(type:, struct:, division:)
