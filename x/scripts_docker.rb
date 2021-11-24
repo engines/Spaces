@@ -24,11 +24,11 @@ controllers.blueprinting.summarize(identifier: :phpmyadmin)
 
 # ------------------------------------------------------------------------------
 
-# synchronize a blueprint from a publication
-controllers.blueprinting.synchronize(identifier: :phpmyadmin)
-
-# synchronize a publication from a blueprint
-controllers.publishing.synchronize(identifier: :phpmyadmin)
+# # synchronize a blueprint from a publication
+# controllers.blueprinting.synchronize(identifier: :phpmyadmin)
+#
+# # synchronize a publication from a blueprint
+# controllers.publishing.synchronize(identifier: :phpmyadmin)
 
 # ------------------------------------------------------------------------------
 # set up an arena topology
