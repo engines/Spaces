@@ -25,7 +25,7 @@ module Blueprinting
     alias_method :blueprint, :itself
 
     def binder?
-      keys - documentation_only_keys == [:bindings]
+      keys - documentation_only_keys == [:bindings] # NOW WHAT?
     end
 
     def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end

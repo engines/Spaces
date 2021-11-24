@@ -3,11 +3,11 @@ module Divisions
 
     class << self
       def prototype(type:, struct:, division:)
-        constant_for(type || struct.type).new(struct: struct, division: division)
+        class_for(type || struct.type).new(struct: struct, division: division)
       end
 
-      def constant_for(type)
-        Module.const_get("::Providers::#{type.to_s.camelize}")
+      def class_for(type)
+        super(:providers, type.to_s.camelize)
       end
     end
 

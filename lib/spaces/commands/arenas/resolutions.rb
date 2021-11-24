@@ -3,7 +3,7 @@ module Arenas
     class Resolutions < ::Spaces::Commands::Reading
 
       def assembly
-        model.bound_resolutions
+        model.bound_resolutions # NOW WHAT?
       end
 
       def space_identifier

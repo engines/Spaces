@@ -31,22 +31,21 @@ module Providers
 
     def class_map
       @class_map ||= provider_role_map.transform_values do |v|
-        v.map { |c| Module.const_get(class_name_for(c)) }
+        v.map { |c| class_for(class_elements_for(c)) }
       end
     end
 
     def module_map
       @module_map ||= provider_role_map.transform_values do |v|
-        v.map { |c| Module.const_get(module_name_for(c)) }
+        v.map { |c| class_for(module_elements_for(c)) }
       end
     end
 
     def provider_role_map; {} ;end
 
-    #TODO: refactor
-    def class_name_for(role); "#{module_name_for(role)}::#{role.camelize}" ;end
-    def module_name_for(role); "#{namespace}::#{role.camelize}" ;end
-    def namespace; '::Providers' ;end
+    def class_elements_for(role); [module_elements_for(role), role.camelize].flatten ;end
+    def module_elements_for(role); [namespace, role.camelize] ;end
+    def namespace; :providers ;end
 
   end
 end

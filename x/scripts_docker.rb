@@ -11,7 +11,7 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
 
 # ------------------------------------------------------------------------------
-# blueprint indices and lists
+# blueprint indices, lists, and gets
 
 controllers.blueprinting.index
 
@@ -19,18 +19,8 @@ controllers.blueprinting.list
 
 controllers.querying.list(method: :binder_identifiers, space: :blueprints)
 
-# ------------------------------------------------------------------------------
-
-# blueprint gets
 controllers.blueprinting.show(identifier: :phpmyadmin)
 controllers.blueprinting.summarize(identifier: :phpmyadmin)
-
-# save a basic arena with default associations
-controllers.arenas.create(model: {identifier: :docker_arena})
-controllers.arenas.state(identifier: :docker_arena)
-
-# get a list of binder identifiers that are not yet bound to an arena
-controllers.arenas.more_binders(identifier: :docker_arena)
 
 # ------------------------------------------------------------------------------
 
@@ -41,52 +31,66 @@ controllers.blueprinting.synchronize(identifier: :phpmyadmin)
 controllers.publishing.synchronize(identifier: :phpmyadmin)
 
 # ------------------------------------------------------------------------------
+# set up an arena topology
 
-# bind some blueprints to the arena
-controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :wap)
-controllers.arenas.bind(identifier: :docker_arena, blueprint_identifier: :phpmyadmin)
-controllers.arenas.state(identifier: :docker_arena)
+# save a basic applications arena
+controllers.arenas.create(model: {identifier: :development})
+controllers.arenas.state(identifier: :development)
 
-# save installations for the new bindings
-controllers.arenas.install(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# connect the database arena to the applications arena
+controllers.arenas.connect(identifier: :development, other_identifier: :database)
 
-# resolve the arena including the new bindings
-controllers.arenas.resolve(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# get a list of binder identifiers that are not yet bound to an arena
+controllers.arenas.more_binders(identifier: :development)
+
+# ------------------------------------------------------------------------------
+
+# bind some blueprints to the applications arena
+controllers.arenas.bind(identifier: :development, blueprint_identifier: :wap)
+controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
+controllers.arenas.state(identifier: :development)
+
+# save installations for the arena
+controllers.arenas.install(identifier: :development)
+controllers.arenas.state(identifier: :development)
+
+# resolve the arena
+controllers.arenas.resolve(identifier: :development)
+controllers.arenas.state(identifier: :development)
 
 # # validate a resolution
-# Spaces::Commands::Validating.create(identifier: 'docker_arena::phpmyadmin', space: :resolutions).run.payload
+# Spaces::Commands::Validating.create(identifier: 'development::phpmyadmin', space: :resolutions).run.payload
 
-# save all packs for an arena
-controllers.arenas.pack(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# save all packs for arena
+controllers.arenas.pack(identifier: :development)
+controllers.arenas.state(identifier: :development)
 
 # save a pack for a resolution
-# controllers.packing.create(identifier: 'docker_arena::phpmyadmin')
-# controllers.arenas.state(identifier: :docker_arena)
+# controllers.packing.create(identifier: 'development::phpmyadmin')
+# controllers.arenas.state(identifier: :development)
 
 # # get the identifiers of packs in an arena
-# controllers.querying.list(method: :identifiers, arena_identifier: :docker_arena, space: :packs)
+# controllers.querying.list(method: :identifiers, arena_identifier: :development, space: :packs)
 
 # # get the artifact for a pack
-# controllers.packing.artifact(identifier: 'docker_arena::phpmyadmin')
+# controllers.packing.artifact(identifier: 'development::phpmyadmin')
 
-# provision the arena for applications
-controllers.arenas.provision(identifier: :docker_arena)
-controllers.arenas.state(identifier: :docker_arena)
+# provision the arena
+controllers.arenas.provision(identifier: :development)
 
-# # build packs for an arena
-# controllers.arenas.build(identifier: :docker_arena)
+controllers.arenas.state(identifier: :development)
+
+# # build packs for the arena
+# controllers.arenas.build(identifier: :development)
 #
 # # build a pack
-# controllers.packing.build(identifier: 'docker_arena::phpmyadmin')
+# controllers.packing.build(identifier: 'development::phpmyadmin')
 #
-# # apply provisions for an arena
-# controllers.arenas.apply(identifier: :docker_arena)
+# # apply provisions for arena
+# controllers.arenas.apply(identifier: :development)
 
 # # save provisions for a resolution
-# controllers.provisioning.create(identifier: 'docker_arena::phpmyadmin')
+# controllers.provisioning.create(identifier: 'development::phpmyadmin')
 
 # capture registry entries for an application
-controllers.registry.register(identifier: 'docker_arena::phpmyadmin')
+controllers.registry.register(identifier: 'development::phpmyadmin')

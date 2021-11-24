@@ -1,7 +1,7 @@
-module Divisions
+module Targeting
   class Bindings < ::Divisions::Divisible
 
-    alias_method :all_bindings, :all
+    alias_method :all_bindings, :all # NOW WHAT?
 
     def complete?; all_complete?(all) ;end
 
@@ -9,39 +9,32 @@ module Divisions
       all.detect { |b| b.identifier == name.to_s }
     end
 
-    def flattened
+    def flattened # NOW WHAT?
       empty.tap { |d| d.struct = all.map(&:flattened).map(&:struct) }
     end
 
     def graphed(type: :all, emission: emission_type, direction: nil)
       empty.tap do |d|
-        d.struct = send("#{type}_bindings").map { |b| b.graphed(emission) }.compact.map(&:struct)
+        d.struct = send("#{type}_bindings").map { |b| b.graphed(emission) }.compact.map(&:struct) # NOW WHAT?
       end
     end
 
     def transformed_to(transformation)
-      in_blueprint? ? super : super.select do |s|
+      # TODO: cannot refer to blueprint here
+      in_blueprint? ? super : super.select do |s| # NOW WHAT?
         s.for_runtime?(runtime_qualifier)
       end
     end
 
-    def embed_bindings
+    def embed_bindings # NOW WHAT?
       all.select(&:embed?).map(&:embed_bindings).flatten.uniq
     end
 
-    def connect_bindings
+    def connect_bindings # NOW WHAT?
       all.reject(&:embed?)
     end
 
-    def deep_connect_bindings
-      deep_bindings.reject { |b| b.embed? || b.binder? }
-    end
-
-    def deep_binder_bindings
-      deep_bindings.select(&:binder?)
-    end
-
-    def deep_bindings
+    def deep_bindings # NOW WHAT?
       all.map(&:deep_bindings).flatten.uniq
     end
 

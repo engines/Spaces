@@ -1,5 +1,5 @@
 module Blueprinting
-  module Relations
+  module Relations # is this needed anymore?
 
     def relations
       OpenStruct.new(
@@ -12,14 +12,14 @@ module Blueprinting
       OpenStruct.new(
         parents: parent_identifiers,
         descendants: descendant_identifiers,
-        bindings: deep_bindings.map(&:struct),
-        embeds: embed_bindings.map(&:struct)
+        bindings: deep_bindings.map(&:struct), # NOW WHAT?
+        embeds: embed_bindings.map(&:struct) # NOW WHAT?
       )
     end
 
     def relations_to_arenas
       OpenStruct.new(
-        bindings: direct_arenas.map(&:identifier),
+        bindings: direct_arenas.map(&:identifier), # NOW WHAT?
         conscriptions: indirect_arenas.map(&:identifier)
       )
     end
@@ -29,7 +29,7 @@ module Blueprinting
     end
 
     def descendant_identifiers
-      @descendant_identifiers ||= deep_bindings.map(&:target_identifier).uniq
+      @descendant_identifiers ||= deep_bindings.map(&:target_identifier).uniq # NOW WHAT?
     end
 
   end

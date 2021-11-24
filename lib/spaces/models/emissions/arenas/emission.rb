@@ -10,7 +10,7 @@ module Arenas
 
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
-    def arena_identifier; identifier.split_compound.first ;end
+    def arena_identifier; identifier.high ;end
 
     def empty; super.tap { |m| m.arena = arena } ;end
 
