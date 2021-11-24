@@ -4,7 +4,8 @@ require_relative 'summary'
 module Arenas
   class Arena < ::Emissions::Emission
     include ::Arenas::Prerequisites
-    include ::Arenas::Binding # NOW WHAT?
+    include ::Arenas::Connecting
+    include ::Arenas::Binding
     include ::Arenas::Blueprinting
     include ::Arenas::Installing
     include ::Arenas::Resolving
@@ -19,16 +20,6 @@ module Arenas
     delegate(
       [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
     )
-
-    def more_binder_identifiers # NOW WHAT?
-      blueprints.binder_identifiers - target_identifiers
-    end
-
-    def connectable_blueprints
-      connected_blueprints.map do |b|
-        b.binder? ? b.connected_blueprints.flatten.map(&:blueprint) : b
-      end.flatten.uniq(&:uniqueness)
-    end
 
     def state
       @state ||= State.new(self)

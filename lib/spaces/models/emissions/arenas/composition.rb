@@ -6,7 +6,7 @@ module Arenas
         [
           Associations::Tenant,
           Associations::Domain,
-          Associations::ArenaBindings
+          Associations::Connections
         ]
       end
 

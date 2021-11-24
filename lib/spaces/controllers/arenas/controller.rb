@@ -9,6 +9,7 @@ module Arenas
           create: Commands::Saving,
           state: Commands::StateReading,
           update: Commands::Saving,
+          connect: Commands::Connecting,
           bind: Commands::Binding,
           more_binders: Commands::MoreBinders,
           install: Commands::Installing,
