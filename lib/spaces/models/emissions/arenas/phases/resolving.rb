@@ -5,17 +5,11 @@ module Arenas
     include Settling
 
     def bound_resolutions_deep # NOW WHAT?
-      bindings_with_self_deep.map(&:resolution)
+      resolved_bindings_with_self_deep.map(&:resolution)
     end
 
-    def bindings_with_self_deep
+    def resolved_bindings_with_self_deep
       bindings_with_resolutions.map do |b|
-        binding_class.new(b, self)
-      end
-    end
-
-    def deep_connect_bindings
-      super.map do |b|
         binding_class.new(b, self)
       end
     end

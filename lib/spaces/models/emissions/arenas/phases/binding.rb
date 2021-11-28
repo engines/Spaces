@@ -1,6 +1,12 @@
 module Arenas
   module Binding
 
+    def deep_connect_bindings
+      super.map do |b|
+        binding_class.new(b, self)
+      end
+    end
+
     def bind_with(blueprint_identifier) # NOW WHAT?
       empty.tap do |m|
         m.struct = struct
