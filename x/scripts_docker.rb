@@ -77,7 +77,6 @@ controllers.arenas.state(identifier: :development)
 
 # provision the arena
 controllers.arenas.provision(identifier: :development)
-
 controllers.arenas.state(identifier: :development)
 
 # # build packs for the arena
