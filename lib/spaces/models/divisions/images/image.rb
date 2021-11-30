@@ -5,7 +5,10 @@ module Divisions
       def features; super - [:type] + [:output_identifier] ;end
     end
 
-    delegate(tenant: :emission)
+    delegate(
+      tenant: :emission,
+      context_identifier: :division
+    )
 
     def inflated; self ;end
     def deflated; self ;end
@@ -15,7 +18,7 @@ module Divisions
     end
 
     def targetted_base_identifier
-      targetted_base_image&.output_identifier
+      targetted_base_image&.struct&.output_identifier
     end
 
     def targetted_base_image
