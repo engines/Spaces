@@ -22,7 +22,5 @@ module Arenas
 
     def resolution_map; bound_map_for(:resolution) ;end # NOW WHAT?
 
-    def binding_class; ::Divisions::BindingInArena ;end
-
   end
 end

@@ -5,6 +5,8 @@ module Divisions
       divisions.reject(&:complete?)
     end
 
+    def connections; important_division_for(:connections) ;end
+
     def configuration; important_division_for(:configuration) ;end
     def bindings; important_division_for(:bindings) ;end # NOW WHAT?
     def binding_target; important_division_for(:binding_target) ;end

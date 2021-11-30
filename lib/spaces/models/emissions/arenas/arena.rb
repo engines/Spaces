@@ -27,6 +27,8 @@ module Arenas
 
     def arena; self ;end
 
+    def binding_class; ::Divisions::BindingInArena ;end
+
     def initialize(struct: nil, identifiable: nil)
       super.tap do
         self.struct[:input] ||= Input.new(emission: self, label: :input).struct

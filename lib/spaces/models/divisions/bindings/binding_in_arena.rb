@@ -10,5 +10,13 @@ module Divisions
       self.arena = arena
     end
 
+    def installation
+      @installation ||= super || blueprint.installation_in(arena)
+    end
+
+    def resolution
+      @resolution ||= super || blueprint.resolution_in(arena)
+    end
+
   end
 end
