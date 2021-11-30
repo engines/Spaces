@@ -9,6 +9,8 @@ class Symbol
   def pluralize; to_s.pluralize ;end
   def as_path; to_s.as_path ;end
 
+  def split(*args); to_s.split(*args) ;end
+
   alias_method :underscore, :snakize
   alias_method :no_symbols, :to_s
 
