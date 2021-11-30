@@ -20,10 +20,10 @@ module Divisions
       [arena&.identifier&.with_identifier_separator, target_identifier].join
     end
 
-    def blueprint; @blueprint ||= emission_from(blueprints) ;end
+    def blueprint; @blueprint ||= target_from(blueprints) ;end
 
-    def installation; @installation ||= emission_from(installations) ;end
-    def resolution; @resolution ||= emission_from(resolutions) ;end
+    def installation; @installation ||= target_from(installations) ;end
+    def resolution; @resolution ||= target_from(resolutions) ;end
 
   end
 end

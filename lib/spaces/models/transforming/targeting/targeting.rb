@@ -1,7 +1,7 @@
 module Targeting
   module Targeting
 
-    def emission_from(space)
+    def target_from(space)
       targeter_for(space).emission
     end
 
