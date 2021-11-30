@@ -31,10 +31,15 @@ module Divisions
     end
 
     def default_identifier; tenant_context_identifier ;end
-    def default_output_identifier; "engines/#{tenant_context_identifier}:#{default_tag}" ;end
+    def default_output_identifier; "engines_#{tenant_context_identifier}:#{default_tag}" ;end
     def default_tag; 'latest' ;end
 
-    def tenant_context_identifier; "#{tenant.identifier}/#{context_identifier.as_path}" ;end
+    def tenant_context_identifier
+       [
+         (tenant.identifier unless tenant.identifier == 'engines'),
+         context_identifier.underscore
+       ].compact.join('_')
+     end
 
     protected
 
