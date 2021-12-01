@@ -4,7 +4,7 @@ module Arenas
     def present_in(space); deep_bindings_in(space, :select) ;end
     def absent_in(space); deep_bindings_in(space, :reject) ;end
 
-    def deep_bindings_in(space, method) # NOW WHAT?
+    def deep_bindings_in(space, method)
       all_connect_bindings.send(method) do |b|
         space.exist?(b.context_identifier)
       end

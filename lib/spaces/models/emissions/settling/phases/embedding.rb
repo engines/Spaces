@@ -6,7 +6,7 @@ module Settling
         m.struct = m.struct.merge(
           OpenStruct.new(embedding_division_map.transform_values(&:struct))
         )
-      end.bindings_flattened # NOW WHAT?
+      end.bindings_flattened
     end
 
     def embedding_division_map
@@ -27,16 +27,16 @@ module Settling
       @embeds_for_arena_runtime ||= arena_runtime_embeds_for(runtime_qualifier)
     end
 
-    def bindings_flattened # NOW WHAT?
+    def bindings_flattened
       bindings&.any? ? _bindings_flattened : self
     end
 
     protected
 
-    def _bindings_flattened # NOW WHAT?
+    def _bindings_flattened
       empty.tap do |m|
         m.struct = struct
-        m.struct.bindings = bindings.flattened.struct # NOW WHAT?
+        m.struct.bindings = bindings.flattened.struct
         m.cache_primary_identifiers
       end
     end

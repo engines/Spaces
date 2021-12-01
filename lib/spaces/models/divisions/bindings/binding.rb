@@ -4,12 +4,12 @@ require_relative 'packing'
 
 module Divisions
   class Binding < ::Targeting::Binding
-    include ::Divisions::Binding::Publishing # NOW WHAT?
-    include ::Divisions::Binding::Packing # NOW WHAT?
+    include ::Divisions::Binding::Publishing
+    include ::Divisions::Binding::Packing
 
     delegate(
       [:locations, :blueprints, :installations, :resolutions] => :universe,
-      binder?: :blueprint # NOW WHAT?
+      binder?: :blueprint
     )
 
     def arena

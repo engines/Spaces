@@ -10,7 +10,7 @@ module Locating
     alias_method :identifiers, :simple_identifiers
 
     def ensure_located(publication)
-      publication.bindings.descriptors.each do |d| # NOW WHAT?
+      publication.bindings.descriptors.each do |d|
         save(default_model_class.new(d.struct)) unless exist?(d)
       end
     end

@@ -7,7 +7,7 @@ module Arenas
       absent_in(provisioning)
     end
 
-    def unsaved_provisions; bound_resolutions.reject(&:provisioned?) ;end # NOW WHAT?
+    def unsaved_provisions; bound_resolutions.reject(&:provisioned?) ;end
 
   end
 end

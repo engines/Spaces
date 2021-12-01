@@ -40,13 +40,13 @@ module Emissions
       self.struct.identifier = identifiable.identifier if identifiable
     end
 
-    def method_missing(m, *args, &block) # NOW WHAT?
+    def method_missing(m, *args, &block)
       return division_map[m.to_sym] || struct[m] if division_keys.include?(m)
       return bindings.named(m) if (struct[:bindings] && bindings.named(m))
       super
     end
 
-    def respond_to_missing?(m, *) # NOW WHAT?
+    def respond_to_missing?(m, *)
       division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
     end
 
