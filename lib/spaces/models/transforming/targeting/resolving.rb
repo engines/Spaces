@@ -19,11 +19,11 @@ module Targeting
       end
     end
 
-    def configuration # NOW WHAT?
+    def configuration
       struct.configuration || derived_features[:configuration]
     end
 
-    def target_configuration # NOW WHAT?
+    def target_configuration
       #TODO: can't use blueprint here ... must be more gerneric
       # #better_emission method?
       @target_configuration ||= blueprint.binding_target.struct

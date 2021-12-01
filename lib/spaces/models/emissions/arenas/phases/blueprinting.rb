@@ -5,7 +5,7 @@ module Arenas
     def unblueprinted; deep_blueprints(:reject) ;end
 
     def deep_blueprints(method)
-      deep_connect_bindings.send(method) do |b| # NOW WHAT?
+      deep_connect_bindings.send(method) do |b|
         blueprints.exist?(b.target_identifier)
       end
     end

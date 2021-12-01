@@ -4,8 +4,8 @@ require_relative 'summary'
 module Arenas
   class Arena < ::Emissions::Emission
     include ::Arenas::Prerequisites
-    include ::Arenas::Connecting
     include ::Arenas::Binding
+    include ::Arenas::Connecting
     include ::Arenas::Blueprinting
     include ::Arenas::Installing
     include ::Arenas::Resolving
@@ -26,6 +26,8 @@ module Arenas
     end
 
     def arena; self ;end
+
+    def binding_class; ::Divisions::BindingInArena ;end
 
     def initialize(struct: nil, identifiable: nil)
       super.tap do

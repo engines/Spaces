@@ -78,7 +78,7 @@ module Providers
       end
 
       def unique_connections
-        pack.connect_bindings.uniq(&:uniqueness) # NOW WHAT?
+        pack.connect_bindings.uniq(&:uniqueness)
       end
 
     end

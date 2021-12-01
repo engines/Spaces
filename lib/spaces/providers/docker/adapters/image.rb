@@ -2,7 +2,7 @@ module Adapters
   module Docker
     class Image < ::Adapters::Image
 
-      delegate name: :division
+      delegate identifier: :division
 
       def snippets
         "FROM #{base_image_identifier}"

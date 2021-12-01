@@ -1,12 +1,10 @@
 require 'resolv'
 require_relative 'subdivision'
-require_relative 'targeting'
 require_relative 'graphing'
 require_relative 'resolving'
 
 module Targeting
   class Binding < ::Targeting::Subdivision
-    include ::Targeting::Targeting
     include ::Targeting::Graphing
     include ::Targeting::Resolving
 
@@ -14,38 +12,38 @@ module Targeting
       def features; [:type, :runtimes, :identifier, :target_identifier, :configuration] ;end
     end
 
-    def type; struct.type || derived_features[:type] ;end # NOW WHAT?
+    def type; struct.type || derived_features[:type] ;end
 
-    def runtimes; struct.runtimes ;end # NOW WHAT?
+    def runtimes; struct.runtimes ;end
 
-    def for_runtime?(value) # NOW WHAT?
+    def for_runtime?(value)
       generic? || runtimes&.include?("#{value}")
     end
 
-    def generic? # NOW WHAT?
+    def generic?
       [[], nil].include?(runtimes)
     end
 
-    def embed?; type == 'embed' ;end # NOW WHAT?
+    def embed?; type == 'embed' ;end
 
-    def embed_bindings # NOW WHAT?
+    def embed_bindings
       deep_bindings_of_type(:embed)
     end
 
-    def deep_bindings # NOW WHAT?
+    def deep_bindings
       deep_bindings_of_type(:deep)
     end
 
-    def deep_bindings_of_type(type) # NOW WHAT?
+    def deep_bindings_of_type(type)
       #TODO: can't use blueprint here ... must be more gerneric
       # #better_emission method?
       [self, blueprint.bindings.send("#{type}_bindings")].flatten.uniq(&:identifier)
     end
 
-    def keys; configuration.to_h.keys ;end # NOW WHAT?
+    def keys; configuration.to_h.keys ;end
 
     def method_missing(m, *args, &block)
-      keys&.include?(m) ? configuration[m] : super # NOW WHAT?
+      keys&.include?(m) ? configuration[m] : super
     end
 
     def respond_to_missing?(m, *)
@@ -56,7 +54,7 @@ module Targeting
 
     def derived_features
       @derived_features ||= {
-        type: 'connect', # NOW WHAT?
+        type: 'connect',
         configuration: OpenStruct.new
       }
     end

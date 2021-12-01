@@ -9,17 +9,5 @@ module Settling
       end
     end
 
-    def save(settlement)
-      super.tap do
-        ensure_connections_exist_for(settlement)
-      end
-    end
-
-    protected
-
-    def ensure_connections_exist_for(settlement)
-      settlement.connections_settled.each { |s| save(s) }
-    end
-
   end
 end

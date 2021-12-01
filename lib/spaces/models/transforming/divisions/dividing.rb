@@ -5,8 +5,10 @@ module Divisions
       divisions.reject(&:complete?)
     end
 
+    def connections; important_division_for(:connections) ;end
+
     def configuration; important_division_for(:configuration) ;end
-    def bindings; important_division_for(:bindings) ;end # NOW WHAT?
+    def bindings; important_division_for(:bindings) ;end
     def binding_target; important_division_for(:binding_target) ;end
     def images; important_division_for(:images) ;end
     def volumes; important_division_for(:volumes) ;end

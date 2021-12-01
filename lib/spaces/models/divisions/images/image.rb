@@ -5,7 +5,10 @@ module Divisions
       def features; super - [:type] + [:output_identifier] ;end
     end
 
-    delegate(tenant: :emission)
+    delegate(
+      tenant: :emission,
+      context_identifier: :division
+    )
 
     def inflated; self ;end
     def deflated; self ;end
@@ -15,7 +18,7 @@ module Divisions
     end
 
     def targetted_base_identifier
-      targetted_base_image&.output_identifier
+      targetted_base_image&.struct&.output_identifier
     end
 
     def targetted_base_image
@@ -31,10 +34,15 @@ module Divisions
     end
 
     def default_identifier; tenant_context_identifier ;end
-    def default_output_identifier; "engines/#{tenant_context_identifier}:#{default_tag}" ;end
+    def default_output_identifier; "engines_#{tenant_context_identifier}:#{default_tag}" ;end
     def default_tag; 'latest' ;end
 
-    def tenant_context_identifier; "#{tenant.identifier}/#{context_identifier.as_path}" ;end
+    def tenant_context_identifier
+       [
+         (tenant.identifier unless tenant.identifier == 'engines'),
+         context_identifier.underscore
+       ].compact.join('_')
+     end
 
     protected
 

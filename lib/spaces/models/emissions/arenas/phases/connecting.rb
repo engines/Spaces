@@ -14,5 +14,17 @@ module Arenas
       OpenStruct.new(identifier: other_identifier)
     end
 
+    def all_connect_bindings
+      deep_arenas.map(&:deep_connect_bindings).flatten.compact.uniq(&:uniqueness)
+    end
+
+    def deep_arenas
+      [connected_arenas.map(&:deep_arenas), self].flatten.compact.uniq(&:uniqueness)
+    end
+
+    def connected_arenas
+      connections.all.map(&:arena)
+    end
+
   end
 end

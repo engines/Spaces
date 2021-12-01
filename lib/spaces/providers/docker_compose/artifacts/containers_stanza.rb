@@ -10,7 +10,7 @@ module Artifacts
       end
 
       def container_snippets
-        bound_resolutions_deep.reduce({}) do |m, r| # NOW WHAT?
+        directly_bound_resolutions.reduce({}) do |m, r|
           m.tap do
             m[r.blueprint_identifier.hyphenated] = container_stanza_class.new(self, r).snippets
           end

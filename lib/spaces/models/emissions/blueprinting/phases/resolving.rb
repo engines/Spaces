@@ -6,7 +6,7 @@ module Blueprinting
         m.arena = arena
         m.struct = arena.struct.
           without(irrelevant_arena_divisions).
-          merge(struct.without(irrelevant_blueprint_divisions)) # NOW WHAT?
+          merge(struct.without(irrelevant_blueprint_divisions))
         m.cache_primary_identifiers
       end.with_embeds.infixes_resolved
     end
