@@ -7,16 +7,26 @@ module Registry
 
     relation_accessor :consumer
 
-    def binding_identifier; binding.identifier ;end
-    def arena_identifier; struct[:arena_identifier] ;end
-    def blueprint_identifier; struct[:blueprint_identifier] ;end
+    delegate(arena: :consumer)
 
-    def binding; bindings.first ;end # NOW WHAT?
+    def binding; bindings.first ;end
+
+    def binding_identifier; binding.identifier ;end
+    def service_identifier; struct[:service_identifier] ;end
+    def consumer_identifier; struct[:consumer_identifier] ;end
 
     def cache_primary_identifiers
-      struct.arena_identifier = consumer.arena_identifier
-      struct.blueprint_identifier = consumer.blueprint_identifier
-      struct.identifier = [arena_identifier, target_identifier, binding_identifier, blueprint_identifier].join(identifier_separator)
+      struct.consumer_identifier = consumer.identifier
+      struct.service_identifier = service_identifier
+      struct.identifier = [service_identifier, consumer.identifier].join(identifier_separator)
+    end
+
+    def service_identifier
+      service_connection.identifier
+    end
+
+    def service_connection
+      arena.resolution_map[binding.identifier]
     end
 
     def keys; composition.keys ;end

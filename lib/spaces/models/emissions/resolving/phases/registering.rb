@@ -2,17 +2,17 @@ module Resolving
   module Registering
 
     def registered
-      connect_bindings.map do |c| # NOW WHAT?
+      connect_bindings.map do |c|
         empty_entry.tap do |m|
           m.consumer = self
-          m.struct = OpenStruct.new.tap { |s| s.bindings = [c.struct] } # NOW WHAT?
+          m.struct = OpenStruct.new.tap { |s| s.bindings = [c.struct] }
           m.cache_primary_identifiers
         end
       end
     end
 
     def registrable?
-      @registrable ||= connect_bindings.any? # NOW WHAT?
+      @registrable ||= connect_bindings.any?
     end
 
     def empty_entry; entry_class.new ;end
