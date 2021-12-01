@@ -13,8 +13,8 @@ module Spaces
       def run
         tap do
           _run
-        # rescue ::Spaces::Errors::SpacesError => e
-        #   struct.errors = e.diagnostics
+        rescue ::Spaces::Errors::SpacesError => e
+          struct.errors = e.diagnostics
         end
       end
 
