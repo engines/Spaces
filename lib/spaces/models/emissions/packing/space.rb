@@ -17,6 +17,12 @@ module Packing
       end
     end
 
+    def artifacts_for(identifier)
+      if (m = exist_then_by(identifier))
+        provider_interface_for(m).artifacts
+      end
+    end
+
     def save(pack)
       raise ::Packing::Errors::NoImage, {identifier: pack.identifier} unless pack.has?(:builders)
 

@@ -9,7 +9,7 @@ module Packing
           create: Commands::Saving,
           update: Commands::Saving,
           build: Commands::Building,
-          artifact: Commands::Artifact
+          artifacts: [::Spaces::Commands::Artifacts, {space: :packs}]
         })
       end
 

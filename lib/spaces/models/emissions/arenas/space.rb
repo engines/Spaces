@@ -16,6 +16,12 @@ module Arenas
 
     def cascade_deletes; [:installations] ;end
 
+    def artifacts_for(identifier)
+      if (m = exist_then_by(identifier))
+        provider_interface_for(m).artifacts
+      end
+    end
+
     def save_installations_for(arena, force: false)
       (force ? arena.bound_installations : arena.unsaved_installations).
         map { |i| installations.save(i) }.
