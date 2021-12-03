@@ -12,9 +12,6 @@ module Artifacts
           labels: {
             author: :james,
             other_label: :gidday
-          },
-          sysctls: {
-            'net.core.somaxconn': 1024
           }
         }
       end
