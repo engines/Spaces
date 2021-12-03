@@ -19,6 +19,12 @@ module Settling
       )
     end
 
+    def connections_down(emission: :resolution)
+      connect_bindings.map { |t|
+        arena.send("#{emission}_map")[t.identifier]
+      }.compact
+    end
+
     def connections_settled(&block)
       connections_down(emission: :blueprint).map { |c| block.call(c) }
     end
