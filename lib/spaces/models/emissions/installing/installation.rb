@@ -16,9 +16,5 @@ module Installing
       end
     end
 
-    def connections_settled
-      super { |c| c.installation_in(arena) }
-    end
-
   end
 end
