@@ -1,6 +1,6 @@
 module Artifacts
   module DockerCompose
-    class ContainerStanza < ::Artifacts::Stanza
+    class ServiceStanza < ::Artifacts::Stanza
 
       relation_accessor :resolution
 
