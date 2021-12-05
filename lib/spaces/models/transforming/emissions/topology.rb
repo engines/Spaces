@@ -21,10 +21,6 @@ module Emissions
       all_bindings.map { |t| t.send(emission) }.compact
     end
 
-    def connections_down(emission: :resolution)
-      connect_bindings.map { |t| t.send(emission) }.compact
-    end
-
     def embeds_down(emission: :blueprint)
       embed_bindings.map { |t| t.send(emission) }.compact
     end

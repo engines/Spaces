@@ -28,9 +28,5 @@ module Resolving
       images&.first
     end
 
-    def connections_settled
-      super { |c| c.resolution_in(arena) }
-    end
-
   end
 end
