@@ -3,8 +3,8 @@ module Artifacts
     class DependsOnStanza < ::Artifacts::Stanza
 
       def snippets
-        if (rcd = resolution.connections_down).any?
-          rcd.map { |c| c.blueprint_identifier.hyphenated }
+        if (rcd = resolution.direct_connections).any?
+          rcd.map { |c| c.identifier.underscore }
         end
       end
 

@@ -28,5 +28,9 @@ module Resolving
       images&.first
     end
 
+    def direct_connections
+      connect_bindings.map(&:resolution).compact
+    end
+
   end
 end
