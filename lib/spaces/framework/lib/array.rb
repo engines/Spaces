@@ -20,6 +20,10 @@ class Array
     !any?(false)
   end
 
+  def select_uniq(&block)
+    select(&block).uniq(&block)
+  end
+
   def in_quotes
     map { |v| %("#{v}")}
   end

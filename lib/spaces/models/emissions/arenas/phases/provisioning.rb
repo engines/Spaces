@@ -1,5 +1,8 @@
+require_relative 'golden_packing'
+
 module Arenas
   module Provisioning
+    include ::Arenas::GoldenPacking
 
     def provisioned; present_in(provisioning) ;end
 

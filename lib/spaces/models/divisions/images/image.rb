@@ -14,17 +14,21 @@ module Divisions
     def deflated; self ;end
 
     def base_image_identifier
-      targetted_base_identifier || struct.identifier || derived_features[:identifier]
+      golden_identifier || struct.identifier || derived_features[:identifier]
     end
 
-    def targetted_base_identifier
-      targetted_base_image&.struct&.output_identifier
+    def golden_identifier
+      golden_base_image&.struct&.output_identifier
     end
 
-    def targetted_base_image
-      if target_identifier
+    def golden_base_image
+      if potentially_golden?
         blueprint&.images.resolved.first
       end
+    end
+
+    def potentially_golden?
+      target_identifier
     end
 
     def output_identifier; struct.output_identifier || derived_features[:output_identifier] ;end
