@@ -12,7 +12,7 @@ module Resolving
     end
 
     delegate(
-      [:installations, :packs, :provisioning] => :universe,
+      [:installations, :packs, :provisioning, :registry] => :universe,
       [:input, :deployment] =>  :installation
     )
 
