@@ -1,6 +1,10 @@
 module Arenas
   module GoldenPacking
 
+    def golden_packs
+      golden_pack_identifiers.map { |i| packs.by(i) }
+    end
+
     def golden_pack_identifiers
       golden_image_divisions.map do |g|
         packs.identifiers(blueprint_identifier: g.identifier)

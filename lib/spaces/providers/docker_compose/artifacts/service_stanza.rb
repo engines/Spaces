@@ -16,6 +16,14 @@ module Artifacts
         end.compact
       end
 
+      def build_only_snippets
+        [:build].reduce({}) do |m, q|
+          m.tap do
+            m[q] = stanza_class_for(q).new(self).snippets
+          end
+        end.compact
+      end
+
       def domain_and_hostname_snippets
         {
           domainname: "#{arena.identifier.as_subdomain}.#{universe.host}",

@@ -5,7 +5,7 @@ module Artifacts
       def snippets
         {
           version: "3.3",
-          services: service_snippets
+          services: build_only_snippets.merge(service_snippets)
         }
       end
 
@@ -13,6 +13,14 @@ module Artifacts
         directly_bound_resolutions.reduce({}) do |m, r|
           m.tap do
             m[r.blueprint_identifier.hyphenated] = service_stanza_class.new(self, r).snippets
+          end
+        end
+      end
+
+      def build_only_snippets
+        golden_packs.reduce({}) do |m, p|
+          m.tap do
+            m[p.blueprint_identifier.hyphenated] = service_stanza_class.new(self, p).build_only_snippets
           end
         end
       end
