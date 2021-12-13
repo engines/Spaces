@@ -3,7 +3,7 @@ module Registry
 
     class << self
       def default_model_class
-        Entry
+        ConsumerEntry
       end
     end
 

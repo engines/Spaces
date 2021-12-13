@@ -1,8 +1,8 @@
 module Registry
-  class Entry < Emissions::Emission
+  class ConsumerEntry < Resolving::Emission
 
     class << self
-      def composition_class; Composition ;end
+      def composition_class; EntryComposition ;end
     end
 
     relation_accessor :consumer
@@ -12,7 +12,6 @@ module Registry
     def binding; bindings.first ;end
 
     def binding_identifier; binding.identifier ;end
-    def service_identifier; struct[:service_identifier] ;end
     def consumer_identifier; struct[:consumer_identifier] ;end
 
     def cache_primary_identifiers

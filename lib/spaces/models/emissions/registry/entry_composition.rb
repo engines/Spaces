@@ -1,5 +1,5 @@
 module Registry
-  class Composition < ::Emissions::Composition
+  class EntryComposition < ::Emissions::Composition
 
     class << self
       def division_classes
