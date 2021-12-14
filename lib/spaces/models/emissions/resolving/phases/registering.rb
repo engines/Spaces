@@ -16,7 +16,9 @@ module Resolving
     end
 
     def empty_entry; entry_class.new ;end
-    def entry_class; ::Registry::Entry ;end
+    def entry_class; ::Registry::ConsumerEntry ;end
+
+    def service_path; registry.path_for(self) ;end
 
   end
 end

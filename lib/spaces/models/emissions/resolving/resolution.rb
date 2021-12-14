@@ -12,7 +12,7 @@ module Resolving
     end
 
     delegate(
-      [:installations, :packs, :provisioning] => :universe,
+      [:installations, :packs, :provisioning, :registry] => :universe,
       [:input, :deployment] =>  :installation
     )
 
@@ -26,6 +26,10 @@ module Resolving
 
     def image
       images&.first
+    end
+
+    def direct_connections
+      connect_bindings.map(&:resolution).compact
     end
 
   end
