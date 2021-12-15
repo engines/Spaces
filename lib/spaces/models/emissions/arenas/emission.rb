@@ -3,7 +3,8 @@ module Arenas
 
     delegate(
       arenas: :universe,
-      [:runtime_qualifier, :provisioning_qualifier, :packtime_qualifier] => :arena
+      [:runtime_qualifier, :provisioning_qualifier, :packtime_qualifier] => :arena,
+      volume_path: :arena
     )
 
     relation_accessor :arena

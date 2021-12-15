@@ -12,5 +12,7 @@ module Arenas
 
     def unsaved_provisions; bound_resolutions.reject(&:provisioned?) ;end
 
+    def volume_path; input.volumes[:path] ;end
+
   end
 end

@@ -32,5 +32,9 @@ module Spaces
       path.join("#{context_identifier.as_path}", "#{symbol}")
     end
 
+    def container_path_for(identifiable)
+      Pathname("/#{identifier}").join(identifiable.context_identifier.as_path)
+    end
+
   end
 end

@@ -18,7 +18,8 @@ module Resolving
     def empty_entry; entry_class.new ;end
     def entry_class; ::Registry::ConsumerEntry ;end
 
-    def service_path; registry.path_for(self) ;end
+    def service_path; registry.container_path_for(self) ;end
+    def full_service_path; registry.path_for(self) ;end
 
   end
 end
