@@ -1,4 +1,4 @@
-module Installing
+module Commissioning
   class Composition < ::Emissions::Composition
 
     class << self

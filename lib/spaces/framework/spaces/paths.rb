@@ -24,6 +24,12 @@ module Spaces
       path.join(identifiable.context_identifier.as_path)
     end
 
+    def container_file_names_for(phase, identifier)
+      file_names_for(phase, identifier).map do |p|
+        Pathname.new("/#{p.to_s.split(phase.to_s).last.split('/').drop(2).join('/')}")
+      end
+    end
+
     def file_names_for(directory, identifier)
       file_path_for(directory, identifier).glob('**/*').reject(&:directory?)
     end

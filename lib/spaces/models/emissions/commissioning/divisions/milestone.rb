@@ -1,9 +1,7 @@
 module Divisions
   class Milestone < ::Divisions::Subdivision
 
-    delegate(
-      context_identifier: :division
-    )
+    def path; struct.path ;end
 
   end
 end

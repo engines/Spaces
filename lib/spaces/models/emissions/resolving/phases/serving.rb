@@ -3,14 +3,10 @@ module Resolving
 
     def as_service
       empty_service.tap do |m|
-        m.struct = OpenStruct.new(milestones: services)
         m.struct.identifier = identifier
         m.cache_primary_identifiers
+        m.struct = OpenStruct.new(milestones: m.services)
       end
-    end
-
-    def services
-      []
     end
 
     def empty_service; service_class.new ;end
