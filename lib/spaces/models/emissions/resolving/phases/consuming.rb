@@ -5,7 +5,7 @@ module Resolving
       empty_consumer.tap do |m|
         m.struct.identifier = identifier
         m.cache_primary_identifiers
-        m.struct = OpenStruct.new(milestones: m.the_milestones)
+        m.struct.milestones = m.the_milestones
       end
     end
 

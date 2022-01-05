@@ -7,6 +7,10 @@ module Commissioning
 
     delegate(connections_down: :resolution)
 
+    def milestones_for(name)
+      milestones.select { |m| m.name == name.to_s }
+    end
+
     def the_milestones
       connections_down.map do |c|
         c.as_service.struct.milestones

@@ -5,7 +5,7 @@ module Resolving
       empty_service.tap do |m|
         m.struct.identifier = identifier
         m.cache_primary_identifiers
-        m.struct = OpenStruct.new(milestones: m.services)
+        m.struct.milestones = m.services
       end
     end
 
