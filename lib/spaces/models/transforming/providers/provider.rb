@@ -6,16 +6,16 @@ module Providers
 
     attr_accessor :role
 
-    def interface_for(emission, space = nil)
-      interface_class.new(adapter_for(emission), space)
+    def interface_for(emission, purpose: nil, space: nil)
+      interface_class_for(purpose).new(adapter_for(emission), space)
     end
 
     def adapter_for(emission)
       adapter_class_for(emission.qualifier).new(self, emission)
     end
 
-    def interface_class
-      class_for(nesting_elements, :interface)
+    def interface_class_for(purpose = nil)
+      class_for(nesting_elements, [purpose, :interface].compact.join('_'))
     end
 
     def adapter_class_for(qualifier)

@@ -3,7 +3,7 @@ require_relative 'streaming'
 
 module Providers
   module DockerCompose
-    class Interface < ::Providers::Interface
+    class ProvisioningInterface < ::Providers::Interface
       include Streaming
 
         delegate(packs: :universe)

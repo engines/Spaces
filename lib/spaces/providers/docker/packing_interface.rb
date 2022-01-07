@@ -2,7 +2,7 @@ require_relative 'streaming'
 
 module Providers
   module Docker
-    class Interface < ::Providers::Interface
+    class PackingInterface < ::Providers::Interface
       extend ::Docker
       include Streaming
 
