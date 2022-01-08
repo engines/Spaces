@@ -22,7 +22,7 @@ module Commissioning
     def services
       container_file_names.map do |p|
         OpenStruct.new(
-          container_identifier: identifier,
+          service_identifier: identifier,
           name: milestone_identifier_for(p),
           path: p
         )

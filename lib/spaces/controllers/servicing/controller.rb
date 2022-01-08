@@ -6,7 +6,7 @@ module Servicing
 
       def action_command_map
         @action_command_map ||= {
-          service: Commands::Servicing
+          execute: Commands::Servicing
         }
       end
 
