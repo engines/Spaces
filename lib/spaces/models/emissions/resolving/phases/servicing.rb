@@ -1,8 +1,9 @@
 module Resolving
-  module Serving
+  module Servicing
 
-    def as_service
+    def as_service_for(consumer)
       empty_service.tap do |m|
+        m.consumer = consumer
         m.struct.identifier = identifier
         m.cache_primary_identifiers
         m.struct.milestones = m.services

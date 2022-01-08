@@ -5,6 +5,20 @@ module Commissioning
       def composition_class; Composition ;end
     end
 
+    relation_accessor :consumer
+
+    delegate(runtime_provider: :arena)
+
+    alias_method :provider, :runtime_provider
+
+    def execute_for(milestone_name)
+      provider.interface_for(self, purpose: :service).execute_all_for(milestone_name)
+    end
+
+    def milestones_for(name)
+      milestones.select { |m| m.name == name.to_s }
+    end
+
     def services
       container_file_names.map do |p|
         OpenStruct.new(

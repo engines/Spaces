@@ -6,7 +6,7 @@ module Resolving
     include Packing
     include Provisioning
     include Consuming
-    include Serving
+    include Servicing
     include ::Resolving::Summary
 
     class << self

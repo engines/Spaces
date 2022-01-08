@@ -3,5 +3,9 @@ module Divisions
 
     def path; struct.path ;end
 
+    def command_line
+      "#{path}"
+    end
+
   end
 end

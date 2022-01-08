@@ -20,8 +20,11 @@ module Providers
 
     def adapter_class_for(qualifier)
       class_for(:adapters, provider_qualifier, qualifier)
+    rescue NameError
+      default_adapter_class
     end
 
+    def default_adapter_class; ::Adapters::Emission ;end
     def default_artifact_class; ::Artifacts::Artifact ;end
 
     def provider_qualifier; name_elements.last ;end
