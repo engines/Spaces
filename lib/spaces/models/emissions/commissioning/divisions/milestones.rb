@@ -1,5 +1,5 @@
 module Divisions
-  class Milestones < ::Divisions::Bindings
+  class Milestones < ::Divisions::Divisible
 
   end
 end
