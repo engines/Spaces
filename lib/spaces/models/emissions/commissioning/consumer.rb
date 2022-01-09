@@ -7,6 +7,10 @@ module Commissioning
 
     delegate(connections_down: :resolution)
 
+    def service_identifiers_for(name)
+      milestones_for(name).map(&:service_identifier)
+    end
+
     def milestones_for(name)
       milestones.select { |m| m.name == name.to_s }
     end
