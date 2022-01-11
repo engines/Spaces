@@ -23,6 +23,10 @@ module Targeting
       struct.configuration || derived_features[:configuration]
     end
 
+    def configuration_string_array
+      configuration.keys.map { |k| "#{k}=#{configuration[k]}"}
+    end
+
     def target_configuration
       #TODO: can't use blueprint here ... must be more gerneric
       # #better_emission method?

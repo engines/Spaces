@@ -15,8 +15,18 @@ module Commissioning
       provider.interface_for(self, purpose: :service).execute_all_for(milestone_name)
     end
 
+    def commands_for(name)
+      milestones_for(name).map do |m|
+        ["#{m.path}", parameters].flatten
+      end
+    end
+
     def milestones_for(name)
       milestones.select { |m| m.name == name.to_s }
+    end
+
+    def parameters
+      consumer.send(blueprint_identifier).configuration_string_array
     end
 
     def services
