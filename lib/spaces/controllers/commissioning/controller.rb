@@ -6,7 +6,8 @@ module Commissioning
 
       def action_command_map
         @action_command_map ||= {
-          execute: Commands::Commissioning
+          commission: Commands::Commissioning,
+          start: [Commands::Executing, {execute: :start}]
         }
       end
 

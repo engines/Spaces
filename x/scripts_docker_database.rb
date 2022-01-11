@@ -35,5 +35,8 @@ controllers.arenas.provision(identifier: :database)
 # # apply provisions for arena
 # controllers.arenas.apply(identifier: :database)
 
-# #call create milestone scripts on a container for a given consumer
-# controllers.servicing.execute(milestone: :create, identifier: 'database::mariadb', consumer_identifier: 'development::phpmyadmin')
+# # call create milestone scripts on a container for a given consumer
+# controllers.servicing.service(milestone: :create, identifier: 'database::mariadb', consumer_identifier: 'development::phpmyadmin')
+
+# # start a container
+# controllers.commissioning.start(identifier: 'database::mariadb')

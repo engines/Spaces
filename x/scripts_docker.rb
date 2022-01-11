@@ -96,4 +96,4 @@ controllers.registry.register(identifier: 'development::phpmyadmin')
 
 
 # # call all create scripts for a consumer's services
-# controllers.commissioning.execute(milestone: :create, identifier: 'development::phpmyadmin')
+# controllers.commissioning.commission(milestone: :create, identifier: 'development::phpmyadmin')
