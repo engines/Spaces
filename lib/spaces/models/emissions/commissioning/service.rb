@@ -12,7 +12,11 @@ module Commissioning
     alias_method :provider, :runtime_provider
 
     def execute_for(milestone_name)
-      provider.interface_for(self, purpose: :service).execute_all_for(milestone_name)
+      interface.execute_commands_for(milestone_name)
+    end
+
+    def interface
+      @interface ||= provider.interface_for(self, purpose: :service)
     end
 
     def commands_for(name)
