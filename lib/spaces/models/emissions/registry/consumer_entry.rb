@@ -5,20 +5,15 @@ module Registry
       def composition_class; EntryComposition ;end
     end
 
-    relation_accessor :consumer
+    alias_accessor :consumer, :resolution
 
     delegate(arena: :consumer)
 
+    def bindings; division_map[:bindings] ;end
     def binding; bindings.first ;end
 
     def binding_identifier; binding.identifier ;end
     def consumer_identifier; struct[:consumer_identifier] ;end
-
-    def cache_primary_identifiers
-      struct.consumer_identifier = consumer.identifier
-      struct.service_identifier = service_identifier
-      struct.identifier = [service_identifier, consumer.identifier].join(identifier_separator)
-    end
 
     def service_identifier
       service_connection.identifier
@@ -29,6 +24,12 @@ module Registry
     end
 
     def keys; composition.keys ;end
+
+    def cache_primary_identifiers
+      struct.consumer_identifier = consumer.identifier
+      struct.service_identifier = service_identifier
+      struct.identifier = [service_identifier, consumer.identifier].join(identifier_separator)
+    end
 
     def method_missing(m, *args, &block)
       binding.respond_to?(m) ? binding.send(m) : super

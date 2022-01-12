@@ -8,8 +8,7 @@ module Provisioning
     end
 
     delegate(
-      [:arenas, :resolutions] => :universe,
-      provider_interface_for: :arenas
+      [:arenas, :resolutions] => :universe
     )
 
     def cascade_deletes; [:registry] ;end
@@ -23,16 +22,16 @@ module Provisioning
     def save(provisions)
       ensure_connections_exist_for(provisions)
       super.tap do
-        provider_interface_for(provisions)&.save_artifacts
+        interface_for(provisions)&.save_artifacts
       end
     end
 
     def commit(provisions)
-      provider_interface_for(provisions).commit
+      interface_for(provisions).commit
     end
 
-    def provider_interface_for(provisions)  #TODO: refactor
-      provisions.arena.provisioning_provider.interface_for(provisions, self)
+    def interface_for(provisions)  #TODO: refactor
+      provisions.arena.provisioning_provider.interface_for(provisions, purpose: :provisioning, space: space)
     end
 
     def delete(identifiable, cascade: true)

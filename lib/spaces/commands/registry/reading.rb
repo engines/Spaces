@@ -1,4 +1,4 @@
-module Servicing
+module Registry
   module Commands
     class Reading < ::Spaces::Commands::Reading
 

@@ -1,13 +1,13 @@
-module Registry
+module Commissioning
   module Controllers
     class Controller < ::Spaces::Controllers::Controller
 
-      def space_identifier; :registry ;end
+      def space_identifier; :resolutions ;end
 
       def action_command_map
         @action_command_map ||= {
-          show: Commands::Reading,
-          register: Commands::Registering
+          commission: Commands::Commissioning,
+          start: [Commands::Executing, {execute: :start}]
         }
       end
 

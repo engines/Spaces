@@ -2,7 +2,7 @@ require_relative 'streaming'
 
 module Providers
   module Terraform
-    class Interface < ::Providers::Interface
+    class ProvisioningInterface < ::Providers::Interface
       include Streaming
 
       def execute(command, model)
