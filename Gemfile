@@ -17,3 +17,4 @@ end
 
 gem 'docker-api'
 gem 'docker-compose'
+gem 'rb-inotify'

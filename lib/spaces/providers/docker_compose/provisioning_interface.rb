@@ -20,7 +20,7 @@ module Providers
         rescue ::Docker::Compose::Error => e
           pp e.inspect
         ensure
-          remove_auxiliaries
+          remove_auxiliaries # TODO: this doesn't happen until the send thread is finished!
         end
 
         def plan

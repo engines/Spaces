@@ -27,7 +27,7 @@ module Registry
     end
 
     def life_cycle_paths_for(identifiable)
-      path_for(identifiable).glob('*').reject(&:directory?)
+      path_for(identifiable).glob('milestones/*').reject(&:directory?)
     end
 
     protected
