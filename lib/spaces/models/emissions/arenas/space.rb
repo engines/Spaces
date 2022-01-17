@@ -39,10 +39,6 @@ module Arenas
       interface_for(arena, purpose)&.save_artifacts
     end
 
-    def interface_for(arena, purpose) #TODO: refactor
-      arena.provisioning_provider.interface_for(arena, purpose: purpose, space: self)
-    end
-
     def path_for(model)
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
