@@ -5,7 +5,8 @@ module Artifacts
       relation_accessor :resolution
 
       def stanza_qualifiers
-        [:build, :depends_on, :deploy, :sysctls, :environment, :ports, :logging, :volumes]
+        # [:build, :depends_on, :deploy, :sysctls, :environment, :ports, :logging, :volumes]
+        [:build, :depends_on, :deploy, :sysctls, :environment, :ports, :volumes]
       end
 
       def snippets
