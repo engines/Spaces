@@ -3,8 +3,9 @@ module Resolving
 
     def summary
       OpenStruct.new(
+        identifier: identifier,
         installation: {
-          exist: installations.exist?(identifier)
+          confirmed: installations.exist?(identifier)
         },
         pack: {
           exist: packs.exist?(identifier),
