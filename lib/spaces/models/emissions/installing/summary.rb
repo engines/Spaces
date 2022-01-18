@@ -3,6 +3,7 @@ module Installing
 
     def summary
       OpenStruct.new(
+        identifier: identifier,
         resolution: {
           exist: resolutions.exist?(identifier)
         }
