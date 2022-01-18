@@ -12,7 +12,6 @@ module Arenas
           connect: Commands::Connecting,
           bind: Commands::Binding,
           more_binders: Commands::MoreBinders,
-          install: Commands::Installing,
           resolve: Commands::Resolving,
           pack: Commands::Packing,
           build: Commands::Building,

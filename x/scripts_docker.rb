@@ -50,10 +50,6 @@ controllers.arenas.bind(identifier: :development, blueprint_identifier: :wap)
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
 controllers.arenas.state(identifier: :development)
 
-# save installations for the arena
-controllers.arenas.install(identifier: :development)
-controllers.arenas.state(identifier: :development)
-
 # resolve the arena
 controllers.arenas.resolve(identifier: :development)
 controllers.arenas.state(identifier: :development)

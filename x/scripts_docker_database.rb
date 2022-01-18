@@ -17,9 +17,6 @@ controllers.arenas.create(model: {identifier: :database})
 # bind some blueprints to the database arena
 controllers.arenas.bind(identifier: :database, blueprint_identifier: :mariadb)
 
-# save installations for the arena
-controllers.arenas.install(identifier: :database)
-
 # resolve the arena
 controllers.arenas.resolve(identifier: :database)
 
