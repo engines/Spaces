@@ -3,7 +3,7 @@ module Arenas
     include ::Providers::Providers
 
     def provider_role_map
-      @provider_role_map ||= struct.input.providers || {}
+      @provider_role_map ||= struct.input.providers&.to_h || {}
     end
 
     def prerequisite_map

@@ -2,17 +2,17 @@ module Arenas
   module Interfacing
     include ::Spaces::Streaming
 
-    def init(provisioning); execute_on_provisioner(:init, provisioning) ;end
-    def plan(provisioning); execute_on_provisioner(:plan, provisioning) ;end
-    def show(provisioning); execute_on_provisioner(:show, provisioning) ;end
-    def apply(provisioning); execute_on_provisioner(:apply, provisioning) ;end
+    def init(arena); execute_on_provisioner(:init, arena) ;end
+    def plan(arena); execute_on_provisioner(:plan, arena) ;end
+    def show(arena); execute_on_provisioner(:show, arena) ;end
+    def apply(arena); execute_on_provisioner(:apply, arena) ;end
 
-    def execute_on_provisioner(command, provisioning)
-      interface_for(provisioning).execute(command)
+    def execute_on_provisioner(command, arena)
+      interface_for(arena, :provisioning).execute(command)
     end
 
-    def interface_for(provisioning)
-      provisioning.provisioning_provider.interface_for(provisioning, purpose: :provisioning, space: space)
+    def interface_for(arena, purpose)
+      arena.provisioning_provider.interface_for(arena, purpose: purpose, space: self)
     end
 
   end
