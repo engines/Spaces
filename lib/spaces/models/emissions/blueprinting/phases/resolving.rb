@@ -14,6 +14,7 @@ module Blueprinting
     def irrelevant_arena_divisions
       [:bindings, :connections, :configuration]
     end
+    
     def irrelevant_blueprint_divisions
       [:input]
     end
