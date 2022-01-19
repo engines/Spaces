@@ -5,7 +5,7 @@ module Divisions
 
     class << self
       def subdivision_class
-        Module.const_get(name.singularize)
+        class_for(name.singularize)
       end
 
       def default_struct; [] ;end
@@ -13,7 +13,7 @@ module Divisions
 
     delegate(
       subdivision_class: :klass,
-      [:any?, :empty?, :map, :each, :count, :[], :first] => :all
+      [:any?, :empty?, :map, :each, :count, :[], :first, :select] => :all
     )
 
     alias_method :divisible_embedded_with, :embedded_with

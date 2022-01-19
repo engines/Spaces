@@ -7,8 +7,6 @@ module Divisions
     include Embeddable
     include Resolvable
 
-    attr_accessor :label
-
     class << self
       def prototype(emission:, label:)
         new(emission: emission, label: label)
@@ -18,11 +16,12 @@ module Divisions
     end
 
     relation_accessor :emission
+    attr_accessor :label
 
     delegate(
       default_struct: :klass,
-      [:composition, :auxiliary_directories, :blueprint_identifier, :configuration, :in_blueprint?, :runtime_qualifier, :packtime_qualifier, :arena] => :emission,
       ranking: :composition,
+      [:auxiliary_directories] => :emission,
       resolutions: :universe
     )
 
@@ -66,7 +65,23 @@ module Divisions
       self.struct = struct || emission.struct[label] || default_struct
     end
 
+    def method_missing(m, *args, &block)
+      emission.respond_to?(m) ? emission.send(m) : super
+    end
+
+    def respond_to_missing?(m, *)
+      emission.respond_to?(m) || super
+    end
+
     def to_s; struct ;end
+
+    def method_missing(m, *args, &block)
+      emission.respond_to?(m) ? emission.send(m) : super
+    end
+
+    def respond_to_missing?(m, *)
+      emission.respond_to?(m) || super
+    end
 
   end
 end

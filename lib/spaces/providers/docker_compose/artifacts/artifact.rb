@@ -4,7 +4,7 @@ module Artifacts
 
       alias_method :content, :yaml_content
 
-      def stanza_qualifiers; [:containers] ;end
+      def stanza_qualifiers; [:services] ;end
 
       def filename
         "docker-compose.#{extension}"

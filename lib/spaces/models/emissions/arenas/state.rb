@@ -25,7 +25,7 @@ module Arenas
 
     def missing_blueprints; missing(:unblueprinted) ;end
     def missing_installations; missing(:uninstalled) ;end
-    def missing_resolutions; missing(:unresolved) ;end
+    def missing_resolutions; missing(:bindings_without_resolutions) ;end
     def missing_packs; missing(:unpacked) ;end
     def missing_provisioning; missing(:unprovisioned) ;end
 
@@ -39,13 +39,13 @@ module Arenas
     end
 
     def fresh_installations; fresh(:installed, installations) ;end
-    def fresh_resolutions; fresh(:resolved, resolutions) ;end
+    def fresh_resolutions; fresh(:bindings_with_resolutions, resolutions) ;end
     def fresh_packs; fresh(:packed, packs) ;end
     def fresh_provisioning; fresh(:provisioned, provisioning) ;end
 
     def fresh(method, space)
       arena.send(method).
-        map { |b| b.settlement_identifier_in(arena) }.
+        map { |b| b.context_identifier }.
         select { |si| times(space.modified_at(si), :>, modified_at) }.
         uniq
     end

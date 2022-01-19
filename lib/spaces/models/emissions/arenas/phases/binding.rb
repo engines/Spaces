@@ -1,6 +1,12 @@
 module Arenas
   module Binding
 
+    def deep_connect_bindings
+      super.map do |b|
+        binding_class.new(b, self)
+      end
+    end
+
     def bind_with(blueprint_identifier)
       empty.tap do |m|
         m.struct = struct
@@ -16,6 +22,16 @@ module Arenas
 
     def binding_for(blueprint_identifier)
       OpenStruct.new(target_identifier: blueprint_identifier)
+    end
+
+    def more_binder_identifiers
+      blueprints.binder_identifiers - target_identifiers
+    end
+
+    def connectable_blueprints
+      connected_blueprints.map do |b|
+        b.binder? ? b.connected_blueprints.flatten.map(&:blueprint) : b
+      end.flatten.uniq(&:uniqueness)
     end
 
   end

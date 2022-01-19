@@ -3,7 +3,7 @@ module Arenas
     include ::Providers::Providers
 
     def provider_role_map
-      @provider_role_map ||= struct.input.to_h_deep
+      @provider_role_map ||= struct.input.providers&.to_h || {}
     end
 
     def prerequisite_map
@@ -23,23 +23,6 @@ module Arenas
     def packing_qualifier; packing_provider.qualifier ;end
     def provisioning_qualifier; provisioning_provider.qualifier ;end
     #???????????????????????????????????????????????????????????????????????????
-
-    def method_missing(m, *args, &block)
-      provider_map["#{m}"] || super
-    end
-
-    def respond_to_missing?(m, *)
-      provider_map.keys.include?("#{m}") || super
-    end
-
-    def method_missing(m, *args, &block)
-      return prerequisite_map[m.to_sym] if prerequisite_keys.include?(m)
-      super
-    end
-
-    def respond_to_missing?(m, *)
-      prerequisite_keys.include?(m) || super
-    end
 
   end
 end

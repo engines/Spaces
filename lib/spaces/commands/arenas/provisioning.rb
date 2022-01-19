@@ -3,7 +3,7 @@ module Arenas
     class Provisioning < ::Spaces::Commands::Iterating
 
       def array
-        @array ||= model.bound_resolutions
+        @array ||= model.directly_bound_resolutions
       end
 
       def space_identifier
@@ -15,7 +15,7 @@ module Arenas
       protected
 
       def _run
-        [space.save_provisioning_artifacts_for(model), super].flatten
+        [space.save_artifacts_for(model, :provisioning), super].flatten
       end
 
     end

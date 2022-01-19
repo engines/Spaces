@@ -7,11 +7,14 @@ def controllers
     blueprinting: Blueprinting::Controllers::Controller.new,
     querying: ::Spaces::Controllers::Querying.new,
     arenas: Arenas::Controllers::Controller.new,
+    installing: ::Spaces::Controllers::RESTController.new(space: :installations),
     packing: Packing::Controllers::Controller.new,
     provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
     locations: ::Spaces::Controllers::RESTController.new(space: :locations),
     user_keys: Keys::Controllers::Controller.new,
     registry: Registry::Controllers::Controller.new,
+    commissioning: Commissioning::Controllers::Controller.new,
+    servicing: Servicing::Controllers::Controller.new,
     streaming: Spaces::Controllers::Streaming.new
   )
 end

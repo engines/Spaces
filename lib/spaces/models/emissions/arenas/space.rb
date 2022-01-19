@@ -16,10 +16,10 @@ module Arenas
 
     def cascade_deletes; [:installations] ;end
 
-    def save_installations_for(arena, force: false)
-      (force ? arena.bound_installations : arena.unsaved_installations).
-        map { |i| installations.save(i) }.
-        tap { touch(arena) }
+    def artifacts_for(identifier, purpose)
+      if (m = exist_then_by(identifier))
+        interface_for(m, purpose).artifacts
+      end
     end
 
     def save_resolutions_for(arena, force: false)
@@ -28,13 +28,9 @@ module Arenas
         tap { touch(arena) }
     end
 
-    def save_provisioning_artifacts_for(arena)
+    def save_artifacts_for(arena, purpose)
       ensure_space_for(arena)
-      provider_interface_for(arena)&.save_artifacts # FIX!
-    end
-
-    def provider_interface_for(arena)  #TODO: refactor
-      arena.provisioning_provider.interface_for(arena, self)
+      interface_for(arena, purpose)&.save_artifacts
     end
 
     def path_for(model)

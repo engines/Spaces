@@ -6,7 +6,7 @@ module Emissions
     end
 
     def auxiliary_directories
-      [:packing, :commissioning, :service_tasks]
+      [:packing, :commissioning, :servicing]
     end
 
     def content

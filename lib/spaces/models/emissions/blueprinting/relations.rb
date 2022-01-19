@@ -1,5 +1,5 @@
 module Blueprinting
-  module Relations
+  module Relations # is this needed anymore?
 
     def relations
       OpenStruct.new(
@@ -19,8 +19,8 @@ module Blueprinting
 
     def relations_to_arenas
       OpenStruct.new(
-        bindings: direct_arenas.map(&:identifier),
-        conscriptions: indirect_arenas.map(&:identifier)
+        direct: direct_arenas.map(&:identifier),
+        indirect: indirect_arenas.map(&:identifier)
       )
     end
 

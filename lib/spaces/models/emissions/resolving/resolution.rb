@@ -5,6 +5,9 @@ module Resolving
     include Registering
     include Packing
     include Provisioning
+    include Commissioning
+    include Consuming
+    include Servicing
     include ::Resolving::Summary
 
     class << self
@@ -12,7 +15,7 @@ module Resolving
     end
 
     delegate(
-      [:installations, :packs, :provisioning] => :universe,
+      [:installations, :packs, :provisioning, :registry] => :universe,
       [:input, :deployment] =>  :installation
     )
 
@@ -28,8 +31,8 @@ module Resolving
       images&.first
     end
 
-    def connections_settled
-      super { |c| c.resolution_in(arena) }
+    def direct_connections
+      connect_bindings.map(&:resolution).compact
     end
 
   end

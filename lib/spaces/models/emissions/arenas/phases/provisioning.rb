@@ -1,5 +1,8 @@
+require_relative 'golden_packing'
+
 module Arenas
   module Provisioning
+    include ::Arenas::GoldenPacking
 
     def provisioned; present_in(provisioning) ;end
 
@@ -8,6 +11,8 @@ module Arenas
     end
 
     def unsaved_provisions; bound_resolutions.reject(&:provisioned?) ;end
+
+    def volume_path; input.volumes[:path] ;end
 
   end
 end

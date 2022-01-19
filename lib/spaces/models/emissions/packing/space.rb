@@ -8,7 +8,7 @@ module Packing
     delegate(resolutions: :universe)
 
     def build(pack)
-      provider_interface_for(pack).build
+      interface_for(pack).build
     end
 
     def by(identifier, klass = default_model_class)
@@ -17,19 +17,25 @@ module Packing
       end
     end
 
+    def artifacts_for(identifier)
+      if (m = exist_then_by(identifier))
+        interface_for(m).artifacts
+      end
+    end
+
     def save(pack)
       raise ::Packing::Errors::NoImage, {identifier: pack.identifier} unless pack.has?(:builders)
 
       ensure_connections_exist_for(pack)
       super.tap do
-        provider_interface_for(pack).save_artifacts
+        interface_for(pack).save_artifacts
       end
     rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: pack.identifier, klass: klass)
     end
 
-    def provider_interface_for(pack)  #TODO: refactor
-      pack.arena.packing_provider.interface_for(pack, self)
+    def interface_for(pack)  #TODO: refactor
+      pack.arena.packing_provider.interface_for(pack, purpose: :packing, space: self)
     end
 
     def copy_auxiliaries_for(pack)

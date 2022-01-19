@@ -5,8 +5,8 @@ module Arenas
     def absent_in(space); deep_bindings_in(space, :reject) ;end
 
     def deep_bindings_in(space, method)
-      deep_connect_bindings.send(method) do |b|
-        space.exist?(b.settlement_identifier_in(self))
+      all_connect_bindings.send(method) do |b|
+        space.exist?(b.context_identifier)
       end
     end
 
@@ -21,9 +21,9 @@ module Arenas
     end
 
     def bound_map_for(key)
-      bound_map[key] ||= connectable_blueprints.inject({}) do |m, b|
+      bound_map[key] ||= all_connect_bindings.inject({}) do |m, b|
         m.tap do
-          m[b.identifier] = b.send("#{key}_in", self)
+          m[b.identifier] = b.send(key)
         end
       end.compact
     end

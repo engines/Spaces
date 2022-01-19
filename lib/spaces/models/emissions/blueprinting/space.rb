@@ -19,6 +19,14 @@ module Blueprinting
       all.select(&:binder?).map(&:identifier)
     end
 
+    def by(identifiable, klass = default_model_class)
+      super(identifiable.low, klass)
+    end
+
+    def exist_then_by(identifiable)
+      exist_then(identifiable.low) { by(identifiable.low) }
+    end
+
     def by_import(descriptor, force:)
       delete(descriptor, cascade: false) if force && imported?(descriptor)
 

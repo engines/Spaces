@@ -10,8 +10,8 @@ module Artifacts
         "ADD #{script_path}/ #{temporary_script_path}/" if path.basename.to_s == 'packing'
       end
 
-      def file_copy_snippet_for(folder, precedence)
-        "ADD #{folder}/#{precedence}/ /"
+      def file_copy_snippet_for(directory, precedence)
+        "ADD #{directory}/#{precedence}/ /"
       end
 
     end
