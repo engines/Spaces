@@ -10,7 +10,7 @@ module Providers
         wait_for
         wait_for(:startup)
         service.commands_for(milestone_name).map do |c|
-          container.exec(c)
+          container.exec([c], env: service.parameters)
         end
       end
 
