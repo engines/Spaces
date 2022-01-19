@@ -20,9 +20,7 @@ module Commissioning
     end
 
     def commands_for(name)
-      milestones_for(name).map do |m|
-        ["#{m.path}", parameters].flatten
-      end
+      milestones_for(name).map { |m| "#{m.path}" }
     end
 
     def milestones_for(name)
