@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------------------
 
 # import a bootstrappy blueprint
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/enginesd_debian_base', threaded: false})
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/enginesd_debian_base'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 
@@ -16,9 +16,6 @@ controllers.arenas.create(model: {identifier: :base_arena})
 # bind a base blueprint to the arena
 controllers.arenas.bind(identifier: :base_arena, blueprint_identifier: :enginesd_debian_base)
 
-# save installations for the bindings
-controllers.arenas.install(identifier: :base_arena)
-
 # resolve the arena for the bindings
 controllers.arenas.resolve(identifier: :base_arena)
 
@@ -27,5 +24,5 @@ controllers.arenas.resolve(identifier: :base_arena)
 # save all packs for an arena
 controllers.arenas.pack(identifier: :base_arena)
 
-# build packs for the arena
-controllers.arenas.build(identifier: :base_arena, threaded: false)
+# # build inages for the arena
+# controllers.arenas.build(identifier: :base_arena, threaded: false)
