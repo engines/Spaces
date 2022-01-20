@@ -7,7 +7,7 @@ def controllers
     blueprinting: Blueprinting::Controllers::Controller.new,
     querying: ::Spaces::Controllers::Querying.new,
     arenas: Arenas::Controllers::Controller.new,
-    installing: ::Spaces::Controllers::RESTController.new(space: :installations),
+    installing: Installing::Controllers::Controller.new,
     packing: Packing::Controllers::Controller.new,
     provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
     locations: ::Spaces::Controllers::RESTController.new(space: :locations),
