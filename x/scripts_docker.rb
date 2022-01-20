@@ -75,13 +75,13 @@ controllers.arenas.state(identifier: :development)
 controllers.arenas.provision(identifier: :development)
 controllers.arenas.state(identifier: :development)
 
-# # build packs for the arena
+# # build images for the arena
 # controllers.arenas.build(identifier: :development)
 #
-# # build a pack
+# # build an image
 # controllers.packing.build(identifier: 'development::phpmyadmin')
 #
-# # apply provisions for arena
+# # bring up conatainers for arena
 # controllers.arenas.apply(identifier: :development)
 
 # # save provisions for a resolution
@@ -89,7 +89,6 @@ controllers.arenas.state(identifier: :development)
 
 # capture registry entries for an application
 controllers.registry.register(identifier: 'development::phpmyadmin')
-
 
 # # call all create scripts for a consumer's services
 # controllers.commissioning.commission(milestone: :create, identifier: 'development::phpmyadmin')
