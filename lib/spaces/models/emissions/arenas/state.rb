@@ -30,7 +30,7 @@ module Arenas
     def missing_packs; missing(:unpacked) ;end
     def missing_provisioning; missing(:unprovisioned) ;end
 
-    def missing(method); arena.send(method).map(&:identifier) ;end
+    def missing(method); arena.send(method).map(&:context_identifier) ;end
 
     def stale_bindings
       blueprinted.select do |b|
@@ -46,7 +46,7 @@ module Arenas
     def stale(method, space)
       arena.send(method).select do |b|
         times(space.modified_at(b.context_identifier), :<, modified_at)
-      end.map(&:identifier).uniq
+      end.map(&:context_identifier).uniq
     end
 
     def modified_at; arenas.modified_at(arena) ;end
