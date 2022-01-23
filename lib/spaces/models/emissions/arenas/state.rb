@@ -13,7 +13,7 @@ module Arenas
         :providers,
         :stale_bindings,
         :missing_blueprints,
-        :uncomfirmed_installations, :stale_installations,
+        :unconfirmed_installations, :stale_installations,
         :missing_resolutions, :stale_resolutions,
         :missing_packs, :stale_packs,
         :missing_provisioning, :stale_provisioning
@@ -25,7 +25,7 @@ module Arenas
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end
-    def uncomfirmed_installations; missing(:uninstalled) ;end
+    def unconfirmed_installations; missing(:uninstalled) ;end
     def missing_resolutions; missing(:bindings_without_resolutions) ;end
     def missing_packs; missing(:unpacked) ;end
     def missing_provisioning; missing(:unprovisioned) ;end
