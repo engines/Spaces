@@ -2,6 +2,7 @@
 module Docker::Compose
   class Session
 
+    # Add :stdout to buffered option.
     def initialize(
       shell = Backticks::Runner.new(
         buffered: [:stdout, :stderr],
