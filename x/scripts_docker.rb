@@ -90,5 +90,5 @@ controllers.arenas.state(identifier: :development)
 # capture registry entries for an application
 controllers.registry.register(identifier: 'development::phpmyadmin')
 
-# # call all create scripts for a consumer's services
-# controllers.commissioning.commission(milestone: :create, identifier: 'development::phpmyadmin')
+# # call all add scripts for a consumer's services
+# controllers.commissioning.commission(milestone: :add, identifier: 'development::phpmyadmin')
