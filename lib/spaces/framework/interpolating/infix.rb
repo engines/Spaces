@@ -21,9 +21,19 @@ module Interpolating
       Text.new(origin: resolved_once, transformable: transformable).resolved
     end
 
-    def complete?; !more_to_resolve? || unresolvable? ;end
-    def more_to_resolve?; resolved_once.to_s.include?(interpolation_marker) ;end
-    def unresolvable?; resolved_once == value ;end
+    def complete?
+      !more_to_resolve? || unresolvable?
+    end
+
+    def more_to_resolve?
+      resolved_once.to_s.include?(interpolation_marker)
+    rescue NoMethodError => e
+      false
+    end
+
+    def unresolvable?
+      value === resolved_once.gsub(interpolation_marker, '')
+    end
 
     def acceptable_method_chain_in_value
       @amc ||= ([:unqualified] + value.split('.')).last(2)
