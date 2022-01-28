@@ -4,7 +4,7 @@ module Spaces
 
       def produce(&block)
         clear
-        yield
+        yield(self)
       rescue => e
         exception(e)
       ensure

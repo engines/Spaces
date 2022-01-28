@@ -44,6 +44,15 @@ module Providers
         end
       end
 
+      def process_output(encoded)
+        # FIX ME! The rescue is needed due to JSON parse errors
+        output = JSON.parse(encoded, symbolize_names: true)
+        stream.error("#{output[:error]}\n") if output[:error]
+        stream.output(output[:stream]) if output[:stream]
+      rescue
+        stream.output("Failed to parse JSON: #{encoded}\n")
+      end
+
       def stream
         stream_for(pack, :build)
       end
