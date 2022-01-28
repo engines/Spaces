@@ -9,6 +9,7 @@ require './x/controllers'
 # import some blueprints
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/wap'}, threaded: false)
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 # blueprint indices, lists, and gets
@@ -19,8 +20,8 @@ controllers.blueprinting.list
 
 controllers.querying.list(method: :binder_identifiers, space: :blueprints)
 
-controllers.blueprinting.show(identifier: :phpmyadmin)
-controllers.blueprinting.summarize(identifier: :phpmyadmin)
+controllers.blueprinting.show(identifier: :redmine)
+controllers.blueprinting.summarize(identifier: :redmine)
 
 # ------------------------------------------------------------------------------
 
@@ -48,6 +49,7 @@ controllers.arenas.more_binders(identifier: :development)
 # bind some blueprints to the applications arena
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :wap)
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
+controllers.arenas.bind(identifier: :development, blueprint_identifier: :redmine)
 controllers.arenas.state(identifier: :development)
 
 # resolve the arena
