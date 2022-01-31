@@ -62,7 +62,7 @@ module Interpolating
     def _resolved
       collaborate_with(amc.first).send(*amc.last.split(/[()]+/))
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
-      warn(error: e, text: text, value: value)
+      warn(error: e, text: text, value: value, qualifier: emission.qualifier, identifier: emission.identifier)
       value
     end
 
