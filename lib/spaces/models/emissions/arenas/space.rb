@@ -24,8 +24,8 @@ module Arenas
 
     def save_resolutions_for(arena, force: false)
       (force ? arena.bound_resolutions : arena.unsaved_resolutions).
-        map { |r| resolutions.save(r) }.
-        tap { touch(arena) }
+        tap { touch(arena) }.
+        map { |r| resolutions.save(r) }
     end
 
     def save_artifacts_for(arena, purpose)
