@@ -5,8 +5,9 @@ module Installing
       def division_classes
         [
           Divisions::Input,
-          Divisions::Deployment
-        ]
+          Divisions::Deployment,
+          ::Arenas::Composition.associative_classes
+        ].flatten
       end
     end
 

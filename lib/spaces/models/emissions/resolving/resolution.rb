@@ -10,13 +10,9 @@ module Resolving
     include Servicing
     include ::Resolving::Summary
 
-    class << self
-      def composition_class; Composition ;end
-    end
-
     delegate(
       [:installations, :packs, :provisioning, :registry] => :universe,
-      [:input, :deployment] => :installation
+      [:input, :deployment, :domain] => :installation
     )
 
     def installation; @installation ||= installations.by(identifier) ;end
