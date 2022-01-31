@@ -32,7 +32,7 @@ module Interpolating
     end
 
     def unresolvable?
-      value === resolved_once.gsub(interpolation_marker, '')
+      value == resolved_once.gsub(interpolation_marker, '')
     end
 
     def acceptable_method_chain_in_value
