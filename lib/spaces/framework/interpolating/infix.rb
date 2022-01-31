@@ -43,7 +43,7 @@ module Interpolating
 
     def collaborate_with(name)
       unless name == :unqualified
-        emission.respond_to?(:bindings) && emission.bindings.named(name) ||
+        emission.respond_to?(:bindings) && emission.bindings&.named(name) ||
         emission.respond_to?(name) && emission.send(name)
       else
         transformable
