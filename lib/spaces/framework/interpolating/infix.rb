@@ -21,9 +21,19 @@ module Interpolating
       Text.new(origin: resolved_once, transformable: transformable).resolved
     end
 
-    def complete?; !more_to_resolve? || unresolvable? ;end
-    def more_to_resolve?; resolved_once.to_s.include?(interpolation_marker) ;end
-    def unresolvable?; resolved_once == value ;end
+    def complete?
+      !more_to_resolve? || unresolvable?
+    end
+
+    def more_to_resolve?
+      resolved_once.to_s.include?(interpolation_marker)
+    rescue NoMethodError => e
+      false
+    end
+
+    def unresolvable?
+      value == resolved_once.gsub(interpolation_marker, '')
+    end
 
     def acceptable_method_chain_in_value
       @amc ||= ([:unqualified] + value.split('.')).last(2)
@@ -33,7 +43,7 @@ module Interpolating
 
     def collaborate_with(name)
       unless name == :unqualified
-        emission.respond_to?(:bindings) && emission.bindings.named(name) ||
+        emission.respond_to?(:bindings) && emission.bindings&.named(name) ||
         emission.respond_to?(name) && emission.send(name)
       else
         transformable
@@ -52,7 +62,7 @@ module Interpolating
     def _resolved
       collaborate_with(amc.first).send(*amc.last.split(/[()]+/))
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
-      warn(error: e, text: text, value: value)
+      warn(error: e, text: text, value: value, qualifier: emission.qualifier, identifier: emission.identifier)
       value
     end
 

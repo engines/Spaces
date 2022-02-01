@@ -30,9 +30,8 @@ module Spaces
       protected
 
       def _run
-        subcommands.each(&:run).tap do
-          space.touch(model) if subcommand_class.mutating?
-        end
+        space.touch(model) if subcommand_class.mutating?
+        subcommands.each(&:run)
       end
 
     end

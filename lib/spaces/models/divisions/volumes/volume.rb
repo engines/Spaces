@@ -11,10 +11,10 @@ module Divisions
       "#{volume_path}/#{name}/#{identifier.as_path}"
     end
 
-    def bind?; type == default_type; end
+    def mount?; type == default_type; end
 
-    def type; struct.type || 'bind' ;end
-    def default_type; 'bind' ;end
+    def type; struct.type || 'mount' ;end
+    def default_type; 'mount' ;end
 
   end
 end

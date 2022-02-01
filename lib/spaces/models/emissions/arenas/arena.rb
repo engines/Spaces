@@ -21,13 +21,15 @@ module Arenas
       [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
     )
 
+    def modified_at; arenas.modified_at(self) ;end
+
     def state
       @state ||= State.new(self)
     end
 
     def arena; self ;end
 
-    def binding_class; ::Divisions::BindingInArena ;end    
+    def binding_class; ::Divisions::BindingInArena ;end
 
     def initialize(struct: nil, identifiable: nil)
       super.tap do

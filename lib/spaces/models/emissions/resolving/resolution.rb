@@ -10,18 +10,16 @@ module Resolving
     include Servicing
     include ::Resolving::Summary
 
-    class << self
-      def composition_class; Composition ;end
-    end
-
     delegate(
       [:installations, :packs, :provisioning, :registry] => :universe,
-      [:input, :deployment] =>  :installation
+      [:input, :deployment, :domain] => :installation
     )
 
-    alias_method :input, :configuration # TODO FIX: probably temporary until installations are declared properly in blueprints
-
     def installation; @installation ||= installations.by(identifier) ;end
+
+    def configuration
+      super.class.new(emission: self, struct: super.struct.merge(input.struct))
+    end
 
     def complete?
       all_complete?(divisions)

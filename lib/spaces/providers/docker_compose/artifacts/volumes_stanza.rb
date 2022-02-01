@@ -10,7 +10,7 @@ module Artifacts
 
       def resolution_snippets
         volumes.map do |v|
-          "#{v.source}:#{v.destination}" if v.bind?
+          "#{v.source}:#{v.destination}" if v.mount?
         end if resolution.has?(:volumes)
       end
 

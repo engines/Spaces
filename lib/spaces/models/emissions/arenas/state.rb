@@ -4,8 +4,8 @@ module Arenas
     relation_accessor :arena
 
     delegate(
-      [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
-      [:identifier, :blueprinted] => :arena
+      [:blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
+      [:identifier, :blueprinted, :modified_at] => :arena
     )
 
     def keys
@@ -13,7 +13,7 @@ module Arenas
         :providers,
         :stale_bindings,
         :missing_blueprints,
-        :uncomfirmed_installations, :stale_installations,
+        :unconfirmed_installations, :stale_installations,
         :missing_resolutions, :stale_resolutions,
         :missing_packs, :stale_packs,
         :missing_provisioning, :stale_provisioning
@@ -25,7 +25,7 @@ module Arenas
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end
-    def uncomfirmed_installations; missing(:uninstalled) ;end
+    def unconfirmed_installations; missing(:uninstalled) ;end
     def missing_resolutions; missing(:bindings_without_resolutions) ;end
     def missing_packs; missing(:unpacked) ;end
     def missing_provisioning; missing(:unprovisioned) ;end
@@ -39,17 +39,15 @@ module Arenas
     end
 
     def stale_installations; stale(:installed, installations) ;end
-    def stale_resolutions; stale(:bindings_with_resolutions, resolutions) ;end
+    def stale_resolutions; stale(:resolved, resolutions) ;end
     def stale_packs; stale(:packed, packs) ;end
     def stale_provisioning; stale(:provisioned, provisioning) ;end
 
     def stale(method, space)
       arena.send(method).select do |b|
-        times(space.modified_at(b.context_identifier), :<, modified_at)
+        times(space.modified_at(b.context_identifier), :<, b.arena.modified_at)
       end.map(&:context_identifier).uniq
     end
-
-    def modified_at; arenas.modified_at(arena) ;end
 
     def initialize(arena)
       self.arena = arena

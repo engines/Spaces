@@ -1,4 +1,4 @@
-module Blueprinting
+module Publishing
   class Composition < ::Emissions::Composition
 
     class << self
