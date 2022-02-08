@@ -1,6 +1,5 @@
 module Adapters
 
-  class Configuration < Division ;end
   class Images < Divisible ;end
   class Image < Division ;end
   class OtherPackages < Divisible ;end
