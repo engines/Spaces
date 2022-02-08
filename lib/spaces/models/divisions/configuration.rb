@@ -1,8 +1,5 @@
-require_relative 'configurable'
-
 module Divisions
   class Configuration < ::Divisions::Division
-    include Configurable
 
     alias_method :original_embedded_with, :embedded_with
 
