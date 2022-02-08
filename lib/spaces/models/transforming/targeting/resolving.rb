@@ -3,8 +3,8 @@ module Targeting
 
     def resolved
       super.tap do |d|
-        d.struct.configuration = resolvable_struct_class.new(struct.configuration, self).resolved if struct.configuration
-        d.struct.service = resolvable_struct_class.new(struct.service, self).resolved if struct.service
+        d.struct.configuration = resolvable_struct_class.new(configuration, self).resolved if configuration
+        d.struct.service = resolvable_struct_class.new(service, self).resolved if service
       end
     end
 
