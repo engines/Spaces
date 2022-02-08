@@ -28,7 +28,7 @@ module Commissioning
     end
 
     def parameters
-      consumer.send(blueprint_identifier).configuration_string_array
+      consumer.send(blueprint_identifier).service_string_array
     end
 
     def services

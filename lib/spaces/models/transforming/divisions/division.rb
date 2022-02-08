@@ -65,14 +65,6 @@ module Divisions
       self.struct = struct || emission.struct[label] || default_struct
     end
 
-    def method_missing(m, *args, &block)
-      emission.respond_to?(m) ? emission.send(m) : super
-    end
-
-    def respond_to_missing?(m, *)
-      emission.respond_to?(m) || super
-    end
-
     def to_s; struct ;end
 
     def method_missing(m, *args, &block)
