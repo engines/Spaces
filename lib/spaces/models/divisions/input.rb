@@ -1,8 +1,8 @@
-require_relative 'configurable'
+require_relative 'struct_can_respond'
 
 module Divisions
   class Input < ::Divisions::Division
-    include Configurable
+    include StructCanRespond
 
   end
 end

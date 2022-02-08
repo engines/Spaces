@@ -1,8 +1,8 @@
-require_relative 'configurable'
+require_relative 'struct_can_respond'
 
 module Divisions
   class Configuration < ::Divisions::Division
-    include Configurable
+    include StructCanRespond
 
     alias_method :original_embedded_with, :embedded_with
 

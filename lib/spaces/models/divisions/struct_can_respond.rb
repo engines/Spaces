@@ -1,5 +1,5 @@
 module Divisions
-  module Configurable
+  module StructCanRespond
 
     def method_missing(m, *args, &block)
       if struct.keys.include?(m.to_s.sub('=', '').to_sym)
