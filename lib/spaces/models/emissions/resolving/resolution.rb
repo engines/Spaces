@@ -18,7 +18,7 @@ module Resolving
     def installation; @installation ||= installations.by(identifier) ;end
 
     def configuration
-      super.class.new(emission: self, struct: super.struct.merge(input.struct))
+      binding_target&.struct&.configuration
     end
 
     def complete?
