@@ -2,7 +2,7 @@ module Divisions
   module Resolvable
 
     def resolved
-      empty.tap { |d| d.struct = ResolvableStruct.new(struct, self).resolved }
+      empty.tap { |d| d.struct = resolvable_struct_class.new(struct, self).resolved }
     end
 
     def flattened
@@ -26,8 +26,10 @@ module Divisions
     end
 
     def infix_qualifier; qualifier ;end
+    def resolvable_struct_class; ResolvableStruct ;end
 
   end
+
 
 
   class ResolvableStruct < OpenStruct
