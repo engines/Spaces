@@ -27,7 +27,7 @@ module Commissioning
     def milestones_for(name)
       milestones.
         select { |m| m.name == name.to_s }.
-        sort_by { |m| precedence.index(precedence_for(m.precedence.to_sym)) }
+        sort_by { |m| precedence.index(precedence_for(m.precedence)) }
     end
 
     def parameters
