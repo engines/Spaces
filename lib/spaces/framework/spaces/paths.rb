@@ -26,7 +26,6 @@ module Spaces
 
     def precedence_file_names_for(phase, identifier)
       file_names_for(phase, identifier).map do |p|
-        # Pathname.new("/#{p.to_s.split(phase.to_s).last.split('/').join('/')}")
         Pathname.new("#{p.to_s.split("#{phase}/").last}")
       end
     end
