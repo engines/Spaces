@@ -1,5 +1,6 @@
 module Commissioning
   class Service < ::Resolving::Emission
+    include ::Transforming::Precedence
 
     class << self
       def composition_class; Composition ;end
@@ -24,7 +25,9 @@ module Commissioning
     end
 
     def milestones_for(name)
-      milestones.select { |m| m.name == name.to_s }
+      milestones.
+        select { |m| m.name == name.to_s }.
+        sort_by { |m| precedence.index(precedence_for(m.precedence.to_sym)) }
     end
 
     def parameters
@@ -32,20 +35,29 @@ module Commissioning
     end
 
     def services
-      container_file_names.map do |p|
+      precedence_file_names.map do |p|
         OpenStruct.new(
           service_identifier: identifier,
-          name: milestone_identifier_for(p),
-          path: p
+          name: milestone_identifier_from(p),
+          precedence: precedence_from(p),
+          path: container_path_from(p)
         )
       end
     end
 
-    def container_file_names
-      resolutions.container_file_names_for(:servicing, identifier)
+    def container_path_from(precedence_path)
+      "/#{precedence_path}".split('/').drop(1).join('/')
     end
 
-    def milestone_identifier_for(path)
+    def precedence_from(precedence_path)
+      "#{precedence_path}".split('/').first
+    end
+
+    def precedence_file_names
+      resolutions.precedence_file_names_for(:servicing, identifier)
+    end
+
+    def milestone_identifier_from(path)
       path.basename.to_s.split('_').first
     end
 

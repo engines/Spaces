@@ -24,9 +24,10 @@ module Spaces
       path.join(identifiable.context_identifier.as_path)
     end
 
-    def container_file_names_for(phase, identifier)
+    def precedence_file_names_for(phase, identifier)
       file_names_for(phase, identifier).map do |p|
-        Pathname.new("/#{p.to_s.split(phase.to_s).last.split('/').drop(2).join('/')}")
+        # Pathname.new("/#{p.to_s.split(phase.to_s).last.split('/').join('/')}")
+        Pathname.new("#{p.to_s.split("#{phase}/").last}")
       end
     end
 
