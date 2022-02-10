@@ -1,8 +1,6 @@
-require_relative 'precedence'
-
 module Adapters
   class Adapter < ::Spaces::Model
-    include Adapters::Precedence
+    include ::Transforming::Precedence
 
   end
 end

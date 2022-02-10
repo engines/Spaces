@@ -1,4 +1,5 @@
 require_relative 'transformable'
+require_relative 'precedence'
 
 requires 'divisions',
          'targeting'
