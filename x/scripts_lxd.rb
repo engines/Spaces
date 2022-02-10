@@ -76,9 +76,6 @@ controllers.publishing.synchronize(identifier: :phpmyadmin)
 controllers.arenas.bind(identifier: :lxd_arena, blueprint_identifier: :phpmyadmin)
 
 
-# save installations for the new bindings
-controllers.arenas.install(identifier: :lxd_arena)
-
 # resolve the arena including the new bindings
 controllers.arenas.resolve(identifier: :lxd_arena)
 

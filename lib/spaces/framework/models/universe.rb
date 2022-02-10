@@ -17,7 +17,6 @@ module Spaces
           Publishing::Space.new(:publications),
           Locating::Space.new(:locations),
           Blueprinting::Space.new(:blueprints),
-          Installing::Space.new(:installations),
           Resolving::Space.new(:resolutions),
           Registry::Space.new(:registry),
           Packing::Space.new(:packs),

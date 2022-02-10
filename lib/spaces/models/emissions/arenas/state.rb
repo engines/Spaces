@@ -4,7 +4,7 @@ module Arenas
     relation_accessor :arena
 
     delegate(
-      [:blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
+      [:blueprints, :resolutions, :packs, :provisioning] => :universe,
       [:identifier, :blueprinted, :modified_at] => :arena
     )
 
@@ -13,7 +13,6 @@ module Arenas
         :providers,
         :stale_bindings,
         :missing_blueprints,
-        :unconfirmed_installations, :stale_installations,
         :missing_resolutions, :stale_resolutions,
         :missing_packs, :stale_packs,
         :missing_provisioning, :stale_provisioning
@@ -25,7 +24,6 @@ module Arenas
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end
-    def unconfirmed_installations; missing(:uninstalled) ;end
     def missing_resolutions; missing(:bindings_without_resolutions) ;end
     def missing_packs; missing(:unpacked) ;end
     def missing_provisioning; missing(:unprovisioned) ;end
@@ -38,7 +36,6 @@ module Arenas
       end.map(&:identifier)
     end
 
-    def stale_installations; stale(:installed, installations) ;end
     def stale_resolutions; stale(:resolved, resolutions) ;end
     def stale_packs; stale(:packed, packs) ;end
     def stale_provisioning; stale(:provisioned, provisioning) ;end

@@ -8,7 +8,7 @@ module Arenas
 
     def prerequisite_map
       @prerequisite_map ||= provider_qualifier_map.transform_values do |v|
-        resolution_map[v] || resolution_map[v.camelize.downcase] # TODO FIX: should be an installation_map after installations are declared properly in blueprints
+        resolution_map[v] || resolution_map[v.camelize.downcase]
       end.compact
     end
 

@@ -5,9 +5,6 @@ module Resolving
       OpenStruct.new(
         identifier: identifier,
         stale: stale?,
-        installation: {
-          confirmed: installations.exist?(identifier)
-        },
         pack: {
           exist: packs.exist?(identifier),
           allowed: packable?

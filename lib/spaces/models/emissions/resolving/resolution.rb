@@ -10,12 +10,13 @@ module Resolving
     include Servicing
     include ::Resolving::Summary
 
-    delegate(
-      [:installations, :packs, :provisioning, :registry] => :universe,
-      [:input, :deployment, :domain] => :installation
-    )
+    class << self
+      def composition_class; Composition ;end
+    end
 
-    def installation; @installation ||= installations.by(identifier) ;end
+    delegate(
+      [:packs, :provisioning, :registry] => :universe
+    )
 
     def configuration
       binding_target&.struct&.configuration
@@ -31,6 +32,12 @@ module Resolving
 
     def direct_connections
       connect_bindings.map(&:resolution).compact
+    end
+
+    def division_map
+      @division_map ||= super.tap do |d|
+        d[:deployment] ||= division_for(:deployment)
+      end
     end
 
   end
