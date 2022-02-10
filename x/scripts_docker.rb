@@ -10,6 +10,7 @@ require './x/controllers'
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/wap'}, threaded: false)
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/owncloud'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 # blueprint indices, lists, and gets
@@ -50,6 +51,7 @@ controllers.arenas.more_binders(identifier: :development)
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :wap)
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :redmine)
+controllers.arenas.bind(identifier: :development, blueprint_identifier: :owncloud)
 controllers.arenas.state(identifier: :development)
 
 # resolve the arena

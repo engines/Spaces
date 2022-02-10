@@ -1,12 +1,12 @@
-module Installing
+module Resolving
   class Composition < ::Emissions::Composition
 
     class << self
       def division_classes
         [
-          Divisions::Input,
-          Divisions::Deployment,
-          ::Arenas::Composition.associative_classes
+          ::Arenas::Composition.associative_classes,
+          super,
+          Divisions::Deployment
         ].flatten
       end
     end

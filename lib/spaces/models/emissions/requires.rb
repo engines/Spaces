@@ -13,8 +13,7 @@ requires 'settling', recurse: false
 requires 'resolving/phases'
 requires 'resolving', recurse: false
 
-requires 'installing',
-         'registry'
+requires 'registry'
 
 requires 'packing/artifacts'
 requires 'packing', recurse: false

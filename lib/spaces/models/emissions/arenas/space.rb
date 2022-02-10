@@ -10,11 +10,11 @@ module Arenas
       end
     end
 
-    delegate([:installations, :resolutions, :packs, :provisioning] => :universe)
+    delegate([:resolutions, :packs, :provisioning] => :universe)
 
     alias_method :identifiers, :simple_identifiers
 
-    def cascade_deletes; [:installations] ;end
+    def cascade_deletes; [:resolutions] ;end
 
     def artifacts_for(identifier, purpose)
       if (m = exist_then_by(identifier))

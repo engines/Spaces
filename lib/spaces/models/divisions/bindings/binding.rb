@@ -8,7 +8,7 @@ module Divisions
     include ::Divisions::Binding::Packing
 
     delegate(
-      [:locations, :blueprints, :installations, :resolutions] => :universe,
+      [:locations, :blueprints, :resolutions] => :universe,
       binder?: :blueprint
     )
 
@@ -22,7 +22,6 @@ module Divisions
 
     def blueprint; @blueprint ||= target_from(blueprints) ;end
 
-    def installation; @installation ||= target_from(installations) ;end
     def resolution; @resolution ||= target_from(resolutions) ;end
 
   end

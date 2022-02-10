@@ -7,7 +7,6 @@ module Arenas
     include ::Arenas::Binding
     include ::Arenas::Connecting
     include ::Arenas::Blueprinting
-    include ::Arenas::Installing
     include ::Arenas::Resolving
     include ::Arenas::Packing
     include ::Arenas::Provisioning
@@ -18,7 +17,7 @@ module Arenas
     end
 
     delegate(
-      [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
+      [:arenas, :blueprints, :resolutions, :packs, :provisioning] => :universe,
     )
 
     def modified_at; arenas.modified_at(self) ;end

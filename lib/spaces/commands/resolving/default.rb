@@ -1,9 +1,9 @@
-module Installing
+module Resolving
   module Commands
     class Default < Spaces::Commands::Reading
 
       def assembly
-        @model ||= blueprint.installation_in(arena)
+        @model ||= blueprint.resolution_in(arena)
       end
 
       def blueprint
