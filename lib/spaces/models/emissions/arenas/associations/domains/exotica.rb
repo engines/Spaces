@@ -1,8 +1,5 @@
-require_relative 'exotica'
-
 module Associations
-  class Domains < ::Divisions::Divisible
-    include Exotica
+  module Exotica
 
     def as_owncloud_trusted_names
       all.map do |a|
