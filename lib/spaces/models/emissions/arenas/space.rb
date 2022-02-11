@@ -12,8 +12,6 @@ module Arenas
 
     delegate([:resolutions, :packs, :provisioning] => :universe)
 
-    alias_method :identifiers, :simple_identifiers
-
     def cascade_deletes; [:resolutions] ;end
 
     def artifacts_for(identifier, purpose)

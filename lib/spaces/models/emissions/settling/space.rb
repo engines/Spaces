@@ -1,5 +1,5 @@
 module Settling
-  class Space < ::Spaces::Space
+  class Space < ::Emissions::Space
 
     delegate([:blueprints, :arenas] => :universe)
 
