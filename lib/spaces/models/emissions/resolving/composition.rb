@@ -3,11 +3,11 @@ module Resolving
 
     class << self
       def division_classes
-        blend_associative_classes_of(::Arenas::Composition, super)
-      end
-
-      def blend_associative_classes_of(composition, classes)
-        [classes, composition.associative_classes].flatten
+        [
+          ::Arenas::Composition.associative_classes,
+          super,
+          Divisions::Deployment
+        ].flatten
       end
     end
 

@@ -5,7 +5,6 @@ require_relative 'relations'
 module Blueprinting
   class Blueprint < Publishing::Blueprint
     include Inflating
-    include Installing
     include Resolving
     include Arenas
     include Summary

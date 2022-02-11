@@ -2,7 +2,7 @@ require_relative 'content'
 
 module Artifacts
   class Artifact < ::Spaces::Model
-    include Adapters::Precedence
+    include ::Transforming::Precedence
     include Content
 
     relation_accessor :holder

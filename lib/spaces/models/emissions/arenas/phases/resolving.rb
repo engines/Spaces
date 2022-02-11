@@ -4,6 +4,8 @@ module Arenas
   module Resolving
     include Settling
 
+    def resolved; bindings_with_resolutions ;end
+
     def bindings_with_resolutions; present_in(resolutions) ;end
     def bindings_without_resolutions; absent_in(resolutions) ;end
 

@@ -15,13 +15,12 @@ module Resolving
     end
 
     delegate(
-      [:installations, :packs, :provisioning, :registry] => :universe,
-      [:input, :deployment] =>  :installation
+      [:packs, :provisioning, :registry] => :universe
     )
 
-    alias_method :input, :configuration # TODO FIX: probably temporary until installations are declared properly in blueprints
-
-    def installation; @installation ||= installations.by(identifier) ;end
+    def configuration
+      binding_target&.struct&.configuration
+    end
 
     def complete?
       all_complete?(divisions)
@@ -33,6 +32,12 @@ module Resolving
 
     def direct_connections
       connect_bindings.map(&:resolution).compact
+    end
+
+    def division_map
+      @division_map ||= super.tap do |d|
+        d[:deployment] ||= division_for(:deployment)
+      end
     end
 
   end

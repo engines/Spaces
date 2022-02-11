@@ -4,18 +4,18 @@ module Arenas
     relation_accessor :arena
 
     delegate(
-      [:arenas, :blueprints, :installations, :resolutions, :packs, :provisioning] => :universe,
-      [:identifier, :blueprinted] => :arena
+      [:blueprints, :resolutions, :packs, :provisioning] => :universe,
+      [:identifier, :blueprinted, :modified_at] => :arena
     )
 
     def keys
       [
         :providers,
-        :missing_blueprints, :fresh_blueprints,
-        :missing_installations, :fresh_installations,
-        :missing_resolutions, :fresh_resolutions,
-        :missing_packs, :fresh_packs, #:fresh_packing_attempt?,
-        :missing_provisioning, :fresh_provisioning, #:fresh_provisioning_attempt?
+        :stale_bindings,
+        :missing_blueprints,
+        :missing_resolutions, :stale_resolutions,
+        :missing_packs, :stale_packs,
+        :missing_provisioning, :stale_provisioning
       ]
     end
 
@@ -24,33 +24,27 @@ module Arenas
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end
-    def missing_installations; missing(:uninstalled) ;end
     def missing_resolutions; missing(:bindings_without_resolutions) ;end
     def missing_packs; missing(:unpacked) ;end
     def missing_provisioning; missing(:unprovisioned) ;end
 
-    def missing(method); arena.send(method).map(&:identifier) ;end
+    def missing(method); arena.send(method).map(&:context_identifier) ;end
 
-    def fresh_blueprints
-      blueprinted.
-        map { |b| b.target_identifier }.
-        select { |ti| times(blueprints.modified_at(ti), :>, modified_at) }.
-        uniq
+    def stale_bindings
+      blueprinted.select do |b|
+        times(blueprints.modified_at(b), :>, modified_at)
+      end.map(&:identifier)
     end
 
-    def fresh_installations; fresh(:installed, installations) ;end
-    def fresh_resolutions; fresh(:bindings_with_resolutions, resolutions) ;end
-    def fresh_packs; fresh(:packed, packs) ;end
-    def fresh_provisioning; fresh(:provisioned, provisioning) ;end
+    def stale_resolutions; stale(:resolved, resolutions) ;end
+    def stale_packs; stale(:packed, packs) ;end
+    def stale_provisioning; stale(:provisioned, provisioning) ;end
 
-    def fresh(method, space)
-      arena.send(method).
-        map { |b| b.context_identifier }.
-        select { |si| times(space.modified_at(si), :>, modified_at) }.
-        uniq
+    def stale(method, space)
+      arena.send(method).select do |b|
+        times(space.modified_at(b.context_identifier), :<, b.arena.modified_at)
+      end.map(&:context_identifier).uniq
     end
-
-    def modified_at; arenas.modified_at(arena) ;end
 
     def initialize(arena)
       self.arena = arena

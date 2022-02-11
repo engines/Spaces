@@ -8,7 +8,7 @@ module Commissioning
     delegate(connections_down: :resolution)
 
     def service_identifiers_for(name)
-      milestones_for(name).map(&:service_identifier)
+      milestones_for(name).map(&:service_identifier).uniq
     end
 
     def milestones_for(name)

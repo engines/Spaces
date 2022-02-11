@@ -5,7 +5,7 @@ module Artifacts
       def snippets
         {
           version: "3.3",
-          services: build_only_snippets.merge(service_snippets)
+          services: service_snippets
         }
       end
 

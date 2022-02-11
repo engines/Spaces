@@ -6,6 +6,10 @@ module Publishing
     include ::Publishing::Publishing
     include ::Publishing::Summary
 
+    class << self
+      def composition_class; Composition ;end
+    end
+
     delegate([:blueprints, :publications] => :universe)
 
     def repository

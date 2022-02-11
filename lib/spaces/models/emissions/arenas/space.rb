@@ -10,11 +10,11 @@ module Arenas
       end
     end
 
-    delegate([:installations, :resolutions, :packs, :provisioning] => :universe)
+    delegate([:resolutions, :packs, :provisioning] => :universe)
 
     alias_method :identifiers, :simple_identifiers
 
-    def cascade_deletes; [:installations] ;end
+    def cascade_deletes; [:resolutions] ;end
 
     def artifacts_for(identifier, purpose)
       if (m = exist_then_by(identifier))
@@ -24,8 +24,8 @@ module Arenas
 
     def save_resolutions_for(arena, force: false)
       (force ? arena.bound_resolutions : arena.unsaved_resolutions).
-        map { |r| resolutions.save(r) }.
-        tap { touch(arena) }
+        tap { touch(arena) }.
+        map { |r| resolutions.save(r) }
     end
 
     def save_artifacts_for(arena, purpose)

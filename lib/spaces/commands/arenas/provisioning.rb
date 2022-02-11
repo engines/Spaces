@@ -15,7 +15,8 @@ module Arenas
       protected
 
       def _run
-        [space.save_artifacts_for(model, :provisioning), super].flatten
+        space.save_artifacts_for(current_model, :provisioning).map(&:content)
+        super
       end
 
     end

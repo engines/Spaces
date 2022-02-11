@@ -11,7 +11,6 @@ module Emissions
 
       def division_classes
         [
-          Divisions::Configuration,
           Divisions::Bindings,
           Divisions::Target,
           Divisions::Scaling,

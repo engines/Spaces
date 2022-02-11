@@ -9,6 +9,8 @@ require './x/controllers'
 # import some blueprints
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/wap'}, threaded: false)
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/owncloud'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 # blueprint indices, lists, and gets
@@ -19,8 +21,8 @@ controllers.blueprinting.list
 
 controllers.querying.list(method: :binder_identifiers, space: :blueprints)
 
-controllers.blueprinting.show(identifier: :phpmyadmin)
-controllers.blueprinting.summarize(identifier: :phpmyadmin)
+controllers.blueprinting.show(identifier: :redmine)
+controllers.blueprinting.summarize(identifier: :redmine)
 
 # ------------------------------------------------------------------------------
 
@@ -48,6 +50,8 @@ controllers.arenas.more_binders(identifier: :development)
 # bind some blueprints to the applications arena
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :wap)
 controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
+controllers.arenas.bind(identifier: :development, blueprint_identifier: :redmine)
+controllers.arenas.bind(identifier: :development, blueprint_identifier: :owncloud)
 controllers.arenas.state(identifier: :development)
 
 # resolve the arena
@@ -75,13 +79,13 @@ controllers.arenas.state(identifier: :development)
 controllers.arenas.provision(identifier: :development)
 controllers.arenas.state(identifier: :development)
 
-# # build packs for the arena
+# # build images for the arena
 # controllers.arenas.build(identifier: :development)
 #
-# # build a pack
+# # build an image
 # controllers.packing.build(identifier: 'development::phpmyadmin')
 #
-# # apply provisions for arena
+# # bring up conatainers for arena
 # controllers.arenas.apply(identifier: :development)
 
 # # save provisions for a resolution
@@ -90,6 +94,5 @@ controllers.arenas.state(identifier: :development)
 # capture registry entries for an application
 controllers.registry.register(identifier: 'development::phpmyadmin')
 
-
-# # call all create scripts for a consumer's services
-# controllers.commissioning.commission(milestone: :create, identifier: 'development::phpmyadmin')
+# # call all add scripts for a consumer's services
+# controllers.commissioning.commission(milestone: :add, identifier: 'development::phpmyadmin')

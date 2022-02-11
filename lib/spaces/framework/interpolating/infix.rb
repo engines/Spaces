@@ -21,9 +21,19 @@ module Interpolating
       Text.new(origin: resolved_once, transformable: transformable).resolved
     end
 
-    def complete?; !more_to_resolve? || unresolvable? ;end
-    def more_to_resolve?; resolved_once.to_s.include?(interpolation_marker) ;end
-    def unresolvable?; resolved_once == value ;end
+    def complete?
+      !more_to_resolve? || unresolvable?
+    end
+
+    def more_to_resolve?
+      resolved_once.to_s.include?(interpolation_marker)
+    rescue NoMethodError => e
+      false
+    end
+
+    def unresolvable?
+      value == resolved_once.gsub(interpolation_marker, '')
+    end
 
     def acceptable_method_chain_in_value
       @amc ||= ([:unqualified] + value.split('.')).last(2)
@@ -31,13 +41,36 @@ module Interpolating
 
     alias_method :amc, :acceptable_method_chain_in_value
 
-    def collaborate_with(name)
-      unless name == :unqualified
-        emission.respond_to?(:bindings) && emission.bindings.named(name) ||
-        emission.respond_to?(name) && emission.send(name)
-      else
-        transformable
+    def object_in_value; amc.first ;end
+    def method_in_value; amc.last.split(/[()]+/) ;end
+
+    def collaborator
+      object_in_value == :unqualified ? unqualified_collaborator : qualified_collaborator
+    end
+
+    def qualified_collaborator
+      service_collaborator || configuration_collaborator ||  other_collaborator
+    end
+
+    def service_collaborator
+      if (b = emission.respond_to?(:bindings) && emission.bindings&.named(object_in_value))
+        return b.struct.configuration if b.embed?
+        b.service
       end
+    end
+
+    def configuration_collaborator
+      if emission.respond_to?(:binding_target) && emission.binding_target.respond_to?(:configuration)
+        emission.binding_target.configuration
+      end
+    end
+
+    def other_collaborator
+      emission.respond_to?(object_in_value) && emission.send(object_in_value)
+    end
+
+    def unqualified_collaborator
+      transformable
     end
 
     def initialize(value:, text:)
@@ -50,11 +83,18 @@ module Interpolating
     protected
 
     def _resolved
-      collaborate_with(amc.first).send(*amc.last.split(/[()]+/))
+      collaborator.send(*method_in_value)
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
-      warn(error: e, text: text, value: value)
-      value
+      warn(error: e, text: text, value: value, qualifier: emission.qualifier, identifier: emission.identifier)
+      pp e
+      text.to_s
+      # raise ::Interpolating::Errors::Unresolvable
     end
 
+  end
+
+  module Errors
+    class Unresolvable < ::Spaces::Errors::SpacesError
+    end
   end
 end

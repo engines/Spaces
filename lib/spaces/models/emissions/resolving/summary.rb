@@ -4,9 +4,7 @@ module Resolving
     def summary
       OpenStruct.new(
         identifier: identifier,
-        installation: {
-          confirmed: installations.exist?(identifier)
-        },
+        stale: stale?,
         pack: {
           exist: packs.exist?(identifier),
           allowed: packable?
@@ -15,6 +13,10 @@ module Resolving
           exist: provisioning.exist?(identifier)
         }
       )
+    end
+
+    def stale?
+      arena.state.stale_resolutions.include?(identifier)
     end
 
   end

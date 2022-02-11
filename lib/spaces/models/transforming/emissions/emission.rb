@@ -43,11 +43,15 @@ module Emissions
     def method_missing(m, *args, &block)
       return division_map[m.to_sym] || struct[m] if division_keys.include?(m)
       return bindings.named(m) if (struct[:bindings] && bindings.named(m))
+      return self if m.to_s == blueprint_identifier
       super
     end
 
     def respond_to_missing?(m, *)
-      division_keys.include?(m) || (struct[:bindings] && emission.bindings.named(m)) || super
+      division_keys.include?(m) ||
+        (struct[:bindings] && emission.bindings.named(m)) ||
+        m.to_s == blueprint_identifier ||
+        super
     end
 
   end

@@ -11,7 +11,7 @@ module Divisions
       empty.tap { |d| d.struct = struct_merged_with(other) }
     end
 
-    def struct_merged_with(other); struct.merge(other.struct) ;end
+    def struct_merged_with(other); struct.reverse_merge(other.struct) ;end
 
   end
 end
