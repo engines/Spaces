@@ -20,7 +20,7 @@ module Settling
     end
 
     def domain
-      domains.first
+      domains.primary
     end
 
     def connections_down(emission: :resolution)

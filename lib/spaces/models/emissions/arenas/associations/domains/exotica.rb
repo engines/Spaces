@@ -2,8 +2,8 @@ module Associations
   module Exotica
 
     def as_owncloud_trusted_names
-      all.map do |a|
-        "#{all.index(a)} => '#{a.name}'"
+      (awpf = all_with_primary_first).map do |d|
+        "#{awpf.index(d)} => '#{d.name}'"
       end.join(", ")
     end
 

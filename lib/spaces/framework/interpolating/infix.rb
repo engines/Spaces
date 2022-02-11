@@ -54,14 +54,14 @@ module Interpolating
 
     def service_collaborator
       if (b = emission.respond_to?(:bindings) && emission.bindings&.named(object_in_value))
-        return b.struct.configuration if b.embed?
-        b.service
+        return b.struct.configuration if b.embed? && b.struct.configuration.respond_to?(method_in_value.first)
+        b.service if b.service.respond_to?(method_in_value.first)
       end
     end
 
     def configuration_collaborator
       if emission.respond_to?(:binding_target) && emission.binding_target.respond_to?(:configuration)
-        emission.binding_target.configuration
+        emission.binding_target.configuration if emission.binding_target.configuration.respond_to?(method_in_value.first)
       end
     end
 
