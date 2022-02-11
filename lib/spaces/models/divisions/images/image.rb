@@ -6,7 +6,6 @@ module Divisions
     end
 
     delegate(
-      tenant: :emission,
       context_identifier: :division
     )
 
