@@ -19,6 +19,10 @@ module Settling
       )
     end
 
+    def domain
+      domains.first
+    end
+
     def connections_down(emission: :resolution)
       connect_bindings.map { |t|
         arena.send("#{emission}_map")[t.identifier]

@@ -6,7 +6,7 @@ module Arenas
         identifier: identifier,
         input: struct.input,
         about: struct.about,
-        domain: struct.domain,
+        domains: struct.domains,
       ).compact
     end
 
