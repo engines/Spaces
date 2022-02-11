@@ -24,7 +24,7 @@ module Spaces
           Arenas::Space.new(:arenas),
           Keys::Space.new(:user_keys),
 
-          Associations::Domains::Space.new(:domains)
+          Domains::Space.new(:domains)
         ]
       end
     end
