@@ -12,6 +12,11 @@ module Providers
         container.info['State'].transform_keys { |k| k.snakize.to_sym }
       end
 
+      def network
+        # TODO: revise hackiness -- assumes the first value is the only or best
+        container.info['NetworkSettings']['Networks'].values.first.transform_keys { |k| k.snakize.to_sym }
+      end
+
       def container
         @container ||= bridge.get(container_identifier)
       end
