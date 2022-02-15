@@ -24,6 +24,10 @@ class OpenStruct
     to_h_deep.to_json(*args)
   end
 
+  def to_string_array
+    keys.map { |k| "#{k}=#{send(k)}"}
+  end
+
   def to_h_deep; deep(:to_h_deep) ;end
   def no_symbols; deep(:no_symbols) ;end
 
