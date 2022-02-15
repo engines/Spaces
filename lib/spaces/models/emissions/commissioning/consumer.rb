@@ -5,7 +5,10 @@ module Commissioning
       def composition_class; Composition ;end
     end
 
-    delegate(connections_down: :resolution)
+    delegate(
+      [:connections_down, :commission] => :resolution,
+      ip_address: :commission
+    )
 
     def service_identifiers_for(name)
       milestones_for(name).map(&:service_identifier).uniq
