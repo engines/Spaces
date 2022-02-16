@@ -19,6 +19,10 @@ module Commissioning
     end
 
     def the_milestones
+      resolution ? _the_milestones : []
+    end
+
+    def _the_milestones
       connections_down.map do |c|
         c.as_service_for(self).struct.milestones
       end.flatten
