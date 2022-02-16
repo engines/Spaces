@@ -27,7 +27,16 @@ module Targeting
     end
 
     def embed_bindings
-      all.select(&:embed?).map(&:embed_bindings).flatten.uniq
+      all.select(&:embed?)
+    end
+
+    def embed_bindings_for(runtime)
+      ebs = shallow_embed_bindings_for(runtime)
+      [ebs, ebs.map { |b| b.blueprint.bindings.embed_bindings_for(runtime) }].flatten.compact.uniq
+    end
+
+    def shallow_embed_bindings_for(runtime)
+      embed_bindings.select { |t| t.for_runtime?(runtime) }
     end
 
     def connect_bindings
