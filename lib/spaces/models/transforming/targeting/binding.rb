@@ -14,12 +14,8 @@ module Targeting
       def features; [:type, :runtimes, :identifier, :target_identifier, :configuration, :service] ;end
     end
 
-    def configuration; struct.configuration ;end    
+    def configuration; struct.configuration ;end
     def service; struct.service ;end
-
-    def service_string_array
-      service.keys.map { |k| "#{k}=#{service[k]}"} if respond_to?(:service)
-    end
 
     def type; struct.type || derived_features[:type] ;end
 

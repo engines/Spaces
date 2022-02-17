@@ -1,5 +1,5 @@
 module Packing
-  class Space < ::Spaces::Space
+  class Space < ::Emissions::Space
 
     class << self
       def default_model_class; Pack ;end

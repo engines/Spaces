@@ -24,5 +24,5 @@ controllers.arenas.resolve(identifier: :base_arena)
 # save all packs for an arena
 controllers.arenas.pack(identifier: :base_arena)
 
-# # build inages for the arena
+# # build images for the arena
 # controllers.arenas.build(identifier: :base_arena, threaded: false)

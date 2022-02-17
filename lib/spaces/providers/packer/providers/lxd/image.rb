@@ -16,14 +16,16 @@ module Adapters
             name: default_identifier,
             output_image: default_output_identifier,
             publish_properties: {
-              description: "Spaces #{tenant.identifier} #{context_identifier} image",
-              aliases: tenant.identifier,
+              description: "Spaces #{tenant_identifier} #{context_identifier} image",
+              aliases: tenant_identifier,
               architecture: 'amd64',
               os: 'devuan',
               release: 'Devuan GNU/Linux 3.0'
             }
           }
         end
+
+        def tenant_identifier; :engines ;end
 
         def default_identifier; super.gsub('/', '-') ;end
 

@@ -17,7 +17,7 @@ module Arenas
     end
 
     delegate(
-      [:arenas, :blueprints, :resolutions, :packs, :provisioning] => :universe,
+      [:arenas, :blueprints, :resolutions, :packs, :provisioning, :domains] => :universe,
     )
 
     def modified_at; arenas.modified_at(self) ;end
@@ -28,11 +28,16 @@ module Arenas
 
     def arena; self ;end
 
+    def default_domains
+      domains.all
+    end
+
     def binding_class; ::Divisions::BindingInArena ;end
 
     def initialize(struct: nil, identifiable: nil)
       super.tap do
         self.struct[:input] ||= Input.new(emission: self, label: :input).struct
+        self.struct[:domains] ||= default_domains.map(&:struct)
       end
     end
 

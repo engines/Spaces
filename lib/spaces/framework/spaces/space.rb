@@ -38,14 +38,8 @@ module Spaces
       identifiers.map { |i| by(i) }
     end
 
-    def simple_identifiers(*_)
+    def identifiers(*_)
       path.glob('*').map { |p| p.basename.to_s }
-    end
-
-    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
-      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
-        "#{p.relative_path_from(path)}".as_compound
-      end
     end
 
     def exist?(identifiable)

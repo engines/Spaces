@@ -16,11 +16,11 @@ module Settling
     end
 
     def embedding_keys
-      @embedding_keys ||= [division_keys, embeds_down.map(&:division_keys)].flatten.uniq
+      @embedding_keys ||= [division_keys, embeds_for_arena_runtime.map(&:division_keys)].flatten.uniq
     end
 
     def embeds_including_blueprint
-      [blueprint, embeds_down].flatten.compact.reverse
+      [blueprint, embeds_for_arena_runtime].flatten.compact.reverse
     end
 
     def embeds_for_arena_runtime

@@ -3,8 +3,18 @@ module Targeting
 
     def resolved
       super.tap do |d|
-        d.struct.configuration = resolvable_struct_class.new(configuration, self).resolved if configuration
-        d.struct.service = resolvable_struct_class.new(service, self).resolved if service
+        d.struct.configuration = _resolved(:configuration)
+        d.struct.service = _resolved(:service)
+      end
+    end
+
+    def service_string_array
+      _resolved(:service)&.to_string_array
+    end
+
+    def _resolved(section)
+      if s = send(section)
+        resolvable_struct_class.new(s, self).resolved
       end
     end
 
