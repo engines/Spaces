@@ -18,7 +18,7 @@ module Settling
     end
 
     def identifiers(arena_identifier:)
-      universe.arenas.by(arena_identifier).installation_map.values.map(&:identifier)
+      universe.arenas.by(arena_identifier).resolution_map.values.map(&:identifier)
     end
 
   end
