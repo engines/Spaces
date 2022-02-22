@@ -23,7 +23,7 @@ module Arenas
     end
 
     def connected_arenas
-      connections.all.map(&:arena)
+      connections.all.map(&:arena).compact
     end
 
   end
