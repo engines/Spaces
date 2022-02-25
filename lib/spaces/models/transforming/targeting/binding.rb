@@ -42,13 +42,13 @@ module Targeting
     def deep_bindings_of_type(type)
       #TODO: can't use blueprint here ... must be more gerneric
       # #better_emission method?
-      [self, blueprint.bindings.send("#{type}_bindings")].flatten.uniq(&:identifier)
+      [self, blueprint&.bindings&.send("#{type}_bindings")].flatten.compact.uniq(&:identifier)
     end
 
     def target_struct
       #TODO: can't use blueprint here ... must be more generic
       # #better_emission method?
-      blueprint.binding_target.struct
+      blueprint&.binding_target&.struct
     end
 
     protected
