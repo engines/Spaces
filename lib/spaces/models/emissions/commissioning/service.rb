@@ -16,8 +16,14 @@ module Commissioning
     alias_method :provider, :runtime_provider
 
     def execute_for(milestone_name)
-      interface.execute_commands_for(milestone_name)
-      register(milestone_name)
+      unless registered?(milestone_name)
+        interface.execute_commands_for(milestone_name)
+        register(milestone_name)
+      end
+    end
+
+    def registered?(milestone_name)
+      registry.has_milestone?(service_entry_identifier, milestone_name)
     end
 
     def register(milestone_name)

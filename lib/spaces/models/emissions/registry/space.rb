@@ -18,6 +18,10 @@ module Registry
       resolution.registered.map { |r| save(r) }
     end
 
+    def has_milestone?(consumer_identifier, milestone_name)
+      milestone_path_for(consumer_identifier).join("#{milestone_name}").exist?
+    end
+
     def touch_milestone(consumer_identifier, milestone_name)
       FileUtils.touch(milestone_path_for(consumer_identifier).join("#{milestone_name}"))
     end
