@@ -27,12 +27,6 @@ module Commissioning
 
       def subcommand_class; ::Servicing::Commands::Servicing ;end
 
-      protected
-
-      def commit
-        assembly.execute_for(milestone)
-      end
-
     end
   end
 end
