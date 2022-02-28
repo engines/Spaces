@@ -3,6 +3,7 @@ module Resolving
 
     def as_service_for(consumer)
       empty_service.tap do |m|
+        m.resolution = self
         m.consumer = consumer
         m.struct.identifier = identifier
         m.cache_primary_identifiers

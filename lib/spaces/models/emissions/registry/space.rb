@@ -18,6 +18,16 @@ module Registry
       resolution.registered.map { |r| save(r) }
     end
 
+    def touch_milestone(consumer_identifier, milestone_name)
+      FileUtils.touch(milestone_path_for(consumer_identifier).join("#{milestone_name}"))
+    end
+
+    alias_method :save_milestone, :touch_milestone
+
+    def milestone_path_for(consumer_identifier)
+      path.join(consumer_identifier.as_path, 'milestones').tap { |p| p.mkpath }
+    end
+
     def service_by(identifiable, klass = default_service_class)
       klass.new(identifiable: identifiable)
     end

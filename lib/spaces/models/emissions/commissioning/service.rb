@@ -8,12 +8,20 @@ module Commissioning
 
     relation_accessor :consumer
 
-    delegate(runtime_provider: :arena)
+    delegate(
+      registry: :universe,
+      runtime_provider: :arena
+    )
 
     alias_method :provider, :runtime_provider
 
     def execute_for(milestone_name)
       interface.execute_commands_for(milestone_name)
+      register(milestone_name)
+    end
+
+    def register(milestone_name)
+      registry.save_milestone(service_entry_identifier, milestone_name)
     end
 
     def interface
@@ -59,6 +67,11 @@ module Commissioning
 
     def milestone_identifier_from(path)
       path.basename.to_s.split('_').first
+    end
+
+    def cache_primary_identifiers
+      struct.consumer_identifier = consumer.identifier
+      struct.service_entry_identifier = [resolution.identifier, consumer.identifier].join(identifier_separator)
     end
 
   end
