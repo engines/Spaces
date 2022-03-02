@@ -8,8 +8,7 @@ module Divisions
     include ::Divisions::Binding::Packing
 
     delegate(
-      [:locations, :blueprints, :resolutions] => :universe,
-      binder?: :blueprint
+      [:locations, :blueprints, :resolutions] => :universe
     )
 
     def arena
@@ -19,6 +18,8 @@ module Divisions
     def context_identifier
       [arena&.identifier&.with_identifier_separator, target_identifier].join
     end
+
+    def binder?; blueprint&.binder? ;end
 
     def blueprint; @blueprint ||= target_from(blueprints) ;end
 

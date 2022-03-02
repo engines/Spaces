@@ -87,7 +87,7 @@ module Interpolating
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
       warn(error: e, text: text, value: value, qualifier: emission.qualifier, identifier: emission.identifier)
       pp e
-      text.to_s
+      value
       # raise ::Interpolating::Errors::Unresolvable
     end
 

@@ -21,7 +21,7 @@ module Servicing
       protected
 
       def commit
-        assembly.execute_for(milestone)
+        assembly.execute_for(milestone) || []
       end
 
     end

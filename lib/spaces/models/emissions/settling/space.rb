@@ -14,11 +14,11 @@ module Settling
     end
 
     def all(arena_identifier:)
-      identifiers(arena_identifier: arena_identifier).map { |i| by(i) }
+      identifiers(arena_identifier: arena_identifier).map { |i| exist_then_by(i) }.compact
     end
 
     def identifiers(arena_identifier:)
-      universe.arenas.by(arena_identifier).installation_map.values.map(&:identifier)
+      universe.arenas.by(arena_identifier).resolution_map.values.map(&:identifier)
     end
 
   end

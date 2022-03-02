@@ -37,7 +37,7 @@ module Providers
       rescue Timeout::Error
         n.close
         STDERR.puts("Timeout on wait for #{p}")
-        p.exist?  #catches race condition
+        p.exist? # catch race condition
       end
 
       def kludge_for_dev_macos(milestone_name = '', timeout: 5)
@@ -49,7 +49,7 @@ module Providers
         end
       rescue Timeout::Error
         STDERR.puts("Timeout on wait for #{p}")
-        p.exist?  #catches race condition
+        p.exist? # catch race condition
       end
 
     end

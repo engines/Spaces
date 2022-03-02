@@ -85,7 +85,7 @@ controllers.arenas.state(identifier: :development)
 # # build an image
 # controllers.packing.build(identifier: 'development::phpmyadmin')
 #
-# # bring up conatainers for arena
+# # bring up containers for arena
 # controllers.arenas.apply(identifier: :development)
 
 # # save provisions for a resolution
