@@ -41,6 +41,7 @@ controllers.arenas.state(identifier: :development)
 
 # connect the database arena to the applications arena
 controllers.arenas.connect(identifier: :development, other_identifier: :database)
+controllers.arenas.state(identifier: :development)
 
 # get a list of binder identifiers that are not yet bound to an arena
 controllers.arenas.more_binders(identifier: :development)
