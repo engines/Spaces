@@ -48,18 +48,18 @@ en:
       spaces::spaces::models::space/initialize:
         An instance of %{klass} for %{identifier} does not yet exist in its space.
 
-    spaces::framework::interpolating::infix/once:
-      spaces::framework::interpolating::infix/iteration:
+    spaces::framework::interpolating::iterating/once:
+      spaces::framework::interpolating::resolving/iteration:
         Unable to interpolate for %{value} in %{text} of %{qualifier}>%{identifier}.
 
-    spaces::framework::interpolating::infix/iteration:
+    spaces::framework::interpolating::iterating/iteration:
       spaces::framework::interpolating::infix/method_in_expression:
         Unable to interpolate for %{value} in %{text} of %{qualifier}>%{identifier}.
 
     spaces::framework::interpolating::infix/object_in_expression:
       spaces::framework::interpolating::infix/acceptable_expression:
-        Unable to interpolate for %{value} in %{text} of %{qualifier}>%{identifier}.                
+        Unable to interpolate for %{value} in %{text} of %{qualifier}>%{identifier}.
 
-    spaces::framework::interpolating::infix/qualified_collaborator:
-      spaces::framework::interpolating::infix/binding_collaborator:
+    spaces::framework::interpolating::iterating/qualified_collaborator:
+      spaces::framework::interpolating::iterating/binding_collaborator:
         Unable to interpolate for %{value} in %{text} of %{qualifier}>%{identifier}.
