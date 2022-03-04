@@ -27,10 +27,12 @@ module Spaces
 
       def subcommand_class ;end
 
+      def mutating?; subcommand_class.mutating? ;end
+
       protected
 
       def _run
-        space.touch(model) if subcommand_class.mutating?
+        space.touch(model) if mutating?
         subcommands.each(&:run)
       end
 

@@ -6,25 +6,19 @@ require './x/controllers'
 
 # ------------------------------------------------------------------------------
 
-# import a database blueprint
+# import services blueprints
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/mariadb'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/wap'}, threaded: false)
 
 # ------------------------------------------------------------------------------
-# save a database arena for common use
-controllers.arenas.create(model: {identifier: :database})
+# save a services arena for common use
+controllers.arenas.create(model: {identifier: :services})
 
 # ------------------------------------------------------------------------------
-# bind some blueprints to the database arena
-controllers.arenas.bind(identifier: :database, blueprint_identifier: :mariadb)
+# stage some blueprints in the services arena
+controllers.arenas.stage(identifier: :services, blueprint_identifier: :mariadb)
+controllers.arenas.stage(identifier: :services, blueprint_identifier: :wap)
 
-# resolve the arena
-controllers.arenas.resolve(identifier: :database)
-
-# save all packs for the arena
-controllers.arenas.pack(identifier: :database)
-
-# provision the arena
-controllers.arenas.provision(identifier: :database)
 
 # # build images for the arena
 # controllers.arenas.build(identifier: :database, threaded: false)
