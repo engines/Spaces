@@ -38,7 +38,9 @@ module Interpolating
 
     def splits(method); origin.split(interpolation_marker).select.with_index { |_, i| i.send(method) } ;end
 
-    def infix_for(string); infix_class.new(value: string, text: self) ;end
+    def infix_for(string)
+      infix_class.new(original_value: string, text: self)
+    end
 
     def to_s; origin ;end
 
