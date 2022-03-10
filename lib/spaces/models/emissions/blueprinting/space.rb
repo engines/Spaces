@@ -14,6 +14,18 @@ module Blueprinting
 
     def cascade_deletes; [:publications] ;end
 
+    def bindables_for(identifier:)
+      identifiers - unbindables_for(identifier: identifier)
+    end
+
+    def unbindables_for(identifier:)
+      [
+        (i = identifier.identifier),
+        all.map(&:tree_paths).flatten.map(&:identifiers).
+          select { |x| x.include?(i) }.map { |a| a.split(i).first }
+      ].flatten.uniq
+    end
+
     def binder_identifiers
       all.select(&:binder?).map(&:identifier)
     end
