@@ -13,7 +13,6 @@ module Spaces
       end
 
       def arguments
-        pp _arguments
         _arguments unless _arguments.empty?
       end
 
