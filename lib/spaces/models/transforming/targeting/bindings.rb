@@ -47,6 +47,10 @@ module Targeting
       all.map(&:deep_bindings).flatten.uniq
     end
 
+    def tree_paths(previous = OpenStruct.new(identifiers: [context_identifier]))
+      [any? ? map { |b| b.tree_path_with(previous) } : previous].flatten
+    end
+
     def descriptors
       all.map(&:descriptor).compact
     end
