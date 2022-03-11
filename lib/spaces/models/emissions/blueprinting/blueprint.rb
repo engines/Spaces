@@ -18,7 +18,8 @@ module Blueprinting
 
     delegate(
       documentation_only_keys: :klass,
-      [:locations, :arenas] => :universe
+      [:locations, :arenas] => :universe,
+      tree_paths: :bindings
     )
 
     alias_method :blueprint, :itself
