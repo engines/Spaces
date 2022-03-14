@@ -21,9 +21,12 @@ module Blueprinting
     def unbindables_for(identifier:)
       [
         (i = identifier.identifier),
-        all.map(&:tree_paths).flatten.map(&:identifiers).
-          select { |x| x.include?(i) }.map { |a| a.split(i).first }
+        tree_path_identifiers.select { |x| x.include?(i) }.map { |a| a.split(i).first }
       ].flatten.uniq
+    end
+
+    def tree_path_identifiers
+      all.map(&:tree_paths).flatten.map(&:identifiers)
     end
 
     def binder_identifiers

@@ -31,6 +31,26 @@ module Arenas
       interface_for(arena, purpose)&.save_artifacts
     end
 
+    def connectables_for(identifier:)
+      identifiers - unconnectables_for(identifier: identifier)
+    end
+
+    def unconnectables_for(identifier:)
+      [
+        (i = identifier.identifier),
+        connected_identifiers_for(identifier),
+        tree_path_identifiers.select { |x| x.include?(i) }.map { |a| a.split(i).first }
+      ].flatten.uniq
+    end
+
+    def connected_identifiers_for(identifiable)
+      by(identifiable).connections.map(&:arena).map(&:tree_paths).flatten.map(&:identifiers)
+    end
+
+    def tree_path_identifiers
+      all.map(&:tree_paths).flatten.map(&:identifiers)
+    end
+
     def path_for(model)
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
