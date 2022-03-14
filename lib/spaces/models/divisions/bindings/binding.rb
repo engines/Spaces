@@ -25,5 +25,7 @@ module Divisions
 
     def resolution; @resolution ||= target_from(resolutions) ;end
 
+    alias_method :node, :blueprint
+
   end
 end

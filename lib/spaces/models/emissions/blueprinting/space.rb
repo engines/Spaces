@@ -1,6 +1,8 @@
 module Blueprinting
-  class Space < ::Spaces::Space
+  class Space < ::Targeting::TreeSpace
     include ::Publishing::Synchronizing
+
+    alias_method :bindables_for, :new_leaves_for
 
     class << self
       def default_model_class
@@ -13,21 +15,6 @@ module Blueprinting
     alias_method :imported?, :exist?
 
     def cascade_deletes; [:publications] ;end
-
-    def bindables_for(identifier:)
-      identifiers - unbindables_for(identifier: identifier)
-    end
-
-    def unbindables_for(identifier:)
-      [
-        (i = identifier.identifier),
-        tree_path_identifiers.select { |x| x.include?(i) }.map { |a| a.split(i).first }
-      ].flatten.uniq
-    end
-
-    def tree_path_identifiers
-      all.map(&:tree_paths).flatten.map(&:identifiers)
-    end
 
     def binder_identifiers
       all.select(&:binder?).map(&:identifier)

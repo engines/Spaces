@@ -1,8 +1,10 @@
 require_relative 'interfacing'
 
 module Arenas
-  class Space < ::Spaces::Space
+  class Space < ::Targeting::TreeSpace
     include ::Arenas::Interfacing
+
+    alias_method :connectables_for, :new_leaves_for
 
     class << self
       def default_model_class
@@ -31,24 +33,8 @@ module Arenas
       interface_for(arena, purpose)&.save_artifacts
     end
 
-    def connectables_for(identifier:)
-      identifiers - unconnectables_for(identifier: identifier)
-    end
-
-    def unconnectables_for(identifier:)
-      [
-        (i = identifier.identifier),
-        connected_identifiers_for(identifier),
-        tree_path_identifiers.select { |x| x.include?(i) }.map { |a| a.split(i).first }
-      ].flatten.uniq
-    end
-
-    def connected_identifiers_for(identifiable)
+    def unrepeatable_children_for(identifiable)
       by(identifiable).connections.map(&:arena).map(&:tree_paths).flatten.map(&:identifiers)
-    end
-
-    def tree_path_identifiers
-      all.map(&:tree_paths).flatten.map(&:identifiers)
     end
 
     def path_for(model)
