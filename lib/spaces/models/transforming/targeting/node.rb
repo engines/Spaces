@@ -1,7 +1,9 @@
 require_relative 'targeting'
+require_relative 'graphing'
 
 module Targeting
   class Node < ::Divisions::Subdivision
+    include ::Targeting::Graphing
     include ::Targeting::Targeting
 
     class << self
@@ -17,14 +19,6 @@ module Targeting
       @descriptor ||= descriptor_class.new(
         struct.target || {identifier: struct.target_identifier}
       )
-    end
-
-    def tree_path_with(previous)
-      unless circular_in?(p = previous.identifiers)
-        node.tree_paths(OpenStruct.new(identifiers: [p, target_identifier].flatten))
-      else
-        previous
-      end
     end
 
   end

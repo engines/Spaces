@@ -12,9 +12,5 @@ module Associations
     def context_identifier; identifier ;end
     def target_identifier; identifier ;end
 
-    def circular_in?(identifiers)
-      identifiers.include?(target_identifier)
-    end
-
   end
 end
