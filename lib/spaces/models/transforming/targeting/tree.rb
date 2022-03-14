@@ -11,8 +11,8 @@ module Targeting
       empty.tap { |d| d.struct = all.map(&:flattened).map(&:struct) }
     end
 
-    def tree_paths(previous = OpenStruct.new(identifiers: [context_identifier]))
-      [any? ? map { |b| b.tree_path_with(previous) } : previous].flatten
+    def descendant_paths(previous = OpenStruct.new(identifiers: [context_identifier]))
+      [any? ? map { |b| b.descendant_path_with(previous) } : previous].flatten
     end
 
     def descriptors

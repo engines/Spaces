@@ -20,9 +20,9 @@ module Targeting
       target.identifier == context_identifier
     end
 
-    def tree_path_with(previous)
+    def descendant_path_with(previous)
       unless circular_in?(p = previous.identifiers)
-        node.tree_paths(OpenStruct.new(identifiers: [p, target_identifier].flatten))
+        node.descendant_paths(OpenStruct.new(identifiers: [p, target_identifier].flatten))
       else
         previous
       end

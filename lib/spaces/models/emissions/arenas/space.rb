@@ -34,7 +34,7 @@ module Arenas
     end
 
     def unrepeatable_children_for(identifiable)
-      by(identifiable).connections.map(&:arena).map(&:tree_paths).flatten.map(&:identifiers)
+      by(identifiable).connections.map(&:arena).map(&:descendant_paths).flatten.map(&:identifiers)
     end
 
     def path_for(model)
