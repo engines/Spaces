@@ -9,6 +9,7 @@ module Arenas
           create: Commands::Saving,
           state: Commands::StateReading,
           update: Commands::Saving,
+          connectables: [::Spaces::Commands::Querying, method: :connectables_for],
           connect: Commands::Connecting,
           stage: Commands::Staging,
           bind: Commands::Binding,

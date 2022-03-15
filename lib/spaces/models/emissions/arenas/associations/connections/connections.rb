@@ -1,5 +1,5 @@
 module Associations
-  class Connections < ::Divisions::Divisible
+  class Connections < ::Targeting::Tree
 
   end
 end

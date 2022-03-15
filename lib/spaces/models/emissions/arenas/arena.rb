@@ -20,6 +20,7 @@ module Arenas
 
     delegate(
       [:arenas, :blueprints, :resolutions, :packs, :provisioning, :domains] => :universe,
+      descendant_paths: :connections
     )
 
     def modified_at; arenas.modified_at(self) ;end

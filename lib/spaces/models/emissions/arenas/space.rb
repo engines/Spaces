@@ -1,8 +1,10 @@
 require_relative 'interfacing'
 
 module Arenas
-  class Space < ::Spaces::Space
+  class Space < ::Targeting::TreeSpace
     include ::Arenas::Interfacing
+
+    alias_method :connectables_for, :new_leaves_for
 
     class << self
       def default_model_class
@@ -29,6 +31,10 @@ module Arenas
     def save_artifacts_for(arena, purpose)
       ensure_space_for(arena)
       interface_for(arena, purpose)&.save_artifacts
+    end
+
+    def unrepeatable_children_for(identifiable)
+      by(identifiable).connections.map(&:arena).map(&:descendant_paths).flatten.map(&:identifiers)
     end
 
     def path_for(model)
