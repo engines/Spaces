@@ -4,7 +4,7 @@ module Artifacts
 
       def snippets
         if (rcd = resolution.direct_connections).any?
-          rcd.map { |c| c.identifier.underscore }
+          rcd.map { |c| c.blueprint_identifier.underscore }
         end
       end
 

@@ -1,6 +1,8 @@
 module Blueprinting
-  class Space < ::Spaces::Space
+  class Space < ::Targeting::TreeSpace
     include ::Publishing::Synchronizing
+
+    alias_method :bindables_for, :new_leaves_for
 
     class << self
       def default_model_class
@@ -10,7 +12,6 @@ module Blueprinting
 
     delegate(publications: :universe)
 
-    alias_method :identifiers, :simple_identifiers
     alias_method :imported?, :exist?
 
     def cascade_deletes; [:publications] ;end

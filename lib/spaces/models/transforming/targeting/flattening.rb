@@ -9,8 +9,8 @@ module Targeting
 
     def flattened_struct
       OpenStruct.new.tap do |s|
-        s.configuration = flattened_for(:configuration) if embed? && target_struct.configuration
-        s.service = flattened_for(:service) if target_struct.service
+        s.configuration = flattened_for(:configuration) if embed? && target_struct&.configuration
+        s.service = flattened_for(:service) if target_struct&.service
       end
     end
 

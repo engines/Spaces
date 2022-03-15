@@ -17,10 +17,11 @@ module Docker::Compose
       @last_command = nil
     end
 
-    # Add &block to arguments and pass it to run! method
+    # Add &block to arguments and pass it to run! method.
+    # Change default for :detached and :build to true.
     def up(*services,
            abort_on_container_exit: false,
-           detached: false, timeout: 10, build: false,
+           detached: true, timeout: 10, build: true,
            exit_code_from: nil,
            no_build: false, no_deps: false, no_start: false,
            &block)

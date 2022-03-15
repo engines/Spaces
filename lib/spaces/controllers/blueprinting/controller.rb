@@ -6,6 +6,7 @@ module Blueprinting
 
       def action_command_map
         @action_command_map ||= super.merge({
+          bindables: [::Spaces::Commands::Querying, method: :bindables_for],
           relations: Commands::Relations,
           synchronize: Commands::Synchronizing
         })

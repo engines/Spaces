@@ -8,6 +8,10 @@ module Resolving
       end
     end
 
+    def commission
+      @commission ||= as_commission
+    end
+
     def empty_commission; commission_class.new ;end
     def commission_class; ::Commissioning::Commission ;end
 

@@ -1,5 +1,5 @@
 module Blueprinting
-  module Relations # is this needed anymore?
+  module Relations
 
     def relations
       OpenStruct.new(

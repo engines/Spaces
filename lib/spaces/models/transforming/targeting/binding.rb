@@ -1,12 +1,10 @@
 require 'resolv'
-require_relative 'subdivision'
-require_relative 'graphing'
+require_relative 'node'
 require_relative 'flattening'
 require_relative 'resolving'
 
 module Targeting
-  class Binding < ::Targeting::Subdivision
-    include ::Targeting::Graphing
+  class Binding < ::Targeting::Node
     include ::Targeting::Flattening
     include ::Targeting::Resolving
 
@@ -14,12 +12,8 @@ module Targeting
       def features; [:type, :runtimes, :identifier, :target_identifier, :configuration, :service] ;end
     end
 
-    def configuration; struct.configuration ;end    
+    def configuration; struct.configuration ;end
     def service; struct.service ;end
-
-    def service_string_array
-      service.keys.map { |k| "#{k}=#{service[k]}"} if respond_to?(:service)
-    end
 
     def type; struct.type || derived_features[:type] ;end
 
@@ -46,13 +40,13 @@ module Targeting
     def deep_bindings_of_type(type)
       #TODO: can't use blueprint here ... must be more gerneric
       # #better_emission method?
-      [self, blueprint.bindings.send("#{type}_bindings")].flatten.uniq(&:identifier)
+      [self, blueprint&.bindings&.send("#{type}_bindings")].flatten.compact.uniq(&:identifier)
     end
 
     def target_struct
       #TODO: can't use blueprint here ... must be more generic
       # #better_emission method?
-      blueprint.binding_target.struct
+      blueprint&.binding_target&.struct
     end
 
     protected

@@ -7,10 +7,14 @@ module Commissioning
 
     delegate(
       runtime_provider: :arena,
-      state: :interface
+      [:state, :network] => :interface
     )
 
     alias_method :provider, :runtime_provider
+
+    def ip_address
+      network[:ip_address]
+    end
 
     def execute(command)
       interface.execute(command)

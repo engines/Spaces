@@ -21,12 +21,8 @@ module Emissions
       all_bindings.map { |t| t.send(emission) }.compact
     end
 
-    def embeds_down(emission: :blueprint)
-      embed_bindings.map { |t| t.send(emission) }.compact
-    end
-
     def arena_runtime_embeds_for(runtime, emission: :blueprint)
-      embed_bindings.select { |t| t.for_runtime?(runtime) }.map { |t| t.send(emission) }.compact
+      bindings.embed_bindings_for(runtime).map { |t| t.send(emission) }
     end
 
     def graphed(**args)

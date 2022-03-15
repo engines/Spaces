@@ -9,6 +9,10 @@ module Resolving
       end
     end
 
+    def consumer
+      @consumer ||= as_consumer
+    end
+
     def empty_consumer; consumer_class.new ;end
     def consumer_class; ::Commissioning::Consumer ;end
 

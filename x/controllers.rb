@@ -15,6 +15,7 @@ def controllers
     registry: Registry::Controllers::Controller.new,
     commissioning: Commissioning::Controllers::Controller.new,
     servicing: Servicing::Controllers::Controller.new,
-    streaming: Spaces::Controllers::Streaming.new
+    streaming: Spaces::Controllers::Streaming.new,
+    domains: Domains::Controllers::Controller.new
   )
 end

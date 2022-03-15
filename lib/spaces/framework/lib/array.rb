@@ -36,4 +36,15 @@ class Array
     camelize.constantize
   end
 
+  def split(value)
+    if (i = index(value))
+      [
+        (i > 0 ? self[0..i-1] : []),
+        self[i+1..-1]
+      ]
+    else
+      self
+    end
+  end
+
 end

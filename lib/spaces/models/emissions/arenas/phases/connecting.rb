@@ -23,7 +23,11 @@ module Arenas
     end
 
     def connected_arenas
-      connections.all.map(&:arena)
+      connections.all.map(&:arena).compact
+    end
+
+    def all_in(arenas)
+      arenas.map(&:connections).map(&:all).flatten
     end
 
   end

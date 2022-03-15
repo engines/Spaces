@@ -1,7 +1,9 @@
 require_relative 'targeting'
+require_relative 'graphing'
 
 module Targeting
-  class Subdivision < ::Divisions::Subdivision
+  class Node < ::Divisions::Subdivision
+    include ::Targeting::Graphing
     include ::Targeting::Targeting
 
     class << self

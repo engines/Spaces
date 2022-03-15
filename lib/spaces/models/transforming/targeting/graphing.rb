@@ -20,5 +20,17 @@ module Targeting
       target.identifier == context_identifier
     end
 
+    def descendant_path_with(previous)
+      unless circular_in?(p = previous.identifiers)
+        node.descendant_paths(OpenStruct.new(identifiers: [p, target_identifier].flatten))
+      else
+        previous
+      end
+    end
+
+    def circular_in?(identifiers)
+      identifiers.include?(target_identifier)
+    end
+
   end
 end
