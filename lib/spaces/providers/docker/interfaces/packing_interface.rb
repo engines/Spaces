@@ -1,26 +1,13 @@
+require_relative 'image_interface'
+
 module Providers
   module Docker
-    class PackingInterface < Interface
+    class PackingInterface < ImageInterface
 
       alias_method :pack, :emission
 
-      delegate(
-        [:all, :get, :prune] => :bridge,
-        [:connection, :version, :info, :default_socket_url] => :klass,
-      )
-
       def create
         bridge.create(name: output_image_identifier)
-      end
-
-      def pull
-        bridge.create(fromImage: output_image_identifier)
-      end
-
-      alias_method :import, :pull
-
-      def all(options = {})
-        bridge.all(options.reverse_merge(all: true))
       end
 
       def build
@@ -56,13 +43,6 @@ module Providers
       def stream
         stream_for(pack, :build)
       end
-
-      def tag_latest(image)
-        image.tag('repo' => pack.output_identifier, 'force' => true, 'tag' => 'latest')
-      end
-
-      def bridge; ::Docker::Image ;end
-      def file_class; Files::File ;end
 
     end
   end
