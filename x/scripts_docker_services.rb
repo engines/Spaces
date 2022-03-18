@@ -21,10 +21,10 @@ controllers.arenas.stage(identifier: :services, blueprint_identifier: :wap)
 
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :database, threaded: false)
+# controllers.arenas.build(identifier: :services, threaded: false)
 #
 # # bring up containers for arena
-# controllers.arenas.apply(identifier: :database, threaded: false)
+# controllers.arenas.apply(identifier: :services, threaded: false)
 
 # # call add milestone scripts on a container for a given consumer
 # controllers.servicing.service(milestone: :add, identifier: 'database::mariadb', consumer_identifier: 'development::phpmyadmin')
