@@ -8,6 +8,10 @@ class Hash
     transform_keys(&:to_s)
   end
 
+  def snakize_keys
+    transform_keys { |k| k.snakize.to_sym }
+  end
+
   def without(*keys)
     duplicate(self).without!(*keys)
   end
@@ -30,7 +34,7 @@ class Hash
   end
 
   def to_struct
-    OpenStruct.new(values_to_struct)
+    OpenStruct.new(snakize_keys.values_to_struct)
   end
 
   def no_symbols; stringify_keys.deep(:no_symbols) ;end

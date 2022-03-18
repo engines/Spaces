@@ -21,6 +21,7 @@ module Spaces
           Registry::Space.new(:registry),
           Packing::Space.new(:packs),
           Provisioning::Space.new(:provisioning),
+          Runtime::Space.new(:runtimes),
           Arenas::Space.new(:arenas),
           Keys::Space.new(:user_keys),
 
