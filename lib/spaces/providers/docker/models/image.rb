@@ -1,15 +1,13 @@
+require_relative 'model'
+
 module Providers
   module Docker
-    class Image < ::Spaces::Model
+    class Image < Model
 
-      relation_accessor :interface
-      relation_accessor :image_interface
       relation_accessor :history
 
-      delegate(all: :interface)
-
-      def state
-        @state ||= {
+      def summary
+        @summary ||= {
           identifier: identifier,
           tags: tags,
           size: size,
@@ -19,17 +17,13 @@ module Providers
       def identifier; id[7..18] ;end
       def tags; repo_tags ;end
 
-      def layer_ids
-        history.select { |h| h.id != '<missing>' && h.tags}.map(&:id)
-      end
-
-      def descendant_ids
-        descendants.map(&:id)
-      end
-
       def descendants
         @descendants ||=
           all_others.select { |i| i.layer_ids.include?(id) }.reverse
+      end
+
+      def layer_ids
+        history.select { |h| h.id != '<missing>' && h.tags }.map(&:id)
       end
 
       def all_others
@@ -37,9 +31,7 @@ module Providers
       end
 
       def initialize(interface, image_interface)
-        self.interface = interface
-        self.image_interface = image_interface
-        self.struct = image_interface.info.to_struct
+        super
         self.history = image_interface.history.to_struct
       end
 

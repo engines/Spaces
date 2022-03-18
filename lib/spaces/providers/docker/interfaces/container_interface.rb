@@ -8,25 +8,17 @@ module Providers
         container.send(command)
       end
 
-      def state
-        container.info['State'].transform_keys { |k| k.snakize.to_sym }
+      def by_image_id(image_id)
+        all.select { |c| c.image_id == image_id }.reverse
       end
 
-      def network
-        # TODO: revise hackiness -- assumes the first value is the only or best
-        container.info['NetworkSettings']['Networks'].values.first.transform_keys { |k| k.snakize.to_sym }
-      end
-
-      def container
-        @container ||= bridge.get(container_identifier)
-      end
-
-      def container_identifier
-        "#{emission.identifier.gsub(emission.identifier_separator, separator)}_1" #FIX: !!! hardcoded suffix!
+      def by_spaces_identifier(identifier)
+        all.select { |c| c.spaces_identifier == identifier }.reverse
       end
 
       def bridge; ::Docker::Container ;end
-      def separator; '_' ;end
+      def model_class; Container ;end
+      def summary_class; ContainerSummary ;end
 
     end
   end
