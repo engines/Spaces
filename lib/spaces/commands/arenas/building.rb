@@ -10,7 +10,7 @@ module Arenas
         super || :arenas
       end
 
-      def subcommand_class; ::Packing::Commands::Building ;end
+      def subcommand_class; ::Imaging::Commands::Building ;end
 
     end
   end
