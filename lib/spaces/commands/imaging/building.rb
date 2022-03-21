@@ -1,4 +1,4 @@
-module Packing
+module Imaging
   module Commands
     class Building < Spaces::Commands::Executing
 

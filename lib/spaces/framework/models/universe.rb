@@ -14,18 +14,19 @@ module Spaces
       def space_array
         @@space_array ||=
         [
-          Publishing::Space.new(:publications),
-          Locating::Space.new(:locations),
-          Blueprinting::Space.new(:blueprints),
-          Resolving::Space.new(:resolutions),
-          Registry::Space.new(:registry),
-          Packing::Space.new(:packs),
-          Provisioning::Space.new(:provisioning),
-          Runtime::Space.new(:runtimes),
-          Arenas::Space.new(:arenas),
-          Keys::Space.new(:user_keys),
+          Publishing::Space.new(identifier: :publications),
+          Locating::Space.new(identifier: :locations),
+          Blueprinting::Space.new(identifier: :blueprints),
+          Resolving::Space.new(identifier: :resolutions),
+          Registry::Space.new(identifier: :registry),
+          Packing::Space.new(identifier: :packs),
+          Imaging::Space.new(identifier: :images),
+          Provisioning::Space.new(identifier: :provisioning),
+          Runtime::Space.new(identifier: :runtime),
+          Arenas::Space.new(identifier: :arenas),
+          Keys::Space.new(identifier: :user_keys),
 
-          Domains::Space.new(:domains)
+          Domains::Space.new(identifier: :domains)
         ]
       end
     end

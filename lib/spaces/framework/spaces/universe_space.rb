@@ -15,7 +15,7 @@ module Spaces
 
     def path; workspace.join("#{identifier}") ;end
 
-    def initialize(identifier = :universe)
+    def initialize(identifier: :universe)
       super
     end
 

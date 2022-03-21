@@ -37,6 +37,7 @@ module Adapters
     end
 
     def method_missing(m, *args, &block)
+      return super if m == :arena
       return arena.send(m, *args, &block) if arena.respond_to?(m)
       super
     end

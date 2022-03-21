@@ -54,7 +54,7 @@ module Spaces
       array.reject { |m| exist?(m) }
     end
 
-    def initialize(identifier)
+    def initialize(identifier:)
       self.struct = OpenStruct.new(identifier: identifier.to_sym)
     end
 
