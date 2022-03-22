@@ -18,7 +18,7 @@ module Arenas
 
     def artifacts_for(identifier, purpose)
       if (m = exist_then_by(identifier))
-        interface_for(m, purpose).artifacts
+        adapting_interface_for(m, purpose).artifacts
       end
     end
 
@@ -30,7 +30,7 @@ module Arenas
 
     def save_artifacts_for(arena, purpose)
       ensure_space_for(arena)
-      interface_for(arena, purpose)&.save_artifacts
+      adapting_interface_for(arena, purpose)&.save_artifacts
     end
 
     def unrepeatable_children_for(identifiable)

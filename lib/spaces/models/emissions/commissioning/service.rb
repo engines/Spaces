@@ -31,7 +31,7 @@ module Commissioning
     end
 
     def interface
-      @interface ||= provider.interface_for(self, purpose: :service)
+      @interface ||= provider.adapting_interface_for(self, purpose: :service)
     end
 
     def commands_for(name)

@@ -28,7 +28,7 @@ module Commissioning
     end
 
     def interface
-      @interface ||= provider.interface_for(self, purpose: :commissioning)
+      @interface ||= provider.adapting_interface_for(self, purpose: :commissioning)
     end
 
   end

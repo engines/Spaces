@@ -19,7 +19,6 @@ controllers.arenas.create(model: {identifier: :services})
 controllers.arenas.stage(identifier: :services, blueprint_identifier: :mariadb)
 controllers.arenas.stage(identifier: :services, blueprint_identifier: :wap)
 
-
 # # build images for the arena
 # controllers.arenas.build(identifier: :services, threaded: false)
 #
