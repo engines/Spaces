@@ -22,16 +22,16 @@ module Provisioning
     def save(provisions)
       ensure_connections_exist_for(provisions)
       super.tap do
-        adapting_interface_for(provisions)&.save_artifacts
+        translator_for(provisions)&.save_artifacts_to(writing_path_for(provisions))
       end
     end
 
     def commit(provisions)
-      adapting_interface_for(provisions).commit
+      interface_for(provisions).commit
     end
 
-    def adapting_interface_for(provisions)  #TODO: refactor
-      provisions.arena.provisioning_provider.adapting_interface_for(provisions, purpose: :provisioning, space: space)
+    def translator_for(provisions)  #TODO: refactor
+      provisions.arena.provisioning_provider.translator_for(provisions)
     end
 
     def delete(identifiable, cascade: true)

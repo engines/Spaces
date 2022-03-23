@@ -8,7 +8,7 @@ module Packing
     delegate(resolutions: :universe)
 
     def build(pack)
-      adapting_interface_for(pack).build
+      translator_for(pack).build
     end
 
     def by(identifier, klass = default_model_class)
@@ -19,7 +19,7 @@ module Packing
 
     def artifacts_for(identifier)
       if (m = exist_then_by(identifier))
-        adapting_interface_for(m).artifacts
+        translator_for(m).artifacts
       end
     end
 
@@ -28,14 +28,14 @@ module Packing
 
       ensure_connections_exist_for(pack)
       super.tap do
-        adapting_interface_for(pack).save_artifacts
+        translator_for(pack)&.save_artifacts_to(writing_path_for(pack))
       end
     rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: pack.identifier, klass: klass)
     end
 
-    def adapting_interface_for(pack)  #TODO: refactor
-      pack.arena.packing_provider.adapting_interface_for(pack, purpose: :packing, space: self)
+    def translator_for(pack)  #TODO: refactor
+      pack.arena.packing_provider.translator_for(pack)
     end
 
     def copy_auxiliaries_for(pack)

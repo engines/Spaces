@@ -1,16 +1,12 @@
 module Providers
-  module Adapting
+  module Translating
 
-    def adapting_interface_for(emission, purpose: nil, space: nil)
-      adapting_interface_class_for(purpose).new(adapter_for(emission), space)
+    def translator_for(emission)
+      translator_class.new(adapter_for(emission))
     end
 
     def adapter_for(emission)
       adapter_class_for(emission.qualifier).new(self, emission)
-    end
-
-    def adapting_interface_class_for(purpose = nil)
-      class_for(nesting_elements, [purpose, :interface].compact.join('_'))
     end
 
     def adapter_class_for(qualifier)
@@ -19,8 +15,8 @@ module Providers
       default_adapter_class
     end
 
+    def translator_class; Translator ;end
     def default_adapter_class; ::Adapters::Emission ;end
-    def default_artifact_class; ::Artifacts::Artifact ;end
 
     def provider_qualifier; name_elements.last ;end
 

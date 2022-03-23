@@ -31,7 +31,7 @@ module Commissioning
     end
 
     def interface
-      @interface ||= provider.adapting_interface_for(self, purpose: :service)
+      @interface ||= provider.interface_for(self, purpose: :service) #TODO: shouldn't need purpose ... can be derived from :qualifier
     end
 
     def commands_for(name)
