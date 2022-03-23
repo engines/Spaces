@@ -11,7 +11,6 @@ module Spaces
     include ::Spaces::Saving
     include ::Spaces::Deleting
     include ::Spaces::Topology
-    include ::Spaces::Streaming
 
     class << self
       def universes; @@universes ||= UniverseSpace.new ;end

@@ -8,12 +8,10 @@ module Spaces
     end
 
     def stream_for(identifiable, identifier = nil)
-      stream_class.new(identifiable, space: space, identifier: identifier)
+      stream_class.new(identifiable, identifier: identifier)
     end
 
     def stream_class; Stream ;end
-
-    def default_streaming_location; :streams ;end
 
   end
 end
