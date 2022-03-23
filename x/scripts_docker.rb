@@ -46,8 +46,8 @@ controllers.arenas.more_binders(identifier: :development)
 
 # stage some blueprints in the applications arena
 controllers.arenas.stage(identifier: :development, blueprint_identifier: :phpmyadmin)
-controllers.arenas.stage(identifier: :development, blueprint_identifier: :redmine)
-controllers.arenas.stage(identifier: :development, blueprint_identifier: :owncloud)
+# controllers.arenas.stage(identifier: :development, blueprint_identifier: :redmine)
+# controllers.arenas.stage(identifier: :development, blueprint_identifier: :owncloud)
 controllers.arenas.state(identifier: :development)
 
 # resolve the arena

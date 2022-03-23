@@ -1,10 +1,10 @@
 require_relative 'providers'
-require_relative 'adapting'
+require_relative 'translating'
 
 module Providers
   class Provider < ::Spaces::Model
     include ::Providers::Providers
-    include Adapting
+    include Translating
 
     attr_accessor :role
 

@@ -28,7 +28,7 @@ module Commissioning
     end
 
     def interface
-      @interface ||= provider.adapting_interface_for(self, purpose: :commissioning)
+      @interface ||= provider.interface_for(self, purpose: :commissioning) #TODO: shouldn't need purpose ... can be derived from :qualifier
     end
 
   end

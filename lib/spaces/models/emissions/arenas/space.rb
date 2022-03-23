@@ -1,8 +1,10 @@
+require_relative 'translating'
 require_relative 'interfacing'
 
 module Arenas
   class Space < ::Targeting::TreeSpace
-    include ::Arenas::Interfacing
+    include Translating
+    include Interfacing
 
     alias_method :connectables_for, :new_leaves_for
 
@@ -16,21 +18,10 @@ module Arenas
 
     def cascade_deletes; [:resolutions] ;end
 
-    def artifacts_for(identifier, purpose)
-      if (m = exist_then_by(identifier))
-        adapting_interface_for(m, purpose).artifacts
-      end
-    end
-
     def save_resolutions_for(arena, force: false)
       (force ? arena.bound_resolutions : arena.unsaved_resolutions).
         tap { touch(arena) }.
         map { |r| resolutions.save(r) }
-    end
-
-    def save_artifacts_for(arena, purpose)
-      ensure_space_for(arena)
-      adapting_interface_for(arena, purpose)&.save_artifacts
     end
 
     def unrepeatable_children_for(identifiable)

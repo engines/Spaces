@@ -6,8 +6,8 @@ module Runtime
       path: :provisioning,
     )
 
-    def adapting_interface_for(provisions)  #TODO: refactor
-      provisions.arena.runtime_provider.adapting_interface_for(provisions, purpose: :runtime, space: space)
+    def interface_for(provisions)  #TODO: refactor
+      provisions.arena.runtime_provider.interface_for(provisions, purpose: :runtime, space: space)
     end
 
   end
