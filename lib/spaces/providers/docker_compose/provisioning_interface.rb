@@ -5,9 +5,12 @@ module Providers
     class ProvisioningInterface < ::Providers::Interface
       include Streaming
 
-        delegate(packs: :universe)
+        relation_accessor :arena
 
-        alias_method :arena, :emission
+        delegate(
+          arenas: :universe,
+          [:copy_auxiliaries, :remove_auxiliaries] => :arena
+        )
 
         def execute(command)
           identifier.tap { provisioning_for(execution_map[:"#{command}"]) }
@@ -43,19 +46,13 @@ module Providers
         def bridge
           @bridge ||=
             ::Docker::Compose::Session.new(
-              dir: path_for(arena),
+              dir: arenas.path_for(arena),
               file: 'docker-compose.yaml'
             )
         end
 
-        protected
-
-        def copy_auxiliaries
-          arena.all_packs.each { |p| packs.copy_auxiliaries_for(p) }
-        end
-
-        def remove_auxiliaries
-          arena.all_packs.each { |p| packs.remove_auxiliaries_for(p) }
+        def initialize(arena)
+          self.arena = arena
         end
 
     end

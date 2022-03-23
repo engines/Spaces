@@ -1,5 +1,5 @@
 module Providers
-  module Translating
+  module Interfacing
 
     def translator_for(emission)
       translator_class.new(adapter_for(emission))

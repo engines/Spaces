@@ -1,10 +1,10 @@
-require_relative 'container_interface'
+require_relative 'commissioning_interface'
 
 module Providers
   module Docker
-    class ServiceInterface < ContainerInterface
+    class ServiceInterface < CommissioningInterface
 
-      alias_method :service, :emission
+      alias_method :service, :resolving_emission
 
       def execute_commands_for(milestone_name)
         wait_for

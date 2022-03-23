@@ -4,7 +4,11 @@ module Providers
   module Docker
     class CommissioningInterface < ContainerInterface
 
-      alias_method :commission, :emission
+      relation_accessor :resolving_emission
+
+      def initialize(resolving_emission)
+        self.resolving_emission = resolving_emission
+      end
 
     end
   end

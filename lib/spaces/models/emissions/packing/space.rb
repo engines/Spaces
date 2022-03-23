@@ -8,7 +8,11 @@ module Packing
     delegate(resolutions: :universe)
 
     def build(pack)
-      translator_for(pack).build
+      interface_for(pack).build
+    end
+
+    def interface_for(pack)  #TODO: refactor
+      pack.arena.packing_provider.interface_for(pack)
     end
 
     def by(identifier, klass = default_model_class)
