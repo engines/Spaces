@@ -2,7 +2,7 @@ require_relative 'streaming'
 
 module Providers
   module DockerCompose
-    class ProvisioningInterface < ::Providers::Interface
+    class ArenaInterface < ::Providers::Interface
       include Streaming
 
         relation_accessor :arena
@@ -29,7 +29,7 @@ module Providers
               pp e.inspect
             end
           end
-          remove_auxiliaries # TODO: this doesn't happen until the send thread is finished!
+          remove_auxiliaries # FIX: this doesn't happen until the send thread is finished!
         end
 
         def plan

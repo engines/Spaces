@@ -1,10 +1,15 @@
-require_relative 'interface'
+require_relative 'image_interface'
 
 module Providers
   module Docker
-    class PackingInterface < ImagingInterface
+    class PackInterface < ImageInterface
 
       relation_accessor :pack
+
+      delegate(
+        packs: :universe,
+        path_for: :packs
+      )
 
       def build
         pack.copy_auxiliaries

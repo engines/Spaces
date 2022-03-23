@@ -2,7 +2,7 @@ require_relative 'interface'
 
 module Providers
   module Docker
-    class ImagingInterface < Interface
+    class ImageInterface < Interface
 
       delegate(
         prune: :bridge,

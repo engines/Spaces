@@ -8,11 +8,11 @@ module Arenas
     def apply(arena); execute_on_provisioner(:apply, arena) ;end
 
     def execute_on_provisioner(command, arena)
-      interface_for(arena, :provisioning).execute(command)
+      interface_for(arena).execute(command)
     end
 
-    def interface_for(arena, purpose)
-      arena.provisioning_provider.interface_for(purpose: purpose)
+    def interface_for(arena)
+      arena.provisioning_provider.interface_for(arena)
     end
 
   end
