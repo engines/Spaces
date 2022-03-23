@@ -14,7 +14,7 @@ module Packing
     end
 
     def remove_auxiliaries
-      packs.remove_auxiliaries_for(pack)
+      packs.remove_auxiliaries_for(self)
     end
 
   end
