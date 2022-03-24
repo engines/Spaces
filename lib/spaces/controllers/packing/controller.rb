@@ -8,7 +8,8 @@ module Packing
         @action_command_map ||= super.merge({
           create: Commands::Saving,
           update: Commands::Saving,
-          artifacts: [::Spaces::Commands::Artifacts, {space: :packs}]
+          artifacts: [::Spaces::Commands::Artifacts, {space: :packs}],
+          build: Commands::Building
         })
       end
 

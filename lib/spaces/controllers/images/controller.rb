@@ -1,4 +1,4 @@
-module Imaging
+module Images
   module Controllers
     class Controller < ::Spaces::Controllers::Controller
 
@@ -6,7 +6,6 @@ module Imaging
 
       def action_command_map
         @action_command_map ||= super.merge({
-          build: Commands::Building
         })
       end
 
