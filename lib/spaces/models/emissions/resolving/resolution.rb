@@ -5,6 +5,8 @@ module Resolving
     include Registering
     include Packing
     include Provisioning
+    include Imaging
+    include Podding
     include Commissioning
     include Consuming
     include Servicing

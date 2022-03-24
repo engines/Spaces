@@ -23,4 +23,7 @@ requires 'packing', recurse: false
 requires 'provisioning/artifacts'
 requires 'provisioning', recurse: false
 
+requires 'images'
+requires 'pods'
+
 requires 'commissioning', recurse: false
