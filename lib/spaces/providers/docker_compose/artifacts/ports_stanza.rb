@@ -5,8 +5,8 @@ module Artifacts
       def snippets
         resolution.ports.map do |p|
           {
-            target: p.external_port,
-            published: p.start_port,
+            target: p.start_port,
+            published: p.external_port,
             protocol: p.protocol,
             mode: :host
           }
