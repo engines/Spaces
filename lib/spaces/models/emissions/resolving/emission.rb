@@ -1,6 +1,10 @@
 module Resolving
   class Emission < ::Arenas::Emission
 
+    class << self
+      def composition_class; ::Emissions::NoComposition ;end
+    end
+
     delegate(
       resolutions: :universe,
       important_division_for: :resolution
