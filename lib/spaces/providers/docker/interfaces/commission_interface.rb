@@ -1,8 +1,8 @@
-require_relative 'container_interface'
+require_relative 'pod_interface'
 
 module Providers
   module Docker
-    class CommissionInterface < ContainerInterface
+    class CommissionInterface < PodInterface
 
       relation_accessor :resolving_emission
 
@@ -13,14 +13,10 @@ module Providers
       end
 
       def container_identifier
-        "#{resolving_emission.identifier.gsub(resolving_emission.identifier_separator, '_')}_1"
+        "#{commission.identifier.gsub(commission.identifier_separator, '_')}_1"
       end
 
       #-------------------------------------------------------------------------
-
-      def initialize(resolving_emission)
-        self.resolving_emission = resolving_emission
-      end
 
     end
   end

@@ -2,7 +2,7 @@ require_relative 'interface'
 
 module Providers
   module Docker
-    class ContainerInterface < Interface
+    class PodInterface < Interface
 
       def execute(command)
         container.send(command)
@@ -17,8 +17,8 @@ module Providers
       end
 
       def bridge; ::Docker::Container ;end
-      def model_class; Container ;end
-      def summary_class; ContainerSummary ;end
+      def model_class; Pod ;end
+      def summary_class; PodSummary ;end
 
     end
   end

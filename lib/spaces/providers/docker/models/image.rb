@@ -10,7 +10,7 @@ module Providers
         @summary ||= {
           identifier: identifier,
           tags: tags,
-          size: size,
+          size: size
         }
       end
 

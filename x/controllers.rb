@@ -13,7 +13,7 @@ def controllers
     locations: ::Spaces::Controllers::RESTController.new(space: :locations),
     user_keys: Keys::Controllers::Controller.new,
     registry: Registry::Controllers::Controller.new,
-    imaging: Imaging::Controllers::Controller.new,
+    imaging: Images::Controllers::Controller.new,
     commissioning: Commissioning::Controllers::Controller.new,
     servicing: Servicing::Controllers::Controller.new,
     streaming: Spaces::Controllers::Streaming.new,
