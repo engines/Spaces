@@ -4,7 +4,7 @@ module Providers
   module Docker
     class CommissionInterface < PodInterface
 
-      relation_accessor :resolving_emission
+      alias_method :commission, :emission
 
       #-------------------------------------------------------------------------
 

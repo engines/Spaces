@@ -4,7 +4,7 @@ module Providers
   module Docker
     class PackInterface < ImageInterface
 
-      relation_accessor :pack
+      alias_method :pack, :emission
 
       delegate(
         packs: :universe,
@@ -34,10 +34,6 @@ module Providers
 
       def stream
         stream_for(pack, :build)
-      end
-
-      def initialize(pack)
-        self.pack = pack
       end
 
     end

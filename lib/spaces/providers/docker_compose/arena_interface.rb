@@ -5,7 +5,7 @@ module Providers
     class ArenaInterface < ::Providers::Interface
       include Streaming
 
-        relation_accessor :arena
+        alias_method :arena, :emission
 
         delegate(
           arenas: :universe,
@@ -49,10 +49,6 @@ module Providers
               dir: arenas.path_for(arena),
               file: 'docker-compose.yaml'
             )
-        end
-
-        def initialize(arena)
-          self.arena = arena
         end
 
     end

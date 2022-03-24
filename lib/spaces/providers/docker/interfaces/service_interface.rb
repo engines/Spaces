@@ -4,7 +4,7 @@ module Providers
   module Docker
     class ServiceInterface < CommissionInterface
 
-      alias_method :service, :resolving_emission
+      alias_method :service, :emission
 
       def execute_commands_for(milestone_name)
         wait_for
