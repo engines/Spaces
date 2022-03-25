@@ -22,7 +22,7 @@ module Spaces
           Packing::Space.new(identifier: :packs),
           Images::Space.new(identifier: :images),
           Provisioning::Space.new(identifier: :provisioning),
-          Pods::Space.new(identifier: :pods),
+          Capsules::Space.new(identifier: :capsules),
           Arenas::Space.new(identifier: :arenas),
           Keys::Space.new(identifier: :user_keys),
 

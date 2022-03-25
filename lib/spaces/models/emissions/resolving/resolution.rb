@@ -6,7 +6,7 @@ module Resolving
     include Packing
     include Provisioning
     include Imaging
-    include Podding
+    include Capsules
     include Commissioning
     include Consuming
     include Servicing

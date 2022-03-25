@@ -2,7 +2,7 @@ require_relative 'model'
 
 module Providers
   module Docker
-    class PodSummary < Model
+    class CapsuleSummary < Model
 
       def summary
         @summary ||= {

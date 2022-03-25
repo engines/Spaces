@@ -1,8 +1,8 @@
-require_relative 'pod_interface'
+require_relative 'capsule_interface'
 
 module Providers
   module Docker
-    class CommissionInterface < PodInterface
+    class CommissionInterface < CapsuleInterface
 
       alias_method :commission, :emission
 

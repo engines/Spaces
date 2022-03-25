@@ -1,8 +1,8 @@
-require_relative 'pod_summary'
+require_relative 'capsule_summary'
 
 module Providers
   module Docker
-    class Pod < PodSummary
+    class Capsule < CapsuleSummary
 
       def summary
         @summary ||= super.merge(

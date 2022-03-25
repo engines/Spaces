@@ -22,6 +22,6 @@ requires 'provisioning/artifacts'
 requires 'provisioning', recurse: false
 
 requires 'images'
-requires 'pods'
+requires 'capsules'
 
 requires 'commissioning', recurse: false
