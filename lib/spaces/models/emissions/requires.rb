@@ -1,5 +1,3 @@
-require_relative 'space'
-
 requires 'arenas/associations',
          'arenas/phases'
 requires 'arenas', recurse: false

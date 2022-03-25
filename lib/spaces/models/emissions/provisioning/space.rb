@@ -30,15 +30,13 @@ module Provisioning
       interface_for(provisions).commit
     end
 
-    def translator_for(provisions)  #TODO: refactor
-      provisions.arena.provisioning_provider.translator_for(provisions)
-    end
-
     def delete(identifiable, cascade: true)
       super.tap do
         arena_path(identifiable.identifier).exist_then { delete }
       end
     end
+
+    def provider_role; :provisioning ;end
 
     protected
 

@@ -1,5 +1,5 @@
 module Targeting
-  class TreeSpace < ::Spaces::Space
+  class TreeSpace < ::Emissions::Space
 
     def circular?(parent_identifier, candidate_child_identifier)
       descendant_path_identifiers.map do |x|

@@ -11,9 +11,7 @@ module Arenas
       interface_for(arena).execute(command)
     end
 
-    def interface_for(arena)
-      arena.provisioning_provider.interface_for(arena)
-    end
+    def provider_role; :provisioning ;end
 
   end
 end

@@ -1,9 +1,7 @@
 module Pods
-  class Space < ::Provisioning::Space
+  class Space < ::Emissions::Space
 
-    def interface_for(pod)  #TODO: refactor
-      pod.arena.runtime_provider.interface_for(pod)
-    end
+    def provider_role; :runtime ;end
 
   end
 end

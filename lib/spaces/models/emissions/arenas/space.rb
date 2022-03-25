@@ -1,9 +1,7 @@
-require_relative 'translating'
 require_relative 'interfacing'
 
 module Arenas
   class Space < ::Targeting::TreeSpace
-    include Translating
     include Interfacing
 
     alias_method :connectables_for, :new_leaves_for
@@ -30,6 +28,20 @@ module Arenas
 
     def path_for(model)
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
+    end
+
+    protected
+
+    def copy_auxiliaries_for(arena)
+      arena.all_packs.each do |p|
+        packs.copy_auxiliaries_for(p)
+      end
+    end
+
+    def remove_auxiliaries_for(arena)
+      arena.all_packs.each do |p|
+        packs.remove_auxiliaries_for(p)
+      end
     end
 
   end

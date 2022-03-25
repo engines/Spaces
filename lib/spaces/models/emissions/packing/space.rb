@@ -11,19 +11,9 @@ module Packing
       interface_for(pack).build
     end
 
-    def interface_for(pack)  #TODO: refactor
-      pack.arena.packing_provider.interface_for(pack)
-    end
-
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
-      end
-    end
-
-    def artifacts_for(identifier)
-      if (m = exist_then_by(identifier))
-        translator_for(m).artifacts
       end
     end
 
@@ -38,9 +28,7 @@ module Packing
       warn(error: e, identifier: pack.identifier, klass: klass)
     end
 
-    def translator_for(pack)  #TODO: refactor
-      pack.arena.packing_provider.translator_for(pack)
-    end
+    def provider_role; :packing ;end
 
     def copy_auxiliaries_for(pack)
       pack.auxiliary_directories.each do |d|

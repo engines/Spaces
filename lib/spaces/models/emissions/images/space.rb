@@ -1,9 +1,7 @@
 module Images
-  class Space < ::Packing::Space
+  class Space < ::Emissions::Space
 
-    def interface_for(image)  #TODO: refactor
-      image.arena.runtime_provider.interface_for(image)
-    end
+    def provider_role; :runtime ;end
 
   end
 end
