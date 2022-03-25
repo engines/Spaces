@@ -1,7 +1,7 @@
 require_relative 'space'
 
 module Spaces
-  class UniverseSpace < Space
+  class UniverseSpace < PathSpace
 
     class << self
       def default_model_class; Universe ;end

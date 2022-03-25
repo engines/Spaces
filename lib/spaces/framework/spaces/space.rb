@@ -1,16 +1,5 @@
-require_relative 'paths'
-require_relative 'reading'
-require_relative 'saving'
-require_relative 'deleting'
-require_relative 'topology'
-
 module Spaces
   class Space < Model
-    include ::Spaces::Paths
-    include ::Spaces::Reading
-    include ::Spaces::Saving
-    include ::Spaces::Deleting
-    include ::Spaces::Topology
 
     class << self
       def universes; @@universes ||= UniverseSpace.new ;end
@@ -25,24 +14,8 @@ module Spaces
     def identifier; struct.identifier ;end
     def space; itself ;end
 
-    def ensure_space
-      path.mkpath
-    end
-
     def summaries
       all.map(&:summary)
-    end
-
-    def all
-      identifiers.map { |i| by(i) }
-    end
-
-    def identifiers(*_)
-      path.glob('*').map { |p| p.basename.to_s }
-    end
-
-    def exist?(identifiable)
-      identifiable && path_for(identifiable).exist?
     end
 
     def exist_then(identifiable, &block)
@@ -51,6 +24,10 @@ module Spaces
 
     def absent(array)
       array.reject { |m| exist?(m) }
+    end
+
+    def interface_for(model)
+      model.provider_for(provider_role).interface_for(model)
     end
 
     def initialize(identifier:)

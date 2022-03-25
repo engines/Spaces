@@ -1,5 +1,5 @@
 module Emissions
-  class Space < ::Spaces::Space
+  class Space < ::Spaces::PathSpace
 
     def identifiers(arena_identifier: '*', blueprint_identifier: '*')
       path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
@@ -20,10 +20,6 @@ module Emissions
 
     def translator_for(emission)
       emission.provider_for(provider_role).translator_for(emission)
-    end
-
-    def interface_for(emission)
-      emission.provider_for(provider_role).interface_for(emission)
     end
 
   end

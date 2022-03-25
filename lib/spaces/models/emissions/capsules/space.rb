@@ -1,7 +1,5 @@
 module Capsules
-  class Space < ::Emissions::Space
-
-    def provider_role; :runtime ;end
+  class Space < ::Emissions::InterfaceSpace
 
   end
 end

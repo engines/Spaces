@@ -2,7 +2,7 @@ require_relative 'status'
 
 module Spaces
   module Git
-    class Space < ::Spaces::Space
+    class Space < ::Spaces::PathSpace
 
       delegate(locations: :universe)
 
