@@ -14,10 +14,6 @@ module Packing
         end
       end
 
-      def space_identifier
-        super || :packs
-      end
-
     end
   end
 end
