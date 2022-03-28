@@ -23,6 +23,10 @@ module Providers
         image.tag('repo' => pack.output_identifier, 'force' => true, 'tag' => 'latest')
       end
 
+      def delete(identifier)
+        bridge.remove(identifier)
+      end
+
       def process_output(encoded)
         # FIX ME! The rescue is needed due to JSON parse errors
         output = JSON.parse(encoded, symbolize_names: true)

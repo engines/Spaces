@@ -5,13 +5,13 @@ module Providers
     class CapsuleSummary < Model
 
       def summary
-        @summary ||= {
+        @summary ||= OpenStruct.new(
           identifier: identifier,
           image_identifier: image_identifier,
           spaces_identifier: spaces_identifier,
           name: name,
           status: state
-        }
+        )
       end
 
       def spaces_identifier

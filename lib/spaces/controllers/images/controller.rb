@@ -1,6 +1,6 @@
 module Images
   module Controllers
-    class Controller < ::Spaces::Controllers::Controller
+    class Controller < ::Spaces::Controllers::RESTController
 
       def space_identifier; :images ;end
 

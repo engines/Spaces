@@ -26,10 +26,6 @@ module Spaces
       array.reject { |m| exist?(m) }
     end
 
-    def interface_for(model)
-      model.provider_for(provider_role).interface_for(model)
-    end
-
     def initialize(identifier:)
       self.struct = OpenStruct.new(identifier: identifier.to_sym)
     end

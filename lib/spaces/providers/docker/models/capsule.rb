@@ -6,8 +6,10 @@ module Providers
 
       def summary
         @summary ||= super.merge(
-          status: state.status,
-          state: state.to_h
+          OpenStruct.new(
+            status: state.status,
+            state: state.to_h
+          )
         )
       end
 
