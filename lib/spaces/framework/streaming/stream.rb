@@ -15,10 +15,15 @@ module Spaces
 
       def path; streaming_path_for(identifiable).join("#{identifier}.#{default_extension}") ;end
 
+      def ensure_path_for(identifiable)
+        streaming_path_for(identifiable).mkpath
+      end
+
       def default_extension; :out ;end
       def eot; 4.chr ;end
 
       def initialize(identifiable, identifier:)
+        ensure_path_for(identifiable)
         self.identifier = identifier || qualifier
         self.identifiable = identifiable
       end

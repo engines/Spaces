@@ -2,7 +2,8 @@ require_relative 'synchronizing'
 
 module Publishing
   class Space < Spaces::Git::Space
-    include ::Publishing::Synchronizing
+    include ::Spaces::Streaming
+    include Synchronizing
 
     class << self
       def default_model_class
