@@ -7,7 +7,7 @@ module Spaces
       protected
 
       def assembly
-        space.artifacts_for(identifier, :provisioning).map(&:content)
+        space.artifacts_for(identifier).map(&:content)
       end
 
     end
