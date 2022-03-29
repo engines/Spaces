@@ -1,9 +1,6 @@
-require_relative 'streaming'
-
 module Providers
   module DockerCompose
     class ArenaInterface < ::Providers::Interface
-      include Streaming
 
         alias_method :arena, :emission
 
