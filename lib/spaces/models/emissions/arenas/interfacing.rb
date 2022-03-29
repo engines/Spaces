@@ -1,5 +1,6 @@
 module Arenas
   module Interfacing
+    include Emissions::Providing
     include ::Spaces::Streaming
 
     def init(arena); execute_on_provisioner(:init, arena) ;end
