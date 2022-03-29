@@ -1,15 +1,14 @@
+require_relative 'interfacing'
+
 module Packing
-  class Space < ::Emissions::Space
+  class Space < ::Settling::Space
+    include Interfacing
 
     class << self
       def default_model_class; Pack ;end
     end
 
     delegate(resolutions: :universe)
-
-    def build(pack)
-      interface_for(pack).build
-    end
 
     def by(identifier, klass = default_model_class)
       super.tap do |m|

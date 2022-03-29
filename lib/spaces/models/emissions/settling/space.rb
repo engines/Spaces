@@ -3,7 +3,7 @@ module Settling
 
     delegate([:blueprints, :arenas] => :universe)
 
-    def by(settlement)
+    def by(settlement, klass = default_model_class)
       super.tap do |m|
         m.arena = arenas.by(m.arena_identifier)
       end
