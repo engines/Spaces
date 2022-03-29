@@ -14,7 +14,7 @@ module Emissions
     def interfaces
       arenas.all.map do |a|
         a.provider_for(provider_role).interface_for_all_in(identifier.singularize)
-      end.flatten.uniq
+      end.flatten.uniq(&:uniqueness)
     end
 
     def provider_role; :runtime ;end

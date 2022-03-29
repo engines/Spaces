@@ -4,6 +4,8 @@ module Providers
 
       relation_accessor :emission
 
+      def uniqueness; [klass.name, emission&.identifier] ;end
+
       def initialize(emission)
         self.emission = emission
       end
