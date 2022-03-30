@@ -4,6 +4,8 @@ module Providers
   module Docker
     class CapsuleInterface < Interface
 
+      delegate(delete: :bridge)
+
       def execute(command)
         container.send(command)
       end

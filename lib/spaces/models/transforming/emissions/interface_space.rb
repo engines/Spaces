@@ -1,14 +1,15 @@
 module Emissions
   class InterfaceSpace < ::Spaces::DelegatedSpace
+    #TODO: what happens when there are multiple interfaces?
 
     delegate(arenas: :universe)
 
-    def by(identifier) #TODO: what happens when there are multiple interfaces?
+    def by(identifier)
       interfaces.map { |i| i.by(identifier) }.first
     end
 
-    def delete(identifier) #TODO: what happens when there are multiple interfaces?
-      interfaces.first.delete(identifier)
+    def execute(instruction, identifier)
+      by(identifier).execute(instruction)
     end
 
     def interfaces

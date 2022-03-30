@@ -4,6 +4,8 @@ module Providers
   module Docker
     class Capsule < CapsuleSummary
 
+      delegate([:running, :paused] => :state)
+
       def summary
         @summary ||= super.merge(
           OpenStruct.new(
@@ -11,6 +13,16 @@ module Providers
             state: state.to_h
           )
         )
+      end
+
+      def start
+        return unpause if paused
+        return restart if running
+        model_interface.start
+      end
+
+      def switch_pause
+        paused ? unpause : pause
       end
 
       def image_id; image ;end
