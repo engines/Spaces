@@ -1,5 +1,3 @@
-require_relative 'space'
-
 requires 'arenas/associations',
          'arenas/phases'
 requires 'arenas', recurse: false
@@ -22,5 +20,8 @@ requires 'packing', recurse: false
 
 requires 'provisioning/artifacts'
 requires 'provisioning', recurse: false
+
+requires 'images'
+requires 'capsules'
 
 requires 'commissioning', recurse: false

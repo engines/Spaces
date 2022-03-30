@@ -19,7 +19,6 @@ controllers.arenas.create(model: {identifier: :services})
 controllers.arenas.stage(identifier: :services, blueprint_identifier: :mariadb)
 controllers.arenas.stage(identifier: :services, blueprint_identifier: :wap)
 
-
 # # build images for the arena
 # controllers.arenas.build(identifier: :services, threaded: false)
 #
@@ -30,4 +29,4 @@ controllers.arenas.stage(identifier: :services, blueprint_identifier: :wap)
 # controllers.servicing.service(milestone: :add, identifier: 'database::mariadb', consumer_identifier: 'development::phpmyadmin')
 
 # # start a container
-# controllers.commissioning.start(identifier: 'database::mariadb')
+# controllers.commissioning.start(identifier: 'services::mariadb')

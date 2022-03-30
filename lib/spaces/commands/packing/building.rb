@@ -1,8 +1,8 @@
-module Imaging
+module Packing
   module Commands
     class Building < Spaces::Commands::Executing
 
-      def execution_instruction; :build ;end
+      def instruction; :build ;end
 
       def payload
         return super unless result&.class == Packer::Output::Build

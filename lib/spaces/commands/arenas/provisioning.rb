@@ -15,7 +15,7 @@ module Arenas
       protected
 
       def _run
-        space.save_artifacts_for(current_model, :provisioning).map(&:content)
+        space.save_artifacts_for(current_model).map(&:content)
         super
       end
 

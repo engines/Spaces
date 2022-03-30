@@ -4,14 +4,16 @@ module Spaces
   module Commands
     class Executing < Reading
 
-      def execution_instruction
+      def instruction
         input[:execute]
       end
 
       protected
 
       def commit
-        space.send(execution_instruction, model)
+        space.execute(instruction, model)
+      rescue TypeError
+        raise ::Spaces::Errors::MissingInput, {input: input}
       end
 
     end

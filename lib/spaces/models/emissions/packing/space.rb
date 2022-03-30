@@ -1,5 +1,6 @@
 module Packing
-  class Space < ::Emissions::Space
+  class Space < ::Settling::Space
+    include Emissions::Providing
 
     class << self
       def default_model_class; Pack ;end
@@ -7,19 +8,9 @@ module Packing
 
     delegate(resolutions: :universe)
 
-    def build(pack)
-      interface_for(pack).build
-    end
-
     def by(identifier, klass = default_model_class)
       super.tap do |m|
         m.resolution = resolutions.by(identifier)
-      end
-    end
-
-    def artifacts_for(identifier)
-      if (m = exist_then_by(identifier))
-        interface_for(m).artifacts
       end
     end
 
@@ -28,15 +19,13 @@ module Packing
 
       ensure_connections_exist_for(pack)
       super.tap do
-        interface_for(pack).save_artifacts
+        translator_for(pack)&.save_artifacts_to(writing_path_for(pack))
       end
     rescue ::Packing::Errors::NoImage => e
       warn(error: e, identifier: pack.identifier, klass: klass)
     end
 
-    def interface_for(pack)  #TODO: refactor
-      pack.arena.packing_provider.interface_for(pack, purpose: :packing, space: self)
-    end
+    def provider_role; :packing ;end
 
     def copy_auxiliaries_for(pack)
       pack.auxiliary_directories.each do |d|

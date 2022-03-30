@@ -1,7 +1,7 @@
 module Providers
   module Providers
 
-    def provider_for(purpose); provider_map[purpose] ;end
+    def provider_for(role); provider_map[role] ;end
 
     def providers
       provider_map.values

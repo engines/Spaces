@@ -20,9 +20,9 @@ module Spaces
           Resolving::Space.new(identifier: :resolutions),
           Registry::Space.new(identifier: :registry),
           Packing::Space.new(identifier: :packs),
-          Imaging::Space.new(identifier: :images),
+          Images::Space.new(identifier: :images),
           Provisioning::Space.new(identifier: :provisioning),
-          Runtime::Space.new(identifier: :runtime),
+          Capsules::Space.new(identifier: :capsules),
           Arenas::Space.new(identifier: :arenas),
           Keys::Space.new(identifier: :user_keys),
 

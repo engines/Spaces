@@ -2,7 +2,9 @@ require_relative 'interface'
 
 module Providers
   module Docker
-    class ContainerInterface < Interface
+    class CapsuleInterface < Interface
+
+      delegate(delete: :bridge)
 
       def execute(command)
         container.send(command)
@@ -17,8 +19,8 @@ module Providers
       end
 
       def bridge; ::Docker::Container ;end
-      def model_class; Container ;end
-      def summary_class; ContainerSummary ;end
+      def model_class; Capsule ;end
+      def summary_class; CapsuleSummary ;end
 
     end
   end

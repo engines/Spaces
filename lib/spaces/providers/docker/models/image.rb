@@ -6,16 +6,24 @@ module Providers
 
       relation_accessor :history
 
+      delegate(remove: :model_interface)
+
       def summary
-        @summary ||= {
+        @summary ||= OpenStruct.new(
           identifier: identifier,
           tags: tags,
-          size: size,
-        }
+          size: size
+        )
       end
 
       def identifier; id[7..18] ;end
       def tags; repo_tags ;end
+
+      def delete; remove ;end
+
+      def tagged?
+        !tags.first.include?('none')
+      end
 
       def descendants
         @descendants ||=

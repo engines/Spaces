@@ -1,5 +1,5 @@
-module Packing
-  class Composition < ::Emissions::Composition
+module Emissions
+  class NoComposition < Composition
 
     class << self
       def division_classes; [] ;end

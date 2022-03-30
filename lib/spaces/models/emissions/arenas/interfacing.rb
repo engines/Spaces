@@ -1,5 +1,6 @@
 module Arenas
   module Interfacing
+    include Emissions::Providing
     include ::Spaces::Streaming
 
     def init(arena); execute_on_provisioner(:init, arena) ;end
@@ -8,12 +9,10 @@ module Arenas
     def apply(arena); execute_on_provisioner(:apply, arena) ;end
 
     def execute_on_provisioner(command, arena)
-      interface_for(arena, :provisioning).execute(command)
+      interface_for(arena).execute(command)
     end
 
-    def interface_for(arena, purpose)
-      arena.provisioning_provider.interface_for(arena, purpose: purpose, space: self)
-    end
+    def provider_role; :provisioning ;end
 
   end
 end

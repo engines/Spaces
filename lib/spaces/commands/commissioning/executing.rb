@@ -10,7 +10,7 @@ module Commissioning
 
       def commit
         assembly.tap do |a|
-          a.execute(execution_instruction)
+          a.execute(instruction)
         end.state
       end
 

@@ -17,8 +17,10 @@ module Spaces
     end
 
     def streaming_path_for(identifiable)
-      workspace.join("#{universes.identifier}", "#{default_streaming_location}", "#{identifier}")
+      workspace.join("#{universes.identifier}", "#{default_streaming_location}", "#{identifiable.identifier.as_path}")
     end
+
+    def default_streaming_location; :streams ;end
 
     def path_for(identifiable)
       path.join(identifiable.context_identifier.as_path)

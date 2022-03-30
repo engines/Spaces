@@ -22,7 +22,7 @@ module Provisioning
     def save(provisions)
       ensure_connections_exist_for(provisions)
       super.tap do
-        interface_for(provisions)&.save_artifacts
+        translator_for(provisions)&.save_artifacts_to(writing_path_for(provisions))
       end
     end
 
@@ -30,15 +30,13 @@ module Provisioning
       interface_for(provisions).commit
     end
 
-    def interface_for(provisions)  #TODO: refactor
-      provisions.arena.provisioning_provider.interface_for(provisions, purpose: :provisioning, space: space)
-    end
-
     def delete(identifiable, cascade: true)
       super.tap do
         arena_path(identifiable.identifier).exist_then { delete }
       end
     end
+
+    def provider_role; :provisioning ;end
 
     protected
 

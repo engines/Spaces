@@ -1,5 +1,5 @@
 module Keys
-  class Space < ::Spaces::Space
+  class Space < ::Spaces::PathSpace
 
     class << self
       def default_model_class

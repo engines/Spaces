@@ -1,8 +1,8 @@
-require_relative 'container_interface'
+require_relative 'commission_interface'
 
 module Providers
   module Docker
-    class ServiceInterface < ContainerInterface
+    class ServiceInterface < CommissionInterface
 
       alias_method :service, :emission
 
