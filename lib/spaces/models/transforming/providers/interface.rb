@@ -6,6 +6,8 @@ module Providers
 
       def uniqueness; [klass.name, emission&.identifier] ;end
 
+      def execute(instruction); send(instruction) ;end
+
       def initialize(emission)
         self.emission = emission
       end

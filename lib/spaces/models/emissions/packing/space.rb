@@ -1,8 +1,6 @@
-require_relative 'interfacing'
-
 module Packing
   class Space < ::Settling::Space
-    include Interfacing
+    include Emissions::Providing
 
     class << self
       def default_model_class; Pack ;end
