@@ -15,13 +15,13 @@ module Providers
         )
       end
 
-      def start
+      def toggle_start
         return unpause if paused
         return restart if running
         model_interface.start
       end
 
-      def switch_pause
+      def toggle_pause
         paused ? unpause : pause
       end
 

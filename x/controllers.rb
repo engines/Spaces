@@ -5,7 +5,8 @@ def controllers
     universe: Universes::Controllers::Controller.new,
     publishing: Publishing::Controllers::Controller.new,
     blueprinting: Blueprinting::Controllers::Controller.new,
-    querying: ::Spaces::Controllers::Querying.new,
+    domains: Domains::Controllers::Controller.new,
+    providing: Providing::Controllers::Controller.new,
     arenas: Arenas::Controllers::Controller.new,
     resolving: Resolving::Controllers::Controller.new,
     packing: Packing::Controllers::Controller.new,
@@ -18,6 +19,6 @@ def controllers
     commissioning: Commissioning::Controllers::Controller.new,
     servicing: Servicing::Controllers::Controller.new,
     streaming: Spaces::Controllers::Streaming.new,
-    domains: Domains::Controllers::Controller.new
+    querying: ::Spaces::Controllers::Querying.new
   )
 end
