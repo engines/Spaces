@@ -12,10 +12,13 @@ module Providers
       alias_method :application_qualifiers, :subqualifiers
     end
 
-    attr_accessor :role
+    def name; identifier ;end
 
-    def initialize(role)
-      self.role = role
+    def identifier; struct[:identifier] ;end
+
+    def initialize(struct: nil, identifiable: nil)
+      super(struct: struct)
+      self.struct.identifier = identifiable.identifier if identifiable
     end
 
   end
