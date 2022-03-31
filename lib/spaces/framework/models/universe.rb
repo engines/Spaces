@@ -15,18 +15,21 @@ module Spaces
         @@space_array ||=
         [
           Publishing::Space.new(identifier: :publications),
-          Locating::Space.new(identifier: :locations),
-          Blueprinting::Space.new(identifier: :blueprints),
-          Resolving::Space.new(identifier: :resolutions),
-          Registry::Space.new(identifier: :registry),
-          Packing::Space.new(identifier: :packs),
-          Images::Space.new(identifier: :images),
-          Provisioning::Space.new(identifier: :provisioning),
-          Capsules::Space.new(identifier: :capsules),
-          Arenas::Space.new(identifier: :arenas),
           Keys::Space.new(identifier: :user_keys),
+          Blueprinting::Space.new(identifier: :blueprints),
+          Locating::Space.new(identifier: :locations),
 
-          Domains::Space.new(identifier: :domains)
+          Providers::Space.new(identifier: :providers),
+          Domains::Space.new(identifier: :domains),
+          Arenas::Space.new(identifier: :arenas),
+
+          Resolving::Space.new(identifier: :resolutions),
+          Packing::Space.new(identifier: :packs),
+          Provisioning::Space.new(identifier: :provisioning),
+
+          Registry::Space.new(identifier: :registry),
+          Images::Space.new(identifier: :images),
+          Capsules::Space.new(identifier: :capsules)
         ]
       end
     end

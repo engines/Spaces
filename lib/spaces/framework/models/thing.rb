@@ -28,6 +28,14 @@ module Spaces
 
       def descriptor_class; Descriptor ;end
 
+      def subclasses
+        @@subclasses ||= ObjectSpace.each_object(Class).select { |c| c < self }
+      end
+
+      def subqualifiers
+        @@subqualifiers ||= subclasses.map(&:qualifier).sort
+      end
+
       def klasses(inside:, inheriting:)
         inside.constants.map { |c| inside.const_get(c) }.select {|k| k < inheriting }
       end
