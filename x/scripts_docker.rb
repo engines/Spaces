@@ -35,6 +35,11 @@ controllers.blueprinting.summarize(identifier: :redmine)
 controllers.arenas.create(model: {identifier: :development})
 controllers.arenas.state(identifier: :development)
 
+# define providers
+controllers.arenas.provide(identifier: :development, role_identifier: :packing, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :development, role_identifier: :provisioning, provider_identifier: :docker_compose_local)
+controllers.arenas.provide(identifier: :development, role_identifier: :runtime, provider_identifier: :docker_local)
+
 # connect the services arena to the applications arena
 controllers.arenas.connect(identifier: :development, other_identifier: :services)
 controllers.arenas.state(identifier: :development)

@@ -1,10 +1,10 @@
-require_relative 'prerequisites'
+require_relative 'providing'
 require_relative 'summary'
 require_relative 'relations'
 
 module Arenas
   class Arena < ::Emissions::Emission
-    include Prerequisites
+    include Providing
     include Binding
     include Connecting
     include Blueprinting

@@ -20,7 +20,7 @@ module Arenas
     end
 
     def providers
-       arena.provider_map.transform_values { |v| v.class.name }
+       arena.providers.map { |p| p.class.name }
     end
 
     def missing_blueprints; missing(:unblueprinted) ;end
