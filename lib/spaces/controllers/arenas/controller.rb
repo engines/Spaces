@@ -16,7 +16,7 @@ module Arenas
           bind: Commands::Binding,
           resolve: Commands::Resolving,
           pack: Commands::Packing,
-          provision: Commands::Provisioning,
+          orchestrate: Commands::Orchestrating,
           more_binders: Commands::MoreBinders,
           build: Commands::Building,
           init: [::Spaces::Commands::Executing, {execute: :init, threaded: true}],

@@ -18,8 +18,8 @@ requires 'registry'
 requires 'packing/artifacts'
 requires 'packing', recurse: false
 
-requires 'provisioning/artifacts'
-requires 'provisioning', recurse: false
+requires 'orchestrating/artifacts'
+requires 'orchestrating', recurse: false
 
 requires 'images'
 requires 'capsules'

@@ -90,7 +90,7 @@ import
 r = universe.resolutions.by('mariadb')
 save_pack
 save_arena
-save_provisions
+save_orchestration
 ```
 
 # Containers

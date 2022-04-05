@@ -1,6 +1,6 @@
 module Artifacts
   module Terraform
-    class Artifact < ::Artifacts::Provisioning::Artifact
+    class Artifact < ::Artifacts::Orchestrating::Artifact
 
       def filename
         "#{emission.blueprint_identifier}.#{extension}"

@@ -1,16 +1,16 @@
 require_relative 'golden_packing'
 
 module Arenas
-  module Provisioning
+  module Orchestrating
     include ::Arenas::GoldenPacking
 
-    def provisioned; present_in(provisioning) ;end
+    def orchestrated; present_in(orchestrations) ;end
 
-    def unprovisioned
-      absent_in(provisioning)
+    def unorchestrated
+      absent_in(orchestrations)
     end
 
-    def unsaved_provisions; bound_resolutions.reject(&:provisioned?) ;end
+    def unsaved_orchestration; bound_resolutions.reject(&:orchestrated?) ;end
 
     def volume_path; input.volumes[:path] ;end
 

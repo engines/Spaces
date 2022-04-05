@@ -16,7 +16,7 @@ controllers.arenas.create(model: {identifier: :services})
 
 # define providers
 controllers.arenas.provide(identifier: :services, role_identifier: :packing, provider_identifier: :docker_local)
-controllers.arenas.provide(identifier: :services, role_identifier: :provisioning, provider_identifier: :docker_compose_local)
+controllers.arenas.provide(identifier: :services, role_identifier: :orchestration, provider_identifier: :docker_compose_local)
 controllers.arenas.provide(identifier: :services, role_identifier: :runtime, provider_identifier: :docker_local)
 
 # ------------------------------------------------------------------------------

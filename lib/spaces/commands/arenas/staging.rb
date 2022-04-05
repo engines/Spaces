@@ -13,7 +13,7 @@ module Arenas
           Binding.new(identifier: identifier, blueprint_identifier: blueprint_identifier),
           Resolving.new(identifier: identifier),
           Packing.new(identifier: identifier),
-          Provisioning.new(identifier: identifier)
+          Orchestrating.new(identifier: identifier)
         ]
       end
 

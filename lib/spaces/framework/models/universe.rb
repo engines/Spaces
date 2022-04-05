@@ -25,7 +25,7 @@ module Spaces
 
           Resolving::Space.new(identifier: :resolutions),
           Packing::Space.new(identifier: :packs),
-          Provisioning::Space.new(identifier: :provisioning),
+          Orchestrating::Space.new(identifier: :orchestrations),
 
           Registry::Space.new(identifier: :registry),
           Images::Space.new(identifier: :images),

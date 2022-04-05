@@ -29,10 +29,10 @@ arena = universe.arenas.by('development')
 embedded = arena.with_embeds
 universe.arenas.save(embedded)
 
-# save provisions for bootstrap
+# save orchestration for bootstrap
 resolution = universe.resolutions.by('development::arena')
-provisions = resolution.provisioned
-universe.provisioning.save(provisions)
+orchestration = resolution.orchestrated
+universe.orchestrations.save(orchestration)
 
 # import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/powerdns')
@@ -49,10 +49,10 @@ resolution = universe.resolutions.by('development::powerdns')
 pack = resolution.packed
 universe.packs.save(pack)
 
-# save provisions for resolution
+# save orchestration for resolution
 resolution = universe.resolutions.by('development::powerdns')
-provisions = resolution.provisioned
-universe.provisioning.save(provisions)
+orchestration = resolution.orchestrated
+universe.orchestrations.save(orchestration)
 
 # import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
@@ -69,7 +69,7 @@ resolution = universe.resolutions.by('development::phpmyadmin')
 pack = resolution.packed
 universe.packs.save(pack)
 
-# save provisions for resolution
+# save orchestration for resolution
 resolution = universe.resolutions.by('development::phpmyadmin')
-provisions = resolution.provisioned
-universe.provisioning.save(provisions)
+orchestration = resolution.orchestrated
+universe.orchestrations.save(orchestration)

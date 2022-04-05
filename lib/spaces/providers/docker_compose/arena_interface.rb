@@ -10,10 +10,10 @@ module Providers
         )
 
         def execute(command)
-          identifier.tap { provisioning_for(execution_map[:"#{command}"]) }
+          identifier.tap { orchestration_for(execution_map[:"#{command}"]) }
         end
 
-        def provisioning_for(command)
+        def orchestration_for(command)
           copy_auxiliaries
           with_streaming(arena, command) do |stream|
             begin
@@ -30,7 +30,7 @@ module Providers
         end
 
         def plan
-          bridge.config(arena.provisioned.map(&:identifier))
+          bridge.config(arena.orchestrated.map(&:identifier))
         end
 
         def execution_map

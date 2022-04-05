@@ -4,7 +4,7 @@ module Resolving
   class Resolution < ::Settling::Settlement
     include Registering
     include Packing
-    include Provisioning
+    include Orchestrating
     include Imaging
     include Capsules
     include Commissioning
@@ -17,7 +17,7 @@ module Resolving
     end
 
     delegate(
-      [:packs, :provisioning, :registry] => :universe
+      [:packs, :orchestrations, :registry] => :universe
     )
 
     def configuration
