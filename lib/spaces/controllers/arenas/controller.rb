@@ -8,6 +8,7 @@ module Arenas
         @action_command_map ||= super.merge({
           create: Commands::Saving,
           state: Commands::StateReading,
+          provide: Commands::Providing,
           update: Commands::Saving,
           connectables: [::Spaces::Commands::Querying, method: :connectables_for],
           connect: Commands::Connecting,

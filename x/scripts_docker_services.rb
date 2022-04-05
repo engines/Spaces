@@ -14,6 +14,11 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 # save a services arena for common use
 controllers.arenas.create(model: {identifier: :services})
 
+# define providers
+controllers.arenas.provide(identifier: :services, role_identifier: :packing, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :services, role_identifier: :provisioning, provider_identifier: :docker_compose_local)
+controllers.arenas.provide(identifier: :services, role_identifier: :runtime, provider_identifier: :docker_local)
+
 # ------------------------------------------------------------------------------
 # stage some blueprints in the services arena
 controllers.arenas.stage(identifier: :services, blueprint_identifier: :mariadb)

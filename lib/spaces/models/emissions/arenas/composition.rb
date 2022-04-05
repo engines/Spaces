@@ -4,6 +4,7 @@ module Arenas
     class << self
       def associative_classes
         [
+          Associations::RoleProviders,
           Associations::Domains,
           Associations::Connections
         ]

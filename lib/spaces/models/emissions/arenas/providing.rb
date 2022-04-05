@@ -1,18 +1,13 @@
 module Arenas
-  module Prerequisites
-    include ::Providers::Providers
+  module Providing
 
-    def provider_role_map
-      @provider_role_map ||= struct.input.providers&.to_h || {}
+    def providers
+      role_providers.map(&:provider)
     end
 
-    def prerequisite_map
-      @prerequisite_map ||= provider_qualifier_map.transform_values do |v|
-        resolution_map[v] || resolution_map[v.camelize.downcase]
-      end.compact
+    def provider_for(role_identifier)
+      role_providers.for_role(role_identifier).provider
     end
-
-    def prerequisite_keys; prerequisite_map.keys ;end
 
     #???????????????????????????????????????????????????????????????????????????
     def runtime_provider; provider_for(:runtime) ;end
