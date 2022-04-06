@@ -1,13 +1,13 @@
 module Adapters
-  class Provisions < ResolvedEmission
+  class Orchestration < ResolvedEmission
 
     delegate(
-      [:provisioning_provider, :runtime_qualifier] => :arena,
+      [:orchestration_provider, :runtime_qualifier] => :arena,
       image: :emission
     )
 
-    alias_method :provider, :provisioning_provider
-    alias_method :provisions, :emission
+    alias_method :provider, :orchestration_provider
+    alias_method :orchestration, :emission
 
     def adapter_name_elements
       [super, runtime_qualifier].flatten

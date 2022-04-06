@@ -28,7 +28,7 @@ module Artifacts
       end
 
       def provider_keys
-        super - [:provisioning]
+        super - [:orchestration]
       end
 
     end

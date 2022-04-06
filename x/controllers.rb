@@ -10,7 +10,7 @@ def controllers
     arenas: Arenas::Controllers::Controller.new,
     resolving: Resolving::Controllers::Controller.new,
     packing: Packing::Controllers::Controller.new,
-    provisioning: ::Spaces::Controllers::RESTController.new(space: :provisioning),
+    orchestrating: ::Spaces::Controllers::RESTController.new(space: :orchestrations),
     locations: ::Spaces::Controllers::RESTController.new(space: :locations),
     user_keys: Keys::Controllers::Controller.new,
     registry: Registry::Controllers::Controller.new,

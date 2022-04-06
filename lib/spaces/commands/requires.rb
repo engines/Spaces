@@ -2,5 +2,5 @@ requires 'arenas',
          'blueprinting',
          'publishing',
          'packing',
-         'provisioning',
+         'orchestrating',
          'registry'

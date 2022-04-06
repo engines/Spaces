@@ -1,9 +1,9 @@
-module Provisioning
+module Orchestrating
   class Space < ::Emissions::Space
 
     class << self
       def default_model_class
-        Provisions
+        Orchestration
       end
     end
 
@@ -19,15 +19,15 @@ module Provisioning
       end
     end
 
-    def save(provisions)
-      ensure_connections_exist_for(provisions)
+    def save(orchestration)
+      ensure_connections_exist_for(orchestration)
       super.tap do
-        translator_for(provisions)&.save_artifacts_to(writing_path_for(provisions))
+        translator_for(orchestration)&.save_artifacts_to(writing_path_for(orchestration))
       end
     end
 
-    def commit(provisions)
-      interface_for(provisions).commit
+    def commit(orchestration)
+      interface_for(orchestration).commit
     end
 
     def delete(identifiable, cascade: true)
@@ -36,12 +36,12 @@ module Provisioning
       end
     end
 
-    def provider_role; :provisioning ;end
+    def provider_role; :orchestration ;end
 
     protected
 
-    def ensure_connections_exist_for(provisions)
-      provisions.connections_provisioned.each { |p| save(p) }
+    def ensure_connections_exist_for(orchestration)
+      orchestration.connections_orchestrated.each { |p| save(p) }
     end
 
   end

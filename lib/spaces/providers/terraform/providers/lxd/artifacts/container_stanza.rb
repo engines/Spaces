@@ -50,7 +50,7 @@ module Artifacts
         end
 
         def ports_snippets
-          provisions.ports.snippets if provisions.has?(:ports)
+          orchestration.ports.snippets if orchestration.has?(:ports)
         end
 
         def dependency_string

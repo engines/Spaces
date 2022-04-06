@@ -7,9 +7,9 @@ module Resolving
       end
     end
 
-    delegate([:registry, :packs, :provisioning] => :universe)
+    delegate([:registry, :packs, :orchestrations] => :universe)
 
-    def cascade_deletes; [:packs, :provisioning] ;end
+    def cascade_deletes; [:packs, :orchestrations] ;end
 
     def save(model)
       super.tap do

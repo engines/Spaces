@@ -46,16 +46,16 @@ controllers.arenas.resolve(identifier: :lxd_arena)
 controllers.arenas.pack(identifier: :lxd_arena)
 # RUN PACKER HERE?
 
-# save provisions for the arena's runtime
+# save orchestration for the arena's runtime
 controllers.arenas.runtime(identifier: :lxd_arena)
 # RUN INIT HERE?
 
-# save provisions for the arena's other providers
-controllers.arenas.provision(identifier: :lxd_arena)
+# save orchestration for the arena's other providers
+controllers.arenas.orchestrate(identifier: :lxd_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING? IT MUST HAPPEN BEFORE ...
 
-# save post-initialization provisions for providers
-controllers.arenas.provision_prerequisites(identifier: :lxd_arena)
+# save post-initialization orchestration for providers
+controllers.arenas.orchestrate_prerequisites(identifier: :lxd_arena)
 # RUN APPLY HERE FOR INITIAL PROVISIONING?
 
 #
@@ -91,17 +91,17 @@ controllers.packing.new(identifier: 'lxd_arena::phpmyadmin')
 # # get the artifacts for a pack
 # controllers.packing.artifacts(identifier: 'lxd_arena::phpmyadmin')
 
-# provision the arena for applications
-controllers.arenas.provision(identifier: :lxd_arena)
+# orchestrate the arena for applications
+controllers.arenas.orchestrate(identifier: :lxd_arena)
 
 # # commit a pack
 # controllers.packing.commit(identifier: 'lxd_arena::phpmyadmin')
 #
-# # apply provisions for an arena
+# # apply orchestration for an arena
 # controllers.arenas.apply(identifier: :lxd_arena)
 
-# # save provisions for a resolution
-# controllers.provisioning.new(identifier: 'lxd_arena::phpmyadmin')
+# # save orchestration for a resolution
+# controllers.orchestrating.new(identifier: 'lxd_arena::phpmyadmin')
 
 # capture registry entries for an application
 controllers.registry.register(identifier: 'lxd_arena::phpmyadmin')

@@ -1,9 +1,9 @@
-module Provisioning
+module Orchestrating
   module Commands
     class Saving < ::Spaces::Commands::Saving
 
       def model
-        @model ||= resolution.provisioned
+        @model ||= resolution.orchestrated
       end
 
       def resolution
@@ -11,7 +11,7 @@ module Provisioning
       end
 
       def space_identifier
-        super || :provisioning
+        super || :orchestrations
       end
 
     end

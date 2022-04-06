@@ -1,6 +1,6 @@
 module Arenas
   module Commands
-    class Provisioning < ::Spaces::Commands::Iterating
+    class Orchestrating < ::Spaces::Commands::Iterating
 
       def array
         @array ||= model.directly_bound_resolutions
@@ -10,7 +10,7 @@ module Arenas
         super || :arenas
       end
 
-      def subcommand_class; ::Provisioning::Commands::Saving ;end
+      def subcommand_class; ::Orchestrating::Commands::Saving ;end
 
       protected
 

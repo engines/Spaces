@@ -1,6 +1,6 @@
 module Adapters
   module Terraform
-    class Provisions < ::Adapters::Provisions
+    class Orchestration < ::Adapters::Orchestration
 
       def artifact_qualifiers
         [:container]

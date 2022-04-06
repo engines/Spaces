@@ -12,7 +12,7 @@ module Arenas
       end
     end
 
-    delegate([:resolutions, :packs, :provisioning] => :universe)
+    delegate([:resolutions, :packs, :orchestrations] => :universe)
 
     def cascade_deletes; [:resolutions] ;end
 
@@ -47,7 +47,7 @@ module Arenas
   end
 
   module Errors
-    class ProvisioningError < ::Spaces::Errors::SpacesError
+    class OrchestratingError < ::Spaces::Errors::SpacesError
     end
   end
 end

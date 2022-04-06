@@ -4,7 +4,7 @@ module Arenas
     relation_accessor :arena
 
     delegate(
-      [:blueprints, :resolutions, :packs, :provisioning] => :universe,
+      [:blueprints, :resolutions, :packs, :orchestrations] => :universe,
       [:identifier, :blueprinted, :modified_at] => :arena
     )
 
@@ -15,7 +15,7 @@ module Arenas
         :missing_blueprints,
         :missing_resolutions, :stale_resolutions,
         :missing_packs, :stale_packs,
-        :missing_provisioning, :stale_provisioning
+        :missing_orchestrations, :stale_orchestrations
       ]
     end
 
@@ -26,7 +26,7 @@ module Arenas
     def missing_blueprints; missing(:unblueprinted) ;end
     def missing_resolutions; missing(:bindings_without_resolutions) ;end
     def missing_packs; missing(:unpacked) ;end
-    def missing_provisioning; missing(:unprovisioned) ;end
+    def missing_orchestrations; missing(:unorchestrated) ;end
 
     def missing(method); arena.send(method).map(&:context_identifier) ;end
 
@@ -38,7 +38,7 @@ module Arenas
 
     def stale_resolutions; stale(:resolved, resolutions) ;end
     def stale_packs; stale(:packed, packs) ;end
-    def stale_provisioning; stale(:provisioned, provisioning) ;end
+    def stale_orchestrations; stale(:orchestrated, orchestrations) ;end
 
     def stale(method, space)
       arena.send(method).select do |b|

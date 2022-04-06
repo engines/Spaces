@@ -37,7 +37,7 @@ controllers.arenas.state(identifier: :development)
 
 # define providers
 controllers.arenas.provide(identifier: :development, role_identifier: :packing, provider_identifier: :docker_local)
-controllers.arenas.provide(identifier: :development, role_identifier: :provisioning, provider_identifier: :docker_compose_local)
+controllers.arenas.provide(identifier: :development, role_identifier: :orchestration, provider_identifier: :docker_compose_local)
 controllers.arenas.provide(identifier: :development, role_identifier: :runtime, provider_identifier: :docker_local)
 
 # connect the services arena to the applications arena
@@ -74,8 +74,8 @@ controllers.arenas.state(identifier: :development)
 # # get the artifact for a pack
 # controllers.packing.artifact(identifier: 'development::phpmyadmin')
 
-# provision the arena
-# controllers.arenas.provision(identifier: :development)
+# orchestrate the arena
+# controllers.arenas.orchestrate(identifier: :development)
 
 # # build images for the arena
 # controllers.arenas.build(identifier: :development)
@@ -86,8 +86,8 @@ controllers.arenas.state(identifier: :development)
 # # bring up containers for arena
 # controllers.arenas.apply(identifier: :development)
 
-# # save provisions for a resolution
-# controllers.provisioning.create(identifier: 'development::phpmyadmin')
+# # save orchestration for a resolution
+# controllers.orchestrating.create(identifier: 'development::phpmyadmin')
 
 # capture registry entries for an application
 controllers.registry.register(identifier: 'development::phpmyadmin')
