@@ -18,10 +18,6 @@ module Spaces
         }
       end
 
-      def initialize(**args)
-        self.struct = struct_in_space(**args)
-      end
-
     end
   end
 end

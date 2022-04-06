@@ -10,10 +10,6 @@ module Packing
         universe.resolutions.by(identifier)
       end
 
-      def space_identifier
-        super || :packs
-      end
-
     end
   end
 end

@@ -5,13 +5,13 @@ module Blueprinting
       empty_resolution.tap do |m|
         m.arena = arena
         m.struct = arena.struct.
-          without(irrelevant_arena_divisions).
+          without(arena_specific_divisions).
           merge(struct)
         m.cache_primary_identifiers
       end.with_embeds.infixes_resolved
     end
 
-    def irrelevant_arena_divisions
+    def arena_specific_divisions
       [:bindings, :connections, :input]
     end
 

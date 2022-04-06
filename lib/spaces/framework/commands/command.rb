@@ -24,12 +24,15 @@ module Spaces
 
       def space
         universe.send(space_identifier)
-      rescue TypeError
-        raise ::Spaces::Errors::MissingInput, {input: input}
       end
 
-      def space_identifier
-        input[:space]
+      def space_identifier(default: nil)
+        input_for(:space, default: default)
+      end
+
+      def input_for(key, mandatory: true, default: nil)
+        input[key]&.to_s || default ||
+          (mandatory && (raise ::Spaces::Errors::MissingInput, {input: input}))
       end
 
       def initialize(**input)

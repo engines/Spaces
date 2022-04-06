@@ -3,15 +3,11 @@ module Blueprinting
     class Settling < ::Spaces::Commands::Reading
 
       def arena_identifier
-        input[:arena_identifier]&.to_s
+        input_for(:arena_identifier)
       end
 
       def arena
         @arena ||= universe.arenas.by(arena_identifier)
-      end
-
-      def space_identifier
-        super || :blueprints
       end
 
     end

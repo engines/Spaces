@@ -9,11 +9,15 @@ module Arenas
       end
 
       def role_identifier
-        input[:role_identifier]&.to_s || (raise ::Spaces::Errors::MissingInput, {input: input})
+        input_for(:role_identifier)
       end
 
       def provider_identifier
-        input[:provider_identifier]&.to_s || (raise ::Spaces::Errors::MissingInput, {input: input})
+        input_for(:provider_identifier)
+      end
+
+      def resolution_identifier
+        input_for(:provider_identifier, mandatory: false)
       end
 
     end
