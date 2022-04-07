@@ -5,19 +5,7 @@ module Arenas
     class Providing < Saving
 
       def model
-        @model ||= current_model.provide_for(role_identifier, provider_identifier)
-      end
-
-      def role_identifier
-        input_for(:role_identifier)
-      end
-
-      def provider_identifier
-        input_for(:provider_identifier)
-      end
-
-      def resolution_identifier
-        input_for(:provider_identifier, mandatory: false)
+        @model ||= current_model.provide_for(input.without(:identifier, :space))
       end
 
     end
