@@ -1,11 +1,19 @@
 module Associations
   class RoleProvider < ::Targeting::Node
 
-    delegate(providers: :universe)
+    delegate([:resolutions, :providers] => :universe)
 
-    def provider; @provider ||= target_from(providers) ;end
+    def provider
+      @provider ||= target_from(providers)
+    end
 
     alias_method :node, :provider
+
+    def resolution
+      @resolution ||= target_from(resolutions, identifier: resolution_identifier)
+    end
+
+    def resolution_identifier; struct.resolution_identifier ;end
 
     def identifier; provider_identifier ;end
     def context_identifier; identifier ;end

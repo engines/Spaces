@@ -19,7 +19,7 @@ controllers.arenas.provide(identifier: :services, role_identifier: :packing, pro
 controllers.arenas.provide(identifier: :services, role_identifier: :orchestration, provider_identifier: :docker_compose_local)
 controllers.arenas.provide(identifier: :services, role_identifier: :runtime, provider_identifier: :docker_local)
 
-controllers.arenas.provide(identifier: :services, role_identifier: :dns, provider_identifier: :dns, resolution_identifier: 'infrastructure::powerdns')
+controllers.arenas.provide(identifier: :services, role_identifier: :dns, provider_identifier: :power_dns, resolution_identifier: 'infrastructure::powerdns')
 
 # ------------------------------------------------------------------------------
 # stage some blueprints in the services arena

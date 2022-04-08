@@ -14,8 +14,9 @@ module Artifacts
       [:provider, :adapter_map, :adapter_keys] => :adapter
     )
 
-    def provider_qualifiers
-      super - [provider.qualifier]
+    def
+      # TODO: refactor this long method chain
+      arena.role_providers.map(&:provider).map(&:qualifier).uniq - [provider.qualifier]
     end
 
     def initialize(holder)

@@ -1,7 +1,7 @@
 module Associations
-  class RoleProviders < ::Divisions::Divisible
+  class RoleProviders < ::Targeting::Tree
 
-    def for_role(role_identifier)
+    def named(role_identifier)
       all.detect { |rp| rp.role_identifier == role_identifier }
     end
 

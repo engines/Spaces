@@ -13,7 +13,7 @@ module Artifacts
       end
 
       def provider_snippets
-        provider_resolutions.map do |r|
+        resolutions.map do |r|
           %(
             #{r.blueprint_identifier} = {
               version = "#{r.configuration.version}"
@@ -23,12 +23,9 @@ module Artifacts
         end
       end
 
-      def provider_resolutions
-        provider_keys.map { |k| arena.send(k) }.uniq
-      end
-
-      def provider_keys
-        super - [:orchestration]
+      def resolutions
+        #TODO: reimplement connecting to terraform provider initialization blueprints
+        []
       end
 
     end

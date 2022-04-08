@@ -3,7 +3,7 @@ module Artifacts
     class ZonesStanza < ::Artifacts::Stanza
 
       def stanza_qualifiers
-        [provider.dns_qualifier]
+        [arena.qualifier_for(:dns)]
       end
 
       def stanza_class_for(qualifier)

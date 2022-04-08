@@ -3,8 +3,6 @@ module Artifacts
     module PowerDns
       class ProviderStanza < ::Artifacts::Stanza
 
-        delegate(configuration: :dns)
-
         def snippets
           %(
             provider "powerdns" {
@@ -15,9 +13,14 @@ module Artifacts
         end
 
         def api_key; configuration.api_key ;end
-        def protocol; configuration.struct.protocol || 'http' ;end
-        def port; configuration.struct.port || 8081 ;end
-        def endpoint; configuration.struct.endpoint ;end
+        def protocol; configuration.protocol || 'http' ;end
+        def port; configuration.port || 8081 ;end
+        def endpoint; configuration.endpoint ;end
+
+        def configuration
+          # TODO: refactor this long method chain
+          arena.role_providers.dns.resolution.configuration
+        end
 
       end
     end

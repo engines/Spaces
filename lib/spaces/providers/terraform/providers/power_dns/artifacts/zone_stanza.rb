@@ -18,7 +18,7 @@ module Artifacts
         end
 
         def dns_qualifier
-          provider.dns_qualifier.camelize.downcase
+          arena.qualifier_for(:dns).camelize.downcase
         end
 
       end
