@@ -14,8 +14,6 @@ module Arenas
 
     def volume_path; input.volumes[:path] ;end
 
-    protected
-
     def copy_auxiliaries
       all_packs.each do |p|
         packs.copy_auxiliaries_for(p)

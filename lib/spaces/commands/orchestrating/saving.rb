@@ -10,10 +10,6 @@ module Orchestrating
         universe.resolutions.by(identifier)
       end
 
-      def space_identifier
-        super || :orchestrations
-      end
-
     end
   end
 end

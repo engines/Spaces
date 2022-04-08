@@ -6,8 +6,8 @@ module Arenas
         @array ||= model.packables
       end
 
-      def space_identifier
-        super || :arenas
+      def subcommand_inputs
+        {space: :packs}
       end
 
       def subcommand_class; ::Packing::Commands::Saving ;end

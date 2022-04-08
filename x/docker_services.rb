@@ -14,10 +14,12 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 # save a services arena for common use
 controllers.arenas.create(model: {identifier: :services})
 
-# define providers
+# define providers for spaces roles
 controllers.arenas.provide(identifier: :services, role_identifier: :packing, provider_identifier: :docker_local)
 controllers.arenas.provide(identifier: :services, role_identifier: :orchestration, provider_identifier: :docker_compose_local)
 controllers.arenas.provide(identifier: :services, role_identifier: :runtime, provider_identifier: :docker_local)
+
+controllers.arenas.provide(identifier: :services, role_identifier: :dns, provider_identifier: :power_dns, resolution_identifier: 'infrastructure::powerdns')
 
 # ------------------------------------------------------------------------------
 # stage some blueprints in the services arena

@@ -9,7 +9,7 @@ require './x/controllers'
 # import some blueprints
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, threaded: false)
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/owncloud'}, threaded: false)
+# controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/owncloud'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 # blueprint indices, lists, and gets
@@ -72,7 +72,7 @@ controllers.arenas.state(identifier: :development)
 # controllers.querying.list(method: :identifiers, arena_identifier: :development, space: :packs)
 
 # # get the artifact for a pack
-# controllers.packing.artifact(identifier: 'development::phpmyadmin')
+# controllers.packing.artifacts(identifier: 'development::phpmyadmin')
 
 # orchestrate the arena
 # controllers.arenas.orchestrate(identifier: :development)

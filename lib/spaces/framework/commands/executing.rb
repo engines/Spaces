@@ -5,15 +5,13 @@ module Spaces
     class Executing < Reading
 
       def instruction
-        input[:execute]
+        input_for(:execute)
       end
 
       protected
 
       def commit
         space.execute(instruction, model)
-      rescue TypeError
-        raise ::Spaces::Errors::MissingInput, {input: input}
       end
 
     end

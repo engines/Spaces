@@ -3,7 +3,7 @@ module Commissioning
     class Commissioning < ::Spaces::Commands::Iterating
 
       def milestone
-        input[:milestone]
+        input_for(:milestone)
       end
 
       def assembly

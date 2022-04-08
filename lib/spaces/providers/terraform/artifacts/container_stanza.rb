@@ -1,6 +1,6 @@
 module Artifacts
   module Terraform
-    class ServiceStanza < ::Artifacts::Stanza
+    class ContainerStanza < ::Artifacts::Stanza
 
       def snippets
         %(

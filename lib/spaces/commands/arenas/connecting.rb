@@ -9,7 +9,7 @@ module Arenas
       end
 
       def other_identifier
-        input[:other_identifier]&.to_s || (raise ::Spaces::Errors::MissingInput, {input: input})
+        input_for(:other_identifier)
       end
 
     end

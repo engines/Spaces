@@ -2,10 +2,6 @@ module Publishing
   module Commands
     class Synchronizing < ::Spaces::Commands::Saving
 
-      def space_identifier
-        super || :publications
-      end
-
       protected
 
       def commit

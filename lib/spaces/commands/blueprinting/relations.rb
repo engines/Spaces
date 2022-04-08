@@ -6,10 +6,6 @@ module Blueprinting
         super.relations
       end
 
-      def space_identifier
-        super || :blueprints
-      end
-
     end
   end
 end

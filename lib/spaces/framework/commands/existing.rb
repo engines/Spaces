@@ -5,7 +5,7 @@ module Spaces
     class Existing < Command
 
       def identifier
-        input[:identifier]&.to_s
+        input_for(:identifier, mandatory: false)
       end
 
       protected

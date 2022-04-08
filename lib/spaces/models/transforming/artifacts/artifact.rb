@@ -15,7 +15,8 @@ module Artifacts
     )
 
     def provider_qualifiers
-      super - [provider.qualifier]
+      # TODO: refactor this long method chain
+      arena.role_providers.map(&:provider).map(&:qualifier).uniq - [provider.qualifier]
     end
 
     def initialize(holder)

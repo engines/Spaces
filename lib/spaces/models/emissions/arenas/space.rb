@@ -30,20 +30,6 @@ module Arenas
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
 
-    protected
-
-    def copy_auxiliaries_for(arena)
-      arena.all_packs.each do |p|
-        packs.copy_auxiliaries_for(p)
-      end
-    end
-
-    def remove_auxiliaries_for(arena)
-      arena.all_packs.each do |p|
-        packs.remove_auxiliaries_for(p)
-      end
-    end
-
   end
 
   module Errors
