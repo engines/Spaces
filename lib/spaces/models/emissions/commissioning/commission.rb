@@ -24,7 +24,7 @@ module Commissioning
     end
 
     def interface_models
-      @interface_models ||= interface.by_spaces_identifier(identifier)
+      @interface_models ||= interface.by_resolution_identifier(identifier)
     end
 
     def interface
