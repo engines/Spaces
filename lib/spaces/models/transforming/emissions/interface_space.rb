@@ -8,6 +8,10 @@ module Emissions
       interfaces.map { |i| i.by(identifier) }.first
     end
 
+    def delete(identifier)
+      by(identifier).execute(:delete)
+    end
+
     def execute(instruction, identifier)
       by(identifier).execute(instruction)
     end
