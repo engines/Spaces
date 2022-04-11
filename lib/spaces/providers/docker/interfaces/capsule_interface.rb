@@ -14,8 +14,8 @@ module Providers
         all.select { |c| c.image_id == image_id }.reverse
       end
 
-      def by_spaces_identifier(identifier)
-        all.select { |c| c.spaces_identifier == identifier }.reverse
+      def by_resolution_identifier(identifier)
+        all.select { |c| c.resolution_identifier == identifier }.reverse
       end
 
       def bridge; ::Docker::Container ;end
