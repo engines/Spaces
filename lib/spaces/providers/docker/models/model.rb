@@ -7,6 +7,21 @@ module Providers
 
       delegate(all: :interface)
 
+      def summary
+        @summary ||= OpenStruct.new(
+          resolution_identifier: resolution_identifier,
+          arena_identifier: arena_identifier,
+          blueprint_identifier: blueprint_identifier,
+          identifier: identifier,
+          runtime: runtime_qualifier,
+        )
+      end
+
+      def arena_identifier; resolution_identifier.high ;end
+      def blueprint_identifier; resolution_identifier.low ;end
+
+      def runtime_qualifier; name_elements[1].snakize ;end
+
       def execute(instruction)
         send(instruction)
       rescue NoMethodError
