@@ -3,6 +3,10 @@ module Spaces
     class Tailing < ::Spaces::Commands::Command
       include ::Spaces::Streaming
 
+      def identifier
+        input_for(:identifier)
+      end
+
       def stream_identifier
         input_for(:stream)
       end
@@ -10,7 +14,7 @@ module Spaces
       protected
 
       def commit
-        stream_for(stream_identifier, stream_identifier).consume(input_for(:callback))
+        stream_for(identifier, stream_identifier).consume(input_for(:callback))
       end
 
     end
