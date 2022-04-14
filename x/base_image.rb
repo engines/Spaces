@@ -13,6 +13,11 @@ controllers.arenas.create(model: {identifier: :base})
 
 # ------------------------------------------------------------------------------
 
+# specify an image to build blueprints from
+controllers.arenas.build_from(identifier: :base, image_identifier: :debian)
+
+# ------------------------------------------------------------------------------
+
 # save some providers
 controllers.providing.create(model: {identifier: :docker_local, qualifier: :docker})
 

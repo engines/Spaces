@@ -4,6 +4,7 @@ require_relative 'relations'
 
 module Arenas
   class Arena < ::Emissions::Emission
+    include Images
     include Providing
     include Binding
     include Connecting

@@ -18,6 +18,7 @@ module Arenas
           pack: Commands::Packing,
           orchestrate: Commands::Orchestrating,
           more_binders: Commands::MoreBinders,
+          build_from: Commands::BuildingFrom,
           build: Commands::Building,
           init: [::Spaces::Commands::Executing, {execute: :init, threaded: true}],
           plan: [::Spaces::Commands::Executing, {execute: :plan, threaded: true}],
