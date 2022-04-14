@@ -36,6 +36,8 @@ module Arenas
       domains.all
     end
 
+    def resolution_default_division_keys; [:images] ;end
+
     def binding_class; ::Divisions::BindingInArena ;end
 
     def initialize(struct: nil, identifiable: nil)

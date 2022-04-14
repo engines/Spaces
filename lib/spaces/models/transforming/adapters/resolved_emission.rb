@@ -7,15 +7,19 @@ module Adapters
 
     delegate(
       [:arena, :resolution, :blueprint_identifier] => :emission,
-      division_map: :resolution,
-      keys: :division_map
+      resolution_default_division_keys: :arena,
+      division_map: :resolution
     )
 
     # TODO: possible refactor ... the levels of dynamic class generation are a repeating pattern
     def adapter_map
       @adapter_map ||= keys.inject({}) do |m, k|
-        m.tap { m[k] = division_adapter_for(resolution.division_map[k]) }
+        m.tap { m[k] = division_adapter_for(resolution.send(k)) }
       end.compact
+    end
+
+    def keys
+      [resolution_default_division_keys, division_map.keys].flatten.uniq
     end
 
     def adapters; adapter_map.values ;end
