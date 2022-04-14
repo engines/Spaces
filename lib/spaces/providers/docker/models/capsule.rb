@@ -25,6 +25,11 @@ module Providers
         paused ? unpause : pause
       end
 
+      # TODO: Remove this method once client is able to pass params to execute method.
+      def top
+        model_interface.top(format: :hash)
+      end
+
       def image_id; image ;end
       def names; [struct.name] ;end
 

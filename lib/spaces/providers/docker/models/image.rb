@@ -9,11 +9,14 @@ module Providers
       delegate(remove: :model_interface)
 
       def summary
-        @summary ||= OpenStruct.new(
-          identifier: identifier,
+        @summary ||= super.merge(
           tags: tags,
           size: size
         )
+      end
+
+      def resolution_identifier
+        tags.first.split(':').first.as_compound('_') if tags.first
       end
 
       def identifier; id[7..18] ;end

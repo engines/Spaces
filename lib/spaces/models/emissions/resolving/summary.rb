@@ -9,8 +9,8 @@ module Resolving
           exist: packs.exist?(identifier),
           allowed: packable?
         },
-        provisions: {
-          exist: provisioning.exist?(identifier)
+        orchestration: {
+          exist: orchestrations.exist?(identifier)
         }
       )
     end

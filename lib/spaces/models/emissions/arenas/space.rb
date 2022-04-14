@@ -12,7 +12,7 @@ module Arenas
       end
     end
 
-    delegate([:resolutions, :packs, :provisioning] => :universe)
+    delegate([:resolutions, :packs, :orchestrations] => :universe)
 
     def cascade_deletes; [:resolutions] ;end
 
@@ -30,24 +30,10 @@ module Arenas
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
     end
 
-    protected
-
-    def copy_auxiliaries_for(arena)
-      arena.all_packs.each do |p|
-        packs.copy_auxiliaries_for(p)
-      end
-    end
-
-    def remove_auxiliaries_for(arena)
-      arena.all_packs.each do |p|
-        packs.remove_auxiliaries_for(p)
-      end
-    end
-
   end
 
   module Errors
-    class ProvisioningError < ::Spaces::Errors::SpacesError
+    class OrchestratingError < ::Spaces::Errors::SpacesError
     end
   end
 end

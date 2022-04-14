@@ -14,8 +14,8 @@ module Resolving
         @arena ||= universe.arenas.by(arena_identifier)
       end
 
-      def blueprint_identifier; input[:blueprint_identifier] ;end
-      def arena_identifier; input[:arena_identifier] ;end
+      def blueprint_identifier; input_for(:blueprint_identifier) ;end
+      def arena_identifier; input_for(:arena_identifier) ;end
 
     end
   end

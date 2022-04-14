@@ -19,13 +19,14 @@ module Spaces
 
       def inputs
         @inputs ||= array.map do |i|
-          {identifier: i.identifier}
+          subcommand_inputs.merge(identifier: i.identifier)
         end
       end
 
       def array; [] ;end
 
       def subcommand_class ;end
+      def subcommand_inputs; {} ;end
 
       def mutating?; subcommand_class.mutating? ;end
 

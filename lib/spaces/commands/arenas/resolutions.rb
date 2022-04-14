@@ -6,10 +6,6 @@ module Arenas
         model.bound_resolutions
       end
 
-      def space_identifier
-        super || :arenas
-      end
-
     end
   end
 end

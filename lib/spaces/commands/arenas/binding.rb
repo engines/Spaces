@@ -9,7 +9,7 @@ module Arenas
       end
 
       def blueprint_identifier
-        input[:blueprint_identifier]&.to_s || (raise ::Spaces::Errors::MissingInput, {input: input})
+        input_for(:blueprint_identifier)
       end
 
     end

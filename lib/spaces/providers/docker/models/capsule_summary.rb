@@ -5,16 +5,14 @@ module Providers
     class CapsuleSummary < Model
 
       def summary
-        @summary ||= OpenStruct.new(
-          identifier: identifier,
+        @summary ||= super.merge(
           image_identifier: image_identifier,
-          spaces_identifier: spaces_identifier,
           name: name,
-          status: state
+          status: state,
         )
       end
 
-      def spaces_identifier
+      def resolution_identifier
         names.first[1..-1].gsub(/_*\d/, '').as_compound('_')
       end
 

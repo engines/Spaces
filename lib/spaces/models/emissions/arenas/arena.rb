@@ -10,7 +10,7 @@ module Arenas
     include Blueprinting
     include Resolving
     include Packing
-    include Provisioning
+    include Orchestrating
     include Summary
     include Relations
 
@@ -19,7 +19,7 @@ module Arenas
     end
 
     delegate(
-      [:arenas, :blueprints, :resolutions, :packs, :provisioning, :domains] => :universe,
+      [:arenas, :blueprints, :resolutions, :packs, :orchestrations, :domains] => :universe,
       descendant_paths: :connections
     )
 

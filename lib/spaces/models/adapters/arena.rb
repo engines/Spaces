@@ -1,5 +1,3 @@
-require_relative 'emission'
-
 module Adapters
   class Arena < Emission
 

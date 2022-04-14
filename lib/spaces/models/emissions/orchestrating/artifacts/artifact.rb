@@ -1,5 +1,5 @@
 module Artifacts
-  module Provisioning
+  module Orchestrating
     class Artifact < ::Artifacts::Artifact
 
     end

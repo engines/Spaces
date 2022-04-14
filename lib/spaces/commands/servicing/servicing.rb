@@ -3,11 +3,11 @@ module Servicing
     class Servicing < ::Spaces::Commands::Reading
 
       def milestone
-        input[:milestone]
+        input_for(:milestone)
       end
 
       def consumer_identifier
-        input[:consumer_identifier]
+        input_for(:consumer_identifier)
       end
 
       def assembly

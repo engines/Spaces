@@ -6,7 +6,7 @@ module Spaces
     def identifiers; summaries.map(&:identifier) ;end
 
     def all
-      interfaces.map(&:all).flatten
+      @all ||= interfaces.map(&:all).flatten
     end
 
     def summaries; all ;end

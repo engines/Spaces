@@ -13,10 +13,6 @@ module Publishing
         input[:force] || false
       end
 
-      def space_identifier
-        super || :publications
-      end
-
       def model_class
         locations.default_model_class
       end
