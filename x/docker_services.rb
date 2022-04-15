@@ -22,6 +22,11 @@ controllers.arenas.provide(identifier: :services, role_identifier: :runtime, pro
 controllers.arenas.provide(identifier: :services, role_identifier: :dns, provider_identifier: :power_dns, resolution_identifier: 'infrastructure::powerdns')
 
 # ------------------------------------------------------------------------------
+
+# specify an image to build blueprints from
+controllers.arenas.build_from(identifier: :services, image_identifier: :base_debian)
+
+# ------------------------------------------------------------------------------
 # stage some blueprints in the services arena
 controllers.arenas.stage(identifier: :services, blueprint_identifier: :mariadb)
 controllers.arenas.stage(identifier: :services, blueprint_identifier: :wap)

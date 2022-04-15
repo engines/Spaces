@@ -3,7 +3,6 @@ module Arenas
 
     delegate(
       arenas: :universe,
-      images: :arena,
       provider_for: :arena,
       [:runtime_qualifier, :orchestration_qualifier, :packtime_qualifier] => :arena,
       volume_path: :arena
@@ -14,6 +13,10 @@ module Arenas
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
     def arena_identifier; identifier.high ;end
+
+    def images
+      @images ||= duplicate(arena.images).tap { |i| i.emission = self }
+    end
 
     def empty; super.tap { |m| m.arena = arena } ;end
 

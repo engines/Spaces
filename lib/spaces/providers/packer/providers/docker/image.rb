@@ -21,8 +21,8 @@ module Adapters
 
         def derived_features
           @derived_features ||= {
-            name: default_identifier,
-            output_identifier: default_output_identifier,
+            name: identifier,
+            output_identifier: output_identifier,
             privileged: false
           }
         end
