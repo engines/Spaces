@@ -1,5 +1,7 @@
 module Arenas
   class Composition < ::Emissions::Composition
+    # TODO: review the differences between divisions & associations
+
 
     class << self
       def associative_classes
@@ -14,6 +16,7 @@ module Arenas
         [
           Arenas::Input,
           Divisions::Bindings,
+          Divisions::Images,
           Divisions::About
         ]
       end

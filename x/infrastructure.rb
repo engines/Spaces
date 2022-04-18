@@ -10,6 +10,9 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 # save a providers arena for infrastructure use
 controllers.arenas.create(model: {identifier: :infrastructure})
 
+# specify an image to build blueprints from
+controllers.arenas.build_from(identifier: :infrastructure, image_identifier: :base_debian)
+
 # ------------------------------------------------------------------------------
 
 # save some providers
@@ -24,5 +27,11 @@ controllers.arenas.provide(identifier: :infrastructure, role_identifier: :orches
 controllers.arenas.provide(identifier: :infrastructure, role_identifier: :runtime, provider_identifier: :docker_local)
 
 # ------------------------------------------------------------------------------
-# stage some blueprints in the services arena
+# stage some blueprints in the infrastructure arena
 controllers.arenas.stage(identifier: :infrastructure, blueprint_identifier: :powerdns)
+
+# # build images for the arena
+# controllers.arenas.build(identifier: :infrastructure, threaded: false)
+#
+# # bring up containers for arena
+# controllers.arenas.apply(identifier: :infrastructure, threaded: false)

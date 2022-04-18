@@ -4,12 +4,17 @@
 # ------------------------------------------------------------------------------
 
 # import a bootstrappy blueprint
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/enginesd_debian_base'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/debian'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 
 # save a basic arena with default associations
-controllers.arenas.create(model: {identifier: :base_images})
+controllers.arenas.create(model: {identifier: :base})
+
+# ------------------------------------------------------------------------------
+
+# specify an image to build blueprints from
+controllers.arenas.build_from(identifier: :base, image_identifier: :debian)
 
 # ------------------------------------------------------------------------------
 
@@ -17,21 +22,21 @@ controllers.arenas.create(model: {identifier: :base_images})
 controllers.providing.create(model: {identifier: :docker_local, qualifier: :docker})
 
 # define packing providers
-controllers.arenas.provide(identifier: :base_images, role_identifier: :packing, provider_identifier: :docker_local)
-controllers.arenas.provide(identifier: :base_images, role_identifier: :runtime, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :base, role_identifier: :packing, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provider_identifier: :docker_local)
 
 # ------------------------------------------------------------------------------
 
 # bind a base blueprint to the arena
-controllers.arenas.bind(identifier: :base_images, blueprint_identifier: :enginesd_debian_base)
+controllers.arenas.bind(identifier: :base, blueprint_identifier: :debian)
 
 # resolve the arena for the bindings
-controllers.arenas.resolve(identifier: :base_images)
+controllers.arenas.resolve(identifier: :base)
 
 # ------------------------------------------------------------------------------
 
 # save all packs for an arena
-controllers.arenas.pack(identifier: :base_images)
+controllers.arenas.pack(identifier: :base)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :base_images, threaded: false)
+# controllers.arenas.build(identifier: :base, threaded: false)

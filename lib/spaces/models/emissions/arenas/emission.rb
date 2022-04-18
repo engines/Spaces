@@ -14,6 +14,10 @@ module Arenas
 
     def arena_identifier; identifier.high ;end
 
+    def images
+      @images ||= duplicate(arena.images).tap { |i| i.emission = self }
+    end
+
     def empty; super.tap { |m| m.arena = arena } ;end
 
     def cache_primary_identifiers
