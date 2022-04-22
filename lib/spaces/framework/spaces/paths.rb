@@ -1,12 +1,12 @@
+require_relative 'workspace'
+
 module Spaces
   module Paths
+    include Workspace
 
     def path
       workspace.join("#{universes.identifier}", "#{identifier}")
     end
-
-    def workspace; Pathname(ENV['ENGINES_WORKSPACE'] || default_workspace) ;end
-    def default_workspace; Pathname(ENV['TMP'] || '/tmp').join('spaces') ;end
 
     def reading_path_for(identifiable, klass = default_model_class)
       path.join(identifiable.identifier.as_path, klass.qualifier)
