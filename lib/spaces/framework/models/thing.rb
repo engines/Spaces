@@ -1,7 +1,6 @@
 module Spaces
   class Thing
     extend Forwardable
-
     include ::Recovery::Warning
     extend ::Recovery::Warning
 
@@ -76,17 +75,15 @@ module Spaces
     end
 
     def method_missing(m, *args, &block)
-      if keys&.include?(m.to_s.sub('=', '').to_sym)
-        struct.send(m, *args, &block)
-      else
-        super
-      end
+      return struct.send(m, *args, &block) if keys&.include?(m.to_s.sub('=', '').to_sym)
+      return identifier.send(m, *args, &block) if identifier.respond_to?(m)
+      super
     rescue TypeError
       super
     end
 
     def respond_to_missing?(m, *)
-      keys&.include?(m.to_s.sub('=', '').to_sym) || super
+      keys&.include?(m.to_s.sub('=', '').to_sym) || identifier.respond_to?(m) || super
     rescue TypeError
       super
     end
