@@ -7,15 +7,11 @@ require_relative 'topology'
 
 module Spaces
   class PathSpace < Space
-    include ::Spaces::Paths
-    include ::Spaces::Reading
-    include ::Spaces::Saving
-    include ::Spaces::Deleting
-    include ::Spaces::Topology
-
-    def ensure_space
-      path.mkpath
-    end
+    include Paths
+    include Reading
+    include Saving
+    include Deleting
+    include Topology
 
     def all
       identifiers.map { |i| by(i) }
@@ -28,6 +24,8 @@ module Spaces
     def exist?(identifiable)
       identifiable && path_for(identifiable).exist?
     end
+
+    def ensure_space; path.mkpath ;end
 
   end
 end

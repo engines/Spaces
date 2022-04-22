@@ -1,7 +1,6 @@
 module Arenas
   module Interfacing
     include Emissions::Providing
-    include ::Spaces::Streaming
 
     def init(arena); execute_on_orchestrater(:init, arena) ;end
     def plan(arena); execute_on_orchestrater(:plan, arena) ;end

@@ -43,7 +43,6 @@ module Spaces
 
     protected
 
-    # FIXME: the permissions should be passed in
     def set_permission_for(model)
       writing_name_for(model).tap do |n|
         Pathname.new(n).chmod(model.permission)

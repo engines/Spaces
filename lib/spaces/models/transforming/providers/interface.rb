@@ -1,16 +1,16 @@
 module Providers
   class Interface < ::Spaces::Model
-    include ::Spaces::Streaming
+    include ::Streaming::Streaming
 
-      relation_accessor :emission
+    relation_accessor :emission
 
-      def uniqueness; [klass.name, emission&.identifier] ;end
+    def uniqueness; [klass.name, emission&.identifier] ;end
 
-      def execute(instruction); send(instruction) ;end
+    def execute(instruction); send(instruction) ;end
 
-      def initialize(emission)
-        self.emission = emission
-      end
+    def initialize(emission)
+      self.emission = emission
+    end
 
   end
 end

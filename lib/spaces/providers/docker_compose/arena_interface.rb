@@ -15,7 +15,7 @@ module Providers
 
         def orchestration_for(command)
           copy_auxiliaries
-          with_streaming(arena, command) do |stream|
+          with_streaming(:orchestrations, arena, command) do |stream|
             begin
               bridge.send(command) do |io, bytes|
                 stream.error(bytes) if io == :stderr

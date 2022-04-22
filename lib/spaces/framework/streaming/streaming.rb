@@ -1,17 +1,17 @@
-require_relative 'stream'
+require_relative 'space'
 
-module Spaces
+module Streaming
   module Streaming
 
-    def with_streaming(identifiable, identifier = nil, &block)
-      stream_for(identifiable, identifier).produce(&block)
+    def with_streaming(*path_elements, &block)
+      stream_for(path_elements).produce(&block)
     end
 
-    def stream_for(identifiable, identifier = nil)
-      stream_class.new(identifiable, identifier: identifier)
+    def stream_for(*path_elements)
+      stream_class.new(path_elements)
     end
 
-    def stream_class; Stream ;end
+    def stream_class; Space ;end
 
   end
 end

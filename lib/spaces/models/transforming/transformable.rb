@@ -7,7 +7,7 @@ module Transforming
 
     def blueprint_identifier; identifier.low ;end
 
-    def identifier_separator; ''.with_identifier_separator; end
+    def identifier_separator; ''.identifier_separator; end
 
     def random(length); SecureRandom.hex(length.to_i) ;end
 

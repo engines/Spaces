@@ -11,7 +11,7 @@ module Providers
       end
 
       def stream_on(identifier)
-        stream_for(pack, identifier)
+        stream_for(:packs, pack, identifier)
       end
 
     end
