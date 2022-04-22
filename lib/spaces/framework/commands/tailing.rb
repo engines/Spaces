@@ -14,7 +14,7 @@ module Spaces
       protected
 
       def commit
-        stream_for(space, identifier, stream_identifier).consume(input_for(:callback))
+        stream_for(space, identifier, stream_identifier).consume(input[:callback])
       end
 
     end
