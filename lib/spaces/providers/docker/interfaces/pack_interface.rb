@@ -18,7 +18,7 @@ module Providers
       end
 
       def build_from_pack
-        with_streaming(pack, :build) do
+        with_streaming(streaming_args) do
           build_from_dir.tap { |i| tag_latest(i) }
         rescue ::Docker::Error::ImageNotFoundError => e
           # Do nothing: ignore any ImageNotFoundError.
@@ -32,9 +32,8 @@ module Providers
         end
       end
 
-      def stream
-        stream_for(pack, :build)
-      end
+      def stream; stream_for(streaming_args) ;end
+      def streaming_args; [:packs, pack, :build] ;end
 
     end
   end

@@ -12,7 +12,7 @@ module Providers
 
     def out(command, model)
       ->(output) do
-        stream_for(model, command).output(output)
+        stream_for(:orchestrations, model, command).output(output)
         logger.info(output.strip)
       end
     end

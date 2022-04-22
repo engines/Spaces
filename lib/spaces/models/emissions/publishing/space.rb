@@ -2,7 +2,7 @@ require_relative 'synchronizing'
 
 module Publishing
   class Space < Spaces::Git::Space
-    include ::Spaces::Streaming
+    include ::Streaming::Streaming
     include Synchronizing
 
     class << self
@@ -24,18 +24,18 @@ module Publishing
     end
 
     def import(descriptor, args)
-      with_streaming(descriptor, :import) do
-        stream_for(descriptor, :import).output("\n")
-        by_import(descriptor, args)
-      end
+      by_import(descriptor, args)
     end
 
     def by_import(descriptor, force: false)
-      super.tap do |m|
-        locations.ensure_located(m)
-        blueprints.by_import(descriptor, force: force)
-        m.bindings.each do |b|
-          by_import(b.descriptor) if (!imported?(b.descriptor) || force)
+      sa = streaming_args_for(descriptor, :import)
+      with_streaming(sa) do
+        super.tap do |m|
+          locations.ensure_located(m)
+          blueprints.by_import(descriptor, force: force)
+          m.bindings.each do |b|
+            by_import(b.descriptor) if (!imported?(b.descriptor) || force)
+          end
         end
       end
     rescue ::Spaces::Errors::ImportFailure => e
@@ -47,14 +47,19 @@ module Publishing
 
     def export(**args)
       args[:identifier].tap do |i|
-        with_streaming(i, :export) do
-          stream_for(i, :export).output("\n")
+        sa = streaming_args_for(i, :import)
+        with_streaming(sa) do
+          stream_for(sa).output("\n")
           synchronize_with(blueprints, i)
           super(locations.by(i), **args)
         rescue ::Spaces::Errors::ExportFailure => e
           logger.info(e)
         end
       end
+    end
+
+    def streaming_args_for(*elements)
+      [identifier, elements].flatten
     end
 
   end

@@ -1,12 +1,12 @@
+require_relative 'workspace'
+
 module Spaces
   module Paths
+    include Workspace
 
     def path
       workspace.join("#{universes.identifier}", "#{identifier}")
     end
-
-    def workspace; Pathname(ENV['ENGINES_WORKSPACE'] || default_workspace) ;end
-    def default_workspace; Pathname(ENV['TMP'] || '/tmp').join('spaces') ;end
 
     def reading_path_for(identifiable, klass = default_model_class)
       path.join(identifiable.identifier.as_path, klass.qualifier)
@@ -15,12 +15,6 @@ module Spaces
     def writing_path_for(identifiable)
       path.join(*([identifiable.context_identifier.as_path, identifiable.subpath].compact))
     end
-
-    def streaming_path_for(identifiable)
-      workspace.join("#{universes.identifier}", "#{default_streaming_location}", "#{identifiable.identifier.as_path}")
-    end
-
-    def default_streaming_location; :streams ;end
 
     def path_for(identifiable)
       path.join(identifiable.context_identifier.as_path)

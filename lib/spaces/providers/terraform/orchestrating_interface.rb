@@ -6,7 +6,7 @@ module Providers
       include Streaming
 
       def execute(command, model)
-        with_streaming(model, command) do
+        with_streaming(:orchestrations, model, command) do
           identifier.tap { orchestration_for(command, model) }
         end
       end
@@ -14,14 +14,14 @@ module Providers
       protected
 
       def orchestration_for(command, model)
-        stream_for(model, command).tap do |stream|
-          stream.output("\n") unless command == :init
+        stream_for(:orchestrations, model, command).tap do |s|
+          s.output("\n") unless command == :init
           Dir.chdir(path_for(model)) do
             bridge.send(command, options[command] || {}, config(out(command, model)))
-            stream.output("\n")
+            s.output("\n")
           rescue RubyTerraform::Errors::ExecutionError => e
-            stream.output("\n")
-            stream.error("#{e}\n")
+            s.output("\n")
+            s.error("#{e}\n")
           end
         end
       end

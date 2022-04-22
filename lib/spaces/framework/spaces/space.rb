@@ -2,14 +2,10 @@ module Spaces
   class Space < Model
 
     class << self
-      def universes; @@universes ||= UniverseSpace.new ;end
-
-      def universe; universes.universe ;end
-
       def default_model_class ;end
     end
 
-    delegate([:universes, :default_model_class] => :klass)
+    delegate(default_model_class: :klass)
 
     def identifier; struct.identifier ;end
     def space; itself ;end
