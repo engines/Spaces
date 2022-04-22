@@ -1,7 +1,5 @@
-require_relative 'model'
-
-module Spaces
-  class Universe < Model
+module Universes
+  class Universe < ::Spaces::Model
 
     class << self
       def space_map
