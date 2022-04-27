@@ -35,12 +35,12 @@ module Publishing
           locations.ensure_located(m)
           blueprints.by_import(descriptor, force: force)
           m.bindings.each do |b|
-            importable.push(b.descriptor, force: force) if (!imported?(b.descriptor) || force)
+            importable.push(b.descriptor) if (!imported?(b.descriptor) || force)
           end
         end
       end
       importable.each do |descriptor|
-        by_import(descriptor)
+        by_import(descriptor, force: force)
       end
     rescue ::Spaces::Errors::ImportFailure => e
       locations.exist_then_delete(descriptor)
