@@ -35,7 +35,7 @@ module Publishing
           locations.ensure_located(m)
           blueprints.by_import(descriptor, force: force)
           m.bindings.each do |b|
-            importable.push(b.descriptor) if (!imported?(b.descriptor) || force)
+            importable.push(b.descriptor, force: force) if (!imported?(b.descriptor) || force)
           end
         end
       end
@@ -51,7 +51,7 @@ module Publishing
 
     def export(**args)
       args[:identifier].tap do |i|
-        sa = streaming_args_for(i, :import)
+        sa = streaming_args_for(i, :export)
         with_streaming(sa) do
           stream_for(sa).output("\n")
           synchronize_with(blueprints, i)
