@@ -10,7 +10,7 @@ module Publishing
       end
 
       def force
-        input[:force] || false
+        input_for(:force, default: false, klass: [TrueClass, FalseClass])
       end
 
       def model_class

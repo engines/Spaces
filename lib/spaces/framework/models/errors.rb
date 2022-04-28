@@ -11,6 +11,7 @@ module Spaces
     end
 
     class MissingInput < SpacesError; end
+    class IncorrectInputType < SpacesError; end
     class NoSpace < SpacesError; end
     class LostInSpace < SpacesError; end
     class ExistsInSpace < SpacesError; end

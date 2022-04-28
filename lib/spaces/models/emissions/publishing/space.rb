@@ -29,14 +29,18 @@ module Publishing
 
     def by_import(descriptor, force: false)
       sa = streaming_args_for(descriptor, :import)
+      importable = []
       with_streaming(sa) do
         super.tap do |m|
           locations.ensure_located(m)
           blueprints.by_import(descriptor, force: force)
           m.bindings.each do |b|
-            by_import(b.descriptor) if (!imported?(b.descriptor) || force)
+            importable.push(b.descriptor) if (!imported?(b.descriptor) || force)
           end
         end
+      end
+      importable.each do |descriptor|
+        by_import(descriptor, force: force)
       end
     rescue ::Spaces::Errors::ImportFailure => e
       locations.exist_then_delete(descriptor)
@@ -47,7 +51,7 @@ module Publishing
 
     def export(**args)
       args[:identifier].tap do |i|
-        sa = streaming_args_for(i, :import)
+        sa = streaming_args_for(i, :export)
         with_streaming(sa) do
           stream_for(sa).output("\n")
           synchronize_with(blueprints, i)

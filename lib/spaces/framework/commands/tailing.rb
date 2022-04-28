@@ -11,10 +11,16 @@ module Spaces
         input_for(:stream)
       end
 
+      def callback
+        input_for(:callback, klass: Proc)
+      end
+
       protected
 
       def commit
-        stream_for(space, identifier, stream_identifier).consume(input[:callback])
+        stream_for(space, identifier, stream_identifier).consume(
+          callback
+        )
       end
 
     end
