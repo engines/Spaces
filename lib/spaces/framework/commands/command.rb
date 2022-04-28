@@ -14,6 +14,9 @@ module Spaces
         tap do
           _run
         rescue ::Spaces::Errors::SpacesError => e
+          # TODO:
+          # Handling of errors when action is :threaded or :streaming.
+          # struct.errors won't be logged or returned to client in these cases
           struct.errors = e.diagnostics
         end
       end
@@ -30,9 +33,23 @@ module Spaces
         input_for(:space, default: default)
       end
 
-      def input_for(key, mandatory: true, default: nil)
-        input[key]&.to_s || default ||
-          (mandatory && (raise ::Spaces::Errors::MissingInput, {input: input}))
+      def input_for(key, mandatory: true, default: nil, klass: String)
+        typed_input_value_for(input[key].nil? ? default : input[key], klass).tap do |value|
+          raise ::Spaces::Errors::MissingInput, {input: input} if value.nil? && mandatory
+        end
+      end
+
+      def typed_input_value_for(value, klass)
+        return input_value_truthy?(value) if klass == [TrueClass, FalseClass]
+        return value.to_s if value && klass == String
+        raise ::Spaces::Errors::IncorrectInputType unless [klass].flatten.include?(value.class)
+        value
+      end
+
+      def input_value_truthy?(value)
+        value == true ||
+        value.is_a?(String) && !value.blank? ||
+        false
       end
 
       def initialize(**input)
