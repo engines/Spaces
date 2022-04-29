@@ -6,16 +6,16 @@ module Spaces
 
       delegate(locations: :universe)
 
-      def by_import(descriptor, args)
-        repository_for(descriptor).by_import
+      def by_import(descriptor, **args)
+        repository_for(descriptor, **args).by_import
       end
 
       def export(descriptor, **args)
-        repository_for(descriptor).export(**args)
+        repository_for(descriptor, **args).export(args.without(:stream))
       end
 
-      def repository_for(descriptor)
-        repository_class.new(location_maybe_already_set_for(descriptor), space: self)
+      def repository_for(descriptor, **args)
+        repository_class.new(location_maybe_already_set_for(descriptor), space: self, stream: args[:stream])
       end
 
       def location_maybe_already_set_for(descriptor)

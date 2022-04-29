@@ -2,7 +2,6 @@ module Streaming
   module Producing
 
     def produce(&block)
-      clear
       yield(self)
     rescue => e
       exception(e)
@@ -26,12 +25,12 @@ module Streaming
       append(encoded_exception_for(e))
     end
 
-    protected
-
     def clear
       path.dirname.mkpath
       File.open(path, 'w') {}
     end
+
+    protected
 
     def append(line)
       File.open(path, 'a') { |f| f.write("#{line}\n") }

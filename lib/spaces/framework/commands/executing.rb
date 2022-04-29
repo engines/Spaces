@@ -3,15 +3,12 @@ require_relative 'reading'
 module Spaces
   module Commands
     class Executing < Reading
-
-      def instruction
-        input_for(:execute)
-      end
+      include ::Streaming::Streaming
 
       protected
 
       def commit
-        space.execute(instruction, model)
+        space.execute(input_for(:execute), model, stream: stream)
       end
 
     end
