@@ -1,6 +1,9 @@
+require_relative 'inputs'
+
 module Spaces
   module Commands
     class Command < ::Spaces::Model
+      include Inputs
 
       class << self
         def mutating?; itself <= Saving ;end
@@ -14,10 +17,10 @@ module Spaces
         tap do
           _run
         rescue ::Spaces::Errors::SpacesError => e
+          struct.errors = e.diagnostics
           # TODO:
           # Handling of errors when action is :threaded or :streaming.
           # struct.errors won't be logged or returned to client in these cases
-          struct.errors = e.diagnostics
         end
       end
 
@@ -29,31 +32,8 @@ module Spaces
         universe.send(space_identifier)
       end
 
-      def space_identifier(default: nil)
-        input_for(:space, default: default)
-      end
-
-      def input_for(key, mandatory: true, default: nil, klass: String)
-        typed_input_value_for(input[key].nil? ? default : input[key], klass).tap do |value|
-          raise ::Spaces::Errors::MissingInput, {input: input} if value.nil? && mandatory
-        end
-      end
-
-      def typed_input_value_for(value, klass)
-        return input_value_truthy?(value) if klass == [TrueClass, FalseClass]
-        return value.to_s if value && klass == String
-        raise ::Spaces::Errors::IncorrectInputType unless [klass].flatten.include?(value.class)
-        value
-      end
-
-      def input_value_truthy?(value)
-        value == true ||
-        value.is_a?(String) && !value.blank? ||
-        false
-      end
-
       def initialize(**input)
-        self.struct = OpenStruct.new(input: input.symbolize_keys)
+        self.struct = OpenStruct.new(input: input.symbolize_keys.clean)
       end
 
       protected

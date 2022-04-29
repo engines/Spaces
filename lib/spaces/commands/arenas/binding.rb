@@ -9,7 +9,7 @@ module Arenas
       end
 
       def blueprint_identifier
-        input_for(:blueprint_identifier)
+        input_for(:blueprint_identifier).to_s
       end
 
     end

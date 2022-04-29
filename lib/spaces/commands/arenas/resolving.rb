@@ -4,10 +4,6 @@ module Arenas
 
       alias_method :model, :current_model
 
-      def force
-        input[:force] || false
-      end
-
       protected
 
       def commit

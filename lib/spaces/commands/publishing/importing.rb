@@ -9,10 +9,6 @@ module Publishing
           super.well_formed? ? super : locations.by(identifier)
       end
 
-      def force
-        input_for(:force, default: false, klass: [TrueClass, FalseClass])
-      end
-
       def model_class
         locations.default_model_class
       end
