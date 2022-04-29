@@ -4,7 +4,7 @@ module Spaces
 
       def input_for(key, mandatory: true, default: nil)
         input[key] || default ||
-          (mandatory && (raise ::Spaces::Errors::MissingInput, {input: input}))
+          (mandatory && (raise ::Spaces::Errors::MissingInput, {missing: key, input: input}))
       end
 
       def identifier
