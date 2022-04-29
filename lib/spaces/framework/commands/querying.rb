@@ -9,7 +9,7 @@ module Spaces
       end
 
       def query_method
-        input[:method] || (raise ::Spaces::Errors::MissingInput, {input: input})
+        input_for(:method)
       end
 
       def arguments
