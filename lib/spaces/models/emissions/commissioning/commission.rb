@@ -15,8 +15,12 @@ module Commissioning
 
     def first_interface_model; interface_models.first ;end
 
+    def network
+      first_interface_model&.network
+    end
+
     def ip_address
-      network.ip_address
+      network&.ip_address
     end
 
     def execute(command)
