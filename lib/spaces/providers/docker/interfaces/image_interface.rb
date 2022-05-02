@@ -31,7 +31,7 @@ module Providers
           s.output(j[:stream]) if j[:stream]
         end
       rescue
-        s.output("Failed to parse JSON: #{encoded}\n")
+        stream&.output("Failed to parse JSON: #{encoded}\n")
       end
 
       def bridge; ::Docker::Image ;end

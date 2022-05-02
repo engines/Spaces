@@ -1,7 +1,6 @@
 module Arenas
   module Commands
     class Staging < ::Spaces::Commands::Iterating
-      include ::Streaming::Streaming
 
       def blueprint_identifier
         input_for(:blueprint_identifier)
@@ -19,8 +18,7 @@ module Arenas
       end
 
       def subcommand_inputs
-        @subcommand_inputs ||=
-          {identifier: identifier, space: space_identifier, stream: stream}
+        @subcommand_inputs ||= {identifier: identifier, space: space_identifier}
       end
 
     end

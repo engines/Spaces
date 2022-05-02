@@ -18,7 +18,7 @@ module Providers
       end
 
       def build_from_pack
-          build_from_dir.tap { |i| tag_latest(i) }
+        build_from_dir.tap { |i| tag_latest(i) }
       rescue ::Docker::Error::ImageNotFoundError => e
         # Do nothing: ignore any ImageNotFoundError.
       end

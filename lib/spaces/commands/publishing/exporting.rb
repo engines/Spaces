@@ -6,7 +6,9 @@ module Publishing
       protected
 
       def commit
-        space.export(**input.merge(stream: stream))
+        with_streaming do
+          space.export(**input.merge(stream: stream))
+        end
       end
 
     end
