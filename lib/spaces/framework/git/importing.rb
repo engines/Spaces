@@ -14,19 +14,19 @@ module Spaces
 
       def pull_remote
         opened.pull(remote_name, branch_name, command_options) do |io|
-          collect(io, :import)
+          collect(io)
         end
       rescue git_error
-        stream_import_error
+        maybe_stream_import_error
         raise pull_failure
       end
 
       def clone_remote
         git.clone(repository_url, identifier, clone_options) do |io|
-          collect(io, :import)
+          collect(io)
         end
       rescue git_error
-        stream_import_error
+        maybe_stream_import_error
         raise clone_failure
       end
 

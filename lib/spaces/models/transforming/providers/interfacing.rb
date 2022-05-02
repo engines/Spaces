@@ -1,8 +1,8 @@
 module Providers
   module Interfacing
 
-    def interface_for(emission)
-      interface_class_for(emission.qualifier).new(emission)
+    def interface_for(emission, **args)
+      interface_class_for(emission.qualifier).new(emission, **args)
     end
 
     def interface_class_for(qualifier)

@@ -18,22 +18,17 @@ module Providers
       end
 
       def build_from_pack
-        with_streaming(streaming_args) do
-          build_from_dir.tap { |i| tag_latest(i) }
-        rescue ::Docker::Error::ImageNotFoundError => e
-          # Do nothing: ignore any ImageNotFoundError.
-        end
+        build_from_dir.tap { |i| tag_latest(i) }
+      rescue ::Docker::Error::ImageNotFoundError => e
+        # Do nothing: ignore any ImageNotFoundError.
       end
 
       def build_from_dir
-        stream.output("\n")
+        stream&.output("\n")
         bridge.build_from_dir("#{path_for(pack)}") do |encoded|
           process_output(encoded)
         end
       end
-
-      def stream; stream_for(streaming_args) ;end
-      def streaming_args; [:packs, pack, :build] ;end
 
     end
   end

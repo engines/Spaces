@@ -10,15 +10,15 @@ module Arenas
 
       def subcommands
         @subcommands ||= [
-          Binding.new(subcommand_input.merge(blueprint_identifier: blueprint_identifier)),
-          Resolving.new(subcommand_input),
-          Packing.new(subcommand_input),
-          Orchestrating.new(subcommand_input)
+          Binding.new(subcommand_inputs.merge(blueprint_identifier: blueprint_identifier)),
+          Resolving.new(subcommand_inputs),
+          Packing.new(subcommand_inputs),
+          Orchestrating.new(subcommand_inputs)
         ]
       end
 
-      def subcommand_input
-        @subcommandinput ||= {identifier: identifier, space: space_identifier}
+      def subcommand_inputs
+        @subcommand_inputs ||= {identifier: identifier, space: space_identifier}
       end
 
     end

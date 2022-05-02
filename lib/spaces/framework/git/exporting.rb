@@ -16,10 +16,10 @@ module Spaces
 
       def push_remote
         opened.push(remote_name, branch_name, command_options) do |io|
-          collect(io, :export)
+          collect(io)
         end
       rescue git_error
-        stream_export_error
+        maybe_stream_export_error
         raise push_failure
       end
 

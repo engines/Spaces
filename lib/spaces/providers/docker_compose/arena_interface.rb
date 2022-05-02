@@ -15,18 +15,14 @@ module Providers
 
         def orchestration_for(command)
           copy_auxiliaries
-          with_streaming(:orchestrations, arena, command) do |stream|
-            begin
-              bridge.send(command) do |io, bytes|
-                stream.error(bytes) if io == :stderr
-                stream.output(bytes) if io == :stdout
-              end
-            rescue ::Docker::Compose::Error => e
-              # No need to send message to stream. Error already reported in :stderr above.
-              pp e.inspect
-            end
+          bridge.send(command) do |io, bytes|
+            stream&.error(bytes) if io == :stderr
+            stream&.output(bytes) if io == :stdout
           end
           remove_auxiliaries # FIX: this doesn't happen until the send thread is finished!
+        rescue ::Docker::Compose::Error => e
+          # No need to send message to stream. Error already reported in :stderr above.
+          pp e.inspect
         end
 
         def plan

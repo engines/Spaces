@@ -16,7 +16,7 @@ module Spaces
       end
 
       def stream_identifier
-        input_for(:stream)
+        input_for(:stream_identifier)
       end
 
       def force

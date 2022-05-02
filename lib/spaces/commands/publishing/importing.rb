@@ -1,6 +1,7 @@
 module Publishing
   module Commands
     class Importing < ::Spaces::Commands::Saving
+      include ::Streaming::Streaming
 
       delegate(locations: :universe)
 
@@ -13,11 +14,15 @@ module Publishing
         locations.default_model_class
       end
 
+      def stream_elements; [space.identifier, model.identifier, qualifier] ;end
+
       protected
 
       def commit
         locations.save(model)
-        space.import(model, force: force)
+        with_streaming do
+          space.import(model, force: force, stream: stream)
+        end
       end
 
     end

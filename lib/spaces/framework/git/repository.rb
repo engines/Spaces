@@ -7,10 +7,10 @@ module Spaces
       include Engines::Logger
       include Importing
       include Exporting
-      include ::Streaming::Streaming
 
       relation_accessor :descriptor
       relation_accessor :space
+      relation_accessor :stream
 
       delegate(
         [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor,
@@ -87,24 +87,20 @@ module Spaces
         space.path_for(descriptor).join(".#{protocol}").exist?
       end
 
-      def collect(io, command)
-        stream_for(streaming_args_for(command)).tap do |s|
+      def collect(io)
+        stream&.tap do |s|
           s.output_lines_from(io)
           s.output("\n")
         end
       end
 
       # TODO: I18N for literal strings "Failed to import" and "Failed to export"
-      def stream_import_error
-        stream_for(streaming_args_for(:import)).error("Failed to import #{descriptor}\n")
+      def maybe_stream_import_error
+        stream&.error("Failed to import #{descriptor}\n")
       end
 
-      def stream_export_error
-        stream_for(streaming_args_for(:export)).error("Failed to export #{descriptor}\n")
-      end
-
-      def streaming_args_for(elements)
-        [space.identifier, descriptor, elements].flatten
+      def maybe_stream_export_error
+        stream&.error("Failed to export #{descriptor}\n")
       end
 
       def clone_failure; ::Spaces::Errors::ImportFailure ;end
@@ -112,9 +108,10 @@ module Spaces
       def push_failure; ::Spaces::Errors::ExportFailure ;end
       def head_identifier; 'HEAD ->' ;end
 
-      def initialize(descriptor, space:)
+      def initialize(descriptor, space:, stream: nil)
         self.descriptor = descriptor
         self.space = space
+        self.stream = stream
         init unless exist?
       end
 
