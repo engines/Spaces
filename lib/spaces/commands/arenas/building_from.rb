@@ -3,7 +3,8 @@ module Arenas
     class BuildingFrom < Saving
 
       def model
-        @model ||= current_model.build_from(identifier: input_for(:image_identifier))
+        @model ||=
+          current_model.build_from(identifier: input_for(:image_identifier))
       end
 
     end

@@ -5,10 +5,16 @@ module Spaces
     class Executing < Reading
       include ::Streaming::Streaming
 
+      def instruction
+        input_for(:execute)
+      end
+
       protected
 
       def commit
-        space.execute(input_for(:execute), model, stream: stream)
+        with_streaming do
+          space.execute(model, instruction: instruction, stream: stream)
+        end
       end
 
     end

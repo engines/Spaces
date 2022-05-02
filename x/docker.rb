@@ -54,6 +54,8 @@ controllers.arenas.state(identifier: :development)
 controllers.arenas.more_binders(identifier: :development)
 
 # ------------------------------------------------------------------------------
+# bind blueprints to the arena
+# controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
 
 # stage some blueprints in the applications arena
 controllers.arenas.stage(identifier: :development, blueprint_identifier: :phpmyadmin)

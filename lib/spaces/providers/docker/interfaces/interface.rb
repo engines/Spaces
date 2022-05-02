@@ -24,7 +24,7 @@ module Providers
         # output = JSON.parse(encoded, symbolize_names: true)
         # stream.error("#{output[:error]}\n") if output[:error]
         # stream.output(output[:stream]) if output[:stream]
-        stream.output(encoded)
+        stream&.output(encoded)
       end
 
       def summary_class; model_class ;end
