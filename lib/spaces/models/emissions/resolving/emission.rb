@@ -10,7 +10,13 @@ module Resolving
       important_division_for: :resolution
     )
 
-    def predecessor; @predecessor ||= resolutions.exist_then_by(identifier) ;end
+    def provider
+      provider_for(:runtime)
+    end
+
+    def predecessor
+      @predecessor ||= resolutions.exist_then_by(identifier)
+    end
 
     alias_accessor :resolution, :predecessor
 

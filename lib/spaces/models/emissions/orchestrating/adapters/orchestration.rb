@@ -1,16 +1,16 @@
 module Adapters
   class Orchestration < ResolvedEmission
 
-    delegate(
-      [:orchestration_provider, :runtime_qualifier] => :arena,
-      image: :emission
-    )
+    delegate(image: :emission)
 
-    alias_method :provider, :orchestration_provider
     alias_method :orchestration, :emission
 
+    def provider
+      provider_for(:orchestration)
+    end
+
     def adapter_name_elements
-      [super, runtime_qualifier].flatten
+      [super, qualifier_for(:runtime)].flatten
     end
 
     def image_identifier

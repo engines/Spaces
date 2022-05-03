@@ -68,7 +68,7 @@ module Divisions
     def to_s; struct ;end
 
     def method_missing(m, *args, &block)
-      emission.respond_to?(m) ? emission.send(m) : super
+      emission.respond_to?(m) ? emission.send(m, *args, &block) : super
     end
 
     def respond_to_missing?(m, *)

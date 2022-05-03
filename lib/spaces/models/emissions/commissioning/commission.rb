@@ -6,12 +6,9 @@ module Commissioning
     end
 
     delegate(
-      runtime_provider: :arena,
       model_class: :interface,
       [:state, :network] => :first_interface_model
     )
-
-    alias_method :provider, :runtime_provider
 
     def first_interface_model; interface_models.first ;end
 

@@ -14,7 +14,7 @@ module Targeting
     def transformed_to(transformation)
       # TODO: cannot refer to blueprint here
       in_blueprint? ? super : super.select do |s|
-        s.for_runtime?(runtime_qualifier)
+        s.for_runtime?(qualifier_for(:runtime))
       end
     end
 

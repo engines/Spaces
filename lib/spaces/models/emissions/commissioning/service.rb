@@ -8,12 +8,7 @@ module Commissioning
 
     relation_accessor :consumer
 
-    delegate(
-      registry: :universe,
-      runtime_provider: :arena
-    )
-
-    alias_method :provider, :runtime_provider
+    delegate(registry: :universe)
 
     def execute_for(milestone_name)
       unless registered?(milestone_name)

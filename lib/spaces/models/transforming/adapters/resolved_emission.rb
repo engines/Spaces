@@ -8,6 +8,7 @@ module Adapters
     delegate(
       [:arena, :resolution, :blueprint_identifier] => :emission,
       resolution_default_division_keys: :arena,
+      [:provider_for, :qualifier_for] => :arena,
       division_map: :resolution
     )
 

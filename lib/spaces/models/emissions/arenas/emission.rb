@@ -3,8 +3,7 @@ module Arenas
 
     delegate(
       arenas: :universe,
-      provider_for: :arena,
-      [:runtime_qualifier, :orchestration_qualifier, :packtime_qualifier] => :arena,
+      [:provider_for, :qualifier_for] => :arena,
       volume_path: :arena
     )
 

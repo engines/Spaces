@@ -24,7 +24,7 @@ module Settling
     end
 
     def embeds_for_arena_runtime
-      @embeds_for_arena_runtime ||= arena_runtime_embeds_for(runtime_qualifier)
+      @embeds_for_arena_runtime ||= arena_runtime_embeds_for(qualifier_for(:runtime))
     end
 
     def bindings_flattened

@@ -1,10 +1,11 @@
 module Adapters
   class Pack < ResolvedEmission
 
-    delegate(packing_provider: :arena)
-
-    alias_method :provider, :packing_provider
     alias_method :pack, :emission
+
+    def provider
+      provider_for(:packing)
+    end
 
     def adapter_qualifiers; [:script_copying, :file_packing, :script_running, :execution] ;end
 
