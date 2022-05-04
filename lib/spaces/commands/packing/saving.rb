@@ -1,6 +1,9 @@
+require_relative 'asserting'
+
 module Packing
   module Commands
     class Saving < ::Spaces::Commands::Saving
+      include Asserting
 
       def model
         @model ||= resolution.packed
