@@ -2,7 +2,11 @@ module Arenas
   module Providing
 
     def perform?(role_identifier)
-      role_providers.identifiers.include?(role_identifier.to_sym)
+      role_identifiers.include?(role_identifier.to_sym)
+    end
+
+    def role_identifiers
+      role_providers.identifiers
     end
 
     def providers

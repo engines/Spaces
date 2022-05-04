@@ -5,6 +5,7 @@ module Divisions
       divisions.reject(&:complete?)
     end
 
+    def role_providers; important_division_for(:role_providers) ;end
     def connections; important_division_for(:connections) ;end
 
     def input; important_division_for(:input) ;end
