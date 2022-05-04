@@ -3,6 +3,7 @@ require_relative 'inflatable'
 
 module Spaces
   class Model < Thing
+    include Asserting
     include Inflatable
 
     class << self

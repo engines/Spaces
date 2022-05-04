@@ -15,6 +15,7 @@ module Spaces
 
       def run
         tap do
+          insist
           struct.result = _run
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
