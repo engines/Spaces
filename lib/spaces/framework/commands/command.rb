@@ -15,7 +15,7 @@ module Spaces
 
       def run
         tap do
-          _run
+          struct.result = _run
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
           # TODO:
@@ -39,7 +39,6 @@ module Spaces
       protected
 
       def _run
-        struct.result =
         if c = commit
           c
         else

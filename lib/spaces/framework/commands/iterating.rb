@@ -34,7 +34,7 @@ module Spaces
 
       def _run
         space.touch(model) if mutating?
-        subcommands.each(&:run)
+        struct.result = subcommands.map(&:run).map(&:result)
       end
 
     end
