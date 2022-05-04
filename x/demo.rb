@@ -1,0 +1,7 @@
+require './x/controllers'
+require './x/demo/nuke'
+require './x/demo/init'
+require './x/demo/base'
+require './x/demo/infrastructure'
+require './x/demo/services'
+require './x/demo/applications'
