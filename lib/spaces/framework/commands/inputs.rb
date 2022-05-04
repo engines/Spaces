@@ -24,7 +24,7 @@ module Spaces
       end
 
       def callback
-        input_for(:callback)
+        input_for(:callback, default: -> (line) {puts line})
       end
 
     end
