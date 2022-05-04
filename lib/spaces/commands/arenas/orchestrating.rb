@@ -1,6 +1,17 @@
 module Arenas
   module Commands
     class Orchestrating < ::Spaces::Commands::Iterating
+      include ::Orchestrating::Commands::Asserting
+
+      def payload
+        r = super.map(&:result).compact
+        OpenStruct.new(
+          {
+            result: (r unless r.empty?),
+            errors: struct.errors
+          }.compact
+        )
+      end
 
       def array
         @array ||= model.directly_bound_resolutions
