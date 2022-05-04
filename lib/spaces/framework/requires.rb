@@ -1,5 +1,6 @@
 requires 'lib',
          'recovery',
+         'asserting',
          'models',
          'spaces',
          'universes',
