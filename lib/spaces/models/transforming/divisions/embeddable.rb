@@ -13,5 +13,7 @@ module Divisions
 
     def struct_merged_with(other); struct.reverse_merge(other.struct) ;end
 
+    def no_embed_makes_sense; self ;end
+
   end
 end

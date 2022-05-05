@@ -9,5 +9,7 @@ module Associations
       all.detect { |rp| rp.role_identifier.to_sym == role_identifier.to_sym }
     end
 
+    def embedded_with(_); no_embed_makes_sense ;end
+
   end
 end
