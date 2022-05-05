@@ -30,13 +30,8 @@ controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provide
 # bind a base blueprint to the arena
 controllers.arenas.bind(identifier: :base, blueprint_identifier: :debian)
 
-# resolve the arena for the bindings
-controllers.arenas.resolve(identifier: :base)
-
-# ------------------------------------------------------------------------------
-
-# save all packs for an arena
-controllers.arenas.pack(identifier: :base)
+# stage the arena for the bindings -- should not orchestrate!
+controllers.arenas.stage(identifier: :base)
 
 # # build images for the arena
 # controllers.arenas.build(identifier: :base, threaded: false)

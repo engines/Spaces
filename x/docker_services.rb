@@ -26,10 +26,13 @@ controllers.arenas.provide(identifier: :services, role_identifier: :dns, provide
 # specify an image to build blueprints from
 controllers.arenas.build_from(identifier: :services, image_identifier: :base_debian)
 
+# bind some blueprints to the arena
+controllers.arenas.bind(identifier: :services, blueprint_identifier: :mariadb)
+controllers.arenas.bind(identifier: :services, blueprint_identifier: :wap)
+
 # ------------------------------------------------------------------------------
-# stage some blueprints in the services arena
-controllers.arenas.stage(identifier: :services, blueprint_identifier: :mariadb)
-controllers.arenas.stage(identifier: :services, blueprint_identifier: :wap)
+# stage the arena
+controllers.arenas.stage(identifier: :services)
 
 # # build images for the arena
 # controllers.arenas.build(identifier: :services, threaded: false)

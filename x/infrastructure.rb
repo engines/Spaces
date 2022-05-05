@@ -26,9 +26,12 @@ controllers.arenas.provide(identifier: :infrastructure, role_identifier: :packin
 controllers.arenas.provide(identifier: :infrastructure, role_identifier: :orchestration, provider_identifier: :docker_compose_local)
 controllers.arenas.provide(identifier: :infrastructure, role_identifier: :runtime, provider_identifier: :docker_local)
 
+# bind a blueprint to the arena
+controllers.arenas.bind(identifier: :infrastructure, blueprint_identifier: :powerdns)
+
 # ------------------------------------------------------------------------------
 # stage some blueprints in the infrastructure arena
-controllers.arenas.stage(identifier: :infrastructure, blueprint_identifier: :powerdns)
+controllers.arenas.stage(identifier: :infrastructure)
 
 # # build images for the arena
 # controllers.arenas.build(identifier: :infrastructure, threaded: false)

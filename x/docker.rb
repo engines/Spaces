@@ -11,7 +11,7 @@ controllers.publishing.identify(model: {repository: 'https://github.com/v2Bluepr
 
 # import some blueprints
 controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, threaded: false)
+# controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, threaded: false)
 # controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/owncloud'}, threaded: false)
 
 # ------------------------------------------------------------------------------
@@ -55,12 +55,12 @@ controllers.arenas.more_binders(identifier: :development)
 
 # ------------------------------------------------------------------------------
 # bind blueprints to the arena
-# controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
+controllers.arenas.bind(identifier: :development, blueprint_identifier: :phpmyadmin)
+# controllers.arenas.bind(identifier: :development, blueprint_identifier: :redmine)
+# controllers.arenas.bind(identifier: :development, blueprint_identifier: :owncloud)
 
 # stage some blueprints in the applications arena
-controllers.arenas.stage(identifier: :development, blueprint_identifier: :phpmyadmin)
-# controllers.arenas.stage(identifier: :development, blueprint_identifier: :redmine)
-# controllers.arenas.stage(identifier: :development, blueprint_identifier: :owncloud)
+controllers.arenas.stage(identifier: :development)
 controllers.arenas.state(identifier: :development)
 
 # resolve the arena
