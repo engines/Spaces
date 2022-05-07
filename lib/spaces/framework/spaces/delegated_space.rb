@@ -9,8 +9,6 @@ module Spaces
       @all ||= interfaces.map(&:all).flatten
     end
 
-    def summaries; all ;end
-
     def interfaces; [] ;end
 
   end
