@@ -13,6 +13,7 @@ module Providers
     def name; identifier ;end
 
     def identifier; struct[:identifier] ;end
+    def compute_qualifier; struct[:compute_qualifier] ;end
 
     def prototype
       class_for(class_elements).new(struct: struct)

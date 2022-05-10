@@ -15,9 +15,9 @@ end
 # setup arena for orchestration
 controllers.arenas.create(model: {identifier: :applications})
 controllers.arenas.build_from(identifier: :applications, image_identifier: :base_debian)
-controllers.arenas.provide(identifier: :applications, role_identifier: :packing, provider_identifier: :docker_local)
-controllers.arenas.provide(identifier: :applications, role_identifier: :orchestration, provider_identifier: :docker_compose_local)
-controllers.arenas.provide(identifier: :applications, role_identifier: :runtime, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :applications, role_identifier: :packing, provider_identifier: :docker)
+controllers.arenas.provide(identifier: :applications, role_identifier: :orchestration, provider_identifier: :docker_compose)
+controllers.arenas.provide(identifier: :applications, role_identifier: :runtime, provider_identifier: :docker)
 
 # bind some arenas
 controllers.arenas.connect(identifier: :applications, other_identifier: :services)

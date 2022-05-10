@@ -39,9 +39,9 @@ controllers.arenas.create(model: {identifier: :development})
 controllers.arenas.state(identifier: :development)
 
 # define providers
-controllers.arenas.provide(identifier: :development, role_identifier: :packing, provider_identifier: :docker_local)
-controllers.arenas.provide(identifier: :development, role_identifier: :orchestration, provider_identifier: :docker_compose_local)
-controllers.arenas.provide(identifier: :development, role_identifier: :runtime, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :development, role_identifier: :packing, provider_identifier: :docker)
+controllers.arenas.provide(identifier: :development, role_identifier: :orchestration, provider_identifier: :docker_compose)
+controllers.arenas.provide(identifier: :development, role_identifier: :runtime, provider_identifier: :docker)
 
 # specify an image to build blueprints from
 controllers.arenas.build_from(identifier: :development, image_identifier: :base_debian)

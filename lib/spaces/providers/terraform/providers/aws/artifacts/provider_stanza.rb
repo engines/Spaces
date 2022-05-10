@@ -1,13 +1,11 @@
 module Artifacts
   module Terraform
-    module Docker
+    module Aws
       class ProviderStanza < ::Artifacts::Stanza
 
         def snippets
           %(
-            provider "#{qualifier_for(:runtime)}" {
-              # Note need to expand this to support remote hosts
-              host = "unix:///var/run/docker.sock"
+            provider "aws" {
             }
           )
         end

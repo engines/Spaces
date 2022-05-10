@@ -25,5 +25,15 @@ module Arenas
       provider_for(role_identifier)&.resolution
     end
 
+    def role_for(provider_identifier)
+      role_providers.detect do |rp|
+        rp.provider_identifier.to_sym == provider_identifier.to_sym
+      end
+    end
+
+    def compute_provider_for(provider_identifier)
+      role_for(provider_identifier)&.compute_provider
+    end
+
   end
 end

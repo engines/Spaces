@@ -2,7 +2,7 @@ require_relative 'arena'
 
 module Artifacts
   module Terraform
-    class Zones < Arena
+    class Support < Arena
 
       def stanza_qualifiers; [:zones] ;end
 

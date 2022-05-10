@@ -19,6 +19,8 @@ module Artifacts
       arena.role_providers.map(&:provider).map(&:qualifier).uniq - [provider.qualifier]
     end
 
+    def filename; qualifier ;end
+
     def initialize(holder)
       self.holder = holder
     end
