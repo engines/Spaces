@@ -19,11 +19,11 @@ controllers.arenas.build_from(identifier: :base, image_identifier: :debian)
 # ------------------------------------------------------------------------------
 
 # save some providers
-controllers.providing.create(model: {identifier: :docker_local, qualifier: :docker})
+controllers.providing.create(model: {identifier: :docker, qualifier: :docker})
 
 # define packing providers
-controllers.arenas.provide(identifier: :base, role_identifier: :packing, provider_identifier: :docker_local)
-controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :base, role_identifier: :packing, provider_identifier: :docker)
+controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provider_identifier: :docker)
 
 # ------------------------------------------------------------------------------
 

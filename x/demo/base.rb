@@ -10,8 +10,8 @@ controllers.streaming.tail(space: :publications, stream_identifier: :importing, 
 # setup an arena for building
 controllers.arenas.create(model: {identifier: :base})
 controllers.arenas.build_from(identifier: :base, image_identifier: :debian)
-controllers.arenas.provide(identifier: :base, role_identifier: :packing, provider_identifier: :docker_local)
-controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provider_identifier: :docker_local)
+controllers.arenas.provide(identifier: :base, role_identifier: :packing, provider_identifier: :docker)
+controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provider_identifier: :docker)
 controllers.arenas.bind(identifier: :base, blueprint_identifier: blueprint_identifier)
 controllers.arenas.resolve(identifier: :base)
 controllers.arenas.pack(identifier: :base)
