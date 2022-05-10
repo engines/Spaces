@@ -5,7 +5,7 @@ module Artifacts
 
         def snippets
           %(
-            provider "#{runtime_qualifier}" {
+            provider "#{qualifier_for(:runtime)}" {
               # Note need to expand this to support remote hosts
               host = "unix:///var/run/docker.sock"
             }
