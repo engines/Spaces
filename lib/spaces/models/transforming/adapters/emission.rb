@@ -16,17 +16,23 @@ module Adapters
 
     def artifacts
       @artifacts ||= artifact_qualifiers.map do |q|
-        artifact_class_for(q).new(self)
-      end
+        artifact_class_for(q)&.new(self)
+      end.compact
     end
 
     def artifact_class_for(artifact_qualifier)
-      class_for(:artifacts, qualifier, artifact_qualifier)
+      class_for(:artifacts, qualifier, compute_qualifier, artifact_qualifier)
     rescue NameError
       default_artifact_class
     end
 
-    def default_artifact_class; ::Artifacts::Artifact ;end
+    def compute_qualifier; compute_provider&.qualifier ;end
+
+    def compute_provider
+      @compute_provider ||= emission.compute_provider_for(provider.identifier)
+    end
+
+    def default_artifact_class; nil ;end
 
     def adapter_keys; [] ;end
     def adapter_map; {} ;end

@@ -39,7 +39,7 @@ module Spaces
         inside.constants.map { |c| inside.const_get(c) }.select {|k| k < inheriting }
       end
 
-      def class_for(*elements); elements.flatten.constantize ;end
+      def class_for(*elements); elements.flatten.compact.constantize ;end
     end
 
     attr_accessor :struct

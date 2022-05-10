@@ -10,7 +10,7 @@ module Adapters
     end
 
     def adapter_name_elements
-      [super, qualifier_for(:runtime)].flatten
+      [super, compute_qualifier_for(:runtime), qualifier_for(:runtime)].flatten.compact
     end
 
     def image_identifier
