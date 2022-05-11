@@ -13,6 +13,7 @@ module Artifacts
                 Name        = "private-app-subnet-1"
               }
             }
+            
             resource "aws_subnet" "private-app-subnet-2" {
               vpc_id            = aws_vpc.aws-vpc.id
               cidr_block        = 10.168.110.0/24
