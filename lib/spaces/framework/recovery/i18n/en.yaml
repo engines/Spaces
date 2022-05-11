@@ -63,3 +63,7 @@ en:
     spaces::framework::interpolating::iterating/qualified_collaborator:
       spaces::framework::interpolating::iterating/binding_collaborator:
         Unable to interpolate for %{value} in %{text} of %{qualifier}>%{identifier}.
+
+    string/constantize:
+      string/const_get:
+        Unable to find class for %{identifier} with elements %{elements}.
