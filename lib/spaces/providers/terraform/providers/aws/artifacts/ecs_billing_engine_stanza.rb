@@ -1,7 +1,7 @@
 module Artifacts
   module Terraform
     module Aws
-      class EcrAbsStanza < ::Artifacts::Stanza
+      class EcsBillingEngineStanza < ::Artifacts::Stanza
 
         def snippets
           %(
@@ -22,7 +22,6 @@ module Artifacts
                 target_group_arn = aws_lb_target_group.abs.arn
                 container_name   = "app"
                 container_port   = 8501
-              }
             }
           )
         end
