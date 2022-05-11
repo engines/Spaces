@@ -3,7 +3,7 @@ module Adapters
     class Orchestration < ::Adapters::Orchestration
 
       def artifact_qualifiers
-        [:container]
+        [:capsule]
       end
 
     end
