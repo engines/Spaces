@@ -1,7 +1,9 @@
+require_relative 'capsule_stanza'
+
 module Artifacts
   module Terraform
     module Aws
-      class EcsAbsStanza < ::Artifacts::Stanza
+      class ContainerServiceStanza < CapsuleStanza
 
         def snippets
           %(
@@ -22,7 +24,6 @@ module Artifacts
                 target_group_arn = aws_lb_target_group.abs.arn
                 container_name   = "app"
                 container_port   = 8501
-              }
             }
           )
         end

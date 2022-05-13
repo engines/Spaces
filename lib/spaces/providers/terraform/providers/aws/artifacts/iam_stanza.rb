@@ -1,7 +1,9 @@
+require_relative 'capsule_stanza'
+
 module Artifacts
   module Terraform
     module Aws
-      class IamStanza < ::Artifacts::Stanza
+      class IamStanza < CapsuleStanza
 
         def snippets
           %(
