@@ -11,7 +11,7 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 controllers.arenas.create(model: {identifier: :aws})
 
 # specify an image to build blueprints from
-controllers.arenas.build_from(identifier: :mf_infrastructure, image_identifier: :base_debian)
+controllers.arenas.build_from(identifier: :aws, image_identifier: :base_debian)
 
 # ------------------------------------------------------------------------------
 

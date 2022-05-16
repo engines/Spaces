@@ -1,15 +1,11 @@
-require_relative 'artifact'
-
 module Artifacts
   module Terraform
     module Aws
       class Capsule < ::Artifacts::Terraform::Capsule
 
-        def stanza_qualifiers; [:capsule] ;end
-
-        # def capsule_type
-        #   [runtime_qualifier, 'container'].compact.join('_')
-        # end
+        def stanza_qualifiers
+          [compute_service_identifier || :capsule]
+        end
 
       end
     end

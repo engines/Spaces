@@ -20,16 +20,20 @@ module Resolving
       [:packs, :orchestrations, :registry] => :universe
     )
 
-    def configuration
-      binding_target&.struct&.configuration
-    end
-
     def complete?
       all_complete?(divisions)
     end
 
+    def configuration
+      binding_target&.struct&.configuration
+    end
+
     def image
       images&.first
+    end
+
+    def compute_service
+      division_map[:compute_service]
     end
 
     def direct_connections

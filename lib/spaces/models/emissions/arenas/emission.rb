@@ -3,7 +3,7 @@ module Arenas
 
     delegate(
       arenas: :universe,
-      [:perform?, :provider_for, :compute_provider_for, :qualifier_for] => :arena,
+      [:perform?, :role_for, :provider_for, :compute_provider_for, :qualifier_for] => :arena,
       volume_path: :arena
     )
 
