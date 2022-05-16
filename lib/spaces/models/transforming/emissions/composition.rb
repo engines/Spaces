@@ -13,7 +13,7 @@ module Emissions
         [
           Divisions::Bindings,
           Divisions::Target,
-          Divisions::Scaling,
+          Divisions::ComputeService,
           Divisions::SystemPackages,
           Divisions::OtherPackages,
           Divisions::Modules,
@@ -21,6 +21,7 @@ module Emissions
           Divisions::Permissions,
           Divisions::Volumes,
           Divisions::Ports,
+          Divisions::Scaling,
           Divisions::About
         ]
       end

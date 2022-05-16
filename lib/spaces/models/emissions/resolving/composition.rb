@@ -2,9 +2,14 @@ module Resolving
   class Composition < ::Emissions::Composition
 
     class << self
+      def associative_classes
+        [
+          Associations::Domains,
+        ]
+      end
+
       def division_classes
         [
-          ::Arenas::Composition.associative_classes,
           super,
           Divisions::Deployment
         ].flatten
