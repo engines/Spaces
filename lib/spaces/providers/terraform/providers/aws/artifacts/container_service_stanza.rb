@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_ecs_service" "abs" {
+            resource "aws_ecs_service" "#{blueprint_identifier}" {
               name            = "abs"
               cluster         = aws_ecs_cluster.abs.id
               task_definition = aws_ecs_task_definition.abs.arn

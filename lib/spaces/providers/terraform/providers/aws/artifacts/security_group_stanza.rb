@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_security_group" "load_balancer_security_group" {
+            resource "aws_security_group" "#{blueprint_identifier}" {
               vpc_id = aws_vpc.aws-vpc.id
 
               ingress {

@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_cloudwatch_log_group" "log-group" {
+            resource "aws_cloudwatch_log_group" "#{blueprint_identifier}" {
               name = "${var.app_name}-${var.app_environment}-logs"
               target_arn = arn:aws:logs:ap-southeast-2:*:log-group:/aws/lambda/*:*:*
               role_arn   = aws_iam_role.iam_for_cloudwatch.arn

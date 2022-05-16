@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_subnet" "private-app-subnet-1" {
+            resource "aws_subnet" "#{blueprint_identifier}" {
               vpc_id            = aws_vpc.aws-vpc.id
               cidr_block        = 10.168.100.0/24
 

@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_route_table" "public" {
+            resource "aws_route_table" "#{blueprint_identifier}" {
               vpc_id = aws_vpc.aws-vpc.id
 
               tags = {

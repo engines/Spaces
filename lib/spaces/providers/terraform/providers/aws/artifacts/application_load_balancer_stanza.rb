@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_alb" "application_load_balancer" {
+            resource "aws_alb" "#{blueprint_identifier}" {
               name               = "${var.app_name}-${var.app_environment}-alb"
               internal           = false
               load_balancer_type = "application"
@@ -20,7 +20,7 @@ module Artifacts
               }
             }
 
-            resource "aws_lb_target_group" "target_group" {
+            resource "aws_lb_target_group" "#{blueprint_identifier}_target_group" {
               name        = "${var.app_name}-${var.app_environment}-tg"
               port        = 80
               protocol    = "HTTP"
@@ -43,7 +43,7 @@ module Artifacts
               }
             }
 
-            resource "aws_lb_listener" "listener" {
+            resource "aws_lb_listener" "#{blueprint_identifier}_listener" {
               load_balancer_arn = aws_alb.application_load_balancer.id
               port              = "8501"
               protocol          = "HTTP"

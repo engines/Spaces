@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_vpc" "aws-vpc" {
+            resource "aws_vpc" "#{blueprint_identifier}" {
               cidr_block           = "10.168.0.0/16"
               enable_dns_hostnames = true
               enable_dns_support   = true
