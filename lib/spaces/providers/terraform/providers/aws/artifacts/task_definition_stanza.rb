@@ -5,12 +5,7 @@ module Artifacts
     module Aws
       class TaskDefinitionStanza < CapsuleStanza
 
-        def snippets
-          %(
-            resource "aws_ecs_task_definition" "#{blueprint_identifier}" {
-            }
-          )
-        end
+        def resource_type; :ecs_task_definition ;end
 
       end
     end

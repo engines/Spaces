@@ -5,16 +5,12 @@ module Artifacts
     module Aws
       class LogGroupStanza < CapsuleStanza
 
-        def snippets
+        def resource_type; :cloudwatch_log_group ;end
+
+        def more_snippets
           %(
-            resource "aws_cloudwatch_log_group" "#{blueprint_identifier}" {
-              name = "${var.app_name}-${var.app_environment}-logs"
-              target_arn = arn:aws:logs:ap-southeast-2:*:log-group:/aws/lambda/*:*:*
-              role_arn   = aws_iam_role.iam_for_cloudwatch.arn
-              tags = {
-                Application = var.app_name
-              }
-            }
+            target_arn = arn:aws:logs:ap-southeast-2:*:log-group:/aws/lambda/*:*:*
+            role_arn   = aws_iam_role.iam_for_cloudwatch.arn
           )
         end
 
