@@ -3,7 +3,7 @@ require_relative 'capsule_stanza'
 module Artifacts
   module Terraform
     module Aws
-      class InternetGatewayStanza < CapsuleStanza
+      class SubnetStanza < CapsuleStanza
 
       end
     end

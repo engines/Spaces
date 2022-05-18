@@ -37,6 +37,10 @@ class Hash
     OpenStruct.new(snakize_keys.values_to_struct)
   end
 
+  def to_hcl
+    keys.map { |k| %(#{k} = "#{self[k]}") }
+  end
+
   def no_symbols; stringify_keys.deep(:no_symbols) ;end
   def values_to_struct; deep(:to_struct) ;end
 

@@ -1,11 +1,13 @@
+require_relative 'capsule_stanza'
+
 module Artifacts
   module Terraform
     module Aws
-      class EcrStanza < ::Artifacts::Stanza
+      class ContainerRegistryStanza < CapsuleStanza
 
         def snippets
           %(
-            resource "aws_ecr_repository" "aws-ecr" {
+            resource "aws_ecr_repository" "#{blueprint_identifier}" {
               name = "${var.app_name}-${var.app_environment}-ecr"
               tags = {
                 Name = "${var.app_name}-ecr"

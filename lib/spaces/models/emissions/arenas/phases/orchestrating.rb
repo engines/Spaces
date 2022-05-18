@@ -1,8 +1,5 @@
-require_relative 'golden_packing'
-
 module Arenas
   module Orchestrating
-    include ::Arenas::GoldenPacking
 
     def orchestrated; present_in(orchestrations) ;end
 

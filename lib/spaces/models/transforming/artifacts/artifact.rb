@@ -19,6 +19,14 @@ module Artifacts
       arena.role_providers.map(&:provider).map(&:qualifier).uniq - [provider.qualifier]
     end
 
+    def compute_service_identifier
+      resolution.compute_service&.identifier_for(compute_identifier)
+    end
+
+    def compute_identifier; role.compute_identifier ;end
+
+    def role; resolution.role_for(provider.identifier) ;end
+
     def filename; qualifier ;end
 
     def initialize(holder)
