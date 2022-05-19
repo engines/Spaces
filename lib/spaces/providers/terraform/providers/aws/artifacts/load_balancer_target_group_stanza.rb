@@ -5,8 +5,6 @@ module Artifacts
     module Aws
       class LoadBalancerTargetGroupStanza < CapsuleStanza
 
-        def resource_type; :lb_target_group ;end
-
         def more_snippets
           %(
             vpc_id = aws_vpc.#{vpc.blueprint_identifier}.id

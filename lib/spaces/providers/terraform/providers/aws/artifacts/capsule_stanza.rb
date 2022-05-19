@@ -3,6 +3,31 @@ module Artifacts
     module Aws
       class CapsuleStanza < ::Artifacts::Terraform::CapsuleStanza
 
+        class << self
+
+          def resource_type_map
+            {
+              application_load_balancer: :alb,
+              cluster_key: :kms_key,
+              container_definition: :ecs_container_definition,
+              container_registry: :ecr_repository,
+              container_service: :ecs,
+              container_service_cluster: :ecs_cluster,
+              load_balancer_listener: :lb_listener,
+              load_balancer_target_group: :lb_target_group,
+              log_group: :cloudwatch_log_group,
+              task_definition: :ecs_task_definition
+            }
+          end
+        end
+
+        delegate resource_type_map: :klass
+
+        def resource_type
+          resource_type_map[compute_service_identifier&.to_sym] ||
+            qualifier.split('_')[0..-2].join('_')
+        end
+
         # def snippets
         #   "# capsule resource snippet for #{blueprint_identifier} with nothing to say."
         # end
@@ -16,8 +41,6 @@ module Artifacts
             }
           )
         end
-
-        def resource_type; qualifier.split('_')[0..-2].join('_') ;end
 
         def configuration_snippet
           configuration_hash.without(:tags).to_hcl.join("\n")

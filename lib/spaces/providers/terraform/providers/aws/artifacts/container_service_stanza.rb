@@ -5,8 +5,6 @@ module Artifacts
     module Aws
       class ContainerServiceStanza < CapsuleStanza
 
-        def resource_type; :ecs ;end
-
         def more_snippets
           %(
             cluster         = aws_ecs_cluster.abs.id ??

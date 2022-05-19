@@ -5,8 +5,6 @@ module Artifacts
     module Aws
       class ApplicationLoadBalancerStanza < CapsuleStanza
 
-        def resource_type; :alb ;end
-
         def more_snippets
           %(
             internal           = false
