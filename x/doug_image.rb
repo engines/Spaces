@@ -28,7 +28,7 @@ controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provide
 # ------------------------------------------------------------------------------
 
 # bind a base blueprint to the arena
-controllers.arenas.bind(identifier: :base, blueprint_identifier: :'python:3.8-slim-buster')
+controllers.arenas.bind(identifier: :base, blueprint_identifier: :'dougs-base-image')
 
 # stage the arena for the bindings -- should not orchestrate!
 controllers.arenas.stage(identifier: :base)
