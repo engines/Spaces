@@ -5,8 +5,6 @@ module Artifacts
     module Aws
       class ContainerServiceClusterStanza < CapsuleStanza
 
-        def resource_type; :ecs_cluster ;end
-
         def snippets
           %(
             resource "aws_#{resource_type}" "#{blueprint_identifier}" {

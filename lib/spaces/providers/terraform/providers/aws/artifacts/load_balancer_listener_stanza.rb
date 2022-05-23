@@ -5,8 +5,6 @@ module Artifacts
     module Aws
       class LoadBalancerListenerStanza < CapsuleStanza
 
-        def resource_type; :lb_listener ;end
-
         def more_snippets
           %(
             load_balancer_arn = aws_alb.application_load_balancer.id
