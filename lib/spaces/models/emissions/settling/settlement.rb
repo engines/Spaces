@@ -1,6 +1,7 @@
 module Settling
   class Settlement < ::Arenas::Emission
     include Embedding
+    include Injecting
     include Infixing
 
     delegate([:blueprints, :resolutions] => :universe)

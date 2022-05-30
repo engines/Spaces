@@ -8,7 +8,7 @@ module Blueprinting
           without(arena_specific_divisions).
           merge(struct)
         m.cache_primary_identifiers
-      end.with_embeds.infixes_resolved
+      end.with_embeds.with_injection.infixes_resolved
     end
 
     def arena_specific_divisions

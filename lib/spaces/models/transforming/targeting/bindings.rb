@@ -18,6 +18,16 @@ module Targeting
       end
     end
 
+    def connect_bindings
+      all.reject { |b| b.embed? || b.inject? }
+    end
+
+    def inject_bindings
+      deep_bindings.select(&:inject?)
+    end
+
+    alias_method :configure_bindings, :inject_bindings
+
     def embed_bindings
       all.select(&:embed?)
     end
@@ -29,10 +39,6 @@ module Targeting
 
     def shallow_embed_bindings_for(runtime)
       embed_bindings.select { |t| t.for_runtime?(runtime) }
-    end
-
-    def connect_bindings
-      all.reject(&:embed?)
     end
 
     def deep_bindings

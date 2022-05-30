@@ -27,7 +27,14 @@ module Targeting
       [[], nil].include?(runtimes)
     end
 
+    def inject?; type == 'configure' ;end
     def embed?; type == 'embed' ;end
+
+    def configure_bindings
+      deep_bindings_of_type(:configure)
+    end
+
+    alias_method :inject_bindings, :configure_bindings
 
     def embed_bindings
       deep_bindings_of_type(:embed)
