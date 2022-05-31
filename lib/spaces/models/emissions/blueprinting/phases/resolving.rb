@@ -1,14 +1,16 @@
 module Blueprinting
   module Resolving
 
-    def resolution_in(arena)
+    def resolution_in(arena, binding)
       empty_resolution.tap do |m|
         m.arena = arena
         m.struct = arena.struct.
           without(arena_specific_divisions).
           merge(struct)
+        m.struct.blueprint_identifier = binding.target_identifier
+        m.struct.application_identifier = binding.application_identifier
         m.cache_primary_identifiers
-      end.with_embeds.with_injection.infixes_resolved
+      end.with_embeds.with_injection(binding).infixes_resolved
     end
 
     def arena_specific_divisions

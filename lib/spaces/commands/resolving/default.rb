@@ -3,7 +3,7 @@ module Resolving
     class Default < Spaces::Commands::Reading
 
       def assembly
-        @model ||= blueprint.resolution_in(arena)
+        @model ||= blueprint.resolution_in(arena, binding)
       end
 
       def blueprint

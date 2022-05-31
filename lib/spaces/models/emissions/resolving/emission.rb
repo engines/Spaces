@@ -22,6 +22,7 @@ module Resolving
 
     def cache_primary_identifiers
       struct.arena_identifier = arena.identifier
+      struct.application_identifier = application_identifier
       struct.blueprint_identifier = blueprint_identifier
     end
 

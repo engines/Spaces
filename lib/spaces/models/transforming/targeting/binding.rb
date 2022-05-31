@@ -12,10 +12,17 @@ module Targeting
       def features; [:type, :runtimes, :identifier, :target_identifier, :configuration, :service] ;end
     end
 
+    def application_identifier
+      inject? ? identifier : target_identifier
+    end
+
     def configuration; struct.configuration ;end
     def service; struct.service ;end
 
     def type; struct.type || derived_features[:type] ;end
+
+    def inject?; type == 'configure' ;end
+    def embed?; type == 'embed' ;end
 
     def runtimes; struct.runtimes ;end
 
@@ -26,9 +33,6 @@ module Targeting
     def generic?
       [[], nil].include?(runtimes)
     end
-
-    def inject?; type == 'configure' ;end
-    def embed?; type == 'embed' ;end
 
     def configure_bindings
       deep_bindings_of_type(:configure)

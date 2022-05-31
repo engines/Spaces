@@ -12,6 +12,8 @@ module Arenas
     def arena; @arena ||= arenas.by(arena_identifier) ;end
 
     def arena_identifier; identifier.high ;end
+    def blueprint_identifier; struct.blueprint_identifier ;end
+    def application_identifier; struct.application_identifier ;end
 
     def images
       @images ||= duplicate(arena.images).tap { |i| i.emission = self }
@@ -20,9 +22,8 @@ module Arenas
     def empty; super.tap { |m| m.arena = arena } ;end
 
     def cache_primary_identifiers
-      struct.identifier = "#{arena.identifier.with_identifier_separator}#{blueprint_identifier}"
+      struct.identifier = "#{arena.identifier.with_identifier_separator}#{application_identifier}"
       struct.arena_identifier = arena.identifier
-      struct.blueprint_identifier = blueprint_identifier
     end
 
   end

@@ -1,28 +1,24 @@
 module Settling
   module Injecting
 
-    def with_injection
+    def with_injection(binding)
       empty.tap do |m|
         m.struct = struct
-        m.binding_target_with_injection!
+        m.maybe_inject_with!(binding)
       end
     end
 
-    def binding_target_with_injection!
+    def maybe_inject_with!(binding)
       binding_target.struct.configuration =
-        configuration.merge(injection) if injectable?
+        configuration.merge(injection(binding)) if injectable?(binding)
     end
 
-    def injectable?
-      injection && configuration
+    def injection(binding)
+      binding.struct.configuration
     end
 
-    def injection
-      inject_binding&.struct&.configuration
-    end
-
-    def inject_binding
-      arena.inject_bindings.detect { |b| b.identifier.to_sym == blueprint_identifier.to_sym }
+    def injectable?(binding)
+      configuration && binding.inject?
     end
 
     def configuration

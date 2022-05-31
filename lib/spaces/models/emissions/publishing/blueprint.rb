@@ -12,6 +12,9 @@ module Publishing
 
     delegate([:blueprints, :publications] => :universe)
 
+    def blueprint_identifier; identifier ;end
+    def application_identifier; identifier ;end
+
     def repository
       @repository ||= publications.repository_for(descriptor)
     end
