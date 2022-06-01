@@ -20,10 +20,11 @@ module Resolving
 
     alias_accessor :resolution, :predecessor
 
-    def cache_primary_identifiers
-      struct.arena_identifier = arena.identifier
-      struct.application_identifier = application_identifier
-      struct.blueprint_identifier = blueprint_identifier
+    def cache_primary_identifiers!
+      struct.arena_identifier = resolution.arena_identifier
+      struct.identifier = resolution.identifier
+      struct.application_identifier = resolution.application_identifier
+      struct.blueprint_identifier = resolution.blueprint_identifier
     end
 
     def method_missing(m, *args, &block)

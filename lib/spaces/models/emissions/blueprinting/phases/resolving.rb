@@ -2,15 +2,18 @@ module Blueprinting
   module Resolving
 
     def resolution_in(arena, binding)
-      empty_resolution.tap do |m|
+      with_cache!(binding).empty_resolution.tap do |m|
         m.arena = arena
+        m.predecessor = self
         m.struct = arena.struct.
           without(arena_specific_divisions).
           merge(struct)
-        m.struct.blueprint_identifier = binding.target_identifier
-        m.struct.application_identifier = binding.application_identifier
-        m.cache_primary_identifiers
+        m.cache_primary_identifiers!
       end.with_embeds.with_injection(binding).infixes_resolved
+    end
+
+    def with_cache!(binding)
+      tap { cache_primary_identifiers!(binding) }
     end
 
     def arena_specific_divisions

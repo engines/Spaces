@@ -4,8 +4,8 @@ module Resolving
     def packed
       empty_pack.tap do |m|
         m.struct = builders_for(images)
-        m.struct.identifier = identifier
-        m.cache_primary_identifiers
+        m.predecessor = self
+        m.cache_primary_identifiers!
       end if packable?
     end
 

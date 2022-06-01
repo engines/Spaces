@@ -24,6 +24,8 @@ module Blueprinting
 
     alias_method :blueprint, :itself
 
+    def application_identifier; struct.application_identifier ;end
+
     def binder?
       keys - documentation_only_keys == [:bindings]
     end
@@ -31,6 +33,12 @@ module Blueprinting
     def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end
 
     def transformed_for_publication; globalized ;end
+
+    def cache_primary_identifiers!(binding)
+      struct.blueprint_identifier = binding.target_identifier
+      struct.identifier = binding.target_identifier
+      struct.application_identifier = binding.application_identifier
+    end
 
   end
 end
