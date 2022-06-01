@@ -34,7 +34,7 @@ module Blueprinting
 
     def transformed_for_publication; globalized ;end
 
-    def cache_primary_identifiers!(binding)
+    def cache_identifiers!(binding)
       struct.blueprint_identifier = binding.target_identifier
       struct.identifier = binding.target_identifier
       struct.application_identifier = binding.application_identifier

@@ -4,7 +4,7 @@ module Resolving
     def to_image
       empty_image.tap do |m|
         m.predecessor = self
-        m.cache_primary_identifiers!
+        m.cache_identifiers!
       end
     end
 

@@ -8,12 +8,12 @@ module Blueprinting
         m.struct = arena.struct.
           without(arena_specific_divisions).
           merge(struct)
-        m.cache_primary_identifiers!
+        m.cache_identifiers!
       end.with_embeds.with_injection(binding).infixes_resolved
     end
 
     def with_cache!(binding)
-      tap { cache_primary_identifiers!(binding) }
+      tap { cache_identifiers!(binding) }
     end
 
     def arena_specific_divisions

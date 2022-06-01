@@ -28,7 +28,7 @@ module Arenas
 
     def empty; super.tap { |m| m.arena = arena } ;end
 
-    def cache_primary_identifiers!
+    def cache_identifiers!
       struct.arena_identifier = arena.identifier
       struct.blueprint_identifier = blueprint.identifier
       struct.application_identifier = blueprint.application_identifier

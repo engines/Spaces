@@ -70,7 +70,7 @@ module Commissioning
       path.basename.to_s.split('_').first
     end
 
-    def cache_primary_identifiers!
+    def cache_identifiers!
       struct.consumer_identifier = consumer.identifier
       struct.service_entry_identifier = [resolution.identifier, consumer.identifier].join(identifier_separator)
     end

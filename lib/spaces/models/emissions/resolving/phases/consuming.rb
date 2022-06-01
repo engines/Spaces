@@ -4,7 +4,7 @@ module Resolving
     def as_consumer
       empty_consumer.tap do |m|
         m.predecessor = self
-        m.cache_primary_identifiers!
+        m.cache_identifiers!
         m.struct.milestones = m.the_milestones
       end
     end

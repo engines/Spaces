@@ -6,7 +6,7 @@ module Resolving
         empty_entry.tap do |m|
           m.consumer = self
           m.struct = OpenStruct.new.tap { |s| s.bindings = [c.struct] }
-          m.cache_primary_identifiers!
+          m.cache_identifiers!
         end
       end
     end

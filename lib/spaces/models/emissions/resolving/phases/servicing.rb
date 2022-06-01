@@ -5,7 +5,7 @@ module Resolving
       empty_service.tap do |m|
         m.resolution = self
         m.consumer = consumer
-        m.cache_primary_identifiers!
+        m.cache_identifiers!
         m.struct.milestones = m.services
       end
     end

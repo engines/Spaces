@@ -20,7 +20,7 @@ module Resolving
 
     alias_accessor :resolution, :predecessor
 
-    def cache_primary_identifiers!
+    def cache_identifiers!
       struct.arena_identifier = resolution.arena_identifier
       struct.identifier = resolution.identifier
       struct.application_identifier = resolution.application_identifier

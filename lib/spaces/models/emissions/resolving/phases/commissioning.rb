@@ -4,7 +4,7 @@ module Resolving
     def as_commission
       empty_commission.tap do |m|
         m.predecessor = self
-        m.cache_primary_identifiers!
+        m.cache_identifiers!
       end
     end
 

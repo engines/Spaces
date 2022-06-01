@@ -5,7 +5,7 @@ module Resolving
       empty_pack.tap do |m|
         m.struct = builders_for(images)
         m.predecessor = self
-        m.cache_primary_identifiers!
+        m.cache_identifiers!
       end if packable?
     end
 

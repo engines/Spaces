@@ -37,7 +37,7 @@ module Settling
       empty.tap do |m|
         m.struct = struct
         m.struct.bindings = bindings.flattened.struct
-        m.cache_primary_identifiers!
+        m.cache_identifiers!
       end
     end
 
