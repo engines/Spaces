@@ -28,6 +28,14 @@ module Resolving
       images&.first
     end
 
+    def provides_compute_service_for?(identifier)
+      compute_service_identifiers&.include?(identifier.to_sym)
+    end
+
+    def compute_service_identifiers
+      compute_service&.identifiers || []
+    end
+
     def compute_service
       division_map[:compute_service]
     end

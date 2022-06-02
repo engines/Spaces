@@ -55,7 +55,7 @@ module Artifacts
         end
 
         def configuration_hash
-          resolution.configuration&.struct&.to_h_deep || {}
+          configuration&.to_h_deep || {}
         end
 
         def tags_hash

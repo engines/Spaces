@@ -6,22 +6,22 @@ module Artifacts
       class RouteTableStanza < CapsuleStanza
 
         def more_snippets
+          arena.compute_resolutions_for(:subnet).map do |r|
+            route_snippet_for(r)
+          end.join("\n")
+        end
+
+        def route_snippet_for(subnet_resolution)
           %(
             route {
-              cidr_block = "10.111.111.0/24"
-              gateway_id = aws_internet_gateway.VPC_A-gw.id
-            }
-
-            route {
-              cidr_block = "10.111.222.0/24"
-              gateway_id = aws_internet_gateway.VPC_A-gw.id
-            }
-
-            route {
-              cidr_block = "0.0.0.0/0"
-              gateway_id = aws_internet_gateway.VPC_A-gw.id
+              cidr_block = "#{subnet_resolution.configuration.cidr_block}"
+              gateway_id = configuration.gateway_id
             }
           )
+        end
+
+        def configuration_hash
+          super.without(:gateway_id)
         end
 
       end

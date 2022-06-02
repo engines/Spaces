@@ -17,6 +17,7 @@ class OpenStruct
   end
 
   def keys; to_h.keys ;end
+  def values; to_h.values ;end
 
   def compact; to_h_deep.compact.to_struct ;end
 

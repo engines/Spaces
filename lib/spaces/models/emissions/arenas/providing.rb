@@ -1,6 +1,12 @@
 module Arenas
   module Providing
 
+    def compute_resolutions_for(identifier)
+      directly_bound_resolutions.select do |r|
+        r.provides_compute_service_for?(identifier)
+      end
+    end
+
     def perform?(role_identifier)
       role_identifiers.include?(role_identifier.to_sym)
     end
