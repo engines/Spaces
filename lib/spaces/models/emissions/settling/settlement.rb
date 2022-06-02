@@ -15,6 +15,7 @@ module Settling
       super.merge(
         {
           arena_identifier: arena_identifier,
+          application_identifier: application_identifier,
           blueprint_identifier: blueprint_identifier
         }
       )

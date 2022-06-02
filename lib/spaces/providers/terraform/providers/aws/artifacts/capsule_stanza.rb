@@ -29,12 +29,12 @@ module Artifacts
         end
 
         # def snippets
-        #   "# capsule resource snippet for #{blueprint_identifier} with nothing to say."
+        #   "# capsule resource snippet for #{application_identifier} with nothing to say."
         # end
         def snippets
           %(
-            resource "aws_#{resource_type}" "#{blueprint_identifier}" {
-              name = "#{blueprint_identifier}"
+            resource "aws_#{resource_type}" "#{application_identifier}" {
+              name = "#{application_identifier}"
               #{configuration_snippet}
               #{tags_snippet}
               #{more_snippets}

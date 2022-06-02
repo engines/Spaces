@@ -5,9 +5,9 @@ module Artifacts
       def snippets
         # TODO: refactor the long method chain for ttl
         %(
-          resource "#{dns_qualifier}_record" "#{blueprint_identifier}" {
+          resource "#{dns_qualifier}_record" "#{application_identifier}" {
             zone    = "#{universe.host}."
-            name    = "#{blueprint_identifier}.#{universe.host}."
+            name    = "#{application_identifier}.#{universe.host}."
             type    = "AAAA"
             ttl     = #{arena.role_providers.dns.resolution.configuration.ttl}
             records = [#{container_address_snippet}]
@@ -15,10 +15,10 @@ module Artifacts
         ) unless redundant
       end
 
-      def redundant; dns_qualifier == blueprint_identifier ;end
+      def redundant; dns_qualifier == application_identifier ;end
 
       def container_address_snippet
-        "#{container_type}.#{blueprint_identifier}.ipv6_address"
+        "#{container_type}.#{application_identifier}.ipv6_address"
       end
 
     end

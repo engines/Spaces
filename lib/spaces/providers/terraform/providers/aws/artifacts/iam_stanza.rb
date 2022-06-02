@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_iam_role" "#{blueprint_identifier}_role" {
+            resource "aws_iam_role" "#{application_identifier}_role" {
               name               = "${var.app_name}-execution-task-role"
               assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
               tags = {
@@ -15,7 +15,7 @@ module Artifacts
               }
             }
 
-            data "aws_iam_policy_document" "#{blueprint_identifier}_policy_document" {
+            data "aws_iam_policy_document" "#{application_identifier}_policy_document" {
               statement {
                 actions = ["sts:AssumeRole"]
 
@@ -26,7 +26,7 @@ module Artifacts
               }
             }
 
-            resource "aws_iam_role_policy_attachment" "#{blueprint_identifier}_policy_attachment" {
+            resource "aws_iam_role_policy_attachment" "#{application_identifier}_policy_attachment" {
               role       = aws_iam_role.ecsTaskExecutionRole.name
               policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
 
