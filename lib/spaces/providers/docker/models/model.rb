@@ -18,7 +18,7 @@ module Providers
       end
 
       def arena_identifier; resolution_identifier.high ;end
-      def blueprint_identifier; resolution_identifier.low ;end
+      def application_identifier; resolution_identifier.low ;end
 
       def runtime_qualifier; name_elements[1].snakize ;end
       alias_method :runtime, :runtime_qualifier

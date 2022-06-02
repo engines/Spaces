@@ -7,6 +7,10 @@ module Arenas
       end
     end
 
+    def inject_bindings
+      bindings.map(&:inject_bindings).flatten.compact.uniq
+    end
+
     def bind_with(blueprint_identifier)
       empty.tap do |m|
         m.struct = struct

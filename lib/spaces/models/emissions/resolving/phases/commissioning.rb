@@ -3,8 +3,8 @@ module Resolving
 
     def as_commission
       empty_commission.tap do |m|
-        m.struct.identifier = identifier
-        m.cache_primary_identifiers
+        m.predecessor = self
+        m.cache_identifiers!
       end
     end
 

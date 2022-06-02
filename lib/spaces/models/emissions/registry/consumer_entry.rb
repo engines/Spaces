@@ -25,7 +25,7 @@ module Registry
 
     def keys; composition.keys ;end
 
-    def cache_primary_identifiers
+    def cache_identifiers!
       struct.consumer_identifier = consumer.identifier
       struct.service_identifier = service_identifier
       struct.identifier = [service_identifier, consumer.identifier].join(identifier_separator)

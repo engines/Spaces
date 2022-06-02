@@ -24,10 +24,6 @@ module Resolving
       all_complete?(divisions)
     end
 
-    def configuration
-      binding_target&.struct&.configuration
-    end
-
     def image
       images&.first
     end

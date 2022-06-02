@@ -3,7 +3,7 @@ module Settling
 
     def with_embeds
       empty.tap do |m|
-        m.struct = m.struct.merge(
+        m.struct = struct.merge(
           OpenStruct.new(embedding_division_map.transform_values(&:struct))
         )
       end.bindings_flattened
@@ -37,7 +37,7 @@ module Settling
       empty.tap do |m|
         m.struct = struct
         m.struct.bindings = bindings.flattened.struct
-        m.cache_primary_identifiers
+        m.cache_identifiers!
       end
     end
 

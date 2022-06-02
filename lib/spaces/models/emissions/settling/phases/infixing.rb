@@ -6,7 +6,6 @@ module Settling
         m.struct = struct.merge(
           OpenStruct.new(division_map.transform_values { |v| v.resolved.struct } )
         )
-        m.cache_primary_identifiers
       end
     end
 
