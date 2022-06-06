@@ -4,12 +4,12 @@ module Emissions
 
     delegate(arenas: :universe)
 
-    def identifiers(arena_identifier: nil, blueprint_identifier: nil, runtime: nil)
-      _summaries(arena_identifier: arena_identifier, blueprint_identifier: blueprint_identifier, runtime: runtime).map(&:identifier)
+    def identifiers(arena_identifier: nil, application_identifier: nil, runtime: nil)
+      _summaries(arena_identifier: arena_identifier, application_identifier: application_identifier, runtime: runtime).map(&:identifier)
     end
 
-    def summaries(arena_identifier: nil, blueprint_identifier: nil, runtime: nil)
-      _summaries(arena_identifier: arena_identifier, blueprint_identifier: blueprint_identifier, runtime: runtime).map(&:struct)
+    def summaries(arena_identifier: nil, application_identifier: nil, runtime: nil)
+      _summaries(arena_identifier: arena_identifier, application_identifier: application_identifier, runtime: runtime).map(&:struct)
     end
 
     def _summaries(args)

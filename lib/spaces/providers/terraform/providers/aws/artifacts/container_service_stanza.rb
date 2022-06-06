@@ -1,16 +1,15 @@
 require_relative 'capsule_stanza'
+require_relative 'task_defining'
 
 module Artifacts
   module Terraform
     module Aws
       class ContainerServiceStanza < CapsuleStanza
+        include TaskDefining
 
         def more_snippets
           %(
-            cluster         = aws_ecs_cluster.abs.id ??
-            task_definition = aws_ecs_task_definition.abs.arn ??
-            iam_role        = aws_iam_role
-            depends_on      = [aws_iam_role]
+            task_definition = aws_ecs_task_definition.#{application_identifier}.arn
 
             ordered_placement_strategy {
               type  = "binpack"
@@ -18,8 +17,8 @@ module Artifacts
             }
 
             load_balancer {
-              target_group_arn = aws_lb_target_group.abs.arn
-              container_name   = "app"
+              target_group_arn = aws_lb_target_group.#{application_identifier}.arn
+              container_name   = "#{application_identifier}"
               container_port   = 8501
             }
           )

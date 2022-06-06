@@ -1,6 +1,10 @@
 module Divisions
   class ComputeService < ::Divisions::Division
 
+    def identifiers
+      struct&.values&.map(&:identifier)&.map(&:to_sym)
+    end
+
     def identifier_for(compute_identifier)
       (struct[compute_identifier] || default)&.identifier
     end

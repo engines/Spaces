@@ -11,7 +11,7 @@ module Providers
         @summary ||= OpenStruct.new(
           resolution_identifier: resolution_identifier,
           arena_identifier: arena_identifier,
-          blueprint_identifier: blueprint_identifier,
+          application_identifier: application_identifier,
           identifier: identifier,
           runtime: runtime_qualifier,
         )

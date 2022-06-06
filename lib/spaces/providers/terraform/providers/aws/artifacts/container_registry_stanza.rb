@@ -7,7 +7,7 @@ module Artifacts
 
         def snippets
           %(
-            resource "aws_ecr_repository" "#{blueprint_identifier}" {
+            resource "aws_ecr_repository" "#{application_identifier}" {
               name = "${var.app_name}-${var.app_environment}-ecr"
               tags = {
                 Name = "${var.app_name}-ecr"

@@ -4,11 +4,11 @@ module Artifacts
 
       def snippets
         %(
-          resource "#{runtime_qualifier}_container" "#{blueprint_identifier}" {
-            name = "#{blueprint_identifier}"
+          resource "#{runtime_qualifier}_container" "#{application_identifier}" {
+            name = "#{application_identifier}"
             image = "#{spaces_image_registry}#{image_identifier}"
             domainname = "#{arena.identifier.as_subdomain}.#{universe.host}"
-            hostname = "#{blueprint_identifier.as_subdomain}"
+            hostname = "#{application_identifier.as_subdomain}"
 
             #{volume_snippets if volumes}
           }
@@ -24,7 +24,7 @@ module Artifacts
       end
 
       def dependency_string
-        connections_down.map { |c| "#{runtime_qualifier}.#{c.blueprint_identifier}" }.join(', ')
+        connections_down.map { |c| "#{runtime_qualifier}.#{c.application_identifier}" }.join(', ')
       end
 
     end

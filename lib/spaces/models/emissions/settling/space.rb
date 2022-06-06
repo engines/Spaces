@@ -17,8 +17,8 @@ module Settling
       identifiers(arena_identifier: arena_identifier).map { |i| exist_then_by(i) }.compact
     end
 
-    def identifiers(arena_identifier: '*', blueprint_identifier: '*')
-      path.glob("#{arena_identifier}/#{blueprint_identifier}").map do |p|
+    def identifiers(arena_identifier: '*', application_identifier: '*')
+      path.glob("#{arena_identifier}/#{application_identifier}").map do |p|
         "#{p.relative_path_from(path)}".as_compound
       end
     end
