@@ -44,6 +44,12 @@ class String
     empty? || BLANK_RE.match?(self)
   end
 
+  def downcase_first
+    dup.tap do |d|
+      d[0] = d[0].downcase
+    end
+  end
+
   def to_h
     self
   end

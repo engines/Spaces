@@ -9,7 +9,9 @@ class Array
   def no_symbols; deep(:no_symbols) ;end
 
   def to_hcl
-    %([#{deep(:to_hcl).join("\n")}])
+    %([
+      #{deep(:to_hcl).join("\n")}
+    ])
   end
 
   def deep(method)

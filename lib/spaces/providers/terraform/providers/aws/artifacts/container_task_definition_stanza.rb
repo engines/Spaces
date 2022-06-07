@@ -10,41 +10,51 @@ module Artifacts
         def more_snippets
           %(
             container_definitions = jsonencode([
-              #{task_definition_snippets}
-            ])
-          )
+              #{definition_snippets}
+            )
+          ])
         end
 
-        def task_definition_snippets
+        def definition_snippets
           #TODO: assumes one stanza for all container services in the arena
           arena.compute_resolutions_for(:container_service).map do |r|
-            task_definition_snippet_for(r)
-          end.join(,"\n")
+            [
+              definition_snippet_for(r),
+            ]
+          end.join(",\n")
         end
 
-        def task_definition_snippet_for(resolution)
+        def definition_snippet_for(r)
           %(
-            {
-              #{task_definition_hash_for(resolution).to_hcl.join("\n")}
-            }
+            #{hash_for(r).to_hcl}
+            #{ports_hash_for(r).to_hcl}
           )
         end
 
-        def task_definition_hash_for(resolution)
-          h = resolution.configuration&.to_h_deep
-          task_definition_keys.without(*port_mapping_keys).inject({}) do |m, k|
+        def hash_for(r)
+          {
+            name: r.application_identifier,
+            image: r.application_identifier,
+          }.
+            merge(task_configuration_hash_for(r)).
+            merge(resources_hash_for(r))
+        end
+
+        def task_configuration_hash_for(r)
+          h = r.configuration&.to_h_deep
+          task_definition_keys.inject({}) do |m, k|
             m.tap do
               m[k] = h[k]
             end
           end
         end
 
-        def port_mapping_keys
-          #TODO: assumes one set of port mappings per task definition
-          [
-            :container_port,
-            :host_port
-          ]
+        def resources_hash_for(r)
+          r.resources&.struct&.to_h_deep
+        end
+
+        def ports_hash_for(r)
+          {portMappings: r.ports&.map { |p| p.struct.to_h_deep.transform_keys { |k| k.camelize.downcase_first } }}
         end
 
       end
