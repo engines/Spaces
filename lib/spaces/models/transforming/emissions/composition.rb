@@ -19,8 +19,9 @@ module Emissions
           Divisions::Modules,
           Divisions::Repositories,
           Divisions::Permissions,
-          Divisions::Volumes,
+          Divisions::Resources,
           Divisions::Ports,
+          Divisions::Volumes,
           Divisions::Scaling,
           Divisions::About
         ]
