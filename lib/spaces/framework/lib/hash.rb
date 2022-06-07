@@ -38,7 +38,11 @@ class Hash
   end
 
   def to_hcl
-    keys.map { |k| %(#{k} = "#{self[k]}") }
+    %(#{keys.map { |k| hcl_for(k) }.join("\n")})
+  end
+
+  def hcl_for(key)
+    %(#{key} = #{self[key].to_hcl})
   end
 
   def no_symbols; stringify_keys.deep(:no_symbols) ;end
