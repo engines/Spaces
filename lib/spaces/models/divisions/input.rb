@@ -1,3 +1,4 @@
+#TODO: deprecate!
 require_relative 'struct_can_respond'
 
 module Divisions

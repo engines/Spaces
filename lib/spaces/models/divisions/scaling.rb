@@ -1,3 +1,4 @@
+#TODO: deprecate!
 module Divisions
   class Scaling < ::Divisions::Division
 
