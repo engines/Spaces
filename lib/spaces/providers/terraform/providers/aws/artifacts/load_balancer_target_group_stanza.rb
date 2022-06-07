@@ -7,7 +7,7 @@ module Artifacts
 
         def more_snippets
           %(
-            vpc_id = aws_vpc.#{vpc.blueprint_identifier}.id
+            vpc_id = aws_vpc.#{vpc.application_identifier}.id
 
             health_check {
               healthy_threshold   = "3"

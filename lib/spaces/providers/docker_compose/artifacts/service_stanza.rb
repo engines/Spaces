@@ -28,7 +28,7 @@ module Artifacts
       def domain_and_hostname_snippets
         {
           domainname: "#{arena.identifier.as_subdomain}.#{universe.host}",
-          hostname: resolution.blueprint_identifier.as_subdomain
+          hostname: resolution.application_identifier.as_subdomain
         }
       end
 
