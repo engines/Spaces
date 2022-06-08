@@ -22,6 +22,10 @@ class Array
     end
   end
 
+  def exclude?(object)
+    !include?(object)
+  end
+
   def all_true?
     !any?(false)
   end

@@ -10,7 +10,16 @@ module Resolving
     end
 
     def packable?
-      @packable ||= images.any?
+      @packable ||= images.any? && intends_container_service?
+    end
+
+    def intends_container_service?
+      provides_no_specific_compute_service? ||
+      provides_compute_service_for?(:container_service)
+    end
+
+    def provides_no_specific_compute_service?
+      division_keys.exclude?(:compute_service)
     end
 
     def packed?
