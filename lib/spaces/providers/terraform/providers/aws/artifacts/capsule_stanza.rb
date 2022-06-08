@@ -56,7 +56,7 @@ module Artifacts
 
         def tags_hash
           {
-            'Name': '${var.app_name}',
+            'Name': application_identifier,
             'Environment': 'var.app_environment'
           }.merge(configuration_hash[:tags] || {})
         end
