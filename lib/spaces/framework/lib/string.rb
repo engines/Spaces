@@ -44,8 +44,23 @@ class String
     empty? || BLANK_RE.match?(self)
   end
 
+  def downcase_first
+    dup.tap do |d|
+      d[0] = d[0].downcase
+    end
+  end
+
   def to_h
     self
+  end
+
+  def to_hcl
+    hcl_variable? ? self : %("#{self}")
+  end
+
+  def hcl_variable?
+    # HACKY!
+    split('.').compact.count == 3
   end
 
   alias_method :no_symbols, :to_s

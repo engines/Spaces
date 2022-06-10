@@ -3,8 +3,8 @@
 
 # ------------------------------------------------------------------------------
 
-# import a bootstrappy blueprint
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/dougs-base-image'}, threaded: false)
+# import blueprint to build a base image
+controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/python'}, threaded: false)
 
 # ------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provide
 # ------------------------------------------------------------------------------
 
 # bind a base blueprint to the arena
-controllers.arenas.bind(identifier: :base, blueprint_identifier: :'dougs-base-image')
+controllers.arenas.bind(identifier: :base, blueprint_identifier: :'python')
 
 # stage the arena for the bindings -- should not orchestrate!
 controllers.arenas.stage(identifier: :base)

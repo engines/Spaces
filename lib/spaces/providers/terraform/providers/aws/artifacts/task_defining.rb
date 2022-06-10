@@ -9,11 +9,7 @@ module Artifacts
 
         def task_definition_keys
           [
-            :cpu,
-            :memory,
             :essential,
-            :container_port,
-            :host_port
           ]
         end
 

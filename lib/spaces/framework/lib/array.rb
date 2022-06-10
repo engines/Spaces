@@ -8,12 +8,22 @@ class Array
   def to_struct; deep(:to_struct) ;end
   def no_symbols; deep(:no_symbols) ;end
 
+  def to_hcl
+    %([
+      #{deep(:to_hcl).join("\n")}
+    ])
+  end
+
   def deep(method)
     map do |i|
       i.send(method)
     rescue NoMethodError
       i
     end
+  end
+
+  def exclude?(object)
+    !include?(object)
   end
 
   def all_true?

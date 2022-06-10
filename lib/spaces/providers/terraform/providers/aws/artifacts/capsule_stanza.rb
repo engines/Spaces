@@ -43,15 +43,11 @@ module Artifacts
         end
 
         def configuration_snippet
-          configuration_hash.without(:tags).to_hcl.join("\n")
+          configuration_hash.without(:tags).to_hcl
         end
 
         def tags_snippet
-          %(
-            tags = {
-              #{tags_hash.to_hcl.join("\n")}
-            }
-          )
+          %(tags = {#{tags_hash.to_hcl}})
         end
 
         def configuration_hash
@@ -60,7 +56,7 @@ module Artifacts
 
         def tags_hash
           {
-            'Name': '${var.app_name}',
+            'Name': application_identifier,
             'Environment': 'var.app_environment'
           }.merge(configuration_hash[:tags] || {})
         end

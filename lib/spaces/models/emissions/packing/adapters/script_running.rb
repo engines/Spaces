@@ -9,9 +9,7 @@ module Adapters
 
     def directories
       @directories ||=
-        if (p = resolutions.path_for(pack).join(path)).exist?
-          p.children.select(&:directory?)
-        end || []
+        has_scripts? ? absolute_path.children.select(&:directory?) : []
     end
 
   end
