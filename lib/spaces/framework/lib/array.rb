@@ -46,6 +46,10 @@ class Array
     camelize.constantize
   end
 
+  def drop(integer)
+    take(count - integer)
+  end
+
   def split(value)
     if (i = index(value))
       [
