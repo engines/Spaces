@@ -21,10 +21,15 @@ module Adapters
     end
 
     def artifact_class_for(artifact_qualifier)
-      class_for(:artifacts, qualifier, compute_qualifier, artifact_qualifier)
+      ne = naming_elements_for(artifact_qualifier)
+      class_for(ne)
     rescue NameError => e
-      warn(error: e, identifier: emission.identifier, elements: [:artifacts, qualifier, compute_qualifier, artifact_qualifier].compact)
+      warn(error: e, identifier: emission.identifier, elements: ne)
       default_artifact_class
+    end
+
+    def naming_elements_for(artifact_qualifier)
+      [:artifacts, qualifier, compute_qualifier, artifact_qualifier].compact
     end
 
     def compute_qualifier; compute_provider&.qualifier ;end
