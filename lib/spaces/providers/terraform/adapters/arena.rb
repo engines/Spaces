@@ -3,7 +3,7 @@ module Adapters
     class Arena < ::Adapters::Arena
 
       def artifact_qualifiers
-        [:prerequisites, :support]
+        [:providers, :support]
       end
 
     end

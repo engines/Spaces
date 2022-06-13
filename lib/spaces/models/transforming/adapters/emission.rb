@@ -7,7 +7,7 @@ module Adapters
     relation_accessor :emission
 
     delegate(
-      [:qualifier, :prerequisite_qualifiers] => :provider
+      qualifier: :provider
     )
 
     def artifact_qualifiers

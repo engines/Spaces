@@ -1,7 +1,7 @@
 module Artifacts
   module Terraform
     module Aws
-      class Prerequisites < ::Artifacts::Terraform::Prerequisites ;end
+      class Providers < ::Artifacts::Terraform::Providers ;end
     end
   end
 end
