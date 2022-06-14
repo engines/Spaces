@@ -6,7 +6,7 @@ module Artifacts
         def snippets
           %(
             provider "aws" {
-              region = "ap-southeast-2"
+              region = "#{compute_provider&.region}"
             }
           )
         end
