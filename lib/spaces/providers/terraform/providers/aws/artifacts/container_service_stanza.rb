@@ -15,12 +15,6 @@ module Artifacts
               type  = "binpack"
               field = "cpu"
             }
-
-            load_balancer {
-              target_group_arn = aws_lb_target_group.#{application_identifier}.arn
-              container_name   = "#{application_identifier}"
-              container_port   = 8501
-            }
           )
         end
 
