@@ -1,6 +1,12 @@
 module Arenas
   module Orchestrating
 
+    def all_orchestrations
+      orchestrations.identifiers(arena_identifier: identifier).map do |i|
+        orchestrations.by(i)
+      end
+    end
+
     def orchestrated; present_in(orchestrations) ;end
 
     def unorchestrated
