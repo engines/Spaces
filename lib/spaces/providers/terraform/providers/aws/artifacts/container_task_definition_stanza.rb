@@ -11,23 +11,25 @@ module Artifacts
           %(
             container_definitions = jsonencode([
               #{definition_snippets}
-            )
-          ])
+            ])
+          )
         end
 
         def definition_snippets
           #TODO: assumes one stanza for all container services in the arena
           arena.compute_resolutions_for(:container_service).map do |r|
-            [
-              definition_snippet_for(r),
-            ]
+            definition_snippet_for(r)
           end.join(",\n")
         end
 
         def definition_snippet_for(r)
           %(
-            #{hash_for(r).to_hcl}
-            #{ports_hash_for(r).to_hcl}
+            {
+              #{hash_for(r).to_hcl(enclosed:false)}
+              portMappings = [
+                #{ports_mappings_for(r)}
+              ]
+            }
           )
         end
 
@@ -53,8 +55,12 @@ module Artifacts
           r.resources&.struct&.to_h_deep
         end
 
-        def ports_hash_for(r)
-          {portMappings: r.ports&.map { |p| p.struct.to_h_deep.transform_keys { |k| k.camelize.downcase_first } }}
+        def ports_mappings_for(r)
+          r.ports&.map do |p|
+            p.struct.to_h_deep.transform_keys do |k|
+              k.camelize.downcase_first
+            end
+          end.to_hcl(enclosed: false)
         end
 
       end

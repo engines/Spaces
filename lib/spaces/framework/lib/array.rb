@@ -8,10 +8,12 @@ class Array
   def to_struct; deep(:to_struct) ;end
   def no_symbols; deep(:no_symbols) ;end
 
-  def to_hcl
-    %([
+  def to_hcl(enclosed: true)
+    %(
+      #{'[' if enclosed}
       #{deep(:to_hcl).join("\n")}
-    ])
+      #{']' if enclosed}
+    )
   end
 
   def deep(method)

@@ -43,11 +43,11 @@ module Artifacts
         end
 
         def configuration_snippet
-          configuration_hash.without(:tags).to_hcl
+          configuration_hash.without(:tags).to_hcl(enclosed: false)
         end
 
         def tags_snippet
-          %(tags = {#{tags_hash.to_hcl}})
+          %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
         end
 
         def configuration_hash

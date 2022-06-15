@@ -37,8 +37,12 @@ class Hash
     OpenStruct.new(snakize_keys.values_to_struct)
   end
 
-  def to_hcl
-    %(#{keys.map { |k| hcl_for(k) }.join("\n")})
+  def to_hcl(enclosed: true)
+    %(
+      #{'{' if enclosed}
+        #{keys.map { |k| hcl_for(k) }.join("\n")}
+      #{'}' if enclosed}
+    )
   end
 
   def hcl_for(key)
