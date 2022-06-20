@@ -4,6 +4,7 @@ module Artifacts
   module Terraform
     module Aws
       class IamRoleStanza < CapsuleStanza
+        include Named
 
         def more_snippets
           %(
