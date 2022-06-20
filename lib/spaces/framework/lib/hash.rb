@@ -38,9 +38,8 @@ class Hash
   end
 
   def to_hcl(enclosed: true)
-    %(
-      #{'{' if enclosed}
-        #{keys.map { |k| hcl_for(k) }.join("\n")}
+    %(#{'{' if enclosed}
+      #{keys.map { |k| hcl_for(k) }.join("\n")}
       #{'}' if enclosed}
     )
   end

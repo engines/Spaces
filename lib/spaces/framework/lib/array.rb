@@ -9,9 +9,8 @@ class Array
   def no_symbols; deep(:no_symbols) ;end
 
   def to_hcl(enclosed: true)
-    %(
-      #{'[' if enclosed}
-      #{deep(:to_hcl).join("\n")}
+    %(#{'[' if enclosed}
+      #{deep(:to_hcl).join(",\n")}
       #{']' if enclosed}
     )
   end
