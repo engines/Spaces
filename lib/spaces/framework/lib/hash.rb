@@ -25,8 +25,8 @@ class Hash
     compact.delete_if { |k, v| v == '' }
   end
 
-  def reverse_merge(other = {})
-    other.merge(self)
+  def reverse_merge(other)
+    other ? other.merge(self) : self
   end
 
   def reverse_merge!(other_hash)
