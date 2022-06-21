@@ -11,7 +11,7 @@ module Artifacts
           def resource_type_map
             {
               application_load_balancer: :alb,
-              kms: :kms_key,
+              cluster_key: :kms_key,
               container_definition: :ecs_container_definition,
               container_registry: :ecr_repository,
               container_service: :ecs_service,
