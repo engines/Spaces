@@ -22,7 +22,6 @@ module Emissions
           Divisions::Dimensions,
           Divisions::Ports,
           Divisions::Volumes,
-          Divisions::Scaling,
           Divisions::About
         ]
       end

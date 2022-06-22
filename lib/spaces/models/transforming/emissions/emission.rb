@@ -29,10 +29,6 @@ module Emissions
 
     def has?(property); !struct[property].nil? ;end
 
-    def count
-      has?(:scaling) ? scaling.count : 1
-    end
-
     def empty; klass.new(identifiable: identifier) ;end
 
     def in_blueprint?; ;end
