@@ -35,6 +35,12 @@ module Artifacts
           )
         end
 
+        def default_configuration
+          OpenStruct.new(
+            image_tag_mutability: 'IMMUTABLE'
+          )
+        end
+
       end
     end
   end

@@ -63,6 +63,12 @@ module Artifacts
           end.to_hcl(enclosed: false)
         end
 
+        def default_configuration
+          OpenStruct.new(
+            family: :service
+          )
+        end
+
       end
     end
   end
