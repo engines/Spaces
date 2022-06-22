@@ -6,7 +6,7 @@ module Adapters
   class OtherPackage < Division ;end
   class Permission < Division ;end
   class Permissions < Divisible ;end
-  class Resources < Divisible ;end
+  class Dimensions < Divisible ;end
   class Ports < Divisible ;end
   class Port < Division ;end
   class Volumes < Divisible ;end

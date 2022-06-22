@@ -1,4 +1,4 @@
-#TODO: Deprecated! ... need to move to blueprint Resources Division
+#TODO: Deprecated! ... need to move to blueprint Dimensions Division
 module Divisions
   class Deployment < ::Divisions::Division
 
