@@ -6,6 +6,10 @@ module Adapters
         [:resource]
       end
 
+      def artifacts
+        resourcer? ? [] : super
+      end
+
     end
   end
 end

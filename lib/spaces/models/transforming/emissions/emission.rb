@@ -14,12 +14,14 @@ module Emissions
     class << self
       def composition; @composition ||= composition_class.new ;end
       def composition_class; Composition ;end
+
+      def documentation_only_keys; [:identifier, :about] ;end
     end
 
     relation_accessor :predecessor
 
     delegate(
-      composition: :klass,
+      [:composition, :documentation_only_keys] => :klass,
       associations_and_divisions: :composition
     )
 
@@ -28,6 +30,10 @@ module Emissions
     def identifier; struct.identifier ;end
 
     def has?(property); !struct[property].nil? ;end
+
+    def only_defines?(division_identitifers)
+      keys - documentation_only_keys == [division_identitifers].flatten.map(&:to_sym)
+    end
 
     def empty; klass.new(identifiable: identifier) ;end
 
