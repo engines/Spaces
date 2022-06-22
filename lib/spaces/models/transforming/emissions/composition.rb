@@ -13,6 +13,7 @@ module Emissions
         [
           Divisions::Bindings,
           Divisions::Target,
+          Divisions::Resources,
           Divisions::ComputeService,
           Divisions::SystemPackages,
           Divisions::OtherPackages,
