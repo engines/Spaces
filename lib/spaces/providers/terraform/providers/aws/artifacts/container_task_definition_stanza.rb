@@ -1,10 +1,10 @@
-require_relative 'capsule_stanza'
+require_relative 'resource_stanza'
 require_relative 'task_defining'
 
 module Artifacts
   module Terraform
     module Aws
-      class ContainerTaskDefinitionStanza < CapsuleStanza
+      class ContainerTaskDefinitionStanza < ResourceStanza
         include TaskDefining
 
         def more_snippets
