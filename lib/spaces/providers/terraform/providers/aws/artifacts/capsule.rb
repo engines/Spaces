@@ -1,10 +1,10 @@
 module Artifacts
   module Terraform
     module Aws
-      class Resource < ::Artifacts::Terraform::Resource
+      class Capsule < ::Artifacts::Terraform::Capsule
 
         def stanza_qualifiers
-          [compute_service_identifier || :resource]
+          [compute_service_identifier || :capsule]
         end
 
       end

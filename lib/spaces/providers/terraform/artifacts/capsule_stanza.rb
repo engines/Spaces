@@ -1,6 +1,6 @@
 module Artifacts
   module Terraform
-    class ResourceStanza < ::Artifacts::Stanza
+    class CapsuleStanza < ::Artifacts::Stanza
 
       def snippets
         %(

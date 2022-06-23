@@ -4,7 +4,7 @@ require_relative 'task_defining'
 module Artifacts
   module Terraform
     module Aws
-      class ResourceStanza < ::Artifacts::Terraform::ResourceStanza
+      class CapsuleStanza < ::Artifacts::Terraform::CapsuleStanza
 
         class << self
 

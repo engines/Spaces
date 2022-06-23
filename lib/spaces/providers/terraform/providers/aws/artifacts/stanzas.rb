@@ -1,11 +1,11 @@
-require_relative 'resource_stanza'
+require_relative 'capsule_stanza'
 
 module Artifacts
   module Terraform
     module Aws
 
-      class LogGroupStanza < ResourceStanza ;end
-      class ContainerDefinitionStanza < ResourceStanza ;end
+      class LogGroupStanza < CapsuleStanza ;end
+      class ContainerDefinitionStanza < CapsuleStanza ;end
 
     end
   end
