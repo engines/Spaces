@@ -17,7 +17,7 @@ module Adapters
       end
 
       def resources_artifact
-        artifact_class_for(:resources)&.new(self)
+        artifact_class_for(:resources)&.new(self) if has?(:resources)
       end
 
     end
