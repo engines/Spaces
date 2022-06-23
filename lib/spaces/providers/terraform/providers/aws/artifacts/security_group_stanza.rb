@@ -1,9 +1,9 @@
-require_relative 'capsule_stanza'
+require_relative 'resources_stanza'
 
 module Artifacts
   module Terraform
     module Aws
-      class SecurityGroupStanza < CapsuleStanza
+      class SecurityGroupStanza < ResourcesStanza
 
         def more_snippets
           %(

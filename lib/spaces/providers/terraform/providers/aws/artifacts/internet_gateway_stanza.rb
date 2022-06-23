@@ -1,9 +1,9 @@
-require_relative 'capsule_stanza'
+require_relative 'resources_stanza'
 
 module Artifacts
   module Terraform
     module Aws
-      class InternetGatewayStanza < CapsuleStanza
+      class InternetGatewayStanza < ResourcesStanza
 
         def configuration_snippet
           %(

@@ -1,7 +1,9 @@
+require_relative 'resources_stanza'
+
 module Artifacts
   module Terraform
     module Aws
-      class VpcStanza < CapsuleStanza
+      class VpcStanza < ResourcesStanza
 
         def default_configuration
           OpenStruct.new(

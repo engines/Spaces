@@ -1,9 +1,9 @@
-require_relative 'capsule_stanza'
+require_relative 'resources_stanza'
 
 module Artifacts
   module Terraform
     module Aws
-      class LoadBalancerListenerStanza < CapsuleStanza
+      class LoadBalancerListenerStanza < ResourcesStanza
 
         def more_snippets
           %(

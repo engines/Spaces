@@ -1,7 +1,9 @@
+require_relative 'resources_stanza'
+
 module Artifacts
   module Terraform
     module Aws
-      class SubnetStanza < CapsuleStanza
+      class SubnetStanza < ResourcesStanza
 
         def more_snippets
           %(
