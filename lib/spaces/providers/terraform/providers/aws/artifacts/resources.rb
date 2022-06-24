@@ -4,7 +4,7 @@ module Artifacts
       class Resources < ::Artifacts::Terraform::Artifact
 
         def stanza_qualifiers
-          resolution.resources.map(&:type).uniq
+          [:resources]
         end
 
       end

@@ -1,9 +1,9 @@
-require_relative 'resources_stanza'
+require_relative 'resource_stanza'
 
 module Artifacts
   module Terraform
     module Aws
-      class RouteTableStanza < ResourcesStanza
+      class RouteTableStanza < ResourceStanza
 
         def configuration_snippet
           %(

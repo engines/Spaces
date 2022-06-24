@@ -1,9 +1,9 @@
-require_relative 'resources_stanza'
+require_relative 'resource_stanza'
 
 module Artifacts
   module Terraform
     module Aws
-      class IamRoleStanza < ResourcesStanza
+      class IamRoleStanza < ResourceStanza
         include Named
 
         def more_snippets
