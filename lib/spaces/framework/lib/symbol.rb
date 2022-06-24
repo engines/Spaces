@@ -11,6 +11,10 @@ class Symbol
 
   def split(*args); to_s.split(*args) ;end
 
+  def to_hcl
+    %("#{self}")
+  end
+
   alias_method :underscore, :snakize
   alias_method :no_symbols, :to_s
 
