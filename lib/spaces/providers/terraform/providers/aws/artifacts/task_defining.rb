@@ -9,7 +9,7 @@ module Artifacts
 
         def task_definition_keys
           [
-            :essential,
+            :essential
           ]
         end
 

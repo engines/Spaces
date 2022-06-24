@@ -27,6 +27,10 @@ module Artifacts
 
         def application_identifier; resource.identifier.hyphenated ;end
 
+        def resource_type_here
+          resource_type_map[resource_type.to_sym] || resource_type
+        end
+
         def configuration
           @configuration ||= default_configuration.merge(resource.configuration)
         end

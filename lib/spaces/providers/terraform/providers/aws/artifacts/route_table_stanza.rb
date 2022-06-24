@@ -12,15 +12,15 @@ module Artifacts
         end
 
         def more_snippets
-          arena.compute_resolutions_for(:subnet).map do |r|
+          resource.division.for_type(:subnet).map do |r|
             route_snippet_for(r)
           end.join("\n")
         end
 
-        def route_snippet_for(subnet_resolution)
+        def route_snippet_for(subnet_resource)
           %(
             route {
-              cidr_block = "#{subnet_resolution.configuration.cidr_block}"
+              cidr_block = "#{subnet_resource.configuration.cidr_block}"
               gateway_id = aws_internet_gateway.#{configuration.gateway_binding}.id
             }
           )

@@ -6,14 +6,9 @@ module Artifacts
     module Aws
       class Stanza < ::Artifacts::Stanza
 
-        def resource_type
-          resource_type_map[compute_service_identifier&.to_sym] ||
-            qualifier.split('_')[0..-2].join('_')
-        end
-
         def snippets
           %(
-            resource "aws_#{resource_type}" "#{application_identifier}" {
+            resource "aws_#{resource_type_here}" "#{application_identifier}" {
               #{name_snippet}
               #{configuration_snippet}
               #{tags_snippet}

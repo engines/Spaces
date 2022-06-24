@@ -27,8 +27,6 @@ module Artifacts
 
         def default_configuration
           OpenStruct.new(
-            logging: 'OVERRIDE',
-            logging_encryption_enabled: true,
             cluster_binding: :'container-service-cluster',
             iam_role_binding: :'iam-role',
             task_definition_binding: :'container-task-definition'
