@@ -1,5 +1,5 @@
 module Orchestrating
-  class Space < ::Emissions::Space
+  class Space < ::Settling::Space
 
     class << self
       def default_model_class

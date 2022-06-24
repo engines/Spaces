@@ -8,8 +8,6 @@ module Artifacts
         "#{qualifier}.#{extension}"
       end
 
-      def extension; "tf.#{qualifier}" ;end
-
     end
   end
 end

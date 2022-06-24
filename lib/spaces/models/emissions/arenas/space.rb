@@ -22,6 +22,23 @@ module Arenas
         map { |r| resolutions.save(r) }
     end
 
+    def copy_artifacts_for(orchestration)
+      d = path_for(orchestration.arena)
+      orchestrations.path_for(orchestration).tap do |s|
+        FileUtils.cp_r(s.children, d) if s.exist?
+      end
+    end
+
+    def remove_artifacts_for(orchestration)
+      d = path_for(orchestration.arena)
+      orchestrations.path_for(orchestration).tap do |s|
+        s.children.map do |c|
+          p = d.join(c.basename)
+          p.delete if p.exist?
+        end
+      end
+    end
+
     def unrepeatable_children_for(identifiable)
       by(identifiable).connections.map(&:arena).map(&:descendant_paths).flatten.map(&:identifiers)
     end

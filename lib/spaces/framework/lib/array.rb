@@ -8,10 +8,11 @@ class Array
   def to_struct; deep(:to_struct) ;end
   def no_symbols; deep(:no_symbols) ;end
 
-  def to_hcl
-    %([
-      #{deep(:to_hcl).join("\n")}
-    ])
+  def to_hcl(enclosed: true)
+    %(#{'[' if enclosed}
+      #{deep(:to_hcl).join(",\n")}
+      #{']' if enclosed}
+    )
   end
 
   def deep(method)
@@ -44,6 +45,10 @@ class Array
 
   def constantize
     camelize.constantize
+  end
+
+  def drop(integer)
+    take(count - integer)
   end
 
   def split(value)

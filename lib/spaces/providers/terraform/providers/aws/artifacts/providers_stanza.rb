@@ -1,10 +1,14 @@
 module Artifacts
   module Terraform
     module Aws
-      class ProvidersStanza < ::Artifacts::Terraform::ProvidersStanza
+      class ProvidersStanza < ::Artifacts::Stanza
 
-        def stanza_class_for(qualifier)
-          class_for(nesting_elements, :provider_stanza)
+        def snippets
+          %(
+            provider "aws" {
+              region = "#{compute_provider&.region}"
+            }
+          )
         end
 
       end

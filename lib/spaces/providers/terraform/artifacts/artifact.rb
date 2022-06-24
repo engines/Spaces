@@ -6,7 +6,7 @@ module Artifacts
         "#{emission.application_identifier}.#{extension}"
       end
 
-      def extension; "tf.#{qualifier}" ;end
+      def extension; :tf ;end
 
       def dns_address
         "#{container_type}.#{application_identifier}.ipv4_address"
