@@ -13,16 +13,16 @@ module Emissions
         [
           Divisions::Bindings,
           Divisions::Target,
+          Divisions::Resources,
           Divisions::ComputeService,
           Divisions::SystemPackages,
           Divisions::OtherPackages,
           Divisions::Modules,
           Divisions::Repositories,
           Divisions::Permissions,
-          Divisions::Resources,
+          Divisions::Dimensions,
           Divisions::Ports,
           Divisions::Volumes,
-          Divisions::Scaling,
           Divisions::About
         ]
       end

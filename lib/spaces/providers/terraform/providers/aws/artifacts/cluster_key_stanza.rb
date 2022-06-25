@@ -1,13 +1,15 @@
+require_relative 'resource_stanza'
+
 module Artifacts
   module Terraform
     module Aws
-      class ClusterKeyStanza < CapsuleStanza
+      class ClusterKeyStanza < ResourceStanza
 
         def default_configuration
           OpenStruct.new(
-            description: '^^identifier^^',
+            description: application_identifier,
       			deletion_window_in_days: 10,
-      			is_enable: true,
+      			is_enabled: true,
       			enable_key_rotation: false,
       			multi_region: false
           )

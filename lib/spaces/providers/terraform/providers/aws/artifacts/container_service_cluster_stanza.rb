@@ -1,18 +1,13 @@
-require_relative 'capsule_stanza'
+require_relative 'resource_stanza'
 
 module Artifacts
   module Terraform
     module Aws
-      class ContainerServiceClusterStanza < CapsuleStanza
+      class ContainerServiceClusterStanza < ResourceStanza
         include Named
 
-        def snippets
-          %(
-            resource "aws_#{resource_type}" "#{application_identifier}" {
-              name = "#{application_identifier}"
-            }
-          )
-        end
+        def tags_snippet ;end
+
       end
     end
   end

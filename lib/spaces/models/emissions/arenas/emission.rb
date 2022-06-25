@@ -26,6 +26,14 @@ module Arenas
       @images ||= duplicate(arena.images).tap { |i| i.emission = self }
     end
 
+    def documentation_only_keys
+      [super, arena.keys, cache_identifiers, :deployment].flatten.uniq
+    end
+
+    def cache_identifiers
+      [:arena_identifier, :blueprint_identifier, :application_identifier]
+    end
+
     def empty; super.tap { |m| m.arena = arena } ;end
 
     def cache_identifiers!

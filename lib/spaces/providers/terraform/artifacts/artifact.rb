@@ -3,7 +3,7 @@ module Artifacts
     class Artifact < ::Artifacts::Orchestrating::Artifact
 
       def filename
-        "#{emission.application_identifier}.#{extension}"
+        "#{emission.application_identifier}.#{qualifier}.#{extension}"
       end
 
       def extension; :tf ;end

@@ -7,6 +7,8 @@ module Adapters
   class Permission < Division ;end
   class Permissions < Divisible ;end
   class Resources < Divisible ;end
+  class Resource < Division ;end
+  class Dimensions < Division ;end
   class Ports < Divisible ;end
   class Port < Division ;end
   class Volumes < Divisible ;end

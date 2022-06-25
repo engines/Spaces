@@ -20,6 +20,8 @@ module Resolving
       [:packs, :orchestrations, :registry] => :universe
     )
 
+    def resourcer?; only_defines?(:resources) ;end
+
     def complete?
       all_complete?(divisions)
     end

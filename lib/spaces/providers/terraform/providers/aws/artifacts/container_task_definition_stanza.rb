@@ -1,10 +1,10 @@
-require_relative 'capsule_stanza'
+require_relative 'resource_stanza'
 require_relative 'task_defining'
 
 module Artifacts
   module Terraform
     module Aws
-      class ContainerTaskDefinitionStanza < CapsuleStanza
+      class ContainerTaskDefinitionStanza < ResourceStanza
         include TaskDefining
 
         def more_snippets
@@ -39,7 +39,7 @@ module Artifacts
             image: r.application_identifier,
           }.
             merge(task_configuration_hash_for(r)).
-            merge(resources_hash_for(r))
+            merge(dimensions_hash_for(r))
         end
 
         def task_configuration_hash_for(r)
@@ -51,8 +51,8 @@ module Artifacts
           end
         end
 
-        def resources_hash_for(r)
-          r.resources&.struct&.to_h_deep
+        def dimensions_hash_for(r)
+          r.dimensions&.struct&.to_h_deep
         end
 
         def ports_mappings_for(r)
