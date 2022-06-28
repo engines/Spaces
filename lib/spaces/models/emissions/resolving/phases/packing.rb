@@ -14,8 +14,11 @@ module Resolving
     end
 
     def intends_container_service?
-      provides_no_specific_compute_service? ||
-      provides_compute_service_for?(:container_service)
+      !resourcer? && (container_service? || provides_no_specific_compute_service?)
+    end
+
+    def container_service?
+      compute_service&.identifier&.to_sym == (:container_service)
     end
 
     def provides_no_specific_compute_service?
