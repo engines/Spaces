@@ -4,8 +4,13 @@ module Artifacts
   module Terraform
     module Aws
       class ContainerRegistryStanza < ResourceStanza
+        include Named
 
-        def more_snippets
+        def snippets
+          super + policy_snippet
+        end
+
+        def policy_snippet
           %(
             resource "aws_ecr_repository_policy" "#{application_identifier}" {
               repository = aws_ecr_repository.#{application_identifier}.name
