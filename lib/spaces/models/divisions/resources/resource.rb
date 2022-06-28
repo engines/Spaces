@@ -6,7 +6,7 @@ module Divisions
     end
 
     def configuration
-        struct.configuration
+      struct.configuration
     end
 
     #FIX: Resources are masquerading as adapters in artifact stanza processing
