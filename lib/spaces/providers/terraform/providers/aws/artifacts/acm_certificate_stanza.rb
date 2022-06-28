@@ -7,7 +7,7 @@ module Artifacts
 
         def more_snippets
           %(
-	         domain_name = "#{acm_certificate_resource.configuration.domain_name}"       
+	         domain_name = "#{configuration.domain_name}"       
           )
         end
 
