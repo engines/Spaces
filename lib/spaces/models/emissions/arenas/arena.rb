@@ -1,4 +1,5 @@
 require_relative 'providing'
+require_relative 'resourcing'
 require_relative 'summary'
 require_relative 'relations'
 
@@ -12,6 +13,7 @@ module Arenas
     include Resolving
     include Packing
     include Orchestrating
+    include Resourcing
     include Summary
     include Relations
 
