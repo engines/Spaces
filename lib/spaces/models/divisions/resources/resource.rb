@@ -5,6 +5,10 @@ module Divisions
       struct.identifier || struct.type
     end
 
+    def application_identifier
+      identifier.hyphenated
+    end
+
     def configuration
       struct.configuration
     end

@@ -16,7 +16,7 @@ module Arenas
     end
 
     def providers
-      role_providers.map(&:provider)
+      role_providers.map(&:provider).uniq(&:identifier)
     end
 
     def provider_for(role_identifier)

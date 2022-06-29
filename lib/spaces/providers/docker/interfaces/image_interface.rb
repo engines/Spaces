@@ -19,10 +19,6 @@ module Providers
         bridge.create(name: output_image_identifier)
       end
 
-      def tag_latest(image)
-        image.tag('repo' => pack.output_identifier, 'force' => true, 'tag' => 'latest')
-      end
-
       def process_output(encoded)
         # FIX ME! The rescue is needed due to JSON parse errors
         if s = stream
