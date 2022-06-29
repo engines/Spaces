@@ -13,9 +13,5 @@ module Adapters
       [super, compute_qualifier_for(:runtime), qualifier_for(:runtime)].flatten.compact
     end
 
-    def image_identifier
-      image&.output_identifier
-    end
-
   end
 end
