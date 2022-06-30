@@ -36,7 +36,7 @@ module Artifacts
         def hash_for(r)
           {
             name: r.application_identifier,
-            image: r.application_identifier,
+            image: r.image_identifier,
           }.
             merge(task_configuration_hash_for(r)).
             merge(dimensions_hash_for(r))

@@ -30,6 +30,10 @@ module Resolving
       images&.first
     end
 
+    def image_identifier
+      image&.output_identifier
+    end
+
     def provides_compute_service_for?(identifier)
       compute_service_identifiers&.include?(identifier.to_sym)
     end
