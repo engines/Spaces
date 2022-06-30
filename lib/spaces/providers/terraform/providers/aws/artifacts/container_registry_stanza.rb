@@ -7,14 +7,14 @@ module Artifacts
         include Named
 
         def snippets
-          super + policy_snippet
+          super + policy_snippet + push_images_snippet
         end
 
         def policy_snippet
           %(
             resource "aws_ecr_repository_policy" "#{application_identifier}" {
               repository = aws_ecr_repository.#{application_identifier}.name
-              policy     = <<EOF
+              policy     = <<LINES
               {
                 "Version": "2008-10-17",
                 "Statement": [
@@ -35,9 +35,36 @@ module Artifacts
                   }
                 ]
               }
-              EOF
+              LINES
             }
           )
+        end
+
+        def push_images_snippet
+          %(
+            resource "null_resource" "#{application_identifier}-images-#{Time.now.to_i}" {
+              provisioner "local-exec" {
+                command = <<LINES
+                  {get_login_command} &&
+                  #{image_push_commands}
+                LINES
+              }
+
+              depends_on = [
+                aws_ecr_repository_policy.#{application_identifier}
+              ]
+            }
+          )
+        end
+
+        def image_push_commands
+          arena.compute_resolutions_for(:container_service).map do |r|
+            "docker push #{arena.packing_compute_respository_path}:#{r.image_identifier}"
+          end.join(";\n")
+        end
+
+        def get_login_command
+          %(aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///')
         end
 
         def default_configuration

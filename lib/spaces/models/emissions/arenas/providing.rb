@@ -41,5 +41,13 @@ module Arenas
       role_for(provider_identifier)&.compute_provider
     end
 
+    def packing_compute_provider
+      role_providers.packing&.compute_provider
+    end
+
+    def packing_compute_respository_path
+      "#{packing_compute_provider.respository_domain}/#{container_registry.application_identifier}"
+    end
+
   end
 end
