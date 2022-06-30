@@ -1,3 +1,5 @@
+# require 'pathname'
+
 $LOAD_PATH.unshift(Pathname.new(__dir__).parent.join('lib').expand_path)
 
 require 'spaces'

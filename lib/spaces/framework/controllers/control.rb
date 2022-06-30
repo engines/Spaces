@@ -5,7 +5,7 @@ module Spaces
       alias_method :signature, :struct
 
       def attempt
-        arguments[:threaded] ? _attempt_with_threading : _attempt
+        arguments[:background] ? _attempt_with_threading : _attempt
       end
 
       def command
@@ -25,6 +25,7 @@ module Spaces
       protected
 
       def _attempt_with_threading
+        self.struct.arguments[:timestamp] = "#{Time.now.to_i}"
         {result: arguments.tap { Thread.new { _attempt } }}
       end
 

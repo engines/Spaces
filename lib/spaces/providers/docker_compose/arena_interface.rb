@@ -22,7 +22,6 @@ module Providers
           remove_auxiliaries # FIX: this doesn't happen until the send thread is finished!
         rescue ::Docker::Compose::Error => e
           # No need to send message to stream. Error already reported in :stderr above.
-          pp e.inspect
         end
 
         def plan

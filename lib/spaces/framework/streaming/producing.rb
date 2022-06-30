@@ -5,8 +5,6 @@ module Streaming
       yield(self)
     rescue => e
       exception(e)
-    ensure
-      append(eot)
     end
 
     def output_lines_from(io)
@@ -14,7 +12,9 @@ module Streaming
     end
 
     def output(line)
-      append(encoded_output_for(line))
+      line.split("\r").each do |r| # split line into terminal rows
+        append(encoded_output_for("#{r}\r"))
+      end
     end
 
     def error(line)
@@ -25,9 +25,13 @@ module Streaming
       append(encoded_exception_for(e))
     end
 
-    def clear
+    def init
       path.dirname.mkpath
       File.open(path, 'w') {}
+    end
+
+    def close
+      append(eot)
     end
 
     protected

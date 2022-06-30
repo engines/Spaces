@@ -19,11 +19,11 @@ module Arenas
           orchestrate: Commands::Orchestrating,
           more_binders: Commands::MoreBinders,
           build_from: Commands::BuildingFrom,
-          build: Commands::Building,
-          init: [::Spaces::Commands::Executing, {execute: :init, threaded: true}],
-          plan: [::Spaces::Commands::Executing, {execute: :plan, threaded: true}],
-          # show: [::Spaces::Commands::Executing, {execute: :show, threaded: true}],
-          apply: [::Spaces::Commands::Executing, {execute: :apply, threaded: true}],
+          build: [Commands::Building, {background: true}],
+          init: [::Spaces::Commands::Executing, {execute: :init, background: true}],
+          plan: [::Spaces::Commands::Executing, {execute: :plan, background: true}],
+          # show: [::Spaces::Commands::Executing, {execute: :show, background: true}],
+          apply: [::Spaces::Commands::Executing, {execute: :apply, background: true}],
           artifacts: [::Spaces::Commands::Artifacts, {space: :arenas}]
         })
       end

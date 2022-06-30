@@ -3,8 +3,11 @@ module Spaces
     module Inputs
 
       def input_for(key, mandatory: true, default: nil)
-        input[key] || default ||
-          (mandatory && (raise ::Spaces::Errors::MissingInput, {missing: key, input: input}))
+        input[key] || default || (mandatory && missing_input_for(key))
+      end
+
+      def missing_input_for(key)
+        raise ::Spaces::Errors::MissingInput, {missing: key, input: input}
       end
 
       def identifier
@@ -24,7 +27,7 @@ module Spaces
       end
 
       def callback
-        input_for(:callback, default: -> (line) {puts line})
+        input_for(:callback)
       end
 
     end

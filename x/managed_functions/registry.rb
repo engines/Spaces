@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------------------
 
 # import blueprint to store a base image
-controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/container-registry'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/container-registry'}, background: false)
 
 # ------------------------------------------------------------------------------
 

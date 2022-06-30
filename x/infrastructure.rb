@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------------------
 
 # import infrastructure blueprints
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/powerdns'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/powerdns'}, background: false)
 
 # ------------------------------------------------------------------------------
 # save a providers arena for infrastructure use
@@ -34,7 +34,7 @@ controllers.arenas.bind(identifier: :infrastructure, blueprint_identifier: :powe
 controllers.arenas.stage(identifier: :infrastructure)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :infrastructure, threaded: false)
+# controllers.arenas.build(identifier: :infrastructure, background: false)
 #
 # # bring up containers for arena
-# controllers.arenas.apply(identifier: :infrastructure, threaded: false)
+# controllers.arenas.apply(identifier: :infrastructure, background: false)

@@ -4,7 +4,7 @@
 # ------------------------------------------------------------------------------
 
 # import a bootstrappy blueprint
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/debian'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/debian'}, background: false)
 
 # ------------------------------------------------------------------------------
 
@@ -34,4 +34,4 @@ controllers.arenas.bind(identifier: :base, blueprint_identifier: :debian)
 controllers.arenas.stage(identifier: :base)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :base, threaded: false)
+# controllers.arenas.build(identifier: :base, background: false)

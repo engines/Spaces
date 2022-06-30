@@ -7,8 +7,8 @@ require './x/controllers'
 # ------------------------------------------------------------------------------
 
 # import services blueprints
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/mariadb'}, threaded: false)
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/wap'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/mariadb'}, background: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/wap'}, background: false)
 
 # ------------------------------------------------------------------------------
 # save a services arena for common use
@@ -35,10 +35,10 @@ controllers.arenas.bind(identifier: :services, blueprint_identifier: :wap)
 controllers.arenas.stage(identifier: :services)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :services, threaded: false)
+# controllers.arenas.build(identifier: :services, background: false)
 #
 # # bring up containers for arena
-# controllers.arenas.apply(identifier: :services, threaded: false)
+# controllers.arenas.apply(identifier: :services, background: false)
 
 # # call add milestone scripts on a container for a given consumer
 # controllers.servicing.service(milestone: :add, identifier: 'database::mariadb', consumer_identifier: 'development::phpmyadmin')
