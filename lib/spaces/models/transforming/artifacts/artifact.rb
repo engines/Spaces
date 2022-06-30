@@ -20,7 +20,7 @@ module Artifacts
     end
 
     def compute_service_identifier
-      resolution.compute_service&.identifier_for(compute_identifier)
+      resolution.compute_service&.identifier
     end
 
     def compute_identifier; role.compute_identifier ;end

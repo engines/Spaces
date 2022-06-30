@@ -12,8 +12,7 @@ module Divisions
       super || empty.tap { |m| m.struct = struct.compact }
     end
 
-    def output_identifier; "#{context_identifier.underscore}:#{default_tag}" ;end
-    def default_tag; 'latest' ;end
+    def output_identifier; context_identifier.underscore ;end
 
   end
 end

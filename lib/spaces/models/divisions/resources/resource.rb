@@ -5,8 +5,12 @@ module Divisions
       struct.identifier || struct.type
     end
 
+    def application_identifier
+      identifier.hyphenated
+    end
+
     def configuration
-        struct.configuration
+      struct.configuration
     end
 
     #FIX: Resources are masquerading as adapters in artifact stanza processing

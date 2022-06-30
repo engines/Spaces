@@ -8,7 +8,8 @@ module Providers
 
       delegate(
         packs: :universe,
-        path_for: :packs
+        path_for: :packs,
+        compute_provider: :pack
       )
 
       def build
@@ -18,7 +19,13 @@ module Providers
       end
 
       def build_from_pack
-        build_from_dir.tap { |i| tag_latest(i) }
+        build_from_dir.tap do |i|
+          if compute_provider
+            i.tag(repo: compute_repository_identifier, tag: pack.output_identifier, force: true)
+          else
+            i.tag(repo: pack.output_identifier, tag: default_tag, force: true)
+          end
+        end
       rescue ::Docker::Error::ImageNotFoundError => e
         # Do nothing: ignore any ImageNotFoundError.
         # Docker should get image from remote repository.
@@ -29,6 +36,12 @@ module Providers
           process_output(encoded)
         end
       end
+
+      def compute_repository_identifier
+        "#{compute_provider.repository_identifier}/#{arena.container_registry.application_identifier}"
+      end
+
+      def default_tag; :latest ;end
 
     end
   end

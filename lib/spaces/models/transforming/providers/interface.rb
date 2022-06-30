@@ -4,6 +4,8 @@ module Providers
     relation_accessor :emission
     relation_accessor :stream
 
+    delegate(arena: :emission)
+
     def uniqueness; [klass.name, emission&.identifier] ;end
 
     def execute(instruction, **args); send(instruction, **args) ;end
