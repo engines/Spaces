@@ -45,7 +45,7 @@ module Artifacts
             resource "null_resource" "#{application_identifier}-images-#{Time.now.to_i}" {
               provisioner "local-exec" {
                 command = <<LINES
-                  {get_login_command} &&
+                  #{get_login_command} &&
                   #{image_push_commands}
                 LINES
               }
