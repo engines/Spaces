@@ -9,7 +9,7 @@ module Providers
       delegate(
         packs: :universe,
         path_for: :packs,
-        [:packing_compute_provider, :packing_compute_repository_path] => :arena
+        [:compute_provider, :compute_repository_path] => :arena
       )
 
       def build
@@ -20,8 +20,8 @@ module Providers
 
       def build_from_pack
         build_from_dir.tap do |i|
-          if packing_compute_provider
-            i.tag(repo: packing_compute_repository_path, tag: pack.output_identifier, force: true)
+          if compute_provider
+            i.tag(repo: compute_repository_path, tag: pack.output_identifier, force: true)
           else
             i.tag(repo: pack.output_identifier, tag: default_tag, force: true)
           end
