@@ -59,7 +59,7 @@ module Artifacts
 
         def image_push_commands
           arena.compute_resolutions_for(:container_service).map do |r|
-            "docker push #{arena.packing_compute_repository_path}:#{r.image_identifier}"
+            "docker push #{arena.compute_repository_path}:#{r.image_identifier}"
           end.join(";\n")
         end
 
