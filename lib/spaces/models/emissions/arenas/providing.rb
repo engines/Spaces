@@ -45,8 +45,8 @@ module Arenas
       role_providers.packing&.compute_provider
     end
 
-    def packing_compute_respository_path
-      "#{packing_compute_provider.respository_domain}/#{container_registry.application_identifier}"
+    def packing_compute_repository_path
+      "#{packing_compute_provider.repository_domain}/#{container_registry.application_identifier}"
     end
 
   end

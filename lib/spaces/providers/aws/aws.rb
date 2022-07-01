@@ -2,7 +2,7 @@ module Providers
   module Aws
     class Aws < ::Providers::Provider
 
-      def respository_domain
+      def repository_domain
         "#{account_identifier}.dkr.ecr.#{region}.amazonaws.com"
       end
 
