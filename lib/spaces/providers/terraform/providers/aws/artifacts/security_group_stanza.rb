@@ -20,7 +20,7 @@ module Artifacts
               to_port          = #{configuration.o_to_port}
               protocol         = "#{configuration.o_protocol}"
               cidr_blocks      = #{configuration.o_cidr_blocks}
-              ipv6_cidr_blocks = ["#{configuration.o_ipv6_cidr_blocks}"]
+              ipv6_cidr_blocks = "#{configuration.o_ipv6_cidr_blocks}"
             }
           )
         end
