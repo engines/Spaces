@@ -8,22 +8,50 @@ module Artifacts
         def more_snippets
           %(
             ingress {
-              from_port        = 8501
-              to_port          = 8501
-              protocol         = "tcp"
-              cidr_blocks      = ["0.0.0.0/0"]
-              ipv6_cidr_blocks = ["::/0"]
+              from_port        = #{in_from_port}
+              to_port          = #{configuration.in_to_port}
+              protocol         = "#{configuration.in_protocol}"
+              cidr_blocks      = #{configuration.in_cidr_blocks}
+		      #{in_ivp6}
             }
 
             egress {
-              from_port        = 0
-              to_port          = 0
-              protocol         = "-1"
-              cidr_blocks      = ["0.0.0.0/0"]
-              ipv6_cidr_blocks = ["::/0"]
+              from_port        = #{o_from_port}
+              to_port          = #{o_to_port}
+              protocol         = "#{o_protocol}"
+              cidr_blocks      = #{o_cidr_blocks}
+              #{o_ivp6}
             }
           )
         end
+
+        def in_ivp6
+          %(ipv6_cidr_blocks #{configuration.in_ipv6_cidr_blocks} if configuration.instance_methods(false).include?(:in_ipv6_cidr_blocks)
+        end
+        
+        def  o_ivp6
+          configuration.instance_methods(false).include?(:o_ipv6_cidr_blocks) ?  %(ipv6_cidr_blocks = ["configuration.o_ipv6_cidr_blocks"])  : %(ipv6_cidr_blocks = ["::/0"]) 
+        end
+        
+        def o_from_port
+          configuration.instance_methods(false).include?(:o_from_port) ? configuration.o_from_port : 0
+        end
+        
+        def o_to_port
+         configuration.instance_methods(false).include?(:o_to_port) ? configuration.o_to_port : 0
+        end
+        
+        def o_protocol
+         configuration.instance_methods(false).include?(:o_protocol) ? configuration.o_protocol : "-1"
+        end
+        
+        def o_cidr_blocks
+         configuration.instance_methods(false).include?(:o_cidr_blocks) ? configuration.o_cidr_blocks : ["0.0.0.0/0"]
+        end
+
+       def in_from_port
+         configuration.instance_methods(false).include?(:in_from_port) ? configuration.o_from_port : 0
+       end 
 
       end
     end
