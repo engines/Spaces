@@ -26,7 +26,7 @@ module Artifacts
         end
 
         def in_ivp6
-          %(ipv6_cidr_blocks #{configuration.in_ipv6_cidr_blocks}) if in_ipv6_cidr_blocks
+          %(configuration.in_ipv6_cidr_blocks #{configuration.in_ipv6_cidr_blocks}) if in_ipv6_cidr_blocks
         end
         
         def  o_ivp6
