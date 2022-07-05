@@ -31,7 +31,7 @@ module Artifacts
 				in_from_port: 0,		
       			o_from_port: 10,
       			o_to_port: 0,
-      			o_protocol: '-1'
+      			o_protocol: '-1',
       			o_cidr_blocks: ["0.0.0.0/0"]
           )
         end
