@@ -2,7 +2,7 @@ module Images
   module Controllers
     class Controller < ::Spaces::Controllers::RESTController
 
-      def space_identifier; :images ;end
+      def space_identifier = :images
 
       def action_command_map
         @action_command_map ||= super.merge({

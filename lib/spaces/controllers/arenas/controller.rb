@@ -2,7 +2,7 @@ module Arenas
   module Controllers
     class Controller < ::Spaces::Controllers::RESTController
 
-      def space_identifier; :arenas ;end
+      def space_identifier = :arenas
 
       def action_command_map
         @action_command_map ||= super.merge({

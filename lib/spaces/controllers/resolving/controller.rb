@@ -2,7 +2,7 @@ module Resolving
   module Controllers
     class Controller < ::Spaces::Controllers::RESTController
 
-      def space_identifier; :resolutions ;end
+      def space_identifier = :resolutions
 
       def action_command_map
         @action_command_map ||= super.merge({
