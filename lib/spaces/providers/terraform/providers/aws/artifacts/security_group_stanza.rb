@@ -20,7 +20,7 @@ module Artifacts
               to_port          = #{configuration.o_to_port}
               protocol         = "#{configuration.o_protocol}"
               cidr_blocks      = #{configuration.o_cidr_blocks}
-              ipv6_cidr_blocks = ["configuration.o_ipv6_cidr_blocks"]
+              ipv6_cidr_blocks = ["#{configuration.o_ipv6_cidr_blocks}"]
             }
           )
         end
@@ -29,7 +29,7 @@ module Artifacts
           OpenStruct.new(
             description: application_identifier,
 				in_from_port: 0,		
-      			o_from_port: 10,
+      			o_from_port: 0,
       			o_to_port: 0,
       			o_protocol: '-1',
       			o_cidr_blocks: ["0.0.0.0/0"]
