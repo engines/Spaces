@@ -8,7 +8,7 @@ module Spaces
       end
 
       def instance_for(args)
-        instance_class.new(signature_for(args))
+        instance_class.new(signature_for(**args))
       end
 
       def instance_class; Control ;end

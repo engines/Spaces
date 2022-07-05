@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = "info@engines.org"
   s.homepage = "http://github.com/engines/spaces"
   s.description = "Define Engines blueprints, export/import them, and manage the generation of artifacts required to generate images and provision virual machines and components."
-  s.required_ruby_version = ">= 2.7.0"
+  s.required_ruby_version = ">= 3.1"
 
   s.author = "Engines"
   s.licenses = ["AGPL-3.0"]
