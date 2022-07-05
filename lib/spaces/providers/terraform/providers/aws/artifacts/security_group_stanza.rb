@@ -32,7 +32,8 @@ module Artifacts
       			o_from_port: 0,
       			o_to_port: 0,
       			o_protocol: '-1',
-      			o_cidr_blocks: ["0.0.0.0/0"]
+      			o_cidr_blocks: ["0.0.0.0/0"],
+				o_ipv6_cidr_blocks: ["::0"]
           )
         end
 
