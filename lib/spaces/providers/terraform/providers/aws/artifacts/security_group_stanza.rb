@@ -39,31 +39,7 @@ module Artifacts
 
         def in_ivp6
           %(configuration.in_ipv6_cidr_blocks #{configuration.in_ipv6_cidr_blocks}) if configuration.in_ipv6_cidr_blocks
-        end
-        
-        def  o_ivp6
-          configuration.o_ipv6_cidr_blocks ?  %(ipv6_cidr_blocks = ["configuration.o_ipv6_cidr_blocks"])  : %(ipv6_cidr_blocks = ["::/0"]) 
-        end
-        
-        def o_from_port
-          configuration.o_from_port ? configuration.o_from_port : 0
-        end
-        
-        def o_to_port
-         configuration.o_to_port ? configuration.o_to_port : 0
-        end
-        
-        def o_protocol
-         configuration.o_protocol ? configuration.o_protocol : "-1"
-        end
-        
-        def o_cidr_blocks
-         configuration.o_cidr_blocks ? configuration.o_cidr_blocks : ["0.0.0.0/0"]
-        end
-
-       def in_from_port
-         configuration.in_from_port  ? configuration.in_from_port : 0
-       end 
+        end               
 
       end
     end
