@@ -9,9 +9,7 @@ module Packing
         @model ||= resolution.packed
       end
 
-      def resolution
-        universe.resolutions.by(identifier)
-      end
+      def resolution = universe.resolutions.by(identifier)
 
     end
   end
