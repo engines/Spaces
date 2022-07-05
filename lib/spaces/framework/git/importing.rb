@@ -30,13 +30,12 @@ module Spaces
         raise clone_failure
       end
 
-      def clone_options
+      def clone_options =
         command_options.merge({
           branch: branch_name,
           path: space.path,
           depth: 0,
         })
-      end
 
     end
   end

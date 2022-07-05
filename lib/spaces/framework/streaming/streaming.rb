@@ -12,8 +12,8 @@ module Streaming
       @stream ||= input[:stream] || stream_class.new(stream_elements)
     end
 
-    def stream_class; Space ;end
-    def stream_elements; [space.identifier, input_for(:identifier), qualifier] ;end
+    def stream_class = Space
+    def stream_elements = [space.identifier, input_for(:identifier), qualifier]
 
   end
 end

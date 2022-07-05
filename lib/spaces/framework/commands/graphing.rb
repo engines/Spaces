@@ -6,9 +6,7 @@ module Spaces
 
       protected
 
-      def assembly
-        space.graph(identifier, **input)
-      end
+      def assembly = space.graph(identifier, **input)
 
     end
   end

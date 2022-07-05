@@ -19,9 +19,7 @@ module Streaming
       end
     end
 
-    def is_eot?(line)
-      line[0] == eot
-    end
+    def is_eot?(line) = line[0] == eot
 
   end
 end

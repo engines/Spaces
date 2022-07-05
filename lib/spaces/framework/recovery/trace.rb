@@ -36,11 +36,11 @@ module Recovery
       end
     end
 
-    def identifier; [:trace, zipped_nodes].join('.') ;end
+    def identifier = [:trace, zipped_nodes].join('.')
 
-    def zipped_nodes; path_nodes.zip(method_names).map{ |n| n.join('/') } ;end
-    def path_nodes; array.map(&:trace_path_nodes) ;end
-    def method_names; array.map(&:trace_method_name) ;end
+    def zipped_nodes = path_nodes.zip(method_names).map{ |n| n.join('/') }
+    def path_nodes = array.map(&:trace_path_nodes)
+    def method_names = array.map(&:trace_method_name)
 
     def array
       @array ||= (error&.backtrace || []).select do |s|
@@ -50,12 +50,11 @@ module Recovery
       end.take(2).reverse.map(&:shortened_trace_line)
     end
 
-    def ignorable?(line)
+    def ignorable?(line) =
       [
         'spaces/models/space',
         'method_missing',
       ].map { |s| line.include?(s) }.include?(true)
-    end
 
     def spout(stuff = '-' * 88, to: STDOUT)
       to.puts stuff
@@ -75,18 +74,12 @@ end
 
 class String
 
-  def shortened_trace_line
-    split(break_text).last
-  end
+  def shortened_trace_line = split(break_text).last
 
-  def trace_method_name
-    split('`').last.split("'").first.gsub(' ', '_')
-  end
+  def trace_method_name = split('`').last.split("'").first.gsub(' ', '_')
 
-  def trace_path_nodes
-    split('.').first.gsub('/', '::')
-  end
+  def trace_path_nodes = split('.').first.gsub('/', '::')
 
-  def break_text; '/lib/' ;end # FIX: will fail if source code is not under lib folder
+  def break_text = '/lib/' # FIX: will fail if source code is not under lib folder
 
 end

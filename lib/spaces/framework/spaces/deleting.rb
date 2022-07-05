@@ -19,7 +19,7 @@ module Spaces
       delete(identifiable, cascade: cascade) if exist?(identifiable)
     end
 
-    def cascade_deletes; [] ;end
+    def cascade_deletes = []
 
     protected
 

@@ -36,21 +36,13 @@ module Streaming
       File.open(path, 'a') { |f| f.write("#{line}\n") }
     end
 
-    def encoded_output_for(line)
-      {output: line}.to_json
-    end
+    def encoded_output_for(line) = {output: line}.to_json
 
-    def encoded_error_for(line)
-      {error: line}.to_json
-    end
+    def encoded_error_for(line) = {error: line}.to_json
 
-    def encoded_exception_for(e)
-      {exception: exception_message_for(e)}.to_json
-    end
+    def encoded_exception_for(e) = {exception: exception_message_for(e)}.to_json
 
-    def exception_message_for(e)
-      [e.message, *e.backtrace].join("\n")
-    end
+    def exception_message_for(e) = [e.message, *e.backtrace].join("\n")
 
   end
 end
