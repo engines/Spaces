@@ -50,7 +50,7 @@ module Artifacts
         end
 
        def in_from_port
-         configuration.in_from_port  ? configuration.o_from_port : 0
+         configuration.in_from_port  ? configuration.in_from_port : 0
        end 
 
       end
