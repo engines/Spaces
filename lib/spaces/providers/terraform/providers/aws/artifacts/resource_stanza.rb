@@ -16,8 +16,7 @@ module Artifacts
               container_task_definition: :ecs_task_definition,
               load_balancer_listener: :lb_listener,
               load_balancer_target_group: :lb_target_group,
-              log_group: :cloudwatch_log_group,
-              acm_certificate: :aws_acm_certificate
+              log_group: :cloudwatch_log_group
             }
           end
         end

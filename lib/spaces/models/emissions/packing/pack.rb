@@ -5,10 +5,6 @@ module Packing
 
     alias_method :context_identifier, :identifier
 
-    def compute_provider
-      role_providers.packing&.compute_provider
-    end
-
     def copy_auxiliaries
       packs.copy_auxiliaries_for(self)
     end

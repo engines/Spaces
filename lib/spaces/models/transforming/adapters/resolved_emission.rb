@@ -9,7 +9,7 @@ module Adapters
       [:arena, :resolution, :blueprint_identifier] => :emission,
       resolution_default_division_keys: :arena,
       [:provider_for, :qualifier_for] => :arena,
-      division_map: :resolution
+      [:image_identifier, :division_map] => :resolution
     )
 
     # TODO: possible refactor ... the levels of dynamic class generation are a repeating pattern

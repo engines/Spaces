@@ -55,12 +55,7 @@ class String
   end
 
   def to_hcl
-    hcl_variable? ? self : %("#{self}")
-  end
-
-  def hcl_variable?
-    # HACKY!
-    split('.').compact.count == 3
+    %("#{self}")
   end
 
   alias_method :no_symbols, :to_s

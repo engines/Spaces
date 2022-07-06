@@ -6,9 +6,9 @@ module Arenas
 
       def subcommands
         @subcommands ||= [
-          Resolving.new(subcommand_inputs),
-          Packing.new(subcommand_inputs),
-          Orchestrating.new(subcommand_inputs)
+          Resolving.new(**subcommand_inputs),
+          Packing.new(**subcommand_inputs),
+          Orchestrating.new(**subcommand_inputs)
         ]
       end
 

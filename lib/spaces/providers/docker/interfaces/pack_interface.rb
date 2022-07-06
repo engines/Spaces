@@ -9,7 +9,7 @@ module Providers
       delegate(
         packs: :universe,
         path_for: :packs,
-        compute_provider: :pack
+        [:compute_provider, :compute_repository_path] => :arena
       )
 
       def build
@@ -21,7 +21,7 @@ module Providers
       def build_from_pack
         build_from_dir.tap do |i|
           if compute_provider
-            i.tag(repo: compute_repository_identifier, tag: pack.output_identifier, force: true)
+            i.tag(repo: compute_repository_path, tag: pack.output_identifier, force: true)
           else
             i.tag(repo: pack.output_identifier, tag: default_tag, force: true)
           end
@@ -35,10 +35,6 @@ module Providers
         bridge.build_from_dir("#{path_for(pack)}") do |encoded|
           process_output(encoded)
         end
-      end
-
-      def compute_repository_identifier
-        "#{compute_provider.repository_identifier}/#{arena.container_registry.application_identifier}"
       end
 
       def default_tag; :latest ;end
