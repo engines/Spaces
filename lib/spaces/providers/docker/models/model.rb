@@ -17,10 +17,10 @@ module Providers
         )
       end
 
-      def arena_identifier; resolution_identifier.high ;end
-      def application_identifier; resolution_identifier.low ;end
+      def arena_identifier = resolution_identifier.high
+      def application_identifier = resolution_identifier.low
 
-      def runtime_qualifier; name_elements[1].snakize ;end
+      def runtime_qualifier = name_elements[1].snakize
       alias_method :runtime, :runtime_qualifier
 
       def execute(instruction)
