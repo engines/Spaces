@@ -1,7 +1,6 @@
 module Providers
   module PowerDns
-    class PowerDns < ::Providers::Provider
+    PowerDns = ::Providers::Provider
 
-    end
   end
 end

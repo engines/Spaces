@@ -1,7 +1,6 @@
 module Providers
   module Terraform
-    class Terraform < ::Providers::Provider
+    Terraform = ::Providers::Provider
 
-    end
   end
 end

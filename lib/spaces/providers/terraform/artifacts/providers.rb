@@ -2,7 +2,7 @@ module Artifacts
   module Terraform
     class Providers < Arena
 
-      def stanza_qualifiers; [:providers] ;end
+      def stanza_qualifiers = [:providers]
 
     end
   end

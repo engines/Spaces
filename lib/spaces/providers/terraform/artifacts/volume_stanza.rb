@@ -11,9 +11,7 @@ module Artifacts
         ) if volumes
       end
 
-      def volume_name
-        volumes.all.map(&:volume_name).join
-      end
+      def volume_name = volumes.all.map(&:volume_name).join
 
     end
   end

@@ -4,9 +4,7 @@ module Artifacts
   module Terraform
     class Arena < Artifact
 
-      def filename
-        "#{qualifier}.#{extension}"
-      end
+      def filename = "#{qualifier}.#{extension}"
 
     end
   end

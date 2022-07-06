@@ -42,9 +42,9 @@ module Providers
         end
       end
 
-      def bridge; RubyTerraform ;end
+      def bridge = RubyTerraform
 
-      def options
+      def options =
         {
           plan: {
             input: false
@@ -54,7 +54,6 @@ module Providers
             auto_approve: true
           }
         }
-      end
 
     end
   end
