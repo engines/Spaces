@@ -1,7 +1,7 @@
 module Artifacts
   module Orchestrating
-    class Artifact < ::Artifacts::Artifact
 
-    end
+    Artifact = ::Artifacts::Artifact
+
   end
 end

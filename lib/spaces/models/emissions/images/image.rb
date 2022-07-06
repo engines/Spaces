@@ -1,5 +1,4 @@
 module Images
-  class Image < ::Resolving::Emission
+  Image = ::Resolving::Emission
 
-  end
 end
