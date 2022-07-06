@@ -25,7 +25,7 @@ module Packing
       warn(error: e, identifier: pack.identifier, klass: klass)
     end
 
-    def provider_role; :packing ;end
+    def provider_role = :packing
 
     def copy_auxiliaries_for(pack)
       pack.auxiliary_directories.each do |d|
@@ -64,7 +64,6 @@ module Packing
   end
 
   module Errors
-    class NoImage < ::Spaces::Errors::SpacesError
-    end
+    NoImage = ::Spaces::Errors::SpacesError
   end
 end

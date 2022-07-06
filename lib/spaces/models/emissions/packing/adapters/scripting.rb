@@ -8,9 +8,7 @@ module Adapters
 
     alias_method :path, :script_path
 
-    def has_scripts?
-      absolute_path.exist?
-    end
+    def has_scripts? = absolute_path.exist?
 
     def absolute_path
       @absolute_path ||= resolutions.path_for(pack).join(path)
