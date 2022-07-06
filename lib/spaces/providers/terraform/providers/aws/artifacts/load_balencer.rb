@@ -7,11 +7,11 @@ module Artifacts
         def configuration_snippet
           %(
            subnets         = #{subnets_array}
-           security_groups = [aws_security_group.lb.id]
+           security_groups = #{sg_array}
           )
         end
         def subnets_array
-			r = []
+			r = []  # Yes I know tap it
 			configuration.subnets.each do |sn|
 			 r.push("aws_subnet.#{sn}.id")
 			end
@@ -19,7 +19,7 @@ module Artifacts
         end
 
         def sg_array
-			r = []
+			r = []  # Yes I know tap it
 			configuration.subnets.each do |sg|
 			 r.push("aws_security_group.#{sg}.id")
 			end
