@@ -5,14 +5,12 @@ module Divisions
       context_identifier: :division
     )
 
-    def inflated; self ;end
-    def deflated; self ;end
+    def inflated = self
+    def deflated = self
 
-    def globalized
-      super || empty.tap { |m| m.struct = struct.compact }
-    end
+    def globalized = super || empty.tap { |m| m.struct = struct.compact }
 
-    def output_identifier; context_identifier.underscore ;end
+    def output_identifier = context_identifier.underscore
 
   end
 end

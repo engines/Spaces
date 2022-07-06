@@ -1,8 +1,8 @@
 module Divisions
   class SystemPackages < ::Divisions::Division
 
-    def inflated; self ;end
-    def deflated; self ;end
+    def inflated = self
+    def deflated = self
 
     def embedded_with(other)
       duplicate(itself).tap do |d|
@@ -12,11 +12,9 @@ module Divisions
       end
     end
 
-    def keys_including(other)
-      [other.keys, keys].flatten.uniq
-    end
+    def keys_including(other) = [other.keys, keys].flatten.uniq
 
-    def path; Pathname(__dir__) ;end
+    def path = Pathname(__dir__)
 
   end
 end

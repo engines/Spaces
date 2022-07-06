@@ -1,19 +1,18 @@
 module Adapters
 
-  class Images < Divisible ;end
-  class Image < Division ;end
-  class OtherPackages < Divisible ;end
-  class OtherPackage < Division ;end
-  class Permission < Division ;end
-  class Permissions < Divisible ;end
-  class Resources < Divisible ;end
-  class Resource < Division ;end
-  class Dimensions < Division ;end
-  class Ports < Divisible ;end
-  class Port < Division ;end
-  class Volumes < Divisible ;end
-  class Volume < Division ;end
-  class Default < Division ;end
-  class EmissionDefault < Emission ;end
+  Images = Divisible
+  Image = Division
+  OtherPackages = Divisible
+  Permission = Division
+  Permissions = Divisible
+  Resources = Divisible
+  Resource = Division
+  Dimensions = Division
+  Ports = Divisible
+  Port = Division
+  Volumes = Divisible
+  Volume = Division
+  Default = Division
+  EmissionDefault = Emission
 
 end
