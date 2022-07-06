@@ -2,7 +2,7 @@ module Commissioning
   class Commission < ::Resolving::Emission
 
     class << self
-      def composition_class; Composition ;end
+      def composition_class = Composition
     end
 
     delegate(
@@ -10,15 +10,11 @@ module Commissioning
       [:state, :network] => :first_interface_model
     )
 
-    def first_interface_model; interface_models.first ;end
+    def first_interface_model = interface_models.first
 
-    def network
-      first_interface_model&.network
-    end
+    def network = first_interface_model&.network
 
-    def ip_address
-      network&.ip_address
-    end
+    def ip_address = network&.ip_address
 
     def execute(command)
       interface.execute(command)

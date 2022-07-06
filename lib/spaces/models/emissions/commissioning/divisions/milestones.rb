@@ -1,5 +1,5 @@
 module Divisions
-  class Milestones < ::Divisions::Divisible
 
-  end
+  Milestones = ::Divisions::Divisible
+
 end

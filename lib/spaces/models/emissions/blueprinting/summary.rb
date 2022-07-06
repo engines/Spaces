@@ -1,7 +1,7 @@
 module Blueprinting
   module Summary
 
-    def summary
+    def summary =
       OpenStruct.new(
         identifier: identifier,
         about: struct.about,
@@ -11,7 +11,6 @@ module Blueprinting
         },
         utilized: all_arenas.any?
       )
-    end
 
     def flat_location_struct
       @flat_location_struct ||=

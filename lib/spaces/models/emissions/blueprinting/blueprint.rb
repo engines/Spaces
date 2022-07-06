@@ -17,13 +17,15 @@ module Blueprinting
 
     alias_method :blueprint, :itself
 
-    def application_identifier; struct.application_identifier ;end
+    def application_identifier = struct.application_identifier
 
-    def binder?; only_defines?(:bindings) ;end
+    def binder? = only_defines?(:bindings)
 
-    def descriptor; @descriptor ||= blueprints.by(identifier, Spaces::Descriptor) ;end
+    def descriptor
+      @descriptor ||= blueprints.by(identifier, Spaces::Descriptor)
+    end
 
-    def transformed_for_publication; globalized ;end
+    def transformed_for_publication = globalized
 
     def cache_identifiers!(binding)
       struct.blueprint_identifier = binding.target_identifier
