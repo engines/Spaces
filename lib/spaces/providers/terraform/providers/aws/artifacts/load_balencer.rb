@@ -13,16 +13,16 @@ module Artifacts
         def subnets_array
 			r = []
 			configuration.subnets.each do |sn|
-			sn.push("aws_subnet.#{sn}.id")
-			done
+			 r.push("aws_subnet.#{sn}.id")
+			end
 			r
         end
 
         def sg_array
 			r = []
 			configuration.subnets.each do |sg|
-			sn.push("aws_security_group.#{sg}.id")
-			done
+			 r.push("aws_security_group.#{sg}.id")
+			end
 			r
         end
       end
