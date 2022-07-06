@@ -7,13 +7,12 @@ module Targeting
     include ::Targeting::Targeting
 
     class << self
-      def prototype(type:, struct:, division:)
+      def prototype(type:, struct:, division:) =
         new(struct: struct, division: division)
-      end
     end
 
-    def identifier; struct.identifier || target_identifier ;end
-    def target_identifier; struct.target_identifier || descriptor&.identifier ;end
+    def identifier = struct.identifier || target_identifier
+    def target_identifier = struct.target_identifier || descriptor&.identifier
 
     def descriptor
       @descriptor ||= descriptor_class.new(

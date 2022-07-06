@@ -2,9 +2,7 @@ module Keys
   class Space < ::Spaces::PathSpace
 
     class << self
-      def default_model_class
-        Key
-      end
+      def default_model_class = Key
     end
 
     def identifiers(domain: '*', username: '*', tie_breaker: '*')
@@ -15,9 +13,8 @@ module Keys
       end
     end
 
-    def key_path_for(identifiable)
+    def key_path_for(identifiable) =
       Pathname.new("#{reading_path_for(identifiable)}.#{default_extension}")
-    end
 
     protected
 

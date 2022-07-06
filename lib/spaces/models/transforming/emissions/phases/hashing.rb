@@ -7,11 +7,9 @@ module Emissions
       end.compact
     end
 
-    def identifiers; {identifier: identifier} ;end
+    def identifiers = {identifier: identifier}
 
-    def h_for(key)
-      division_map[key]&.to_h
-    end
+    def h_for(key) = division_map[key]&.to_h
 
   end
 end
