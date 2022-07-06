@@ -5,7 +5,7 @@ module Artifacts
     module Aws
       class SecurityGroupStanza < ResourceStanza
 
-        def more_snippets
+        def more_snippets =
           %(
             ingress {
               from_port        = 8501
@@ -23,7 +23,6 @@ module Artifacts
               ipv6_cidr_blocks = ["::/0"]
             }
           )
-        end
 
       end
     end

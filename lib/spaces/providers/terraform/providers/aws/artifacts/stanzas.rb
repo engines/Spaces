@@ -4,8 +4,8 @@ module Artifacts
   module Terraform
     module Aws
 
-      class LogGroupStanza < ResourceStanza ;end
-      class ContainerDefinitionStanza < ResourceStanza ;end
+      LogGroupStanza = ResourceStanza
+      ContainerDefinitionStanza = ResourceStanza
 
     end
   end

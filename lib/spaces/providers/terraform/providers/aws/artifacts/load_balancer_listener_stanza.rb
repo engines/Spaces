@@ -5,7 +5,7 @@ module Artifacts
     module Aws
       class LoadBalancerListenerStanza < ResourceStanza
 
-        def more_snippets
+        def more_snippets =
           %(
             load_balancer_arn = aws_alb.application_load_balancer.id
 
@@ -14,7 +14,6 @@ module Artifacts
               target_group_arn = aws_lb_target_group.target_group.id
             }
           )
-        end
 
       end
     end

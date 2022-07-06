@@ -5,7 +5,7 @@ module Artifacts
     module Aws
       class LoadBalancerTargetGroupStanza < ResourceStanza
 
-        def more_snippets
+        def more_snippets =
           %(
             vpc_id = aws_vpc.#{vpc.application_identifier}.id
 
@@ -19,7 +19,6 @@ module Artifacts
               unhealthy_threshold = "2"
             }
           )
-        end
 
       end
     end
