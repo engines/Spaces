@@ -37,7 +37,7 @@ module Artifacts
       			matcher: 200,
       			timeout: 3,
 				unhealthy_threshold: 2,
-				health_check_path: ='/',				
+				health_check_path: '/',				
 			    path_pattern:  ["/*"]
           )
         end
