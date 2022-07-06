@@ -2,7 +2,7 @@ module Adapters
   module Terraform
     module Docker
 
-      class Volumes < ::Adapters::Terraform::Volumes ;end
+      Volumes = ::Adapters::Terraform::Volumes
 
     end
   end
