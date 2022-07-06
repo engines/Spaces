@@ -7,14 +7,12 @@ module Arenas
     alias_method :connectables_for, :new_leaves_for
 
     class << self
-      def default_model_class
-        Arena
-      end
+      def default_model_class = Arena
     end
 
     delegate([:resolutions, :packs, :orchestrations] => :universe)
 
-    def cascade_deletes; [:resolutions] ;end
+    def cascade_deletes = [:resolutions]
 
     def save_resolutions_for(arena, force: false)
       (force ? arena.bound_resolutions : arena.unsaved_resolutions).
@@ -39,18 +37,17 @@ module Arenas
       end
     end
 
-    def unrepeatable_children_for(identifiable)
+    def unrepeatable_children_for(identifiable) =
       by(identifiable).connections.map(&:arena).map(&:descendant_paths).flatten.map(&:identifiers)
-    end
 
-    def path_for(model)
+    def path_for(model) =
       model.respond_to?(:arena) ? path.join(model.arena.context_identifier) : super
-    end
 
   end
 
   module Errors
-    class OrchestratingError < ::Spaces::Errors::SpacesError
-    end
+
+    OrchestratingError = ::Spaces::Errors::SpacesError
+
   end
 end

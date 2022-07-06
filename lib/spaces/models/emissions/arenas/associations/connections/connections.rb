@@ -1,5 +1,5 @@
 module Associations
-  class Connections < ::Targeting::Tree
 
-  end
+  Connections = ::Targeting::Tree
+
 end
