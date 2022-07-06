@@ -16,7 +16,7 @@ module Spaces
 
       def qualifier; name_elements.last.snakize ;end
 
-      def from_yaml(y); YAML::load(y) ;end
+      def from_yaml(y); YAML::load(y, permitted_classes: [OpenStruct, Symbol]) ;end
 
       def relation_accessor(*args); attr_accessor(*args) ;end
 
