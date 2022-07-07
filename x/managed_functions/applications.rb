@@ -38,4 +38,6 @@ controllers.arenas.stage(identifier: :applications)
 # controllers.arenas.build(identifier: :applications, threaded: false)
 #
 # # bring up containers for arena
+#controllers.arenas.init(identifier: :applications, threaded: false)
+
 # controllers.arenas.apply(identifier: :applications, threaded: false)
