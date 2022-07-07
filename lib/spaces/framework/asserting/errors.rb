@@ -4,7 +4,7 @@ module Spaces
 
       attr_reader :diagnostics
 
-      def initialize(**args)
+      def initialize(args)
         super
         @diagnostics = {self.class.name => args}
       end

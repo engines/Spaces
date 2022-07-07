@@ -13,7 +13,7 @@ module Requiring
   def requires(*entry_names, **options)
     locate(caller_locations) do |location|
       entry_names.each do |entry_name|
-        require_children(location.join(entry_name), options)
+        require_children(location.join(entry_name), **options)
       end
     end
   end

@@ -5,7 +5,7 @@ module Arenas
     class Providing < Saving
 
       def model
-        @model ||= current_model.provide_for(input.without(:identifier, :space))
+        @model ||= current_model.provide_for(**(input.without(:identifier, :space)))
       end
 
     end
