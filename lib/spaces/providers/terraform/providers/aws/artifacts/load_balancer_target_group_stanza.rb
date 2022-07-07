@@ -6,7 +6,7 @@ module Artifacts
       class LoadBalancerTargetGroupStanza < ResourceStanza
 		def configuration_snippet
 			%(
-             vpc_id = aws_vpc.#{vpc.application_identifier}.id
+             vpc_id = aws_vpc.#{configuration.vpc_binding}.id
 			 subnets         = aws_subnet.public.*.id
   			 security_groups = [aws_security_group.lb.id]
              protocol = #{configuration.protocol}
