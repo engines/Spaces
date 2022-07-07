@@ -42,7 +42,7 @@ module Arenas
     end
 
     def compute_provider
-      role_providers.orchestration&.compute_provider
+      role_providers.named(:orchestration)&.compute_provider
     end
 
     def compute_repository_path
