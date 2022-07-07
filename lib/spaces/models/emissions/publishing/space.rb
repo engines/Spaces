@@ -23,7 +23,7 @@ module Publishing
     end
 
     def import(descriptor, args)
-      by_import(descriptor, args)
+      by_import(descriptor, **args)
     end
 
     def by_import(descriptor, **args)

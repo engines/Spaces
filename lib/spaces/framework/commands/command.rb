@@ -33,7 +33,7 @@ module Spaces
         universe.send(space_identifier)
       end
 
-      def initialize(**input)
+      def initialize(input)
         self.struct = OpenStruct.new(input: input.symbolize_keys.clean)
       end
 
