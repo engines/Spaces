@@ -17,7 +17,7 @@ module Blueprinting
 
     alias_method :blueprint, :itself
 
-    def application_identifier = struct.application_identifier
+    def application_identifier = struct.application_identifier || super
 
     def binder? = only_defines?(:bindings)
 
