@@ -5,7 +5,7 @@ module Artifacts
     module Aws
       class SecurityGroupStanza < ResourceStanza
 
-        def more_snippets =
+        def configuration_snippet =
           %(
             ingress {
               from_port        = #{configuration.in_from_port}
@@ -16,11 +16,11 @@ module Artifacts
             }
 
             egress {
-              from_port        = #{configuration.o_from_port}
-              to_port          = #{configuration.o_to_port}
-              protocol         = "#{configuration.o_protocol}"
-              cidr_blocks      = #{configuration.o_cidr_blocks}
-              ipv6_cidr_blocks = #{configuration.o_ipv6_cidr_blocks}
+              from_port        = #{configuration.out_from_port}
+              to_port          = #{configuration.out_to_port}
+              protocol         = "#{configuration.out_protocol}"
+              cidr_blocks      = #{configuration.out_cidr_blocks}
+              ipv6_cidr_blocks = #{configuration.out_ipv6_cidr_blocks}
             }
           )
 
@@ -28,14 +28,15 @@ module Artifacts
           OpenStruct.new(
             description: application_identifier,
             in_from_port: 0,
-            o_from_port: 0,
-            o_to_port: 0,
-            o_protocol: '-1',
-            o_cidr_blocks: ["0.0.0.0/0"],
-            o_ipv6_cidr_blocks: ["::/0"],
-            in_to_port: "",
-            in_protocol: "",
-            in_cidr_blocks: []
+            in_to_port: '',
+            in_protocol: '',
+            in_cidr_blocks: [],
+
+            out_from_port: 0,
+            out_to_port: 0,
+            out_protocol: '-1',
+            out_cidr_blocks: ['0.0.0.0/0'],
+            out_ipv6_cidr_blocks: ['::/0']
           )
 
         def in_ivp6
