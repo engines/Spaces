@@ -4,9 +4,7 @@ module Spaces
   module Commands
     class Existing < Command
 
-      def identifier
-        input_for(:identifier, mandatory: false)
-      end
+      def identifier = input_for(:identifier, mandatory: false)
 
       protected
 

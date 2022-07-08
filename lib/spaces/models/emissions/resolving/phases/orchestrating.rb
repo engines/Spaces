@@ -8,12 +8,10 @@ module Resolving
       end
     end
 
-    def orchestrated?
-      orchestrations.exist?(identifier)
-    end
+    def orchestrated? = orchestrations.exist?(identifier)
 
-    def empty_orchestration; orchestration_class.new ;end
-    def orchestration_class; ::Orchestrating::Orchestration ;end
+    def empty_orchestration = orchestration_class.new
+    def orchestration_class = ::Orchestrating::Orchestration
 
   end
 end

@@ -5,9 +5,7 @@ module Publishing
     include Synchronizing
 
     class << self
-      def default_model_class
-        Blueprint
-      end
+      def default_model_class = Blueprint
     end
 
     delegate([:locations, :blueprints] => :universe)
@@ -16,7 +14,7 @@ module Publishing
     alias_method :save, :save_json
     alias_method :imported?, :exist?
 
-    def default_extension; :json ;end
+    def default_extension = :json
 
     def modified_at(*args)
       super(*args, as: default_extension)

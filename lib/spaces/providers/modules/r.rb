@@ -1,9 +1,7 @@
 module Providers
   class R < ::Adapters::ModuleList
 
-    def inline
-      struct.map { |s| "R -e 'install.packages(\"#{s}\")'" }
-    end
+    def inline = struct.map { |s| "R -e 'install.packages(\"#{s}\")'" }
 
   end
 end

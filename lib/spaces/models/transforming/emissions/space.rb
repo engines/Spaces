@@ -12,9 +12,8 @@ module Emissions
       translator_for(arena)&.save_artifacts_to(writing_path_for(arena))
     end
 
-    def translator_for(emission)
+    def translator_for(emission) =
       emission.provider_for(provider_role).translator_for(emission)
-    end
 
   end
 end

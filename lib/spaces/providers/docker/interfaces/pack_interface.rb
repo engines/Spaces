@@ -37,7 +37,7 @@ module Providers
         end
       end
 
-      def default_tag; :latest ;end
+      def default_tag = :latest
 
     end
   end

@@ -3,7 +3,6 @@ module Adapters
   class Images < Divisible ;end
   class Image < Division ;end
   class OtherPackages < Divisible ;end
-  class OtherPackage < Division ;end
   class Permission < Division ;end
   class Permissions < Divisible ;end
   class Resources < Divisible ;end

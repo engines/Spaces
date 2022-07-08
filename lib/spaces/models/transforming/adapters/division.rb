@@ -9,7 +9,7 @@ module Adapters
       @snippet_map ||= {}.tap { |m| m[qualifier] = snippets }.compact
     end
 
-    def snippets; ;end
+    def snippets = nil
 
     def initialize(division)
       self.division = division

@@ -9,9 +9,7 @@ module Providers
       ::Docker.options[:read_timeout] = 1000
       ::Docker.options[:write_timeout] = 1000
 
-      def get(id)
-        model_class.new(self, bridge.get(id))
-      end
+      def get(id) = model_class.new(self, bridge.get(id))
 
       alias_method :by, :get
 
@@ -27,7 +25,7 @@ module Providers
         stream&.output(encoded)
       end
 
-      def summary_class; model_class ;end
+      def summary_class = model_class
 
     end
   end

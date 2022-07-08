@@ -18,7 +18,7 @@ module Arenas
     include Relations
 
     class << self
-      def composition_class; Composition ;end
+      def composition_class = Composition
     end
 
     delegate(
@@ -26,21 +26,19 @@ module Arenas
       descendant_paths: :connections
     )
 
-    def modified_at; arenas.modified_at(self) ;end
+    def modified_at = arenas.modified_at(self)
 
     def state
       @state ||= State.new(self)
     end
 
-    def arena; self ;end
+    def arena = self
 
-    def default_domains
-      domains.all
-    end
+    def default_domains = domains.all
 
-    def resolution_default_division_keys; [:images] ;end
+    def resolution_default_division_keys = [:images]
 
-    def binding_class; ::Divisions::BindingInArena ;end
+    def binding_class = ::Divisions::BindingInArena
 
     def initialize(struct: nil, identifiable: nil)
       super.tap do

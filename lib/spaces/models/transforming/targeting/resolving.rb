@@ -8,9 +8,7 @@ module Targeting
       end
     end
 
-    def service_string_array
-      _resolved(:service)&.to_string_array
-    end
+    def service_string_array = _resolved(:service)&.to_string_array
 
     def _resolved(section)
       if s = send(section)
@@ -18,7 +16,7 @@ module Targeting
       end
     end
 
-    def infix_qualifier; target_identifier ;end
+    def infix_qualifier = target_identifier
 
   end
 end

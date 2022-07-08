@@ -19,16 +19,14 @@ module Adapters
       end.compact
     end
 
-    def keys
+    def keys =
       [resolution_default_division_keys, division_map.keys].flatten.uniq
-    end
 
-    def adapters; adapter_map.values ;end
-    def adapter_keys; adapter_map.keys ;end
+    def adapters = adapter_map.values
+    def adapter_keys = adapter_map.keys
 
-    def division_adapter_for(division)
+    def division_adapter_for(division) =
       adapter_class_for(division).new(division)
-    end
 
     def adapter_class_for(division)
       q = division.qualifier
@@ -45,10 +43,10 @@ module Adapters
       end
     end
 
-    def adapter_name_elements; nesting_elements ;end
-    def default_name_elements; [:default] ;end
-    def default_adapter_class; Default ;end
-    def default_emission_adapter_class; EmissionDefault ;end
+    def adapter_name_elements = nesting_elements
+    def default_name_elements = [:default]
+    def default_adapter_class = Default
+    def default_emission_adapter_class = EmissionDefault
 
     def method_missing(m, *args, &block)
       return resolution.send(m, *args, &block) if resolution.respond_to?(m)

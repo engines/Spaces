@@ -1,8 +1,8 @@
 module Arenas
   module Settling
 
-    def present_in(space); deep_bindings_in(space, :select) ;end
-    def absent_in(space); deep_bindings_in(space, :reject) ;end
+    def present_in(space) = deep_bindings_in(space, :select)
+    def absent_in(space) = deep_bindings_in(space, :reject)
 
     def deep_bindings_in(space, method)
       all_connect_bindings.send(method) do |b|
@@ -16,9 +16,7 @@ module Arenas
       end
     end
 
-    def bound_of(key)
-      bound_map_for(key).values
-    end
+    def bound_of(key) = bound_map_for(key).values
 
     def bound_map_for(key)
       bound_map[key] ||= all_connect_bindings.inject({}) do |m, b|
@@ -28,7 +26,9 @@ module Arenas
       end.compact
     end
 
-    def bound_map; @bound_map ||= {} ;end
+    def bound_map
+      @bound_map ||= {}
+    end
 
   end
 end

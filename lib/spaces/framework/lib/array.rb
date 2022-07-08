@@ -4,16 +4,15 @@ class Array
     alias_method w, :itself
   end
 
-  def to_h_deep; deep(:to_h_deep) ;end
-  def to_struct; deep(:to_struct) ;end
-  def no_symbols; deep(:no_symbols) ;end
+  def to_h_deep = deep(:to_h_deep)
+  def to_struct = deep(:to_struct)
+  def no_symbols = deep(:no_symbols)
 
-  def to_hcl(enclosed: true)
+  def to_hcl(enclosed: true) =
     %(#{'[' if enclosed}
       #{deep(:to_hcl).join(",\n")}
       #{']' if enclosed}
     )
-  end
 
   def deep(method)
     map do |i|
@@ -23,33 +22,19 @@ class Array
     end
   end
 
-  def exclude?(object)
-    !include?(object)
-  end
+  def exclude?(object) = !include?(object)
 
-  def all_true?
-    !any?(false)
-  end
+  def all_true? = !any?(false)
 
-  def select_uniq(&block)
-    select(&block).uniq(&block)
-  end
+  def select_uniq(&block) = select(&block).uniq(&block)
 
-  def in_quotes
-    map { |v| %("#{v}")}
-  end
+  def in_quotes = map { |v| %("#{v}")}
 
-  def camelize
-    map(&:to_s).map(&:camelize).join('::')
-  end
+  def camelize = map(&:to_s).map(&:camelize).join('::')
 
-  def constantize
-    camelize.constantize
-  end
+  def constantize = camelize.constantize
 
-  def drop(integer)
-    take(count - integer)
-  end
+  def drop(integer) = take(count - integer)
 
   def split(value)
     if (i = index(value))

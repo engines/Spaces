@@ -29,12 +29,11 @@ module Providers
           bridge.config(arena.orchestrated.map(&:identifier))
         end
 
-        def execution_map
+        def execution_map =
           {
             plan: :build,
             apply: :up
           }
-        end
 
         def bridge
           @bridge ||=

@@ -7,13 +7,13 @@ module Publishing
     include ::Publishing::Summary
 
     class << self
-      def composition_class; Composition ;end
+      def composition_class = Composition
     end
 
     delegate([:blueprints, :publications] => :universe)
 
-    def blueprint_identifier; identifier ;end
-    def application_identifier; identifier ;end
+    def blueprint_identifier = identifier
+    def application_identifier = identifier
 
     def repository
       @repository ||= publications.repository_for(descriptor)
@@ -23,9 +23,9 @@ module Publishing
       @descriptor ||= descriptor_class.new(identifier: identifier)
     end
 
-    def transformed_for_publication; localized ;end
+    def transformed_for_publication = localized
 
-    def in_blueprint?; true ;end
+    def in_blueprint? = true
 
   end
 end

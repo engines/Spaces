@@ -1,7 +1,7 @@
 module Resolving
   module Summary
 
-    def summary
+    def summary =
       OpenStruct.new(
         identifier: identifier,
         stale: stale?,
@@ -13,11 +13,9 @@ module Resolving
           exist: orchestrations.exist?(identifier)
         }
       )
-    end
 
-    def stale?
+    def stale? =
       arena.state.stale_resolutions.include?(identifier)
-    end
 
   end
 end

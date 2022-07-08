@@ -2,12 +2,11 @@ module Artifacts
   module DockerCompose
     class ServicesStanza < ::Artifacts::Stanza
 
-      def snippets
+      def snippets =
         {
           version: "3.3",
           services: service_snippets
         }
-      end
 
       def service_snippets
         directly_bound_resolutions.reduce({}) do |m, r|
@@ -25,7 +24,7 @@ module Artifacts
         end
       end
 
-      def service_stanza_class; ServiceStanza; end
+      def service_stanza_class = ServiceStanza
 
     end
   end

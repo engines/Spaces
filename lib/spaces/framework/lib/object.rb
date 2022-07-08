@@ -1,7 +1,5 @@
 class Object
 
-  def to_hcl
-    self
-  end
+  def to_hcl = self
 
 end

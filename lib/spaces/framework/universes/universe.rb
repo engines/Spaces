@@ -32,9 +32,9 @@ module Universes
       end
     end
 
-    def identifier; struct.identifier ;end
+    def identifier = struct.identifier
 
-    def host; 'engines.internal' ;end
+    def host = 'engines.internal'
 
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)

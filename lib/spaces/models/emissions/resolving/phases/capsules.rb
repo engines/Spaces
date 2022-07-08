@@ -8,8 +8,8 @@ module Resolving
       end
     end
 
-    def empty_capsule; capsule_class.new ;end
-    def capsule_class; ::Capsules::Capsule ;end
+    def empty_capsule = capsule_class.new
+    def capsule_class = ::Capsules::Capsule
 
   end
 end

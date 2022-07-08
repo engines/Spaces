@@ -3,9 +3,7 @@ module Artifacts
     module Aws
       class Resources < ::Artifacts::Terraform::Artifact
 
-        def stanza_qualifiers
-          [:resources]
-        end
+        def stanza_qualifiers = [:resources]
 
       end
     end

@@ -23,11 +23,10 @@ module Spaces
         raise push_failure
       end
 
-      def commit_message_for(args)
+      def commit_message_for(args) =
         "#{args.dig(:model, :message) || default_commit_message} [BY ENGINES]"
-      end
 
-      def default_commit_message; "Exported on #{Time.now}" ;end
+      def default_commit_message = "Exported on #{Time.now}"
 
     end
   end

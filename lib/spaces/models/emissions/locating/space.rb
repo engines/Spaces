@@ -2,9 +2,7 @@ module Locating
   class Space < ::Spaces::PathSpace
 
     class << self
-      def default_model_class
-        ::Locating::Location
-      end
+      def default_model_class = ::Locating::Location
     end
 
     def ensure_located(publication)

@@ -2,7 +2,7 @@ module Divisions
   class Modules < ::Divisions::Division
 
     class << self
-      def subdivision_class; ModuleList ;end
+      def subdivision_class = ModuleList
     end
 
     delegate(subdivision_class: :klass)
@@ -13,9 +13,8 @@ module Divisions
       @all ||= languages.map { |l| subdivision_for(l) }.compact
     end
 
-    def subdivision_for(language)
+    def subdivision_for(language) =
       subdivision_class.prototype(type: language, struct: struct[language], division: self)
-    end
 
     def method_missing(m, *args, &block)
       all.detect { |a| a.identifier == m.to_s }
