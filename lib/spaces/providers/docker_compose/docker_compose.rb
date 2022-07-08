@@ -1,6 +1,6 @@
 module Providers
   module DockerCompose
-    DockerCompose = ::Providers::Provider
-
+    class DockerCompose < ::Providers::Provider
+    end
   end
 end

@@ -1,9 +1,9 @@
 module Adapters
   module Terraform
 
-    Dimensions = ::Adapters::Dimensions
-    Volumes = ::Adapters::Volumes
-    Port = ::Adapters::Port
+    class Dimensions < ::Adapters::Dimensions ;end
+    class Volumes < ::Adapters::Volumes ;end
+    class Port < ::Adapters::Port ;end
 
   end
 end

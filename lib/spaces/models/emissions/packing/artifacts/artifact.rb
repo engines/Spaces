@@ -1,6 +1,6 @@
 module Artifacts
   module Packing
-    Artifact = ::Artifacts::Artifact
-
+    class Artifact < ::Artifacts::Artifact
+    end
   end
 end

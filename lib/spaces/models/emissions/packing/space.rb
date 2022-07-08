@@ -64,6 +64,7 @@ module Packing
   end
 
   module Errors
-    NoImage = ::Spaces::Errors::SpacesError
+    class NoImage < ::Spaces::Errors::SpacesError
+    end
   end
 end

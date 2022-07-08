@@ -1,5 +1,4 @@
 module Capsules
-
-  Capsule = ::Resolving::Emission
-
+  class Capsule < ::Resolving::Emission
+  end
 end

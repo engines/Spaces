@@ -1,5 +1,4 @@
 module Repositories
-
-  Repository = ::Divisions::Subdivision
-
+  class Repository < ::Divisions::Subdivision
+  end
 end

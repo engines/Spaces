@@ -46,8 +46,7 @@ module Arenas
   end
 
   module Errors
-
-    OrchestratingError = ::Spaces::Errors::SpacesError
-
+    class OrchestratingError < ::Spaces::Errors::SpacesError
+    end
   end
 end

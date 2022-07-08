@@ -1,7 +1,6 @@
 module Providers
   module Docker
-
-    Docker = ::Providers::Provider
-
+    class Docker < ::Providers::Provider
+    end
   end
 end

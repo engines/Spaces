@@ -1,7 +1,6 @@
 module Adapters
   module Packer
-
-    Pack = ::Adapters::Pack
-
+    class Pack < ::Adapters::Pack
+    end
   end
 end

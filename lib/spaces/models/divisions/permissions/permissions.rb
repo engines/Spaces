@@ -1,5 +1,4 @@
 module Divisions
-
-  Permissions = ::Divisions::Divisible
-
+  class Permissions < ::Divisions::Divisible
+  end
 end

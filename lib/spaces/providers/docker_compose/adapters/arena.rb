@@ -1,7 +1,6 @@
 module Adapters
   module DockerCompose
-
-    Arena = ::Adapters::Arena
-
+    class Arena < ::Adapters::Arena
+    end
   end
 end

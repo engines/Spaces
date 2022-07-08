@@ -1,9 +1,8 @@
 module Artifacts
   module Terraform
     module Aws
-
-      Providers = ::Artifacts::Terraform::Providers
-      
+      class Providers < ::Artifacts::Terraform::Providers
+      end
     end
   end
 end

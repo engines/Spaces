@@ -1,5 +1,4 @@
 module Capsules
-
-  Space = ::Emissions::InterfaceSpace
-
+  class Space < ::Emissions::InterfaceSpace
+  end
 end
