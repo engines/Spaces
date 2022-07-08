@@ -17,9 +17,10 @@ module Artifacts
               load_balancer_listener: :lb_listener,
               load_balancer_target_group: :lb_target_group,
               log_group: :cloudwatch_log_group,
-			  load_balencer: :lb
+              load_balencer: :lb
             }
-          end
+
+        end
 
         delegate resource_type_map: :klass
 
