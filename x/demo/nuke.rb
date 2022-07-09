@@ -1,6 +1,6 @@
 # clear the universe
 ::Spaces::Space.universes.path.join('universe').tap do |path|
-  FileUtils.rm_f Dir.glob(path.join('*')) if path.exist?
+  FileUtils.rm_rf(Dir.glob(path.join('*'))) if path.exist?
 end
 
 # clear Docker (except for debian image; it's slow to download)

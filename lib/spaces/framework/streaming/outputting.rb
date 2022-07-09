@@ -8,17 +8,17 @@ module Streaming
 
     def produce(&block)
       yield(self)
-    rescue => e
-      exception(e)
+    # rescue => e
+    #   exception(e)
     end
 
     def error(message)
       print("\033[0;33m#{message}\033[0m\n")
     end
 
-    def exception(e)
-      print("\033[0;31m#{e.backtrace}\n#{e}\033[0m\n")
-    end
+    # def exception(e)
+    #   print("\033[0;31m#{e.backtrace}\n#{e}\033[0m\n")
+    # end
 
     def output_lines_from(io)
       io.each_line { |l| output(l) }

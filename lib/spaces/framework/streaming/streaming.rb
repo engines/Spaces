@@ -11,7 +11,9 @@ module Streaming
     end
 
     def stream
-      @stream ||= input[:stream] || stream_class.new(self).stream
+      puts caller
+      exit
+      @stream ||= input[:stream] || stream_class.new(self)
     end
 
     def stream_class; Space ;end

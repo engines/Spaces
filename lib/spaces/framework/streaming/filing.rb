@@ -10,8 +10,8 @@ module Streaming
       def default_model_class; self ;end
     end
 
-    def identifier
-      [:streaming, segments].flatten.join(identifier_separator).as_path
+    def initialize(stream)
+      @stream = stream
     end
 
     def path
@@ -24,16 +24,7 @@ module Streaming
 
     def default_extension; :out ;end
 
-    def identifier_separator; ''.identifier_separator ;end
     def eot; 4.chr ;end
-
-    def initialize(streaming)
-      @streaming = streaming
-    end
-
-    def segments
-      @streaming.stream_elements.flatten.map(&:identifier)
-    end
 
   end
 end
