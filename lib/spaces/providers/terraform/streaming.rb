@@ -2,13 +2,12 @@ module Providers
   module Terraform
     module Streaming
 
-    def config(out)
+    def config(out) =
       {
         stdout: out,
         stderr: out,
         logger: logger
       }
-    end
 
     def out(command, model)
       ->(output) do

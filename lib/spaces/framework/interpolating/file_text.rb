@@ -5,19 +5,22 @@ module Interpolating
 
     attr_accessor :origin_file_name, :segment
 
-    def origin; @origin ||= origin_file_name.read ;end
-
-    def permission; @permission ||= origin_file_name.stat.mode ;end
-
-    def file_name; origin_file_name.basename ;end
-
-    def subpath; origin_path ;end
-
-    def origin_path
-      origin_file_name.relative_path_from(relative_path.parent).dirname
+    def origin
+      @origin ||= origin_file_name.read
     end
 
-    def to_s; origin_file_name.to_s ;end
+    def permission
+      @permission ||= origin_file_name.stat.mode
+    end
+
+    def file_name = origin_file_name.basename
+
+    def subpath = origin_path
+
+    def origin_path =
+      origin_file_name.relative_path_from(relative_path.parent).dirname
+
+    def to_s = origin_file_name.to_s
 
     def initialize(origin:, directory:, transformable:)
       self.transformable = transformable
@@ -27,9 +30,8 @@ module Interpolating
 
     private
 
-    def relative_path
+    def relative_path =
       origin_file_name.ascend.detect { |s| s.basename == segment }
-    end
 
   end
 end

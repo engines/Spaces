@@ -4,17 +4,16 @@ module Providers
 
       delegate [:snippets, :auxiliary_directories, :source_path_for, :copy_source_path_for] => :division
 
-      def snippets; snippets.compact.map(&:to_h) ;end
+      def snippets = snippets.compact.map(&:to_h)
 
-      def auxiliary_file_snippet_for(path)
+      def auxiliary_file_snippet_for(path) =
         {
           type: 'file',
           source: "#{path}/",
           destination: 'tmp'
         }
-      end
 
-      def file_copy_snippet_for(folder, precedence)
+      def file_copy_snippet_for(folder, precedence) =
         {
           type: 'shell',
           inline: [
@@ -22,7 +21,6 @@ module Providers
             "tar -C /tmp/#{folder}/#{precedence}/ -cf - . | tar -C / -xf -"
           ]
         }
-      end
 
     end
   end

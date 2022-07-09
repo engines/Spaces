@@ -6,12 +6,12 @@ module Spaces
       include Inputs
 
       class << self
-        def mutating?; itself <= Saving ;end
+        def mutating? = itself <= Saving
       end
 
-      def result; struct[:result] ;end
-      def errors; struct[:errors] ;end
-      def payload; OpenStruct.new(struct.to_h.without(:input)) ;end
+      def result = struct[:result]
+      def errors = struct[:errors]
+      def payload = OpenStruct.new(struct.to_h.without(:input))
 
       def run
         tap do
@@ -22,13 +22,11 @@ module Spaces
         end
       end
 
-      def has_run?; !payload.empty? ;end
-      def success?; has_run? && errors.nil? ;end
-      def fail?; has_run? && !success? ;end
+      def has_run? = !payload.empty?
+      def success? = has_run? && errors.nil?
+      def fail? = has_run? && !success?
 
-      def space
-        universe.send(space_identifier)
-      end
+      def space = universe.send(space_identifier)
 
       def initialize(input)
         self.struct = OpenStruct.new(input: input.symbolize_keys.clean)
@@ -44,8 +42,8 @@ module Spaces
         end
       end
 
-      def assembly ;end
-      def commit ;end
+      def assembly = nil
+      def commit = nil
 
     end
   end

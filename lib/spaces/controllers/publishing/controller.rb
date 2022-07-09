@@ -2,7 +2,7 @@ module Publishing
   module Controllers
     class Controller < ::Spaces::Controllers::RESTController
 
-      def space_identifier; :publications ;end
+      def space_identifier = :publications
 
       def action_command_map
         @action_command_map ||= super.merge({

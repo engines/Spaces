@@ -10,8 +10,8 @@ module Resolving
       end
     end
 
-    def empty_service; service_class.new ;end
-    def service_class; ::Commissioning::Service ;end
+    def empty_service = service_class.new
+    def service_class = ::Commissioning::Service
 
   end
 end

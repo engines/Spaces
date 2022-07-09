@@ -15,11 +15,11 @@ module Resolving
       @registrable ||= connect_bindings.any?
     end
 
-    def empty_entry; entry_class.new ;end
-    def entry_class; ::Registry::ConsumerEntry ;end
+    def empty_entry = entry_class.new
+    def entry_class = ::Registry::ConsumerEntry
 
-    def service_path; registry.container_path_for(self) ;end
-    def full_service_path; registry.path_for(self) ;end
+    def service_path = registry.container_path_for(self)
+    def full_service_path = registry.path_for(self)
 
   end
 end

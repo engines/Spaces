@@ -6,9 +6,7 @@ module Orchestrating
         @model ||= resolution.orchestrated
       end
 
-      def resolution
-        universe.resolutions.by(identifier)
-      end
+      def resolution = universe.resolutions.by(identifier)
 
     end
   end

@@ -13,8 +13,8 @@ module Resolving
       @consumer ||= as_consumer
     end
 
-    def empty_consumer; consumer_class.new ;end
-    def consumer_class; ::Commissioning::Consumer ;end
+    def empty_consumer = consumer_class.new
+    def consumer_class = ::Commissioning::Consumer
 
   end
 end

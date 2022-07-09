@@ -2,26 +2,23 @@ module Keys
   class Key < ::Spaces::Model
 
     class << self
-      def features; [:tie_breaker, :domain, :username, :explanation, :token] ;end
+      def features = [:tie_breaker, :domain, :username, :explanation, :token]
     end
 
-    def identifier
-      identifiers.values.compact.join('::')
-    end
+    def identifier = identifiers.values.compact.join('::')
 
-    def identifiers
+    def identifiers =
       {
         domain: domain,
         username: username,
         tie_breaker: tie_breaker
       }
-    end
 
-    def qualifier; "#{username}:#{token}@" ;end
+    def qualifier = "#{username}:#{token}@"
 
-    def domain; struct.domain ;end
-    def username; struct.username ;end
-    def tie_breaker; struct.tie_breaker ;end
+    def domain = struct.domain
+    def username = struct.username
+    def tie_breaker = struct.tie_breaker
 
     def initialize(args)
       self.struct = args[:struct] || OpenStruct.new(args)

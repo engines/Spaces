@@ -10,17 +10,9 @@ module Publishing
         super.well_formed? ? super : locations.by(identifier)
       end
 
-      def model_class
-        locations.default_model_class
-      end
-
-      def stream_elements
-        [ space.identifier,
-          model.identifier,
-          qualifier,
-          input_for(:timestamp)
-        ]
-      end
+      def model_class = locations.default_model_class
+        
+      def stream_elements = [space.identifier, model.identifier, qualifier, input_for(:timestamp)]
 
       protected
 

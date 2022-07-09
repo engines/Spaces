@@ -2,19 +2,16 @@ module Artifacts
   module Terraform
     class Artifact < ::Artifacts::Orchestrating::Artifact
 
-      def filename
+      def filename =
         "#{emission.application_identifier}.#{qualifier}.#{extension}"
-      end
 
-      def extension; :tf ;end
+      def extension = :tf
 
-      def dns_address
+      def dns_address =
         "#{container_type}.#{application_identifier}.ipv4_address"
-      end
 
-      def container_type
+      def container_type =
         [runtime_qualifier, 'container'].compact.join('_')
-      end
 
     end
   end

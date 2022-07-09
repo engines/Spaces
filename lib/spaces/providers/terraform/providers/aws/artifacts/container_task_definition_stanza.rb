@@ -7,13 +7,12 @@ module Artifacts
       class ContainerTaskDefinitionStanza < ResourceStanza
         include TaskDefining
 
-        def more_snippets
+        def more_snippets =
           %(
             container_definitions = jsonencode([
               #{definition_snippets}
             ])
           )
-        end
 
         def definition_snippets
           #TODO: assumes one stanza for all container services in the arena
@@ -22,7 +21,7 @@ module Artifacts
           end.join(",\n")
         end
 
-        def definition_snippet_for(r)
+        def definition_snippet_for(r) =
           %(
             {
               #{hash_for(r).to_hcl(enclosed:false)}
@@ -31,7 +30,6 @@ module Artifacts
               ]
             }
           )
-        end
 
         def hash_for(r)
           {
@@ -51,9 +49,7 @@ module Artifacts
           end
         end
 
-        def dimensions_hash_for(r)
-          r.dimensions&.struct&.to_h_deep
-        end
+        def dimensions_hash_for(r) = r.dimensions&.struct&.to_h_deep
 
         def ports_mappings_for(r)
           r.ports&.map do |p|
@@ -63,11 +59,10 @@ module Artifacts
           end.to_hcl(enclosed: false)
         end
 
-        def default_configuration
+        def default_configuration =
           OpenStruct.new(
             family: :service
           )
-        end
 
       end
     end

@@ -7,7 +7,7 @@ module Divisions
 
     delegate([:emission, :context_identifier] => :division)
 
-    def empty; self.class.new(division: division) ;end
+    def empty = self.class.new(division: division)
 
     def initialize(division:, struct: nil)
       self.division = division

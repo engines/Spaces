@@ -1,8 +1,8 @@
 module Blueprinting
   module Inflating
 
-    def inflated; flated(:inflated) ;end
-    def deflated; flated(:deflated) ;end
+    def inflated = flated(:inflated)
+    def deflated = flated(:deflated)
 
     def flated(desired_state)
       empty.tap do |m|

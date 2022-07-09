@@ -6,11 +6,9 @@ module Arenas
         @array ||= model.packables
       end
 
-      def subcommand_inputs
-        {space: :packs}
-      end
+      def subcommand_inputs = {space: :packs}
 
-      def subcommand_class; ::Packing::Commands::Saving ;end
+      def subcommand_class = ::Packing::Commands::Saving
 
     end
   end

@@ -30,9 +30,9 @@ module Providers
         end
       end
 
-      def bridge; ::Docker::Image ;end
-      def model_class; Image ;end
-      def file_class; Files::File ;end
+      def bridge = ::Docker::Image
+      def model_class = Image
+      def file_class = Files::File
 
     end
   end

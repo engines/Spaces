@@ -6,11 +6,10 @@ module Artifacts
       class ContainerRegistryStanza < ResourceStanza
         include Named
 
-        def snippets
+        def snippets =
           super + policy_snippet + push_images_snippet
-        end
 
-        def policy_snippet
+        def policy_snippet =
           %(
             resource "aws_ecr_repository_policy" "#{application_identifier}" {
               repository = aws_ecr_repository.#{application_identifier}.name
@@ -38,9 +37,8 @@ module Artifacts
               LINES
             }
           )
-        end
 
-        def push_images_snippet
+        def push_images_snippet =
           %(
             resource "null_resource" "#{application_identifier}-images-#{Time.now.to_i}" {
               provisioner "local-exec" {
@@ -55,7 +53,6 @@ module Artifacts
               ]
             }
           )
-        end
 
         def image_push_commands
           arena.compute_resolutions_for(:container_service).map do |r|
@@ -63,15 +60,13 @@ module Artifacts
           end.join(";\n")
         end
 
-        def get_login_command
+        def get_login_command =
           %(aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///')
-        end
 
-        def default_configuration
+        def default_configuration =
           OpenStruct.new(
             image_tag_mutability: 'IMMUTABLE'
           )
-        end
 
       end
     end

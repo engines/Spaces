@@ -10,23 +10,20 @@ module Targeting
       end.any? { |x| x.count == 2 && x.first > x.last }
     end
 
-    def new_leaves_for(identifier:)
+    def new_leaves_for(identifier:) =
       identifiers - existing_nodes_for(identifier: identifier)
-    end
 
-    def existing_nodes_for(identifier:)
+    def existing_nodes_for(identifier:) =
       [
         (i = identifier.identifier),
         unrepeatable_children_for(identifier),
         descendant_path_identifiers.select { |x| x.include?(i) }.map { |a| a.split(i).first }
       ].flatten.uniq
-    end
 
-    def unrepeatable_children_for(identifiable); [] ;end
+    def unrepeatable_children_for(identifiable) = []
 
-    def descendant_path_identifiers
+    def descendant_path_identifiers =
       all.map(&:descendant_paths).flatten.map(&:identifiers)
-    end
 
   end
 end

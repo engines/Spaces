@@ -3,9 +3,7 @@ module Artifacts
     module Aws
       module Named
 
-        def name_snippet
-          %(name = "#{application_identifier}")
-        end
+        def name_snippet = %(name = "#{application_identifier}")
 
       end
     end

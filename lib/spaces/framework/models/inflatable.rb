@@ -16,11 +16,11 @@ module Spaces
       end
     end
 
-    def features; klass.features ;end
+    def features = klass.features
 
     protected
 
-    def derived_features; {} ;end
+    def derived_features = {}
 
   end
 end

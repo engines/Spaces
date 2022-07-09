@@ -2,16 +2,14 @@ module Orchestrating
   class Space < ::Settling::Space
 
     class << self
-      def default_model_class
-        Orchestration
-      end
+      def default_model_class = Orchestration
     end
 
     delegate(
       [:arenas, :resolutions] => :universe
     )
 
-    def cascade_deletes; [:registry] ;end
+    def cascade_deletes = [:registry]
 
     def by(identifier, klass = default_model_class)
       super.tap do |m|
@@ -36,7 +34,7 @@ module Orchestrating
       end
     end
 
-    def provider_role; :orchestration ;end
+    def provider_role = :orchestration
 
     protected
 

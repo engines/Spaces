@@ -8,18 +8,13 @@ module Streaming
       @streaming = streaming
     end
 
-    def stream
-      stream_class.new(@streaming)
-    end
+    def stream = stream_class.new(@streaming)
 
-    def stream_class
-      with_filing? ? Filing : Outputting
-    end
+    def stream_class = with_filing? ? Filing : Outputting
 
-    def with_filing?
+    def with_filing? = (
       @streaming.is_a?(Spaces::Commands::Tailing) ||
-      @streaming.input[:background]
-    end
+      @streaming.input[:background] )
 
   end
 end

@@ -1,8 +1,8 @@
 module Divisions
   class Milestone < ::Divisions::Subdivision
 
-    def precedence; struct.precedence ;end
-    def path; struct.path ;end
+    def precedence = struct.precedence
+    def path = struct.path
 
   end
 end

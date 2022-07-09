@@ -12,11 +12,9 @@ module Spaces
         @command ||= signature.klass.new(**arguments)
       end
 
-      def arguments
-        signature.arguments || {}
-      end
+      def arguments = signature.arguments || {}
 
-      def calling_chain; [:run, :payload] ;end
+      def calling_chain = [:run, :payload]
 
       def initialize(signature)
         self.struct = signature

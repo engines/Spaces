@@ -9,12 +9,13 @@ module Settling
       end
     end
 
-    def summaries(arena_identifier:)
+    def summaries(arena_identifier:) =
       all(arena_identifier: arena_identifier).map(&:summary)
-    end
 
     def all(arena_identifier:)
-      identifiers(arena_identifier: arena_identifier).map { |i| exist_then_by(i) }.compact
+      identifiers(arena_identifier: arena_identifier).map do |i|
+        exist_then_by(i)
+      end.compact
     end
 
     def identifiers(arena_identifier: '*', application_identifier: '*')

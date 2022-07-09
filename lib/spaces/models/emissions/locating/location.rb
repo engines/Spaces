@@ -2,7 +2,7 @@ module Locating
   class Location < ::Spaces::Descriptor
 
     class << self
-      def features; super + [:key_identifier] ;end
+      def features = super + [:key_identifier]
     end
 
     delegate(user_keys: :universe)
@@ -19,9 +19,7 @@ module Locating
       @user_key ||= user_keys.exist_then_by(struct.key_identifier)
     end
 
-    def well_formed?
-      repository
-    end
+    def well_formed? = repository
 
   end
 end

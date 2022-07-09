@@ -9,56 +9,42 @@ module Targeting
     include ::Targeting::Resolving
 
     class << self
-      def features; [:type, :runtimes, :identifier, :target_identifier, :configuration, :service] ;end
+      def features =
+        [:type, :runtimes, :identifier, :target_identifier, :configuration, :service]
     end
 
-    def application_identifier
-      inject? ? identifier : target_identifier
-    end
+    def application_identifier = inject? ? identifier : target_identifier
 
-    def configuration; struct.configuration ;end
-    def service; struct.service ;end
+    def configuration = struct.configuration
+    def service = struct.service
 
-    def type; struct.type || derived_features[:type] ;end
+    def type = struct.type || derived_features[:type]
 
-    def inject?; type == 'configure' ;end
-    def embed?; type == 'embed' ;end
+    def inject? = type == 'configure'
+    def embed? = type == 'embed'
 
-    def runtimes; struct.runtimes ;end
+    def runtimes = struct.runtimes
 
-    def for_runtime?(value)
-      generic? || runtimes&.include?("#{value}")
-    end
+    def for_runtime?(value) = generic? || runtimes&.include?("#{value}")
 
-    def generic?
-      [[], nil].include?(runtimes)
-    end
+    def generic? = [[], nil].include?(runtimes)
 
-    def configure_bindings
-      deep_bindings_of_type(:configure)
-    end
+    def configure_bindings = deep_bindings_of_type(:configure)
 
     alias_method :inject_bindings, :configure_bindings
 
-    def embed_bindings
-      deep_bindings_of_type(:embed)
-    end
+    def embed_bindings = deep_bindings_of_type(:embed)
 
-    def deep_bindings
-      deep_bindings_of_type(:deep)
-    end
+    def deep_bindings = deep_bindings_of_type(:deep)
 
-    def deep_bindings_of_type(type)
+    def deep_bindings_of_type(type) =
+      [self, blueprint&.bindings&.send("#{type}_bindings")].flatten.compact.uniq(&:identifier)
       #TODO: can't use blueprint here ... must be more gerneric
       # #better_emission method?
-      [self, blueprint&.bindings&.send("#{type}_bindings")].flatten.compact.uniq(&:identifier)
-    end
 
-    def target_struct
+    def target_struct = blueprint&.binding_target&.struct
       #TODO: can't use blueprint here ... must be more generic
       # #better_emission method?
-      blueprint&.binding_target&.struct
-    end
 
     protected
 

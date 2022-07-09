@@ -5,7 +5,7 @@ module Packing
     class Building < Spaces::Commands::Executing
       include Asserting
 
-      def instruction; :build ;end
+      def instruction = :build
 
       def payload
         return super unless result&.class == Packer::Output::Build

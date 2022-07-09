@@ -2,7 +2,7 @@ module Universes
   module Controllers
     class Controller < ::Spaces::Controllers::Controller
 
-      def space_identifier; :universes ;end
+      def space_identifier = :universes
 
       def action_command_map
         @action_command_map ||= {

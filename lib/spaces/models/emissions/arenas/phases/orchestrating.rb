@@ -7,15 +7,13 @@ module Arenas
       end
     end
 
-    def orchestrated; present_in(orchestrations) ;end
+    def orchestrated = present_in(orchestrations)
 
-    def unorchestrated
-      absent_in(orchestrations)
-    end
+    def unorchestrated = absent_in(orchestrations)
 
-    def unsaved_orchestration; bound_resolutions.reject(&:orchestrated?) ;end
+    def unsaved_orchestration = bound_resolutions.reject(&:orchestrated?)
 
-    def volume_path; input.volumes[:path] ;end
+    def volume_path = input.volumes[:path]
 
     def copy_auxiliaries
       all_packs.each do |p|

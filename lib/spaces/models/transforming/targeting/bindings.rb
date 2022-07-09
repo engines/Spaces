@@ -18,32 +18,23 @@ module Targeting
       end
     end
 
-    def connect_bindings
-      all.reject { |b| b.embed? || b.inject? }
-    end
+    def connect_bindings = all.reject { |b| b.embed? || b.inject? }
 
-    def inject_bindings
-      deep_bindings.select(&:inject?)
-    end
+    def inject_bindings = deep_bindings.select(&:inject?)
 
     alias_method :configure_bindings, :inject_bindings
 
-    def embed_bindings
-      all.select(&:embed?)
-    end
+    def embed_bindings = all.select(&:embed?)
 
     def embed_bindings_for(runtime)
       ebs = shallow_embed_bindings_for(runtime)
       [ebs, ebs.map { |b| b.blueprint.bindings.embed_bindings_for(runtime) }].flatten.compact.uniq
     end
 
-    def shallow_embed_bindings_for(runtime)
+    def shallow_embed_bindings_for(runtime) =
       embed_bindings.select { |t| t.for_runtime?(runtime) }
-    end
 
-    def deep_bindings
-      all.map(&:deep_bindings).flatten.uniq
-    end
+    def deep_bindings = all.map(&:deep_bindings).flatten.uniq
 
   end
 end

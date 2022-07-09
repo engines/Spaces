@@ -7,20 +7,19 @@ module Spaces
     include Inflatable
 
     class << self
-      def universe; Space.universe ;end
+      def universe = Space.universe
     end
 
     delegate(universe: :klass)
 
-    def space_named(name); universe.send(name) ;end
+    def space_named(name) = universe.send(name)
 
-    def file_name; klass.qualifier ;end
-    def subpath; Pathname(''); end
-    def uniqueness; [klass.name, identifier] ;end
+    def file_name = klass.qualifier
+    def subpath = Pathname('')
+    def uniqueness = [klass.name, identifier]
 
-    def namespaced_name(namespace, symbol)
+    def namespaced_name(namespace, symbol) =
       "#{namespace}::#{symbol.to_s.split('_').map(&:capitalize).join}"
-    end
 
   end
 end
