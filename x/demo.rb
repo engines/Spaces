@@ -7,6 +7,8 @@ def callback
   }
 end
 
+require 'byebug'
+
 require './x/controllers'
 require './x/demo/nuke'
 require './x/demo/init'

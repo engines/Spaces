@@ -12,9 +12,10 @@ module Streaming
 
     def stream_class = with_filing? ? Filing : Outputting
 
-    def with_filing? = (
+    def with_filing?
       @streaming.is_a?(Spaces::Commands::Tailing) ||
-      @streaming.input[:background] )
+      @streaming.input[:background]
+    end
 
   end
 end
