@@ -1,10 +1,8 @@
-require_relative 'producing'
-require_relative 'consuming'
-
 module Streaming
   class Filing < ::Spaces::PathSpace
     include Producing
     include Consuming
+    include Writing
 
     class << self
       def default_model_class; self ;end

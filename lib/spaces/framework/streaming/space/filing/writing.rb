@@ -1,5 +1,5 @@
 module Streaming
-  module Producing
+  module Writing
 
     def output(line)
       line.split(/\r/).each do |r| # split line into terminal rows

@@ -2,6 +2,11 @@ require 'io/console'
 
 module Streaming
   class Outputting < ::Spaces::Space
+    include Producing
+
+    def initialize(stream)
+      @stream = stream
+    end
 
     def init
       print("\033[?25l")
@@ -16,11 +21,11 @@ module Streaming
     end
 
     def exception
-      # Do nothing.
+      # Do nothing. Exception logged elsewhere.
     end
 
     def output(line)
-      @stream.verbose? ? print(line) : progress_line(line)
+      verbose? ? print(line) : progress_line(line)
     end
 
     def progress_line(line)
@@ -47,8 +52,8 @@ module Streaming
       @spin = @spin.to_i + 1
     end
 
-    def initialize(stream)
-      @stream = stream
+    def verbose?
+      @stream.streaming.input[:verbose]
     end
 
   end

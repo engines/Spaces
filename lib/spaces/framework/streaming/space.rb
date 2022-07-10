@@ -1,6 +1,3 @@
-require_relative 'filing'
-require_relative 'outputting'
-
 module Streaming
   class Space < Spaces::Space
 
@@ -8,58 +5,16 @@ module Streaming
       @streaming = streaming
     end
 
-    def streams
-      @stream ||= stream_classes.map { |s| s.new(self) }
-    end
+    attr_reader :streaming
 
-    def init
-      streams.each &:init
-    end
-
-    def produce(&block)
-      yield(self)
-    rescue => e
-      logger.error(e)
-      exception
-    end
-
-    def consume(callback)
-      streams.each { |s| s.consume(callback) }
-    end
-
-    def output_lines_from(io)
-      io.each_line { |l| output(l) }
-    end
-
-    def close
-      streams.each &:close
-    end
-
-    def output(line)
-      streams.each { |s| s.output(line) }
-    end
-
-    def error(message)
-      streams.each { |s| s.error(message) }
-    end
-
-    def exception
-      streams.each { |s| s.exception }
-    end
-
-    def verbose?
-      @streaming.input[:verbose]
+    def stream
+      @stream ||= stream_class.new(self)
     end
 
     protected
 
-    def stream_classes
-      [(Filing if with_filing?), (Outputting if with_outputting?)].compact
-    end
-
-    def with_outputting?
-      !@streaming.is_a?(Spaces::Commands::Tailing) &&
-      !@streaming.input[:background]
+    def stream_class
+      with_filing? ? Filing : Outputting
     end
 
     def with_filing?
