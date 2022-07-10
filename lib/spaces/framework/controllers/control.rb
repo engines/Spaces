@@ -23,8 +23,8 @@ module Spaces
       protected
 
       def _background_attempt
-        self.struct.arguments[:timestamp] = "#{Time.now.to_i}"
-        {result: arguments.tap { Thread.new { _attempt } }}
+        self.struct.arguments[:timestamp] = arguments[:timestamp] || "#{Time.now.to_i}"
+        OpenStruct.new(result: arguments.tap { Thread.new { _attempt } })
       end
 
       def _attempt(with: calling_chain)

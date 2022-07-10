@@ -26,5 +26,7 @@ module Streaming
 
     def eot; 4.chr ;end
 
+    def identifier = @stream.identifier
+
   end
 end

@@ -11,8 +11,6 @@ module Streaming
     end
 
     def stream
-      puts caller
-      exit
       @stream ||= input[:stream] || stream_class.new(self)
     end
 

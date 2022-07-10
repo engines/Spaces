@@ -3,47 +3,52 @@ require 'io/console'
 module Streaming
   class Outputting < ::Spaces::Space
 
-    def init; end
-    def close; end
+    def init
+      print("\033[?25l")
+    end
 
-    def produce(&block)
-      yield(self)
-    # rescue => e
-    #   exception(e)
+    def close
+      print("\033[?25h")
     end
 
     def error(message)
-      print("\033[0;33m#{message}\033[0m\n")
+      print("\033[0;33m#{message}\033[0m")
     end
 
-    # def exception(e)
-    #   print("\033[0;31m#{e.backtrace}\n#{e}\033[0m\n")
-    # end
-
-    def output_lines_from(io)
-      io.each_line { |l| output(l) }
-      clear_row
+    def exception
+      # Do nothing.
     end
 
     def output(line)
-      line.split(/\R+/).each do |row| # split line into terminal rows
-        max = IO.console.winsize[1] - 2
-        r = " #{row.gsub(/\P{ASCII}/, '')[0...max]}"
-        clear_row
-        print_row(r)
-      end
+      @stream.verbose? ? print(line) : progress_line(line)
     end
 
-    def print_row(row)
-      print("#{row}\r")
+    def progress_line(line)
+      line.split(/\R+/).each { |r| progress_row(r) }
+    end
+
+    def progress_row(row)
+      max = IO.console.winsize[1] - 1
+      text = "\033[0;34m#{spinner}\033[0m #{row.gsub(/\P{ASCII}/, '')}"[0...max]
+      clear_row
+      print("#{text}\r")
     end
 
     def clear_row
-      print("\033[K")
+      print("\033[2K")
     end
 
-    def initialize(streaming)
-      @streaming = streaming
+    def spinner
+      '⣯⣟⡿⢿⣻⣽⣾⣷'[spin]
+    end
+
+    def spin
+      return @spin = 0 if @spin == 7
+      @spin = @spin.to_i + 1
+    end
+
+    def initialize(stream)
+      @stream = stream
     end
 
   end

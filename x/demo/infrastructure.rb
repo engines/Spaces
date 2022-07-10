@@ -1,7 +1,7 @@
 repository = 'https://github.com/v2Blueprints/powerdns'
 
 # import blueprint
-controllers.publishing.import(model: {repository: repository}, background: false)
+controllers.publishing.import(model: {repository: repository}, verbose: false)
 blueprint_identifier = controllers.publishing.identify(model: {repository: repository}).result
 # sleep 1 # prepare the output file
 # controllers.streaming.tail(space: :publications, stream_identifier: :importing, identifier: blueprint_identifier)
@@ -19,4 +19,5 @@ controllers.arenas.bind(identifier: :infrastructure, blueprint_identifier: :powe
 controllers.arenas.stage(identifier: :infrastructure)
 
 # orchestrate arena
-controllers.arenas.apply(identifier: :infrastructure, background: false)
+result = controllers.arenas.apply(identifier: :infrastructure, background: true).result
+controllers.streaming.tail(space: :arenas, stream_identifier: :executing, identifier: :infrastructure, timestamp: result[:timestamp], callback: callback)

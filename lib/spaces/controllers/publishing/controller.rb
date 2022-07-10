@@ -7,8 +7,8 @@ module Publishing
       def action_command_map
         @action_command_map ||= super.merge({
           identify: Commands::Identifying,
-          import: [Commands::Importing, background: true],
-          export: [Commands::Exporting, background: true],
+          import: Commands::Importing,
+          export: Commands::Exporting,
           synchronize: Commands::Synchronizing
         })
       end

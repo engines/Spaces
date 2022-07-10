@@ -14,7 +14,7 @@ module Spaces
 
       def force = input_for(:force, mandatory: false)
 
-      def callback = input_for(:callback)
+      def callback = input_for(:callback, default: default_callback)
 
     end
   end

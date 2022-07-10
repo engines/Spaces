@@ -4,8 +4,8 @@
 # ------------------------------------------------------------------------------
 
 # import mf_infrastructure blueprints
-controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/managed-functions'}, background: false)
-controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/startup-infrastructure'}, background: false)
+controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/managed-functions'}, verbose: true)
+controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/startup-infrastructure'}, verbose: true)
 
 # ------------------------------------------------------------------------------
 # save a providers arena for mf_infrastructure use
@@ -35,7 +35,7 @@ controllers.arenas.bind(identifier: :applications, blueprint_identifier: 'startu
 controllers.arenas.stage(identifier: :applications)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :applications, background: false)
+# controllers.arenas.build(identifier: :applications, verbose: true)
 #
 # # bring up containers for arena
-# controllers.arenas.apply(identifier: :applications, background: false)
+# controllers.arenas.apply(identifier: :applications, verbose: true)

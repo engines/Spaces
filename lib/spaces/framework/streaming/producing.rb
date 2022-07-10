@@ -1,18 +1,8 @@
 module Streaming
   module Producing
 
-    def produce(&block)
-      yield(self)
-    rescue => e
-      exception(e)
-    end
-
-    def output_lines_from(io)
-      io.each_line { |l| output(l) }
-    end
-
     def output(line)
-      line.split("\r").each do |r| # split line into terminal rows
+      line.split(/\r/).each do |r| # split line into terminal rows
         append(encoded_output_for("#{r}\r"))
       end
     end
@@ -21,8 +11,8 @@ module Streaming
       append(encoded_error_for(line))
     end
 
-    def exception(e)
-      append(encoded_exception_for(e))
+    def exception
+      append(encoded_exception)
     end
 
     def init
@@ -44,9 +34,7 @@ module Streaming
 
     def encoded_error_for(line) = {error: line}.to_json
 
-    def encoded_exception_for(e) = {exception: exception_message_for(e)}.to_json
-
-    def exception_message_for(e) = [e.message, *e.backtrace].join("\n")
+    def encoded_exception = {exception: "Server error. Command output streaming failed."}.to_json
 
   end
 end

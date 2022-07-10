@@ -6,7 +6,7 @@ blueprint_identifiers = []
 
 # import blueprints
 repositories.each do |repository|
-  controllers.publishing.import(model: {repository: repository}, background: false)
+  controllers.publishing.import(model: {repository: repository}, verbose: true)
   blueprint_identifier = controllers.publishing.identify(model: {repository: repository}).result
   blueprint_identifiers.push(blueprint_identifier)
   # sleep 1
@@ -32,6 +32,4 @@ end
 controllers.arenas.stage(identifier: :services)
 
 # orchestrate arena
-controllers.arenas.apply(identifier: :services, background: false)
-# sleep 1
-# controllers.streaming.tail(space: :arenas, stream_identifier: :executing, identifier: :services)
+controllers.arenas.apply(identifier: :services, verbose: true)
