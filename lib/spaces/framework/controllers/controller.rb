@@ -7,54 +7,42 @@ module Spaces
         instance_for(args).attempt
       end
 
-      def instance_for(args)
-        instance_class.new(signature_for(**args))
-      end
+      def instance_for(args) = instance_class.new(signature_for(**args))
 
-      def instance_class; Control ;end
+      def instance_class = Control
 
-      def signature_for(**args)
+      def signature_for(**args) =
         OpenStruct.new(
           klass: class_for(args[:action]),
           arguments: full_args_for(**args)
         )
-      end
 
-      def full_args_for(**args)
+      def full_args_for(**args) =
         default_args
         .merge(args_for(args[:action]))
         .merge(usable_args(args))
-      end
 
-      def usable_args(args)
-        args.without(:action)
-      end
+      def usable_args(args) = args.without(:action)
 
-      def args_for(action)
-        array_for(action)[1] || {}
-      end
+      def args_for(action) = array_for(action)[1] || {}
 
-      def class_for(action)
-        array_for(action).first
-      end
+      def class_for(action) = array_for(action).first
 
-      def array_for(action)
+      def array_for(action) =
         [action_command_map[action.to_sym]].flatten
-      end
 
-      def action_command_map; {} ;end
+      def action_command_map = {}
 
-      def default_args; struct.to_h ;end
+      def default_args = struct.to_h
 
       def initialize(**args)
         self.struct = struct_in_space(**args)
       end
 
-      def struct_in_space(**args)
+      def struct_in_space(**args) =
         OpenStruct.new({space: space_identifier}.merge(args.symbolize_keys))
-      end
 
-      def space_identifier; ;end
+      def space_identifier = nil
 
       def log(args) #TODO: args should be vetted rather than defending against potential bugs
         logger.info("Arguments: #{args}")

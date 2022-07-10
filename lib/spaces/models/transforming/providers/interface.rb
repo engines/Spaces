@@ -6,9 +6,11 @@ module Providers
 
     delegate(arena: :emission)
 
-    def uniqueness; [klass.name, emission&.identifier] ;end
+    def uniqueness = [klass.name, emission&.identifier]
 
-    def execute(instruction, **args); send(instruction, **args) ;end
+    def execute(instruction, **args)
+       send(instruction, **args)
+     end
 
     def initialize(emission, stream: nil)
       self.emission = emission

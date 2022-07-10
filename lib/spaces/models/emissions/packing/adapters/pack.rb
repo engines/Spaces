@@ -3,15 +3,12 @@ module Adapters
 
     alias_method :pack, :emission
 
-    def provider
-      provider_for(:packing)
-    end
+    def provider = provider_for(:packing)
 
-    def adapter_qualifiers; [:script_copying, :file_packing, :script_running, :execution] ;end
+    def adapter_qualifiers =
+      [:script_copying, :file_packing, :script_running, :execution]
 
-    def adapter_map
-      pack_adapter_map.merge(super)
-    end
+    def adapter_map = pack_adapter_map.merge(super)
 
     # TODO: possible refactor ... the levels of dynamic class generation are a repeating pattern
     def pack_adapter_map
@@ -20,9 +17,8 @@ module Adapters
       end.compact
     end
 
-    def pack_adapter_for(qualifier)
+    def pack_adapter_for(qualifier) =
       pack_adapter_class_for(qualifier).new(provider, pack)
-    end
 
     def pack_adapter_class_for(qualifier)
       class_for(adapter_name_elements, qualifier)

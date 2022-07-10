@@ -17,7 +17,7 @@ module Recovery
       end
     end
 
-    def trace_class; Trace ;end
+    def trace_class = Trace
 
   end
 end

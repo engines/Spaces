@@ -1,8 +1,8 @@
 module Arenas
   module Blueprinting
 
-    def blueprinted; deep_blueprints(:select) ;end
-    def unblueprinted; deep_blueprints(:reject) ;end
+    def blueprinted = deep_blueprints(:select)
+    def unblueprinted = deep_blueprints(:reject)
 
     def deep_blueprints(method)
       deep_connect_bindings.send(method) do |b|

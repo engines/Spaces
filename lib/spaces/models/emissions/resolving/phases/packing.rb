@@ -13,30 +13,25 @@ module Resolving
       @packable ||= images.any? && intends_container_service?
     end
 
-    def intends_container_service?
+    def intends_container_service? =
       !resourcer? && (container_service? || provides_no_specific_compute_service?)
-    end
 
-    def container_service?
+    def container_service? =
       compute_service&.identifier&.to_sym == (:container_service)
-    end
 
-    def provides_no_specific_compute_service?
+    def provides_no_specific_compute_service? =
       division_keys.exclude?(:compute_service)
-    end
 
-    def packed?
-      packs.exist?(identifier)
-    end
+    def packed? = packs.exist?(identifier)
 
-    def builders_for(images); OpenStruct.new(builders: images.inflated.struct) ;end
+    def builders_for(images) =
+      OpenStruct.new(builders: images.inflated.struct)
 
-    def packing_divisions
+    def packing_divisions =
       divisions.select { |d| d.packing_division? }.sort_by(&:composition_rank)
-    end
 
-    def empty_pack; packing_class.new ;end
-    def packing_class; ::Packing::Pack ;end
+    def empty_pack = packing_class.new
+    def packing_class = ::Packing::Pack
 
   end
 end

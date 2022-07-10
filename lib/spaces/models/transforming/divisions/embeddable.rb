@@ -7,13 +7,12 @@ module Divisions
       end
     end
 
-    def embedded_with(other)
+    def embedded_with(other) =
       empty.tap { |d| d.struct = struct_merged_with(other) }
-    end
 
-    def struct_merged_with(other); struct.reverse_merge(other.struct) ;end
+    def struct_merged_with(other) = struct.reverse_merge(other.struct)
 
-    def no_embed_makes_sense; self ;end
+    def no_embed_makes_sense = self
 
   end
 end

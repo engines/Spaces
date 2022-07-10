@@ -3,13 +3,12 @@ module Artifacts
     module Aws
       class ProvidersStanza < ::Artifacts::Stanza
 
-        def snippets
+        def snippets =
           %(
             provider "aws" {
               region = "#{compute_provider&.region}"
             }
           )
-        end
 
       end
     end

@@ -10,17 +10,15 @@ module Providers
         container.send(command)
       end
 
-      def by_image_id(image_id)
+      def by_image_id(image_id) =
         all.select { |c| c.image_id == image_id }.reverse
-      end
 
-      def by_resolution_identifier(identifier)
+      def by_resolution_identifier(identifier) =
         all.select { |c| c.resolution_identifier == identifier }.reverse
-      end
 
-      def bridge; ::Docker::Container ;end
-      def model_class; Capsule ;end
-      def summary_class; CapsuleSummary ;end
+      def bridge = ::Docker::Container
+      def model_class = Capsule
+      def summary_class = CapsuleSummary
 
     end
   end

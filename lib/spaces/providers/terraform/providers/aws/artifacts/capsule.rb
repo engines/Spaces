@@ -3,9 +3,8 @@ module Artifacts
     module Aws
       class Capsule < ::Artifacts::Terraform::Artifact
 
-        def stanza_qualifiers
+        def stanza_qualifiers =
           [compute_service_identifier || :capsule]
-        end
 
       end
     end

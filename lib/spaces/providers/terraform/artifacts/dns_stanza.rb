@@ -15,11 +15,10 @@ module Artifacts
         ) unless redundant
       end
 
-      def redundant; dns_qualifier == application_identifier ;end
+      def redundant = dns_qualifier == application_identifier
 
-      def container_address_snippet
+      def container_address_snippet =
         "#{container_type}.#{application_identifier}.ipv6_address"
-      end
 
     end
   end

@@ -4,10 +4,10 @@ module Adapters
       class Image < ::Adapters::Image
 
         class << self
-          def features; [:identifier, :output_identifier, :privileged] ;end
+          def features = [:identifier, :output_identifier, :privileged]
         end
 
-        def privileged; struct.privileged || derived_features[:privileged] ;end
+        def privileged = struct.privileged || derived_features[:privileged]
 
         def export
           duplicate(struct).tap { |m| m[:export_path] = "#{identifier}.tar" }
@@ -19,13 +19,12 @@ module Adapters
 
         protected
 
-        def derived_features
-          @derived_features ||= {
+        def derived_features =
+          {
             name: identifier,
             output_identifier: output_identifier,
             privileged: false
           }
-        end
 
       end
     end

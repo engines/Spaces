@@ -3,13 +3,9 @@ module Git
 
     attr_reader :files
 
-    def commitable
-      files.select { |_, f| f.type }
-    end
+    def commitable = files.select { |_, f| f.type }
 
-    def map(&block)
-      files.values.map(&block)
-    end
+    def map(&block) = files.values.map(&block)
 
   end
 end

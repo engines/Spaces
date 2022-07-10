@@ -6,9 +6,7 @@ module Spaces
 
       protected
 
-      def assembly
-        space.artifacts_for(identifier).map(&:content)
-      end
+      def assembly = space.artifacts_for(identifier).map(&:content)
 
     end
   end

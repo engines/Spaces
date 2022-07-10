@@ -4,7 +4,7 @@ module Providers
 
       delegate [:recursion, :ownership, :file, :mode] => :division
 
-      def snippets
+      def snippets =
         {
           type: 'shell',
           inline: [
@@ -12,7 +12,6 @@ module Providers
             ("chmod #{recursion} #{mode} #{file}" if mode)
           ].compact
         }
-      end
 
     end
   end

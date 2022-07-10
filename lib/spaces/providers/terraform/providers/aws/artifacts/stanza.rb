@@ -6,7 +6,7 @@ module Artifacts
     module Aws
       class Stanza < ::Artifacts::Stanza
 
-        def snippets
+        def snippets =
           %(
             resource "aws_#{resource_type_here}" "#{application_identifier}" {
               #{name_snippet}
@@ -15,36 +15,30 @@ module Artifacts
               #{more_snippets}
             }
           )
-        end
 
-        def name_snippet; end
+        def name_snippet = nil
 
-        def configuration_snippet
+        def configuration_snippet =
           configuration_hash.without(:tags).to_hcl(enclosed: false)
-        end
 
-        def tags_snippet
+        def tags_snippet =
           %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
-        end
 
         def configuration
           @configuration ||= default_configuration.reverse_merge(super)
         end
 
-        def default_configuration; OpenStruct.new ;end
+        def default_configuration = OpenStruct.new
 
-        def configuration_hash
-          configuration&.to_h_deep || {}
-        end
+        def configuration_hash = configuration&.to_h_deep || {}
 
-        def tags_hash
+        def tags_hash =
           {
             'Name': application_identifier,
             'Environment': 'var.app_environment'
           }.merge(configuration_hash[:tags] || {})
-        end
 
-        def more_snippets ;end
+        def more_snippets = nil
 
       end
     end

@@ -2,14 +2,12 @@ module Resolving
   class Space < ::Settling::Space
 
     class << self
-      def default_model_class
-        Resolution
-      end
+      def default_model_class = Resolution
     end
 
     delegate([:registry, :packs, :orchestrations] => :universe)
 
-    def cascade_deletes; [:packs, :orchestrations] ;end
+    def cascade_deletes = [:packs, :orchestrations]
 
     def save(model)
       super.tap do
@@ -19,7 +17,9 @@ module Resolving
     end
 
     def bindings_to(model)
-      all.map(&:bindings).map(&:all).flatten.select { |b| b.descriptor.identifier == model.blueprint_identifier }
+      all.map(&:bindings).map(&:all).flatten.select do |b|
+        b.descriptor.identifier == model.blueprint_identifier
+      end
     end
 
     protected

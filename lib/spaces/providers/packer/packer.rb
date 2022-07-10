@@ -10,28 +10,25 @@ module Providers
         path_for(pack).join("commit.json").write(pack.artifact.to_json)
       end
 
-      def export; execute(:export) ;end
-      def commit; execute(:commit) ;end
+      def export = execute(:export)
+      def commit = execute(:commit)
 
-      def push ;end
-      def fix ;end
+      def push = nil
+      def fix = nil
       # def inspect(model) ;end
-      def validate ;end
+      def validate  = nil
 
-      def encloses_commit?; encloses_good_result?(:commit) ;end
-      def encloses_export?; encloses_good_result?(:export) ;end
+      def encloses_commit? = encloses_good_result?(:commit)
+      def encloses_export? = encloses_good_result?(:export)
 
-      def encloses_good_result?(command)
+      def encloses_good_result?(command) =
         encloses_result?(command) && with_good_artifacts?(command)
-      end
 
-      def encloses_result?(command)
+      def encloses_result?(command) =
         path_for(pack).join(command.to_s).exist?
-      end
 
-      def with_good_artifacts?(command)
+      def with_good_artifacts?(command) =
         artifacts_by(command)&.any?(&:id)
-      end
 
       def artifacts_by(command)
         YAML::load(path_for(pack).join("#{command}", 'artifacts.yaml').read)
@@ -69,17 +66,13 @@ module Providers
         end
       end
 
-      def unexecuted_aspects_for(command)
+      def unexecuted_aspects_for(command) =
         unique_aspects.reject { |a| a.encloses_good_result?(command) }
-      end
 
-      def unique_aspects
+      def unique_aspects =
         unique_connections.map { |c| klass.new(by(c.resolution_identifier), space) }.compact
-      end
 
-      def unique_connections
-        pack.connect_bindings.uniq(&:uniqueness)
-      end
+      def unique_connections = pack.connect_bindings.uniq(&:uniqueness)
 
     end
   end

@@ -1,19 +1,17 @@
 module Transforming
   class Transformable < ::Spaces::Model
 
-    def complete?; true ;end
+    def complete? = true
 
-    def identifier; struct[:identifier] ;end
+    def identifier = struct[:identifier]
 
-    def identifier_separator; ''.identifier_separator; end
+    def identifier_separator = ''.identifier_separator
 
-    def random(length); SecureRandom.hex(length.to_i) ;end
+    def random(length) = SecureRandom.hex(length.to_i)
 
     protected
 
-    def all_complete?(array)
-      array.map(&:complete?).all_true?
-    end
+    def all_complete?(array) = array.map(&:complete?).all_true?
 
   end
 end

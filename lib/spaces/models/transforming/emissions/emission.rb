@@ -12,10 +12,13 @@ module Emissions
     include Hashing
 
     class << self
-      def composition; @composition ||= composition_class.new ;end
-      def composition_class; Composition ;end
+      def composition
+        @composition ||= composition_class.new
+      end
 
-      def documentation_only_keys; [:identifier, :about] ;end
+      def composition_class = Composition
+
+      def documentation_only_keys = [:identifier, :about]
     end
 
     relation_accessor :predecessor
@@ -27,21 +30,19 @@ module Emissions
 
     alias_method :emission, :itself
 
-    def identifier; struct.identifier ;end
+    def identifier = struct.identifier
 
-    def has?(property); !struct[property].nil? ;end
+    def has?(property) = !struct[property].nil?
 
-    def only_defines?(division_identitifers)
+    def only_defines?(division_identitifers) =
       keys - documentation_only_keys == [division_identitifers].flatten.map(&:to_sym)
-    end
 
-    def empty; klass.new(identifiable: identifier) ;end
+    def empty = klass.new(identifiable: identifier)
 
-    def in_blueprint?; ;end
+    def in_blueprint? = false
 
-    def self_referring_method?(method)
+    def self_referring_method?(method) =
       [:blueprint_identifier, :application_identifier].include?(method.to_sym)
-    end
 
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)

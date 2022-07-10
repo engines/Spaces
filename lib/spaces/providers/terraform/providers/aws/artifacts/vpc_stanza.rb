@@ -5,14 +5,13 @@ module Artifacts
     module Aws
       class VpcStanza < ResourceStanza
 
-        def default_configuration
+        def default_configuration =
           OpenStruct.new(
             cidr_block: nil,
       			enable_dns_support: true,
       			enable_dns_hostnames: false,
       			instance_tenancy: :default
           )
-        end
 
       end
     end

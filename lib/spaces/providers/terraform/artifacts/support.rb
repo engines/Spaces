@@ -4,7 +4,7 @@ module Artifacts
   module Terraform
     class Support < Arena
 
-      def stanza_qualifiers; [:zones] ;end
+      def stanza_qualifiers = [:zones]
 
     end
   end

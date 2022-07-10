@@ -4,18 +4,15 @@ module Adapters
 
       delegate [:recursion, :ownership, :file, :mode] => :division
 
-      def snippets
-        "RUN #{statements.join(connector)}"
-      end
+      def snippets = "RUN #{statements.join(connector)}"
 
-      def statements
+      def statements =
         [
           ("chown #{recursion} #{ownership} #{file}" if ownership),
           ("chmod #{recursion} #{mode} #{file}" if mode)
         ].compact
-      end
 
-      def connector; " &\&\\\n  " ;end
+      def connector = " &\&\\\n  "
 
     end
   end

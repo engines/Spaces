@@ -4,15 +4,16 @@ module Adapters
       class Image < ::Adapters::Image
 
         class << self
-          def features; [:name, :output_identifier, :publish_properties] ;end
+          def features = [:name, :output_identifier, :publish_properties]
         end
 
-        def publish_properties; struct.publish_properties || derived_features[:publish_properties] ;end
+        def publish_properties =
+          struct.publish_properties || derived_features[:publish_properties]
 
         protected
 
-        def derived_features
-          @derived_features ||= {
+        def derived_features =
+          {
             name: default_identifier,
             output_image: default_output_identifier,
             publish_properties: {
@@ -23,11 +24,10 @@ module Adapters
               release: 'Devuan GNU/Linux 3.0'
             }
           }
-        end
 
-        def tenant_identifier; :engines ;end
+        def tenant_identifier = :engines
 
-        def default_identifier; super.gsub('/', '-') ;end
+        def default_identifier = super.gsub('/', '-')
 
       end
     end

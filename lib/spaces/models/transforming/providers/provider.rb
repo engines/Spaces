@@ -10,18 +10,14 @@ module Providers
       alias_method :application_qualifiers, :subqualifiers
     end
 
-    def name; identifier ;end
+    def name = identifier
 
-    def identifier; struct[:identifier] ;end
-    def compute_qualifier; struct[:compute_qualifier] ;end
+    def identifier = struct[:identifier]
+    def compute_qualifier = struct[:compute_qualifier]
 
-    def prototype
-      class_for(class_elements).new(struct: struct)
-    end
+    def prototype = class_for(class_elements).new(struct: struct)
 
-    def class_elements
-      [namespace, 2.times.map{struct.qualifier}].flatten
-    end
+    def class_elements = [namespace, 2.times.map{struct.qualifier}].flatten
 
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)

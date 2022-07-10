@@ -9,8 +9,11 @@ module Adapters
       end
     end
 
-    def adapter_keys; to_h.keys ;end
-    def to_h; @to_h ||= division.struct.to_h ;end
+    def adapter_keys = to_h.keys
+
+    def to_h
+      @to_h ||= division.struct.to_h
+    end
 
   end
 end

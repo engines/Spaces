@@ -6,7 +6,7 @@ module Artifacts
       class ContainerServiceClusterStanza < ResourceStanza
         include Named
 
-        def tags_snippet ;end
+        def tags_snippet = nil
 
       end
     end

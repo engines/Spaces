@@ -2,7 +2,7 @@ module Registry
   module Commands
     class Registering < ::Spaces::Commands::Reading
 
-      def space_identifier; :resolutions ;end
+      def space_identifier = :resolutions
 
       protected
 

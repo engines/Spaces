@@ -6,13 +6,10 @@ module Spaces
 
       alias_method :model, :current_model
 
-      def assembly
-        model.tap { model.identifier = new_identifier }
-      end
+      def assembly = model.tap { model.identifier = new_identifier }
 
-      def new_identifier
+      def new_identifier =
         (input[:new_identifier] || [identifier,'_copy'].join).to_s
-      end
 
       protected
 

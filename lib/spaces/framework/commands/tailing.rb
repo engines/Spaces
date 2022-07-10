@@ -3,13 +3,7 @@ module Spaces
     class Tailing < ::Spaces::Commands::Command
       include ::Streaming::Streaming
 
-      def stream_elements
-        [ space.identifier,
-          input_for(:identifier),
-          stream_identifier,
-          input_for(:timestamp)
-        ]
-      end
+      def stream_elements = [space.identifier, input_for(:identifier), stream_identifier, input_for(:timestamp)]
 
       protected
 

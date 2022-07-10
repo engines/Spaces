@@ -1,8 +1,8 @@
 module Publishing
   module Publishing
 
-    def localized; transformed_to(:localized) ; end
-    def globalized; transformed_to(:globalized) ; end
+    def localized = transformed_to(:localized)
+    def globalized = transformed_to(:globalized)
 
     protected
 

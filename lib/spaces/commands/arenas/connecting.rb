@@ -8,9 +8,7 @@ module Arenas
         @model ||= current_model.connect_with(other_identifier)
       end
 
-      def other_identifier
-        input_for(:other_identifier)
-      end
+      def other_identifier = input_for(:other_identifier)
 
     end
   end
