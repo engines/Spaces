@@ -8,6 +8,7 @@ module Spaces
     delegate(default_model_class: :klass)
 
     def identifier = struct.identifier
+
     def space = itself
 
     def summaries = all.map(&:summary)

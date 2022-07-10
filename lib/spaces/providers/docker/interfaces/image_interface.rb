@@ -21,13 +21,13 @@ module Providers
 
       def process_output(encoded)
         # FIX ME! The rescue is needed due to JSON parse errors
-        if s = stream
+        begin
           j = JSON.parse(encoded, symbolize_names: true)
-          s.error("#{j[:error]}\n") if j[:error]
-          s.output(j[:stream]) if j[:stream]
+          stream.output(j[:stream]) if j[:stream]
+          stream.error("#{j[:error].strip}\n") if j[:error]
+        rescue JSON::ParserError => e
+          stream.error("Failed to parse JSON: #{e}\n")
         end
-      rescue
-        stream&.output("Failed to parse JSON: #{encoded}\n")
       end
 
       def bridge = ::Docker::Image

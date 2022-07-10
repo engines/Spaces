@@ -4,16 +4,25 @@ module Streaming
   module Streaming
 
     def with_streaming(&block)
-      stream.clear
+      stream.init
       stream.produce(&block)
+    ensure
+      stream.close
     end
 
     def stream
-      @stream ||= input[:stream] || stream_class.new(stream_elements)
+      @stream ||= input[:stream] || stream_class.new(self).stream
     end
 
-    def stream_class = Space
-    def stream_elements = [space.identifier, input_for(:identifier), qualifier]
+    def stream_class; Space ;end
+
+    def stream_elements
+      [ space.identifier,
+        input_for(:identifier),
+        qualifier,
+        input_for(:timestamp)
+      ]
+    end
 
   end
 end

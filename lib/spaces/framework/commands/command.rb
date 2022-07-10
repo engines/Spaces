@@ -19,9 +19,6 @@ module Spaces
           struct.result = _run
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
-          # TODO:
-          # Handling of errors when action is :threaded or :streaming.
-          # struct.errors won't be logged or returned to client in these cases
         end
       end
 

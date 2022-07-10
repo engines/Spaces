@@ -44,7 +44,7 @@ module Spaces
     def set_permission_for(model)
       writing_name_for(model).tap do |n|
         Pathname.new(n).chmod(model.permission)
-        logger.debug("Saving #{n} with permissions [#{sprintf "%o", model.permission}]")
+        logger.info("Saving #{n} with permissions [#{sprintf "%o", model.permission}]")
       end
     end
 

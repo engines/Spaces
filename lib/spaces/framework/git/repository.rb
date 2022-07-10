@@ -69,7 +69,7 @@ module Spaces
       end
 
       def opened
-        @opened ||= git.open(space.path_for(descriptor), log: logger)
+        @opened ||= git.open(space.path_for(descriptor))
       end
 
       def exist? = space.path_for(descriptor).join(".#{protocol}").exist?
@@ -103,12 +103,11 @@ module Spaces
       end
 
       def init
-        git.init("#{space.path_for(descriptor)}", log: logger)
+        git.init("#{space.path_for(descriptor)}")
       end
 
       def command_options =
         {
-          logger: logger,
           verbose: true,
           progress: true,
         }

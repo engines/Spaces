@@ -20,10 +20,10 @@ module Arenas
           more_binders: Commands::MoreBinders,
           build_from: Commands::BuildingFrom,
           build: Commands::Building,
-          init: [::Spaces::Commands::Executing, {execute: :init, threaded: true}],
-          plan: [::Spaces::Commands::Executing, {execute: :plan, threaded: true}],
-          # show: [::Spaces::Commands::Executing, {execute: :show, threaded: true}],
-          apply: [::Spaces::Commands::Executing, {execute: :apply, threaded: true}],
+          init: [::Spaces::Commands::Executing, {execute: :init}],
+          plan: [::Spaces::Commands::Executing, {execute: :plan}],
+          # show: [::Spaces::Commands::Executing, {execute: :show}],
+          apply: [::Spaces::Commands::Executing, {execute: :apply}],
           artifacts: [::Spaces::Commands::Artifacts, {space: :arenas}]
         })
       end
