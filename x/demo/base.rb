@@ -29,6 +29,6 @@ controllers.arenas.stage(identifier: :base)
 
 # # build the pack
 pack_identifier = "base::#{blueprint_identifier}"
-controllers.packing.build(identifier: pack_identifier, verbose: false)
-# result = controllers.packing.build(identifier: pack_identifier, background: true).result
-# controllers.streaming.tail(space: :packs, stream_identifier: :building, identifier: pack_identifier, timestamp: result[:timestamp])
+# controllers.packing.build(identifier: pack_identifier, verbose: false)
+result = controllers.packing.build(identifier: pack_identifier, background: true).result
+controllers.streaming.tail(space: :packs, stream_identifier: :building, identifier: pack_identifier, timestamp: result[:timestamp])

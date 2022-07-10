@@ -2,8 +2,15 @@ module Streaming
   module Writing
 
     def output(line)
-      line.split(/\r/).each do |r| # split line into terminal rows
-        append(encoded_output_for("#{r}\r"))
+      line.match(/\r/) ? returning_line(line) : append(encoded_output_for(line))
+    end
+
+    def returning_line(line)
+      line.split(/\r/).tap do |rows|
+        last = rows.count - 1
+        rows.each.with_index do |r, i|
+          append(encoded_output_for(i == last ? r : "#{r}\r"))
+        end
       end
     end
 

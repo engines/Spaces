@@ -31,4 +31,5 @@ end
 controllers.arenas.stage(identifier: :applications)
 
 # orchestrate arena
-# controllers.arenas.apply(identifier: :applications, verbose: true)
+result = controllers.arenas.apply(identifier: :applications, background: true).result
+controllers.streaming.tail(space: :arenas, stream_identifier: :executing, identifier: :applications, timestamp: result[:timestamp], callback: callback)
