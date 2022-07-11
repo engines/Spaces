@@ -13,7 +13,7 @@ module Artifacts
             cluster = aws_ecs_cluster.#{configuration.cluster_binding}.id
             iam_role = aws_iam_role.#{configuration.iam_role_binding}.arn
             task_definition = aws_ecs_task_definition.#{configuration.task_definition_binding}.arn
-
+            launch_type = configuration.launch_type
             ordered_placement_strategy {
               type  = "binpack"
               field = "cpu"
@@ -29,7 +29,8 @@ module Artifacts
           OpenStruct.new(
             cluster_binding: :'container-service-cluster',
             iam_role_binding: :'iam-role',
-            task_definition_binding: :'container-task-definition'
+            task_definition_binding: :'container-task-definition',
+            launch_type: :'FARGATE'
           )
         end
 
