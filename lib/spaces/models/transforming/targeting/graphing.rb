@@ -14,11 +14,9 @@ module Targeting
       end
     end
 
-    def target_for(type); send(type) ;end
+    def target_for(type) = send(type)
 
-    def hard_looping_on?(target)
-      target.identifier == context_identifier
-    end
+    def hard_looping_on?(target) = target.identifier == context_identifier
 
     def descendant_path_with(previous)
       unless circular_in?(p = previous.identifiers)
@@ -28,9 +26,7 @@ module Targeting
       end
     end
 
-    def circular_in?(identifiers)
-      identifiers.include?(target_identifier)
-    end
+    def circular_in?(identifiers) = identifiers.include?(target_identifier)
 
   end
 end

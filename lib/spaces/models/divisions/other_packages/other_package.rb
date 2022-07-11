@@ -2,21 +2,29 @@ module Divisions
   class OtherPackage < ::Divisions::Subdivision
 
     class << self
-      def features; [:identifier, :target, :extraction, :extracted_path, :destination] ;end
+      def features = [:identifier, :target, :extraction, :extracted_path, :destination]
     end
 
     delegate(
       [:branch, :repository, :protocol, :git?] => :target
     )
 
-    def target; @target ||= descriptor_class.new(struct.target) ;end
-    def identifier; struct.identifier || derived_features[:identifier] ;end
+    def target
+      @target ||= descriptor_class.new(struct.target)
+    end
 
-    def extraction; struct.extraction ||= derived_features[:extraction] ;end
-    def extracted_path; struct.extracted_path ||= derived_features[:extracted_path] ;end
+    def identifier = struct.identifier || derived_features[:identifier]
 
-    def inflated; super.tap { |s| s.target = target.struct } ;end
-    def deflated; super.tap { |s| s.target = target.struct } ;end
+    def extraction
+      struct.extraction ||= derived_features[:extraction]
+    end
+
+    def extracted_path
+      struct.extracted_path ||= derived_features[:extracted_path]
+    end
+
+    def inflated = super.tap { |s| s.target = target.struct }
+    def deflated = super.tap { |s| s.target = target.struct }
 
     protected
 

@@ -16,25 +16,25 @@ module Arenas
 
     relation_accessor :arena
 
-    def arena; @arena ||= arenas.by(arena_identifier) ;end
+    def arena
+      @arena ||= arenas.by(arena_identifier)
+    end
 
-    def arena_identifier; struct.arena_identifier ;end
-    def blueprint_identifier; struct.blueprint_identifier ;end
-    def application_identifier; struct.application_identifier ;end
+    def arena_identifier = struct.arena_identifier
+    def blueprint_identifier = struct.blueprint_identifier
+    def application_identifier = struct.application_identifier
 
     def images
       @images ||= duplicate(arena.images).tap { |i| i.emission = self }
     end
 
-    def documentation_only_keys
+    def documentation_only_keys =
       [super, arena.keys, cache_identifiers, :deployment].flatten.uniq
-    end
 
-    def cache_identifiers
+    def cache_identifiers =
       [:arena_identifier, :blueprint_identifier, :application_identifier]
-    end
 
-    def empty; super.tap { |m| m.arena = arena } ;end
+    def empty =  super.tap { |m| m.arena = arena }
 
     def cache_identifiers!
       struct.arena_identifier = arena.identifier

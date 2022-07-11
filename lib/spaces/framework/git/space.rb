@@ -14,17 +14,17 @@ module Spaces
         repository_for(descriptor, **args).export(args.without(:stream))
       end
 
-      def repository_for(descriptor, **args)
-        repository_class.new(location_maybe_already_set_for(descriptor), space: self, stream: args[:stream])
-      end
+      def repository_for(descriptor, **args) =
+        repository_class.new(
+          location_maybe_already_set_for(descriptor), space: self, stream: args[:stream]
+        )
 
-      def location_maybe_already_set_for(descriptor)
+      def location_maybe_already_set_for(descriptor) =
         locations.exist_then_by(descriptor) || descriptor
-      end
 
-      def git; ::Git ;end
-      def git_error; ::Git::GitExecuteError ;end
-      def repository_class; ::Spaces::Git::Repository ;end
+      def git = ::Git
+      def git_error = ::Git::GitExecuteError
+      def repository_class = ::Spaces::Git::Repository
 
     end
   end

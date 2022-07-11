@@ -4,20 +4,16 @@ module Spaces
   module Commands
     class Querying < Command
 
-      def method_signature
-        [query_method, arguments].compact
-      end
+      # TODO: Remove :method_signature and :arguments methods, if not used.
 
-      def query_method
-        input_for(:method)
-      end
+      def method_signature = [query_method, arguments].compact
 
-      def arguments
-        _arguments unless _arguments.empty?
-      end
+      def query_method = input_for(:method)
+
+      def arguments = (_arguments unless _arguments.empty?)
 
       def models
-        @models ||= space.send(*method_signature)
+        @models ||= space.send(query_method, **_arguments)
       end
 
       alias_method :assembly, :models

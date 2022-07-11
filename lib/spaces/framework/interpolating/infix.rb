@@ -15,20 +15,16 @@ module Interpolating
       emission: :transformable
     )
 
-    def resolved
+    def resolved =
       resolvable? ? completed : "#{interpolation_marker}#{original_value}#{interpolation_marker}"
-    end
 
-    def object_in_expression; acceptable_expression.first ;end
-    def method_in_expression; acceptable_expression.last.split(/[()]+/) ;end
+    def object_in_expression = acceptable_expression.first
+    def method_in_expression = acceptable_expression.last.split(/[()]+/)
 
-    def acceptable_expression
+    def acceptable_expression =
       @acceptable_expression ||= ([:unqualified] + working_value.split('.')).last(2)
-    end
 
-    def working_value
-      last_iteration || original_value
-    end
+    def working_value = last_iteration || original_value
 
     def initialize(original_value:, text:, last_iteration: nil)
       self.original_value = original_value
@@ -36,7 +32,7 @@ module Interpolating
       self.text = text
     end
 
-    def to_s; resolved ;end
+    def to_s = resolved
 
   end
 

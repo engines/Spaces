@@ -7,11 +7,8 @@ module Arenas
         @array ||= model.all_packs
       end
 
-      def subcommand_inputs
-        {space: :packs, stream: stream}
-      end
-
-      def subcommand_class; ::Packing::Commands::Building ;end
+      def subcommand_inputs = {space: :packs, stream: stream}
+      def subcommand_class = ::Packing::Commands::Building
 
     end
   end

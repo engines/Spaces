@@ -5,9 +5,7 @@ module Spaces
     class Executing < Reading
       include ::Streaming::Streaming
 
-      def instruction
-        input_for(:execute)
-      end
+      def instruction = input_for(:execute)
 
       protected
 

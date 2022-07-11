@@ -6,7 +6,7 @@ module Artifacts
       class IamRoleStanza < ResourceStanza
         include Named
 
-        def more_snippets
+        def more_snippets =
           %(
             assume_role_policy = jsonencode({
               Version = "2012-10-17"
@@ -22,7 +22,6 @@ module Artifacts
               ]
             })
           )
-        end
 
       end
     end

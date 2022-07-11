@@ -19,17 +19,14 @@ module Settling
       @embedding_keys ||= [division_keys, embeds_for_arena_runtime.map(&:division_keys)].flatten.uniq
     end
 
-    def embeds_including_blueprint
+    def embeds_including_blueprint =
       [blueprint, embeds_for_arena_runtime].flatten.compact.reverse
-    end
 
     def embeds_for_arena_runtime
       @embeds_for_arena_runtime ||= arena_runtime_embeds_for(qualifier_for(:runtime))
     end
 
-    def bindings_flattened
-      bindings&.any? ? _bindings_flattened : self
-    end
+    def bindings_flattened = bindings&.any? ? _bindings_flattened : self
 
     protected
 

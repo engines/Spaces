@@ -16,12 +16,10 @@ module Blueprinting
       tap { cache_identifiers!(binding) }
     end
 
-    def arena_specific_divisions
-      [:bindings, :connections, :input]
-    end
+    def arena_specific_divisions = [:bindings, :connections, :input]
 
-    def empty_resolution; resolution_class.new ;end
-    def resolution_class; ::Resolving::Resolution ;end
+    def empty_resolution = resolution_class.new
+    def resolution_class = ::Resolving::Resolution
 
   end
 end

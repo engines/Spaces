@@ -2,9 +2,11 @@ module Spaces
   class Space < Model
 
     class << self
-      def universes; @@universes ||= ::Universes::Space.new ;end
+      def universes
+        @@universes ||= ::Universes::Space.new
+      end
 
-      def universe; universes.universe ;end
+      def universe = universes.universe
     end
 
     delegate(universes: :klass)

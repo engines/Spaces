@@ -8,11 +8,9 @@ module Divisions
     include Resolvable
 
     class << self
-      def prototype(emission:, label:)
-        new(emission: emission, label: label)
-      end
+      def prototype(emission:, label:) = new(emission: emission, label: label)
 
-      def default_struct; OpenStruct.new ;end
+      def default_struct = OpenStruct.new
     end
 
     relation_accessor :emission
@@ -25,10 +23,10 @@ module Divisions
       resolutions: :universe
     )
 
-    def context_identifier; emission.context_identifier ;end
+    def context_identifier = emission.context_identifier
 
-    def localized; self ;end
-    def globalized; self ;end
+    def localized = self
+    def globalized = self
 
     def content
       auxiliary_directories.map do |d|
@@ -42,22 +40,21 @@ module Divisions
       path.join("#{symbol}").glob("**/*").reject(&:directory?) if path
     end
 
-    def path; ;end
+    def path = nil
 
-    def empty; self.class.new(emission: emission, struct: default_struct, label: label) ;end
+    def empty =
+      self.class.new(emission: emission, struct: default_struct, label: label)
 
-    def any?; !empty? ;end
-    def empty?; struct == OpenStruct.new ;end
+    def any? = !empty?
+    def empty? = struct == OpenStruct.new
 
-    def inflated
+    def inflated =
       duplicate(self).tap { |s| s.struct = s.struct.merge(inflatables) }
-    end
 
-    def deflated
+    def deflated =
       empty.tap { |s| s.struct = OpenStruct.new(deflatables) }
-    end
 
-    def merge(other); struct.merge(other.struct) ;end
+    def merge(other) = struct.merge(other.struct)
 
     def initialize(emission:, struct: nil, label: nil)
       self.emission = emission
@@ -65,7 +62,7 @@ module Divisions
       self.struct = struct || emission.struct[label] || default_struct
     end
 
-    def to_s; struct ;end
+    def to_s = struct
 
     def method_missing(m, *args, &block)
       emission.respond_to?(m) ? emission.send(m, *args, &block) : super

@@ -10,9 +10,9 @@ require './x/controllers'
 controllers.publishing.identify(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'})
 
 # import some blueprints
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, threaded: false)
-# controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, threaded: false)
-# controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/owncloud'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/phpmyadmin'}, verbose: true)
+# controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/redmine'}, verbose: true)
+# controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/owncloud'}, verbose: true)
 
 # ------------------------------------------------------------------------------
 # blueprint indices, lists, and gets

@@ -7,9 +7,8 @@ module Arenas
       end
     end
 
-    def inject_bindings
+    def inject_bindings =
       bindings.map(&:inject_bindings).flatten.compact.uniq
-    end
 
     def bind_with(blueprint_identifier)
       empty.tap do |m|
@@ -20,17 +19,14 @@ module Arenas
       end
     end
 
-    def bindings_merged_for(blueprint_identifier)
+    def bindings_merged_for(blueprint_identifier) =
       [binding_for(blueprint_identifier), struct[:bindings]].compact.flatten.uniq
-    end
 
-    def binding_for(blueprint_identifier)
+    def binding_for(blueprint_identifier) =
       OpenStruct.new(target_identifier: blueprint_identifier)
-    end
 
-    def more_binder_identifiers
+    def more_binder_identifiers =
       blueprints.binder_identifiers - target_identifiers
-    end
 
     def connectable_blueprints
       connected_blueprints.map do |b|

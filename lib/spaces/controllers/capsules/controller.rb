@@ -2,7 +2,7 @@ module Capsules
   module Controllers
     class Controller < ::Spaces::Controllers::RESTController
 
-      def space_identifier; :capsules ;end
+      def space_identifier = :capsules
 
       def action_command_map
         @action_command_map ||= super.merge({

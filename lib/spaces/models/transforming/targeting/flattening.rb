@@ -14,13 +14,10 @@ module Targeting
       end
     end
 
-    def flattened_for(key)
+    def flattened_for(key) =
       unresolved_struct.merge(target_struct[key]).merge(original(key))
-    end
 
-    def original(key)
-      struct[key] || derived_features[key]
-    end
+    def original(key) = struct[key] || derived_features[key]
 
   end
 end

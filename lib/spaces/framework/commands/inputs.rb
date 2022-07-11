@@ -2,30 +2,19 @@ module Spaces
   module Commands
     module Inputs
 
-      def input_for(key, mandatory: true, default: nil)
+      def input_for(key, mandatory: true, default: nil) =
         input[key] || default ||
           (mandatory && (raise ::Spaces::Errors::MissingInput, {missing: key, input: input}))
-      end
 
-      def identifier
-        input_for(:identifier)
-      end
+      def identifier = input_for(:identifier)
 
-      def space_identifier(default: nil)
-        input_for(:space, default: default)
-      end
+      def space_identifier(default: nil) = input_for(:space, default: default)
 
-      def stream_identifier
-        input_for(:stream_identifier)
-      end
+      def stream_identifier = input_for(:stream_identifier)
 
-      def force
-        input_for(:force, mandatory: false)
-      end
+      def force = input_for(:force, mandatory: false)
 
-      def callback
-        input_for(:callback, default: -> (line) {puts line})
-      end
+      def callback = input_for(:callback, default: default_callback)
 
     end
   end

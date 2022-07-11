@@ -1,17 +1,14 @@
 module Divisions
   module Resolvable
 
-    def resolved
-      empty.tap { |d| d.struct = resolvable_struct_class.new(struct, self).resolved }
-    end
+    def resolved =
+      empty.
+        tap { |d| d.struct = resolvable_struct_class.new(struct, self).resolved }
 
-    def flattened
+    def flattened =
       empty.tap { |d| d.struct = flattened_struct }
-    end
 
-    def flattened_struct
-      unresolved_struct.merge(struct)
-    end
+    def flattened_struct = unresolved_struct.merge(struct)
 
     def unresolved_struct
       OpenStruct.new(
@@ -21,12 +18,11 @@ module Divisions
       )
     end
 
-    def unresolved_variables
+    def unresolved_variables =
       emission.unresolved_infixes[infix_qualifier] || []
-    end
 
-    def infix_qualifier; qualifier ;end
-    def resolvable_struct_class; ResolvableStruct ;end
+    def infix_qualifier = qualifier
+    def resolvable_struct_class = ResolvableStruct
 
   end
 
@@ -36,17 +32,14 @@ module Divisions
 
     attr_accessor :transformable
 
-    def resolved
+    def resolved =
       OpenStruct.new(texts.transform_values(&:resolved))
-    end
 
-    def texts
+    def texts =
       to_h.transform_values { |v| text_from(v) }
-    end
 
-    def text_from(value)
+    def text_from(value) =
       Interpolating::Text.new(origin: value, transformable: transformable)
-    end
 
     def initialize(struct, transformable)
       super(struct)

@@ -17,15 +17,12 @@ module Spaces
         [:git, :git_error] => :space
       )
 
-      def branch_names_without_head
+      def branch_names_without_head =
         opened.branches.map(&:name).uniq.reject { |b| b.include?(head_identifier) }
-      end
 
       alias_method :branch_names, :branch_names_without_head
 
-      def diff
-        opened.diff.patch
-      end
+      def diff = opened.diff.patch
 
       def add
         opened.add
@@ -43,25 +40,17 @@ module Spaces
         opened.branch(branch_name).checkout(new_branch: true)
       end
 
-      def local_branches
-        opened.branches.local
-      end
+      def local_branches = opened.branches.local
 
-      def local_current
-        opened.branches.local.find(&:current).name
-      end
+      def local_current = opened.branches.local.find(&:current).name
 
-      def remote_current?
-        remote_url == repository_url
-      end
+      def remote_current? = remote_url == repository_url
 
       def fetch
         opened.fetch(remote_name)
       end
 
-      def remote_url
-        opened.remote(remote_name).url
-      end
+      def remote_url = opened.remote(remote_name).url
 
       def set_remote
         if opened.remotes.find { |r| r.name == remote_name }
@@ -80,12 +69,10 @@ module Spaces
       end
 
       def opened
-        @opened ||= git.open(space.path_for(descriptor), log: logger)
+        @opened ||= git.open(space.path_for(descriptor))
       end
 
-      def exist?
-        space.path_for(descriptor).join(".#{protocol}").exist?
-      end
+      def exist? = space.path_for(descriptor).join(".#{protocol}").exist?
 
       def collect(io)
         stream&.tap do |s|
@@ -103,10 +90,10 @@ module Spaces
         stream&.error("Failed to export #{descriptor}\n")
       end
 
-      def clone_failure; ::Spaces::Errors::ImportFailure ;end
-      def pull_failure; ::Spaces::Errors::ReimportFailure ;end
-      def push_failure; ::Spaces::Errors::ExportFailure ;end
-      def head_identifier; 'HEAD ->' ;end
+      def clone_failure = ::Spaces::Errors::ImportFailure
+      def pull_failure = ::Spaces::Errors::ReimportFailure
+      def push_failure = ::Spaces::Errors::ExportFailure
+      def head_identifier = 'HEAD ->'
 
       def initialize(descriptor, space:, stream: nil)
         self.descriptor = descriptor
@@ -116,16 +103,14 @@ module Spaces
       end
 
       def init
-        git.init("#{space.path_for(descriptor)}", log: logger)
+        git.init("#{space.path_for(descriptor)}")
       end
 
-      def command_options
+      def command_options =
         {
-          logger: logger,
           verbose: true,
           progress: true,
         }
-      end
 
     end
   end

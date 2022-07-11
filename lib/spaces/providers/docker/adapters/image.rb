@@ -4,9 +4,7 @@ module Adapters
 
       delegate identifier: :division
 
-      def snippets
-        "FROM #{identifier}"
-      end
+      def snippets = "FROM #{identifier}"
 
     end
   end

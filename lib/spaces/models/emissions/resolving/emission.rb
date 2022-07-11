@@ -2,7 +2,7 @@ module Resolving
   class Emission < ::Arenas::Emission
 
     class << self
-      def composition_class; ::Emissions::NoComposition ;end
+      def composition_class = ::Emissions::NoComposition
     end
 
     delegate(
@@ -10,9 +10,7 @@ module Resolving
       important_division_for: :resolution
     )
 
-    def provider
-      provider_for(:runtime)
-    end
+    def provider = provider_for(:runtime)
 
     def predecessor
       @predecessor ||= resolutions.exist_then_by(identifier)

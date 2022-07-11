@@ -5,18 +5,16 @@ module Spaces
       alias_method :signature, :struct
 
       def attempt
-        arguments[:threaded] ? _attempt_with_threading : _attempt
+        arguments[:background] ? _background_attempt : _attempt
       end
 
       def command
         @command ||= signature.klass.new(**arguments)
       end
 
-      def arguments
-        signature.arguments || {}
-      end
+      def arguments = signature.arguments || {}
 
-      def calling_chain; [:run, :payload] ;end
+      def calling_chain = [:run, :payload]
 
       def initialize(signature)
         self.struct = signature
@@ -24,8 +22,9 @@ module Spaces
 
       protected
 
-      def _attempt_with_threading
-        {result: arguments.tap { Thread.new { _attempt } }}
+      def _background_attempt
+        self.struct.arguments[:timestamp] = arguments[:timestamp] || "#{Time.now.to_i}"
+        OpenStruct.new(result: arguments.tap { Thread.new { _attempt } })
       end
 
       def _attempt(with: calling_chain)

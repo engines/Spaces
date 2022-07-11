@@ -8,9 +8,7 @@ module Arenas
         @model ||= current_model.bind_with(blueprint_identifier)
       end
 
-      def blueprint_identifier
-        input_for(:blueprint_identifier).to_s
-      end
+      def blueprint_identifier = input_for(:blueprint_identifier).to_s
 
     end
   end

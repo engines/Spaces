@@ -13,9 +13,7 @@ module Adapters
             # map to signal what adapters are required for it.
 
 
-      def artifact_qualifiers
-        []
-      end
+      def artifact_qualifiers = []
 
     end
   end

@@ -4,9 +4,8 @@ module Artifacts
 
       delegate([:identifier, :volumes, :full_service_path, :service_path] => :resolution)
 
-      def snippets
+      def snippets =
         [resolution_snippets, default_snippets].flatten.compact
-      end
 
       def resolution_snippets
         volumes.map do |v|
@@ -14,12 +13,11 @@ module Artifacts
         end if resolution.has?(:volumes)
       end
 
-      def default_snippets
+      def default_snippets =
         [
           "#{volume_path}/log/#{identifier.as_path}:/var/logs",
           "#{full_service_path}:#{service_path}"
         ]
-      end
 
     end
   end

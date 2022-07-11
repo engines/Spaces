@@ -2,13 +2,11 @@ require 'ostruct'
 
 class OpenStruct
 
-  def merge(other)
+  def merge(other) =
     other ? OpenStruct.new(self.to_h.merge(other.to_h)) : self
-  end
 
-  def reverse_merge(other)
+  def reverse_merge(other) =
     other ? OpenStruct.new(self.to_h.reverse_merge(other.to_h)) : self
-  end
 
   def without(*keys)
     duplicate(self).tap do |s|
@@ -16,21 +14,17 @@ class OpenStruct
     end
   end
 
-  def keys; to_h.keys ;end
-  def values; to_h.values ;end
+  def keys = to_h.keys
+  def values = to_h.values
 
-  def compact; to_h_deep.compact.to_struct ;end
+  def compact = to_h_deep.compact.to_struct
 
-  def to_json(*args)
-    to_h_deep.to_json(*args)
-  end
+  def to_json(*args) = to_h_deep.to_json(*args)
 
-  def to_string_array
-    keys.map { |k| "#{k}=#{send(k)}"}
-  end
+  def to_string_array = keys.map { |k| "#{k}=#{send(k)}"}
 
-  def to_h_deep; deep(:to_h_deep) ;end
-  def no_symbols; deep(:no_symbols) ;end
+  def to_h_deep = deep(:to_h_deep)
+  def no_symbols = deep(:no_symbols)
 
   def deep(method)
     to_h.transform_values do |v|

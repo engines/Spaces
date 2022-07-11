@@ -10,7 +10,7 @@ module Streaming
     def follow(file, callback)
       select([file])
       loop do
-        sleep 0.01
+        sleep 0.001
         file.gets.tap do |line|
           next unless line
           return if is_eot?(line)
@@ -19,9 +19,7 @@ module Streaming
       end
     end
 
-    def is_eot?(line)
-      line[0] == eot
-    end
+    def is_eot?(line) = line[0] == eot
 
   end
 end

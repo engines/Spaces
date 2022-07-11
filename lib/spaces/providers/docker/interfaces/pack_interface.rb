@@ -28,16 +28,16 @@ module Providers
         end
       rescue ::Docker::Error::ImageNotFoundError => e
         # Do nothing: ignore any ImageNotFoundError.
+        # Docker should get image from remote repository.
       end
 
       def build_from_dir
-        stream&.output("\n")
         bridge.build_from_dir("#{path_for(pack)}") do |encoded|
           process_output(encoded)
         end
       end
 
-      def default_tag; :latest ;end
+      def default_tag = :latest
 
     end
   end

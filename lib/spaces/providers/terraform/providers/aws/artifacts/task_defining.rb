@@ -3,15 +3,9 @@ module Artifacts
     module Aws
       module TaskDefining
 
-        def configuration_hash
-          super.without(*task_definition_keys)
-        end
+        def configuration_hash = super.without(*task_definition_keys)
 
-        def task_definition_keys
-          [
-            :essential
-          ]
-        end
+        def task_definition_keys = [:essential]
 
       end
     end

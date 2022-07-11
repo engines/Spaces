@@ -2,7 +2,7 @@ module Registry
   class ServiceEntry < ::Resolving::Emission
 
     class << self
-      def composition_class; ::Emissions::NoComposition ;end
+      def composition_class = ::Emissions::NoComposition
     end
 
     delegate(registry: :resolution)

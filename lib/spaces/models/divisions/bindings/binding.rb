@@ -11,19 +11,20 @@ module Divisions
       [:locations, :blueprints, :resolutions] => :universe
     )
 
-    def arena
-      emission.arena if emission.respond_to?(:arena)
-    end
+    def arena = (emission.arena if emission.respond_to?(:arena))
 
-    def context_identifier
+    def context_identifier =
       [arena&.identifier&.with_identifier_separator, target_identifier].join
+
+    def binder? = blueprint&.binder?
+
+    def blueprint
+      @blueprint ||= target_from(blueprints)
     end
 
-    def binder?; blueprint&.binder? ;end
-
-    def blueprint; @blueprint ||= target_from(blueprints) ;end
-
-    def resolution; @resolution ||= target_from(resolutions) ;end
+    def resolution;
+      @resolution ||= target_from(resolutions)
+    end
 
     alias_method :node, :blueprint
 

@@ -1,15 +1,12 @@
 module Arenas
   module Resourcing
 
-    def container_registry
-      # ASSUMING THERE IS ONLY ONE PER ARENA
-      # or, if there isn't, just grab the first one
-      resources_by(:container_registry).first
-    end
+    # ASSUMING THERE IS ONLY ONE PER ARENA
+    # or, if there isn't, just grab the first one
+    def container_registry = resources_by(:container_registry).first
 
-    def resources_by(type)
+    def resources_by(type) =
       resources.select { |r| r.type.to_sym == type.to_sym }
-    end
 
     def resources
       @resources ||= resolutions_with_resources.map(&:resources).map(&:all).flatten

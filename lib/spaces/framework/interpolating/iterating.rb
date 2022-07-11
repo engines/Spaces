@@ -1,9 +1,7 @@
 module Interpolating
   module Iterating
 
-    def resolvable?
-      working_value != once
-    end
+    def resolvable? = working_value != once
 
     def completed
       @completed ||= complete? ? once : again
@@ -20,7 +18,11 @@ module Interpolating
     end
 
     def again
-      klass.new(original_value: original_value, text: text, last_iteration: once.gsub(interpolation_marker, '')).resolved
+      klass.new(
+        original_value: original_value,
+        text: text,
+        last_iteration: once.gsub(interpolation_marker, '')
+      ).resolved
     end
 
   end

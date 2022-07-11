@@ -4,9 +4,7 @@ module Adapters
   class FilePacking < Pack
     include Keyed
 
-      def adapter_keys
-        precedence
-      end
+      def adapter_keys = precedence
 
       def directories
         @directories ||=

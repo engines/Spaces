@@ -17,11 +17,8 @@ module Arenas
         @array ||= model.directly_bound_resolutions
       end
 
-      def subcommand_inputs
-        {space: :orchestrations}
-      end
-
-      def subcommand_class; ::Orchestrating::Commands::Saving ;end
+      def subcommand_inputs = {space: :orchestrations}
+      def subcommand_class = ::Orchestrating::Commands::Saving
 
       protected
 

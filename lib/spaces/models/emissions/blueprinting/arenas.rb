@@ -1,9 +1,7 @@
 module Blueprinting
   module Arenas
 
-    def indirect_arenas
-      all_arenas - direct_arenas
-    end
+    def indirect_arenas = all_arenas - direct_arenas
 
     def all_arenas
       arenas_all.select do |a|
@@ -11,11 +9,12 @@ module Blueprinting
       end
     end
 
-    def direct_arenas
+    def direct_arenas =
       arenas_all.select { |a| a.bindings.map(&:target_identifier).include?(identifier) }
-    end
 
-    def arenas_all; @arenas_all ||= arenas.all ;end
+    def arenas_all
+      @arenas_all ||= arenas.all
+    end
 
   end
 end

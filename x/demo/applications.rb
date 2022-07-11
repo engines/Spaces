@@ -5,11 +5,11 @@ blueprint_identifiers = []
 
 # import blueprints
 repositories.each do |repository|
-  controllers.publishing.import(model: {repository: repository})
+  controllers.publishing.import(model: {repository: repository}, verbose: true)
   blueprint_identifier = controllers.publishing.identify(model: {repository: repository}).result
   blueprint_identifiers.push(blueprint_identifier)
-  sleep 1
-  controllers.streaming.tail(space: :publications, stream_identifier: :importing, identifier: blueprint_identifier)
+  # sleep 1
+  # controllers.streaming.tail(space: :publications, stream_identifier: :importing, identifier: blueprint_identifier)
 end
 
 # setup arena for orchestration
@@ -24,10 +24,12 @@ controllers.arenas.connect(identifier: :applications, other_identifier: :service
 
 # bind some blueprints
 blueprint_identifiers.each do |blueprint_identifier|
-  controllers.arenas.stage(identifier: :applications, blueprint_identifier: blueprint_identifier)
+  controllers.arenas.bind(identifier: :applications, blueprint_identifier: blueprint_identifier)
 end
 
+# stage arena
+controllers.arenas.stage(identifier: :applications)
+
 # orchestrate arena
-controllers.arenas.apply(identifier: :applications)
-sleep 1
-controllers.streaming.tail(space: :arenas, stream_identifier: :executing, identifier: :applications)
+result = controllers.arenas.apply(identifier: :applications, background: true).result
+controllers.streaming.tail(space: :arenas, stream_identifier: :executing, identifier: :applications, timestamp: result[:timestamp], callback: callback)
