@@ -38,8 +38,7 @@ module Artifacts
             timeout: 3,
             unhealthy_threshold: 2,
             health_check_path: '/',
-            path_pattern:  ["/*"],
-			port: '' #FIXME need this here as without it port in bp is ignored 
+            path_pattern:  ["/*"]
           )
 
       end
