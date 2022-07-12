@@ -8,7 +8,7 @@ module Artifacts
     		def configuration_snippet =
           %(
             vpc_id = aws_vpc.#{configuration.vpc_binding}.id
-            subnets = aws_subnet.public.*.id
+            subnets = aws_subnet.*.id
             security_groups = [aws_security_group.lb.id]
             protocol = #{configuration.protocol}
             port = #{configuration.port}
@@ -22,7 +22,7 @@ module Artifacts
               protocol            = #{configuration.protocol}
               matcher             = #{configuration.matcher}
               timeout             = #{configuration.timeout}
-              path                = #{configuration.health_check_path}
+              path                = "#{configuration.health_check_path}"
               unhealthy_threshold = #{configuration.unhealthy_threshold}
             }
           )
