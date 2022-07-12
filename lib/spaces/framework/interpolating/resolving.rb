@@ -4,7 +4,9 @@ module Interpolating
     def iteration
       collaborator.send(*method_in_expression)
     rescue TypeError, ArgumentError, NoMethodError, SystemStackError => e
-      warn(error: e, text: text, value: working_value, qualifier: emission.qualifier, identifier: emission.identifier)
+      warn(error: e, method: :iteration,
+        elements: nesting_elements, identifier: emission.identifier, qualifier: emission.qualifier, text: text.to_s, value: working_value
+      )
       pp e
       original_value
       # raise ::Interpolating::Errors::Unresolvable

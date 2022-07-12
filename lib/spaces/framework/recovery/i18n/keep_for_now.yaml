@@ -1,0 +1,48 @@
+en:
+  trace:
+
+    spaces::models::emissions::blueprinting::space/import:
+      spaces::spaces::git::space/import: |
+        An attempt to import blueprint for '%{descriptor}' finds it already exists.
+        Moving on.
+      spaces::framework::models::thing/open_struct_from_json: |
+        The blueprint for '%{descriptor}' is not well formed.
+        Results are unpredictable.
+
+    spaces::models::emissions::packing::pack/auxiliary_texts:
+      spaces::models::emissions::packing::pack/division_scripts: |
+        There are no images given in the blueprint for '%{identifier}'.
+        So there's nothing to pack.
+
+    spaces::models::emissions::packing::space/block_in_by:
+      spaces::models::emissions::packing::space/save: |
+        There are no images given in the blueprint for '%{identifier}'.
+        So there's no worthwhile pack to save.
+
+    spaces::models::emissions::packing::space/rescue_in_by:
+      spaces::models::emissions::resolving::space/by: |
+        There is no resolution saved yet for the pack for '%{identifier}'.
+        Saving now.
+
+    spaces::models::transforming::divisions::divisible/new:
+      spaces::models::transforming::divisions::divisible/initialize: |
+        Malformed %{klass} declaration in %{blueprint} blueprint.
+        Ignoring %{content}
+
+    spaces::models::transforming::divisions::divisible/subdivision_for:
+      spaces::models::transforming::divisions::subdivision/prototype: |
+        There is no source code for subdivision class %{klass}.
+        Substituting OpenStruct.
+
+    spaces::models::transforming::divisions::targeting_subdivision/resolution:
+      spaces::models::emissions::resolving::space/by: |
+        A resolution for %{identifier} is yet to be saved.
+        Saving now.
+
+    spaces::framework::models::space/open:
+      spaces::spaces::models::space/initialize:
+        An instance of %{klass} for %{identifier} does not yet exist in its space.
+
+    string/constantize:
+      string/const_get:
+        Unable to find class for %{identifier} with elements %{elements}.

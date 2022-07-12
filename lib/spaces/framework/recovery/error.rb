@@ -3,7 +3,6 @@ module Recovery
 
     def initialize(error)
       STDOUT.puts error.inspect
-      pp caller_locations
     end
 
   end

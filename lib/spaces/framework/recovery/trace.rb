@@ -5,24 +5,29 @@ I18n.load_path << Pathname(__dir__).join('i18n').glob('*.yaml')
 module Recovery
   class Trace < Error
 
-    attr_accessor :error,
-      :witnesses,
-      :verbosity
+    attr_accessor :args
 
     def translation(id = identifier)
       @translation ||= I18n.t(id, **witnesses)
     end
 
+    def identifier =
+      [:trace, elements, specifier].flatten.compact.map(&:downcase).map(&:underscore).join('.')
+
+    def error = args.error
+    def specifier = args.method
+    def elements = args.elements
+    def verbosity = args.verbosity
+    def witnesses = args.to_h.without(:error, :elements, :method, :verbosity)
+
     def spout_translation(id = identifier)
       t = translation(id)
       spout t
-      spout error.backtrace if t.include?('translation missing')
+      spout error.backtrace if error && t.include?('translation missing')
     end
 
     def spout_trace
-      spout "\n#{array.join("\n")}" if !array.empty? && verbosity&.include?(:trace)
-
-      spout error.backtrace if verbosity&.include?(:full_trace)
+      spout error.backtrace if error && verbosity&.include?(:trace)
     end
 
     def spout_error
@@ -36,50 +41,13 @@ module Recovery
       end
     end
 
-    def identifier = [:trace, zipped_nodes].join('.')
-
-    def zipped_nodes = path_nodes.zip(method_names).map{ |n| n.join('/') }
-    def path_nodes = array.map(&:trace_path_nodes)
-    def method_names = array.map(&:trace_method_name)
-
-    def array
-      @array ||= (error&.backtrace || []).select do |s|
-        s.include? 'Spaces' # FIX: will fail if project name changes
-      end.reject do |s|
-        ignorable?(s)
-      end.take(2).reverse.map(&:shortened_trace_line)
-    end
-
-    def ignorable?(line) =
-      [
-        'spaces/models/space',
-        'method_missing',
-      ].map { |s| line.include?(s) }.include?(true)
-
     def spout(stuff = '-' * 88, to: STDOUT)
       to.puts stuff
     end
 
     def initialize(args)
-      p = args.partition { |k, v| k == :error }.map(&:to_h)
-      self.error = p.first[:error]
-      q = p.last.partition { |k, v| k == :verbosity }.map(&:to_h)
-      self.verbosity = q.first[:verbosity]
-      self.witnesses = q.last
+      self.args = OpenStruct.new(args)
     end
 
   end
-end
-
-
-class String
-
-  def shortened_trace_line = split(break_text).last
-
-  def trace_method_name = split('`').last.split("'").first.gsub(' ', '_')
-
-  def trace_path_nodes = split('.').first.gsub('/', '::')
-
-  def break_text = '/lib/' # FIX: will fail if source code is not under lib folder
-
 end
