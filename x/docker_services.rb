@@ -14,7 +14,11 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 # save a services arena for common use
 controllers.arenas.create(model: {identifier: :services})
 
-# define providers for spaces roles
+# save some providers
+controllers.providing.create(model: {identifier: :docker, qualifier: :docker})
+controllers.providing.create(model: {identifier: :docker_compose, qualifier: :docker_compose})
+
+# define role providers
 controllers.arenas.provide(identifier: :services, role_identifier: :packing, provider_identifier: :docker)
 controllers.arenas.provide(identifier: :services, role_identifier: :orchestration, provider_identifier: :docker_compose)
 controllers.arenas.provide(identifier: :services, role_identifier: :runtime, provider_identifier: :docker)

@@ -38,7 +38,11 @@ controllers.blueprinting.summarize(identifier: :redmine)
 controllers.arenas.create(model: {identifier: :development})
 controllers.arenas.state(identifier: :development)
 
-# define providers
+# save some providers
+controllers.providing.create(model: {identifier: :docker, qualifier: :docker})
+controllers.providing.create(model: {identifier: :docker_compose, qualifier: :docker_compose})
+
+# define role providers
 controllers.arenas.provide(identifier: :development, role_identifier: :packing, provider_identifier: :docker)
 controllers.arenas.provide(identifier: :development, role_identifier: :orchestration, provider_identifier: :docker_compose)
 controllers.arenas.provide(identifier: :development, role_identifier: :runtime, provider_identifier: :docker)

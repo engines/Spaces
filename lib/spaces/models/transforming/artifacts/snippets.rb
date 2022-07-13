@@ -31,7 +31,9 @@ module Artifacts
     def stanza_class_for(qualifier)
       class_for(nesting_elements, "#{qualifier}_stanza")
     rescue NameError => e
-      warn(error: e, identifier: emission.identifier, elements: nesting_elements)
+      warn(error: e, method: :stanza_class_for,
+        elements: nesting_elements, identifier: emission.identifier
+      )
       class_for(nesting_elements.drop(1), "#{qualifier}_stanza")
     end
 

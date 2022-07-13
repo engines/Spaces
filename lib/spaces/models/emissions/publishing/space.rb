@@ -35,9 +35,7 @@ module Publishing
       end
     rescue ::Spaces::Errors::ImportFailure => e
       locations.exist_then_delete(descriptor)
-      logger.info(e)
     rescue ::Spaces::Errors::ReimportFailure => e
-      logger.info(e)
     end
 
     def export(**args)
@@ -46,7 +44,6 @@ module Publishing
         super(locations.by(i), **args)
       end
     rescue ::Spaces::Errors::ExportFailure => e
-      logger.info(e)
     end
 
   end
