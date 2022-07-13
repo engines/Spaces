@@ -9,6 +9,7 @@ module Artifacts
 
         def more_snippets =
           %(
+  			requires_compatibilities = ["FARGATE"]
             container_definitions = jsonencode([
               #{definition_snippets}
             ])
