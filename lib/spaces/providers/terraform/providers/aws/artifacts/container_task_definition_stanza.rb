@@ -9,6 +9,9 @@ module Artifacts
 
         def more_snippets =
           %(
+             network_mode = "awsvpc"
+			 memory = 2048  #FixME take from cluster bp
+			cpu = 1024 #FixME take from cluster bp
   			requires_compatibilities = ["FARGATE"]
             container_definitions = jsonencode([
               #{definition_snippets}
