@@ -16,7 +16,7 @@ module Artifacts
                   Effect = "Allow"
                   Sid    = ""
                   Principal = {
-                    Service = "ec2.amazonaws.com"
+                    Service = "ecs-tasks.amazonaws.com"
                   }
                 }
               ]
