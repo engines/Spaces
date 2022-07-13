@@ -26,6 +26,7 @@ module Artifacts
           %(
             {
               #{hash_for(r).to_hcl(enclosed:false)}
+              networkMode = "awsvpc"
               portMappings = [
                 #{ports_mappings_for(r)}
               ]
