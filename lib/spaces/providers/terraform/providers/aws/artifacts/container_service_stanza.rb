@@ -18,9 +18,9 @@ module Artifacts
               field = "cpu"
             }
 			load_balancer {
-    		target_group_arn = aws_lb_target_group.#{configuration.load_balancer_target_group}.arn
+    		target_group_arn = aws_lb_target_group.#{application_identifier}-tg.arn #FIXME should be inferred
     		container_name   = "#{application_identifier}"
-    		container_port   = #{configuration.port}
+    		container_port   = 80 #FIXME Kludge
   			}
           )
 
