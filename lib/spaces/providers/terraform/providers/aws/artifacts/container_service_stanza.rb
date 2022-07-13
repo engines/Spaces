@@ -17,6 +17,11 @@ module Artifacts
               type  = "binpack"
               field = "cpu"
             }
+			load_balancer {
+    		target_group_arn = aws_lb_target_group.#{configuration.load_balancer_target_group}.arn
+    		container_name   = "#{application_identifier}"
+    		container_port   = #{configuration.port}
+  			}
           )
 
         def configuration_hash =

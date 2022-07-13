@@ -24,11 +24,7 @@ module Artifacts
               unhealthy_threshold = #{configuration.unhealthy_threshold}
             }
 
-			load_balancer {
-    		target_group_arn = aws_lb_target_group.#{application_identifier}-lb.arn
-    		container_name   = "#{application_identifier}"
-    		container_port   = #{configuration.port}
-  			}
+
           )
 
         def default_configuration =
