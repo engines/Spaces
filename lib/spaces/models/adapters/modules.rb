@@ -1,8 +1,8 @@
 module Adapters
-  class ModuleList < ::Divisions::ModuleList
+  class ManagedPackageList < ::Divisions::ManagedPackageList
   end
 
-  class Modules < Division
+  class ManagedPackages < Division
     include Keyed
   end
 end

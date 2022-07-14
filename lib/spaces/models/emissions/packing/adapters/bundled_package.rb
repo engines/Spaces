@@ -1,7 +1,7 @@
 require_relative 'script_paths'
 
 module Adapters
-  class OtherPackage < Division
+  class BundledPackage < Division
     include ScriptPaths
 
     def environment_vars

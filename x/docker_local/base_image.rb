@@ -1,10 +1,10 @@
 # load the code!
-# require './x/controllers'
+# require './x/common/controllers'
 
 # ------------------------------------------------------------------------------
 
 # import a bootstrappy blueprint
-controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/dougs-base-image'}, verbose: true)
+controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprints/debian'}, verbose: true)
 
 # ------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ controllers.arenas.create(model: {identifier: :base})
 # ------------------------------------------------------------------------------
 
 # specify an image to build blueprints from
-controllers.arenas.build_from(identifier: :base, image_identifier: :'python:3.8-slim-buster')
+controllers.arenas.build_from(identifier: :base, image_identifier: :debian)
 
 # ------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provide
 # ------------------------------------------------------------------------------
 
 # bind a base blueprint to the arena
-controllers.arenas.bind(identifier: :base, blueprint_identifier: :'dougs-base-image')
+controllers.arenas.bind(identifier: :base, blueprint_identifier: :debian)
 
 # stage the arena for the bindings -- should not orchestrate!
 controllers.arenas.stage(identifier: :base)

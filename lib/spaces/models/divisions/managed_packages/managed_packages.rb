@@ -1,8 +1,8 @@
 module Divisions
-  class Modules < ::Divisions::Division
+  class ManagedPackages < ::Divisions::Division
 
     class << self
-      def subdivision_class = ModuleList
+      def subdivision_class = ManagedPackageList
     end
 
     delegate(subdivision_class: :klass)

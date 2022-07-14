@@ -1,6 +1,6 @@
 module Providers
   module Packer
-    class Modules < ::Adapters::Modules
+    class ManagedPackages < ::Adapters::ManagedPackages
 
       def snippets_for(language) =
         {

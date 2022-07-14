@@ -1,6 +1,6 @@
 module Adapters
   module Docker
-    class OtherPackage < ::Adapters::OtherPackage
+    class BundledPackage < ::Adapters::BundledPackage
 
      def snippets =
         "RUN #{temporary_script_path}/#{qualifier}/add #{environment_vars.in_quotes.join(' ')}"

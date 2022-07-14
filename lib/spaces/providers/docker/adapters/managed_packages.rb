@@ -1,6 +1,6 @@
 module Adapters
   module Docker
-    class Modules < ::Adapters::Modules
+    class ManagedPackages < ::Adapters::ManagedPackages
 
       def snippets_for(language) = "RUN #{division.send(language).inline.join(connector)}"
 

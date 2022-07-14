@@ -1,6 +1,6 @@
 module Providers
   module Packer
-    class OtherPackage < ::Adapters::OtherPackage
+    class BundledPackage < ::Adapters::BundledPackage
 
       def snippets =
         {
