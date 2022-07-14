@@ -1,5 +1,5 @@
 module Divisions
-  class ModuleList < ::Divisions::Subdivision
+  class ManagedPackageList < ::Divisions::Subdivision
 
     class << self
       def prototype(type:, struct:, division:) =

@@ -1,5 +1,5 @@
 module Divisions
-  class OtherPackages < ::Divisions::Divisible
+  class BundledPackages < ::Divisions::Divisible
 
     def path = Pathname(__dir__)
 

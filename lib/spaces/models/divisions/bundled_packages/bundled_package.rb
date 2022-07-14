@@ -1,5 +1,5 @@
 module Divisions
-  class OtherPackage < ::Divisions::Subdivision
+  class BundledPackage < ::Divisions::Subdivision
 
     class << self
       def features = [:identifier, :target, :extraction, :extracted_path, :destination]
