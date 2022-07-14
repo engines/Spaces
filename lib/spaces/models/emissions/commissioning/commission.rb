@@ -10,18 +10,18 @@ module Commissioning
       [:state, :network] => :first_interface_model
     )
 
-    def first_interface_model = interface_models.first
+    def first_running = commissioned_runtime.first
 
-    def network = first_interface_model&.network
+    def network = first_running.network
 
-    def ip_address = network&.ip_address
+    def ip_address = network.ip_address
 
     def execute(command)
       interface.execute(command)
     end
 
-    def interface_models
-      @interface_models ||= interface.by_resolution_identifier(identifier)
+    def commissioned_runtime
+      @commissioned_runtime ||= interface.by_resolution_identifier(identifier)
     end
 
     def interface

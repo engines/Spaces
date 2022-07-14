@@ -16,7 +16,9 @@ module Commissioning
     def milestones_for(name) =
       milestones.select { |m| m.name == name.to_s }
 
-    def the_milestones = resolution ? _the_milestones : []
+    def the_milestones = settled_resolution ? _the_milestones : []
+
+    def settled_resolution = resolutions.exist_then_by(identifier)
 
     def _the_milestones
       connections_down.map do |c|
