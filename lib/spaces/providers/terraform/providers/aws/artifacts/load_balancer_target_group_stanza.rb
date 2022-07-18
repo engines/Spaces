@@ -10,6 +10,7 @@ module Artifacts
             vpc_id = aws_vpc.#{configuration.vpc_binding}.id
             protocol = "#{configuration.protocol}"
             port = #{configuration.port}
+            target_type = "ip"
           )
 
         def more_snippets =
