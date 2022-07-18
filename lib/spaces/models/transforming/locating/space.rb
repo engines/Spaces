@@ -5,9 +5,9 @@ module Locating
       def default_model_class = ::Locating::Location
     end
 
-    def ensure_located(publication)
-      publication.bindings.descriptors.each do |d|
-        save(default_model_class.new(d.struct)) unless exist?(d)
+    def ensure_located(model)
+      unless exist?(model)
+        save(default_model_class.new(model.struct))
       end
     end
 
