@@ -20,7 +20,6 @@ module Spaces
     def account = struct.account || derived_account
     def repository = struct.repository || derived_repository
 
-    def has_specified_repository? = struct.repository
     def has_derivable_repository? = struct.account && struct.identifier
 
     def git? = protocol == 'git'
@@ -28,7 +27,6 @@ module Spaces
     alias_method :repository_url, :repository
     alias_method :remote_name, :remote
     alias_method :branch_name, :branch
-    alias_method :needs_locating?, :has_specified_repository?
 
     def pathname = (Pathname.new(repository) if repository)
 
