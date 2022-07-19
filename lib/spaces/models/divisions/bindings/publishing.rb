@@ -15,7 +15,7 @@ module Divisions
         if l = location
           empty.tap do |m|
             m.struct = struct.without([:identifier, :target_identifier]).tap do |s|
-              s.target = l.struct
+              s.target = l.struct.without(:account)
               s.identifier = identifier unless identifier == l.identifier
             end
           end

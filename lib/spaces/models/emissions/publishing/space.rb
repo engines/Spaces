@@ -27,10 +27,11 @@ module Publishing
     def by_import(descriptor, **args)
       f = args[:force]
       super.tap do |m|
-        locations.ensure_located(m)
+        locations.ensure_located(descriptor)
         blueprints.by_import(descriptor, force: f)
         m.bindings.each do |b|
-          by_import(b.descriptor, **args) if (!imported?(b.descriptor) || f)
+          dwa = b.descriptor.with_account(descriptor.account)
+          by_import(dwa, **args) if (!imported?(dwa) || f)
         end
       end
     rescue ::Spaces::Errors::ImportFailure => e

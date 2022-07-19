@@ -17,7 +17,6 @@ module Publishing
       protected
 
       def commit
-        locations.save(model)
         with_streaming do
           space.import(model, force: force, stream: stream)
         end
