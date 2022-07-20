@@ -23,8 +23,6 @@ module Spaces
         sleep 1
         commit
       end
-      #
-      # def to_h_deep = {}
 
       def default_callback
         ->(encoded) {
