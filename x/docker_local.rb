@@ -10,9 +10,9 @@ def callback =
 require 'byebug'
 
 require './x/common/controllers'
-require './x/docker_local/domains'
+require './x/common/domains'
 require './x/docker_local/providers'
 require './x/docker_local/base_image'
-require './x/docker_local/infrastructure'
+# require './x/docker_local/infrastructure'
 require './x/docker_local/services'
 require './x/docker_local/applications'
