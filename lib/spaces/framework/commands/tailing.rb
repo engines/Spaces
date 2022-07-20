@@ -24,8 +24,6 @@ module Spaces
         commit
       end
 
-      def to_h_deep = {}
-
       def default_callback
         ->(encoded) {
           message = JSON.parse(encoded, symbolize_names: true)
