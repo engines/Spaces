@@ -44,7 +44,7 @@ module Streaming
     end
 
     def spinner
-      '⣯⣟⡿⢿⣻⣽⣾⣷'[spin]
+      '⠋⠙⠸⢰⣠⣄⡆⠇'[spin]
     end
 
     def spin

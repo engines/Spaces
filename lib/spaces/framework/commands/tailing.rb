@@ -8,7 +8,7 @@ module Spaces
       protected
 
       def commit
-        self.tap { stream.consume(callback) }
+        stream.consume(callback) 
       rescue Errno::ENOENT => e
         # Allow tailing to commence before file has been created.
         wait_and_retry(e)
