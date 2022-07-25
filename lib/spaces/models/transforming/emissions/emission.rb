@@ -32,6 +32,9 @@ module Emissions
 
     def identifier = struct.identifier
 
+    def modified_at = default_space.modified_at(self)
+    def default_space = universe.send(qualifier.pluralize)
+
     def has?(property) = !struct[property].nil?
 
     def only_defines?(division_identitifers) =
