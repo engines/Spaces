@@ -4,7 +4,8 @@ module Blueprinting
     def relations =
       OpenStruct.new(
         blueprints: relations_to_blueprints,
-        arenas: relations_to_arenas
+        arenas: relations_to_arenas,
+        resources: relations_to_resources
       )
 
     def relations_to_blueprints =
@@ -19,6 +20,11 @@ module Blueprinting
       OpenStruct.new(
         direct: direct_arenas.map(&:identifier),
         indirect: indirect_arenas.map(&:identifier)
+      )
+
+    def relations_to_resources =
+      OpenStruct.new(
+        types: resources.map(&:type)
       )
 
     def parent_identifiers

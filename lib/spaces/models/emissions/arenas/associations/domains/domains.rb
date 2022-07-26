@@ -6,7 +6,7 @@ module Associations
 
     def all_with_primary_first = [primary, all].flatten.uniq(&:identifier)
 
-    def primary = map.detect(&:primary?)
+    def primary = map.first
 
   end
 end

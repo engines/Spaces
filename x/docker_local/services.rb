@@ -39,10 +39,10 @@ controllers.arenas.bind(identifier: :services, blueprint_identifier: :wap)
 controllers.arenas.stage(identifier: :services)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :services, verbose: true)
+controllers.arenas.build(identifier: :services, verbose: true)
 #
 # # bring up containers for arena
-# controllers.arenas.apply(identifier: :services, verbose: true)
+controllers.arenas.apply(identifier: :services, verbose: true)
 
 # # call add milestone scripts on a container for a given consumer
 # controllers.servicing.service(milestone: :add, identifier: 'database::mariadb', consumer_identifier: 'development::phpmyadmin')

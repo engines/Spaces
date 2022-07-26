@@ -20,8 +20,8 @@ controllers.publishing.import(model: {repository: 'https://github.com/v2Blueprin
 controllers.blueprinting.index
 controllers.blueprinting.list
 controllers.querying.list(method: :binder_identifiers, space: :blueprints)
-controllers.blueprinting.show(identifier: :redmine)
-controllers.blueprinting.summarize(identifier: :redmine)
+# controllers.blueprinting.show(identifier: :redmine)
+# controllers.blueprinting.summarize(identifier: :redmine)
 
 # ------------------------------------------------------------------------------
 
@@ -89,14 +89,14 @@ controllers.arenas.state(identifier: :development)
 # orchestrate the arena
 # controllers.arenas.orchestrate(identifier: :development)
 
-# # build images for the arena
-# controllers.arenas.build(identifier: :development)
+# build images for the arena
+controllers.arenas.build(identifier: :development)
 #
 # # build an image
 # controllers.packing.build(identifier: 'development::phpmyadmin')
 #
-# # bring up containers for arena
-# controllers.arenas.apply(identifier: :development)
+# bring up containers for arena
+controllers.arenas.apply(identifier: :development)
 
 # # save orchestration for a resolution
 # controllers.orchestrating.create(identifier: 'development::phpmyadmin')

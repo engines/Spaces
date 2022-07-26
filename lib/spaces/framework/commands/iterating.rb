@@ -33,7 +33,6 @@ module Spaces
       protected
 
       def _run
-        space.touch(model) if mutating?
         struct.result = subcommands.map(&:run).map(&:result)
       end
 

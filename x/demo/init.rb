@@ -1,5 +1,5 @@
 # save some domains
-controllers.domains.create(model: {identifier: 'example.com', primary: true})
+controllers.domains.create(model: {identifier: 'example.com'})
 controllers.domains.create(model: {identifier: :localhost})
 
 # save some providers

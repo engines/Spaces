@@ -20,7 +20,7 @@ module Settling
         }
       )
 
-    def domain = domains.primary
+    def domain = domains.first
 
     def connections_down(emission: :resolution)
       connect_bindings.map { |t|
