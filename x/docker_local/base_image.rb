@@ -34,4 +34,4 @@ controllers.arenas.bind(identifier: :base, blueprint_identifier: :debian)
 controllers.arenas.stage(identifier: :base)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :base, verbose: true)
+controllers.arenas.build(identifier: :base, verbose: true)

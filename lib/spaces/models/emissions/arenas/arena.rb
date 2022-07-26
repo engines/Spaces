@@ -26,8 +26,6 @@ module Arenas
       descendant_paths: :connections
     )
 
-    def modified_at = arenas.modified_at(self)
-
     def state
       @state ||= State.new(self)
     end

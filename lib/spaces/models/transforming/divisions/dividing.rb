@@ -12,6 +12,7 @@ module Divisions
     def binding_target = important_division_for(:binding_target)
     def images = important_division_for(:images)
     def volumes = important_division_for(:volumes)
+    def resources = important_division_for(:resources)
 
     def important_division_for(key) =
       has?(key) ? division_map[key] : division_for(key)

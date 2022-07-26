@@ -4,8 +4,6 @@ module Domains
     def name = identifier
     def identifier = struct[:identifier]
 
-    def primary? = struct.primary
-
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)
       self.struct.identifier = identifiable.identifier if identifiable
