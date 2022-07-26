@@ -12,6 +12,8 @@ module Universes
       def space_array
         @@space_array ||=
         [
+          Classifying::Space.new(identifier: :classifiers),
+
           Publishing::Space.new(identifier: :publications),
           Keys::Space.new(identifier: :user_keys),
           Blueprinting::Space.new(identifier: :blueprints),
