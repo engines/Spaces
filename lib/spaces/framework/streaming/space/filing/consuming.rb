@@ -8,6 +8,8 @@ module Streaming
     protected
 
     def follow(file, callback)
+      #TODO: Allow reading from end of file, which will be needed for Spaces Events.
+      # Something like `file.seek(0, IO::SEEK_END) if tailing_from_end`
       select([file])
       loop do
         sleep 0.001
