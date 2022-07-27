@@ -23,6 +23,7 @@ module Spaces
         tap do
           insist
           struct.result = _run
+          struct.timestamp = Time.now.to_i
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
         end
@@ -44,7 +45,7 @@ module Spaces
 
       def stamp_elements =
         [
-          "#{Time.now.to_i}",
+          "#{timestamp}",
           qualifier,
           context_identifier
         ]
