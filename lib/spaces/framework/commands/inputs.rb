@@ -8,6 +8,8 @@ module Spaces
 
       def identifier = input_for(:identifier)
 
+      def timestamp = input_for(:timestamp, default: "#{Time.now.to_i}")
+
       def space_identifier(default: nil) = input_for(:space, default: default)
 
       def stream_identifier = input_for(:stream_identifier)
