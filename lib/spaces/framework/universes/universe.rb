@@ -29,7 +29,9 @@ module Universes
 
           Registry::Space.new(identifier: :registry),
           Images::Space.new(identifier: :images),
-          Capsules::Space.new(identifier: :capsules)
+          Capsules::Space.new(identifier: :capsules),
+
+          Commands::Space.new(identifier: :commands)
         ]
       end
     end

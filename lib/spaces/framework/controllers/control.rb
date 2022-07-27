@@ -14,7 +14,7 @@ module Spaces
 
       def arguments = signature.arguments || {}
 
-      def calling_chain = [:run, :payload]
+      def calling_chain = [:run, :log, :payload]
 
       def initialize(signature)
         self.struct = signature
