@@ -1,11 +1,7 @@
 module Streaming
   class Space < Spaces::Space
 
-    def initialize(streaming)
-      @streaming = streaming
-    end
-
-    attr_reader :streaming
+    attr_accessor :streaming
 
     def stream
       @stream ||= stream_class.new(self)
@@ -18,12 +14,12 @@ module Streaming
     end
 
     def with_filing?
-      @streaming.is_a?(Spaces::Commands::Tailing) ||
-      @streaming.input[:background]
+      streaming.is_a?(Spaces::Commands::Tailing) ||
+      streaming.input[:background]
     end
 
     def segments
-      @streaming.stream_elements.flatten.map(&:identifier)
+      streaming.stream_elements.flatten.map(&:identifier)
     end
 
     def identifier
@@ -31,6 +27,10 @@ module Streaming
     end
 
     def identifier_separator; ''.identifier_separator ;end
+
+    def initialize(streaming)
+      self.streaming = streaming
+    end
 
   end
 end

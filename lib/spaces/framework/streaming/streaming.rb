@@ -20,7 +20,7 @@ module Streaming
       [ space.identifier,
         input_for(:identifier),
         qualifier,
-        input_for(:timestamp)
+        timestamp
       ]
     end
 

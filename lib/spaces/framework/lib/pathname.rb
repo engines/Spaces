@@ -8,6 +8,10 @@ class Pathname
     delete if empty?
   end
 
+  def without_ext = sub_ext('')
+    
+  def split(*args) = to_s.split(*args)
+
   def to_sym = to_s.to_sym
 
 end
