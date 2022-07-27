@@ -3,6 +3,7 @@ require './x/universe'
 def controllers
   @controllers ||= OpenStruct.new(
     universe: Universes::Controllers::Controller.new,
+    commands: ::Spaces::Controllers::RESTController.new(space: :commands),
     classifying: ::Spaces::Controllers::RESTController.new(space: :classifiers),
     publishing: Publishing::Controllers::Controller.new,
     blueprinting: Blueprinting::Controllers::Controller.new,

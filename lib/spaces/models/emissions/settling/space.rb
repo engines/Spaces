@@ -23,5 +23,6 @@ module Settling
         "#{p.relative_path_from(path)}".as_compound
       end
     end
+
   end
 end

@@ -31,7 +31,7 @@ module Universes
           Images::Space.new(identifier: :images),
           Capsules::Space.new(identifier: :capsules),
 
-          Commands::Space.new(identifier: :commands)
+          ::Spaces::Commands::Space.new(identifier: :commands)
         ]
       end
     end
