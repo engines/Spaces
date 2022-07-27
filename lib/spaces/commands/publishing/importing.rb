@@ -18,6 +18,8 @@ module Publishing
 
       protected
 
+      def _run = commit.struct
+
       def commit
         with_streaming do
           space.import(model, force: force, stream: stream)
