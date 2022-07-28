@@ -13,11 +13,15 @@ module Artifacts
             cluster = aws_ecs_cluster.#{configuration.cluster_binding}.id
             iam_role = aws_iam_role.#{configuration.iam_role_binding}.arn
             task_definition = aws_ecs_task_definition.#{configuration.task_definition_binding}.arn
-
             ordered_placement_strategy {
               type  = "binpack"
               field = "cpu"
             }
+			load_balancer {
+    		target_group_arn = aws_lb_target_group.#{application_identifier}-tg.arn #FIXME should be inferred
+    		container_name   = "#{application_identifier}"
+    		container_port   = 80 #FIXME Kludge
+  			}
           )
 
         def configuration_hash =
@@ -27,7 +31,8 @@ module Artifacts
           OpenStruct.new(
             cluster_binding: :'container-service-cluster',
             iam_role_binding: :'iam-role',
-            task_definition_binding: :'container-task-definition'
+            task_definition_binding: :'container-task-definition',
+            launch_type: :'FARGATE'
           )
 
       end

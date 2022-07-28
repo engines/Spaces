@@ -15,7 +15,7 @@ module Artifacts
           configuration.subnets.map { |s| "aws_subnet.#{s}.id" }
 
         def security_group_array =
-          configuration.subnets.map { |s| "aws_security_group.#{s}.id" }
+          configuration.security_groups.map { |s| "aws_security_group.#{s}.id" }
 
       end
     end
