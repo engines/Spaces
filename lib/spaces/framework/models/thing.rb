@@ -53,6 +53,11 @@ module Spaces
 
     def context_identifier = identifier
 
+    def has?(property) = !struct[property].nil?
+
+    def modified_at = default_space.modified_at(self)
+    def default_space = universe.send(qualifier.pluralize)
+
     def times(first, operator, second) =
       (first || Time.at(0)).send(operator, (second || Time.at(0)))
 

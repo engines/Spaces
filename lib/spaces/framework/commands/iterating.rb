@@ -33,7 +33,8 @@ module Spaces
       protected
 
       def _run
-        struct.result = subcommands.map(&:run).map(&:result)
+        #REFACTOR: run/log/result partially duplicates Control#calling_chain
+        struct.result = subcommands.map(&:run).map(&:log).map(&:result)
       end
 
     end

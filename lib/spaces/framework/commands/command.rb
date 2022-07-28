@@ -7,7 +7,13 @@ module Spaces
 
       class << self
         def mutating? = itself <= Saving
+        def interfacing? = itself <= Executing
       end
+
+      delegate(
+        commands: :universe,
+        [:mutating?, :interfacing?] => :klass
+      )
 
       def result = struct[:result]
       def errors = struct[:errors]
@@ -17,8 +23,15 @@ module Spaces
         tap do
           insist
           struct.result = _run
+          struct.timestamp = Time.now.to_i
         rescue ::Spaces::Errors::SpacesError => e
           struct.errors = e.diagnostics
+        end
+      end
+
+      def log
+        tap do
+          commands.save(self) if mutating? || interfacing?
         end
       end
 
@@ -27,6 +40,15 @@ module Spaces
       def fail? = has_run? && !success?
 
       def space = universe.send(space_identifier)
+
+      def file_name = stamp_elements.join('_')
+
+      def stamp_elements =
+        [
+          "#{timestamp}",
+          qualifier,
+          context_identifier
+        ]
 
       def initialize(input)
         self.struct = OpenStruct.new(input: input.symbolize_keys.clean)

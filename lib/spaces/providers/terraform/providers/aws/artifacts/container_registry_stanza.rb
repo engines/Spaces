@@ -61,7 +61,7 @@ module Artifacts
         end
 
         def get_login_command =
-          %(aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///')
+          %(`aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///'`)
 
         def default_configuration =
           OpenStruct.new(
