@@ -6,13 +6,13 @@ module Spaces
     end
 
     def delete(identifiable, cascade: true)
-      insist(deletion_precondition(identifiable: identifiable))
+      insist(deletion_precondition(identifiable))
       identifiable.tap { |i| _delete(i, cascade: cascade) }
     rescue Errno::ENOENT
       raise_lost_error(identifiable)
     end
 
-    def deletion_precondition(identifiable:) = {}
+    def deletion_precondition(identifiable) = {}
 
     def delete_cascades(identifiable, cascade: true)
       cascade_deletes.each { |c| universe.send(c).maybe_delete(identifiable) } if cascade
