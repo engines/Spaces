@@ -43,7 +43,7 @@ module Artifacts
             resource "null_resource" "#{application_identifier}-images-#{Time.now.to_i}" {
               provisioner "local-exec" {
                 command = <<LINES
-                  #{get_login_command} &&
+                  #{login_command} &&
                   #{image_push_commands}
                 LINES
               }
@@ -60,7 +60,7 @@ module Artifacts
           end.join(";\n")
         end
 
-        def get_login_command =
+        def login_command =
           %(`aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///'`)
 
         def default_configuration =
