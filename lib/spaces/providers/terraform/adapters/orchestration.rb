@@ -15,7 +15,7 @@ module Adapters
       end
 
       def resources_artifact
-        artifact_class_for(:resources)&.new(self) if emission.has?(:resources)
+        artifact_class_for(:resources)&.new(self) if resolution.has?(:resources)
       end
 
     end
