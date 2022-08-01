@@ -9,9 +9,6 @@ module Artifacts
 
         def more_snippets =
           %(
-            network_mode = "awsvpc"
-            memory = 2048  #FixME take from cluster bp
-            cpu = 1024 #FixME take from cluster bp
             requires_compatibilities = ["FARGATE"]
             container_definitions = jsonencode([
               #{definition_snippets}
@@ -28,8 +25,8 @@ module Artifacts
         def definition_snippet_for(r) =
           %(
             {
-              #{hash_for(r).to_hcl(enclosed:false)}
-              networkMode = "awsvpc"
+              #{with_tailored_keys(hash_for(r)).to_hcl(enclosed:false)}
+              networkMode = "#{configuration.network_mode}"
               portMappings = [
                 #{ports_mappings_for(r)}
               ]
@@ -64,9 +61,18 @@ module Artifacts
           end.to_hcl(enclosed: false)
         end
 
+        def configuration_key_map =
+          {
+            cpus: :cpu,
+            network_mode: :NetworkMode
+          }
+
         def default_configuration =
           OpenStruct.new(
-            family: :service
+            family: :service,
+            network_mode: :awsvpc,
+            memory: 2048,
+            cpus: 1024
           )
 
       end
