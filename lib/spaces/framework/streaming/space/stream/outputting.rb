@@ -4,10 +4,6 @@ module Streaming
   class Outputting < ::Spaces::Space
     include Producing
 
-    def initialize(stream)
-      @stream = stream
-    end
-
     def init
       print("\033[?25l")
     end
@@ -54,6 +50,12 @@ module Streaming
 
     def verbose?
       @stream.streaming.input[:verbose]
+    end
+
+    def identifier = @stream.identifier
+
+    def initialize(stream)
+      @stream = stream
     end
 
   end

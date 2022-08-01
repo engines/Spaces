@@ -10,6 +10,16 @@ module Providers
       alias_method :application_qualifiers, :subqualifiers
     end
 
+    delegate(arenas: :universe)
+
+    def used_in_arena? = arenas_used_in.any?
+
+    def arenas_used_in
+      arenas.all.select do |a|
+        a.provider_identifiers.include?(identifier.to_sym)
+      end
+    end
+
     def name = identifier
 
     def identifier = struct[:identifier]

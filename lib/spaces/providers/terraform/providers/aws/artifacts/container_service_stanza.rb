@@ -17,11 +17,11 @@ module Artifacts
               type  = "binpack"
               field = "cpu"
             }
-			load_balancer {
-    		target_group_arn = aws_lb_target_group.#{application_identifier}-tg.arn #FIXME should be inferred
-    		container_name   = "#{application_identifier}"
-    		container_port   = 80 #FIXME Kludge
-  			}
+            load_balancer {
+              target_group_arn = aws_lb_target_group.#{application_identifier}-tg.arn #FIXME should be inferred
+              container_name   = "#{application_identifier}"
+              container_port   = "#{ports.first.container_port}"
+            }
           )
 
         def configuration_hash =

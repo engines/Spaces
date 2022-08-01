@@ -10,7 +10,8 @@ module Arenas
     def perform?(role_identifier) =
       role_identifiers.include?(role_identifier.to_sym)
 
-    def role_identifiers = role_providers.identifiers.map(&:to_sym)
+    def role_identifiers = role_providers.identifiers
+    def provider_identifiers = role_providers.provider_identifiers
 
     def providers =
       role_providers.map(&:provider).uniq(&:identifier)
