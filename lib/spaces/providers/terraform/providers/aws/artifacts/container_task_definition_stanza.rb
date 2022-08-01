@@ -7,6 +7,16 @@ module Artifacts
       class ContainerTaskDefinitionStanza < ResourceStanza
         include TaskDefining
 
+        class << self
+          def default_configuration =
+            OpenStruct.new(
+              family: :service,
+              network_mode: :awsvpc,
+              memory: 2048,
+              cpus: 1024
+            )
+        end
+
         def more_snippets =
           %(
             requires_compatibilities = ["FARGATE"]
@@ -33,14 +43,13 @@ module Artifacts
             }
           )
 
-        def hash_for(r)
+        def hash_for(r) =
           {
             name: r.application_identifier,
             image: r.image_identifier,
           }.
             merge(task_configuration_hash_for(r)).
             merge(dimensions_hash_for(r))
-        end
 
         def task_configuration_hash_for(r)
           h = r.configuration&.to_h_deep
@@ -60,20 +69,6 @@ module Artifacts
             end
           end.to_hcl(enclosed: false)
         end
-
-        def configuration_key_map =
-          {
-            cpus: :cpu,
-            network_mode: :NetworkMode
-          }
-
-        def default_configuration =
-          OpenStruct.new(
-            family: :service,
-            network_mode: :awsvpc,
-            memory: 2048,
-            cpus: 1024
-          )
 
       end
     end

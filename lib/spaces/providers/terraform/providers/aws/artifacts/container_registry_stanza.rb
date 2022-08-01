@@ -6,6 +6,13 @@ module Artifacts
       class ContainerRegistryStanza < ResourceStanza
         include Named
 
+        class << self
+          def default_configuration =
+            OpenStruct.new(
+              image_tag_mutability: 'IMMUTABLE'
+            )
+        end
+
         def snippets =
           super + policy_snippet + push_images_snippet
 
@@ -62,11 +69,6 @@ module Artifacts
 
         def login_command =
           %(`aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///'`)
-
-        def default_configuration =
-          OpenStruct.new(
-            image_tag_mutability: 'IMMUTABLE'
-          )
 
       end
     end

@@ -8,6 +8,16 @@ module Artifacts
         include Named
         include TaskDefining
 
+        class << self
+          def default_configuration =
+            OpenStruct.new(
+              cluster_binding: :'container-service-cluster',
+              iam_role_binding: :'iam-role',
+              task_definition_binding: :'container-task-definition',
+              launch_type: :'FARGATE'
+            )
+        end
+
         def more_snippets =
           %(
             cluster = aws_ecs_cluster.#{configuration.cluster_binding}.id
@@ -26,14 +36,6 @@ module Artifacts
 
         def configuration_hash =
           super.without(:cluster_binding, :iam_role_binding, :task_definition_binding)
-
-        def default_configuration =
-          OpenStruct.new(
-            cluster_binding: :'container-service-cluster',
-            iam_role_binding: :'iam-role',
-            task_definition_binding: :'container-task-definition',
-            launch_type: :'FARGATE'
-          )
 
       end
     end
