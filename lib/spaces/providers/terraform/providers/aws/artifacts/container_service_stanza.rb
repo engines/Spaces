@@ -16,6 +16,8 @@ module Artifacts
               task_definition_binding: :'container-task-definition',
               launch_type: :'FARGATE'
             )
+
+          def launch_type = default_configuration.launch_type
         end
 
         def more_snippets =

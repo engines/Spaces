@@ -17,20 +17,26 @@ module Artifacts
             )
         end
 
+        def container_services =
+          #TODO: assumes one stanza for all container services in the arena
+          arena.compute_resolutions_for(:container_service)
+
         def more_snippets =
           %(
-            requires_compatibilities = ["FARGATE"]
+            requires_compatibilities = #{compatibilities}
             container_definitions = jsonencode([
               #{definition_snippets}
             ])
           )
 
-        def definition_snippets
-          #TODO: assumes one stanza for all container services in the arena
-          arena.compute_resolutions_for(:container_service).map do |r|
-            definition_snippet_for(r)
-          end.join(",\n")
-        end
+        def compatibilities =
+          "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
+
+        def launch_type_for(r) =
+          r.configuration.launch_type || ContainerServiceStanza.launch_type
+
+        def definition_snippets =
+          container_services.map { |s| definition_snippet_for(s) }.join(",\n")
 
         def definition_snippet_for(r) =
           %(
