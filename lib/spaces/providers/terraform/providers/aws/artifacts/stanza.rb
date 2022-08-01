@@ -30,7 +30,13 @@ module Artifacts
 
         def default_configuration = OpenStruct.new
 
-        def configuration_hash = configuration&.to_h_deep || {}
+        def configuration_hash =
+          with_tailored_keys(configuration&.to_h_deep || {})
+
+        def with_tailored_keys(hash) =
+          hash.transform_keys { |k| configuration_key_map[k] || k }
+
+        def configuration_key_map = {}
 
         def tags_hash =
           {
