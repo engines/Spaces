@@ -11,8 +11,7 @@ module Artifacts
 
           def configuration_key_map =
             {
-              cpus: :cpu,
-              network_mode: :NetworkMode
+              cpus: :cpu
             }
         end
 
