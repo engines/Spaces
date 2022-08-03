@@ -32,7 +32,7 @@ module Emissions
     end
 
     def interfaces
-      arenas.all.map do |a|
+      arenas.all.map do |a| #TODO: this class is too 'low' to know about arenas
         a.provider_for(provider_role)&.interface_for_all_in(identifier.singularize)
       end.flatten.compact.uniq(&:uniqueness)
     end

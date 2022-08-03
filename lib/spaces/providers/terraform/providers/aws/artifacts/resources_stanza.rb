@@ -1,7 +1,7 @@
 module Artifacts
   module Terraform
     module Aws
-      class ResourcesStanza < ::Artifacts::Stanza
+      class ResourcesStanza < Stanza
 
         def snippets = stanzas.map(&:snippets).join("\n")
 
