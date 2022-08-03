@@ -6,6 +6,20 @@ module Artifacts
     module Aws
       class Stanza < ::Artifacts::Stanza
 
+        class << self
+          def default_configuration = OpenStruct.new
+
+          def configuration_key_map =
+            {
+              cpus: :cpu,
+              network_mode: :NetworkMode
+            }
+        end
+
+        delegate(
+          [:default_configuration, :configuration_key_map] => :klass
+        )
+
         def snippets =
           %(
             resource "aws_#{resource_type_here}" "#{application_identifier}" {
@@ -28,9 +42,11 @@ module Artifacts
           @configuration ||= default_configuration.reverse_merge(super)
         end
 
-        def default_configuration = OpenStruct.new
+        def configuration_hash =
+          with_tailored_keys(configuration&.to_h_deep || {})
 
-        def configuration_hash = configuration&.to_h_deep || {}
+        def with_tailored_keys(hash) =
+          hash.transform_keys { |k| configuration_key_map[k] || k }
 
         def tags_hash =
           {

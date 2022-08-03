@@ -7,43 +7,55 @@ module Artifacts
       class ContainerTaskDefinitionStanza < ResourceStanza
         include TaskDefining
 
+        class << self
+          def default_configuration =
+            OpenStruct.new(
+              family: :service,
+              network_mode: :awsvpc,
+              memory: 2048,
+              cpus: 1024
+            )
+        end
+
+        def container_services =
+          #TODO: assumes one stanza for all container services in the arena
+          arena.compute_resolutions_for(:container_service)
+
         def more_snippets =
           %(
-            network_mode = "awsvpc"
-            memory = 2048  #FixME take from cluster bp
-            cpu = 1024 #FixME take from cluster bp
-            requires_compatibilities = ["FARGATE"]
+            requires_compatibilities = #{compatibilities}
             container_definitions = jsonencode([
               #{definition_snippets}
             ])
           )
 
-        def definition_snippets
-          #TODO: assumes one stanza for all container services in the arena
-          arena.compute_resolutions_for(:container_service).map do |r|
-            definition_snippet_for(r)
-          end.join(",\n")
-        end
+        def compatibilities =
+          "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
+
+        def launch_type_for(r) =
+          r.configuration.launch_type || ContainerServiceStanza.launch_type
+
+        def definition_snippets =
+          container_services.map { |s| definition_snippet_for(s) }.join(",\n")
 
         def definition_snippet_for(r) =
           %(
             {
-              #{hash_for(r).to_hcl(enclosed:false)}
-              networkMode = "awsvpc"
+              #{with_tailored_keys(hash_for(r)).to_hcl(enclosed:false)}
+              networkMode = "#{configuration.network_mode}"
               portMappings = [
                 #{ports_mappings_for(r)}
               ]
             }
           )
 
-        def hash_for(r)
+        def hash_for(r) =
           {
             name: r.application_identifier,
             image: r.image_identifier,
           }.
             merge(task_configuration_hash_for(r)).
             merge(dimensions_hash_for(r))
-        end
 
         def task_configuration_hash_for(r)
           h = r.configuration&.to_h_deep
@@ -63,11 +75,6 @@ module Artifacts
             end
           end.to_hcl(enclosed: false)
         end
-
-        def default_configuration =
-          OpenStruct.new(
-            family: :service
-          )
 
       end
     end
