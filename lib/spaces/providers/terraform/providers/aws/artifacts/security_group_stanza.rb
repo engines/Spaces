@@ -7,6 +7,7 @@ module Artifacts
 
         def configuration_snippet =
           %(
+            vpc_id = aws_vpc.vpc.id
             ingress {
               from_port        = #{configuration.in_from_port}
               to_port          = #{configuration.in_to_port}
