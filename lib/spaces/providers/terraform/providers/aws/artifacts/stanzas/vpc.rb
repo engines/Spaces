@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -7,7 +7,7 @@ module Artifacts
 
         class << self
           def default_configuration =
-            OpenStruct.new(
+            super.merge(
               cidr_block: nil,
         			enable_dns_support: true,
         			enable_dns_hostnames: false,

@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -7,11 +7,16 @@ module Artifacts
 
     		def configuration_snippet =
           %(
-            vpc_id = aws_vpc.#{configuration.vpc_binding}.id
+            vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
             protocol = "#{configuration.protocol}"
-            port = #{configuration.port}
             target_type = "ip"
           )
+          # %(
+          #   vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
+          #   protocol = "#{configuration.protocol}"
+          #   port = #{configuration.port}
+          #   target_type = "ip"
+          # )
 
         def more_snippets =
           %(
@@ -27,8 +32,9 @@ module Artifacts
           )
 
         def default_configuration =
-          OpenStruct.new(
+          super.merge(
             description: application_identifier,
+            vpc_binding: :vpc,
             target_type: "ip",
             healthy_threshold: 3,
             interval: 300,

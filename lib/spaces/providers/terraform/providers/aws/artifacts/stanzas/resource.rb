@@ -1,5 +1,3 @@
-require_relative 'stanza'
-
 module Artifacts
   module Terraform
     module Aws
@@ -28,7 +26,7 @@ module Artifacts
 
         alias_method :resource, :holder
 
-        def application_identifier = resource.identifier.hyphenated
+        def application_identifier = [arena.identifier, resource.identifier].join('_').hyphenated
 
         def resource_type_here =
           resource_type_map[resource_type.to_sym] || resource_type

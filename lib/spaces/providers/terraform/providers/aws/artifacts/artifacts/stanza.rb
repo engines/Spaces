@@ -29,6 +29,8 @@ module Artifacts
             }
           )
 
+        def application_identifier = resolution.identifier.split_compound.join('-').hyphenated
+
         def name_snippet = nil
 
         def configuration_snippet =
@@ -36,6 +38,9 @@ module Artifacts
 
         def tags_snippet =
           %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
+
+        def qualifier_for(attachable) =
+          [arena.identifier, configuration.send(attachable)].join('_').hyphenated
 
         def configuration
           @configuration ||= default_configuration.reverse_merge(super)

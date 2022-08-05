@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -7,14 +7,14 @@ module Artifacts
 
         class << self
           def default_configuration =
-            OpenStruct.new(
+            super.merge(
               vpc_binding: :vpc
             )
         end
 
         def configuration_snippet =
           %(
-            vpc_id = aws_vpc.#{configuration.vpc_binding}.id
+            vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
           )
 
         def configuration_hash = super.without(:vpc_binding)

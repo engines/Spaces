@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -6,7 +6,7 @@ module Artifacts
       class ClusterKeyStanza < ResourceStanza
 
         def default_configuration =
-          OpenStruct.new(
+          super.merge(
             description: application_identifier,
       			deletion_window_in_days: 10,
       			is_enabled: true,

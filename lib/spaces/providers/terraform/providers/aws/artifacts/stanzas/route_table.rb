@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -7,7 +7,7 @@ module Artifacts
 
         class << self
           def default_configuration =
-            OpenStruct.new(
+            super.merge(
               vpc_binding: :vpc,
               gateway_binding: :'internet-gateway'
             )
@@ -15,10 +15,10 @@ module Artifacts
 
         def configuration_snippet =
           %(
-            vpc_id = aws_vpc.#{configuration.vpc_binding}.id
+            vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
             route {
               cidr_block = "0.0.0.0/0"
-              gateway_id = aws_internet_gateway.#{configuration.gateway_binding}.id
+              gateway_id = aws_internet_gateway.#{qualifier_for(:gateway_binding)}.id
             }
           )
 
