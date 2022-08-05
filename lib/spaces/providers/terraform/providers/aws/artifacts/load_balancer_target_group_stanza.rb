@@ -24,8 +24,6 @@ module Artifacts
               path                = "#{configuration.health_check_path}"
               unhealthy_threshold = #{configuration.unhealthy_threshold}
             }
-
-
           )
 
         def default_configuration =
