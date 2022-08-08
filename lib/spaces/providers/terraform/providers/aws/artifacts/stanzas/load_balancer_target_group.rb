@@ -7,12 +7,12 @@ module Artifacts
 
     		def configuration_snippet =
           %(
-            vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
+            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
             protocol = "#{configuration.protocol}"
             target_type = "ip"
           )
           # %(
-          #   vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
+          #   vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
           #   protocol = "#{configuration.protocol}"
           #   port = #{configuration.port}
           #   target_type = "ip"

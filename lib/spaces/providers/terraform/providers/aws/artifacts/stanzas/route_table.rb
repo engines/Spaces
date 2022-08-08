@@ -15,10 +15,10 @@ module Artifacts
 
         def configuration_snippet =
           %(
-            vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
+            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
             route {
               cidr_block = "0.0.0.0/0"
-              gateway_id = aws_internet_gateway.#{qualifier_for(:gateway_binding)}.id
+              gateway_id = aws_internet_gateway.#{arena_attachable_qualification_for(:gateway_binding)}.id
             }
           )
 

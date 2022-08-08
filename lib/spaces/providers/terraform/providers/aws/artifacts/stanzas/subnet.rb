@@ -14,7 +14,7 @@ module Artifacts
 
         def more_snippets =
           %(
-            vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
+            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
           )
 
         def configuration_hash = super.without(:vpc_binding)

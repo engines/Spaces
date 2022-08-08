@@ -16,7 +16,7 @@ module Artifacts
           "#{container_type}.#{dns_qualifier}.ipv4_address"
 
         def dns_qualifier =
-          arena.qualifier_for(:dns).camelize.downcase
+          arena.arena_attachable_qualification_for(:dns).camelize.downcase
 
       end
     end

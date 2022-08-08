@@ -7,7 +7,7 @@ module Artifacts
 
         def configuration_snippet =
           %(
-            vpc_id = aws_vpc.#{qualifier_for(:vpc_binding)}.id
+            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
             ingress {
               from_port        = #{configuration.in_from_port}
               to_port          = #{configuration.in_to_port}
