@@ -5,21 +5,26 @@ module Artifacts
     module Aws
       class LoadBalancerTargetGroupStanza < ResourceStanza
 
-    		def configuration_snippet =
-          %(
-            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
-            protocol = "#{configuration.protocol}"
-            target_type = "ip"
-          )
-          # %(
-          #   vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
-          #   protocol = "#{configuration.protocol}"
-          #   port = #{configuration.port}
-          #   target_type = "ip"
-          # )
+        class << self
+          def default_configuration =
+            super.merge(
+              vpc_binding: :vpc,
+              target_type: 'ip',
+              healthy_threshold: 3,
+              interval: 300,
+              protocol: 'HTTP',
+              matcher: 200,
+              timeout: 3,
+              unhealthy_threshold: 2,
+              health_check_path: '/',
+              path_pattern:  ["/*"]
+            )
+        end
 
         def more_snippets =
           %(
+            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
+
             health_check {
               healthy_threshold   = #{configuration.healthy_threshold}
               interval            = #{configuration.interval}
@@ -31,20 +36,18 @@ module Artifacts
             }
           )
 
-        def default_configuration =
-          super.merge(
-            description: application_identifier,
-            vpc_binding: :vpc,
-            target_type: "ip",
-            healthy_threshold: 3,
-            interval: 300,
-            protocol: 'HTTP',
-            matcher: 200,
-            timeout: 3,
-            unhealthy_threshold: 2,
-            health_check_path: '/',
-            path_pattern:  ["/*"]
-          )
+          def configuration_hash =
+            super.without(
+              :vpc_binding,
+              :healthy_threshold,
+              :interval,
+              :matcher,
+              :timeout,
+              :path,
+              :unhealthy_threshold,
+              :health_check_path,
+              :path_pattern
+            )
 
       end
     end
