@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -7,15 +7,15 @@ module Artifacts
 
         class << self
           def default_configuration =
-            OpenStruct.new(
+            super.merge(
               role_binding: :'iam-role'
             )
         end
 
         def configuration_snippet =
           %(
-            role       = aws_iam_role.#{configuration.role_binding}.name
-            policy_arn = aws_iam_role.#{configuration.role_binding}.arn
+            role       = aws_iam_role.#{qualifier_for(:role_binding)}.name
+            policy_arn = aws_iam_role.#{qualifier_for(:role_binding)}.arn
           )
 
         def tags_snippet = nil

@@ -1,4 +1,4 @@
-require_relative 'capsule_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform

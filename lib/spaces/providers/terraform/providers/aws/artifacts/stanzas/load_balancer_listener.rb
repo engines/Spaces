@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform

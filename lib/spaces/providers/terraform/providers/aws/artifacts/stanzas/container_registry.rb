@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -8,7 +8,7 @@ module Artifacts
 
         class << self
           def default_configuration =
-            OpenStruct.new(
+            super.merge(
               image_tag_mutability: 'IMMUTABLE'
             )
         end
