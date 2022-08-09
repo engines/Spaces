@@ -6,12 +6,12 @@ class Hash
 
   def snakize_keys = transform_keys { |k| k.snakize.to_sym }
 
-  def without(*keys) = duplicate(self).without!(*keys)
+  def with(*keys) =
+    keys.inject({}) do |m, k|
+      m.tap { m[k] = itself[k] }
+    end.compact
 
-  def without!(*keys)
-    keys.each { |key| delete(key) }
-    self
-  end
+  def without(*keys) = with(*(itself.keys - keys))
 
   def clean = compact.delete_if { |k, v| v == '' }
 

@@ -12,10 +12,14 @@ module Artifacts
           )
 
         def subnet_array =
-          configuration.subnets.map { |s| "aws_subnet.#{s}.id" }
+          configuration.subnets.map do |s|
+            "aws_subnet.#{arena_resource_qualification_for(s)}.id"
+          end
 
         def security_group_array =
-          configuration.security_groups.map { |s| "aws_security_group.#{s}.id" }
+          configuration.security_groups.map do |s|
+            "aws_security_group.#{arena_resource_qualification_for(s)}.id"
+          end
 
       end
     end

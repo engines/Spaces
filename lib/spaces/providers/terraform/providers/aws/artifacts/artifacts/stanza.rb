@@ -39,7 +39,10 @@ module Artifacts
         def tags_snippet =
           %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
 
-        def qualifier_for(attachable) =
+        def arena_resource_qualification_for(resource) =
+          [arena.identifier, resource.identifier].join('_').hyphenated
+
+        def arena_attachable_qualification_for(attachable) =
           [arena.identifier, configuration.send(attachable)].join('_').hyphenated
 
         def configuration
