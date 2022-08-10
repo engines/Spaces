@@ -22,6 +22,16 @@ module Artifacts
           super.merge(
             task_definition_binding: :"#{blueprint_identifier.hyphenated}",
             target_group_binding: :"#{blueprint_identifier.hyphenated}"
+          )
+        #
+        # def snippets = super + task_definition_snippet
+        #
+        # def task_definition_snippet =
+        #   %(
+        #     resource "aws_#{resource_type_map[:container_task_definition]}" "#{application_identifier}" {
+        #     }
+        #   )
+
         def more_snippets =
           %(
             cluster = aws_ecs_cluster.#{arena_attachable_qualification_for(:cluster_binding)}.id
