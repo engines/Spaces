@@ -14,8 +14,8 @@ module Artifacts
 
         def configuration_snippet =
           %(
-            role       = aws_iam_role.#{arena_attachable_qualification_for(:role_binding)}.name
-            policy_arn = aws_iam_role.#{arena_attachable_qualification_for(:role_binding)}.arn
+            role       = aws_iam_role.#{arena_attachable_qualification_for(:role_binding)}.id
+            policy_arn = arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole
           )
 
         def tags_snippet = nil
