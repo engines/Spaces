@@ -24,6 +24,7 @@ module Arenas
           plan: [::Spaces::Commands::Executing, {execute: :plan}],
           # show: [::Spaces::Commands::Executing, {execute: :show}],
           apply: [::Spaces::Commands::Executing, {execute: :apply}],
+          destroy: [::Spaces::Commands::Executing, {execute: :destroy}],
           artifacts: [::Spaces::Commands::Artifacts, {space: :arenas}]
         })
       end
