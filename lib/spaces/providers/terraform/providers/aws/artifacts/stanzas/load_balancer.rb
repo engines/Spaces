@@ -20,11 +20,12 @@ module Artifacts
           configuration.security_groups.map do |s|
             "aws_security_group.#{arena_resource_qualification_for(s)}.id"
           end
+      end
 
-        def depends_on_snippet =
-          configuration.security_groups.map do |s|
-            "aws_security_group.#{arena_resource_qualification_for(s)}"
-          end
+      def depends_on_snippet
+        configuration.security_groups.map do |s|
+          "aws_security_group.#{arena_resource_qualification_for(s)}"
+        end
         configuration.subnets.map do |s|
           "aws_subnet.#{arena_resource_qualification_for(s)}"
         end
