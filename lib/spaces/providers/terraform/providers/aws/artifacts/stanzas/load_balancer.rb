@@ -33,7 +33,7 @@ module Artifacts
   
 
       def depends_on_snippet =
-		"depends_on[#{security_group_array.merge(subnet_array)}]"		
+		"depends_on[#{security_group_array.concat(subnet_array)}]"		
        
       end
     end
