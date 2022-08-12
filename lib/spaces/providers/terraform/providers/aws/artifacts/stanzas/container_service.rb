@@ -11,7 +11,6 @@ module Artifacts
           def default_configuration =
             super.merge(
               cluster_binding: :'container-service-cluster',
-              # iam_role_binding: :'iam-role',
               desired_count: 3,
               launch_type: :'FARGATE'
             )
@@ -29,9 +28,6 @@ module Artifacts
           )
 
         def more_snippets =
-          # REMOVED ...
-          # cluster = aws_ecs_cluster.#{arena_attachable_qualification_for(:cluster_binding)}.id
-          # is this right?
           %(
             depends_on = [
               aws_lb.#{arena_attachable_qualification_for(:load_balancer_binding)},
@@ -52,7 +48,6 @@ module Artifacts
 
         def configuration_hash =
           super.without(:cluster_binding, :task_definition_binding, :target_group_binding, :load_balancer_binding, :listener_binding, :subnet_binding)
-          # super.without(:cluster_binding, :iam_role_binding, :task_definition_binding, :target_group_binding)
 
       end
     end
