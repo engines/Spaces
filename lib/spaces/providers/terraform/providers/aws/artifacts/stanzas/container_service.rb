@@ -23,6 +23,7 @@ module Artifacts
           super.merge(
             task_definition_binding: default_binding,
             target_group_binding: default_binding,
+            subnet_binding: default_binding,
             load_balancer_binding: default_binding,
             listener_binding: default_binding
           )
@@ -39,19 +40,18 @@ module Artifacts
 
             cluster = aws_ecs_cluster.#{arena_attachable_qualification_for(:cluster_binding)}.id
             task_definition = aws_ecs_task_definition.#{arena_attachable_qualification_for(:task_definition_binding)}.arn
-            ordered_placement_strategy {
-              type  = "binpack"
-              field = "cpu"
-            }
             load_balancer {
               target_group_arn = aws_lb_target_group.#{arena_attachable_qualification_for(:target_group_binding)}.arn
               container_name   = "#{application_identifier}"
               container_port   = "#{ports.first.container_port}"
             }
+            network_configuration {
+              subnets = [aws_subnet.#{arena_attachable_qualification_for(:subnet_binding)}.id]
+            }
           )
 
         def configuration_hash =
-          super.without(:cluster_binding, :task_definition_binding, :target_group_binding, :load_balancer_binding, :listener_binding)
+          super.without(:cluster_binding, :task_definition_binding, :target_group_binding, :load_balancer_binding, :listener_binding, :subnet_binding)
           # super.without(:cluster_binding, :iam_role_binding, :task_definition_binding, :target_group_binding)
 
       end
