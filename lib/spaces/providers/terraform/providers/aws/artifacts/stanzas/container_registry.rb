@@ -13,8 +13,7 @@ module Artifacts
             )
         end
 
-        def snippets =
-          super + policy_snippet + push_images_snippet
+        def snippets = super + policy_snippet + push_images_snippet
 
         def policy_snippet =
           %(

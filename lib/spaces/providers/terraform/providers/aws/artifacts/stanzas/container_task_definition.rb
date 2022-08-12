@@ -17,6 +17,7 @@ module Artifacts
 
         def default_configuration =
           super.merge(
+            # family: :service
             family: :"#{application_identifier}"
           )
 
@@ -42,6 +43,7 @@ module Artifacts
           container_services.map { |s| definition_snippet_for(s) }.join(",\n")
 
         def definition_snippet_for(r) =
+          #TODO: hostPort must be the same as containerPort when netWorkMode is awsvpc
           %(
             {
               #{with_tailored_keys(hash_for(r)).to_hcl(enclosed:false)}
