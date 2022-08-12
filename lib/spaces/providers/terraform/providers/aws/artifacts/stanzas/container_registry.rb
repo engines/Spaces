@@ -50,7 +50,7 @@ module Artifacts
               provisioner "local-exec" {
                 command = <<LINES
                   #{login_command} &&
-                  #{image_push_commands}
+                  #{image_push_commands}; echo 0
                 LINES
               }
 
@@ -67,7 +67,8 @@ module Artifacts
         end
 
         def login_command =
-          %(`aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///'`)
+          %(`aws ecr get-login-password | docker login --username AWS --password-stdin #{arena.compute_provider.repository_domain}}`)
+          # 910122582945.dkr.ecr.ap-southeast-2.amazonaws.com
 
       end
     end
