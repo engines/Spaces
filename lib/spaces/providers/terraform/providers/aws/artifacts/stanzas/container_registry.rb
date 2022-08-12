@@ -68,7 +68,6 @@ module Artifacts
 
         def login_command =
           %(`aws ecr get-login-password | docker login --username AWS --password-stdin #{arena.compute_provider.repository_domain}}`)
-          # 910122582945.dkr.ecr.ap-southeast-2.amazonaws.com
 
       end
     end
