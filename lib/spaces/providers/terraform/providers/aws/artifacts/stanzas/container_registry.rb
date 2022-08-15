@@ -13,8 +13,7 @@ module Artifacts
             )
         end
 
-        def snippets =
-          super + policy_snippet + push_images_snippet
+        def snippets = super + policy_snippet + push_images_snippet
 
         def policy_snippet =
           %(
@@ -51,7 +50,7 @@ module Artifacts
               provisioner "local-exec" {
                 command = <<LINES
                   #{login_command} &&
-                  #{image_push_commands}
+                  #{image_push_commands}; echo 0
                 LINES
               }
 
@@ -68,7 +67,7 @@ module Artifacts
         end
 
         def login_command =
-          %(`aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///'`)
+          %(`aws ecr get-login-password | docker login --username AWS --password-stdin #{arena.compute_provider.repository_domain}}`)
 
       end
     end

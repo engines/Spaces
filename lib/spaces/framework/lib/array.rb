@@ -8,6 +8,8 @@ class Array
   def to_struct = deep(:to_struct)
   def no_symbols = deep(:no_symbols)
 
+  def to_hcl_without_quotes(**args) = to_hcl(**args).gsub('"', '')
+
   def to_hcl(enclosed: true) =
     %(#{'[' if enclosed}
       #{deep(:to_hcl).join(",\n")}

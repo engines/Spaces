@@ -9,16 +9,21 @@ module Artifacts
         class << self
           def default_configuration =
             super.merge(
-              family: :service,
               network_mode: :awsvpc,
               memory: 2048,
               cpus: 1024
             )
         end
 
+        def default_configuration =
+          super.merge(
+            # family: :service
+            family: :"#{application_identifier}"
+          )
+
         def container_services =
-          #TODO: assumes one stanza for all container services in the arena
-          arena.compute_resolutions_for(:container_service)
+          arena.compute_resolutions_for(:container_service).
+            select { |s| s.application_identifier == blueprint_identifier }
 
         def more_snippets =
           %(
@@ -38,6 +43,7 @@ module Artifacts
           container_services.map { |s| definition_snippet_for(s) }.join(",\n")
 
         def definition_snippet_for(r) =
+          #TODO: hostPort must be the same as containerPort when netWorkMode is awsvpc
           %(
             {
               #{with_tailored_keys(hash_for(r)).to_hcl(enclosed:false)}
@@ -50,7 +56,7 @@ module Artifacts
 
         def hash_for(r) =
           {
-            name: r.application_identifier,
+            name: r.image_identifier.hyphenated,
             image: r.image_identifier,
           }.
             merge(task_configuration_hash_for(r)).
