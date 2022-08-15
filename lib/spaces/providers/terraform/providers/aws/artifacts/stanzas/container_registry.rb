@@ -17,8 +17,8 @@ module Artifacts
 
         def policy_snippet =
           %(
-            resource "aws_ecr_repository_policy" "#{application_identifier}" {
-              repository = aws_ecr_repository.#{application_identifier}.name
+            resource "aws_ecr_repository_policy" "#{resource_identifier}" {
+              repository = aws_ecr_repository.#{resource_identifier}.name
               policy     = <<LINES
               {
                 "Version": "2008-10-17",
@@ -46,7 +46,7 @@ module Artifacts
 
         def push_images_snippet =
           %(
-            resource "null_resource" "#{application_identifier}-images-#{Time.now.to_i}" {
+            resource "null_resource" "#{resource_identifier}-images-#{Time.now.to_i}" {
               provisioner "local-exec" {
                 command = <<LINES
                   #{login_command} &&
@@ -55,7 +55,7 @@ module Artifacts
               }
 
               depends_on = [
-                aws_ecr_repository_policy.#{application_identifier}
+                aws_ecr_repository_policy.#{resource_identifier}
               ]
             }
           )

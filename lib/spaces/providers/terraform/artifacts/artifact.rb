@@ -8,7 +8,7 @@ module Artifacts
       def extension = :tf
 
       def dns_address =
-        "#{container_type}.#{application_identifier}.ipv4_address"
+        "#{container_type}.#{resource_identifier}.ipv4_address"
 
       def container_type =
         [runtime_qualifier, 'container'].compact.join('_')

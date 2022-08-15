@@ -27,7 +27,7 @@ module Artifacts
 
         def default_configuration =
           super.merge(
-            description: application_identifier,
+            description: resource_identifier,
             vpc_binding: :vpc,
             in_from_port: 0,
             in_to_port: '',

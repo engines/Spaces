@@ -38,7 +38,7 @@ module Artifacts
             task_definition = aws_ecs_task_definition.#{arena_attachable_qualification_for(:task_definition_binding)}.arn
             load_balancer {
               target_group_arn = aws_lb_target_group.#{arena_attachable_qualification_for(:target_group_binding)}.arn
-              container_name   = "#{application_identifier}"
+              container_name   = "#{resource_identifier}"
               container_port   = "#{ports.first.container_port}"
             }
             network_configuration {

@@ -21,15 +21,13 @@ module Artifacts
 
         def snippets =
           %(
-            resource "aws_#{resource_type_here}" "#{application_identifier}" {
+            resource "aws_#{resource_type_here}" "#{resource_identifier}" {
               #{name_snippet}
               #{configuration_snippet}
               #{tags_snippet}
               #{more_snippets}
             }
           )
-
-        def application_identifier = resolution.identifier.split_compound.join('-').hyphenated
 
         def name_snippet = nil
 
@@ -59,7 +57,7 @@ module Artifacts
 
         def tags_hash =
           {
-            'Name': application_identifier,
+            'Name': resource_identifier,
             'Environment': 'var.app_environment'
           }.merge(configuration_hash[:tags] || {})
 

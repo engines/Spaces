@@ -40,7 +40,7 @@ module Emissions
     def in_blueprint? = false
 
     def self_referring_method?(method) =
-      [:blueprint_identifier, :application_identifier].include?(method.to_sym)
+      [:blueprint_identifier, :application_identifier, :resource_identifier].include?(method.to_sym)
 
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)
