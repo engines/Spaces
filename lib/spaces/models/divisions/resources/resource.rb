@@ -3,7 +3,8 @@ module Divisions
 
     def identifier = struct.identifier || struct.type
 
-    def application_identifier = identifier.hyphenated
+    def resource_identifier =
+      [arena.identifier, identifier].join('-').hyphenated
 
     def configuration = struct.configuration
 
