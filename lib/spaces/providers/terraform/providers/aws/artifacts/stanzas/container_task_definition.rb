@@ -17,7 +17,6 @@ module Artifacts
 
         def default_configuration =
           super.merge(
-            # family: :service
             family: :"#{application_identifier}"
           )
 
