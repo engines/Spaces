@@ -1,4 +1,4 @@
-require_relative 'resource_stanza'
+require_relative 'resource'
 
 module Artifacts
   module Terraform
@@ -6,8 +6,14 @@ module Artifacts
       class ContainerRegistryStanza < ResourceStanza
         include Named
 
-        def snippets =
-          super + policy_snippet + push_images_snippet
+        class << self
+          def default_configuration =
+            super.merge(
+              image_tag_mutability: 'IMMUTABLE'
+            )
+        end
+
+        def snippets = super + policy_snippet + push_images_snippet
 
         def policy_snippet =
           %(
@@ -43,8 +49,8 @@ module Artifacts
             resource "null_resource" "#{application_identifier}-images-#{Time.now.to_i}" {
               provisioner "local-exec" {
                 command = <<LINES
-                  #{get_login_command} &&
-                  #{image_push_commands}
+                  #{login_command} &&
+                  #{image_push_commands}; echo 0
                 LINES
               }
 
@@ -60,13 +66,8 @@ module Artifacts
           end.join(";\n")
         end
 
-        def get_login_command =
-          %(`aws ecr get-login | sed 's|https://||' | sed  '/-e none/s///'`)
-
-        def default_configuration =
-          OpenStruct.new(
-            image_tag_mutability: 'IMMUTABLE'
-          )
+        def login_command =
+          %(`aws ecr get-login-password | docker login --username AWS --password-stdin #{arena.compute_provider.repository_domain}`)
 
       end
     end

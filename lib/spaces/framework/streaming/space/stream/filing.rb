@@ -8,10 +8,6 @@ module Streaming
       def default_model_class; self ;end
     end
 
-    def initialize(stream)
-      @stream = stream
-    end
-
     def path
       super.dirname.join(super.dirname, "#{super.basename}.#{default_extension}")
     end
@@ -25,6 +21,10 @@ module Streaming
     def eot; 4.chr ;end
 
     def identifier = @stream.identifier
+
+    def initialize(stream)
+      @stream = stream
+    end
 
   end
 end

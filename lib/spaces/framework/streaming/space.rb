@@ -7,8 +7,6 @@ module Streaming
       @stream ||= stream_class.new(self)
     end
 
-    protected
-
     def stream_class
       with_filing? ? Filing : Outputting
     end

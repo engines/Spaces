@@ -24,6 +24,9 @@ module Arenas
     def blueprint_identifier = struct.blueprint_identifier
     def application_identifier = struct.application_identifier
 
+    def resource_identifier =
+      [arena_identifier, application_identifier].join('-').hyphenated
+
     def images
       @images ||= duplicate(arena.images).tap { |i| i.emission = self }
     end
