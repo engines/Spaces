@@ -21,6 +21,10 @@ module Artifacts
             )
         end
 
+        def default_configuration = super.merge(port: default_port)
+
+        def default_port = (ports.first.host_port if emission.has?(:ports))
+
         def more_snippets =
           %(
             vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
