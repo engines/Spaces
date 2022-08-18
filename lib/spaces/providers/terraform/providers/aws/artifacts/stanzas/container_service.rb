@@ -11,7 +11,6 @@ module Artifacts
           def default_configuration =
             super.merge(
               cluster_binding: :'container-service-cluster',
-              desired_count: 1,
               launch_type: :'FARGATE'
             )
 
@@ -20,6 +19,7 @@ module Artifacts
 
         def default_configuration =
           super.merge(
+            desired_count: emission.dimensions&.tasks || 1,
             task_definition_binding: default_binding,
             target_group_binding: default_binding,
             subnet_binding: default_binding,
