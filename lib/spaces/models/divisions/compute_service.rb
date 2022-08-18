@@ -11,9 +11,7 @@ module Divisions
 
     def embedded_with(other)
       duplicate(itself).tap do |d|
-        keys_including(other).each do |k|
-          d.struct[k] = other.struct[k].merge(d.struct[k])
-        end
+        d.struct = other.struct.merge(d.struct)
       end
     end
 
