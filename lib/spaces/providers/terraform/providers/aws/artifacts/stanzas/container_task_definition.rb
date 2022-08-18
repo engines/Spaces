@@ -35,8 +35,9 @@ module Artifacts
         def compatibilities =
           "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
 
-        def launch_type_for(r) =
-          r.configuration.launch_type || ContainerServiceStanza.launch_type
+        def launch_type_for(r) = (
+          r.configuration&.launch_type || ContainerServiceStanza.launch_type
+        )
 
         def definition_snippets =
           container_services.map { |s| definition_snippet_for(s) }.join(",\n")
