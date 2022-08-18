@@ -5,7 +5,6 @@ module Artifacts
     module Aws
       class ContainerServiceStanza < CapsuleStanza
         include Named
-        include TaskDefining
 
         class << self
           def default_configuration =

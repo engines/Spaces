@@ -1,5 +1,4 @@
 require_relative 'named'
-require_relative 'task_defining'
 
 module Artifacts
   module Terraform
