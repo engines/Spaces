@@ -45,9 +45,6 @@ module Artifacts
             }
           )
 
-        def configuration_hash =
-          super.without(:cluster_binding, :task_definition_binding, :target_group_binding, :load_balancer_binding, :listener_binding, :subnet_binding)
-
       end
     end
   end

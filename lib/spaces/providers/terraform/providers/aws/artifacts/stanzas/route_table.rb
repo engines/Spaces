@@ -22,9 +22,6 @@ module Artifacts
             }
           )
 
-        def configuration_hash =
-          super.without(:vpc_binding, :gateway_binding)
-
       end
     end
   end

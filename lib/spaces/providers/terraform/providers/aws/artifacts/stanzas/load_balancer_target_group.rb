@@ -42,7 +42,6 @@ module Artifacts
 
           def configuration_hash =
             super.without(
-              :vpc_binding,
               :healthy_threshold,
               :interval,
               :matcher,

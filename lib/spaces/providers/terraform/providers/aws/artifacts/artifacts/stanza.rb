@@ -49,7 +49,7 @@ module Artifacts
         end
 
         def configuration_hash =
-          with_tailored_keys(configuration&.to_h_deep || {})
+          with_tailored_keys(configuration&.to_h_deep || {}).without_binding_keys
 
         def with_tailored_keys(hash) =
           hash.transform_keys { |k| configuration_key_map[k] || k }
@@ -65,4 +65,10 @@ module Artifacts
       end
     end
   end
+end
+
+
+class Hash
+  def without_binding_keys = without(*binding_keys)
+  def binding_keys = keys.select { |k| k.include?('_binding')}
 end
