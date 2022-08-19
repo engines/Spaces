@@ -48,6 +48,8 @@ module Artifacts
           @configuration ||= default_configuration.reverse_merge(super)
         end
 
+        def more_configuration = {}
+
         def configuration_hash =
           with_tailored_keys(configuration&.to_h_deep || {}).
             without(*more_snippets_keys).
@@ -56,7 +58,7 @@ module Artifacts
         def with_tailored_keys(hash) =
           hash.transform_keys { |k| configuration_key_map[k] || k }
 
-        def more_snippets_keys = []
+        def more_snippets_keys = more_configuration.keys
 
         def tags_hash =
           {

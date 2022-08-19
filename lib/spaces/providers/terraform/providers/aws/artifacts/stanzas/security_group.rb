@@ -25,11 +25,7 @@ module Artifacts
             }
           )
 
-        def more_snippets_keys = default_configuration_here.keys
-
-        def default_configuration = super.merge(default_configuration_here)
-
-        def default_configuration_here =
+        def more_configuration =
           {
             description: resource_identifier,
             vpc_binding: :vpc,

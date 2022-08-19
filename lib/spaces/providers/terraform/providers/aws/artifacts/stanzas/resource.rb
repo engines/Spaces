@@ -31,7 +31,7 @@ module Artifacts
           resource_type_map[resource_type.to_sym] || resource_type
 
         def configuration
-          @configuration ||= default_configuration.merge(resource.configuration)
+          @configuration ||= default_configuration.merge(more_configuration).merge(resource.configuration)
         end
 
         def resource_type = resource.type
