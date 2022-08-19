@@ -2,7 +2,7 @@ module Adapters
   module Terraform
     class Volume < ::Adapters::Volume
 
-      def volume_name = "#{application_identifier.hyphenated}-#{source}"
+      def volume_name = "#{resource_identifier}-#{source}"
       def pool_name = "#{source}-pool"
 
     end

@@ -13,7 +13,7 @@ module Artifacts
             )
         end
 
-        def configuration_snippet =
+        def more_snippets =
           %(
             vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
             route {
@@ -21,9 +21,6 @@ module Artifacts
               gateway_id = aws_internet_gateway.#{arena_attachable_qualification_for(:gateway_binding)}.id
             }
           )
-
-        def configuration_hash =
-          super.without(:vpc_binding, :gateway_binding)
 
       end
     end

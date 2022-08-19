@@ -5,13 +5,11 @@ module Artifacts
     module Aws
       class ContainerServiceStanza < CapsuleStanza
         include Named
-        include TaskDefining
 
         class << self
           def default_configuration =
             super.merge(
               cluster_binding: :'container-service-cluster',
-              desired_count: 1,
               launch_type: :'FARGATE'
             )
 
@@ -20,6 +18,7 @@ module Artifacts
 
         def default_configuration =
           super.merge(
+            desired_count: emission.dimensions&.tasks || 1,
             task_definition_binding: default_binding,
             target_group_binding: default_binding,
             subnet_binding: default_binding,
@@ -38,16 +37,13 @@ module Artifacts
             task_definition = aws_ecs_task_definition.#{arena_attachable_qualification_for(:task_definition_binding)}.arn
             load_balancer {
               target_group_arn = aws_lb_target_group.#{arena_attachable_qualification_for(:target_group_binding)}.arn
-              container_name   = "#{application_identifier}"
+              container_name   = "#{resource_identifier}"
               container_port   = "#{ports.first.container_port}"
             }
             network_configuration {
               subnets = [aws_subnet.#{arena_attachable_qualification_for(:subnet_binding)}.id]
             }
           )
-
-        def configuration_hash =
-          super.without(:cluster_binding, :task_definition_binding, :target_group_binding, :load_balancer_binding, :listener_binding, :subnet_binding)
 
       end
     end

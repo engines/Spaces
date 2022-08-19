@@ -11,6 +11,8 @@ class Symbol
   def split(*args) = to_s.split(*args)
   def to_hcl = %("#{self}")
 
+  def include?(segment) = to_s.include?(segment.to_s)
+
   alias_method :underscore, :snakize
   alias_method :no_symbols, :to_s
 

@@ -1,5 +1,4 @@
 require_relative 'named'
-require_relative 'task_defining'
 
 module Artifacts
   module Terraform
@@ -21,15 +20,13 @@ module Artifacts
 
         def snippets =
           %(
-            resource "aws_#{resource_type_here}" "#{application_identifier}" {
+            resource "aws_#{resource_type_here}" "#{resource_identifier}" {
               #{name_snippet}
               #{configuration_snippet}
               #{tags_snippet}
               #{more_snippets}
             }
           )
-
-        def application_identifier = resolution.identifier.split_compound.join('-').hyphenated
 
         def name_snippet = nil
 
@@ -51,15 +48,21 @@ module Artifacts
           @configuration ||= default_configuration.reverse_merge(super)
         end
 
+        def more_configuration = {}
+
         def configuration_hash =
-          with_tailored_keys(configuration&.to_h_deep || {})
+          with_tailored_keys(configuration&.to_h_deep || {}).
+            without(*more_snippets_keys).
+            without_binding_keys
 
         def with_tailored_keys(hash) =
           hash.transform_keys { |k| configuration_key_map[k] || k }
 
+        def more_snippets_keys = more_configuration.keys
+
         def tags_hash =
           {
-            'Name': application_identifier,
+            'Name': resource_identifier,
             'Environment': 'var.app_environment'
           }.merge(configuration_hash[:tags] || {})
 
@@ -68,4 +71,10 @@ module Artifacts
       end
     end
   end
+end
+
+
+class Hash
+  def without_binding_keys = without(*binding_keys)
+  def binding_keys = keys.select { |k| k.include?('_binding')}
 end

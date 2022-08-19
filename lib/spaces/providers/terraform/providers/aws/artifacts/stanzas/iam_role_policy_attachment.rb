@@ -12,7 +12,7 @@ module Artifacts
             )
         end
 
-        def configuration_snippet =
+        def more_snippets =
           #FIX: use terraform HCL instead of AWS notation
           # why did the following not work?
           # aws_iam_role.#{arena_attachable_qualification_for(:role_binding)}.arn

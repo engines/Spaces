@@ -25,13 +25,13 @@ module Artifacts
 
         alias_method :resource, :holder
 
-        def application_identifier = [arena.identifier, resource.identifier].join('-').hyphenated
+        def resource_identifier = [arena.identifier, resource.identifier].join('-').hyphenated
 
         def resource_type_here =
           resource_type_map[resource_type.to_sym] || resource_type
 
         def configuration
-          @configuration ||= default_configuration.merge(resource.configuration)
+          @configuration ||= default_configuration.merge(more_configuration).merge(resource.configuration)
         end
 
         def resource_type = resource.type

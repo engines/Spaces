@@ -17,8 +17,6 @@ module Artifacts
             vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
           )
 
-        def configuration_hash = super.without(:vpc_binding)
-
       end
     end
   end

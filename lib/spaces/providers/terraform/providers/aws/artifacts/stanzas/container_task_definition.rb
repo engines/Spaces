@@ -4,7 +4,6 @@ module Artifacts
   module Terraform
     module Aws
       class ContainerTaskDefinitionStanza < ResourceStanza
-        include TaskDefining
 
         class << self
           def default_configuration =
@@ -35,8 +34,9 @@ module Artifacts
         def compatibilities =
           "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
 
-        def launch_type_for(r) =
-          r.configuration.launch_type || ContainerServiceStanza.launch_type
+        def launch_type_for(r) = (
+          r.configuration&.launch_type || ContainerServiceStanza.launch_type
+        )
 
         def definition_snippets =
           container_services.map { |s| definition_snippet_for(s) }.join(",\n")
@@ -57,18 +57,9 @@ module Artifacts
           {
             name: r.image_identifier.hyphenated,
             image: r.image_identifier,
+            essential: true
           }.
-            merge(task_configuration_hash_for(r)).
             merge(dimensions_hash_for(r))
-
-        def task_configuration_hash_for(r)
-          h = r.configuration&.to_h_deep
-          task_definition_keys.inject({}) do |m, k|
-            m.tap do
-              m[k] = h[k]
-            end
-          end
-        end
 
         def dimensions_hash_for(r) = r.dimensions&.struct&.to_h_deep
 
