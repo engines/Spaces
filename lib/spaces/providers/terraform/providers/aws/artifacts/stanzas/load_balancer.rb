@@ -13,19 +13,17 @@ module Artifacts
             )
         end
 
-        def configuration_snippet =
-          %(
-            subnets         = #{subnet_identifiers.to_hcl_without_quotes}
-            security_groups = #{security_group_identifiers.to_hcl_without_quotes}
-          )
-
         def subnet_identifiers = subnet_array.map { |s| "#{s}.id"}
         def security_group_identifiers = security_group_array.map { |g| "#{g}.id"}
 
         def more_snippets =
           %(
-            depends_on = #{dependency_array.to_hcl_without_quotes}
+            subnets         = #{subnet_identifiers.to_hcl_without_quotes}
+            security_groups = #{security_group_identifiers.to_hcl_without_quotes}
+            depends_on      = #{dependency_array.to_hcl_without_quotes}
           )
+
+        def more_snippets_keys = [:subnets, :security_groups]
 
         def dependency_array = [security_group_array, subnet_array].flatten
 

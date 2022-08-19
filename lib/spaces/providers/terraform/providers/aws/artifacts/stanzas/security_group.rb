@@ -5,7 +5,7 @@ module Artifacts
     module Aws
       class SecurityGroupStanza < ResourceStanza
 
-        def configuration_snippet =
+        def more_snippets =
           %(
             vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
             ingress {
@@ -25,8 +25,12 @@ module Artifacts
             }
           )
 
-        def default_configuration =
-          super.merge(
+        def more_snippets_keys = default_configuration_here.keys
+
+        def default_configuration = super.merge(default_configuration_here)
+
+        def default_configuration_here =
+          {
             description: resource_identifier,
             vpc_binding: :vpc,
             in_from_port: 0,
@@ -39,7 +43,7 @@ module Artifacts
             out_protocol: '-1',
             out_cidr_blocks: ['0.0.0.0/0'],
             out_ipv6_cidr_blocks: ['::/0']
-          )
+          }
 
         def in_ivp6
           %(configuration.in_ipv6_cidr_blocks #{configuration.in_ipv6_cidr_blocks}) if configuration.in_ipv6_cidr_blocks

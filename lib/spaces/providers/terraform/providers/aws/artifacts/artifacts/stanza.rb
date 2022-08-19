@@ -49,10 +49,14 @@ module Artifacts
         end
 
         def configuration_hash =
-          with_tailored_keys(configuration&.to_h_deep || {}).without_binding_keys
+          with_tailored_keys(configuration&.to_h_deep || {}).
+            without(*more_snippets_keys).
+            without_binding_keys
 
         def with_tailored_keys(hash) =
           hash.transform_keys { |k| configuration_key_map[k] || k }
+
+        def more_snippets_keys = []
 
         def tags_hash =
           {

@@ -5,7 +5,7 @@ module Artifacts
     module Aws
       class AcmCertificateStanza < ResourceStanza
 
-        def configuration_snippet =
+        def more_snippets =
           %(
             domain_name       = "#{configuration.domain_name}"
             validation_method = "#{configuration.validation_method}"
@@ -13,6 +13,9 @@ module Artifacts
                  create_before_destroy = #{configuration.create_before_destroy}
             }
           )
+
+        def more_snippets_keys =
+          [:domain_name, :validation_method, :create_before_destroy]
 
       end
     end

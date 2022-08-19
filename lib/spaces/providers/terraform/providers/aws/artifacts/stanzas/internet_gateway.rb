@@ -12,7 +12,7 @@ module Artifacts
             )
         end
 
-        def configuration_snippet =
+        def more_snippets =
           %(
             vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
           )
