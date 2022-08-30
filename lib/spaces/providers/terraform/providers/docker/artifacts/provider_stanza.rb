@@ -5,7 +5,7 @@ module Artifacts
 
         def snippets =
           %(
-            provider "#{arena_attachable_qualification_for(:runtime)}" {
+            provider "#{qualification_for(:runtime)}" {
               # Note need to expand this to support remote hosts
               host = "unix:///var/run/docker.sock"
             }

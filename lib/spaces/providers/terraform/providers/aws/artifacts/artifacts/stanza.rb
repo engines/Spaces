@@ -42,6 +42,8 @@ module Artifacts
         def arena_attachable_qualification_for(attachable) =
           [arena.identifier, configuration.send(attachable)].join('_').hyphenated
 
+        alias_method :qualification_for, :arena_attachable_qualification_for
+
         def default_binding = :"#{blueprint_identifier.hyphenated}"
 
         def configuration

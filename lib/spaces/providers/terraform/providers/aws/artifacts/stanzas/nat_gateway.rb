@@ -14,11 +14,11 @@ module Artifacts
 
         def more_snippets =
           %(
-            subnet_id = aws_subnet.#{arena_attachable_qualification_for(:subnet_binding)}.id
-            allocation_id = aws_eip.#{arena_attachable_qualification_for(:allocation_binding)}.id
+            subnet_id = aws_subnet.#{qualification_for(:subnet_binding)}.id
+            allocation_id = aws_eip.#{qualification_for(:allocation_binding)}.id
 
             depends_on = [
-              aws_internet_gateway.#{arena_attachable_qualification_for(:internet_gateway_binding)}
+              aws_internet_gateway.#{qualification_for(:internet_gateway_binding)}
             ]
           )
 

@@ -29,19 +29,19 @@ module Artifacts
         def more_snippets =
           %(
             depends_on = [
-              aws_lb.#{arena_attachable_qualification_for(:load_balancer_binding)},
-              aws_lb_listener.#{arena_attachable_qualification_for(:listener_binding)}
+              aws_lb.#{qualification_for(:load_balancer_binding)},
+              aws_lb_listener.#{qualification_for(:listener_binding)}
             ]
 
-            cluster = aws_ecs_cluster.#{arena_attachable_qualification_for(:cluster_binding)}.id
-            task_definition = aws_ecs_task_definition.#{arena_attachable_qualification_for(:task_definition_binding)}.arn
+            cluster = aws_ecs_cluster.#{qualification_for(:cluster_binding)}.id
+            task_definition = aws_ecs_task_definition.#{qualification_for(:task_definition_binding)}.arn
             load_balancer {
-              target_group_arn = aws_lb_target_group.#{arena_attachable_qualification_for(:target_group_binding)}.arn
+              target_group_arn = aws_lb_target_group.#{qualification_for(:target_group_binding)}.arn
               container_name   = "#{resource_identifier}"
               container_port   = "#{ports.first.container_port}"
             }
             network_configuration {
-              subnets = [aws_subnet.#{arena_attachable_qualification_for(:subnet_binding)}.id]
+              subnets = [aws_subnet.#{qualification_for(:subnet_binding)}.id]
             }
           )
 
