@@ -4,6 +4,7 @@ module Artifacts
   module Terraform
     module Aws
       class SecurityGroupStanza < ResourceStanza
+        include Named
 
         def more_snippets =
           %(

@@ -4,6 +4,7 @@ module Artifacts
   module Terraform
     module Aws
       class LoadBalancerStanza < ResourceStanza
+        include Named
 
         delegate(resources_by: :arena)
 
