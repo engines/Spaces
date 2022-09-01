@@ -11,7 +11,10 @@ module Providers
       )
 
       def execute(command)
-        identifier.tap { orchestration_for(command) }
+        identifier.tap do
+          orchestration_for(command)
+          arena.save_cache
+        end
       end
 
       protected
