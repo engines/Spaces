@@ -1,14 +1,19 @@
 module Spaces
-  class Space < Model
+  class Model < Thing
 
     class << self
       def universes
-        @@universes ||= ::Universes::Space.new
+        @@universes ||= ::Universes::Multiverse.new
       end
-
-      def universe = universes.universe
     end
 
     delegate(universes: :klass)
+
+    #FIX -- should derive universe from the context of a model's enclosing space
+    def universe = universes.universe
+    def cache = universes.cache
+
+    def space_named(name) = universe.send(name)
+
   end
 end

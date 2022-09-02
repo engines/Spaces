@@ -1,4 +1,4 @@
-require './x/universe'
+require './x/universes'
 
 def controllers
   @controllers ||= OpenStruct.new(

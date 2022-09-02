@@ -4,6 +4,7 @@ module Artifacts
   module Terraform
     module Aws
       class LoadBalancerTargetGroupStanza < ResourceStanza
+        include Named
 
         class << self
           def default_configuration =
@@ -27,7 +28,7 @@ module Artifacts
 
         def more_snippets =
           %(
-            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
+            vpc_id = aws_vpc.#{qualification_for(:vpc_binding)}.id
 
             health_check {
               healthy_threshold   = #{configuration.healthy_threshold}

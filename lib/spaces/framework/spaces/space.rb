@@ -19,8 +19,8 @@ module Spaces
 
     def absent(array) = array.reject { |m| exist?(m) }
 
-    def initialize(identifier:)
-      self.struct = OpenStruct.new(identifier: identifier.to_sym)
+    def initialize(**args)
+      self.struct = OpenStruct.new(args.transform_values(&:to_sym))
     end
 
     protected

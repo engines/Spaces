@@ -8,14 +8,18 @@ module Artifacts
         class << self
           def default_configuration =
             super.merge(
-              vpc_binding: :vpc
+              vpc_binding: :vpc,
+              public: false
             )
         end
 
         def more_snippets =
           %(
-            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
+            map_public_ip_on_launch = #{configuration.public}
+            vpc_id = aws_vpc.#{qualification_for(:vpc_binding)}.id
           )
+
+        def configuration_hash = super.without(:public)
 
       end
     end

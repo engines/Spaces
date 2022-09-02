@@ -4,10 +4,11 @@ module Artifacts
   module Terraform
     module Aws
       class SecurityGroupStanza < ResourceStanza
+        include Named
 
         def more_snippets =
           %(
-            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
+            vpc_id = aws_vpc.#{qualification_for(:vpc_binding)}.id
             ingress {
               from_port        = #{configuration.in_from_port}
               to_port          = #{configuration.in_to_port}
