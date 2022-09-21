@@ -1,7 +1,9 @@
 require_relative 'identifiable'
+require_relative 'abbreviating'
 
 class String
   include Identifiable
+  include Abbreviating
 
   BLANK_RE = /\A[[:space:]]*\z/
 

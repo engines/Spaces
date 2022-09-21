@@ -46,7 +46,7 @@ module Artifacts
 
         def push_images_snippet =
           %(
-            resource "null_resource" "#{resource_identifier}-images-#{Time.now.to_i}" {
+            resource "null_resource" "#{images_resource_identifier}" {
               provisioner "local-exec" {
                 command = <<LINES
                   #{login_command} &&
@@ -59,6 +59,9 @@ module Artifacts
               ]
             }
           )
+
+        def images_resource_identifier =
+          "#{resource_identifier}-images-#{Time.now.to_i}".abbreviated_to(32)
 
         def image_push_commands
           arena.compute_resolutions_for(:container_service).map do |r|
