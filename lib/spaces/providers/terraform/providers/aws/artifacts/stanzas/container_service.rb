@@ -19,6 +19,7 @@ module Artifacts
         def default_configuration =
           super.merge(
             desired_count: emission.dimensions&.tasks || 1,
+            security_group_binding: :security_group,
             task_definition_binding: default_binding,
             target_group_binding: default_binding,
             subnet_binding: default_binding,
@@ -42,6 +43,7 @@ module Artifacts
             }
             network_configuration {
               subnets = [aws_subnet.#{qualification_for(:subnet_binding)}.id]
+              security_groups = [aws_security_group.#{qualification_for(:security_group_binding)}.id]
             }
           )
 
