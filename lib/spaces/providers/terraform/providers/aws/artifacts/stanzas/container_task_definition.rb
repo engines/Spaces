@@ -10,7 +10,8 @@ module Artifacts
             super.merge(
               network_mode: :awsvpc,
               memory: 2048,
-              cpus: 1024
+              cpus: 1024,
+              role_binding: :'iam-role'
             )
         end
 
@@ -25,6 +26,7 @@ module Artifacts
 
         def more_snippets =
           %(
+            execution_role_arn = aws_iam_role.#{qualification_for(:role_binding)}.arn
             requires_compatibilities = #{compatibilities}
             container_definitions = jsonencode([
               #{definition_snippets}
