@@ -25,7 +25,7 @@ module Artifacts
 
         alias_method :resource, :holder
 
-        def resource_identifier = [arena.identifier, resource.identifier].join('-').hyphenated.abbreviated_to(32)
+        def resource_identifier = [arena.identifier, resource.identifier].join('-').hyphenated.abbreviated_to(maximum_identifier_length)
 
         def resource_type_here =
           resource_type_map[resource_type.to_sym] || resource_type
