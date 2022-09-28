@@ -40,7 +40,9 @@ module Artifacts
           [arena.identifier, resource.identifier].join('_').hyphenated
 
         def arena_attachable_qualification_for(attachable) =
-          [arena.identifier, configuration.send(attachable)].join('_').hyphenated
+          [arena.identifier, configuration.send(attachable)].join('_').hyphenated.abbreviated_to(maximum_identifier_length)
+
+        def maximum_identifier_length = 32
 
         alias_method :qualification_for, :arena_attachable_qualification_for
 
