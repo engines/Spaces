@@ -13,9 +13,9 @@ module Artifacts
             )
         end
 
-        def configuration_snippet =
+        def more_snippets =
           %(
-            role = aws_iam_role.#{arena_attachable_qualification_for(:role_binding)}.id
+            role = aws_iam_role.#{qualification_for(:role_binding)}.id
 
             policy = jsonencode({
               Version = "2012-10-17"

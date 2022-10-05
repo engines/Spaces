@@ -6,14 +6,6 @@ module Spaces
     include Asserting
     include Inflatable
 
-    class << self
-      def universe = Space.universe
-    end
-
-    delegate(universe: :klass)
-
-    def space_named(name) = universe.send(name)
-
     def file_name = klass.qualifier
     def subpath = Pathname('')
     def uniqueness = [klass.name, identifier]

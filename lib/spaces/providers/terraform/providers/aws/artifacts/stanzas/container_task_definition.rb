@@ -4,14 +4,14 @@ module Artifacts
   module Terraform
     module Aws
       class ContainerTaskDefinitionStanza < ResourceStanza
-        include TaskDefining
 
         class << self
           def default_configuration =
             super.merge(
               network_mode: :awsvpc,
               memory: 2048,
-              cpus: 1024
+              cpus: 1024,
+              role_binding: :'iam-role'
             )
         end
 
@@ -26,6 +26,7 @@ module Artifacts
 
         def more_snippets =
           %(
+            execution_role_arn = aws_iam_role.#{qualification_for(:role_binding)}.arn
             requires_compatibilities = #{compatibilities}
             container_definitions = jsonencode([
               #{definition_snippets}
@@ -35,8 +36,9 @@ module Artifacts
         def compatibilities =
           "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
 
-        def launch_type_for(r) =
-          r.configuration.launch_type || ContainerServiceStanza.launch_type
+        def launch_type_for(r) = (
+          r.configuration&.launch_type || ContainerServiceStanza.launch_type
+        )
 
         def definition_snippets =
           container_services.map { |s| definition_snippet_for(s) }.join(",\n")
@@ -56,19 +58,10 @@ module Artifacts
         def hash_for(r) =
           {
             name: r.image_identifier.hyphenated,
-            image: r.image_identifier,
+            image: "#{arena.compute_repository_path}:#{r.image_identifier}",
+            essential: true
           }.
-            merge(task_configuration_hash_for(r)).
             merge(dimensions_hash_for(r))
-
-        def task_configuration_hash_for(r)
-          h = r.configuration&.to_h_deep
-          task_definition_keys.inject({}) do |m, k|
-            m.tap do
-              m[k] = h[k]
-            end
-          end
-        end
 
         def dimensions_hash_for(r) = r.dimensions&.struct&.to_h_deep
 

@@ -5,7 +5,7 @@ module Spaces
     include Workspace
 
     def path =
-      workspace.join("#{universes.identifier}", "#{identifier}")
+      workspace.join("#{universe_identifier}", "#{identifier}")
 
     def reading_path_for(identifiable, klass = default_model_class) =
       path.join(identifiable.identifier.as_path, klass.qualifier)

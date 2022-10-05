@@ -4,10 +4,11 @@ module Artifacts
   module Terraform
     module Aws
       class SecurityGroupStanza < ResourceStanza
+        include Named
 
-        def configuration_snippet =
+        def more_snippets =
           %(
-            vpc_id = aws_vpc.#{arena_attachable_qualification_for(:vpc_binding)}.id
+            vpc_id = aws_vpc.#{qualification_for(:vpc_binding)}.id
             ingress {
               from_port        = #{configuration.in_from_port}
               to_port          = #{configuration.in_to_port}
@@ -25,9 +26,9 @@ module Artifacts
             }
           )
 
-        def default_configuration =
-          super.merge(
-            description: application_identifier,
+        def more_configuration =
+          {
+            description: resource_identifier,
             vpc_binding: :vpc,
             in_from_port: 0,
             in_to_port: '',
@@ -39,7 +40,7 @@ module Artifacts
             out_protocol: '-1',
             out_cidr_blocks: ['0.0.0.0/0'],
             out_ipv6_cidr_blocks: ['::/0']
-          )
+          }
 
         def in_ivp6
           %(configuration.in_ipv6_cidr_blocks #{configuration.in_ipv6_cidr_blocks}) if configuration.in_ipv6_cidr_blocks

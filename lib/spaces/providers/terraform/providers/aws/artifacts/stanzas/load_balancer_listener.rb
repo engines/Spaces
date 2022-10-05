@@ -16,8 +16,8 @@ module Artifacts
 
         def default_configuration =
           super.merge(
-            target_group: application_identifier,
-            load_balancer: application_identifier
+            target_group: resource_identifier,
+            load_balancer: resource_identifier
           )
 
         def more_snippets =

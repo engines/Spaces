@@ -7,7 +7,7 @@ module Artifacts
 
         def default_configuration =
           super.merge(
-            description: application_identifier,
+            description: resource_identifier,
       			deletion_window_in_days: 10,
       			is_enabled: true,
       			enable_key_rotation: false,
