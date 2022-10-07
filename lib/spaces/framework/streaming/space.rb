@@ -1,33 +1,19 @@
 module Streaming
-  class Space < Spaces::Space
+  class Space < Spaces::PathSpace
 
-    attr_accessor :streaming
-
-    def stream
-      @stream ||= stream_class.new(self)
+    def by(command)
+      stream_class_for(command).new(command)
     end
 
-    def stream_class
-      with_filing? ? Filing : Outputting
+    alias_method :over, :by
+
+    def stream_class_for(command)
+      with_filing?(command) ? FileStream : OutputStream
     end
 
-    def with_filing?
-      streaming.is_a?(Spaces::Commands::Tailing) ||
-      streaming.input[:background]
-    end
-
-    def segments
-      streaming.stream_elements.flatten.map(&:identifier)
-    end
-
-    def identifier
-      [:streaming, segments].flatten.join(identifier_separator).as_path
-    end
-
-    def identifier_separator; ''.identifier_separator ;end
-
-    def initialize(streaming)
-      self.streaming = streaming
+    def with_filing?(command)
+      command.is_a?(Spaces::Commands::Tailing) ||
+      command.input[:background]
     end
 
   end

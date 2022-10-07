@@ -1,7 +1,8 @@
 require 'io/console'
+require_relative 'stream'
 
 module Streaming
-  class Outputting < ::Spaces::Space
+  class OutputStream < Stream
     include Producing
 
     def init
@@ -49,14 +50,10 @@ module Streaming
     end
 
     def verbose?
-      @stream.streaming.input[:verbose]
+      command.input[:verbose]
     end
 
-    def identifier = @stream.identifier
-
-    def initialize(stream)
-      @stream = stream
-    end
+    # def identifier = @stream.identifier
 
   end
 end
