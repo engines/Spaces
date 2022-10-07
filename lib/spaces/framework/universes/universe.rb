@@ -33,7 +33,8 @@ module Universes
         Images::Space.new(identifier: :images, universe_identifier: identifier),
         Capsules::Space.new(identifier: :capsules, universe_identifier: identifier),
 
-        ::Spaces::Commands::Space.new(identifier: :commands, universe_identifier: identifier)
+        ::Spaces::Commands::Space.new(identifier: :commands, universe_identifier: identifier),
+        Streaming::Space.new(identifier: :streaming, universe_identifier: identifier)
       ]
     end
 
