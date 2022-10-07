@@ -7,6 +7,8 @@ module Spaces
 
       def instruction = input_for(:execute)
 
+      def qualifier = instruction
+
       protected
 
       def commit

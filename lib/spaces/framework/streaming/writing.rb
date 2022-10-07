@@ -23,9 +23,14 @@ module Streaming
     end
 
     def init
-      path.dirname.mkpath
-      File.open(path, 'w') {}
+      stream_path.dirname.mkpath
+      File.open(stream_path, 'w') {}
     end
+
+    def stream_path =
+      dirname.join("#{identifier.as_path}.#{default_extension}")
+
+    def default_extension = :out
 
     def close
       append(eot)
@@ -34,7 +39,7 @@ module Streaming
     protected
 
     def append(line)
-      File.open(path, 'a') { |f| f.write("#{line}\n") }
+      File.open(stream_path, 'a') { |f| f.write("#{line}\n") }
     end
 
     def encoded_output_for(line) = {output: line}.to_json
