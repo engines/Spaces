@@ -5,29 +5,26 @@ module Streaming
   class OutputStream < Stream
     include Producing
 
-    def init
-      print("\033[?25l")
-    end
+    def init = hide_cursor
+    def close = show_cursor
 
-    def close
-      print("\033[?25h")
-    end
+    def verbose? = command.input[:verbose]
 
-    def error(message)
-      print("\033[0;33m#{message}\033[0m")
-    end
+    def error(line) =
+      print("\033[0;33m#{line}\033[0m")
+
+    # The << method is so stream behaves like STDOUT
+    def << (line) = output(line)
 
     def exception
       # Do nothing. Exception logged elsewhere.
     end
 
-    def output(line)
+    def output(line) =
       verbose? ? print(line) : progress_line(line)
-    end
 
-    def progress_line(line)
+    def progress_line(line) =
       line.split(/\R+/).each { |r| progress_row(r) }
-    end
 
     def progress_row(row)
       max = IO.console.winsize[1] - 1
@@ -36,24 +33,16 @@ module Streaming
       print("#{text}\r")
     end
 
-    def clear_row
-      print("\033[2K")
-    end
+    def hide_cursor = print("\033[?25l")
+    def show_cursor = print("\033[?25h")
+    def clear_row = print("\033[2K")
 
-    def spinner
-      '⠋⠙⠸⢰⣠⣄⡆⠇'[spin]
-    end
+    def spinner = '⠋⠙⠸⢰⣠⣄⡆⠇'[spin]
 
     def spin
       return @spin = 0 if @spin == 7
       @spin = @spin.to_i + 1
     end
-
-    def verbose?
-      command.input[:verbose]
-    end
-
-    # def identifier = @stream.identifier
 
   end
 end

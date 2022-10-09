@@ -2,7 +2,7 @@ module Streaming
   module Consuming
 
     def consume(callback)
-      File.open(path, 'r').tap { |f| follow(f, callback) }
+      File.open(stream_path, 'r').tap { |f| follow(f, callback) }
     end
 
     protected

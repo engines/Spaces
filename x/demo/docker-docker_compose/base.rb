@@ -32,4 +32,4 @@ pack_identifier = "base::#{blueprint_identifier}"
 # controllers.packing.build(identifier: pack_identifier, verbose: false)
 result = controllers.packing.build(identifier: pack_identifier, background: true).result
 result.to_json
-controllers.streaming.tail(space: :packs, stream_identifier: :building, identifier: pack_identifier, timestamp: result[:timestamp]).to_json
+controllers.streaming.tail(space: :packs, stream_identifier: :build, identifier: pack_identifier, timestamp: result[:timestamp]).to_json

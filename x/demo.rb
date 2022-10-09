@@ -10,9 +10,9 @@ def callback =
 require 'byebug'
 
 require './x/common/controllers'
-require './x/demo/nuke'
-require './x/demo/init'
-require './x/demo/base'
-require './x/demo/infrastructure'
-require './x/demo/services'
-require './x/demo/applications'
+
+require './x/demo/packer-terraform-aws/nuke'
+require './x/demo/packer-terraform-aws/image'
+require './x/demo/packer-terraform-aws/mxr'
+require './x/demo/packer-terraform-aws/registry'
+require './x/demo/packer-terraform-aws/applications'
