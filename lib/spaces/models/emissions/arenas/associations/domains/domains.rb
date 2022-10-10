@@ -4,13 +4,9 @@ module Associations
   class Domains < ::Divisions::Divisible
     include Exotica
 
-    def all_with_primary_first
-      [primary, all].flatten.uniq(&:identifier)
-    end
+    def all_with_primary_first = [primary, all].flatten.uniq(&:identifier)
 
-    def primary
-      map.detect(&:primary?)
-    end
+    def primary = map.first
 
   end
 end

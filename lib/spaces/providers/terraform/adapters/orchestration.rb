@@ -2,9 +2,7 @@ module Adapters
   module Terraform
     class Orchestration < ::Adapters::Orchestration
 
-      def artifact_qualifiers
-        [:capsule, :resources]
-      end
+      def artifact_qualifiers = [:capsule, :resources]
 
       def artifacts
         @artifacts ||= artifact_qualifiers.map do |q|
@@ -17,7 +15,7 @@ module Adapters
       end
 
       def resources_artifact
-        artifact_class_for(:resources)&.new(self) if has?(:resources)
+        artifact_class_for(:resources)&.new(self) if resolution.has?(:resources)
       end
 
     end

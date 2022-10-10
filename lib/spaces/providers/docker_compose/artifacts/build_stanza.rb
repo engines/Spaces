@@ -2,7 +2,7 @@ module Artifacts
   module DockerCompose
     class BuildStanza < ::Artifacts::Stanza
 
-      def snippets
+      def snippets =
         {
           context: packs.path_for(resolution).to_s,
           args: [
@@ -14,7 +14,6 @@ module Artifacts
             other_label: :gidday
           }
         }
-      end
 
     end
   end

@@ -17,21 +17,18 @@ module Commissioning
       end
     end
 
-    def registered?(milestone_name)
+    def registered?(milestone_name) =
       registry.has_milestone?(service_entry_identifier, milestone_name)
-    end
 
-    def register(milestone_name)
+    def register(milestone_name) =
       registry.save_milestone(service_entry_identifier, milestone_name)
-    end
 
     def interface
       @interface ||= provider.interface_for(self)
     end
 
-    def commands_for(name)
+    def commands_for(name) =
       milestones_for(name).map { |m| "#{m.path}" }
-    end
 
     def milestones_for(name)
       milestones.
@@ -39,9 +36,8 @@ module Commissioning
         sort_by { |m| precedence.index(precedence_for(m.precedence)) }
     end
 
-    def parameters
+    def parameters =
       consumer.send(blueprint_identifier).service_string_array
-    end
 
     def services
       precedence_file_names.map do |p|
@@ -54,21 +50,17 @@ module Commissioning
       end
     end
 
-    def container_path_from(precedence_path)
+    def container_path_from(precedence_path) =
       "/#{precedence_path}".split('/').drop(1).join('/')
-    end
 
-    def precedence_from(precedence_path)
+    def precedence_from(precedence_path) =
       "#{precedence_path}".split('/').first
-    end
 
-    def precedence_file_names
+    def precedence_file_names =
       resolutions.precedence_file_names_for(:servicing, identifier)
-    end
 
-    def milestone_identifier_from(path)
+    def milestone_identifier_from(path) =
       path.basename.to_s.split('_').first
-    end
 
     def cache_identifiers!
       struct.consumer_identifier = consumer.identifier

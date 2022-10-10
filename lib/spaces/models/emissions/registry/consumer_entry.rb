@@ -2,28 +2,24 @@ module Registry
   class ConsumerEntry < Resolving::Emission
 
     class << self
-      def composition_class; EntryComposition ;end
+      def composition_class = EntryComposition
     end
 
     alias_accessor :consumer, :resolution
 
     delegate(arena: :consumer)
 
-    def bindings; division_map[:bindings] ;end
-    def binding; bindings.first ;end
+    def bindings = division_map[:bindings]
+    def binding = bindings.first
 
-    def binding_identifier; binding.identifier ;end
-    def consumer_identifier; struct[:consumer_identifier] ;end
+    def binding_identifier = binding.identifier
+    def consumer_identifier = struct[:consumer_identifier]
 
-    def service_identifier
-      service_connection.identifier
-    end
+    def service_identifier = service_connection.identifier
 
-    def service_connection
-      arena.resolution_map[binding.identifier]
-    end
+    def service_connection = arena.resolution_map[binding.identifier]
 
-    def keys; composition.keys ;end
+    def keys = composition.keys
 
     def cache_identifiers!
       struct.consumer_identifier = consumer.identifier

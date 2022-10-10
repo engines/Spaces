@@ -1,19 +1,21 @@
-require_relative 'space'
-
 module Streaming
   module Streaming
 
     def with_streaming(&block)
-      stream.clear
+      stream.init
       stream.produce(&block)
+    ensure
+      stream.close
     end
 
-    def stream
-      @stream ||= input[:stream] || stream_class.new(stream_elements)
-    end
+    def stream = input[:stream] || universe.streaming.over(self)
 
-    def stream_class; Space ;end
-    def stream_elements; [space.identifier, input_for(:identifier), qualifier] ;end
+    def stream_elements =
+      [ space.identifier,
+        input_for(:identifier),
+        qualifier,
+        timestamp
+      ]
 
   end
 end

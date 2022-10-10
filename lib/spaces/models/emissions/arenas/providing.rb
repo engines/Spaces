@@ -7,29 +7,23 @@ module Arenas
       end
     end
 
-    def perform?(role_identifier)
+    def perform?(role_identifier) =
       role_identifiers.include?(role_identifier.to_sym)
-    end
 
-    def role_identifiers
-      role_providers.identifiers
-    end
+    def role_identifiers = role_providers.identifiers
+    def provider_identifiers = role_providers.provider_identifiers
 
-    def providers
+    def providers =
       role_providers.map(&:provider).uniq(&:identifier)
-    end
 
-    def provider_for(role_identifier)
+    def provider_for(role_identifier) =
       role_providers.named(role_identifier)&.provider
-    end
 
-    def qualifier_for(role_identifier)
+    def qualifier_for(role_identifier) =
       provider_for(role_identifier)&.qualifier
-    end
 
-    def resolution_for(role_identifier)
+    def resolution_for(role_identifier) =
       provider_for(role_identifier)&.resolution
-    end
 
     def role_for(provider_identifier)
       role_providers.detect do |rp|
@@ -37,17 +31,14 @@ module Arenas
       end
     end
 
-    def compute_provider_for(provider_identifier)
+    def compute_provider_for(provider_identifier) =
       role_for(provider_identifier)&.compute_provider
-    end
 
-    def compute_provider
-      role_providers.orchestration&.compute_provider
-    end
+    def compute_provider =
+      role_providers.named(:orchestration)&.compute_provider
 
-    def compute_repository_path
-      "#{compute_provider.repository_domain}/#{container_registry.application_identifier}"
-    end
+    def compute_repository_path =
+      "#{compute_provider.repository_domain}/#{container_registry.resource_identifier}"
 
   end
 end

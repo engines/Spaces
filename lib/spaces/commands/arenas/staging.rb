@@ -2,7 +2,7 @@ module Arenas
   module Commands
     class Staging < ::Spaces::Commands::Iterating
 
-      def mutating?; true ;end
+      def mutating? = true
 
       def subcommands
         @subcommands ||= [

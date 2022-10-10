@@ -5,13 +5,10 @@ module Adapters
 
     alias_method :orchestration, :emission
 
-    def provider
-      provider_for(:orchestration)
-    end
+    def provider = provider_for(:orchestration)
 
-    def adapter_name_elements
+    def adapter_name_elements =
       [super, compute_qualifier_for(:runtime), qualifier_for(:runtime)].flatten.compact
-    end
 
   end
 end

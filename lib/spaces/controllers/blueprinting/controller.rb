@@ -2,7 +2,7 @@ module Blueprinting
   module Controllers
     class Controller < ::Spaces::Controllers::RESTController
 
-      def space_identifier; :blueprints ;end
+      def space_identifier = :blueprints
 
       def action_command_map
         @action_command_map ||= super.merge({

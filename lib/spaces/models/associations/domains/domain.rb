@@ -1,13 +1,8 @@
 module Domains
   class Domain < ::Spaces::Model
 
-    def name; identifier ;end
-
-    def identifier; struct[:identifier] ;end
-
-    def primary?
-      struct.primary
-    end
+    def name = identifier
+    def identifier = struct[:identifier]
 
     def initialize(struct: nil, identifiable: nil)
       super(struct: struct)

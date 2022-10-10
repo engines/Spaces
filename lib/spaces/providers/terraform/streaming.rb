@@ -2,20 +2,15 @@ module Providers
   module Terraform
     module Streaming
 
-    def config(out)
+    def config(out) =
       {
         stdout: out,
         stderr: out,
         logger: logger
       }
-    end
 
-    def out(command, model)
-      ->(output) do
-        stream_for(:orchestrations, model, command).output(output)
-        logger.info(output.strip)
-      end
-    end
+    def out(command, model) =
+      ->(output) { stream_for(:orchestrations, model, command).output(output) }
 
     end
   end

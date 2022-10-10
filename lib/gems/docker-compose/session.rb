@@ -1,12 +1,13 @@
 # Added :stdout to :buffered option.
+# Removed interactive: true.
+# Added &block to .run!
 module Docker::Compose
   class Session
 
     # Add :stdout to buffered option.
     def initialize(
       shell = Backticks::Runner.new(
-        buffered: [:stdout, :stderr],
-        interactive: true
+        buffered: [:stdout, :stderr]
       ),
       dir: Dir.pwd,
       file: 'docker-compose.yml'

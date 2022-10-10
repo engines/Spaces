@@ -11,12 +11,16 @@ module Providers
       )
 
       def execute(command)
-        identifier.tap { orchestration_for(command) }
+        identifier.tap do
+          orchestration_for(command)
+          arena.save_cache
+        end
       end
 
       protected
 
       def orchestration_for(command)
+        configure_ruby_terraform
         stream&.output("\n") unless command == :init
         Dir.chdir(path_for(arena)) do
           copy_artifacts
@@ -27,6 +31,13 @@ module Providers
           stream&.error("#{e}\n")
         ensure
           remove_artifacts
+        end
+      end
+
+      def configure_ruby_terraform
+        RubyTerraform.configure do |config|
+          config.stdout = stream
+          config.stderr = stream
         end
       end
 
@@ -42,9 +53,9 @@ module Providers
         end
       end
 
-      def bridge; RubyTerraform ;end
+      def bridge = RubyTerraform
 
-      def options
+      def options =
         {
           plan: {
             input: false
@@ -54,7 +65,6 @@ module Providers
             auto_approve: true
           }
         }
-      end
 
     end
   end

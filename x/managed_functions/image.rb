@@ -1,10 +1,10 @@
 # load the code!
-# require './x/controllers'
+# require './x/common/controllers'
 
 # ------------------------------------------------------------------------------
 
 # import blueprint to build a base image
-controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/python'}, threaded: false)
+controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS/python'}, verbose: true)
 
 # ------------------------------------------------------------------------------
 
@@ -34,4 +34,4 @@ controllers.arenas.bind(identifier: :base, blueprint_identifier: :'python')
 controllers.arenas.stage(identifier: :base)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :base, threaded: false)
+# controllers.arenas.build(identifier: :base, verbose: true)

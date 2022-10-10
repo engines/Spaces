@@ -6,10 +6,10 @@ module Spaces
 
       alias_method :model, :current_model
 
-      def result; payload.map(&:result) ;end
-      def errors; payload.map(&:errors) ;end
+      def result =  payload.map(&:result)
+      def errors = payload.map(&:errors)
 
-      def payload; subcommands.map(&:payload) ;end
+      def payload = subcommands.map(&:payload)
 
       def subcommands
         @subcommands ||= inputs.map do |i|
@@ -23,18 +23,18 @@ module Spaces
         end
       end
 
-      def array; [] ;end
+      def array = []
 
-      def subcommand_class ;end
-      def subcommand_inputs; {} ;end
+      def subcommand_class = nil
+      def subcommand_inputs =  {}
 
-      def mutating?; subcommand_class.mutating? ;end
+      def mutating? = subcommand_class.mutating?
 
       protected
 
       def _run
-        space.touch(model) if mutating?
-        struct.result = subcommands.map(&:run).map(&:result)
+        #REFACTOR: run/log/result partially duplicates Control#calling_chain
+        struct.result = subcommands.map(&:run).map(&:log).map(&:result)
       end
 
     end

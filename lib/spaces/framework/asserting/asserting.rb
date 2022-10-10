@@ -3,21 +3,19 @@ require_relative 'errors'
 module Spaces
   module Asserting
 
-    def insist; affirm(precondition) ;end
-    def assure; affirm(postcondition) ;end
-    def enforce; affirm(invariant) ;end
+    def insist(assertion = nil) = affirm(assertion || precondition)
+    def assure(assertion = nil ) = affirm(assertion || postcondition)
+    def enforce(assertion = nil) = affirm(assertion || invariant)
 
     def affirm(clauses)
-      (raise ::Spaces::Errors::FailedAffirmation, clauses) if failed?(clauses)
+      (raise ::Spaces::Errors::FailedAssertion, clauses) if failed?(clauses)
     end
 
-    def failed?(clauses)
-      [clauses.values].flatten.uniq.include?(false)
-    end
+    def failed?(clauses) = [clauses.values].flatten.uniq.include?(false)
 
-    def precondition; {} ;end
-    def postcondition; {} ;end
-    def invariant; {} ;end
+    def precondition = {}
+    def postcondition = {}
+    def invariant = {}
 
   end
 end

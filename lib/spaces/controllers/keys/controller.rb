@@ -2,7 +2,7 @@ module Keys
   module Controllers
     class Controller < ::Spaces::Controllers::RESTController
 
-      def space_identifier; :user_keys ;end
+      def space_identifier = :user_keys
 
       def action_command_map
         @action_command_map ||= super.merge({

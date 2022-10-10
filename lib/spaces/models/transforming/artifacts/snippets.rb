@@ -1,13 +1,11 @@
 module Artifacts
   module Snippets
 
-    def snippets
+    def snippets =
       no_stanzas? ? snippets_here : stanzas.map(&:snippets)
-    end
 
-    def snippets_here
+    def snippets_here =
       precedence.map { |p| snippet_map[p] }.compact
-    end
 
     def snippet_map
       @snippet_map ||= adapters.reduce({}) do |m, a|
@@ -20,11 +18,11 @@ module Artifacts
       end
     end
 
-    def snippet_keys; snippet_map.keys ;end
+    def snippet_keys =  snippet_map.keys
 
-    def no_stanzas?; stanza_qualifiers.empty? ;end
+    def no_stanzas? = stanza_qualifiers.empty?
 
-    def stanza_qualifiers; [] ;end
+    def stanza_qualifiers = []
 
     def stanzas
       @stanzas ||= stanza_qualifiers.map { |q| stanza_class_for(q).new(self) }
@@ -33,7 +31,9 @@ module Artifacts
     def stanza_class_for(qualifier)
       class_for(nesting_elements, "#{qualifier}_stanza")
     rescue NameError => e
-      warn(error: e, identifier: emission.identifier, elements: nesting_elements)
+      warn(error: e, method: :stanza_class_for,
+        elements: nesting_elements, identifier: emission.identifier
+      )
       class_for(nesting_elements.drop(1), "#{qualifier}_stanza")
     end
 

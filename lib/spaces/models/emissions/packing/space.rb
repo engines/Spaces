@@ -22,10 +22,12 @@ module Packing
         translator_for(pack)&.save_artifacts_to(writing_path_for(pack))
       end
     rescue ::Packing::Errors::NoImage => e
-      warn(error: e, identifier: pack.identifier, klass: klass)
+      warn(error: e, method: :save,
+        elements: nesting_elements, identifier: pack.identifier, klass: klass
+      )
     end
 
-    def provider_role; :packing ;end
+    def provider_role = :packing
 
     def copy_auxiliaries_for(pack)
       pack.auxiliary_directories.each do |d|

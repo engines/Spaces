@@ -2,7 +2,7 @@ module Commissioning
   class Consumer < ::Resolving::Emission
 
     class << self
-      def composition_class; Composition ;end
+      def composition_class = Composition
     end
 
     delegate(
@@ -10,17 +10,15 @@ module Commissioning
       ip_address: :commission
     )
 
-    def service_identifiers_for(name)
+    def service_identifiers_for(name) =
       milestones_for(name).map(&:service_identifier).uniq
-    end
 
-    def milestones_for(name)
+    def milestones_for(name) =
       milestones.select { |m| m.name == name.to_s }
-    end
 
-    def the_milestones
-      resolution ? _the_milestones : []
-    end
+    def the_milestones = settled_resolution ? _the_milestones : []
+
+    def settled_resolution = resolutions.exist_then_by(identifier)
 
     def _the_milestones
       connections_down.map do |c|

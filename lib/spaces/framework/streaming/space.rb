@@ -1,34 +1,19 @@
-require_relative 'producing'
-require_relative 'consuming'
-
 module Streaming
-  class Space < ::Spaces::PathSpace
-    include Producing
-    include Consuming
+  class Space < Spaces::PathSpace
 
-    class << self
-      def default_model_class; self ;end
+    def by(command)
+      stream_class_for(command).new(command)
     end
 
-    def identifier
-      [:streaming, segments].flatten.join(identifier_separator).as_path
+    alias_method :over, :by
+
+    def stream_class_for(command)
+      with_filing?(command) ? FileStream : OutputStream
     end
 
-    def path
-      super.dirname.join(super.dirname, "#{super.basename}.#{default_extension}")
-    end
-
-    def by(args)
-      default_model_class.new(args)
-    end
-
-    def default_extension; :out ;end
-
-    def identifier_separator; ''.identifier_separator ;end
-    def eot; 4.chr ;end
-
-    def initialize(segments)
-      self.struct = OpenStruct.new(segments: [segments].flatten.map(&:identifier))
+    def with_filing?(command)
+      command.is_a?(Spaces::Commands::Tailing) ||
+      command.input[:background]
     end
 
   end

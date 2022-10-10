@@ -13,17 +13,11 @@ module Settling
         configuration.merge(injection(binding)) if injectable?(binding)
     end
 
-    def injection(binding)
-      binding.struct.configuration
-    end
+    def injection(binding) = binding.struct.configuration
 
-    def injectable?(binding)
-      configuration && binding.inject?
-    end
+    def injectable?(binding) = configuration && binding.inject?
 
-    def configuration
-      binding_target&.struct&.configuration
-    end
+    def configuration = binding_target&.struct&.configuration
 
   end
 end

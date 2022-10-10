@@ -1,28 +1,31 @@
 module Blueprinting
   module Relations
 
-    def relations
+    def relations =
       OpenStruct.new(
         blueprints: relations_to_blueprints,
-        arenas: relations_to_arenas
+        arenas: relations_to_arenas,
+        resources: relations_to_resources
       )
-    end
 
-    def relations_to_blueprints
+    def relations_to_blueprints =
       OpenStruct.new(
         parents: parent_identifiers,
         descendants: descendant_identifiers,
         bindings: deep_bindings.map(&:struct),
         embeds: embed_bindings.map(&:struct)
       )
-    end
 
-    def relations_to_arenas
+    def relations_to_arenas =
       OpenStruct.new(
         direct: direct_arenas.map(&:identifier),
         indirect: indirect_arenas.map(&:identifier)
       )
-    end
+
+    def relations_to_resources =
+      OpenStruct.new(
+        types: resources.map(&:type)
+      )
 
     def parent_identifiers
       @parent_identifiers ||= all_identifiers_up_in(blueprints.all)

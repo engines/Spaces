@@ -10,9 +10,7 @@ module Adapters
       qualifier: :provider
     )
 
-    def artifact_qualifiers
-      [:artifact]
-    end
+    def artifact_qualifiers = [:artifact]
 
     def artifacts
       @artifacts ||= artifact_qualifiers.map do |q|
@@ -24,24 +22,25 @@ module Adapters
       ne = naming_elements_for(artifact_qualifier)
       class_for(ne)
     rescue NameError => e
-      warn(error: e, identifier: emission.identifier, elements: ne)
+      warn(error: e, method: :artifact_class_for, elements: ne,
+        identifier: emission.identifier
+      )
       default_artifact_class
     end
 
-    def naming_elements_for(artifact_qualifier)
+    def naming_elements_for(artifact_qualifier) =
       [:artifacts, qualifier, compute_qualifier, artifact_qualifier].compact
-    end
 
-    def compute_qualifier; compute_provider&.qualifier ;end
+    def compute_qualifier = compute_provider&.qualifier
 
     def compute_provider
       @compute_provider ||= emission.compute_provider_for(provider.identifier)
     end
 
-    def default_artifact_class; nil ;end
+    def default_artifact_class = nil
 
-    def adapter_keys; [] ;end
-    def adapter_map; {} ;end
+    def adapter_keys = []
+    def adapter_map = {}
 
     def initialize(provider, emission)
       self.provider = provider

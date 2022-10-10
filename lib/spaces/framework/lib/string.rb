@@ -1,7 +1,9 @@
 require_relative 'identifiable'
+require_relative 'abbreviating'
 
 class String
   include Identifiable
+  include Abbreviating
 
   BLANK_RE = /\A[[:space:]]*\z/
 
@@ -20,29 +22,17 @@ class String
       downcase
   end
 
-  def underscore
-    snakize.gsub('/', '_')
-  end
+  def underscore = snakize.gsub('/', '_')
 
-  def constantize
-    Module.const_get(self)
-  end
+  def constantize = Module.const_get(self)
 
-  def hyphenated
-    tr('_', '-')
-  end
+  def hyphenated = tr('_', '-')
 
-  def singularize
-    chomp('s')
-  end
+  def singularize = chomp('s')
 
-  def pluralize
-    "#{itself}s"
-  end
+  def pluralize = "#{itself}s"
 
-  def blank?
-    empty? || BLANK_RE.match?(self)
-  end
+  def blank? = empty? || BLANK_RE.match?(self)
 
   def downcase_first
     dup.tap do |d|
@@ -50,13 +40,9 @@ class String
     end
   end
 
-  def to_h
-    self
-  end
+  def to_h = self
 
-  def to_hcl
-    %("#{self}")
-  end
+  def to_hcl = %("#{self}")
 
   alias_method :no_symbols, :to_s
 

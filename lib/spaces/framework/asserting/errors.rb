@@ -10,7 +10,7 @@ module Spaces
       end
     end
 
-    class FailedAffirmation < SpacesError; end
+    class FailedAssertion < SpacesError; end
     class MissingInput < SpacesError; end
     class IncorrectInputType < SpacesError; end
     class NoSpace < SpacesError; end

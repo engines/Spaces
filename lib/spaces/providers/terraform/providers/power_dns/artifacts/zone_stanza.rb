@@ -3,7 +3,7 @@ module Artifacts
     module PowerDns
       class ZoneStanza < ::Artifacts::Stanza
 
-        def snippets
+        def snippets =
           %(
             resource "#{dns_qualifier}_zone" "#{arena.identifier}-zone" {
               name        = "#{arena.identifier}.#{universe.host}."
@@ -11,15 +11,12 @@ module Artifacts
               nameservers = [#{dns_address}]
             }
           )
-        end
 
-        def dns_address
+        def dns_address =
           "#{container_type}.#{dns_qualifier}.ipv4_address"
-        end
 
-        def dns_qualifier
-          arena.qualifier_for(:dns).camelize.downcase
-        end
+        def dns_qualifier =
+          arena.qualification_for(:dns).camelize.downcase
 
       end
     end

@@ -28,25 +28,22 @@ module Spaces
       end.identifier
     end
 
-    def file_name_for(model)
+    def file_name_for(model) =
       Pathname.new([writing_name_for(model), default_extension].join('.'))
-    end
 
     def writing_name_for(model)
       ensure_space_for(model)
       "#{writing_path_for(model)}/#{model.file_name}"
     end
 
-    def ensure_space_for(identifiable)
+    def ensure_space_for(identifiable) =
       writing_path_for(identifiable).mkpath
-    end
 
     protected
 
     def set_permission_for(model)
       writing_name_for(model).tap do |n|
         Pathname.new(n).chmod(model.permission)
-        logger.debug("Saving #{n} with permissions [#{sprintf "%o", model.permission}]")
       end
     end
 

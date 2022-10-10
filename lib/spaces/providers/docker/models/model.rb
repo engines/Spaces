@@ -17,10 +17,10 @@ module Providers
         )
       end
 
-      def arena_identifier; resolution_identifier.high ;end
-      def application_identifier; resolution_identifier.low ;end
+      def arena_identifier = resolution_identifier.high
+      def application_identifier = resolution_identifier.low
 
-      def runtime_qualifier; name_elements[1].snakize ;end
+      def runtime_qualifier = name_elements[1].snakize
       alias_method :runtime, :runtime_qualifier
 
       def execute(instruction)
@@ -36,6 +36,8 @@ module Providers
         self.model_interface = model_interface
         self.struct = model_interface.info.to_struct
       end
+
+      def to_h_deep = to_h
 
       def method_missing(m, **args, &block)
         return model_interface.send(m, **args, &block) if model_interface.respond_to?(m)

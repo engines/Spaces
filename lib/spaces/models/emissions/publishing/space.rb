@@ -5,9 +5,7 @@ module Publishing
     include Synchronizing
 
     class << self
-      def default_model_class
-        Blueprint
-      end
+      def default_model_class = Blueprint
     end
 
     delegate([:locations, :blueprints] => :universe)
@@ -16,7 +14,7 @@ module Publishing
     alias_method :save, :save_json
     alias_method :imported?, :exist?
 
-    def default_extension; :json ;end
+    def default_extension = :json
 
     def modified_at(*args)
       super(*args, as: default_extension)
@@ -29,17 +27,16 @@ module Publishing
     def by_import(descriptor, **args)
       f = args[:force]
       super.tap do |m|
-        locations.ensure_located(m)
+        locations.ensure_located(descriptor)
         blueprints.by_import(descriptor, force: f)
         m.bindings.each do |b|
-          by_import(b.descriptor, **args) if (!imported?(b.descriptor) || f)
+          dwa = b.descriptor.with_account(descriptor.account)
+          by_import(dwa, **args) if (!imported?(dwa) || f)
         end
       end
     rescue ::Spaces::Errors::ImportFailure => e
       locations.exist_then_delete(descriptor)
-      logger.info(e)
     rescue ::Spaces::Errors::ReimportFailure => e
-      logger.info(e)
     end
 
     def export(**args)
@@ -48,7 +45,6 @@ module Publishing
         super(locations.by(i), **args)
       end
     rescue ::Spaces::Errors::ExportFailure => e
-      logger.info(e)
     end
 
   end

@@ -13,42 +13,30 @@ module Resolving
     include ::Resolving::Summary
 
     class << self
-      def composition_class; Composition ;end
+      def composition_class = Composition
     end
 
     delegate(
       [:packs, :orchestrations, :registry] => :universe
     )
 
-    def resourcer?; only_defines?(:resources) ;end
+    def resourcer? = only_defines?(:resources)
 
-    def complete?
-      all_complete?(divisions)
-    end
+    def complete? = all_complete?(divisions)
 
-    def image
-      images&.first
-    end
+    def image = images&.first
 
-    def image_identifier
-      image&.output_identifier
-    end
+    def image_identifier = image&.output_identifier
 
-    def provides_compute_service_for?(identifier)
+    def provides_compute_service_for?(identifier) =
       compute_service_identifiers&.include?(identifier.to_sym)
-    end
 
-    def compute_service_identifiers
+    def compute_service_identifiers =
       compute_service&.identifiers || []
-    end
 
-    def compute_service
-      division_map[:compute_service]
-    end
+    def compute_service = division_map[:compute_service]
 
-    def direct_connections
-      connect_bindings.map(&:resolution).compact
-    end
+    def direct_connections = connect_bindings.map(&:resolution).compact
 
     def division_map
       @division_map ||= super.tap do |d|

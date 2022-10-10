@@ -13,19 +13,15 @@ module Spaces
     include Deleting
     include Topology
 
-    def all
-      identifiers.map { |i| by(i) }
-    end
+    def all = identifiers.map { |i| by(i) }
 
-    def identifiers(*_)
+    def identifiers(*_) =
       path.glob('*').map { |p| p.basename.to_s }
-    end
 
-    def exist?(identifiable)
+    def exist?(identifiable) =
       identifiable && path_for(identifiable).exist?
-    end
 
-    def ensure_space; path.mkpath ;end
+    def ensure_space = path.mkpath
 
   end
 end

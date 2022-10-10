@@ -8,8 +8,8 @@ module Resolving
       end
     end
 
-    def empty_image; image_class.new ;end
-    def image_class; ::Images::Image ;end
+    def empty_image = image_class.new
+    def image_class = ::Images::Image
 
   end
 end

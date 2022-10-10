@@ -2,28 +2,25 @@ module Spaces
   class Space < Model
 
     class << self
-      def default_model_class ;end
+      def default_model_class = nil
     end
 
     delegate(default_model_class: :klass)
 
-    def identifier; struct.identifier ;end
-    def space; itself ;end
+    def identifier = struct.identifier
 
-    def summaries
-      all.map(&:summary)
-    end
+    def space = itself
+
+    def summaries = all.map(&:summary)
 
     def exist_then(identifiable, &block)
       yield(identifiable) if block_given? && exist?(identifiable)
     end
 
-    def absent(array)
-      array.reject { |m| exist?(m) }
-    end
+    def absent(array) = array.reject { |m| exist?(m) }
 
-    def initialize(identifier:)
-      self.struct = OpenStruct.new(identifier: identifier.to_sym)
+    def initialize(**args)
+      self.struct = OpenStruct.new(args.transform_values(&:to_sym))
     end
 
     protected

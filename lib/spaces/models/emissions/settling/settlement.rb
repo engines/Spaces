@@ -11,7 +11,7 @@ module Settling
     alias_accessor :blueprint, :predecessor
     alias_accessor :binder, :predecessor
 
-    def identifiers
+    def identifiers =
       super.merge(
         {
           arena_identifier: arena_identifier,
@@ -19,11 +19,8 @@ module Settling
           blueprint_identifier: blueprint_identifier
         }
       )
-    end
 
-    def domain
-      domains.primary
-    end
+    def domain = domains.first
 
     def connections_down(emission: :resolution)
       connect_bindings.map { |t|

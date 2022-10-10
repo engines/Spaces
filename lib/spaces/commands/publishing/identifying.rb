@@ -4,17 +4,13 @@ module Publishing
 
       delegate(locations: :universe)
 
-      def assembly
-        model.identifier
-      end
+      def assembly = model.identifier
 
       def model
         @model ||= model_class.new(model_struct)
       end
 
-      def model_class
-        locations.default_model_class
-      end
+      def model_class = locations.default_model_class
 
     end
   end

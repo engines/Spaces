@@ -8,7 +8,7 @@ module Emissions
       end
     end
 
-    def associations; association_map.values ;end
+    def associations = association_map.values
 
     def current_associating_structs
       association_keys.inject({}) do |m, k|
@@ -16,13 +16,11 @@ module Emissions
       end.compact
     end
 
-    def default_associating_map
+    def default_associating_map =
       associating_division_map.transform_values(&:struct)
-    end
 
-    def associating_division_map
+    def associating_division_map =
       association_map.merge(division_map)
-    end
 
     def association_map
       @association_map ||= association_keys.inject({}) do |m, k|
@@ -30,11 +28,10 @@ module Emissions
       end
     end
 
-    def association_for(key)
+    def association_for(key) =
       composition.associations[key]&.prototype(emission: self, label: key)
-    end
 
-    def association_keys; composition.associations.keys ;end
+    def association_keys = composition.associations.keys
 
   end
 end

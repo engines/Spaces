@@ -4,13 +4,11 @@ module Emissions
 
     delegate(arenas: :universe)
 
-    def identifiers(arena_identifier: nil, application_identifier: nil, runtime: nil)
+    def identifiers(arena_identifier: nil, application_identifier: nil, runtime: nil) =
       _summaries(arena_identifier: arena_identifier, application_identifier: application_identifier, runtime: runtime).map(&:identifier)
-    end
 
-    def summaries(arena_identifier: nil, application_identifier: nil, runtime: nil)
+    def summaries(arena_identifier: nil, application_identifier: nil, runtime: nil) =
       _summaries(arena_identifier: arena_identifier, application_identifier: application_identifier, runtime: runtime).map(&:struct)
-    end
 
     def _summaries(args)
       if (a = args.compact).empty?
@@ -22,9 +20,8 @@ module Emissions
       end
     end
 
-    def by(identifier)
+    def by(identifier) =
       interfaces.map { |i| i.by(identifier) }.first
-    end
 
     def delete(identifier)
       by(identifier).execute(:delete)
@@ -35,12 +32,12 @@ module Emissions
     end
 
     def interfaces
-      arenas.all.map do |a|
+      arenas.all.map do |a| #TODO: this class is too 'low' to know about arenas
         a.provider_for(provider_role)&.interface_for_all_in(identifier.singularize)
       end.flatten.compact.uniq(&:uniqueness)
     end
 
-    def provider_role; :runtime ;end
+    def provider_role = :runtime
 
   end
 end

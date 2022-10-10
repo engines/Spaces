@@ -3,7 +3,7 @@ module Divisions
     class Deployment < ::Divisions::Deployment
 
       class << self
-        def default_struct
+        def default_struct =
           OpenStruct.new(
             restart_policy: OpenStruct.new({
               condition: 'on-failure',
@@ -18,7 +18,7 @@ module Divisions
               }
             })
           )
-        end
+
       end
 
     end

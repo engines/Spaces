@@ -2,9 +2,7 @@ module Commissioning
   module Commands
     class Executing < ::Spaces::Commands::Executing
 
-      def assembly
-        model.as_commission
-      end
+      def assembly = model.as_commission
 
       protected
 
