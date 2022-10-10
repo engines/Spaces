@@ -30,7 +30,7 @@ controllers.arenas.bind(identifier: :mxr, blueprint_identifier: 'startup-infrast
 controllers.arenas.stage(identifier: :mxr).to_json
 
 print controllers.resolving.index(arena_identifier: :mxr).result.map(&:identifier).to_yaml
-# print controllers.resolving.show(identifier: :'mxr::longitude').to_json
+print controllers.resolving.show(identifier: :'mxr::longitude').to_json
 
 # build images for the arena
 controllers.arenas.build(identifier: :mxr, verbose: false).to_json

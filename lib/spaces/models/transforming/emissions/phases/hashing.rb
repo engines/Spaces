@@ -7,6 +7,8 @@ module Emissions
       end.compact
     end
 
+    alias_method :to_h_deep, :to_h
+
     def identifiers = {identifier: identifier}
 
     def h_for(key) = division_map[key]&.to_h
