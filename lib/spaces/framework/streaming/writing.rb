@@ -18,6 +18,11 @@ module Streaming
       append(encoded_error_for(line))
     end
 
+    # The << method is so stream behaves like STDOUT
+    def << (line)
+      append(encoded_output_for(line))
+    end
+
     def exception
       append(encoded_exception)
     end
@@ -32,9 +37,7 @@ module Streaming
 
     def default_extension = :out
 
-    def close
-      append(eot)
-    end
+    def close = append(eot)
 
     protected
 

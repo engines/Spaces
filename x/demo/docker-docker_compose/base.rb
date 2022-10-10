@@ -12,23 +12,24 @@ puts controllers.publishing.import(identifier: blueprint_identifier, verbose: fa
 
 
 # setup an arena for building
-controllers.arenas.create(model: {identifier: :base})
-controllers.arenas.build_from(identifier: :base, image_identifier: :debian)
-controllers.arenas.provide(identifier: :base, role_identifier: :packing, provider_identifier: :docker)
-controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provider_identifier: :docker)
-controllers.arenas.bind(identifier: :base, blueprint_identifier: blueprint_identifier)
+controllers.arenas.create(model: {identifier: :base}).to_json
+controllers.arenas.build_from(identifier: :base, image_identifier: :debian).to_json
+controllers.arenas.provide(identifier: :base, role_identifier: :packing, provider_identifier: :docker).to_json
+controllers.arenas.provide(identifier: :base, role_identifier: :runtime, provider_identifier: :docker).to_json
+controllers.arenas.bind(identifier: :base, blueprint_identifier: blueprint_identifier).to_json
 
 # get arena JSON
-controllers.arenas.show(identifier: :base).result.to_json
+controllers.arenas.show(identifier: :base).to_json
 
 # stage arena
-controllers.arenas.stage(identifier: :base)
+controllers.arenas.stage(identifier: :base).to_json
 
-# controllers.arenas.resolve(identifier: :base)
-# controllers.arenas.pack(identifier: :base)
+# controllers.arenas.resolve(identifier: :base).to_json
+# controllers.arenas.pack(identifier: :base).to_json
 
 # # build the pack
 pack_identifier = "base::#{blueprint_identifier}"
 # controllers.packing.build(identifier: pack_identifier, verbose: false)
 result = controllers.packing.build(identifier: pack_identifier, background: true).result
-controllers.streaming.tail(space: :packs, stream_identifier: :building, identifier: pack_identifier, timestamp: result[:timestamp])
+result.to_json
+controllers.streaming.tail(space: :packs, stream_identifier: :build, identifier: pack_identifier, timestamp: result[:timestamp]).to_json

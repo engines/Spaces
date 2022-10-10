@@ -20,6 +20,7 @@ module Providers
       protected
 
       def orchestration_for(command)
+        configure_ruby_terraform
         stream&.output("\n") unless command == :init
         Dir.chdir(path_for(arena)) do
           copy_artifacts
@@ -30,6 +31,13 @@ module Providers
           stream&.error("#{e}\n")
         ensure
           remove_artifacts
+        end
+      end
+
+      def configure_ruby_terraform
+        RubyTerraform.configure do |config|
+          config.stdout = stream
+          config.stderr = stream
         end
       end
 
