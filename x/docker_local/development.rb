@@ -48,7 +48,7 @@ controllers.arenas.provide(identifier: :development, role_identifier: :orchestra
 controllers.arenas.provide(identifier: :development, role_identifier: :runtime, provider_identifier: :docker)
 
 # specify an image to build blueprints from
-controllers.arenas.build_from(identifier: :development, image_identifier: :base_debian)
+controllers.arenas.build_from(identifier: :development, image_identifier: :debian_debian)
 
 # connect the services arena to the applications arena
 controllers.arenas.connect(identifier: :development, other_identifier: :services)
