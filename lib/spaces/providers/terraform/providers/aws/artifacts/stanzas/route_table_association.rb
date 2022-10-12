@@ -8,7 +8,8 @@ module Artifacts
         def default_configuration =
           super.merge(
             subnet_binding: resource.identifier,
-            route_table_binding: resource.identifier
+            # subnet_binding: :'public-a',
+            route_table_binding: :'route-table'
           )
 
         def more_snippets =
@@ -17,7 +18,7 @@ module Artifacts
             route_table_id = aws_route_table.#{qualification_for(:route_table_binding)}.id
           )
 
-          def tags_snippet = nil
+        def tags_snippet = nil
 
       end
     end
