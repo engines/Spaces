@@ -43,6 +43,7 @@ module Artifacts
             }
             network_configuration {
               subnets = [aws_subnet.#{qualification_for(:subnet_binding)}.id]
+              assign_public_ip = true
               security_groups = [aws_security_group.#{qualification_for(:security_group_binding)}.id]
             }
           )
