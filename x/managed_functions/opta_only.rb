@@ -19,7 +19,7 @@ controllers.arenas.build_from(identifier: :sura, image_identifier: :base_python)
 # save some providers
 controllers.providing.create(model: {identifier: :docker, qualifier: :docker})
 controllers.providing.create(model: {identifier: :terraform, qualifier: :terraform})
-controllers.providing.create(model: {identifier: :aws, qualifier: :aws, account_identifier: 910122582945, region: :'ap-southeast-2'})
+controllers.providing.create(model: {identifier: :aws, qualifier: :aws, account_identifier: 910122582945, region: :'ap-southeast-2', zone_identifier: 'ZARIYTT7C12LN'})
 
 # define role providers
 controllers.arenas.provide(identifier: :sura, role_identifier: :packing, provider_identifier: :docker)
