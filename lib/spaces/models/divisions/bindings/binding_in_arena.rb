@@ -11,7 +11,8 @@ module Divisions
     end
 
     def resolution
-      @resolution ||= super || blueprint&.resolution_in(arena, self)
+      # @resolution ||= super || blueprint&.resolution_in(arena, self)
+      @resolution ||= blueprint&.resolution_in(arena, self)
     end
 
   end
