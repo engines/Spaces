@@ -40,7 +40,7 @@ module Arenas
 
     def save_cache
       cache.arenas.ensure_space
-      FileUtils.cp_r(arenas.path_for(self), cache.arenas.path_for(self))
+      FileUtils.cp_r(arenas.path_for(self), cache.arenas.path)
     end
 
     def initialize(struct: nil, identifiable: nil)
