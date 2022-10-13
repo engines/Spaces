@@ -10,7 +10,8 @@ module Artifacts
           def default_configuration =
             super.merge(
               cluster_binding: :'container-service-cluster',
-              launch_type: :'FARGATE'
+              launch_type: :'FARGATE',
+              assign_public_ip: true
             )
 
           def launch_type = default_configuration.launch_type
@@ -44,10 +45,12 @@ module Artifacts
             }
             network_configuration {
               subnets = [aws_subnet.#{qualification_for(:subnet_binding)}.id]
-              assign_public_ip = true
+              assign_public_ip = #{configuration.assign_public_ip}
               security_groups = [aws_security_group.#{qualification_for(:security_group_binding)}.id]
             }
           )
+
+        def configuration_hash = super.without(:assign_public_ip)
 
       end
     end
