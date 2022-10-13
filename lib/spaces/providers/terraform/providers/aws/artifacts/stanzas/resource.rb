@@ -10,6 +10,8 @@ module Artifacts
               container_registry: :ecr_repository,
               container_task_definition: :ecs_task_definition,
 
+              dns_record: :route53_record,
+
               load_balancer: :lb,
               load_balancer_listener: :lb_listener,
               load_balancer_target_group: :lb_target_group,
