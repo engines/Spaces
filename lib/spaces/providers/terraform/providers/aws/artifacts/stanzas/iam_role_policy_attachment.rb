@@ -18,7 +18,7 @@ module Artifacts
 
         def more_snippets =
           %(
-            role = aws_iam_role.#{qualification_for(:role_binding)}.id
+            role = aws_iam_role.#{qualification_for(:role_binding)}.name
           )
 
         def tags_snippet = nil
