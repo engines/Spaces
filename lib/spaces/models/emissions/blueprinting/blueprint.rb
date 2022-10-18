@@ -19,7 +19,9 @@ module Blueprinting
 
     def application_identifier = struct.application_identifier || super
 
-    def binder? = only_defines?(:bindings)
+    def binder? = only_defines?(:bindings) && binds_no_embeds?
+
+    def binds_no_embeds? = !bindings.map(&:embed?).any?
 
     def descriptor
       @descriptor ||= blueprints.by(identifier, Spaces::Descriptor)
