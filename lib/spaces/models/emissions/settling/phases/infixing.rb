@@ -20,7 +20,7 @@ module Settling
     end
 
     def unresolved_infix_strings =
-      content.map(&:infixes).flatten.map(&:value).uniq
+      content.map(&:infixes).flatten.map(&:to_s).uniq
 
   end
 end

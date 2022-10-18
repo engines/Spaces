@@ -7,7 +7,6 @@ module Interpolating
       warn(error: e, method: :iteration,
         elements: nesting_elements, identifier: emission.identifier, qualifier: emission.qualifier, text: text.to_s, value: working_value
       )
-      pp e
       original_value
       # raise ::Interpolating::Errors::Unresolvable
     end
