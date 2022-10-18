@@ -12,6 +12,9 @@ module Artifacts
             route_table_binding: :'route-table'
           )
 
+        def resource_identifier =
+          [arena.identifier, application_identifier, resource.identifier].join('-').hyphenated.abbreviated_to(maximum_identifier_length)
+
         def more_snippets =
           %(
             subnet_id = aws_subnet.#{qualification_for(:subnet_binding)}.id
