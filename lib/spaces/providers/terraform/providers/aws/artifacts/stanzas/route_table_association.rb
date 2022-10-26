@@ -8,12 +8,8 @@ module Artifacts
         def default_configuration =
           super.merge(
             subnet_binding: resource.identifier,
-            # subnet_binding: :'public-a',
-            route_table_binding: :'route-table'
+            route_table_binding: default_binding
           )
-
-        def resource_identifier =
-          [arena.identifier, application_identifier, resource.identifier].join('-').hyphenated.abbreviated_to(maximum_identifier_length)
 
         def more_snippets =
           %(
