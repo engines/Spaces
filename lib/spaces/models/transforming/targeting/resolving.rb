@@ -1,13 +1,6 @@
 module Targeting
   module Resolving
 
-    def resolved
-      super.tap do |d|
-        d.struct.configuration = _resolved(:configuration)
-        d.struct.service = _resolved(:service)
-      end
-    end
-
     def service_string_array = _resolved(:service)&.to_string_array
 
     def _resolved(section)

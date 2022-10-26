@@ -23,8 +23,7 @@ module Artifacts
             security_group_binding: :security_group,
             task_definition_binding: default_binding,
             target_group_binding: default_binding,
-            # subnet_binding: default_binding,
-            subnet_binding: :'public-a',
+            subnet_binding: "#{default_binding}-a",
             load_balancer_binding: default_binding,
             listener_binding: default_binding
           )
