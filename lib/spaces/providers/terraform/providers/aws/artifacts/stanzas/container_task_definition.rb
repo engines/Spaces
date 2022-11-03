@@ -58,7 +58,7 @@ module Artifacts
         def hash_for(r) =
           {
             name: r.image_identifier.hyphenated,
-            image: "#{arena.compute_repository_path}:#{r.image_identifier}",
+            image: "#{arena.image_registry_path}:#{r.image_identifier}",
             essential: true
           }.
             merge(dimensions_hash_for(r))

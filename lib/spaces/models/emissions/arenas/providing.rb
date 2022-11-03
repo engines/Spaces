@@ -37,8 +37,8 @@ module Arenas
     def compute_provider =
       role_providers.named(:orchestration)&.compute_provider
 
-    def compute_repository_path =
-      "#{compute_provider.repository_domain}/#{container_registry.resource_identifier}"
+    def image_registry_path =
+      "#{compute_provider.image_registry_domain}/#{container_registry.resource_identifier}"
 
   end
 end
