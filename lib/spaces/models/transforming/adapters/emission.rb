@@ -22,9 +22,8 @@ module Adapters
       ne = naming_elements_for(artifact_qualifier)
       class_for(ne)
     rescue NameError => e
-      warn(error: e, method: :artifact_class_for, elements: ne,
-        identifier: emission.identifier
-      )
+      raise e unless ne
+      warn(error: e, method: :artifact_class_for, elements: ne, identifier: emission.identifier)
       default_artifact_class
     end
 
