@@ -13,6 +13,7 @@ module Providers
       )
 
       def build
+        pack.access_repositories
         pack.copy_auxiliaries
         build_from_pack
         pack.remove_auxiliaries

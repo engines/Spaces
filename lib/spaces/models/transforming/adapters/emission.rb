@@ -39,6 +39,8 @@ module Adapters
 
     def default_artifact_class = nil
 
+    def declares_repositories? = adapter_keys.include?(:repositories)
+
     def adapter_keys = []
     def adapter_map = {}
 
