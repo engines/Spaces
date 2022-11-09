@@ -49,7 +49,7 @@ module Artifacts
             resource "null_resource" "#{images_resource_identifier}" {
               provisioner "local-exec" {
                 command = <<LINES
-                  #{login_command} &&
+                  `#{login_command}` &&
                   #{image_push_commands}; echo 0
                 LINES
               }
@@ -70,7 +70,7 @@ module Artifacts
         end
 
         def login_command =
-          %(`aws ecr get-login-password | docker login --username AWS --password-stdin #{arena.compute_provider.image_registry_domain}`)
+          %(aws ecr get-login-password | docker login --username AWS --password-stdin #{arena.compute_provider.image_registry_domain})
 
       end
     end
