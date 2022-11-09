@@ -34,7 +34,8 @@ module Adapters
     def compute_qualifier = compute_provider&.qualifier
 
     def compute_provider
-      @compute_provider ||= emission.compute_provider_for(provider.identifier)
+      @compute_provider ||=
+        emission.compute_provider_for_identifier(provider.identifier)
     end
 
     def default_artifact_class = nil
