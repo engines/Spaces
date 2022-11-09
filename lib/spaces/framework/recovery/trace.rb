@@ -12,13 +12,13 @@ module Recovery
     end
 
     def identifier =
-      [:trace, elements, specifier].flatten.compact.map(&:downcase).map(&:underscore).join('.')
+      [:trace, context, specifier].flatten.compact.map(&:downcase).map(&:underscore).join('.')
 
     def error = args.error
     def specifier = args.method
-    def elements = args.elements
+    def context = args.context
     def verbosity = args.verbosity
-    def witnesses = args.to_h.without(:error, :elements, :method, :verbosity)
+    def witnesses = args.to_h.without(:error, :context, :method, :verbosity)
 
     def spout_translation(id = identifier)
       t = translation(id)

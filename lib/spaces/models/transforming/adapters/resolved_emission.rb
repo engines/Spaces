@@ -49,12 +49,13 @@ module Adapters
     def default_emission_adapter_class = EmissionDefault
 
     def method_missing(m, *args, &block)
+      return adapter_map[m.to_sym] if adapter_keys.include?(m)
       return resolution.send(m, *args, &block) if resolution.respond_to?(m)
       super
     end
 
     def respond_to_missing?(m, *)
-      resolution.respond_to?(m) || super
+      adapter_keys.include?(m) || resolution.respond_to?(m) || super
     end
 
   end

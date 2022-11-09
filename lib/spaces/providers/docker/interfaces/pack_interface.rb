@@ -9,10 +9,11 @@ module Providers
       delegate(
         packs: :universe,
         path_for: :packs,
-        [:compute_provider, :compute_repository_path] => :arena
+        [:compute_provider, :image_registry_path] => :arena
       )
 
       def build
+        pack.access_repositories
         pack.copy_auxiliaries
         build_from_pack
         pack.remove_auxiliaries
@@ -21,7 +22,7 @@ module Providers
       def build_from_pack
         build_from_dir.tap do |i|
           if compute_provider
-            i.tag(repo: compute_repository_path, tag: pack.output_identifier, force: true)
+            i.tag(repo: image_registry_path, tag: pack.output_identifier, force: true)
           else
             i.tag(repo: pack.output_identifier, tag: default_tag, force: true)
           end

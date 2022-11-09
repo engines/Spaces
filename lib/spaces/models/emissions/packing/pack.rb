@@ -1,7 +1,11 @@
 module Packing
   class Pack < ::Resolving::Emission
 
-    delegate(output_identifier: :image)
+    delegate(
+      output_identifier: :image,
+      adapter: :translator,
+      access_repositories: :adapter
+    )
 
     alias_method :context_identifier, :identifier
 
@@ -12,6 +16,8 @@ module Packing
     def remove_auxiliaries
       packs.remove_auxiliaries_for(self)
     end
+
+    def translator = packs.translator_for(self)
 
   end
 end

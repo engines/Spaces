@@ -55,6 +55,10 @@ module Spaces
 
     def has?(property) = !struct[property].nil?
 
+    def system_execute(command)
+      Open3.capture3(command)
+    end
+
     def modified_at = default_space.modified_at(self)
     def default_space = universe.send(qualifier.pluralize)
 
