@@ -25,7 +25,7 @@ module Providers
     def identifier = struct[:identifier]
     def compute_qualifier = struct[:compute_qualifier]
 
-    def prototype = class_for(class_elements).new(struct: struct)
+    def dynamic_type = class_for(class_elements).new(struct: struct)
 
     def class_elements = [namespace, 2.times.map{struct.qualifier}].flatten
 

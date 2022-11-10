@@ -8,7 +8,7 @@ module Divisions
     include Resolvable
 
     class << self
-      def prototype(emission:, label:) = new(emission: emission, label: label)
+      def dynamic_type(emission:, label:) = new(emission: emission, label: label)
 
       def default_struct = OpenStruct.new
     end
