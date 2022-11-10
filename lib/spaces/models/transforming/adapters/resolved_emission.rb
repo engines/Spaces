@@ -6,6 +6,7 @@ module Adapters
     relation_accessor :arena_adapter
 
     delegate(
+      resolutions: :universe,
       [:arena, :resolution, :blueprint_identifier] => :emission,
       resolution_default_division_keys: :arena,
       [:provider_for, :qualifier_for] => :arena,
