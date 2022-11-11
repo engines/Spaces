@@ -1,5 +1,7 @@
 module Adapters
 
+  class BundledPackages < Divisible ;end
+  class BundledPackage < Division ;end
   class Images < Divisible ;end
   class Image < Division ;end
   class Permissions < Divisible ;end
