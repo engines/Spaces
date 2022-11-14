@@ -13,7 +13,7 @@ module Spaces
       relation_accessor :stream
 
       delegate(
-        [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor,
+        [:repository_url, :identifier, :branch_name, :remote_name, :format] => :descriptor,
         [:git, :git_error] => :space
       )
 
@@ -72,7 +72,7 @@ module Spaces
         @opened ||= git.open(space.path_for(descriptor))
       end
 
-      def exist? = space.path_for(descriptor).join(".#{protocol}").exist?
+      def exist? = space.path_for(descriptor).join(".#{format}").exist?
 
       def collect(io)
         stream&.tap do |s|

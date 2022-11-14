@@ -4,7 +4,7 @@ module Spaces
   class Descriptor < Model
 
     class << self
-      def features = [:identifier, :repository, :remote, :branch, :protocol]
+      def features = [:identifier, :repository, :remote, :branch, :format]
     end
 
     def with_account(account)
@@ -15,14 +15,14 @@ module Spaces
 
     def remote = struct.remote || derived_features[:remote]
     def branch = struct.branch || derived_features[:branch]
-    def protocol = struct.protocol || derived_features[:protocol]
+    def format = struct.format || derived_features[:format]
 
     def account = struct.account || derived_account
     def repository = struct.repository || derived_repository
 
     def has_derivable_repository? = struct.account && struct.identifier
 
-    def git? = protocol == 'git'
+    def git? = format == 'git'
 
     alias_method :repository_url, :repository
     alias_method :remote_name, :remote
@@ -51,13 +51,13 @@ module Spaces
         identifier: root_identifier,
         remote: 'origin',
         branch: 'main',
-        protocol: default_protocol
+        format: default_format
       }
     end
 
     def root_identifier = "#{basename}"&.split('.')&.first
 
-    def default_protocol = extname.blank? ? 'git' : extname.gsub('.', '')
+    def default_format = extname.blank? ? 'git' : extname.gsub('.', '')
 
     def basename = pathname&.basename
     def extname = pathname&.extname

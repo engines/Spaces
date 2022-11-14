@@ -8,11 +8,11 @@ module Divisions
     end
 
     delegate(
-      [:repository, :protocol, :git?] => :target
+      [:repository, :format, :git?] => :target
     )
 
     def dynamic_type =
-      klass.class_for(protocol).new(struct: struct, division: division)
+      klass.class_for(format).new(struct: struct, division: division)
 
     def target
       @target ||= descriptor_class.new(struct.target)
@@ -34,7 +34,7 @@ module Divisions
     def derived_features
       @derived_features ||= {
         identifier: target.identifier,
-        extraction: protocol,
+        extraction: format,
         extracted_path: target.identifier
       }
     end
