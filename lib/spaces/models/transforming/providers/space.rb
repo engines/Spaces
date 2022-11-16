@@ -5,7 +5,7 @@ module Providers
       def default_model_class = Provider
     end
 
-    def by(*args) = super.prototype
+    def by(*args) = super.dynamic_type
 
     def application_qualifiers = default_model_class.application_qualifiers
 

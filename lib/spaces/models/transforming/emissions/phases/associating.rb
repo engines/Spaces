@@ -29,7 +29,7 @@ module Emissions
     end
 
     def association_for(key) =
-      composition.associations[key]&.prototype(emission: self, label: key)
+      composition.associations[key]&.dynamic_type(emission: self, label: key)
 
     def association_keys = composition.associations.keys
 

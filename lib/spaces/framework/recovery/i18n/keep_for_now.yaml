@@ -30,7 +30,7 @@ en:
         Ignoring %{content}
 
     spaces::models::transforming::divisions::divisible/subdivision_for:
-      spaces::models::transforming::divisions::subdivision/prototype: |
+      spaces::models::transforming::divisions::subdivision/dynamic_type: |
         There is no source code for subdivision class %{klass}.
         Substituting OpenStruct.
 

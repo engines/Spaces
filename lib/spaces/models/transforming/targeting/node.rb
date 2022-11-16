@@ -7,7 +7,7 @@ module Targeting
     include ::Targeting::Targeting
 
     class << self
-      def prototype(type:, struct:, division:) =
+      def dynamic_type(type:, struct:, division:) =
         new(struct: struct, division: division)
     end
 

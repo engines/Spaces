@@ -27,7 +27,7 @@ module Divisions
     def division_keys = division_map.keys
 
     def division_for(key) =
-      associations_and_divisions[key]&.prototype(emission: self, label: key)
+      associations_and_divisions[key]&.dynamic_type(emission: self, label: key)
 
   end
 end
