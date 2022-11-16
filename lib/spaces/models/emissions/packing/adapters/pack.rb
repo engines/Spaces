@@ -3,6 +3,12 @@ module Adapters
 
     alias_method :pack, :emission
 
+    def access_repositories
+      if declares_repositories?
+        repositories.map(&:access)
+      end
+    end
+
     def provider = provider_for(:packing)
 
     def adapter_qualifiers =

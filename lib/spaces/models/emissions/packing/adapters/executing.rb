@@ -4,7 +4,7 @@ module Adapters
   class Execution < Pack
     include Keyed
 
-      def adapter_keys = [:execution]
+      def adapter_keys = [:last]
 
   end
 end

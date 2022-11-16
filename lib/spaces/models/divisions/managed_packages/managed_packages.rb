@@ -14,7 +14,7 @@ module Divisions
     end
 
     def subdivision_for(language) =
-      subdivision_class.prototype(type: language, struct: struct[language], division: self)
+      subdivision_class.dynamic_type(type: language, struct: struct[language], division: self)
 
     def method_missing(m, *args, &block)
       all.detect { |a| a.identifier == m.to_s }

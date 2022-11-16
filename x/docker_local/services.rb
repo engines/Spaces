@@ -23,12 +23,10 @@ controllers.arenas.provide(identifier: :services, role_identifier: :packing, pro
 controllers.arenas.provide(identifier: :services, role_identifier: :orchestration, provider_identifier: :docker_compose)
 controllers.arenas.provide(identifier: :services, role_identifier: :runtime, provider_identifier: :docker)
 
-controllers.arenas.provide(identifier: :services, role_identifier: :dns, provider_identifier: :power_dns, resolution_identifier: 'infrastructure::powerdns')
-
 # ------------------------------------------------------------------------------
 
 # specify an image to build blueprints from
-controllers.arenas.build_from(identifier: :services, image_identifier: :base_debian)
+controllers.arenas.build_from(identifier: :services, image_identifier: :debian_debian)
 
 # bind some blueprints to the arena
 controllers.arenas.bind(identifier: :services, blueprint_identifier: :mariadb)

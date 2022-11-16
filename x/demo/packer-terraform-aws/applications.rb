@@ -20,7 +20,7 @@ controllers.arenas.build_from(identifier: :applications, image_identifier: :base
 # save some providers
 controllers.providing.create(model: {identifier: :docker, qualifier: :docker}).to_json
 controllers.providing.create(model: {identifier: :terraform, qualifier: :terraform}).to_json
-controllers.providing.create(model: {identifier: :aws, qualifier: :aws, account_identifier: 910122582945, region: :'ap-southeast-2'}).to_json
+controllers.providing.create(model: {identifier: :aws, qualifier: :aws, account_identifier: 910122582945, region: :'ap-southeast-2', zone_identifier: 'ZARIYTT7C12LN'}).to_json
 
 # define role providers
 controllers.arenas.provide(identifier: :applications, role_identifier: :packing, provider_identifier: :docker).to_json

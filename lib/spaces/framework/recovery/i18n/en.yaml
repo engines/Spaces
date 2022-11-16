@@ -2,4 +2,6 @@ en:
   trace:
     interpolating:
       iteration:
-        Unable to interpolate for %{value} in %{text} of %{qualifier} -> %{identifier}.
+        Unable to resolve interpolation for %{value} in %{text} of %{qualifier} -> %{identifier}.
+    artifact_class_for:
+      Unable to derive artifact class for %{identifier} with naming elements %{elements}.

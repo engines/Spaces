@@ -22,9 +22,8 @@ module Adapters
       ne = naming_elements_for(artifact_qualifier)
       class_for(ne)
     rescue NameError => e
-      warn(error: e, method: :artifact_class_for, elements: ne,
-        identifier: emission.identifier
-      )
+      raise e unless ne
+      warn(error: e, method: :artifact_class_for, elements: ne, identifier: emission.identifier)
       default_artifact_class
     end
 
@@ -34,10 +33,13 @@ module Adapters
     def compute_qualifier = compute_provider&.qualifier
 
     def compute_provider
-      @compute_provider ||= emission.compute_provider_for(provider.identifier)
+      @compute_provider ||=
+        emission.compute_provider_for_identifier(provider.identifier)
     end
 
     def default_artifact_class = nil
+
+    def declares_repositories? = adapter_keys.include?(:repositories)
 
     def adapter_keys = []
     def adapter_map = {}

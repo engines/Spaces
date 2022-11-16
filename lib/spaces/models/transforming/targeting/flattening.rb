@@ -17,6 +17,17 @@ module Targeting
     def flattened_for(key) =
       unresolved_struct.merge(target_struct[key]).merge(original(key))
 
+    def unresolved_struct
+      OpenStruct.new(
+        unresolved_variables.inject({}) do |m, k|
+          m.tap { m[k] = nil }
+        end
+      )
+    end
+
+    def unresolved_variables =
+      emission.unresolved_infixes[infix_qualifier] || []
+
     def original(key) = struct[key] || derived_features[key]
 
   end

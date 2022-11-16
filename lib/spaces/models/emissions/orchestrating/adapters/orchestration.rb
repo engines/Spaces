@@ -8,7 +8,7 @@ module Adapters
     def provider = provider_for(:orchestration)
 
     def adapter_name_elements =
-      [super, compute_qualifier_for(:runtime), qualifier_for(:runtime)].flatten.compact
+      [super, compute_qualifier, qualifier_for(:runtime)].flatten.compact
 
   end
 end

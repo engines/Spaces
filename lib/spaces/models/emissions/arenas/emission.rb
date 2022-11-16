@@ -3,7 +3,7 @@ module Arenas
 
     delegate(
       [:blueprints, :arenas] => :universe,
-      [:perform?, :role_providers, :role_for, :provider_for, :compute_provider_for, :qualifier_for] => :arena,
+      [:perform?, :role_providers, :role_for, :provider_for, :compute_provider_for_identifier, :qualifier_for] => :arena,
       volume_path: :arena
     )
 

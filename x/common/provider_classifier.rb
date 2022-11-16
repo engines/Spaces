@@ -52,7 +52,8 @@ controllers.classifying.create(
         identifier: :aws,
         attributes: [
           :account_identifier,
-          :region
+          :region,
+          :zone_identifier
         ]
       }
     ]
