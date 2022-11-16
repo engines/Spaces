@@ -7,21 +7,22 @@ module Divisions
 
     delegate(subdivision_class: :klass)
 
-    alias_method :languages, :keys
+    alias_method :installer_names, :keys
 
     def all
-      @all ||= languages.map { |l| subdivision_for(l) }.compact
+      @all ||= installer_names.map { |n| subdivision_for(n) }.compact
     end
 
-    def subdivision_for(language) =
-      subdivision_class.dynamic_type(type: language, struct: struct[language], division: self)
+    def subdivision_for(installer_name) =
+      subdivision_class.new(installer_name: installer_name, struct: struct[installer_name], division: self)
 
     def method_missing(m, *args, &block)
-      all.detect { |a| a.identifier == m.to_s }
+      return all.detect { |a| a.identifier == m } if keys.include?(m)
+      super
     end
 
     def respond_to_missing?(m, *)
-      keys.include?(m)
+      keys.include?(m) || super
     end
 
   end

@@ -1,14 +1,13 @@
 module Divisions
   class ManagedPackageList < ::Divisions::Subdivision
 
-    class << self
-      def dynamic_type(type:, struct:, division:) =
-        class_for(type || struct.type).new(struct: struct, division: division)
+    attr_accessor :installer_name
+    alias_method :identifier, :installer_name
 
-      def class_for(type) = super(:providers, type.to_s.camelize)
+    def initialize(installer_name:, division:, struct: nil)
+      self.installer_name = installer_name
+      super(division:, struct: struct || division.struct[identifier])
     end
-
-    def identifier = qualifier
 
   end
 end
