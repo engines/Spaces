@@ -3,16 +3,11 @@ module Divisions
 
     class << self
       def features = [:identifier, :target, :extraction, :extracted_path, :destination]
-
-      def class_for(type) = super(:divisions, type.to_s.camelize)
     end
 
     delegate(
-      [:repository, :format, :git?] => :target
+      [:repository, :git?] => :target
     )
-
-    def dynamic_type =
-      klass.class_for(format).new(struct: struct, division: division)
 
     def target
       @target ||= descriptor_class.new(struct.target)
@@ -20,9 +15,11 @@ module Divisions
 
     def identifier = struct.identifier || derived_features[:identifier]
 
+    def format = target.format
+
     def environment_vars
       [:repository, :extraction, :extracted_path, :destination].map do |v|
-        division.send(v) if division.respond_to?(v)
+        send(v) if respond_to?(v)
       end
     end
 

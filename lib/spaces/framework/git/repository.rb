@@ -13,7 +13,7 @@ module Spaces
       relation_accessor :stream
 
       delegate(
-        [:repository_url, :identifier, :branch_name, :remote_name, :format] => :descriptor,
+        [:repository_url, :identifier, :branch_name, :remote_name] => :descriptor,
         [:git, :git_error] => :space
       )
 
@@ -21,6 +21,8 @@ module Spaces
         opened.branches.map(&:name).uniq.reject { |b| b.include?(head_identifier) }
 
       alias_method :branch_names, :branch_names_without_head
+
+      def format = descriptor.format
 
       def diff = opened.diff.patch
 
