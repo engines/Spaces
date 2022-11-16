@@ -1,5 +1,5 @@
 module Divisions
-  class ManagedPackages < ::Divisions::Division
+  class ManagedPackages < KeyedDivision
 
     class << self
       def subdivision_class = ManagedPackageList
