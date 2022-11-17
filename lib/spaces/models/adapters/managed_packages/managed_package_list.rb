@@ -2,13 +2,17 @@ module Adapters
   class ManagedPackageList < Division
 
     class << self
-      def installer_class_for(name) = class_for(:package_installers, name.to_s.camelize)
+      def installer_class_for(name)
+        class_for(:package_installers, name.to_s.camelize)
+      rescue NameError => e
+        ::PackageInstallers::Installer
+      end
     end
 
     delegate(
       installer_class_for: :klass,
       command: :installer,
-      installer_name: :division
+      [:identifier, :struct, :installer_name] => :division
     )
 
     def installer
