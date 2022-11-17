@@ -1,5 +1,5 @@
 module PackageInstallers
-  class Installer < ::Spaces::Thing
+  class Installer < ::Packaging::Accessor
 
     class << self
       def name_map =
@@ -8,22 +8,19 @@ module PackageInstallers
           php: :phpenmod,
           lua: :luarocks
         }
+
+      def class_for(name)
+        super(:package_installers, name.to_s.camelize)
+      rescue NameError => e
+        klass
+      end
     end
 
-    relation_accessor :adapter
-
-    delegate(
-      name_map: :klass,
-      [:identifier, :struct] => :adapter
-    )
+    delegate(name_map: :klass)
 
     def command = struct.map { |s| "#{command_type} install #{s}" }
 
     def command_type = name_map[identifier] || identifier
-
-    def initialize(adapter)
-      self.adapter = adapter
-    end
 
   end
 end

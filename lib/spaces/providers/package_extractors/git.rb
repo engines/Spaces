@@ -4,8 +4,7 @@ module PackageExtractors
   class Git < Extractor
 
     delegate(
-      [:target, :repository, :destination] => :adapter,
-      branch: :target
+      [:branch, :repository, :destination] => :state
     )
 
     def command =

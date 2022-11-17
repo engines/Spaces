@@ -1,18 +1,16 @@
 module PackageExtractors
-  class Extractor < ::Spaces::Thing
+  class Extractor < ::Packaging::Accessor
 
     class << self
-      def class_for(format) = super(:extractors, format.to_s.camelize)
+      def class_for(name)
+        super(:package_extractors, name.to_s.camelize)
+      rescue NameError => e
+        klass
+      end
     end
-
-    relation_accessor :adapter
 
     def dynamic_type =
-      klass.class_for(format).new(adapter)
-
-    def initialize(adapter)
-      self.adapter = adapter
-    end
+      klass.class_for(format).new(state)
 
   end
 end

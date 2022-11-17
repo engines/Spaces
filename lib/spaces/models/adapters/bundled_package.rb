@@ -1,22 +1,15 @@
 module Adapters
   class BundledPackage < Division
 
-    class << self
-      def extractor_class_for(format)
-        class_for(:package_extractors, format.to_s.camelize)
-      rescue NameError => e
-        ::PackageExtractors::Extractor
-      end
-    end
-
     delegate(
-      extractor_class_for: :klass,
       command: :extractor
     )
 
     def extractor
-      @extractor ||= extractor_class_for(format).new(self)
+      @extractor ||= default_extractor_class.class_for(format).new(self)
     end
+
+    def default_extractor_class = ::PackageExtractors::Extractor
 
     def format = division.format
 
