@@ -9,7 +9,7 @@ module Adapters
       @extractor ||= default_extractor_class.class_for(format).new(self)
     end
 
-    def default_extractor_class = ::PackageExtractors::Extractor
+    def default_extractor_class = ::Packaging::Extractor
 
     def format = division.format
 

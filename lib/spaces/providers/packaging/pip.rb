@@ -1,6 +1,6 @@
 require_relative 'installer'
 
-module PackageInstallers
+module Packaging
   class Pip < Installer
 
     def command =

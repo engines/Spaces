@@ -1,6 +1,10 @@
 module Packaging
   class Accessor < ::Spaces::Thing
 
+    class << self
+      def class_for(name) = super(:packaging, name.to_s.camelize)
+    end
+
     relation_accessor :state
 
     delegate(

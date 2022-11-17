@@ -10,7 +10,7 @@ module Adapters
       @installer ||= default_installer_class.class_for(installer_name).new(self)
     end
 
-    def default_installer_class = ::PackageInstallers::Installer
+    def default_installer_class = ::Packaging::Installer
 
   end
 end

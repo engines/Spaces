@@ -1,9 +1,11 @@
-module PackageExtractors
-  class Extractor < ::Packaging::Accessor
+require_relative 'accessor'
+
+module Packaging
+  class Extractor < Accessor
 
     class << self
       def class_for(name)
-        super(:package_extractors, name.to_s.camelize)
+        super
       rescue NameError => e
         klass
       end

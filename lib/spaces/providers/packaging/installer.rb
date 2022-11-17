@@ -1,5 +1,7 @@
-module PackageInstallers
-  class Installer < ::Packaging::Accessor
+require_relative 'accessor'
+
+module Packaging
+  class Installer < Accessor
 
     class << self
       def name_map =
@@ -10,7 +12,7 @@ module PackageInstallers
         }
 
       def class_for(name)
-        super(:package_installers, name.to_s.camelize)
+        super
       rescue NameError => e
         klass
       end

@@ -1,6 +1,6 @@
 require_relative 'extractor'
 
-module PackageExtractors
+module Packaging
   class Gz < Extractor
     include ::Adapters::ScriptPaths
 

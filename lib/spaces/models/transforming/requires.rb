@@ -10,5 +10,4 @@ requires 'targeting'
 
 requires 'adapters',
          'artifacts',
-         'providers',
-         'packaging'
+         'providers'
