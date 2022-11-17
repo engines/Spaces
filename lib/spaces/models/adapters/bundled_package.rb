@@ -8,6 +8,7 @@ module Adapters
     def extractor
       @extractor ||= default_extractor_class.class_for(format).new(self)
     end
+    delegate(branch: :target)
 
     def default_extractor_class = ::Packaging::Extractor
 
