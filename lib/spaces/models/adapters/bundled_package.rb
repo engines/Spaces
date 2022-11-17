@@ -1,18 +1,13 @@
+require_relative 'package'
+
 module Adapters
-  class BundledPackage < Division
+  class BundledPackage < Package
 
-    delegate(
-      command: :extractor
-    )
-
-    def extractor
-      @extractor ||= default_extractor_class.class_for(format).new(self)
-    end
     delegate(branch: :target)
 
-    def default_extractor_class = ::Packaging::Extractor
+    def default_accessor_class = ::Packaging::Extractor
 
-    def format = division.format
+    def accessor_name = division.format
 
   end
 end
