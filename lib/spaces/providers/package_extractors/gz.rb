@@ -1,5 +1,13 @@
-module Divisions
-  class Gz < BundledPackage
+require_relative 'extractor'
+
+module PackageExtractors
+  class Gz < Extractor
+    include ::Adapters::ScriptPaths
+
+    delegate(
+      [:qualifier, :division] => :adapter,
+      environment_vars: :division
+    )
 
     def extraction
       struct.extraction ||= derived_features[:extraction]

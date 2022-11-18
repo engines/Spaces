@@ -12,7 +12,7 @@ controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS
 controllers.arenas.create(model: {identifier: :applications})
 
 # specify an image to build blueprints from
-controllers.arenas.build_from(identifier: :base, image_identifier: :'python:3.8-slim-buster')
+controllers.arenas.build_from(identifier: :applications, image_identifier: :'python:3.8-slim-buster')
 # controllers.arenas.build_from(identifier: :applications, image_identifier: :base_python)
 
 # ------------------------------------------------------------------------------

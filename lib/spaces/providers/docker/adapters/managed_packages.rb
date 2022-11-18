@@ -2,7 +2,8 @@ module Adapters
   module Docker
     class ManagedPackages < ::Adapters::ManagedPackages
 
-      def snippets_for(language) = "RUN #{division.send(language).inline.join(connector)}"
+      def snippets =
+        "RUN #{all.map(&:command).join(connector)}"
 
       def connector = ' && '
 
