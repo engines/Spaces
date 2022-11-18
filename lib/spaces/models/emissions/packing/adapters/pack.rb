@@ -3,13 +3,19 @@ module Adapters
 
     alias_method :pack, :emission
 
-    def access_repositories
+    def provider = provider_for(:packing)
+
+    def configure_repositories
       if declares_repositories?
-        repositories.map(&:access)
+        repositories.each(&:configure)
       end
     end
 
-    def provider = provider_for(:packing)
+    def clean_repository_configurations
+      if declares_repositories?
+        repositories.each(&:clean)
+      end
+    end
 
     def adapter_qualifiers =
       [:script_copying, :file_packing, :script_running, :execution]

@@ -4,7 +4,7 @@ module Packing
     delegate(
       output_identifier: :image,
       adapter: :translator,
-      access_repositories: :adapter
+      [:configure_repositories, :clean_repository_configurations] => :adapter
     )
 
     alias_method :context_identifier, :identifier
