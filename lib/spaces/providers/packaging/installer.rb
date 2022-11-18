@@ -14,7 +14,7 @@ module Packaging
       def class_for(name)
         super
       rescue NameError => e
-        klass
+        self
       end
     end
 
@@ -23,6 +23,9 @@ module Packaging
     def command = struct.map { |s| "#{command_type} install #{s}" }
 
     def command_type = name_map[identifier] || identifier
+
+    def configure = nil
+    def clean = nil
 
   end
 end

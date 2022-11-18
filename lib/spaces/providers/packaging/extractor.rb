@@ -7,7 +7,7 @@ module Packaging
       def class_for(name)
         super
       rescue NameError => e
-        klass
+        self
       end
     end
 
