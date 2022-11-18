@@ -1,7 +1,7 @@
-require_relative '../package'
+require_relative '../package_access'
 
 module Adapters
-  class ManagedPackageList < Package
+  class ManagedPackageList < PackageAccess
 
     delegate(
       [:identifier, :struct, :installer_name] => :division

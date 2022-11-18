@@ -1,5 +1,5 @@
 module Adapters
-  class Package < Division
+  class PackageAccess < Division
 
     delegate(command: :accessor)
 

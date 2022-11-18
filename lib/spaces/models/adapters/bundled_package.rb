@@ -1,7 +1,7 @@
-require_relative 'package'
+require_relative 'package_access'
 
 module Adapters
-  class BundledPackage < Package
+  class BundledPackage < PackageAccess
 
     delegate(branch: :target)
 
