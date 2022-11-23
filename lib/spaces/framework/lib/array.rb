@@ -49,4 +49,8 @@ class Array
     end
   end
 
+  def nilify
+    self unless self.empty?
+  end
+
 end
