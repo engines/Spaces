@@ -1,19 +1,15 @@
-module Adapters
-  class ManagedPackageList < Division
+require_relative '../package_access'
 
-    class << self
-      def installer_class_for(name) = class_for(:package_installers, name.to_s.camelize)
-    end
+module Adapters
+  class ManagedPackageList < PackageAccess
 
     delegate(
-      installer_class_for: :klass,
-      command: :installer,
-      installer_name: :division
+      [:identifier, :struct, :installer_name] => :division
     )
 
-    def installer
-      @installer ||= installer_class_for(installer_name).new(self)
-    end
+    alias_method :accessor_name, :installer_name
+
+    def default_accessor_class = ::Packaging::Installer
 
   end
 end

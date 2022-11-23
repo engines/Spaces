@@ -1,20 +1,13 @@
+require_relative 'package_access'
+
 module Adapters
-  class BundledPackage < Division
+  class BundledPackage < PackageAccess
 
-    class << self
-      def extractor_class_for(format) = class_for(:package_extractors, format.to_s.camelize)
-    end
+    delegate(branch: :target)
 
-    delegate(
-      extractor_class_for: :klass,
-      command: :extractor
-    )
+    def default_accessor_class = ::Packaging::Extractor
 
-    def extractor
-      @extractor ||= extractor_class_for(format).new(self)
-    end
-
-    def format = division.format
+    def accessor_name = division.format
 
   end
 end

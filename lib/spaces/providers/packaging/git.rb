@@ -1,11 +1,10 @@
 require_relative 'extractor'
 
-module PackageExtractors
+module Packaging
   class Git < Extractor
 
     delegate(
-      [:target, :repository, :destination] => :adapter,
-      branch: :target
+      [:branch, :repository, :destination] => :state
     )
 
     def command =
