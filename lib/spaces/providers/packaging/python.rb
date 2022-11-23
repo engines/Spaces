@@ -3,6 +3,10 @@ require_relative 'installer'
 module Packaging
   class Python < Installer
 
+    class << self
+      def system_dependencies = [:pip]
+    end
+
     delegate(
       resolutions: :universe,
       index_url: :state

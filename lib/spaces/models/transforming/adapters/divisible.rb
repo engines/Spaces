@@ -16,7 +16,7 @@ module Adapters
       @all ||= division.all.map { |s| subadapter_for(s) }&.compact || []
     end
 
-    def subadapter_for(subdivision) = subadapter_class.new(subdivision)
+    def subadapter_for(subdivision) = subadapter_class.new(subdivision, adapter)
 
     def snippets = all.map(&:snippets).flatten.compact
 

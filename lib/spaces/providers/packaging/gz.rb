@@ -4,6 +4,10 @@ module Packaging
   class Gz < Extractor
     include ::Adapters::ScriptPaths
 
+    class << self
+      def system_dependencies = [:unzip]
+    end
+
     delegate(
       [:qualifier, :environment_vars] => :state
     )
