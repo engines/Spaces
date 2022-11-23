@@ -4,6 +4,7 @@ module Adapters
   class Division < Adapter
 
     relation_accessor :division
+    relation_accessor :adapter
 
     def snippet_map
       @snippet_map ||= {}.tap { |m| m[qualifier] = snippets }.compact
@@ -11,8 +12,9 @@ module Adapters
 
     def snippets = nil
 
-    def initialize(division)
+    def initialize(division, adapter)
       self.division = division
+      self.adapter = adapter
     end
 
     def method_missing(m, *args, &block)
