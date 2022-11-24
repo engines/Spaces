@@ -4,8 +4,8 @@ module Adapters
   class Repository < PackageAccess
 
     class << self
-      def dynamic_type(division) =
-        class_for(division.type).new(division)
+      def dynamic_type(division, adapter) =
+        class_for(division.type).new(division, adapter)
 
       def class_for(type) = super(:adapters, type.to_s.camelize, qualifier)
     end
