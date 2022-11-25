@@ -1,18 +1,22 @@
 module Artifacts
-  module Terraform
-    class CloudFormation < ::Artifacts::Stanza
+  module CloudFormation
+    class CapsuleStanza < ::Artifacts::Stanza
 
       def snippets =
-        %(
-          resource "#{runtime_qualifier}_container" "#{resource_identifier}" {
-            name = "#{resource_identifier}"
-            image = "#{spaces_image_registry}#{image_identifier}"
-            domainname = "#{arena.identifier.as_subdomain}.#{universe.host}"
-            hostname = "#{resource_identifier.as_subdomain}"
+        {
+          "#{resource_identifier}": {
+            Type: "#{runtime_qualifier}::ECS::Service",
+            FIXME:
+              %(
+                name = "#{resource_identifier}"
+                image = "#{spaces_image_registry}#{image_identifier}"
+                domainname = "#{arena.identifier.as_subdomain}.#{universe.host}"
+                hostname = "#{resource_identifier.as_subdomain}"
 
-            #{volume_snippets if volumes}
+                #{volume_snippets if volumes}
+              )
           }
-        )
+        }
 
       def volume_snippets = volumes.all.map(&:snippets).join
 

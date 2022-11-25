@@ -5,11 +5,17 @@ module Artifacts
         include Named
 
         def snippets =
-          %(
-            provider "aws" {
-              region = "#{compute_provider&.region}"
+          {
+            "#{resource_identifier}": {
+              Type: "??PROVIDER??",
+              FIXME:
+              %(
+                provider "aws" {
+                  region = "#{compute_provider&.region}"
+                }
+              )
             }
-          )
+          }
 
       end
     end

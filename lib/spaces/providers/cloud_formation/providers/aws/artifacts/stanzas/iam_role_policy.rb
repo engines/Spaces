@@ -14,22 +14,22 @@ module Artifacts
         end
 
         def more_snippets =
-          %(
-            role = aws_iam_role.#{qualification_for(:role_binding)}.id
+          {
+            role: "aws_iam_role.#{qualification_for(:role_binding)}.id",
 
-            policy = jsonencode({
-              Version = "2012-10-17"
-              Statement = [
+            policy: {
+              Version: "2012-10-17",
+              Statement: [
                 {
-                  Action = [
-                    "ec2:Describe*",
-                  ]
-                  Effect   = "Allow"
-                  Resource = "*"
-                },
+                  Action: [
+                    "ec2:Describe*"
+                  ],
+                  Effect: "Allow",
+                  Resource: "*"
+                }
               ]
-            })
-          )
+            }
+          }
 
         def tags_snippet = nil
 

@@ -13,7 +13,8 @@ module Artifacts
             )
         end
 
-        def snippets = super + policy_snippet + push_images_snippet
+        #FIXME
+        def snippets = super.reverse_merge({FIXME: 'policy_snippet + push_images_snippet'})
 
         def policy_snippet =
           %(
