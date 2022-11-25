@@ -77,9 +77,3 @@ module Artifacts
     end
   end
 end
-
-
-class Hash
-  def without_binding_keys = without(*binding_keys)
-  def binding_keys = keys.select { |k| k.include?('_binding')}
-end
