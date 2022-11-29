@@ -1,3 +1,5 @@
+require_relative 'stanza'
+
 module Artifacts
   module Terraform
     module Aws

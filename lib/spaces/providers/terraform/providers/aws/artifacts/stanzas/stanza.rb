@@ -1,5 +1,3 @@
-require_relative 'named'
-
 module Artifacts
   module Terraform
     module Aws
