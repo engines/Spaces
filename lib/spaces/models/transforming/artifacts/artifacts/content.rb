@@ -1,8 +1,5 @@
-require_relative 'snippets'
-
 module Artifacts
   module Content
-    include Snippets
 
     def text_content = array_content.join("\n")
 

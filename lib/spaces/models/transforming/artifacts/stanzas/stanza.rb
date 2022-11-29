@@ -1,5 +1,3 @@
-require_relative 'artifact'
-
 module Artifacts
   class Stanza < Artifact
 

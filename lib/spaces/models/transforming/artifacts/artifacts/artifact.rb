@@ -1,8 +1,10 @@
+require_relative 'snippeting'
 require_relative 'content'
 
 module Artifacts
   class Artifact < ::Spaces::Model
     include ::Transforming::Precedence
+    include Snippeting
     include Content
 
     relation_accessor :holder

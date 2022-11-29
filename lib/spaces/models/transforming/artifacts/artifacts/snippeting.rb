@@ -1,5 +1,6 @@
 module Artifacts
-  module Snippets
+  module Snippeting
+    
 
     def snippets =
       no_stanzas? ? snippets_here : stanzas.map(&:snippets)
