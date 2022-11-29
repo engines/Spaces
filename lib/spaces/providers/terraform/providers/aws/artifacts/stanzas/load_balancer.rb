@@ -8,12 +8,7 @@ module Artifacts
 
         delegate(resources_by: :arena)
 
-        def more_snippets =
-          %(
-            subnets         = #{subnet_identifiers.to_hcl_without_quotes}
-            security_groups = #{security_group_identifiers.to_hcl_without_quotes}
-            depends_on      = #{dependency_array.to_hcl_without_quotes}
-          )
+        def more_snippets = LoadBalancer::More.new(self).content
 
         def more_snippets_keys = [:subnets, :security_groups]
 

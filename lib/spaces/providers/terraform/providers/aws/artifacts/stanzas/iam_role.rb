@@ -6,22 +6,7 @@ module Artifacts
       class IamRoleStanza < ResourceStanza
         include Named
 
-        def more_snippets =
-          %(
-            assume_role_policy = jsonencode({
-              Version = "2012-10-17"
-              Statement = [
-                {
-                  Action = "sts:AssumeRole"
-                  Effect = "Allow"
-                  Sid    = ""
-                  Principal = {
-                    Service = "ecs-tasks.amazonaws.com"
-                  }
-                }
-              ]
-            })
-          )
+        def more_snippets = IamRole::More.new(self).content
 
       end
     end

@@ -13,23 +13,7 @@ module Artifacts
             )
         end
 
-        def more_snippets =
-          %(
-            role = aws_iam_role.#{qualification_for(:role_binding)}.id
-
-            policy = jsonencode({
-              Version = "2012-10-17"
-              Statement = [
-                {
-                  Action = [
-                    "ec2:Describe*",
-                  ]
-                  Effect   = "Allow"
-                  Resource = "*"
-                },
-              ]
-            })
-          )
+        def more_snippets = IamRole::Policy.new(self).content
 
         def tags_snippet = nil
 

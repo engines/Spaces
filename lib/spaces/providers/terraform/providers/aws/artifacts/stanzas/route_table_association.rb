@@ -11,11 +11,7 @@ module Artifacts
             route_table_binding: default_binding
           )
 
-        def more_snippets =
-          %(
-            subnet_id = aws_subnet.#{qualification_for(:subnet_binding)}.id
-            route_table_id = aws_route_table.#{qualification_for(:route_table_binding)}.id
-          )
+        def more_snippets = RouteTable::Association.new(self).content
 
         def tags_snippet = nil
 

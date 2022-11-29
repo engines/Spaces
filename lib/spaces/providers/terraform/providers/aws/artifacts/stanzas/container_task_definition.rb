@@ -24,14 +24,7 @@ module Artifacts
           arena.compute_resolutions_for(:container_service).
             select { |s| s.application_identifier == blueprint_identifier }
 
-        def more_snippets =
-          %(
-            execution_role_arn = aws_iam_role.#{qualification_for(:execution_role_binding)}.arn
-            requires_compatibilities = #{compatibilities}
-            container_definitions = jsonencode([
-              #{definition_snippets}
-            ])
-          )
+        def more_snippets = ContainerTaskDefinition::More.new(self).content
 
         def compatibilities =
           "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
@@ -40,38 +33,7 @@ module Artifacts
           r.configuration&.launch_type || ContainerServiceStanza.launch_type
         )
 
-        def definition_snippets =
-          container_services.map { |s| definition_snippet_for(s) }.join(",\n")
-
-        def definition_snippet_for(r) =
-          #TODO: hostPort must be the same as containerPort when netWorkMode is awsvpc
-          %(
-            {
-              #{with_tailored_keys(hash_for(r)).to_hcl(enclosed:false)}
-              networkMode = "#{configuration.network_mode}"
-              portMappings = [
-                #{ports_mappings_for(r)}
-              ]
-            }
-          )
-
-        def hash_for(r) =
-          {
-            name: r.image_identifier.hyphenated,
-            image: "#{arena.image_registry_path}:#{r.image_identifier}",
-            essential: true
-          }.
-            merge(dimensions_hash_for(r))
-
-        def dimensions_hash_for(r) = r.dimensions&.struct&.to_h_deep
-
-        def ports_mappings_for(r)
-          r.ports&.map do |p|
-            p.struct.to_h_deep.transform_keys do |k|
-              k.camelize.downcase_first
-            end
-          end.to_hcl(enclosed: false)
-        end
+        def definition_snippets = ContainerTaskDefinition::Definition.new(self).content
 
       end
     end

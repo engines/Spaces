@@ -16,21 +16,14 @@ module Artifacts
         def default_configuration =
           super.merge(
             load_balancer_binding: default_binding,
-            zone_id: "#{arena.compute_provider.zone_identifier}"            
+            zone_id: "#{arena.compute_provider.zone_identifier}"
           )
 
         def tags_snippet = nil
 
-        def more_snippets =
-          %(
-            alias {
-              name                   = aws_lb.#{qualification_for(:load_balancer_binding)}.dns_name
-              zone_id                = aws_lb.#{qualification_for(:load_balancer_binding)}.zone_id
-              evaluate_target_health = #{configuration.evaluate_target_health}
-            }
-          )
+        def more_snippets = DnsRecord::More.new(self).content
 
-          def configuration_hash = super.without(:evaluate_target_health)
+        def configuration_hash = super.without(:evaluate_target_health)
 
       end
     end

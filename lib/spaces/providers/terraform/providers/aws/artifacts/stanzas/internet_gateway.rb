@@ -12,10 +12,7 @@ module Artifacts
             )
         end
 
-        def more_snippets =
-          %(
-            vpc_id = aws_vpc.#{qualification_for(:vpc_binding)}.id
-          )
+        def more_snippets = InternetGateway::More.new(self).content
 
       end
     end

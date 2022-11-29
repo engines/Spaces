@@ -16,10 +16,7 @@ module Artifacts
             )
         end
 
-        def more_snippets =
-          %(
-            role = aws_iam_role.#{qualification_for(:role_binding)}.name
-          )
+        def more_snippets = IamRole::PolicyAttachment.new(self).content
 
         def tags_snippet = nil
 
