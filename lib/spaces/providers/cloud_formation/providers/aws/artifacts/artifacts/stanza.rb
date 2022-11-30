@@ -1,5 +1,7 @@
+require_relative 'named'
+
 module Artifacts
-  module Terraform
+  module CloudFormation
     module Aws
       class Stanza < ::Artifacts::Stanza
 
@@ -16,23 +18,24 @@ module Artifacts
           [:default_configuration, :configuration_key_map] => :klass
         )
 
+        def runtime_qualifier = name_elements[2].camelize
+
         def snippets =
-          %(
-            resource "aws_#{resource_type_here}" "#{resource_identifier}" {
-              #{name_snippet}
-              #{configuration_snippet}
-              #{tags_snippet}
-              #{more_snippets}
-            }
-          )
+          {
+            "#{resource_identifier}":
+              [name_snippet, configuration_snippet, tags_snippet, more_snippets].
+                inject({Type: "#{runtime_qualifier}::#{resource_type_here}",}) do |m, s|
+                  m.merge(s || {})
+                end
+          }
 
         def name_snippet = nil
 
         def configuration_snippet =
-          configuration_hash.without(:tags).to_hcl(enclosed: false)
+          configuration_hash.without(:tags)
 
         def tags_snippet =
-          %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
+          {tags: tags_hash}
 
         def arena_resource_qualification_for(resource) =
           [arena.identifier, resource.identifier].join('_').hyphenated
