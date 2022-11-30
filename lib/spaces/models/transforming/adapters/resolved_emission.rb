@@ -27,7 +27,7 @@ module Adapters
     def adapter_keys = adapter_map.keys
 
     def division_adapter_for(division) =
-      adapter_class_for(division).new(division)
+      adapter_class_for(division).new(division, self)
 
     def adapter_class_for(division)
       q = division.qualifier

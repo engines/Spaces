@@ -11,9 +11,7 @@ module Adapters
 
     def adapter_keys = to_h.keys
 
-    def to_h
-      @to_h ||= division.struct.to_h
-    end
+    def struct = division.struct
 
   end
 end

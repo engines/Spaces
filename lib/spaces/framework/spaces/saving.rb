@@ -1,6 +1,5 @@
 module Spaces
   module Saving
-    include Engines::Logger
 
     def touch(model)
       FileUtils.touch(file_name_for(model))

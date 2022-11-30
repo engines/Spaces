@@ -13,7 +13,7 @@ module Spaces
       relation_accessor :stream
 
       delegate(
-        [:repository_url, :identifier, :branch_name, :remote_name, :protocol] => :descriptor,
+        [:repository_url, :identifier, :branch_name, :remote_name] => :descriptor,
         [:git, :git_error] => :space
       )
 
@@ -21,6 +21,8 @@ module Spaces
         opened.branches.map(&:name).uniq.reject { |b| b.include?(head_identifier) }
 
       alias_method :branch_names, :branch_names_without_head
+
+      def format = descriptor.format
 
       def diff = opened.diff.patch
 
@@ -72,7 +74,7 @@ module Spaces
         @opened ||= git.open(space.path_for(descriptor))
       end
 
-      def exist? = space.path_for(descriptor).join(".#{protocol}").exist?
+      def exist? = space.path_for(descriptor).join(".#{format}").exist?
 
       def collect(io)
         stream&.tap do |s|

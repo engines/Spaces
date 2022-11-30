@@ -1,13 +1,12 @@
+require_relative 'configuration'
+require_relative 'system_dependencies'
+
 module Adapters
   class Pack < ResolvedEmission
+    include PackConfiguration
+    include SystemDependencies
 
     alias_method :pack, :emission
-
-    def access_repositories
-      if declares_repositories?
-        repositories.map(&:access)
-      end
-    end
 
     def provider = provider_for(:packing)
 

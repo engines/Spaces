@@ -13,10 +13,11 @@ module Providers
       )
 
       def build
-        pack.access_repositories
+        pack.configure_repositories
         pack.copy_auxiliaries
         build_from_pack
         pack.remove_auxiliaries
+        pack.clean_repository_configurations
       end
 
       def build_from_pack

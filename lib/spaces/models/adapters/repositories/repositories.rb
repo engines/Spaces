@@ -1,5 +1,5 @@
 module Adapters
-    class Repositories < Divisible
+  class Repositories < Divisible
 
     class << self
       def subadapter_class = Repository
