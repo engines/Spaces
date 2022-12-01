@@ -13,6 +13,8 @@ module Artifacts
               ])
             )
 
+          def definition_snippets =  Definition.new(self).content
+
         end
       end
     end

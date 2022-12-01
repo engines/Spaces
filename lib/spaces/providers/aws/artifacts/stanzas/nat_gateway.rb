@@ -11,6 +11,14 @@ module Artifacts
           internet_gateway_binding: :internet_gateway
         )
 
+      def snippets =
+        %(#{super}
+
+          resource "aws_eip" "#{resource_identifier}" {
+            vpc = true
+          }
+        )
+
     end
   end
 end

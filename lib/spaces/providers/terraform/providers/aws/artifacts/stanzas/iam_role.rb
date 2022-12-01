@@ -1,10 +1,7 @@
-require_relative 'resource'
-
 module Artifacts
   module Terraform
     module Aws
-      class IamRoleStanza < ResourceStanza
-        include Named
+      class IamRoleStanza < ::Artifacts::Aws::IamRoleStanza
 
         def more_snippets = IamRole::More.new(self).content
 
