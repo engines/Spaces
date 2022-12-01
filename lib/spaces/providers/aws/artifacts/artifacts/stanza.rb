@@ -17,25 +17,37 @@ module Artifacts
         [:default_configuration, :configuration_key_map] => :klass
       )
 
-      def maximum_identifier_length = 32
       def resource_type_map = ResourceTypeMap.new.type_map
 
+      def snippets =
+        %(
+          resource "aws_#{resource_type_here}" "#{resource_identifier}" {
+            #{name_snippet}
+            #{configuration_snippet}
+            #{tags_snippet}
+            #{more_snippets}
+          }
+        )
+
       def name_snippet = nil
-      def more_snippets = nil
 
-      def tags_snippet = {tags: tags_hash}
+      def configuration_snippet =
+        configuration_hash.without(:tags).to_hcl(enclosed: false)
 
-      def configuration_snippet = configuration_hash.without(:tags)
+      def tags_snippet =
+        %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
 
       def arena_resource_qualification_for(resource) =
-        [arena.identifier, resource.identifier].join('_')
+        [arena.identifier, resource.identifier].join('_').hyphenated
 
       def arena_attachable_qualification_for(attachable) =
-        [arena.identifier, configuration.send(attachable)].join('_').abbreviated_to(maximum_identifier_length)
+        [arena.identifier, configuration.send(attachable)].join('_').hyphenated.abbreviated_to(maximum_identifier_length)
+
+      def maximum_identifier_length = 32
 
       alias_method :qualification_for, :arena_attachable_qualification_for
 
-      def default_binding = :"#{blueprint_identifier}"
+      def default_binding = :"#{blueprint_identifier.hyphenated}"
 
       def configuration
         @configuration ||= default_configuration.reverse_merge(super)
@@ -58,6 +70,8 @@ module Artifacts
           'Name': resource_identifier,
           'Environment': 'var.app_environment'
         }.merge(configuration_hash[:tags] || {})
+
+      def more_snippets = nil
 
     end
   end
