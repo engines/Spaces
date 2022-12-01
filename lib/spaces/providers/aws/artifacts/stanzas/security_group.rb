@@ -3,7 +3,6 @@ require_relative 'resource'
 module Artifacts
   module Aws
     class SecurityGroupStanza < ResourceStanza
-      include Named
 
       def more_configuration =
         {

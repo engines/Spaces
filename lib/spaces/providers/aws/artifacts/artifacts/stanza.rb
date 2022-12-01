@@ -1,5 +1,3 @@
-require_relative 'named'
-
 module Artifacts
   module Aws
     class Stanza < ::Artifacts::Stanza
@@ -29,7 +27,7 @@ module Artifacts
           }
         )
 
-      def name_snippet = nil
+      def name_snippet = ::Artifacts::Terraform::Aws::Snippets::Name.new(self).content
 
       def configuration_snippet =
         configuration_hash.without(:tags).to_hcl(enclosed: false)

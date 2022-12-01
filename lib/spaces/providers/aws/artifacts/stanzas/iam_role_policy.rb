@@ -3,7 +3,6 @@ require_relative 'resource'
 module Artifacts
   module Aws
     class IamRolePolicyStanza < ResourceStanza
-      include Named
 
       class << self
         def default_configuration =
