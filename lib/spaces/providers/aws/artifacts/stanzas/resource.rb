@@ -2,11 +2,6 @@ module Artifacts
   module Aws
     class ResourceStanza < Stanza
 
-      class << self
-        def resource_type_map = {}
-      end
-
-      delegate resource_type_map: :klass
 
       alias_method :resource, :holder
 

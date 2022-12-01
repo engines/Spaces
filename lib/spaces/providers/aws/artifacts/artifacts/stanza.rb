@@ -18,6 +18,7 @@ module Artifacts
       )
 
       def maximum_identifier_length = 32
+      def resource_type_map = ResourceTypeMap.new.type_map
 
       def name_snippet = nil
       def more_snippets = nil
