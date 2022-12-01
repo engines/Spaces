@@ -1,3 +1,0 @@
-requires 'adapters',
-         'artifacts',
-         'providers'

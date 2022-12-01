@@ -1,2 +1,0 @@
-requires 'artifacts'
-requires 'stanzas'
