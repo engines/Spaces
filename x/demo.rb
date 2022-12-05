@@ -11,8 +11,8 @@ require 'byebug'
 
 require './x/common/controllers'
 
-require './x/demo/packer-terraform-aws/nuke'
-require './x/demo/packer-terraform-aws/image'
-require './x/demo/packer-terraform-aws/mxr'
-require './x/demo/packer-terraform-aws/registry'
-require './x/demo/packer-terraform-aws/applications'
+require './x/demo/terraform-aws/nuke'
+require './x/demo/terraform-aws/image'
+require './x/demo/terraform-aws/mxr'
+require './x/demo/terraform-aws/registry'
+require './x/demo/terraform-aws/applications'
