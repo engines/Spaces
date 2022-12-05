@@ -15,8 +15,6 @@ module Artifacts
         [:default_configuration, :configuration_key_map] => :klass
       )
 
-      def resource_type_map = ResourceTypeMap.new.type_map
-
       def format
         @format ||= ::Artifacts::Terraform::Aws::Formats::Hcl.new(self)
       end

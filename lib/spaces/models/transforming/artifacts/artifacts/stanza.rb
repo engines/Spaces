@@ -5,6 +5,8 @@ module Artifacts
 
     alias_method :artifact, :holder
 
+    def resource_type_map = ResourceTypeMap.new.type_map
+
     def snippets = format.content
 
     # def format
