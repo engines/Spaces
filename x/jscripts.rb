@@ -35,26 +35,6 @@ orchestration = resolution.orchestrated
 universe.orchestrations.save(orchestration)
 
 # import a blueprint
-descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/powerdns')
-universe.publications.import(descriptor, force: true)
-
-# resolve a blueprint
-blueprint = universe.blueprints.by('powerdns')
-arena = universe.arenas.by('development')
-resolution = blueprint.with_embeds.resolution_in(arena)
-universe.resolutions.save(resolution)
-
-# save a pack for a resolution
-resolution = universe.resolutions.by('development::powerdns')
-pack = resolution.packed
-universe.packs.save(pack)
-
-# save orchestration for resolution
-resolution = universe.resolutions.by('development::powerdns')
-orchestration = resolution.orchestrated
-universe.orchestrations.save(orchestration)
-
-# import a blueprint
 descriptor = Spaces::Descriptor.new(repository: 'https://github.com/v2Blueprints/phpmyadmin')
 universe.publications.import(descriptor, force: true)
 
