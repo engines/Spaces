@@ -20,6 +20,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::LoadBalancerTargetGroup.new(self)
+      end
+
       def default_configuration = super.merge(port: default_port)
 
       def default_port = (ports.first.host_port if emission.has?(:ports))

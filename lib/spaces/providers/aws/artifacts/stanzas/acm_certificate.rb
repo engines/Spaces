@@ -4,8 +4,9 @@ module Artifacts
   module Aws
     class AcmCertificateStanza < ResourceStanza
 
-      def more_snippets_keys =
-        [:domain_name, :validation_method, :create_before_destroy]
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::AcmCertificate.new(self)
+      end
 
     end
   end

@@ -11,6 +11,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::ContainerRegistry.new(self)
+      end
+
       def images_resource_identifier =
         "#{resource_identifier}-images-#{Time.now.to_i}".abbreviated_to(maximum_identifier_length)
 

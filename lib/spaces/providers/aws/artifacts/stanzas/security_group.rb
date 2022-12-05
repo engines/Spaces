@@ -4,6 +4,10 @@ module Artifacts
   module Aws
     class SecurityGroupStanza < ResourceStanza
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::SecurityGroup.new(self)
+      end
+
       def more_configuration =
         {
           description: resource_identifier,

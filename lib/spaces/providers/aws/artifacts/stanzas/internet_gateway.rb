@@ -11,6 +11,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::InternetGateway.new(self)
+      end
+
     end
   end
 end

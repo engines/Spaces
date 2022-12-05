@@ -6,6 +6,10 @@ module Artifacts
 
       delegate(resources_by: :arena)
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::LoadBalancer.new(self)
+      end
+
       def more_snippets_keys = [:subnets, :security_groups]
 
       def subnet_identifiers = subnet_array.map { |s| "#{s}.id" }

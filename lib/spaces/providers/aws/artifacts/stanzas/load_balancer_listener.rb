@@ -13,6 +13,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::LoadBalancerListener.new(self)
+      end
+
       def default_configuration =
         super.merge(
           target_group: resource_identifier,

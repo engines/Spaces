@@ -1,9 +1,9 @@
 module Artifacts
   module Aws
-    class ResourcesStanza < Stanza
+    class ResourcesStanza < ::Artifacts::Stanza
 
-      def stanzas
-        @stanzas ||= emission.resources.map { |r| stanza_class_for(r.type).new(r) }
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::Resources.new(self)
       end
 
     end

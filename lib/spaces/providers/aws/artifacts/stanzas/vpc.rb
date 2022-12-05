@@ -14,6 +14,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::Vpc.new(self)
+      end
+
     end
   end
 end

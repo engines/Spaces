@@ -4,7 +4,9 @@ module Artifacts
   module Aws
     class ContainerServiceClusterStanza < ResourceStanza
 
-      def tags_snippet = nil
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::ContainerServiceCluster.new(self)
+      end
 
     end
   end

@@ -11,7 +11,9 @@ module Artifacts
           )
       end
 
-      def tags_snippet = nil
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::IamRolePolicy.new(self)
+      end
 
     end
   end

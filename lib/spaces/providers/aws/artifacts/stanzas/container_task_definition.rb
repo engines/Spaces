@@ -14,6 +14,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::ContainerTaskDefinition.new(self)
+      end
+
       def default_configuration =
         super.merge(
           family: :"#{application_identifier}"

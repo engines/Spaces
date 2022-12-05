@@ -10,7 +10,7 @@ module Artifacts
     relation_accessor :holder
 
     alias_method :adapter, :holder
-    alias_method :content, :text_content
+    alias_method :content, :text_content #TODO: consider ... this now depends on the format
 
     delegate(
       [:provider, :adapter_map, :adapter_keys] => :adapter

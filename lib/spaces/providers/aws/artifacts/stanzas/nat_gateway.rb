@@ -11,13 +11,9 @@ module Artifacts
           internet_gateway_binding: :internet_gateway
         )
 
-      def snippets =
-        %(#{super}
-
-          resource "aws_eip" "#{resource_identifier}" {
-            vpc = true
-          }
-        )
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::NatGateway.new(self)
+      end
 
     end
   end

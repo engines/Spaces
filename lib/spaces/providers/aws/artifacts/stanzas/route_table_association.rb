@@ -10,7 +10,9 @@ module Artifacts
           route_table_binding: default_binding
         )
 
-      def tags_snippet = nil
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::RouteTableAssociation.new(self)
+      end
 
     end
   end

@@ -12,6 +12,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::RouteTable.new(self)
+      end
+
       def nat_gateway? = resource.struct&.configuration&.gateway_type == 'nat'
 
       def default_configuration =

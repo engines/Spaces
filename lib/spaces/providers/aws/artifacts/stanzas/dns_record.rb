@@ -11,13 +11,15 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::DnsRecord.new(self)
+      end
+
       def default_configuration =
         super.merge(
           load_balancer_binding: default_binding,
           zone_id: "#{arena.compute_provider.zone_identifier}"
         )
-
-      def tags_snippet = nil
 
       def configuration_hash = super.without(:evaluate_target_health)
 

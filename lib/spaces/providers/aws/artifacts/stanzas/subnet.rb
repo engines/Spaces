@@ -12,6 +12,10 @@ module Artifacts
           )
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::Subnet.new(self)
+      end
+
       def configuration_hash = super.without(:public)
 
     end

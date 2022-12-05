@@ -15,6 +15,10 @@ module Artifacts
         def launch_type = default_configuration.launch_type
       end
 
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::ContainerService.new(self)
+      end
+
       def default_configuration =
         super.merge(
           desired_count: emission.dimensions&.tasks || 1,

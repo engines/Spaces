@@ -17,31 +17,20 @@ module Artifacts
 
       def resource_type_map = ResourceTypeMap.new.type_map
 
-      def snippets =
-        %(
-          resource "aws_#{resource_type_here}" "#{resource_identifier}" {
-            #{name_snippet}
-            #{configuration_snippet}
-            #{tags_snippet}
-            #{more_snippets}
-          }
-        )
-
-      def name_snippet = ::Artifacts::Terraform::Aws::Snippets::Name.new(self).content
-
-      def configuration_snippet =
-        configuration_hash.without(:tags).to_hcl(enclosed: false)
-
-      def tags_snippet =
-        %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
+      def format
+        @format ||= ::Artifacts::Terraform::Aws::Formats::Hcl.new(self)
+      end
 
       def arena_resource_qualification_for(resource) =
         [arena.identifier, resource.identifier].join('_').hyphenated
 
+      ##################################
+      # FIXME: identifier length is a format conern
       def arena_attachable_qualification_for(attachable) =
         [arena.identifier, configuration.send(attachable)].join('_').hyphenated.abbreviated_to(maximum_identifier_length)
 
       def maximum_identifier_length = 32
+      ##################################
 
       alias_method :qualification_for, :arena_attachable_qualification_for
 
@@ -68,8 +57,6 @@ module Artifacts
           'Name': resource_identifier,
           'Environment': 'var.app_environment'
         }.merge(configuration_hash[:tags] || {})
-
-      def more_snippets = nil
 
     end
   end
