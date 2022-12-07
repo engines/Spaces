@@ -1,6 +1,6 @@
 module Artifacts
   module DockerCompose
-    class Artifact < ::Artifacts::Orchestrating::Artifact
+    class Artifact < ::Artifacts::Artifact
 
       alias_method :content, :yaml_content
 
