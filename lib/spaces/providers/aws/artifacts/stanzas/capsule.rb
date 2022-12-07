@@ -1,7 +1,7 @@
 module Artifacts
   module Aws
     module Stanzas
-      class Capsule < ::Artifacts::Aws::Stanza
+      class Capsule < Stanza
 
         def resource_type_here =
           resource_type_map[compute_service_identifier&.to_sym] ||

@@ -1,7 +1,7 @@
 module Artifacts
   module Aws
     module Stanzas
-      class Resource < ::Artifacts::Aws::Stanza
+      class Resource < Stanza
 
         alias_method :stanza, :holder
 

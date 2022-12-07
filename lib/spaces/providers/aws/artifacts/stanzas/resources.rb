@@ -1,7 +1,7 @@
 module Artifacts
   module Aws
     module Stanzas
-      class Resources < ::Artifacts::Stanza
+      class Resources < Stanza
 
         delegate(resources: :emission)
 
