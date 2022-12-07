@@ -8,13 +8,7 @@ module Artifacts
 
     def hash_content
       [snippets].flatten.inject({}) do |m, s|
-        begin
-          m.merge(s)
-        rescue TypeError => e
-          pp '~-' * 44
-          pp s
-          m
-        end
+        m.merge(s)
       end
     end
 
