@@ -15,10 +15,8 @@ requires 'resolving', recurse: false
 
 requires 'registry'
 
-requires 'packing/artifacts'
 requires 'packing', recurse: false
 
-requires 'orchestrating/artifacts'
 requires 'orchestrating', recurse: false
 
 requires 'images'

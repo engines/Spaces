@@ -4,7 +4,8 @@ module Artifacts
   module Terraform
     class Capsule < Artifact
 
-      def stanza_qualifiers = [:capsule, :volume, :dns]
+      def stanza_qualifiers =
+        [compute_service_identifier || :capsule]
 
       def dns_qualifier = arena.qualifier_for(:dns).camelize.downcase
 
