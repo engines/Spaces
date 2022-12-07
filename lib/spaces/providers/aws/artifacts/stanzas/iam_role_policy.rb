@@ -2,19 +2,17 @@ require_relative 'resource'
 
 module Artifacts
   module Aws
-    class IamRolePolicyStanza < ResourceStanza
+    module Stanzas
+      class IamRolePolicy < Resource
 
-      class << self
-        def default_configuration =
-          super.merge(
-            role_binding: :'iam-role'
-          )
+        class << self
+          def default_configuration =
+            super.merge(
+              role_binding: :'iam-role'
+            )
+        end
+
       end
-
-      def format
-        @format ||= ::Artifacts::Terraform::Aws::Formats::IamRolePolicy.new(self)
-      end
-
     end
   end
 end

@@ -15,9 +15,7 @@ module Artifacts
         [:default_configuration, :configuration_key_map] => :klass
       )
 
-      def format
-        @format ||= ::Artifacts::Terraform::Aws::Formats::Hcl.new(self)
-      end
+      def compute_qualifier = :aws
 
       def arena_resource_qualification_for(resource) =
         [arena.identifier, resource.identifier].join('_').hyphenated
@@ -55,6 +53,8 @@ module Artifacts
           'Name': resource_identifier,
           'Environment': 'var.app_environment'
         }.merge(configuration_hash[:tags] || {})
+
+      def resource_type_map_class = ResourceTypeMap
 
     end
   end

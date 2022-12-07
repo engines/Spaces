@@ -5,14 +5,14 @@ module Artifacts
 
     alias_method :artifact, :holder
 
-    def resource_type_map = ResourceTypeMap.new.type_map
-
     def snippets = format.content
 
-    # def format
-    #   #TODO: need dynamic type processing
-    #   @format ||= Format.new(self)
-    # end
+    def format
+      @format ||= Format.dynamic_type(self)
+    end
+
+    def resource_type_map = resource_type_map_class.new.type_map
+    def resource_type_map_class = ResourceTypeMap
 
     def method_missing(m, *args, &block)
       return artifact.send(m, *args, &block) if artifact.respond_to?(m)

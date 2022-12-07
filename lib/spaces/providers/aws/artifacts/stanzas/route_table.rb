@@ -2,34 +2,32 @@ require_relative 'resource'
 
 module Artifacts
   module Aws
-    class RouteTableStanza < ResourceStanza
+    module Stanzas
+      class RouteTable < Resource
 
-      class << self
-        def default_configuration =
-          super.merge(
-            vpc_binding: :vpc,
-            gateway_binding: :'internet-gateway'
-          )
-      end
-
-      def format
-        @format ||= ::Artifacts::Terraform::Aws::Formats::RouteTable.new(self)
-      end
-
-      def nat_gateway? = resource.struct&.configuration&.gateway_type == 'nat'
-
-      def default_configuration =
-        super.merge(
-          nat_gateway_binding: nat_gateway_identifier
-        )
-
-      def nat_gateway_identifier =
-        if nat_gateway?
-          :"#{resource.struct[:identifier] || configuration.gateway_binding}"
+        class << self
+          def default_configuration =
+            super.merge(
+              vpc_binding: :vpc,
+              gateway_binding: :'internet-gateway'
+            )
         end
 
-      def more_snippets_keys = [:gateway_type]
+        def nat_gateway? = division.struct&.configuration&.gateway_type == 'nat'
 
+        def default_configuration =
+          super.merge(
+            nat_gateway_binding: nat_gateway_identifier
+          )
+
+        def nat_gateway_identifier =
+          if nat_gateway?
+            :"#{division.struct[:identifier] || configuration.gateway_binding}"
+          end
+
+        def more_snippets_keys = [:gateway_type]
+
+      end
     end
   end
 end

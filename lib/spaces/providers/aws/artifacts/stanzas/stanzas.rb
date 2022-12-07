@@ -2,9 +2,15 @@ require_relative 'resource'
 
 module Artifacts
   module Aws
+    module Stanzas
 
-    class LogGroupStanza < ResourceStanza ;end
-    class ContainerDefinitionStanza < ResourceStanza ;end
+      class AcmCertificate < Resource ;end
+      class ContainerDefinition < Resource ;end
+      class ContainerServiceCluster < Resource ;end
+      class IamRole < Resource ;end
+      class LogGroup < Resource ;end
+      class Providers < Stanza ;end
 
+    end
   end
 end

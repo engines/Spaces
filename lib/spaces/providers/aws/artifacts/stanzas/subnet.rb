@@ -1,23 +1,21 @@
 require_relative 'resource'
 
 module Artifacts
-  module Aws
-    class SubnetStanza < ResourceStanza
+    module Aws
+      module Stanzas
+        class Subnet < Resource
 
-      class << self
-        def default_configuration =
-          super.merge(
-            vpc_binding: :vpc,
-            public: false
-          )
+          class << self
+            def default_configuration =
+              super.merge(
+                vpc_binding: :vpc,
+                public: false
+              )
+          end
+
+          def configuration_hash = super.without(:public)
+
       end
-
-      def format
-        @format ||= ::Artifacts::Terraform::Aws::Formats::Subnet.new(self)
-      end
-
-      def configuration_hash = super.without(:public)
-
     end
   end
 end

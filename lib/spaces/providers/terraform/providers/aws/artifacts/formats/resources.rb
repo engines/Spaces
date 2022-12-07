@@ -6,11 +6,9 @@ module Artifacts
       module Formats
         class Resources < Hcl
 
-          def content = stanzas.map(&:content).join("\n")
+          delegate(substanzas: :holder)
 
-          def stanzas
-            @stanzas ||= emission.resources.map { |r| stanza_class_for(r.type).new(r) }
-          end
+          def content = substanzas.map(&:content).join("\n")
 
         end
       end
