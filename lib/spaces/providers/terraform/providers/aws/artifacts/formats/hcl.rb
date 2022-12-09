@@ -14,7 +14,8 @@ module Artifacts
               }
             )
 
-          def name_snippet = %(name = "#{resource_identifier}")
+          def name_snippet =
+            %(name = "#{resource_identifier}")
 
           def configuration_snippet =
             configuration_hash.without(:tags).to_hcl(enclosed: false)

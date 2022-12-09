@@ -2,6 +2,7 @@ module Adapters
   module CloudFormation
     class Orchestration < ::Adapters::Orchestration
 
+      #TODO: REFACTOR ... this code needs to be abstracted into Adapters::Orchestration
       def artifact_qualifiers = [:capsule, :resources]
 
       def artifacts
