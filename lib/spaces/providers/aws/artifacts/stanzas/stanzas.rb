@@ -4,7 +4,6 @@ module Artifacts
   module Aws
     module Stanzas
 
-      class AcmCertificate < Resource ;end
       class ContainerDefinition < Resource ;end
       class ContainerServiceCluster < Resource ;end
       class IamRole < Resource ;end
