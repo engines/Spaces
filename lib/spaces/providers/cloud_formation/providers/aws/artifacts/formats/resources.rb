@@ -1,10 +1,10 @@
-require_relative 'hcl'
+require_relative 'hash'
 
 module Artifacts
-  module Terraform
+  module CloudFormation
     module Aws
       module Formats
-        class Resources < Hcl
+        class Resources < Hash
 
           delegate(substanzas: :holder)
 
