@@ -9,7 +9,7 @@ module Artifacts
           delegate(substanzas: :holder)
 
           def content =
-            substanzas.reduce({}) { |m,s| m.merge(s.content) }
+            substanzas.reduce({}) { |m,s| m.merge(s.format.content) }
 
         end
       end
