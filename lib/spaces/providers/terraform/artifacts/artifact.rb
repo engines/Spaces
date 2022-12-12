@@ -1,6 +1,6 @@
 module Artifacts
   module Terraform
-    class Artifact < ::Artifacts::Orchestrating::Artifact
+    class Artifact < ::Artifacts::Artifact
 
       def filename =
         "#{emission.application_identifier}.#{qualifier}.#{extension}"

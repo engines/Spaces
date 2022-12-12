@@ -1,8 +1,8 @@
 module Artifacts
   module CloudFormation
-    class Artifact < ::Artifacts::Orchestrating::Artifact
+    class Artifact < ::Artifacts::Artifact
 
-      alias_method :content, :yaml_content
+      alias_method :content, :yaml_content #TODO: consider ... this now depends on the format
 
       #TODO: REFACTOR ... abstract up
       def filename =
