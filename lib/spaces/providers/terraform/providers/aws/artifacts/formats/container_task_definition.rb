@@ -32,24 +32,6 @@ module Artifacts
               }
             )
 
-          def hash_for(r) =
-            {
-              name: r.image_identifier.hyphenated,
-              image: "#{arena.image_registry_path}:#{r.image_identifier}",
-              essential: true
-            }.
-              merge(dimensions_hash_for(r))
-
-          def dimensions_hash_for(r) = r.dimensions&.struct&.to_h_deep
-
-          def ports_mappings_for(r)
-            r.ports&.map do |p|
-              p.struct.to_h_deep.transform_keys do |k|
-                k.camelize.downcase_first
-              end
-            end.to_hcl(enclosed: false)
-          end
-
         end
       end
     end
