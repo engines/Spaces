@@ -4,7 +4,7 @@ module Artifacts
       module Formats
         class Hash < ::Artifacts::Format
 
-          # def runtime_qualifier = name_elements[2].camelize
+          def runtime_qualifier = name_elements[2].camelize
 
           def content =
             {
