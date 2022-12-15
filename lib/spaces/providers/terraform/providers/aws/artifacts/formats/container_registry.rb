@@ -53,6 +53,9 @@ module Artifacts
               }
             )
 
+          def images_resource_identifier =
+            super.abbreviated_to(maximum_identifier_length)
+
         end
       end
     end

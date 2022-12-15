@@ -13,7 +13,7 @@ module Artifacts
         end
 
         def images_resource_identifier =
-          "#{resource_identifier}-images-#{Time.now.to_i}".abbreviated_to(maximum_identifier_length)
+          "#{resource_identifier}-images-#{Time.now.to_i}"
 
         def image_push_commands
           arena.compute_resolutions_for(:container_service).map do |r|

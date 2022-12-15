@@ -21,13 +21,8 @@ module Artifacts
         def arena_resource_qualification_for(resource) =
           [arena.identifier, resource.identifier].join('_').hyphenated
 
-        ##################################
-        # FIXME: identifier length is a format conern
         def arena_attachable_qualification_for(attachable) =
-          [arena.identifier, configuration.send(attachable)].join('_').hyphenated.abbreviated_to(maximum_identifier_length)
-
-        def maximum_identifier_length = 32
-        ##################################
+          [arena.identifier, configuration.send(attachable)].join('_')
 
         alias_method :qualification_for, :arena_attachable_qualification_for
 

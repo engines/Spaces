@@ -7,7 +7,7 @@ module Artifacts
 
         relation_accessor :division
 
-        def resource_identifier = [arena.identifier, division.identifier].join('-').hyphenated.abbreviated_to(maximum_identifier_length)
+        def resource_identifier = [arena.identifier, division.identifier].join('-').hyphenated
 
         def resource_type =
           resource_type_map[division_type.to_sym] || division_type
