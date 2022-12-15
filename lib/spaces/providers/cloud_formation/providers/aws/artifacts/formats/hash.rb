@@ -13,7 +13,7 @@ module Artifacts
                   inject({Type: "#{runtime_qualifier}::#{resource_type_here}",}) do |m, s|
                     m.merge(s || {})
                   end
-            }
+            }.deep(:camelize, of: :keys)
 
           def name_snippet =
             {name: resource_identifier}
