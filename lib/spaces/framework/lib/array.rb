@@ -16,9 +16,9 @@ class Array
       #{']' if enclosed}
     )
 
-  def deep(method)
+  def deep(method, of:)
     map do |i|
-      i.send(method)
+      i.deep(method, of: of)
     rescue NoMethodError
       i
     end

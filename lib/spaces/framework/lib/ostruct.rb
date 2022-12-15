@@ -26,12 +26,9 @@ class OpenStruct
   def to_h_deep = deep(:to_h_deep)
   def no_symbols = deep(:no_symbols)
 
-  def deep(method)
-    to_h.transform_values do |v|
-      v.send(method)
-    rescue NoMethodError
-      v
-    end
+  def deep(method, of: :values)
+    to_h.send("transform_#{of}") { |v| v.deep(method, of: of) }.
+    transform_values { |v| (v.respond_to?(:keys) && of == :keys) ? v.deep(method, of: :keys) : v }
   end
 
 end

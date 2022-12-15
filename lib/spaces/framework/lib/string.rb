@@ -44,6 +44,8 @@ class String
 
   def to_hcl = %("#{self}")
 
+  def deep(method, _) = send(method)
+
   alias_method :no_symbols, :to_s
 
 end
