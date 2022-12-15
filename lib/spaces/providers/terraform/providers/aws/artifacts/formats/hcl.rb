@@ -6,7 +6,7 @@ module Artifacts
 
           def content =
             %(
-              resource "aws_#{resource_type_here}" "#{resource_identifier}" {
+              resource "aws_#{resource_type}" "#{resource_identifier}" {
                 #{name_snippet}
                 #{configuration_snippet}
                 #{tags_snippet}

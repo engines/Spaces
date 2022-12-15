@@ -9,14 +9,14 @@ module Artifacts
 
         def resource_identifier = [arena.identifier, division.identifier].join('-').hyphenated.abbreviated_to(maximum_identifier_length)
 
-        def resource_type_here =
-          resource_type_map[resource_type.to_sym] || resource_type
+        def resource_type =
+          resource_type_map[division_type.to_sym] || division_type
 
         def configuration
           @configuration ||= default_configuration.merge(more_configuration).merge(division.configuration)
         end
 
-        def resource_type = division.type
+        def division_type = division.type
 
         def initialize(stanza, division)
           super(stanza)

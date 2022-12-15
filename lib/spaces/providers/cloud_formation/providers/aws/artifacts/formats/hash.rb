@@ -10,7 +10,7 @@ module Artifacts
             {
               "#{resource_identifier}":
                 [name_snippet, configuration_snippet, tags_snippet, more_snippets].
-                  inject({Type: "#{runtime_qualifier}::#{resource_type_here}",}) do |m, s|
+                  inject({Type: "#{runtime_qualifier}::#{resource_type}",}) do |m, s|
                     m.merge(s || {})
                   end
             }.deep(:camelize, of: :keys)

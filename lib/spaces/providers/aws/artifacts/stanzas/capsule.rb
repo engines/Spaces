@@ -3,7 +3,7 @@ module Artifacts
     module Stanzas
       class Capsule < Stanza
 
-        def resource_type_here =
+        def resource_type =
           resource_type_map[compute_service_identifier&.to_sym] ||
             qualifier.split('_')[0..-2].join('_')
 
