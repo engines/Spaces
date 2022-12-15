@@ -9,8 +9,7 @@ module Artifacts
           def content =
             {
               "#{resource_identifier}":
-                [name_snippet, configuration_snippet, tags_snippet, more_snippets].
-                  inject({Type: resource_type}) do |m, s|
+                all_the_snippets.inject({type: resource_type}) do |m, s|
                     m.merge(s || {})
                   end
             }.deep(:camelize, of: :keys)
@@ -20,22 +19,34 @@ module Artifacts
           def resource_type =
             "#{runtime_qualifier.upcase}_#{super}".amazonize
 
+          def all_the_snippets =
+            [
+              name_snippet,
+              dependency_snippet,
+              configuration_snippet,
+              tags_snippet
+            ].compact
+
           def name_snippet =
             {name: resource_identifier}
 
+          def dependency_snippet = {}
+
           def configuration_snippet =
-            configuration_hash.without(:tags)
+            {
+              properties: configuration_hash.without(:tags).merge(more_snippets)
+            }
 
           def tags_snippet =
             {tags: tags_hash}
 
           def tags_hash =
             {
-              'Name': resource_identifier,
-              'Environment': 'var.app_environment'
+              name: resource_identifier,
+              environment: 'var.app_environment'
             }.merge(configuration_hash[:tags] || {})
 
-          def more_snippets = nil
+          def more_snippets = {}
 
         end
       end
