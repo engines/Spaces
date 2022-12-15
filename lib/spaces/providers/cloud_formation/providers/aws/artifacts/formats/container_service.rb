@@ -9,8 +9,8 @@ module Artifacts
           def dependency_snippet =
             {
               depends_on: [
-                "aws_lb.#{qualification_for(:load_balancer_binding)}",
-                "aws_lb_listener.#{qualification_for(:listener_binding)}"
+                "#{qualification_for(:load_balancer_binding)}_lb".underscore.camelize,
+                "#{qualification_for(:listener_binding)}_lb_listener".underscore.camelize
               ]
             }
 

@@ -14,7 +14,7 @@ module Artifacts
                   end
             }.deep(:camelize, of: :keys)
 
-          def resource_identifier = super.underscore.camelize
+          def resource_identifier = [super, holder.resource_type].join('_').underscore.camelize
 
           def resource_type =
             "#{runtime_qualifier.upcase}_#{super}".amazonize
@@ -47,6 +47,11 @@ module Artifacts
             }.merge(configuration_hash[:tags] || {})
 
           def more_snippets = {}
+
+          def qualification_for(attachable) =
+            super.camelize
+          # def qualification_for(attachable, type) =
+          #   "#{super(attachable)}_#{type}".camelize
 
         end
       end
