@@ -37,14 +37,7 @@ module Artifacts
               properties: configuration_hash.without(:tags).merge(more_snippets)
             }
 
-          def tags_snippet =
-            {tags: tags_hash}
-
-          def tags_hash =
-            {
-              name: resource_identifier,
-              environment: 'var.app_environment'
-            }.merge(configuration_hash[:tags] || {})
+          def tags_snippet = {tags: tags_hash}
 
           def more_snippets = {}
 

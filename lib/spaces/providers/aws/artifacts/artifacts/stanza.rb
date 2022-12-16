@@ -46,11 +46,11 @@ module Artifacts
 
         def tags_hash =
           {
-            'Name': resource_identifier,
-            'Environment': 'var.app_environment'
+            name: resource_identifier,
+            environment: environment_tag
           }.merge(configuration_hash[:tags] || {})
 
-        def resource_type_map_class = ResourceTypeMap
+        def environment_tag = [:Engines, provider.qualifier.camelize, nesting_elements.take(2)].flatten.join(' ')
 
       end
     end
