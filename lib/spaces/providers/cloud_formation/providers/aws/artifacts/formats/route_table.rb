@@ -23,8 +23,6 @@ module Artifacts
               {nat_gateway_id: "aws_nat_gateway.#{qualification_for(:nat_gateway_binding)}.id"}
             end
 
-          def more_snippets_keys = [:gateway_type]
-
         end
       end
     end

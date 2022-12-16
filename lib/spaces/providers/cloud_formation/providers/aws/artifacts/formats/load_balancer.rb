@@ -10,10 +10,20 @@ module Artifacts
             {
               subnets: subnet_identifiers,
               security_groups: security_group_identifiers,
-              depends_on: dependency_array
+              depends_on: dependency_identifiers
             }
 
-          def more_snippets_keys = [:subnets, :security_groups]
+          def subnet_identifiers =
+            configuration.subnets.map { |s| qualification_for(s, :subnet) }
+
+          def security_group_identifiers =
+            configuration.security_groups.map { |g| qualification_for(g, :security_group) }
+
+          def dependency_identifiers =
+            [subnet_identifiers, security_group_identifiers].flatten
+
+          def qualification_for(identifier, type) =
+            [identifier, type].join('_').underscore.camelize
 
         end
       end

@@ -17,9 +17,6 @@ module Artifacts
               }
             }
 
-          def more_snippets_keys =
-            [:domain_name, :validation_method, :create_before_destroy]
-
         end
       end
     end
