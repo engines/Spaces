@@ -23,6 +23,8 @@ module Artifacts
 
       delegate type_map: :klass
 
+      def value(key) = type_map[key] || key
+
     end
   end
 end

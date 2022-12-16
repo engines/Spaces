@@ -42,7 +42,8 @@ module Artifacts
           def more_snippets = {}
 
           def qualification_for(attachable, type=nil) =
-            [super(attachable), type].compact.join('_').underscore.camelize
+            [super(attachable), type_for(type)].
+              compact.join('_').underscore.camelize
 
           def resource_type_map_class = ResourceTypeMap
 

@@ -14,10 +14,10 @@ module Artifacts
             }
 
           def subnet_identifiers =
-            configuration.subnets.map { |s| qualification_for(s, :subnet) }
+            configuration.subnets.map { |s| qualification_for(s, type_for(:subnet)) }
 
           def security_group_identifiers =
-            configuration.security_groups.map { |g| qualification_for(g, :security_group) }
+            configuration.security_groups.map { |g| qualification_for(g, type_for(:security_group)) }
 
           def dependency_identifiers =
             [subnet_identifiers, security_group_identifiers].flatten

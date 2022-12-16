@@ -12,7 +12,10 @@ module Artifacts
       )
     end
 
-    def resource_type_map = resource_type_map_class.new.type_map
+    def type_for(key) = mapping.value(key)
+
+    def resource_type_map = mapping.type_map
+    def mapping = resource_type_map_class.new
     def resource_type_map_class = ResourceTypeMap
 
   end

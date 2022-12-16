@@ -9,22 +9,22 @@ module Artifacts
           def dependency_snippet =
             {
               depends_on: [
-                qualification_for(:load_balancer_binding, :lb),
-                qualification_for(:listener_binding, :lb_listener)
+                qualification_for(:load_balancer_binding, :load_balancer),
+                qualification_for(:listener_binding, :load_balancer_listener)
               ]
             }
 
         def more_snippets =
           {
             cluster: {
-              ref: qualification_for(:cluster_binding, :ecs_cluster)
+              ref: qualification_for(:cluster_binding, :container_service_cluster)
             },
             task_definition: {
-              ref: qualification_for(:task_definition_binding, :ecs_task_definition)
+              ref: qualification_for(:task_definition_binding, :container_task_definition)
             },
             load_balancers: [
               {
-                target_group: qualification_for(:target_group_binding, :lb_target_group),
+                target_group: qualification_for(:target_group_binding, :load_balancer_target_group),
                 container_name: resource_identifier,
                 container_port: ports.first.container_port
               }

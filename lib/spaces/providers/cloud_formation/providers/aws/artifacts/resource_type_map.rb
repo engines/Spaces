@@ -7,7 +7,8 @@ module Artifacts
           def type_map =
             super.merge(
               load_balancer: :'ElasticLoadBalancing::LoadBalancer',
-              vpc: :'EC2::VPC'
+              vpc: :'EC2::VPC',
+              subnet: :'EC2::Subnet',
             )
         end
 
