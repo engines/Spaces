@@ -48,10 +48,8 @@ module Artifacts
 
           def more_snippets = {}
 
-          def qualification_for(attachable) =
-            super.camelize
-          # def qualification_for(attachable, type) =
-          #   "#{super(attachable)}_#{type}".camelize
+          def qualification_for(attachable, type=nil) =
+            [super(attachable), type].compact.join('_').underscore.camelize
 
         end
       end
