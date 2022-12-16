@@ -11,7 +11,7 @@ module Artifacts
           def more_snippets =
             {
               map_public_ip_on_launch: configuration.public,
-              vpc_id: "aws_vpc.#{qualification_for(:vpc_binding)}.id"
+              vpc_id: qualification_for(:vpc_binding, :vpc)
             }
 
         end
