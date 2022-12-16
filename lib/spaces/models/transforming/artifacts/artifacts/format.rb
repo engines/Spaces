@@ -12,5 +12,8 @@ module Artifacts
       )
     end
 
+    def resource_type_map = resource_type_map_class.new.type_map
+    def resource_type_map_class = ResourceTypeMap
+
   end
 end

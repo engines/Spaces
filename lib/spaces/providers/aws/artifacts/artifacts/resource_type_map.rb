@@ -12,7 +12,6 @@ module Artifacts
 
             dns_record: :route53_record,
 
-            load_balancer: :lb,
             load_balancer_listener: :lb_listener,
             load_balancer_target_group: :lb_target_group,
 

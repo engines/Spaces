@@ -4,6 +4,8 @@ module Artifacts
   module Stanzas
     class Stanza < Artifact
 
+      delegate(resource_type_map: :format)
+
       alias_method :artifact, :holder
 
       def snippets = format.content
@@ -11,9 +13,6 @@ module Artifacts
       def format
         @format ||= Format.dynamic_type(self)
       end
-
-      def resource_type_map = resource_type_map_class.new.type_map
-      def resource_type_map_class = ResourceTypeMap
 
       def method_missing(m, *args, &block)
         return artifact.send(m, *args, &block) if artifact.respond_to?(m)

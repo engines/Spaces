@@ -32,6 +32,8 @@ module Artifacts
 
           def maximum_identifier_length = 32
 
+          def resource_type_map_class = ResourceTypeMap
+
         end
       end
     end

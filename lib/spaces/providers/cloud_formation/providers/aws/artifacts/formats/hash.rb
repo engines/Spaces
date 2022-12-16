@@ -51,6 +51,8 @@ module Artifacts
           def qualification_for(attachable, type=nil) =
             [super(attachable), type].compact.join('_').underscore.camelize
 
+          def resource_type_map_class = ResourceTypeMap
+
         end
       end
     end
