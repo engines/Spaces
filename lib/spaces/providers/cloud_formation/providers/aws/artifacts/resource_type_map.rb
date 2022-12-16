@@ -6,7 +6,8 @@ module Artifacts
         class << self
           def type_map =
             super.merge(
-              load_balancer: :'ElasticLoadBalancing::LoadBalancer'
+              load_balancer: :'ElasticLoadBalancing::LoadBalancer',
+              vpc: :'EC2::VPC'
             )
         end
 
