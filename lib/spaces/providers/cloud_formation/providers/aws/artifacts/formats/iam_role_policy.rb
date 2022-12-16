@@ -10,7 +10,7 @@ module Artifacts
 
           def more_snippets =
             {
-              role: "aws_iam_role.#{qualification_for(:role_binding)}.id",
+              role: qualification_for(:role_binding, :iam_role),
 
               policy: {
                 Version: "2012-10-17",
