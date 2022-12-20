@@ -4,8 +4,8 @@ class Array
     alias_method w, :itself
   end
 
-  def to_h_deep = deep(:to_h_deep)
   def to_struct = deep(:to_struct)
+  def deep_to_h = deep(:deep_to_h)
   def no_symbols = deep(:no_symbols)
 
   def to_hcl_without_quotes(**args) = to_hcl(**args).gsub('"', '')

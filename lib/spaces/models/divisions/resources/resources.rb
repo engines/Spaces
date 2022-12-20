@@ -12,7 +12,7 @@ module Divisions
         [
           m,
           u.select { |r| r.type_identifier == k }.reduce({}) do |n, r|
-            r.struct.to_h_deep.deep_merge(n)
+            r.struct.deep_to_h.deep_merge(n)
           end
         ].flatten
       end.to_struct

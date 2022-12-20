@@ -35,7 +35,7 @@ module Artifacts
         def more_configuration = {}
 
         def configuration_hash =
-          with_tailored_keys(configuration&.to_h_deep || {}).
+          with_tailored_keys(configuration&.deep_to_h || {}).
             without(*more_snippets_keys).
             without_binding_keys
 
