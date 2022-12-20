@@ -22,11 +22,15 @@ class String
       downcase
   end
 
-  def underscore = snakize.gsub('/', '_')
+  def underscore
+    snakize.gsub('/', '_')
+  end
 
   def constantize = Module.const_get(self)
 
-  def hyphenated = tr('_', '-')
+  def hyphenated
+    tr('_', '-')
+  end
 
   def singularize = chomp('s')
 
@@ -39,8 +43,6 @@ class String
       d[0] = d[0].downcase
     end
   end
-
-  def to_h = self
 
   def to_hcl = %("#{self}")
 

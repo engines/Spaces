@@ -14,8 +14,8 @@ module Divisions
           u.select { |r| r.type_identifier == k }.reduce({}) do |n, r|
             r.struct.deep_to_h.deep_merge(n)
           end
-        ].flatten
-      end.to_struct
+        ].flatten.map(&:deep_to_struct)
+      end
     end
 
     def union_with(other) = [all, other.all].flatten

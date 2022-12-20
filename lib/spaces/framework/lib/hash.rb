@@ -21,7 +21,6 @@ class Hash
     dup.deep_merge!(other, &block)
   end
 
-
   def to_struct =
     OpenStruct.new(snakize_keys.values_to_struct)
 
@@ -41,6 +40,17 @@ class Hash
     send("transform_#{of}") { |v| v.deep(method, of: of) }.
     transform_values { |v| (v.respond_to?(:keys) && of == :keys) ? v.deep(method, of: :keys) : v }
   end
+
+  def deep_to_h
+    transform_keys(&:deep_to_h).transform_values(&:deep_to_h)
+  end
+
+  def deep_to_struct
+    OpenStruct.new(
+      transform_keys(&:deep_to_struct).transform_values(&:deep_to_struct)
+    )
+  end
+
 
 protected
 
