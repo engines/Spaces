@@ -10,10 +10,17 @@ module Artifacts
 
           def more_snippets =
             {
-              execution_role_arn: "aws_iam_role.#{qualification_for(:execution_role_binding)}.arn",
+              execution_role_arn: execution_role_arn,
               requires_compatibilities: compatibilities,
               container_definitions: definition_snippets
             }
+
+          def execution_role_arn =
+            # TODO: needs to be single-quoted?
+            "arn:aws:iam::#{account_identifier}:role/#{qualification_for(:execution_role_binding)}"
+
+          def compatibilities =
+            container_services.map { |s| launch_type_for(s) }.uniq
 
           def definition_snippets =
             container_services.inject({}) { |m, s| m.merge(definition_snippet_for(s)) }

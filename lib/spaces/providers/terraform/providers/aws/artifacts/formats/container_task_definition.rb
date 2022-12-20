@@ -17,6 +17,9 @@ module Artifacts
               ])
             )
 
+          def compatibilities =
+            "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
+
           def definition_snippets =
             container_services.map { |s| definition_snippet_for(s) }.join(",\n")
 

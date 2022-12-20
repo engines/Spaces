@@ -24,9 +24,6 @@ module Artifacts
           arena.compute_resolutions_for(:container_service).
             select { |s| s.application_identifier == blueprint_identifier }
 
-        def compatibilities =
-          "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
-
         def launch_type_for(r) = (
           r.configuration&.launch_type || ContainerService.launch_type
         )

@@ -13,7 +13,8 @@ module Artifacts
     alias_method :content, :text_content #TODO: consider ... this now depends on the format
 
     delegate(
-      [:provider, :resolution, :adapter_map, :adapter_keys] => :adapter
+      [:provider, :resolution, :adapter_map, :adapter_keys] => :adapter,
+      account_identifier: :compute_provider
     )
 
     def provider_qualifiers =
