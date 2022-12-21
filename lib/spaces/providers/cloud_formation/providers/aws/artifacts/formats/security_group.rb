@@ -8,7 +8,7 @@ module Artifacts
 
           def more_snippets =
             {
-              vpc_id: "aws_vpc.#{qualification_for(:vpc_binding)}.id",
+              vpc_id: qualification_for(:vpc_binding, :vpc),
               ingress: {
                 from_port: configuration.in_from_port,
                 to_port: configuration.in_to_port,

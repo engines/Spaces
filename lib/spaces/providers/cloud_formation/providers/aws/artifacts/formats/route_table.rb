@@ -10,7 +10,7 @@ module Artifacts
 
           def more_snippets =
             {
-              vpc_id: "aws_vpc.#{qualification_for(:vpc_binding)}.id",
+              vpc_id: qualification_for(:vpc_binding, :vpc),
               route: {
                 cidr_block: '0.0.0.0/0'
               }.merge(gateway)
