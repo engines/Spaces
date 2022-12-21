@@ -19,7 +19,8 @@ module Artifacts
 
               vpc: :'EC2::VPC',
               subnet: :'EC2::Subnet',
-              internet_gateway: :'EC2::InternetGateway'
+              internet_gateway: :'EC2::InternetGateway',
+              nat_gateway: :'EC2::NatGateway',
             )
         end
 

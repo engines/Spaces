@@ -18,9 +18,9 @@ module Artifacts
 
           def gateway =
             unless nat_gateway?
-              {gateway_id: "aws_internet_gateway.#{qualification_for(:gateway_binding)}.id"}
+              {gateway_id: qualification_for(:gateway_binding, :internet_gateway)}
             else
-              {nat_gateway_id: "aws_nat_gateway.#{qualification_for(:nat_gateway_binding)}.id"}
+              {nat_gateway_id: qualification_for(:nat_gateway_binding, :nat_gateway)}
             end
 
         end
