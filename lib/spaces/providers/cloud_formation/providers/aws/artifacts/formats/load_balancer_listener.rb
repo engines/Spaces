@@ -10,14 +10,23 @@ module Artifacts
 
           def more_snippets =
             {
-              load_balancer_arn: "aws_lb.#{configuration.load_balancer}.arn",
-              certificate_arn: "arn:aws:acm:ap-southeast-2:910122582945:certificate/487f72fc-0e54-4e57-82b2-fe152294cf29",
+              load_balancer_arn: {
+                  ref: reference_for(configuration.load_balancer, :load_balancer)
+              },
+              certificate_arn: certificate_arn,
 
-              default_action: {
-                type: "forward",
-                target_group_arn: "aws_lb_target_group.#{configuration.target_group}.arn"
-              }
+              default_actions: [
+                {
+                  type: 'forward',
+                  target_group_arn: {
+                    ref: reference_for(configuration.target_group, :load_balancer_target_group)
+                  }
+                }
+              ]
             }
+
+          def reference_for(name, type) =
+            [name, type_for(type)].compact.join('_').underscore.camelize
 
         end
       end

@@ -14,7 +14,7 @@ module Artifacts
 
     delegate(
       [:provider, :resolution, :adapter_map, :adapter_keys] => :adapter,
-      account_identifier: :compute_provider
+      [:account_identifier, :region] => :compute_provider
     )
 
     def provider_qualifiers =

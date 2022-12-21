@@ -13,7 +13,7 @@ module Artifacts
             %(
               load_balancer_arn = aws_lb.#{configuration.load_balancer}.arn
 
-              certificate_arn = "arn:aws:acm:ap-southeast-2:910122582945:certificate/487f72fc-0e54-4e57-82b2-fe152294cf29"
+              certificate_arn = "#{certificate_arn}"
 
               default_action {
                 type             = "forward"
