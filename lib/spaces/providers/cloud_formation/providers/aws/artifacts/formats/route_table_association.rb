@@ -11,8 +11,12 @@ module Artifacts
 
           def more_snippets =
             {
-              subnet_id: "aws_subnet.#{qualification_for(:subnet_binding)}.id",
-              route_table_id: "aws_route_table.#{qualification_for(:route_table_binding)}.id"
+              subnet_id: {
+                ref: qualification_for(:subnet_binding, :subnet)
+              },
+              route_table_id: {
+                ref: qualification_for(:route_table_binding, :route_table)
+              }
             }
 
         end
