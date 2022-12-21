@@ -14,7 +14,9 @@ module Artifacts
                   end
             }.deep(:camelize, of: :keys)
 
-          def resource_identifier = [super, holder.resource_type].join('_').underscore.camelize
+          def resource_identifier =
+            [super, holder.resource_type].join('_').underscore.
+            split('_').reverse.uniq.reverse.join('_').camelize
 
           def resource_type =
             "#{runtime_qualifier.upcase}_#{super}".amazonize
