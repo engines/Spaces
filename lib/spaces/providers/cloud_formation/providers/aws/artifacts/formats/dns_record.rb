@@ -11,11 +11,17 @@ module Artifacts
           def more_snippets =
             {
               alias: {
-                name: "aws_lb.#{qualification_for(:load_balancer_binding)}.dns_name",
-                zone_id:  "aws_lb.#{qualification_for(:load_balancer_binding)}.zone_id",
+                name: dns_name,
+                zone_id: zone_id,
                 evaluate_target_health: configuration.evaluate_target_health
               }
             }
+
+          def dns_name =
+            "!GetAtt #{qualification_for(:load_balancer_binding, :load_balancer)}.DNSName"
+
+          def zone_id =
+            "!GetAtt #{qualification_for(:load_balancer_binding, :load_balancer)}.ZoneId"
 
         end
       end

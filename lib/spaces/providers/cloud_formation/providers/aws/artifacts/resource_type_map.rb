@@ -23,6 +23,8 @@ module Artifacts
               nat_gateway: :'EC2::NatGateway',
               route_table: :'EC2::RouteTable',
               route_table_association: :'EC2::SubnetRouteTableAssociation',
+
+              dns_record: :'Route53::RecordSet'
             )
         end
 

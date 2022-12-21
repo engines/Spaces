@@ -9,8 +9,6 @@ module Artifacts
 
             container_registry: :ecr_repository,
 
-            dns_record: :route53_record,
-
             cluster_key: :kms_key,
             log_group: :cloudwatch_log_group
           }
