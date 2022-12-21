@@ -10,7 +10,9 @@ module Artifacts
               container_service_cluster: :'ECS::Cluster',
               container_task_definition: :'ECS::TaskDefinition',
 
-              load_balancer: :'ElasticLoadBalancing::LoadBalancer',
+              load_balancer: :'ElasticLoadBalancingV2::LoadBalancer',
+              load_balancer_listener: :'ElasticLoadBalancingV2::Listener',
+              load_balancer_target_group: :'ElasticLoadBalancingV2::TargetGroup',
 
               iam_role: :'IAM::Role',
               iam_role_policy: :'IAM::RolePolicy',
