@@ -26,6 +26,7 @@ module Artifacts
               route_table_association: :'EC2::SubnetRouteTableAssociation',
 
               cluster_key: :'KMS::Key',
+              log_group: :'Logs::LogGroup',
 
               dns_record: :'Route53::RecordSet'
             )
