@@ -54,6 +54,10 @@ module Artifacts
 end
 
 class String
+
+  def amazonize = split('_').map(&:camelize).join('::')
+
   def as_cloud_formnation_name =
     underscore.split('_').reverse.uniq.reverse.join('_').camelize
+
 end
