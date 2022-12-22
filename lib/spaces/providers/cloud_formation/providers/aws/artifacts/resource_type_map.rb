@@ -19,6 +19,7 @@ module Artifacts
 
               vpc: :'EC2::VPC',
               subnet: :'EC2::Subnet',
+              security_group: :'EC2::SecurityGroup',
               internet_gateway: :'EC2::InternetGateway',
               nat_gateway: :'EC2::NatGateway',
               route_table: :'EC2::RouteTable',

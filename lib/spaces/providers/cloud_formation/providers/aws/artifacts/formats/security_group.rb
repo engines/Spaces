@@ -9,20 +9,26 @@ module Artifacts
           def more_snippets =
             {
               vpc_id: qualification_for(:vpc_binding, :vpc),
-              ingress: {
-                from_port: configuration.in_from_port,
-                to_port: configuration.in_to_port,
-                protocol: configuration.in_protocol,
-                cidr_blocks: configuration.in_cidr_blocks
-                #{in_ivp6}
-              },
-              egress: {
-                from_port: configuration.out_from_port,
-                to_port: configuration.out_to_port,
-                protocol: configuration.out_protocol,
-                cidr_blocks: configuration.out_cidr_blocks,
-                ipv6_cidr_blocks: configuration.out_ipv6_cidr_blocks
-              }
+              security_group_ingress:
+                configuration.in_cidr_blocks.map do |cb|
+                  {
+                    from_port: configuration.in_from_port,
+                    to_port: configuration.in_to_port,
+                    ip_protocol: configuration.in_protocol,
+                    cidr_ip: cb
+                    #{in_ivp6}
+                  }
+                end,
+              security_group_egress:
+                configuration.out_cidr_blocks.map do |cb|
+                  {
+                    from_port: configuration.out_from_port,
+                    to_port: configuration.out_to_port,
+                    ip_protocol: configuration.out_protocol,
+                    cidr_ip: cb
+                    #ipv6_cidr_blocks: configuration.out_ipv6_cidr_blocks
+                  }
+                end
             }
 
         end
