@@ -15,8 +15,7 @@ module Artifacts
             }.deep(:camelize, of: :keys)
 
           def resource_identifier =
-            [super, holder.resource_type].join('_').underscore.
-            split('_').reverse.uniq.reverse.join('_').camelize
+            [super, holder.resource_type].join('_').as_cloud_formnation_name
 
           def resource_type =
             "#{runtime_qualifier.upcase}_#{super}".amazonize
@@ -44,8 +43,7 @@ module Artifacts
           def more_snippets = {}
 
           def qualification_for(attachable, type=nil) =
-            [super(attachable), type_for(type)].
-              compact.join('_').underscore.camelize
+            [super(attachable), type_for(type)].compact.join('_').as_cloud_formnation_name
 
           def resource_type_map_class = ResourceTypeMap
 
@@ -53,4 +51,9 @@ module Artifacts
       end
     end
   end
+end
+
+class String
+  def as_cloud_formnation_name =
+    underscore.split('_').reverse.uniq.reverse.join('_').camelize
 end
