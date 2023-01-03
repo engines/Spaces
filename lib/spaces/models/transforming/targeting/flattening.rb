@@ -3,7 +3,7 @@ module Targeting
 
     def flattened
       empty.tap do |m|
-        m.struct = struct.merge(flattened_struct)
+        m.struct = OpenStruct.new(struct).merge(flattened_struct)
       end
     end
 
