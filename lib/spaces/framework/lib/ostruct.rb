@@ -28,12 +28,11 @@ class OpenStruct
 
   def no_symbols = deep(:no_symbols)
 
-  def deep(method, of: :values) = to_h.deep(method, of: of)
+  def deep(method, of: :values) = to_h.deep(method, of: of).deep_to_struct
 
   def deep_to_h = to_h.deep_to_h
 
   def deep_to_struct =
     self.class.new(deep_to_h)
-
 
 end
