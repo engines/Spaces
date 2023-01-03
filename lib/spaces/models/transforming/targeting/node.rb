@@ -11,8 +11,8 @@ module Targeting
         new(struct: struct, division: division)
     end
 
-    def identifier = struct[:identifier] || target_identifier
-    def target_identifier = struct[:target_identifier] || descriptor&.identifier
+    def identifier = struct.identifier || target_identifier
+    def target_identifier = struct.target_identifier || descriptor&.identifier
 
     def descriptor
       @descriptor ||= descriptor_class.new(

@@ -18,12 +18,12 @@ module Targeting
     def configuration = struct.configuration
     def service = struct.service
 
-    def type = struct[:type] || derived_features[:type]
+    def type = struct.type || derived_features[:type]
 
     def inject? = type == 'configure'
     def embed? = type == 'embed'
 
-    def runtimes = struct[:runtimes]
+    def runtimes = struct.runtimes
 
     def for_runtime?(value) = generic? || runtimes&.include?("#{value}")
 
