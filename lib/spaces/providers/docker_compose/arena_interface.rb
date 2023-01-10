@@ -13,6 +13,8 @@ module Providers
           identifier.tap { orchestration_for(execution_map[:"#{command}"]) }
         end
 
+        protected
+        
         def orchestration_for(command)
           copy_auxiliaries
           bridge.send(command) do |io, bytes|

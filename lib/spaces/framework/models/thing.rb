@@ -71,7 +71,7 @@ module Spaces
 
     def open_struct_from_json(j) = JSON.parse(j, object_class: OpenStruct)
 
-    def to_h = struct.to_h_deep
+    def to_h = struct.deep_to_h
 
     def to_s = identifier
 

@@ -62,6 +62,8 @@ module Divisions
       self.struct = struct || emission.struct[label] || default_struct
     end
 
+    def deep_to_struct = struct.deep_to_struct
+
     def to_s = struct
 
     def method_missing(m, *args, &block)

@@ -10,6 +10,8 @@ class Symbol
   def as_path = to_s.as_path
   def split(*args) = to_s.split(*args)
   def to_hcl = %("#{self}")
+    
+  def deep(method, _) = to_s.deep(method, _)
 
   def include?(segment) = to_s.include?(segment.to_s)
 

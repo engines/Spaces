@@ -1,6 +1,6 @@
 module Artifacts
   module Docker
-    class Dockerfile < ::Artifacts::Packing::Artifact
+    class Dockerfile < ::Artifacts::Artifact
 
       def filename = qualifier.camelize
 

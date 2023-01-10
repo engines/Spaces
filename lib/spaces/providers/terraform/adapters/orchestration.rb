@@ -2,6 +2,7 @@ module Adapters
   module Terraform
     class Orchestration < ::Adapters::Orchestration
 
+      #TODO: REFACTOR ... abstract up
       def artifact_qualifiers = [:capsule, :resources]
 
       def artifacts
