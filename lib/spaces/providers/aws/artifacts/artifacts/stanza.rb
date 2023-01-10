@@ -21,13 +21,8 @@ module Artifacts
         def arena_resource_qualification_for(resource) =
           [arena.identifier, resource.identifier].join('_').hyphenated
 
-        ##################################
-        # FIXME: identifier length is a format conern
         def arena_attachable_qualification_for(attachable) =
-          [arena.identifier, configuration.send(attachable)].join('_').hyphenated.abbreviated_to(maximum_identifier_length)
-
-        def maximum_identifier_length = 32
-        ##################################
+          [arena.identifier, configuration.send(attachable)].join('_')
 
         alias_method :qualification_for, :arena_attachable_qualification_for
 
@@ -40,7 +35,7 @@ module Artifacts
         def more_configuration = {}
 
         def configuration_hash =
-          with_tailored_keys(configuration&.to_h_deep || {}).
+          with_tailored_keys(configuration&.deep_to_h || {}).
             without(*more_snippets_keys).
             without_binding_keys
 
@@ -51,11 +46,11 @@ module Artifacts
 
         def tags_hash =
           {
-            'Name': resource_identifier,
-            'Environment': 'var.app_environment'
+            name: resource_identifier,
+            environment: environment_tag
           }.merge(configuration_hash[:tags] || {})
 
-        def resource_type_map_class = ResourceTypeMap
+        def environment_tag = [:Engines, provider.qualifier.camelize, nesting_elements.take(2)].flatten.join(' ')
 
       end
     end

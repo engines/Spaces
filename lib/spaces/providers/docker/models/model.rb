@@ -37,7 +37,7 @@ module Providers
         self.struct = model_interface.info.to_struct
       end
 
-      def to_h_deep = to_h
+      def deep_to_h = to_h
 
       def method_missing(m, **args, &block)
         return model_interface.send(m, **args, &block) if model_interface.respond_to?(m)

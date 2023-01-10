@@ -5,6 +5,7 @@ module Artifacts
     module Aws
       module Formats
 
+        # TODO: REFACTOR abstract up
         class LogGroup < Hcl ;end
         class ContainerDefinition < Hcl ;end
 

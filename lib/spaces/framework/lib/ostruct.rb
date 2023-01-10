@@ -17,21 +17,22 @@ class OpenStruct
   def keys = to_h.keys
   def values = to_h.values
 
-  def compact = to_h_deep.compact.to_struct
+  def transform_keys(&block) = self.class.new(to_h.transform_keys(&block))
+  def transform_values(&block) = self.class.new(to_h.transform_values(&block))
 
-  def to_json(*args) = to_h_deep.to_json(*args)
+  def compact = deep(:compact)
+
+  def to_json(*args) = deep_to_h.to_json(*args)
 
   def to_string_array = keys.map { |k| "#{k}=#{send(k)}"}
 
-  def to_h_deep = deep(:to_h_deep)
   def no_symbols = deep(:no_symbols)
 
-  def deep(method)
-    to_h.transform_values do |v|
-      v.send(method)
-    rescue NoMethodError
-      v
-    end
-  end
+  def deep(method, of: :values) = to_h.deep(method, of: of).deep_to_struct
+
+  def deep_to_h = to_h.deep_to_h
+
+  def deep_to_struct =
+    self.class.new(deep_to_h)
 
 end

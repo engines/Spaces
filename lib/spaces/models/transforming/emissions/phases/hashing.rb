@@ -7,7 +7,7 @@ module Emissions
       end.compact
     end
 
-    alias_method :to_h_deep, :to_h
+    alias_method :deep_to_h, :to_h
 
     def identifiers = {identifier: identifier}
 

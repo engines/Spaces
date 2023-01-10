@@ -9,11 +9,11 @@ controllers.publishing.import(model: {repository: 'https://github.com/EnginesAWS
 
 # ------------------------------------------------------------------------------
 # save a providers arena for mf_infrastructure use
-controllers.arenas.create(model: {identifier: :mxr})
+controllers.arenas.create(model: {identifier: :tf})
 
 # specify an image to build blueprints from
-controllers.arenas.build_from(identifier: :mxr, image_identifier: :'python:3.8-slim-buster')
-# controllers.arenas.build_from(identifier: :mxr, image_identifier: :base_python)
+controllers.arenas.build_from(identifier: :tf, image_identifier: :'python:3.8-slim-buster')
+# controllers.arenas.build_from(identifier: :tf, image_identifier: :base_python)
 
 # ------------------------------------------------------------------------------
 
@@ -24,20 +24,20 @@ controllers.providing.create(model: {identifier: :'ap-southeast-2', qualifier: :
 controllers.providing.create(model: {identifier: :'us-east-1', qualifier: :aws, account_identifier: 910122582945, region: :'us-east-1', zone_identifier: 'ZARIYTT7C12LN'})
 
 # define role providers
-controllers.arenas.provide(identifier: :mxr, role_identifier: :packing, provider_identifier: :docker, compute_identifier: :'us-east-1')
-controllers.arenas.provide(identifier: :mxr, role_identifier: :orchestration, provider_identifier: :terraform, compute_identifier: :'ap-southeast-2')
-controllers.arenas.provide(identifier: :mxr, role_identifier: :runtime, provider_identifier: :docker)
+controllers.arenas.provide(identifier: :tf, role_identifier: :packing, provider_identifier: :docker, compute_identifier: :'us-east-1')
+controllers.arenas.provide(identifier: :tf, role_identifier: :orchestration, provider_identifier: :terraform, compute_identifier: :'ap-southeast-2')
+controllers.arenas.provide(identifier: :tf, role_identifier: :runtime, provider_identifier: :docker)
 
 # bind blueprints to the arena
-controllers.arenas.bind(identifier: :mxr, blueprint_identifier: 'managed-functions')
-controllers.arenas.bind(identifier: :mxr, blueprint_identifier: 'startup-infrastructure')
+controllers.arenas.bind(identifier: :tf, blueprint_identifier: 'managed-functions')
+controllers.arenas.bind(identifier: :tf, blueprint_identifier: 'startup-infrastructure')
 
 # ------------------------------------------------------------------------------
 # stage some blueprints in the mf_infrastructure arena
-controllers.arenas.stage(identifier: :mxr)
+controllers.arenas.stage(identifier: :tf)
 
 # # build images for the arena
-# controllers.arenas.build(identifier: :mxr, verbose: true)
+# controllers.arenas.build(identifier: :tf, verbose: true)
 #
 # # bring up containers for arena
-# controllers.arenas.apply(identifier: :mxr, verbose: true)
+# controllers.arenas.apply(identifier: :tf, verbose: true)

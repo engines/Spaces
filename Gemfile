@@ -17,4 +17,6 @@ end
 
 gem 'docker-api'
 gem 'docker-compose'
+gem 'aws-sdk-cloudformation'
+gem 'ox', '~> 2.4', '>= 2.4.1'
 gem 'rb-inotify'

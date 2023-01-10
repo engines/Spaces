@@ -23,7 +23,7 @@ module Artifacts
 
         def default_configuration = super.merge(port: default_port)
 
-        def default_port = (ports.first.host_port if resolution.has?(:ports))
+        def default_port = (emission.ports.first.host_port if emission.has?(:ports))
 
         def configuration_hash =
           super.without(

@@ -1,3 +1,4 @@
+#TODO: consider removing
 module Artifacts
   module DockerCompose
     module Stanzas

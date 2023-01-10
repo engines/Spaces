@@ -6,7 +6,7 @@ module Artifacts
 
           def content =
             %(
-              resource "aws_#{resource_type_here}" "#{resource_identifier}" {
+              resource "aws_#{resource_type}" "#{resource_identifier}" {
                 #{name_snippet}
                 #{configuration_snippet}
                 #{tags_snippet}
@@ -14,7 +14,10 @@ module Artifacts
               }
             )
 
-          def name_snippet = %(name = "#{resource_identifier}")
+          def resource_identifier = super.abbreviated_to(maximum_identifier_length)
+
+          def name_snippet =
+            %(name = "#{resource_identifier}")
 
           def configuration_snippet =
             configuration_hash.without(:tags).to_hcl(enclosed: false)
@@ -23,6 +26,13 @@ module Artifacts
             %(tags = {#{tags_hash.to_hcl(enclosed: false)}})
 
           def more_snippets = nil
+
+          def qualification_for(attachable) =
+            super.hyphenated.abbreviated_to(maximum_identifier_length)
+
+          def maximum_identifier_length = 32
+
+          def resource_type_map_class = ResourceTypeMap
 
         end
       end

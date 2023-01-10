@@ -24,9 +24,6 @@ module Artifacts
           arena.compute_resolutions_for(:container_service).
             select { |s| s.application_identifier == blueprint_identifier }
 
-        def compatibilities =
-          "#{container_services.map { |s| launch_type_for(s).to_s }.uniq}"
-
         def launch_type_for(r) = (
           r.configuration&.launch_type || ContainerService.launch_type
         )
@@ -39,11 +36,11 @@ module Artifacts
           }.
             merge(dimensions_hash_for(r))
 
-        def dimensions_hash_for(r) = r.dimensions&.struct&.to_h_deep
+        def dimensions_hash_for(r) = r.dimensions&.struct&.deep_to_h
 
         def ports_mappings_for(r)
           r.ports&.map do |p|
-            p.struct.to_h_deep.transform_keys do |k|
+            p.struct.deep_to_h.transform_keys do |k|
               k.camelize.downcase_first
             end
           end
