@@ -27,7 +27,7 @@ module Divisions
     def resolved = with_all_as(:resolved)
 
     def with_all_as(transformation) =
-      empty.tap { |d| d.struct = transformed_to(transformation).map(&:deep_to_struct) }
+      empty.tap { |d| d.struct = transformed_to(transformation).map(&:struct) }
 
     def transformed_to(transformation) =
       all.map { |i| i.send(transformation) }.compact
