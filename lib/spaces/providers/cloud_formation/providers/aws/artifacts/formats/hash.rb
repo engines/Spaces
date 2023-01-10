@@ -38,7 +38,8 @@ module Artifacts
               properties: configuration_hash.without(:tags).merge(more_snippets)
             }
 
-          def tags_snippet = {tags: tags_hash}
+          # def tags_snippet = {tags: tags_hash}
+          def tags_snippet = {}
 
           def more_snippets = {}
 

@@ -6,6 +6,9 @@ module Artifacts
       module Formats
         class ContainerService < Hash
 
+          def resource_identifier =
+            holder.resource_identifier.as_cloud_formation_name
+
           def dependency_snippet =
             {
               depends_on: [
@@ -26,7 +29,7 @@ module Artifacts
               {
                 target_group: qualification_for(:target_group_binding, :load_balancer_target_group),
                 container_name: resource_identifier,
-                container_port: ports.first.container_port
+                container_port: resolution.ports.first.container_port
               }
             ],
             network_configuration: {
@@ -36,9 +39,14 @@ module Artifacts
             }
           }
 
+          # def qualification_for(attachable, type=nil) =
+          #   [resource_identifier, super(attachable), type_for(type),].compact.join('_').as_cloud_formation_name
+
           def configuration_hash = super.without(:assign_public_ip)
 
         end
+
+        Service = ContainerService
       end
     end
   end

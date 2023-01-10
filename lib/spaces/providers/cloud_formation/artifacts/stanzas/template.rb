@@ -3,19 +3,18 @@ module Artifacts
     module Stanzas
       class Template < ::Artifacts::Stanzas::Stanza
 
-        def resolution = emission
-
         def stanza_qualifiers =
-          # [:capsules, :resources]
-          [:resources]
+          [:services, :resources]
 
-        def snippets
-          stanza_qualifiers.reduce({}) do |m, q|
-            m.tap do
-              m[q] = stanza_class_for(q).new(self).snippets
-            end
+        def snippets = { Resources: resources }
+
+        def resources =
+          stanzas.inject({}) do |m, s|
+            m.merge(s.snippets)
           end.compact
-        end
+
+        def stanzas =
+          stanza_qualifiers.map { |q| stanza_class_for(q).new(self) }
 
       end
     end

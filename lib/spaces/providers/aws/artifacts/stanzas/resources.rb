@@ -6,7 +6,9 @@ module Artifacts
         delegate(resources: :emission)
 
         def substanzas
-          @substanzas ||= resources.map { |r| stanza_class_for(r.type).new(self, r) }
+          @substanzas ||= resources.map do |r|
+            stanza_class_for(r.type).new(self, r)
+          end
         end
 
       end
