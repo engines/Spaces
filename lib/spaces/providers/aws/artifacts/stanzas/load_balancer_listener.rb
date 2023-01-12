@@ -23,7 +23,7 @@ module Artifacts
         def configuration_hash = super.without(:target_group, :load_balancer)
 
         def certificate_arn =
-          "arn:aws:#{region}:#{account_identifier}:certificate/487f72fc-0e54-4e57-82b2-fe152294cf29"
+          "arn:aws::#{region}:#{account_identifier}:certificate/487f72fc-0e54-4e57-82b2-fe152294cf29"
 
       end
     end
