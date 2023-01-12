@@ -12,7 +12,7 @@ class Array
 
   def to_hcl(enclosed: true) =
     %(#{'[' if enclosed}
-      #{deep(:to_hcl).join(",\n")}
+      #{map(&:to_hcl).join(",\n")}
       #{']' if enclosed}
     )
 

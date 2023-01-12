@@ -35,6 +35,8 @@ module Artifacts
               }
             )
 
+          def ports_mappings_for(r) = super.to_hcl(enclosed: false)
+
         end
       end
     end

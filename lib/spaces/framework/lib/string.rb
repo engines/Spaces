@@ -44,7 +44,7 @@ class String
     end
   end
 
-  def to_hcl = %("#{self}")
+  def to_hcl(enclosed: false) = %("#{self}")
 
   def deep(method, _) = send(method)
 
