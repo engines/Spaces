@@ -1,5 +1,11 @@
-class Object
+require_relative 'no_depth'
 
-  def to_hcl = self
+class Object
+  include NoDepth
+
+  def to_hcl(enclosed: false) = self
+  def deep(*) = self
+
+  def no_symbols = self
 
 end

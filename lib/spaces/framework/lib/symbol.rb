@@ -9,7 +9,9 @@ class Symbol
   def pluralize = to_s.pluralize
   def as_path = to_s.as_path
   def split(*args) = to_s.split(*args)
-  def to_hcl = %("#{self}")
+  def to_hcl(enclosed: false) = %("#{self}")
+
+  def deep(method, _) = to_s.deep(method, _)
 
   def include?(segment) = to_s.include?(segment.to_s)
 

@@ -6,6 +6,8 @@ module Adapters
     relation_accessor :division
     relation_accessor :adapter
 
+    delegate(struct: :division)
+
     def snippet_map
       @snippet_map ||= {}.tap { |m| m[qualifier] = snippets }.compact
     end

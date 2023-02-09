@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "duplicate",       "~> 1.1"
   s.add_runtime_dependency "i18n",            "~> 1.8"
   s.add_runtime_dependency "ruby-terraform",  "=  0.64"
-  s.add_runtime_dependency "packer-client",   "=  0.2.0"
   s.add_runtime_dependency "docker-api",      "~> 2.1"
   s.add_runtime_dependency "addressable",     "~> 2.8"
 

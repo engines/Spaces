@@ -4,6 +4,7 @@ module Artifacts
   module Terraform
     class Arena < Artifact
 
+      #TODO: REFACTOR ... abstract up
       def filename = "#{qualifier}.#{extension}"
 
     end

@@ -4,21 +4,21 @@ class Array
     alias_method w, :itself
   end
 
-  def to_h_deep = deep(:to_h_deep)
-  def to_struct = deep(:to_struct)
+  def deep_to_h = deep(:deep_to_h)
+  def deep_to_struct = deep(:deep_to_struct)
   def no_symbols = deep(:no_symbols)
 
   def to_hcl_without_quotes(**args) = to_hcl(**args).gsub('"', '')
 
   def to_hcl(enclosed: true) =
     %(#{'[' if enclosed}
-      #{deep(:to_hcl).join(",\n")}
+      #{map(&:to_hcl).join(",\n")}
       #{']' if enclosed}
     )
 
-  def deep(method)
+  def deep(method, of: :values)
     map do |i|
-      i.send(method)
+      i.deep(method, of: of)
     rescue NoMethodError
       i
     end

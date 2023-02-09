@@ -13,7 +13,7 @@ module Arenas
     def bound_resolutions = resolution_map.values
 
     def directly_bound_resolutions =
-      bound_resolutions.select { |r| r.arena_identifier == identifier}
+      bound_resolutions.select { |r| r.arena_identifier == identifier }
 
     def resolution_map = bound_map_for(:resolution)
 
