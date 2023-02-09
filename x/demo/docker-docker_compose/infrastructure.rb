@@ -22,4 +22,4 @@ controllers.arenas.stage(identifier: :infrastructure).to_json
 # controllers.arenas.apply(identifier: :infrastructure, verbose: false)
 result = controllers.arenas.apply(identifier: :infrastructure, background: true).result
 result.to_json
-controllers.streaming.tail(space: :arenas, stream_identifier: :executing, identifier: :infrastructure, timestamp: result[:timestamp], callback: callback).to_json
+controllers.streaming.tail(space: :arenas, stream_identifier: :apply, identifier: :infrastructure, timestamp: result[:timestamp], callback: callback).to_json
