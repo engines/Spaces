@@ -4,8 +4,7 @@ module Divisions
     def resolved =
       empty.
         tap { |d| d.struct =
-          resolvable_struct_class.new(struct).
-            tap { |m| m.transformable = self }.resolved
+          resolvable_struct_class.new(struct, self).resolved
         }
 
     def infix_qualifier = qualifier
@@ -27,6 +26,11 @@ module Divisions
 
     def text_from(value) =
       Interpolating::Text.new(origin: value, transformable: transformable)
+
+    def initialize(value, transformable)
+      super(value)
+      self.transformable = transformable
+    end
 
   end
 end
