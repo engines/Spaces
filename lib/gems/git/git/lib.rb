@@ -16,8 +16,8 @@ module Git
       arr_opts = []
       arr_opts << remote if remote
       arr_opts << branch if branch
-      arr_opts << "--verbose" if opts[:verbose]
-      arr_opts << "--progress" if opts[:progress]
+      arr_opts << '--verbose' if opts[:verbose]
+      arr_opts << '--progress' if opts[:progress]
 
       command('pull', *arr_opts, &block)
     end
@@ -38,8 +38,8 @@ module Git
       arr_opts << '--origin' << opts[:remote] || opts[:origin] if opts[:remote] || opts[:origin]
       arr_opts << '--recursive' if opts[:recursive]
       arr_opts << '--mirror' if opts[:mirror]
-      arr_opts << "--verbose" if opts[:verbose]
-      arr_opts << "--progress" if opts[:progress]
+      arr_opts << '--verbose' if opts[:verbose]
+      arr_opts << '--progress' if opts[:progress]
 
       arr_opts << '--'
 
@@ -64,8 +64,8 @@ module Git
       arr_opts << "--date=#{opts[:date]}" if opts[:date].is_a? String
       arr_opts << '--no-verify' if opts[:no_verify]
       arr_opts << '--allow-empty-message' if opts[:allow_empty_message]
-      arr_opts << "--verbose" if opts[:verbose]
-      arr_opts << "--progress" if opts[:progress]
+      arr_opts << '--verbose' if opts[:verbose]
+      arr_opts << '--progress' if opts[:progress]
 
       if opts[:gpg_sign] && opts[:no_gpg_sign]
         raise ArgumentError, 'cannot specify :gpg_sign and :no_gpg_sign'
@@ -109,8 +109,8 @@ module Git
       arr_opts << '--mirror'  if opts[:mirror]
       arr_opts << '--delete'  if opts[:delete]
       arr_opts << '--force'  if opts[:force] || opts[:f]
-      arr_opts << "--verbose" if opts[:verbose]
-      arr_opts << "--progress" if opts[:progress]
+      arr_opts << '--verbose' if opts[:verbose]
+      arr_opts << '--progress' if opts[:progress]
       Array(opts[:push_option]).each { |o| arr_opts << '--push-option' << o } if opts[:push_option]
       arr_opts << remote if remote
       arr_opts_with_branch = arr_opts.dup
