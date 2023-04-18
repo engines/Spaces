@@ -2,6 +2,7 @@ module Git
   class Branch
 
     # Redefine existing method.
+    #  Add opts argument
     #  Add 'unless opts[:new_branch]'.
     def checkout(opts = {})
       check_if_create unless opts[:new_branch]
