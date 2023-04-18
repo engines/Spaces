@@ -3,7 +3,6 @@ require_relative 'resolvable'
 
 module Divisions
   class Division < ::Transforming::Transformable
-    include Engines::Logger
     include Embeddable
     include Resolvable
 

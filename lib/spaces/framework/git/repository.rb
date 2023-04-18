@@ -4,7 +4,6 @@ require_relative 'exporting'
 module Spaces
   module Git
     class Repository < ::Spaces::Model
-      include Engines::Logger
       include Importing
       include Exporting
 
