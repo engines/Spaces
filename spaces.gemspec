@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = "info@engines.org"
   s.homepage = "http://github.com/engines/spaces"
   s.description = "Define Engines blueprints, export/import them, and manage the generation of artifacts required to generate images and provision virual machines and components."
-  s.required_ruby_version = ">= 3.1"
+  s.required_ruby_version = ">= 3.2"
 
   s.author = "Engines"
   s.licenses = ["AGPL-3.0"]
@@ -22,15 +22,17 @@ Gem::Specification.new do |s|
     "source_code_uri"   => s.homepage
   }
 
-  s.add_runtime_dependency "yajl-ruby",       "~> 1.4"
-  s.add_runtime_dependency "git",             "~> 1.8"
-  s.add_runtime_dependency "duplicate",       "~> 1.1"
-  s.add_runtime_dependency "i18n",            "~> 1.8"
-  s.add_runtime_dependency "ruby-terraform",  "=  0.64"
-  s.add_runtime_dependency "docker-api",      "~> 2.1"
-  s.add_runtime_dependency "addressable",     "~> 2.8"
-
-  s.add_runtime_dependency "engines-logger",  "0.2.0"
-
+  s.add_runtime_dependency "yajl-ruby",               "~> 1.4"
+  s.add_runtime_dependency "git",                     "~> 1.8"
+  s.add_runtime_dependency "duplicate",               "~> 1.1"
+  s.add_runtime_dependency "i18n",                    "~> 1.8"
+  s.add_runtime_dependency "ruby-terraform",          "=  0.64"
+  s.add_runtime_dependency "docker-api",              "~> 2.1"
+  s.add_runtime_dependency "docker-compose",          "~> 1.1"
+  s.add_runtime_dependency "rb-inotify",              "~> 0.10"
+  s.add_runtime_dependency "addressable",             "~> 2.8"
+  s.add_runtime_dependency "aws-sdk-cloudformation",  "~> 1.76"
+  s.add_runtime_dependency "ox",                      "~> 2.4", ">= 2.4.1"
+  
   s.files = `git ls-files -z src`.split(/\0/)
 end

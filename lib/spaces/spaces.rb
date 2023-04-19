@@ -1,5 +1,7 @@
+require 'spaces/logging'
 require 'spaces/requiring'
 
+include Logging
 include Requiring
 
 requires 'framework',

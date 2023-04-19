@@ -4,9 +4,9 @@ module Git
     # Redefine existing method.
     #  Add &block as argument for passing down to command.
     def self.clone(repository_url, directory, options = {}, &block)
-      new_options = Git::Lib.new(nil, options[:log]).clone(repository_url, directory, options)
+      new_options = Git::Lib.new(nil, options[:log]).clone(repository_url, directory, options, &block)
       normalize_paths(new_options, bare: options[:bare] || options[:mirror])
-      new(new_options, &block)
+      new(new_options)
     end
 
     # Redefine existing method.
