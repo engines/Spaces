@@ -22,17 +22,18 @@ Gem::Specification.new do |s|
     "source_code_uri"   => s.homepage
   }
 
-  s.add_runtime_dependency "yajl-ruby",               "~> 1.4"
-  s.add_runtime_dependency "git",                     "~> 1.8"
-  s.add_runtime_dependency "duplicate",               "~> 1.1"
-  s.add_runtime_dependency "i18n",                    "~> 1.8"
-  s.add_runtime_dependency "ruby-terraform",          "=  0.64"
-  s.add_runtime_dependency "docker-api",              "~> 2.1"
-  s.add_runtime_dependency "docker-compose",          "~> 1.1"
-  s.add_runtime_dependency "rb-inotify",              "~> 0.10"
   s.add_runtime_dependency "addressable",             "~> 2.8"
   s.add_runtime_dependency "aws-sdk-cloudformation",  "~> 1.76"
+  s.add_runtime_dependency "docker-api",              "~> 2.1"
+  s.add_runtime_dependency "docker-compose",          "~> 1.1"
+  s.add_runtime_dependency "duplicate",               "~> 1.1"
+  s.add_runtime_dependency "git",                     "~> 1.8"
+  s.add_runtime_dependency "i18n",                    "~> 1.8"
   s.add_runtime_dependency "ox",                      "~> 2.4", ">= 2.4.1"
+  s.add_runtime_dependency "pathname",                "~> 0.2"
+  s.add_runtime_dependency "rb-inotify",              "~> 0.10"
+  s.add_runtime_dependency "ruby-terraform",          "=  0.64"
+  s.add_runtime_dependency "yajl-ruby",               "~> 1.4"
   
   s.files = `git ls-files -z src`.split(/\0/)
 end
