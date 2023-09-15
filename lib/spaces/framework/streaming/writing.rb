@@ -8,7 +8,7 @@ module Streaming
       line.split(/\r/).tap do |rows|
         last = rows.count - 1
         rows.each.with_index do |r, i|
-          append(encoded(i == last ? r : "#{r}\r"))
+          append(encoded(:output, i == last ? r : "#{r}\r"))
         end
       end
     end
