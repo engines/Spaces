@@ -5,7 +5,7 @@ module Streaming
       yield(self)
     rescue => e
       logger.error(e)
-      exception
+      exception(e)
     end
 
     def output_lines_from(io)
