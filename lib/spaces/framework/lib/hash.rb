@@ -33,7 +33,7 @@ class Hash
   def hcl_for(key) =
     %(#{key} = #{self[key].to_hcl})
 
-  def no_symbols = stringify_keys.deep(:no_symbols)
+  def no_symbols = deep(:no_symbols, of: :keys).deep(:no_symbols)
   def values_to_struct = deep(:to_struct)
 
   def deep(method, of: :values)

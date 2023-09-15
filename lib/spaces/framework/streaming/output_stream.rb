@@ -6,12 +6,17 @@ module Streaming
     include Producing
 
     def init = hide_cursor
-    def close = show_cursor
+    def close
+      clear_row if !verbose?
+      show_cursor
+    end
 
     def verbose? = command.input[:verbose]
 
+    def print(line) = super(line.force_encoding("UTF-8"))
+
     def error(line) =
-      print("\033[0;33m#{line}\033[0m")
+      print("\e[33m#{line}\e[0m")
 
     # The << method is so stream behaves like STDOUT
     def << (line) = output(line)
@@ -28,21 +33,18 @@ module Streaming
 
     def progress_row(row)
       max = IO.console.winsize[1] - 1
-      text = "\033[0;34m#{spinner}\033[0m #{row.gsub(/\P{ASCII}/, '')}"[0...max]
+      text = "\e[34m#{spinner}\e[0m #{row.gsub(/\P{ASCII}/, '')}"[0...max]
       clear_row
       print("#{text}\r")
     end
 
-    def hide_cursor = print("\033[?25l")
-    def show_cursor = print("\033[?25h")
-    def clear_row = print("\033[2K")
+    def hide_cursor = print("\e[?25l")
+    def show_cursor = print("\e[?25h")
+    def clear_row = print("\e[2K")
 
-    def spinner = '⠋⠙⠸⢰⣠⣄⡆⠇'[spin]
+    def spinner = '⠋⠛⠙⠹⠸⠼⠴⠶⠦⠧⠇⠏'[spin]
 
-    def spin
-      return @spin = 0 if @spin == 7
-      @spin = @spin.to_i + 1
-    end
+    def spin = @spin == 12 ? @spin = 0 : @spin = @spin.to_i + 1
 
   end
 end
