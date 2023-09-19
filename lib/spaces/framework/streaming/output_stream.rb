@@ -21,10 +21,6 @@ module Streaming
     # The << method is so stream behaves like STDOUT
     def << (line) = output(line)
 
-    def exception
-      # Do nothing. Exception logged elsewhere.
-    end
-
     def output(line) =
       verbose? ? print(line) : progress_line(line)
 
