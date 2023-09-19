@@ -4,11 +4,7 @@ module Streaming
     def produce(&block)
       yield(self)
     rescue => e
-      if command.input[:background]
-        exception(e) 
-      else
-        raise e
-      end 
+      command.input[:background] ? exception(e) : raise(e)
     end
 
     def output_lines_from(io)
